@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=MimeType
+Comment=KBarcode Label
+Encoding=UTF-8
+Icon=kbarcode
+MimeType=application/kbarcode-label
+Name[de]=kbarcode-label.desktop
+Patterns=*.kbarcode;*.KBARCODE;
+

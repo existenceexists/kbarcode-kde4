@@ -1,0 +1,3144 @@
+# Finnish Translation of KBarcode.
+# Copyright (C) 2002 Free Software Foundation, Inc.
+# ANTON VAARANMAA <antonv@postikaista.net>, 2003.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-10-13 14:52+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Anton Vaaranmaa <antonv@postikaista.net>\n"
+"Language-Team: Finnish <fi@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: _translatorinfo.cpp:1
+msgid ""
+"_: NAME OF TRANSLATORS\n"
+"Your names"
+msgstr "Anton Vaaranmaa"
+
+#: _translatorinfo.cpp:3
+msgid ""
+"_: EMAIL OF TRANSLATORS\n"
+"Your emails"
+msgstr "antonv@postikaista.net"
+
+#: barcodecombo.cpp:125
+#, fuzzy
+msgid "&Encoding Type:"
+msgstr "Koodin tyyppi:"
+
+#: barcodecombo.cpp:134
+#, fuzzy
+msgid "&Value:"
+msgstr "Arvo:"
+
+#: barcodecombo.cpp:159
+msgid "&Display text"
+msgstr "&Näytä teksti"
+
+#: barcodecombo.cpp:164
+msgid "&Advanced..."
+msgstr "E&distynyt..."
+
+#: barcodecombo.cpp:168 propertywidget.cpp:481
+#, fuzzy
+msgid "&Insert Data Field..."
+msgstr "Lisää tietokannan kenttä"
+
+#: barcodecombo.cpp:173
+#, fuzzy
+msgid "&Margin:"
+msgstr "Reunus:"
+
+#: barcodecombo.cpp:180 propertywidget.cpp:140 propertywidget.cpp:466
+#, fuzzy
+msgid "&Rotation:"
+msgstr "Kierto:"
+
+#: barcodecombo.cpp:187
+#, fuzzy
+msgid "&Scale (in permille):"
+msgstr "Skaalaus (promilleissa):"
+
+#: barcodecombo.cpp:194
+#, fuzzy
+msgid "&Crop:"
+msgstr "Leikkaa yläreunasta:"
+
+#: barcodedialog.cpp:46
+msgid "Barcode Generator"
+msgstr "Viivakoodikehitin"
+
+#: barcodedialog.cpp:57
+msgid "&Generate"
+msgstr "&Muodosta"
+
+#: barcodedialog.cpp:72
+msgid "&Print"
+msgstr "T&ulosta"
+
+#: barcodedialog.cpp:155
+msgid "An error occurred during saving the image"
+msgstr "Tapahtui virhe tallennettaessa kuvaa"
+
+#: barcodedialogs.cpp:43
+msgid "Barcode Settings"
+msgstr "Viivakoodiasetukset"
+
+#: barcodedialogs.cpp:49 barcodedialogs.cpp:258
+msgid "PDF417"
+msgstr "PDF417"
+
+#: barcodedialogs.cpp:55
+#, fuzzy
+msgid "DataMatrix"
+msgstr "DataMatrix"
+
+#: barcodedialogs.cpp:61 barcodedialogs.cpp:108
+msgid "TBarcode"
+msgstr "TBarcode"
+
+#: barcodedialogs.cpp:67 barcodedialogs.cpp:480
+msgid "Barcode Writer in Pure Postscript"
+msgstr ""
+
+#: barcodedialogs.cpp:73 barcodedialogs.cpp:444
+msgid "Colors"
+msgstr "Värit"
+
+#: barcodedialogs.cpp:78 barcodedialogs.cpp:366
+msgid "Sequence"
+msgstr "Jakso"
+
+#: barcodedialogs.cpp:116
+msgid "Module width (mm):"
+msgstr "Moduulin leveys (millimetreissä):"
+
+#: barcodedialogs.cpp:120
+#, fuzzy
+msgid "Barcode Height (mm):"
+msgstr "Korkeus (millimetreissä):"
+
+#: barcodedialogs.cpp:123
+msgid "&Translate escape sequences"
+msgstr ""
+
+#: barcodedialogs.cpp:124
+msgid "&Text above barcode"
+msgstr "&Teksti viivakoodin yläpuolella"
+
+#: barcodedialogs.cpp:125
+msgid "&Auto correction"
+msgstr "&Automaattinen korjaus"
+
+#: barcodedialogs.cpp:129
+msgid "&Checksum calculation method:"
+msgstr "&Tarkistussumman laskentamenetelmä:"
+
+#: barcodedialogs.cpp:143
+msgid ""
+"<qt>Change the module with used by tbarcode. Take a look into the tbarcode "
+"documentation for details. Normaly you do not want to change this value.</qt>"
+msgstr ""
+"<qt>Vaihda käytettävä moduuli. Tbarcoden dokumentaatiossa on tarkempia "
+"tietoja. Tavallisesti tätä arvoa ei tarvitse muuttaa.</qt>"
+
+#: barcodedialogs.cpp:162
+msgid "No Checksum"
+msgstr "Ei tarkistussummaa"
+
+#: barcodedialogs.cpp:163
+msgid "Default Checksum Method"
+msgstr "Oletusmenetelmä"
+
+#: barcodedialogs.cpp:167
+msgid "Modulo 10 Checksum"
+msgstr "Modulo 10 tarkistussumma"
+
+#: barcodedialogs.cpp:174
+msgid "Module 43 (suggested for Code39 and Logmars, 1 digit)"
+msgstr "Module 43 (suositeltava Code39:lle ja Logmars:lle, 1 numero)"
+
+#: barcodedialogs.cpp:177
+msgid "Modula 47 (2 digits)"
+msgstr "Modula 47 (2 numeroa)"
+
+#: barcodedialogs.cpp:180
+msgid "Deutsche Post Leitcode"
+msgstr "Deutsche Post Leitcode"
+
+#: barcodedialogs.cpp:183
+msgid "Deutsche Post Identcode"
+msgstr "Deutsche Post Identcode"
+
+#: barcodedialogs.cpp:186
+msgid "Code 11 (1 digit)"
+msgstr "Code 11 (1 numero)"
+
+#: barcodedialogs.cpp:187
+msgid "Code 11 (2 digits)"
+msgstr "Code 11 (2 numeroa)"
+
+#: barcodedialogs.cpp:191
+msgid "USPS Postnet"
+msgstr "USPS Postnet"
+
+#: barcodedialogs.cpp:194
+msgid "MSI (1 digit)"
+msgstr "MSI (1 numero)"
+
+#: barcodedialogs.cpp:195
+msgid "MSI (2 digits)"
+msgstr "MSI (2 numeroa)"
+
+#: barcodedialogs.cpp:199 barkode.cpp:710
+msgid "Plessey"
+msgstr "Plessey"
+
+#: barcodedialogs.cpp:202
+msgid "EAN 8"
+msgstr "EAN 8"
+
+#: barcodedialogs.cpp:205
+msgid "EAN 13"
+msgstr "EAN 13"
+
+#: barcodedialogs.cpp:208
+msgid "UPC A"
+msgstr "UPC A"
+
+#: barcodedialogs.cpp:211
+msgid "UPC E"
+msgstr "UPC E"
+
+#: barcodedialogs.cpp:214
+msgid "EAN 128"
+msgstr "EAN 128"
+
+#: barcodedialogs.cpp:217
+msgid "Code 128"
+msgstr "Code 128"
+
+#: barcodedialogs.cpp:220
+#, fuzzy
+msgid "Royal Mail 4 State"
+msgstr "Royal Mail 4 State"
+
+#: barcodedialogs.cpp:266
+msgid "Rows:"
+msgstr "Rivejä:"
+
+#: barcodedialogs.cpp:270
+msgid "Columns:"
+msgstr "Sarakkeita:"
+
+#: barcodedialogs.cpp:274
+msgid "Error correction level:"
+msgstr "Virheenkorjauksen taso:"
+
+#: barcodedialogs.cpp:314
+msgid "Data Matrix symbol sizes (rows x cols):"
+msgstr "Tietomatriisin symboolikot (rivit x sarakkeet):"
+
+#: barcodedialogs.cpp:318
+msgid "Automatic calculation"
+msgstr "Automaattinen laskenta"
+
+#: barcodedialogs.cpp:372
+#, fuzzy
+msgid "&Enable sequence"
+msgstr "&Ota käyttöön jakso"
+
+#: barcodedialogs.cpp:374
+msgid "Iterate over numbers 0-9"
+msgstr ""
+
+#: barcodedialogs.cpp:375
+msgid "Iterate over characters A-Z"
+msgstr ""
+
+#: barcodedialogs.cpp:376
+msgid "Iterate over A-Z, 0-9"
+msgstr ""
+
+#: barcodedialogs.cpp:379
+msgid "Step:"
+msgstr "Askel:"
+
+#: barcodedialogs.cpp:383
+msgid "Start:"
+msgstr "Aloitus:"
+
+#: barcodedialogs.cpp:455
+#, fuzzy
+msgid "Bar Color:"
+msgstr "Reunaviivan väri:"
+
+#: barcodedialogs.cpp:456
+#, fuzzy
+msgid "Background Color:"
+msgstr "Reunaviivan väri:"
+
+#: barcodedialogs.cpp:457
+#, fuzzy
+msgid "Text Color:"
+msgstr "Tekstin &Väri..."
+
+#: barcodedialogs.cpp:483
+#, fuzzy
+msgid "Enable &Checksum"
+msgstr "Ei tarkistussummaa"
+
+#: barcodeprinterdlg.cpp:31
+#, fuzzy
+msgid "Barcode Printer"
+msgstr "Viivakoodin numero"
+
+#: barcodeprinterdlg.cpp:36
+#, fuzzy
+msgid "&Output Format:"
+msgstr "Kohdetiedoston formaatti:"
+
+#: barcodeprinterdlg.cpp:40
+msgid "&Print to File"
+msgstr ""
+
+#: barcodeprinterdlg.cpp:42 batchwizard.cpp:126 batchwizard.cpp:258
+#, fuzzy
+msgid "&Filename:"
+msgstr "Tiedostonimi"
+
+#: barcodeprinterdlg.cpp:46
+msgid "&Device:"
+msgstr ""
+
+#: barcodeprinterdlg.cpp:58
+msgid "TEC Printer (TEC)"
+msgstr ""
+
+#: barcodeprinterdlg.cpp:59
+msgid "Zebra Printer (ZPL)"
+msgstr ""
+
+#: barcodeprinterdlg.cpp:60
+msgid "Intermec Printer (IPL)"
+msgstr ""
+
+#: barcodeprinterdlg.cpp:61
+msgid "EPCL Printer (EPCL)"
+msgstr ""
+
+#: barkode.cpp:649
+#, fuzzy
+msgid " [GNU Barcode]"
+msgstr "Uusi viivakoodi"
+
+#: barkode.cpp:652
+#, fuzzy
+msgid " [PDF 417]"
+msgstr "PDF417"
+
+#: barkode.cpp:655
+#, fuzzy
+msgid " [TBarcode]"
+msgstr "TBarcode"
+
+#: barkode.cpp:658
+#, fuzzy
+msgid " [TBarcode2]"
+msgstr "TBarcode"
+
+#: barkode.cpp:661
+msgid " [Barcode Writer in Pure Postscript]"
+msgstr ""
+
+#: barkode.cpp:696
+msgid "Raw code 128"
+msgstr "Raaka code 128"
+
+#: barkode.cpp:697
+msgid "Codabar"
+msgstr "Codabar"
+
+#: barkode.cpp:698
+#, fuzzy
+msgid "Codabar (no checksum)"
+msgstr "Code 39 (ilman tarkistusnumeroa)"
+
+#: barkode.cpp:699
+msgid "Code 128 (a,b,c: autoselection)"
+msgstr "Code 128 (a,b,c: automaattivalinta)"
+
+#: barkode.cpp:700
+msgid "Code 128B, full printable ascii"
+msgstr "Code 128B, tulostettava ascii"
+
+#: barkode.cpp:701
+#, fuzzy
+msgid "Code 128C (compact form digits)"
+msgstr "Code 128C (compact form digits)"
+
+#: barkode.cpp:702
+msgid "Code 39 (no checksum)"
+msgstr "Code 39 (ilman tarkistusnumeroa)"
+
+#: barkode.cpp:703
+msgid "Code 39"
+msgstr "Code 39"
+
+#: barkode.cpp:704
+msgid "Code 93"
+msgstr "Code 93"
+
+#: barkode.cpp:705
+msgid "EAN (EAN 8 or EAN 13)"
+msgstr "EAN (EAN 8 tai EAN 13)"
+
+#: barkode.cpp:706
+msgid "interleaved 2 of 5 (only digits, no checksum)"
+msgstr "Lomitettu 2 5:stä (vain numeerinen, ei tarkistusnroa)"
+
+#: barkode.cpp:707
+msgid "interleaved 2 of 5 (only digits)"
+msgstr "Lomitettu 2 5:stä (vain numeerinen)"
+
+#: barkode.cpp:708
+msgid "ISBN (still EAN13)"
+msgstr "ISBN (EAN13)"
+
+#: barkode.cpp:709
+msgid "MSI"
+msgstr "MSI"
+
+#: barkode.cpp:711
+msgid "UPC (12-digit EAN; UPCA and UPCB)"
+msgstr "UPC (12:a numeron EAN; UPCA ja UPCB)"
+
+#: barkode.cpp:716
+msgid "pdf 417 2D Barcode"
+msgstr "pdf 417 2D viivakoodi"
+
+#: batchprinter.cpp:111 batchprinter.cpp:341
+msgid "Printing..."
+msgstr "Tulostan..."
+
+#: batchprinter.cpp:156 batchprinter.cpp:157 batchprinter.cpp:158
+#: batchprinter.cpp:159
+msgid "Group : "
+msgstr "Ryhmä: "
+
+#: batchprinter.cpp:161 batchprinter.cpp:162 batchprinter.cpp:163
+#: batchprinter.cpp:164
+msgid "Article No. : "
+msgstr "Nimikenumero : "
+
+#: batchprinter.cpp:273
+msgid "Creating Images..."
+msgstr "Luodaan kuvia..."
+
+#: batchprinter.cpp:337
+msgid "<qt>Can't open the file or device <b>%1</b></qt>."
+msgstr ""
+
+#: batchwizard.cpp:117
+#, fuzzy
+msgid ""
+"<qt>This wizard will guide you through the process of printing many labels "
+"with KBarcode.<br>The first step is to select the KBarcode label file you "
+"want to print.</qt>"
+msgstr ""
+"<br><br>Tämä ohjattu toiminto opastaa sinua ottamaan käyttöön tietokannan "
+"KBarcoden yhteyteen. Jos et halua hyödyntää tietokantaominaisuuksia voit "
+"hypätä tämän vaiheen yli.</qt>"
+
+#: batchwizard.cpp:135
+#, fuzzy
+msgid "File Selection"
+msgstr "Nimikkeen kuvaus"
+
+#: batchwizard.cpp:147
+msgid "Print &labels without data"
+msgstr ""
+
+#: batchwizard.cpp:148
+msgid "Print &articles from KBarcodes SQL database"
+msgstr ""
+
+#: batchwizard.cpp:149
+msgid "Import &variables and print"
+msgstr ""
+
+#: batchwizard.cpp:150
+msgid "Print &contacts from your addressbook"
+msgstr ""
+
+#: batchwizard.cpp:162
+msgid "Data Source"
+msgstr ""
+
+#: batchwizard.cpp:174
+#, fuzzy
+msgid "Print Data"
+msgstr "Kirjoittimen tarkkuus"
+
+#: batchwizard.cpp:185
+#, fuzzy
+msgid "Insert Row"
+msgstr "Lisää &viivakoodi"
+
+#: batchwizard.cpp:187
+#, fuzzy
+msgid "Delete Row"
+msgstr "Tuhoa objekti"
+
+#: batchwizard.cpp:194
+#, fuzzy
+msgid "Import Variables"
+msgstr "Tuo tauluun: "
+
+#: batchwizard.cpp:206
+msgid ""
+"<qt>KBarcode has support for placing serial numbers on labels. If you did "
+"not use the [serial] token on your label in a text field or a barcode, you "
+"can skip this page.<br>Serial start is a free form start value containing at "
+"least one number. This number is increased for every printed label on the "
+"print out.</qt>"
+msgstr ""
+
+#: batchwizard.cpp:216 previewdialog.cpp:104
+#, fuzzy
+msgid "Serial start:"
+msgstr "Aloitus:"
+
+#: batchwizard.cpp:220 previewdialog.cpp:106
+msgid "Serial increment:"
+msgstr ""
+
+#: batchwizard.cpp:223
+#, fuzzy
+msgid "Serial Number"
+msgstr "Nimikenumero"
+
+#: batchwizard.cpp:233
+msgid "&Print to a system printer or to a file"
+msgstr ""
+
+#: batchwizard.cpp:234
+#, fuzzy
+msgid "&Create images"
+msgstr "&Luo kuvia"
+
+#: batchwizard.cpp:239
+msgid "Print to a special &barcode printer"
+msgstr ""
+
+#: batchwizard.cpp:243
+#, fuzzy
+msgid "Output &Directory:"
+msgstr "Valitse kohdehakemisto"
+
+#: batchwizard.cpp:249
+#, fuzzy
+msgid "Output File &Format:"
+msgstr "Kohdetiedoston formaatti:"
+
+#: batchwizard.cpp:259
+msgid "Use &article number for filename"
+msgstr "Käytä nimikenumeroa tiedostonimenä"
+
+#: batchwizard.cpp:260
+msgid "Use &barcode number for filename"
+msgstr "Käytä viivakoodin numeroa tiedostonimenä"
+
+#: batchwizard.cpp:261
+#, fuzzy
+msgid "Use &custom filename:"
+msgstr "Käytä nimikenumeroa tiedostonimenä"
+
+#: batchwizard.cpp:269
+msgid "&Keep window open after printing."
+msgstr ""
+
+#: batchwizard.cpp:287
+msgid "Output Device"
+msgstr ""
+
+#: batchwizard.cpp:298
+msgid "Customer name and no.:"
+msgstr "Asiakkaan nimi ja numero:"
+
+#: batchwizard.cpp:305
+#, fuzzy
+msgid "&Add..."
+msgstr "E&distynyt..."
+
+#: batchwizard.cpp:306
+#, fuzzy
+msgid "&Import..."
+msgstr "&Tuo"
+
+#: batchwizard.cpp:307
+#, fuzzy
+msgid "&Edit..."
+msgstr "Etikettie&ditori..."
+
+#: batchwizard.cpp:309
+msgid "R&emove All"
+msgstr "P&oista kaikki"
+
+#: batchwizard.cpp:312
+msgid "Import from File ..."
+msgstr "&Tuo tiedostosta..."
+
+#: batchwizard.cpp:313
+msgid "Import from Clipboard ..."
+msgstr "Tuo leikepöydästä..."
+
+#: batchwizard.cpp:314
+msgid "Import barcode_basic"
+msgstr "Tuo barcode_basic"
+
+#: batchwizard.cpp:318
+msgid "Index"
+msgstr "Indeksi"
+
+#: batchwizard.cpp:319
+msgid "Number of Labels"
+msgstr "Etikettien lukumäärä"
+
+#: batchwizard.cpp:320 configdialog.cpp:157 configdialog.cpp:163
+#: configdialog.cpp:169
+msgid "Article Number"
+msgstr "Nimikenumero"
+
+#: batchwizard.cpp:321 configdialog.cpp:158 configdialog.cpp:164
+#: configdialog.cpp:170
+msgid "Group"
+msgstr "Ryhmä"
+
+#: batchwizard.cpp:343
+msgid "Enter &data manually"
+msgstr ""
+
+#: batchwizard.cpp:344
+msgid "Import variables from a &SQL table"
+msgstr ""
+
+#: batchwizard.cpp:345
+#, fuzzy
+msgid "Please enter a sql &query:"
+msgstr "Määrittele kuvaus:"
+
+#: batchwizard.cpp:349
+#, fuzzy
+msgid "Import from a &CSV file"
+msgstr "&Tuo tiedostosta..."
+
+#: batchwizard.cpp:350
+msgid "Please select a csv &file:"
+msgstr ""
+
+#: batchwizard.cpp:353
+#, fuzzy
+msgid "&Encoding:"
+msgstr "Koodin tyyppi:"
+
+#: batchwizard.cpp:362
+msgid "Available Variables:"
+msgstr ""
+
+#: batchwizard.cpp:380
+#, fuzzy
+msgid "&Number of labels to print:"
+msgstr "Etikettien lukumäärä:"
+
+#: batchwizard.cpp:411
+msgid "Add all contacts to the list of contacts which will be printed."
+msgstr ""
+
+#: batchwizard.cpp:412
+msgid "Add selected contacts to the list of contacts which will be printed."
+msgstr ""
+
+#: batchwizard.cpp:413
+msgid ""
+"Remove selected contacts from the list of contacts which will be printed."
+msgstr ""
+
+#: batchwizard.cpp:414
+msgid "Remove all contacts from the list of contacts which will be printed."
+msgstr ""
+
+#: batchwizard.cpp:430
+msgid "All Addresses"
+msgstr ""
+
+#: batchwizard.cpp:431
+msgid "Selected Addresses"
+msgstr ""
+
+#: batchwizard.cpp:434 batchwizard.cpp:445
+#, fuzzy
+msgid "Given Name"
+msgstr "Tiedostonimi"
+
+#: batchwizard.cpp:435 batchwizard.cpp:446
+#, fuzzy
+msgid "Family Name"
+msgstr "Tiedostonimi"
+
+#: batchwizard.cpp:436 batchwizard.cpp:447
+msgid "Email Address"
+msgstr ""
+
+#: batchwizard.cpp:561
+#, fuzzy
+msgid "The label file %1 was not found"
+msgstr "Tiedostoa %1 ei ole olemassa."
+
+#: batchwizard.cpp:743
+msgid "Please enter a valid article ID"
+msgstr "Anna jokin käypä nimikenumero"
+
+#: batchwizard.cpp:901
+msgid "Separator is empty. Please set it to a value."
+msgstr "Erotin on tyhjä. Anna sille jokin arvo."
+
+#: batchwizard.cpp:972 batchwizard.cpp:974
+msgid "<qt>The following items can not be added:"
+msgstr "<qt>Seuraavia tietueita ei voitu lisätä:"
+
+#: batchwizard.cpp:1056
+#, fuzzy
+msgid "<qt>Can't execute SQL query:<br>"
+msgstr "<qt>Komentoa ei voitu suorittaa:<br><b>"
+
+#: batchwizard.cpp:1083
+msgid "Can't open file: %1"
+msgstr ""
+
+#: commands.cpp:434
+msgid "New Rectangle"
+msgstr "Uusi nelikulmio"
+
+#: commands.cpp:448
+msgid "New Line"
+msgstr "Uusi rivi"
+
+#: commands.cpp:458
+msgid "New Text"
+msgstr "Uusi teksti"
+
+#: commands.cpp:475
+#, fuzzy
+msgid "New TextLine"
+msgstr "Uusi rivi"
+
+#: commands.cpp:492
+msgid "New Barcode"
+msgstr "Uusi viivakoodi"
+
+#: configdialog.cpp:46
+msgid "There are currently %1 cached barcodes."
+msgstr "Välimuistissa on tällä hetkellä %1 viivakoodia"
+
+#: configdialog.cpp:50 confwizard.cpp:59
+msgid "Configure KBarcode"
+msgstr "Aseta Kbarcode"
+
+#: configdialog.cpp:66
+msgid "SQL Settings"
+msgstr "SQL asetuket"
+
+#: configdialog.cpp:80
+msgid "Print Settings"
+msgstr "Tulostusasetukset"
+
+#: configdialog.cpp:88
+msgid "Medium Resolution (300dpi)"
+msgstr "Keskiverto tarkkuus (300dpi)"
+
+#: configdialog.cpp:89
+msgid "High Resolution (600dpi)"
+msgstr "Korkea tarkkuus (600dpi)"
+
+#: configdialog.cpp:90
+msgid "Very High Resolution (1200dpi)"
+msgstr "Korkea tarkkuus (1200dpi)"
+
+#: configdialog.cpp:110
+msgid "Printer Resolution:"
+msgstr "Kirjoittimen tarkkuus:"
+
+#: configdialog.cpp:112
+msgid "Preview Page Format:"
+msgstr "Esikatsele sivun muoto:"
+
+#: configdialog.cpp:127 csvimportdlg.cpp:175
+msgid "Comment:"
+msgstr "Kommentti:"
+
+#: configdialog.cpp:134 csvimportdlg.cpp:182
+msgid "Separator:"
+msgstr "Erotin:"
+
+#: configdialog.cpp:141 csvimportdlg.cpp:189
+msgid "Quote Character:"
+msgstr "Lainausmerkin merkki:"
+
+#: configdialog.cpp:147
+msgid "&Use customer article no. for import"
+msgstr "&Käytä asiakkaan nimikettä tuontiin"
+
+#: configdialog.cpp:153 csvimportdlg.cpp:156
+msgid "File Format:"
+msgstr "Tietojen asettelu:"
+
+#: configdialog.cpp:156 configdialog.cpp:162 configdialog.cpp:168
+msgid "Quantity"
+msgstr "Määrä"
+
+#: configdialog.cpp:186
+msgid "Label Editor"
+msgstr "Etikettie&ditori"
+
+#: configdialog.cpp:190
+msgid "&Create a new label on startup"
+msgstr "&Luo uusi etiketti etikettieditoria käynnistettäessä"
+
+#: configdialog.cpp:198
+msgid "Grid:"
+msgstr "Ruudukko:"
+
+#: configdialog.cpp:205
+msgid "Grid Color:"
+msgstr "Ruudukon väri:"
+
+#: configdialog.cpp:207
+msgid "Date Format:"
+msgstr "Päiväyksen muoto:"
+
+#: configdialog.cpp:215
+msgid "On New"
+msgstr "Uusi"
+
+#: configdialog.cpp:219
+msgid "On New Article"
+msgstr "Uudelle nimikkeelle"
+
+#: configdialog.cpp:226 configdialog.cpp:232
+msgid "No Line Break"
+msgstr "Ei rivinvaihtoa"
+
+#: configdialog.cpp:227 configdialog.cpp:233
+msgid "Line Break"
+msgstr "Rivinvaihto"
+
+#: configdialog.cpp:228 configdialog.cpp:234
+msgid "Insert Label X"
+msgstr "Lisää etiketti X"
+
+#: configdialog.cpp:229 configdialog.cpp:235
+msgid "New Page"
+msgstr "Uusi sivu"
+
+#: configdialog.cpp:230
+msgid "Article No."
+msgstr "Nimikenumero"
+
+#: configdialog.cpp:236
+msgid "Group Name"
+msgstr "Ryhmän nimi"
+
+#: configdialog.cpp:260
+msgid "On New Group"
+msgstr "Uudelle ryhmälle"
+
+#: configdialog.cpp:348
+msgid "Preview: "
+msgstr "Esikatselu: "
+
+#: confwizard.cpp:45
+msgid ""
+"KBarcode is a barcode and label printing application for KDE 3. It can be "
+"used to print every thing from simple business cards up to complex labels "
+"with several barcodes (e.g. article descriptions). KBarcode comes with an "
+"easy to use WYSIWYG label designer, a setup wizard, batch import of labels "
+"(directly from the delivery note), thousands of predefined labels, database "
+"management tools and translations in many languages. Even printing more than "
+"10.000 labels in one go is no problem for KBarcode. Additionally it is a "
+"simply xbarcode replacement for the creation of barcodes. All major types of "
+"barcodes like EAN, UPC, CODE39 and ISBN are supported."
+msgstr ""
+"KBarcode on viivakoodien ja etikettien tulostusohjelma KDE 3:lle. Sillä voi "
+"luoda ja tulostaa niin pienempiä käyntikortteja kuin myös monimutkaisempia "
+"useita viivakoodeja sekä tietueita sisältäviä etikettejäkin. KBarcodeen "
+"kuuluu helppokäyttöinen WYSIWYG etikettieditori, asetusten ohjattu toiminto, "
+"tietojen tuonti-ominaisuus (esim. lähetteestä), tuhansia valmiita "
+"etikettimalleja, tietokannan hallintatyökalut ja käännökset useille "
+"kielille. KBarcoden avulla voi tulostaa vaikkapa 10 000 etikettiä yhdellä "
+"kertaa. Lisäksi ohjelma on viivakoodinkehittimenä kelpo korvaaja "
+"xbarcodelle. Kaikkia tärkeimmmät koodityypit kuten EAN, UPC, CODE39 ja ISBN "
+"ovat tuettuja."
+
+#: confwizard.cpp:101
+msgid "<qt><h1>Welcome to KBarcode</h1><br><br>"
+msgstr "<qt><h1>Tervetuloa KBarcodeen</h1><br><br>"
+
+#: confwizard.cpp:111
+msgid "Welcome"
+msgstr "Tervetuloa"
+
+#: confwizard.cpp:124
+msgid "System Check"
+msgstr "Järjestelmän tarkistus"
+
+#: confwizard.cpp:133
+msgid "&Use database with KBarcode"
+msgstr "&Käytä tietokantaa KBarcoden kanssa"
+
+#: confwizard.cpp:144 tokenprovider.cpp:207
+msgid "Database"
+msgstr "Tietokanta"
+
+#: confwizard.cpp:153
+msgid ""
+"KBarcode can create the required SQL tables for you.<br>KBarcode will add "
+"also some Label Definitions to the tables.<br>After that you can fill the "
+"tables with some example data."
+msgstr ""
+"KBarcode osaa luoda vaadittavat SQL-tietokantataulut puolestasi.<br> "
+"KBarcode lisää myös valmiita etikettimäärittelyjä tietokantatauluihin."
+"<br>Tämän jälkeen voit täyttää taulut omilla tiedoillasi."
+
+#: confwizard.cpp:160 dsmainwindow.cpp:78
+msgid "&Create Tables"
+msgstr "&Luo tietokantatauluja"
+
+#: confwizard.cpp:165
+msgid "&Add Example Data"
+msgstr "&Lisää esimerkkitietoja"
+
+#: confwizard.cpp:170
+msgid "Create Tables"
+msgstr "Luo tietokantatauluja"
+
+#: confwizard.cpp:196 confwizard.cpp:219 sqltables.cpp:468
+msgid "<qt>Connection failed:<br>"
+msgstr "<qt>Yhteys epäonnistui:<br>"
+
+#: confwizard.cpp:225
+msgid "Example data has been imported."
+msgstr "Tuotiin esimerkkitietoja."
+
+#: confwizard.cpp:236
+msgid ""
+"There are no Qt SQL drivers installed. KBarcode needs those drivers to "
+"access the different SQL databases. This drivers are part of the Qt Source "
+"distribution and should also be part of your distribution. Please install "
+"them first."
+msgstr ""
+"Järjestelmässä ei ole QT SQL-ajuria asennettuna. KBarcode tarvitsee "
+"sellaisen kyetäkseen muodostamaan SQL-tietokantayhteyksiä. Ajureita "
+"toimitetaan osana QT-kirjaston lähdekoodia. Sopiva ajuri pitäisi löytyä myös "
+"sinun jakelustasi. Ole hyvä ja asenna jokin ajuri."
+
+#: csvimportdlg.cpp:61
+msgid "&Import"
+msgstr "&Tuo"
+
+#: csvimportdlg.cpp:61
+msgid "Import the selected file into your tables."
+msgstr "Tuo valitsemasi tiedoston tiedot tietokantatauluihisi."
+
+#: csvimportdlg.cpp:93
+#, fuzzy
+msgid "&Import Data"
+msgstr "&Tuo esimerkkitietoja"
+
+#: csvimportdlg.cpp:104
+#, fuzzy
+msgid "Other table..."
+msgstr "&Vaihda etiketti..."
+
+#: csvimportdlg.cpp:107
+msgid "&Load complete file into preview"
+msgstr ""
+
+#: csvimportdlg.cpp:109
+msgid "Load only a number of datasets:"
+msgstr ""
+
+#: csvimportdlg.cpp:120
+msgid "Column:"
+msgstr "Sarake:"
+
+#: csvimportdlg.cpp:124
+msgid "Set"
+msgstr "Aseta"
+
+#: csvimportdlg.cpp:127
+msgid "Database field to use for this column:"
+msgstr "Tietokannan kenttä käytettäväksi tähän sarakkeeseen:"
+
+#: csvimportdlg.cpp:131
+msgid "File to import:"
+msgstr "Tiedosto joka tuodaan:"
+
+#: csvimportdlg.cpp:133
+#, fuzzy
+msgid "Encoding:"
+msgstr "Koodin tyyppi:"
+
+#: csvimportdlg.cpp:135
+msgid "Import into table:"
+msgstr "Tuo tauluun: "
+
+#: csvimportdlg.cpp:137
+#, fuzzy
+msgid "Table Name:"
+msgstr "Tiedostonimi"
+
+#: csvimportdlg.cpp:151
+#, fuzzy
+msgid "&Import Settings"
+msgstr "Tulostusasetukset"
+
+#: csvimportdlg.cpp:157
+#, fuzzy
+msgid "&CSV File"
+msgstr "&Tuo CSV tiedosto..."
+
+#: csvimportdlg.cpp:158
+msgid "File with &fixed field width"
+msgstr ""
+
+#: csvimportdlg.cpp:162
+msgid "CSV File"
+msgstr ""
+
+#: csvimportdlg.cpp:163
+msgid "Fixed Field Width File"
+msgstr ""
+
+#: csvimportdlg.cpp:207
+msgid "&Add Field"
+msgstr ""
+
+#: csvimportdlg.cpp:210
+#, fuzzy
+msgid "&Remove Field"
+msgstr "P&oista kaikki"
+
+#: csvimportdlg.cpp:357
+msgid "Cannot load data from the file:"
+msgstr ""
+
+#: csvimportdlg.cpp:378
+msgid "Could not import the following line:"
+msgstr "Seuraavaa riviä ei voitu tuoda:"
+
+#: csvimportdlg.cpp:383
+msgid "Data was imported successfully."
+msgstr "Tiedot tuotiin onnistuneesti."
+
+#: databasebrowser.cpp:46
+msgid "Current Table: <b>"
+msgstr "Nykyinen tietokantataulu: <br>"
+
+#: databasebrowser.cpp:98 kbarcode.cpp:87
+msgid "&Import CSV File..."
+msgstr "&Tuo CSV tiedosto..."
+
+#: definition.cpp:547
+msgid ""
+"KBarcode is unable to find its label definitions.Please make sure that the "
+"file $KDEDIR/share/apps/kbarcode/labeldefinitions.sql does exist. This file "
+"is part of the KBarcode distribution. You will be prompted now to select the "
+"file containing the labeldefinitions."
+msgstr ""
+"KBarcode ei kykene löytämään etikettimääritelmiään. Ole hyvä ja varmista, "
+"että $KDEDIR/share/apps/kbarcode/labeldefinitions.sql on olemassa. Tämä "
+"tiedosto kuuluu KBarcode-pakettiin. Sinua pyydetään erikseen valitsemaan "
+"tiedoston joka sisältää tarvittavat määritelmät."
+
+#: definitiondialog.cpp:82
+msgid "Add Label Definition"
+msgstr "Lisää etikettimääritelmä"
+
+#: definitiondialog.cpp:91 newlabel.cpp:64
+msgid "Producer:"
+msgstr "Valmistaja:"
+
+#: definitiondialog.cpp:95 newlabel.cpp:67
+msgid "Type:"
+msgstr "Tyyppi:"
+
+#: definitiondialog.cpp:99
+#, fuzzy
+msgid "Width (in %1):"
+msgstr "Leveys (millimetreissä):"
+
+#: definitiondialog.cpp:103
+#, fuzzy
+msgid "Height (in %1):"
+msgstr "Korkeus (millimetreissä):"
+
+#: definitiondialog.cpp:107
+msgid "Horizontal Gap:"
+msgstr "Koko reunuksineen vaakasuunnassa:"
+
+#: definitiondialog.cpp:111
+msgid "Vertical Gap:"
+msgstr "Koko reunuksineeen pystysuunnassa:"
+
+#: definitiondialog.cpp:115
+msgid "Top Gap:"
+msgstr "Yläreunus:"
+
+#: definitiondialog.cpp:119
+msgid "Left Gap:"
+msgstr "Vasen reunus:"
+
+#: definitiondialog.cpp:123
+msgid "Number Horizontal:"
+msgstr "Koko reunuksineen vaakasuunnassa:"
+
+#: definitiondialog.cpp:127
+msgid "Number Vertical:"
+msgstr "Koko reunuksineen pystysuunnassa:"
+
+#: definitiondialog.cpp:142 definitiondialog.cpp:147 definitiondialog.cpp:152
+#: definitiondialog.cpp:157 definitiondialog.cpp:162 definitiondialog.cpp:167
+#: definitiondialog.cpp:172 definitiondialog.cpp:177 propertywidget.cpp:144
+#: propertywidget.cpp:484
+msgid "0"
+msgstr "0"
+
+#: definitiondialog.cpp:143 definitiondialog.cpp:148 definitiondialog.cpp:153
+#: definitiondialog.cpp:158 definitiondialog.cpp:163 definitiondialog.cpp:168
+msgid "0123456789."
+msgstr "0123456789."
+
+#: definitiondialog.cpp:189
+msgid "More &Information"
+msgstr "&Lisätietoja"
+
+#: definitiondialog.cpp:196 smalldialogs.cpp:97
+msgid "&Add"
+msgstr "&Lisää"
+
+#: definitiondialog.cpp:263 printersettings.cpp:45
+msgid "Custom"
+msgstr "Oma"
+
+#: definitiondialog.cpp:398
+msgid "Number of horizontal Labels"
+msgstr "Vaakasuuntaisten etikettien lukumäärä"
+
+#: definitiondialog.cpp:400
+msgid "Number of vertical Labels"
+msgstr "Pystysuuntaisten etikettien lukumäärä"
+
+#: definitiondialog.cpp:404
+msgid "Gap Top"
+msgstr "Yläreunus"
+
+#: definitiondialog.cpp:406
+msgid "Gap Left"
+msgstr "Vasen reunus"
+
+#: definitiondialog.cpp:411
+msgid "Vertical Gap"
+msgstr "Reunus pystysuunnassa"
+
+#: definitiondialog.cpp:412
+msgid "Horizontal Gap"
+msgstr "Reunus vaakasuunnassa"
+
+#: documentitemdlg.cpp:34
+#, fuzzy
+msgid "&Position && Size"
+msgstr "Sijainti: "
+
+#: documentitemdlg.cpp:37
+#, fuzzy
+msgid "&Border"
+msgstr "&Järjestä"
+
+#: documentitemdlg.cpp:42
+#, fuzzy
+msgid "&Fill Color"
+msgstr "Täytön väri:"
+
+#: documentitemdlg.cpp:47 labeleditor.cpp:526
+msgid "&Barcode"
+msgstr "&Viivakoodi"
+
+#: documentitemdlg.cpp:52
+#, fuzzy
+msgid "&Rotation"
+msgstr "Kierto:"
+
+#: documentitemdlg.cpp:55 documentitemdlg.cpp:66
+#, fuzzy
+msgid "&Text"
+msgstr "Teksti:"
+
+#: documentitemdlg.cpp:60 propertywidget.cpp:470
+#, fuzzy
+msgid "&Image"
+msgstr "...&Kuvana"
+
+#: documentitemdlg.cpp:78
+msgid "&Visibility"
+msgstr ""
+
+#: documentitemdlg.cpp:109
+#, fuzzy
+msgid "Property changed"
+msgstr "Projektipäällikkö"
+
+#: dsmainwindow.cpp:72
+msgid "&Start Configuration Wizard..."
+msgstr "&Käynnistä asetusten ohjattu toiminto..."
+
+#: dsmainwindow.cpp:74
+msgid "&Connect to Database"
+msgstr "&Yhdistä tietokantaan"
+
+#: dsmainwindow.cpp:81
+msgid "&Import Label Definitions"
+msgstr "&Tuo etikettien määritelmiä"
+
+#: dsmainwindow.cpp:84
+msgid "&Import Example Data"
+msgstr "&Tuo esimerkkitietoja"
+
+#: dsmainwindow.cpp:95
+msgid "&Action Map..."
+msgstr ""
+
+#: dsmainwindow.cpp:97
+msgid "&System Check..."
+msgstr "&Järjestelmän tarkistus..."
+
+#: dsmainwindow.cpp:98
+msgid "&Barcode Help..."
+msgstr "&Tietoja viivakoodeista..."
+
+#: dsmainwindow.cpp:99
+msgid "&Donate..."
+msgstr "&Lahjoita..."
+
+#: dsmainwindow.cpp:182
+msgid ""
+"<qt>The KBarcode documentation is avaible as PDF for download on our webpage."
+"<br><br>"
+msgstr ""
+"<qt>KBarcoden dokumentaatio on saatavana kotisivuiltamme PDF-tiedostona."
+"<br><br>"
+
+#: dsmainwindow.cpp:184
+msgid "Download Now"
+msgstr "Lataa nyt"
+
+#: dsmainwindow.cpp:214
+msgid ""
+"<qt>It is possible to support the further development of KBarcode through "
+"donations. PayPal will be used for processing the donation.<br><br>"
+msgstr ""
+"<qt>KBarcoden jatkoheitystä voi tukea rahalahjoitusten avulla. Lahjoitusten "
+"käsittelyssä käytetään PayPal-järjestelmää.<br><br>"
+
+#: dsmainwindow.cpp:217
+msgid "Donate Now"
+msgstr "Lahjoita nyt"
+
+#: dsmainwindow.cpp:230
+msgid "<p><h3>Barcode Support</h3></p>"
+msgstr "<p><h3>Tuki viivakoodeille</h3></p>"
+
+#: dsmainwindow.cpp:232 dsmainwindow.cpp:234 dsmainwindow.cpp:236
+#: dsmainwindow.cpp:238 dsmainwindow.cpp:240
+msgid "<b>No</b><br />"
+msgstr "<b>Ei tukea</b><br />"
+
+#: dsmainwindow.cpp:232 dsmainwindow.cpp:234 dsmainwindow.cpp:236
+#: dsmainwindow.cpp:238 dsmainwindow.cpp:240
+msgid "<b>Found</b><br />"
+msgstr "<b>Kyllä</b><br />"
+
+#: dsmainwindow.cpp:243
+msgid ""
+"<p>To get <b>barcode support</b> you have to either install <i>GNU Barcode</"
+"i>, <i>TBarcode</i> or <i>PDF417 Enc</i>.</p>"
+msgstr ""
+"<p><b>Viivakoodituen </b> mahdollistamiseksi sinun täytyy asentaa joko "
+"<i>GNU Barcode</i>, <i>TBarcode</i> tai <i>PDF417 Enc</i>.</p>"
+
+#: dsmainwindow.cpp:245
+msgid "<p><h3>Database Support</h3></p>"
+msgstr "<p><h3>Tietokantatuki</h3></p>"
+
+#: dsmainwindow.cpp:253
+msgid "<li>Driver found: "
+msgstr "<li>Ajuri löytyi: "
+
+#: dsmainwindow.cpp:258
+msgid ""
+"<p><b>No database drivers found. SQL database support is disabled.</b></p>"
+msgstr ""
+"<p><b>Tietokanta-ajureita ei löytynyt. Tuki SQL-tietokannoille on poistettu "
+"käytöstä.</b></p>"
+
+#: imageitem.cpp:267
+msgid "Expression: "
+msgstr ""
+
+#: kactionmap.cpp:91
+msgid "Action Map"
+msgstr ""
+
+#: kactionmap.cpp:95
+msgid "Find and execute actions."
+msgstr ""
+
+#: kactionmap.cpp:116
+msgid "Action"
+msgstr ""
+
+#: kactionmap.cpp:117
+msgid "Shortcut"
+msgstr ""
+
+#: kactionmap.cpp:118 tokendialog.cpp:142 tokendialog.cpp:177
+#, fuzzy
+msgid "Description"
+msgstr "Etiketin kuvaus"
+
+#: kbarcode.cpp:51
+msgid "Barcode &Generator..."
+msgstr "&Viivakoodikehitin..."
+
+#: kbarcode.cpp:53
+msgid "&Label Editor..."
+msgstr "Etikettie&ditori..."
+
+#: kbarcode.cpp:54
+msgid "&Batch Printing..."
+msgstr "&Eräajotulostus..."
+
+#: kbarcode.cpp:55
+msgid "Edit SQL &Tables..."
+msgstr "Muokkaa SQL-tauluja..."
+
+#: kbarcode.cpp:75
+msgid "&Edit Label Definitions"
+msgstr "&Muokkaa etikettien määritelmiä"
+
+#: kbarcode.cpp:78
+msgid "&Edit Articles"
+msgstr "&Muokkaa nimikkeitä"
+
+#: kbarcode.cpp:81
+msgid "&Edit Customers"
+msgstr "&Muokkaa asiakkaita"
+
+#: kbarcode.cpp:84
+msgid "&Edit Customer Text"
+msgstr "&Muokkaa asiakkaiden tekstejä"
+
+#: kbarcode.cpp:179
+msgid ""
+"%1 is no valid output format for --output. Valid values are POSTSCRIPT, "
+"IMAGE and BARCODE."
+msgstr ""
+
+#: label.cpp:188
+msgid "Static"
+msgstr "Staattinen"
+
+#: labeleditor.cpp:351
+msgid "Select Label"
+msgstr "Valitse etiketti"
+
+#: labeleditor.cpp:388
+msgid ""
+"<qt>The file <b>%1</b> cannot be loaded as the label definition is missing.</"
+"qt>"
+msgstr ""
+
+#: labeleditor.cpp:447
+msgid "Close &Label"
+msgstr "Sulje &etiketti"
+
+#: labeleditor.cpp:449
+msgid "&Recent Files"
+msgstr "Avaa &vanha"
+
+#: labeleditor.cpp:451
+msgid "&Import and Print Batch File..."
+msgstr "&Tuo tietoja ja tulosta eräajona..."
+
+#: labeleditor.cpp:455
+msgid "&Change description..."
+msgstr "&Muuta kuvausta..."
+
+#: labeleditor.cpp:456
+msgid "&Delete Object"
+msgstr "&Tuhoa objekti"
+
+#: labeleditor.cpp:459
+msgid "Print to &Barcode Printer..."
+msgstr ""
+
+#: labeleditor.cpp:460
+#, fuzzy
+msgid "Print to &Image..."
+msgstr "Luodaan kuvia..."
+
+#: labeleditor.cpp:461
+msgid "&Change Label..."
+msgstr "&Vaihda etiketti..."
+
+#: labeleditor.cpp:462
+msgid "Insert &Barcode"
+msgstr "Lisää &viivakoodi"
+
+#: labeleditor.cpp:465
+msgid "Insert &Picture"
+msgstr "Lisää &kuva"
+
+#: labeleditor.cpp:466
+msgid "Insert &Text"
+msgstr "Lisää &teksti"
+
+#: labeleditor.cpp:467 multilineeditdlg.cpp:138 textlineedit.cpp:98
+#, fuzzy
+msgid "Insert &Data Field"
+msgstr "Lisää tietokannan kenttä"
+
+#: labeleditor.cpp:468
+#, fuzzy
+msgid "Insert &Text Line"
+msgstr "Lisää &teksti"
+
+#: labeleditor.cpp:469
+msgid "Insert &Line"
+msgstr "Lisää &rivi"
+
+#: labeleditor.cpp:470
+msgid "Insert &Rectangle"
+msgstr "Lisää &nelikulmio"
+
+#: labeleditor.cpp:471
+msgid "Insert &Ellipse"
+msgstr "Lisää &ellipsi"
+
+#: labeleditor.cpp:473
+msgid "&Grid"
+msgstr "&Ruudukko"
+
+#: labeleditor.cpp:474
+msgid "&Preview..."
+msgstr "&Esikatselu..."
+
+#: labeleditor.cpp:481
+msgid "Address&book"
+msgstr "Osoite&kirja"
+
+#: labeleditor.cpp:482
+msgid "&Create Single Barcode..."
+msgstr "&Luo yksittäinen viivakoodi..."
+
+#: labeleditor.cpp:525
+msgid "T&ools"
+msgstr "T&yökalut"
+
+#: labeleditor.cpp:585
+msgid "&On Top"
+msgstr "&Päällimmäisenä"
+
+#: labeleditor.cpp:586
+msgid "&Raise"
+msgstr "&Nosta"
+
+#: labeleditor.cpp:587
+msgid "&Lower"
+msgstr "&Laske"
+
+#: labeleditor.cpp:588
+msgid "&To Background"
+msgstr "&Vie taustalle"
+
+#: labeleditor.cpp:591
+msgid "Center &Horizontally"
+msgstr "Keskitä &vaakasuunnassa"
+
+#: labeleditor.cpp:592
+msgid "Center &Vertically"
+msgstr "Keskitä &pystysuunnassa"
+
+#: labeleditor.cpp:594
+msgid "&Order"
+msgstr "&Järjestä"
+
+#: labeleditor.cpp:595
+msgid "&Center"
+msgstr "&Keskitä"
+
+#: labeleditor.cpp:598
+msgid "&Protect Position and Size"
+msgstr ""
+
+#: labeleditor.cpp:600
+msgid "&Properties"
+msgstr "&Ominaisuudet"
+
+#: labeleditor.cpp:678
+msgid "Label Description"
+msgstr "Etiketin kuvaus"
+
+#: labeleditor.cpp:679
+msgid "Please enter a description:"
+msgstr "Määrittele kuvaus:"
+
+#: labeleditor.cpp:708
+msgid "Size: "
+msgstr "Koko: "
+
+#: labeleditor.cpp:711
+msgid "Label Template: "
+msgstr "Etiketin mallipohja: "
+
+# fuzzyish
+#: labeleditor.cpp:742
+#, fuzzy
+msgid "Protected Item"
+msgstr "Siirretty objekti"
+
+#: labeleditor.cpp:841
+msgid "Spellchecking"
+msgstr "Oikoluku"
+
+#: labeleditor.cpp:1015
+msgid "The file %1 does not exist."
+msgstr "Tiedostoa %1 ei ole olemassa."
+
+#: labeleditor.cpp:1050
+msgid ""
+"<qt>The document has been modified.<br><br>Do you want to save it ?</qt>"
+msgstr "<qt>Asiakirjaa on muokattu.<br><br>Haluatko tallentaa sen?</qt>"
+
+#: main.cpp:35
+msgid ""
+"Load the file in KBarcode (if --batch is specified, the file will be used in "
+"batchprinting mode)"
+msgstr ""
+
+#: main.cpp:36
+msgid ""
+"Print any loaded files immediately on the default printer or on the printer "
+"specified by the --printer commandline option and exit afterwards"
+msgstr ""
+
+# fuzzyish
+#: main.cpp:38
+msgid "Printer/destination to print on"
+msgstr "Käytettävä tulostin/tulostuksen kohde"
+
+#: main.cpp:39
+#, fuzzy
+msgid "KBarcode Modes:"
+msgstr "KBarcode"
+
+#: main.cpp:40
+#, fuzzy
+msgid "Start KBarcode as xbarcode replacement"
+msgstr "käynnistä xbarcoden korvaajana"
+
+#: main.cpp:41
+#, fuzzy
+msgid "Open the label editor"
+msgstr "käynnistä etikettieditori"
+
+#: main.cpp:42
+#, fuzzy
+msgid "Start directly in batchprinting mode"
+msgstr "käynnistä eräajotulostustilassa"
+
+#: main.cpp:43
+msgid "Additional options for batchprinting (--batch):"
+msgstr ""
+
+#: main.cpp:44
+msgid "Output format where mode is one of POSTSCRIPT|IMAGE|BARCODE"
+msgstr ""
+
+#: main.cpp:45
+msgid "Set the serial number to be used"
+msgstr ""
+
+#: main.cpp:46
+msgid ""
+"Increase a previously specified serial number using this value for each "
+"printed label"
+msgstr ""
+
+#: main.cpp:47
+msgid "Print <value> labels without any data"
+msgstr ""
+
+#: main.cpp:48
+msgid "Import variable data from a specified sql query"
+msgstr ""
+
+#: main.cpp:49
+msgid "Import variable data from a specified csv file"
+msgstr ""
+
+#: main.cpp:75
+#, fuzzy
+msgid "KBarcode"
+msgstr "Viivakoodi"
+
+#: main.cpp:76
+msgid "KBarcode is a barcode and label printing application for KDE 3."
+msgstr "KBarcode on viivakoodien ja etikettien tulostusohjelma KDE 3:lle."
+
+#: main.cpp:81
+msgid "Programmer"
+msgstr "Ohjelmoija"
+
+#: main.cpp:83
+msgid "Project Manager"
+msgstr "Projektipäällikkö"
+
+#: main.cpp:86
+msgid "Wrote GNU Barcode on which kbarcode is based."
+msgstr "GNU Barcoden, johon KBarcode perustuu, tekijä"
+
+#: main.cpp:88
+msgid "Author of Barcode Writer in Pure Postscript"
+msgstr ""
+
+#: main.cpp:90
+msgid "Italian translation"
+msgstr "Käännös italian kielelle"
+
+#: main.cpp:92
+msgid "Finnish and Swedish translation, created the KBarcode icon"
+msgstr "Käännös suomen- ja ruotsin kielille. Kuvakkeiden tekijä."
+
+#: main.cpp:93
+msgid "Spanish translation"
+msgstr "Käännös espanjan kielelle"
+
+#: main.cpp:94
+msgid "Hungarian translation"
+msgstr "Käännös unkarin kielelle"
+
+#: main.cpp:96
+msgid "Tab icon code stolen from his excellent app qtella."
+msgstr "Tab icon -koodi varastettu hänen qtella-ohjelmastaan."
+
+#: main.cpp:97
+msgid "Wrote the RichText KPart"
+msgstr "RichText KPart:n tekijä"
+
+#: main.cpp:98
+msgid "French Translation"
+msgstr "Käännös ranskan kielelle"
+
+#: main.cpp:99
+msgid "Help with ZPL and IPL code"
+msgstr "Avusti ZLP ja IPL-koodien kanssa"
+
+#: main.cpp:100
+msgid "Wrote many patches to improve KBarcode"
+msgstr ""
+
+#: main.cpp:101
+#, fuzzy
+msgid "Made the Netherlands translation"
+msgstr "Käännös italian kielelle"
+
+#: main.cpp:102
+msgid "Added lot's of useful data fields to kbarcode"
+msgstr ""
+
+#: main.cpp:103
+msgid "Added TEC barcode printer support"
+msgstr ""
+
+#: main.cpp:104
+msgid "Added EPCL barcode printer support"
+msgstr ""
+
+#: measurements.cpp:51
+msgid "mm"
+msgstr ""
+
+#: measurements.cpp:52
+msgid "in"
+msgstr ""
+
+#: mimesources.cpp:33
+#, fuzzy
+msgid "Pasted Object"
+msgstr "&Tuhoa objekti"
+
+#: multilineeditdlg.cpp:96
+msgid "&Bold"
+msgstr "&Lihavoitu"
+
+#: multilineeditdlg.cpp:99
+msgid "&Italic"
+msgstr "&Kursiivi"
+
+#: multilineeditdlg.cpp:102
+msgid "&Underline"
+msgstr "&Alleviivattu"
+
+#: multilineeditdlg.cpp:105
+msgid "Text &Color..."
+msgstr "Tekstin &Väri..."
+
+#: multilineeditdlg.cpp:110
+msgid "&Font"
+msgstr "&Kirjasin"
+
+#: multilineeditdlg.cpp:113
+msgid "Font &Size"
+msgstr "Kirjasimen &koko"
+
+#: multilineeditdlg.cpp:119
+msgid "Align &Left"
+msgstr "V&asen tasaus"
+
+#: multilineeditdlg.cpp:122
+msgid "Align &Center"
+msgstr "&Keskitetty"
+
+#: multilineeditdlg.cpp:125
+msgid "Align &Right"
+msgstr "&Oikea tasaus"
+
+#: multilineeditdlg.cpp:128
+msgid "&Justify"
+msgstr "&Tasattu"
+
+#: mycanvasview.cpp:152
+msgid "Position: "
+msgstr "Sijainti: "
+
+#: mycanvasview.cpp:281
+msgid "Item Moved"
+msgstr "Objektin siirtyminen"
+
+#: newlabel.cpp:41
+msgid "New Label"
+msgstr "Uusi etiketti"
+
+#: newlabel.cpp:49
+msgid "<h1>Create a new Label</h1><br><br>"
+msgstr "<h1>Luo uusi etiketti</h1><br><br>"
+
+#: newlabel.cpp:51
+msgid "<h1>Change Label Size</h1><br><br>"
+msgstr "<h1>Muuta etiketin kokoa</h1><br><br>"
+
+#: newlabel.cpp:56 tokenprovider.cpp:208
+msgid "Label"
+msgstr "Etiketti"
+
+#: newlabel.cpp:72
+msgid "&Start with an empty label"
+msgstr ""
+
+#: newlabel.cpp:102
+msgid "&Add own Label Definition"
+msgstr "&Lisää oma etikettimääritelmä"
+
+#: newlabel.cpp:168
+msgid ""
+"<b>Format:</b><br>\n"
+"Width: "
+msgstr ""
+"<b>Mitat:</b><br>\n"
+"Leveys: "
+
+#: newlabel.cpp:169
+#, fuzzy
+msgid "%1<br>Height: "
+msgstr "mm<br>Korkeus: "
+
+#: newlabel.cpp:170
+#, fuzzy
+msgid "%2<br>Horizontal Gap: "
+msgstr "mm<br>Koko reunuksineen vaakasuunnassa: "
+
+#: newlabel.cpp:171
+#, fuzzy
+msgid "%3<br>Vertical Gap: "
+msgstr "mm<br>Koko reunuksineen pystysuunnassa: "
+
+#: newlabel.cpp:172
+#, fuzzy
+msgid "%4<br>Top Gap: "
+msgstr "mm<br>Yläreunus: "
+
+#: newlabel.cpp:173
+#, fuzzy
+msgid "%5<br>Left Gap: "
+msgstr "mm<br>Vasen reunus: "
+
+#: newlabel.cpp:192
+msgid "No label selected."
+msgstr ""
+
+#: previewdialog.cpp:89
+#, fuzzy
+msgid "Select &Address"
+msgstr "Lisää &osoite..."
+
+#: previewdialog.cpp:95
+msgid "Customer Name and No.:"
+msgstr "Asiakkaan nimi ja numero:"
+
+#: previewdialog.cpp:98
+msgid "Article Number:"
+msgstr "Nimikenumero:"
+
+#: previewdialog.cpp:100 smalldialogs.cpp:45 smalldialogs.cpp:94
+msgid "Group:"
+msgstr "Ryhmä:"
+
+#: previewdialog.cpp:102
+msgid "Index:"
+msgstr "Indeksi:"
+
+#: previewdialog.cpp:108
+#, fuzzy
+msgid "Addressbook entry:"
+msgstr "Osoite&kirja"
+
+#: printersettings.cpp:39
+msgid "ISO A3"
+msgstr "ISO A3"
+
+#: printersettings.cpp:40
+msgid "ISO A4"
+msgstr "ISO A4"
+
+#: printersettings.cpp:41
+msgid "ISO A5"
+msgstr "ISO A5"
+
+#: printersettings.cpp:42
+msgid "US Letter"
+msgstr "US Letter"
+
+#: printersettings.cpp:43
+msgid "US Legal"
+msgstr "US Legal"
+
+#: printersettings.cpp:44
+msgid "Screen"
+msgstr "Näyttö"
+
+#: printersettings.cpp:46
+msgid "ISO B5"
+msgstr "ISO B5"
+
+#: printersettings.cpp:47
+msgid "US Executive"
+msgstr "US Executive"
+
+#: printersettings.cpp:48
+msgid "ISO A0"
+msgstr "ISO A0"
+
+#: printersettings.cpp:49
+msgid "ISO A1"
+msgstr "ISO A1"
+
+#: printersettings.cpp:50
+msgid "ISO A2"
+msgstr "ISO A2"
+
+#: printersettings.cpp:51
+msgid "ISO A6"
+msgstr "ISO A6"
+
+#: printersettings.cpp:52
+msgid "ISO A7"
+msgstr "ISO A7"
+
+#: printersettings.cpp:53
+msgid "ISO A8"
+msgstr "ISO A8"
+
+#: printersettings.cpp:54
+msgid "ISO A9"
+msgstr "ISO A9"
+
+#: printersettings.cpp:55
+msgid "ISO B0"
+msgstr "ISO B0"
+
+#: printersettings.cpp:56
+msgid "ISO B1"
+msgstr "ISO B1"
+
+#: printersettings.cpp:57
+msgid "ISO B10"
+msgstr "ISO B10"
+
+#: printersettings.cpp:58
+msgid "ISO B2"
+msgstr "ISO B2"
+
+#: printersettings.cpp:59
+msgid "ISO B3"
+msgstr "ISO B3"
+
+#: printersettings.cpp:60
+msgid "ISO B4"
+msgstr "ISO B4"
+
+#: printersettings.cpp:61
+msgid "ISO B6"
+msgstr "ISO B6"
+
+#: printersettings.cpp:62
+msgid "ISO C5"
+msgstr "ISO C5"
+
+#: printersettings.cpp:63
+msgid "US Common 10"
+msgstr "US Common 10"
+
+#: printersettings.cpp:64
+msgid "ISO DL"
+msgstr "ISO DL"
+
+#: printersettings.cpp:65
+msgid "US Folio"
+msgstr "US Folio"
+
+#: printersettings.cpp:66
+msgid "US Ledger"
+msgstr "US Ledger"
+
+#: printersettings.cpp:67
+msgid "US Tabloid"
+msgstr "US Tabloid"
+
+#: printlabeldlg.cpp:36 smalldialogs.cpp:42 smalldialogs.cpp:88
+msgid "Number of labels:"
+msgstr "Etikettien lukumäärä:"
+
+#: printlabeldlg.cpp:40
+msgid "Start at label position:"
+msgstr "Aloita arkin etiketistä nro:"
+
+#: printlabeldlg.cpp:43
+msgid "&Print crop marks (borders)"
+msgstr "&Tulosta reunat"
+
+# fuzzyish
+#: propertywidget.cpp:56
+#, fuzzy
+msgid "Image Saved in KBarcode"
+msgstr "Muutettu viivakoodi"
+
+#: propertywidget.cpp:90
+msgid "&Border Visible"
+msgstr ""
+
+#: propertywidget.cpp:101 propertywidget.cpp:190 rectsettingsdlg.cpp:159
+msgid "Color:"
+msgstr "Väri:"
+
+#: propertywidget.cpp:103 rectsettingsdlg.cpp:161
+msgid "Line Width:"
+msgstr "Viivan leveys:"
+
+#: propertywidget.cpp:105 rectsettingsdlg.cpp:81 rectsettingsdlg.cpp:163
+msgid "Line Style:"
+msgstr "Viivan tyyli:"
+
+#: propertywidget.cpp:145 propertywidget.cpp:485
+#, fuzzy
+msgid "90"
+msgstr "0"
+
+#: propertywidget.cpp:146 propertywidget.cpp:486
+msgid "180"
+msgstr ""
+
+#: propertywidget.cpp:147 propertywidget.cpp:487
+msgid "270"
+msgstr ""
+
+#: propertywidget.cpp:212
+msgid "Barcode Settings:"
+msgstr "Viivakoodiasetukset:"
+
+#: propertywidget.cpp:346
+msgid "&Protect item from being moved or resized"
+msgstr ""
+
+#: propertywidget.cpp:357
+#, fuzzy
+msgid "&Top:"
+msgstr "&Päällimmäisenä"
+
+#: propertywidget.cpp:358
+#, fuzzy
+msgid "&Left:"
+msgstr "Vasen reunus:"
+
+#: propertywidget.cpp:359
+#, fuzzy
+msgid "&Height:"
+msgstr "mm<br>Korkeus: "
+
+#: propertywidget.cpp:360
+#, fuzzy
+msgid "&Width:"
+msgstr "Viivan leveys:"
+
+#: propertywidget.cpp:471
+#, fuzzy
+msgid "&Load image from path"
+msgstr "Kuvaformaatti ei ole tuettu"
+
+#: propertywidget.cpp:475
+msgid "&Read image path from expression"
+msgstr ""
+
+#: propertywidget.cpp:489
+#, fuzzy
+msgid "&Size"
+msgstr "Koko: "
+
+#: propertywidget.cpp:491
+msgid "&None"
+msgstr ""
+
+#: propertywidget.cpp:493
+#, fuzzy
+msgid "S&cale"
+msgstr "Skaalus:"
+
+#: propertywidget.cpp:495
+#, fuzzy
+msgid "Mirror &Horizontaly"
+msgstr "Keskitä &vaakasuunnassa"
+
+#: propertywidget.cpp:496
+#, fuzzy
+msgid "Mirror &Vertically"
+msgstr "Keskitä &pystysuunnassa"
+
+#: propertywidget.cpp:522
+msgid "Image format not supported for file: %1"
+msgstr ""
+
+#: propertywidget.cpp:611
+msgid "Evaluate JavsScript code to define the visibility of this item:"
+msgstr ""
+
+#: rectsettingsdlg.cpp:54 rectsettingsdlg.cpp:145
+msgid "Settings"
+msgstr "Asetukset"
+
+#: rectsettingsdlg.cpp:71
+msgid "&Enable Border"
+msgstr "&Ota käyttöön reunaviiva"
+
+#: rectsettingsdlg.cpp:73
+msgid "Fill Color:"
+msgstr "Täytön väri:"
+
+#: rectsettingsdlg.cpp:77
+msgid "Border Color:"
+msgstr "Reunaviivan väri:"
+
+#: rectsettingsdlg.cpp:79
+msgid "Border Width:"
+msgstr "Reunaviivan leveys:"
+
+#: smalldialogs.cpp:35
+msgid "Add Barcode_basic"
+msgstr "Lisää Barcode_basic"
+
+#: smalldialogs.cpp:61
+#, fuzzy
+msgid "Add Items"
+msgstr "Lisää sommitelma"
+
+#: smalldialogs.cpp:68
+#, fuzzy
+msgid "Edit Item"
+msgstr "Lisää sommitelma"
+
+#: smalldialogs.cpp:92
+#, fuzzy
+msgid "Article:"
+msgstr "Nimikenumero"
+
+#: sqltables.cpp:117
+msgid "<qt>Unable to open database: "
+msgstr "<qt>Tietokantaa ei voitu avata: "
+
+#: sqltables.cpp:139
+msgid "We are going to re-create the tables '"
+msgstr "Luodaan tietokantataulut uudelleen '"
+
+#: sqltables.cpp:141
+msgid "' and '"
+msgstr "' ja '"
+
+#: sqltables.cpp:164
+msgid "<qt>Can't create database "
+msgstr "<qt>Tietokantaa ei voitu luoda "
+
+#: sqltables.cpp:164
+msgid "<br>You can continue if the database exists already.</qt>"
+msgstr "<br>Voit jatkaa mikäli tietokanta on jo olemassa.</qt>"
+
+#: sqltables.cpp:182
+msgid ""
+"KBarcode could not create the required database. Please create it manually."
+msgstr ""
+"Kbarcode ei kyennyt luomaan vaadittavaa tietokantaa. Ole hyvä ja luo se "
+"manuaalisesti."
+
+#: sqltables.cpp:264
+msgid "Created table "
+msgstr "Tietokantataulu luotiin "
+
+#: sqltables.cpp:264
+msgid " successfully!"
+msgstr " onnistuneesti!"
+
+#: sqltables.cpp:268
+msgid "Can't connect to database."
+msgstr "Tietokantaan ei saatu yhteyttä."
+
+#: sqltables.cpp:277
+msgid "We are going to delete the complete table: "
+msgstr "Koko tietokantataulu poistetaan: "
+
+#: sqltables.cpp:299
+msgid "We are going to delete the complete tables: "
+msgstr "Tietokantataulut poistetaan: "
+
+#: sqltables.cpp:315
+msgid ""
+"Data file for import not found. Continuing without importing data. Please "
+"check your KBarcode installation."
+msgstr ""
+
+#: sqltables.cpp:320
+msgid "SQL import progress:"
+msgstr "SQL tuonnin edistyminen:"
+
+#: sqltables.cpp:331
+msgid "Can't open the data file containing the label definitions."
+msgstr "Ei voitu avata etikettien määritelmiä sisältävää datatiedostoa."
+
+#: sqltables.cpp:340
+msgid "<qt>Can't execute command:<br><b>"
+msgstr "<qt>Komentoa ei voitu suorittaa:<br><b>"
+
+#: sqltables.cpp:432
+msgid ""
+"The SQL tables of KBarcode have changed since the last version. KBarcode "
+"updated them without any loss of data."
+msgstr ""
+"KBarcoden SQL-tietokantataulut ovat muuttuneet sitten edellisen version. "
+"KBarcode päivitti ne ilman tiedon hävikkiä."
+
+#: sqltables.cpp:453 sqltables.cpp:473
+msgid "Connected successfully to your database"
+msgstr "Yhteydenotto tietokantaan onnistui"
+
+#: sqltables.cpp:517
+msgid "Database Settings"
+msgstr "Tietokanta-asetukset"
+
+#: sqltables.cpp:527
+msgid "Username :"
+msgstr "Käyttäjätunnus :"
+
+#: sqltables.cpp:534
+msgid "Password :"
+msgstr "Salasana :"
+
+#: sqltables.cpp:542
+msgid "Database :"
+msgstr "Tietokanta :"
+
+#: sqltables.cpp:549
+msgid "Host :"
+msgstr "Palvelin :"
+
+#: sqltables.cpp:556
+msgid "Driver :"
+msgstr "Ajuri :"
+
+#: sqltables.cpp:569
+msgid "&Autoconnect on program start"
+msgstr "&Yhdistä automaattisesti käynnistyksen yhteydessä"
+
+#: sqltables.cpp:573
+msgid "&Test Settings"
+msgstr "&Testaa asetuksia"
+
+#: sqltables.cpp:577
+msgid "<b>You have to test your database settings before you can procede.</b>"
+msgstr ""
+"<b>Sinun täytyy testata tietokanta-asetuksiasi ennen kuin voit jatkaa.</b>"
+
+#: textlineedit.cpp:138
+msgid "&Mag. Vert.:"
+msgstr ""
+
+#: textlineedit.cpp:140
+msgid "&Mag. Hor.:"
+msgstr ""
+
+#: tokendialog.cpp:65 tokendialog.cpp:93 tokendialog.cpp:109
+#, fuzzy
+msgid "What do you want to insert?"
+msgstr "Kuinka monta etikettiä haluat tulostaa?"
+
+#: tokendialog.cpp:67
+#, fuzzy
+msgid "Insert a &fixed data field"
+msgstr "Lisää tietokannan kenttä"
+
+#: tokendialog.cpp:68
+msgid "Insert a &custom SQL query, variable or JavaScript function"
+msgstr ""
+
+#: tokendialog.cpp:72
+msgid "Step 1 of 3"
+msgstr ""
+
+#: tokendialog.cpp:79
+msgid "Step 2 of 3"
+msgstr ""
+
+#: tokendialog.cpp:86
+msgid "Step 3 of 3"
+msgstr ""
+
+#: tokendialog.cpp:94
+msgid "&Select from a list of all tokens"
+msgstr ""
+
+#: tokendialog.cpp:95
+msgid "Insert printing &informations"
+msgstr ""
+
+#: tokendialog.cpp:96
+#, fuzzy
+msgid "&Insert a database field"
+msgstr "Lisää tietokannan kenttä"
+
+#: tokendialog.cpp:97
+msgid "Insert a &date/time function"
+msgstr ""
+
+#: tokendialog.cpp:98
+#, fuzzy
+msgid "Insert an &addressbook field"
+msgstr "Lisää &osoite..."
+
+#: tokendialog.cpp:111
+msgid "Insert a custom &variable"
+msgstr ""
+
+#: tokendialog.cpp:112
+#, fuzzy
+msgid "Insert a &SQL query"
+msgstr "Lisää &rivi"
+
+#: tokendialog.cpp:113
+msgid "Insert a &JavaScript function"
+msgstr ""
+
+#: tokendialog.cpp:135
+msgid "&Category:"
+msgstr ""
+
+#: tokendialog.cpp:139
+msgid "&Token:"
+msgstr ""
+
+#: tokendialog.cpp:141 tokendialog.cpp:176
+msgid "Token"
+msgstr ""
+
+#: tokendialog.cpp:146
+msgid "&Custom Expression to be inserted in the token."
+msgstr ""
+
+#: tokendialog.cpp:151
+msgid ""
+"<qt>Certain tokens, like for exaple the sqlquery token need arguments. In "
+"the case of the sqlquery token, the sure has to enter a sql query in this "
+"text field.</qt>"
+msgstr ""
+
+#: tokendialog.cpp:191
+#, fuzzy
+msgid "&Create a new custom variable"
+msgstr "&Luo uusi etiketti etikettieditoria käynnistettäessä"
+
+#: tokendialog.cpp:194
+msgid "&Insert an existing custom variable"
+msgstr ""
+
+#: tokendialog.cpp:219
+msgid ""
+"<qt><b>No SQL connection found!</b><br>You can build a query, but you will "
+"not be able to execute or test it right now.<br></qt>"
+msgstr ""
+
+#: tokendialog.cpp:224
+msgid "&SQL Query:"
+msgstr ""
+
+#: tokendialog.cpp:226
+msgid "&Test"
+msgstr ""
+
+#: tokendialog.cpp:231
+msgid "Query test results:"
+msgstr ""
+
+#: tokendialog.cpp:246
+msgid "/* Place your JavaScript code into this text field. */\n"
+msgstr ""
+
+#: tokendialog.cpp:339
+msgid "All"
+msgstr ""
+
+#: tokendialog.cpp:352 tokendialog.cpp:420
+#, fuzzy
+msgid "Variable defined by the user for this label."
+msgstr "Tietokannan kenttä käytettäväksi tähän sarakkeeseen:"
+
+#: tokendialog.cpp:417 tokenprovider.cpp:209
+#, fuzzy
+msgid "Custom Values"
+msgstr "Asiakkaan nimi"
+
+#: tokenprovider.cpp:210
+msgid "Date & Time"
+msgstr ""
+
+#: tokenprovider.cpp:211
+#, fuzzy
+msgid "Addressbook"
+msgstr "Osoite&kirja"
+
+#: tokenprovider.cpp:216
+#, fuzzy
+msgid "Article description from barcode_basic"
+msgstr "Nimikkeen kuvaus"
+
+#: tokenprovider.cpp:217
+#, fuzzy
+msgid "Article number from barcode_basic"
+msgstr "Tuo barcode_basic"
+
+#: tokenprovider.cpp:224
+msgid "customer number of the current customer"
+msgstr ""
+
+#: tokenprovider.cpp:225
+msgid "name of the current customer"
+msgstr ""
+
+#: tokenprovider.cpp:226
+#, fuzzy
+msgid "Barcode number from barcode_basic"
+msgstr "Tuo barcode_basic"
+
+#: tokenprovider.cpp:228
+msgid "group of the current article"
+msgstr ""
+
+#: tokenprovider.cpp:229
+msgid "Barcode encoding type from barcode_basic"
+msgstr ""
+
+#: tokenprovider.cpp:230
+msgid "User readable barcode encoding type from barcode_basic"
+msgstr ""
+
+#: tokenprovider.cpp:235
+msgid "Path and filename of this file"
+msgstr ""
+
+#: tokenprovider.cpp:236
+msgid "number of labels currently printed during this printout"
+msgstr ""
+
+#: tokenprovider.cpp:237
+msgid "current column on the page"
+msgstr ""
+
+#: tokenprovider.cpp:238
+msgid "current row on the page"
+msgstr ""
+
+#: tokenprovider.cpp:239
+#, fuzzy
+msgid "Current page"
+msgstr "Nykyinen tietokantataulu: <br>"
+
+#: tokenprovider.cpp:240
+#, fuzzy
+msgid "Current resolution"
+msgstr "Näytön tarkkuus"
+
+#: tokenprovider.cpp:241
+msgid "Include a serial number on your labels."
+msgstr ""
+
+#: tokenprovider.cpp:247
+msgid "Execute java script code"
+msgstr ""
+
+#: tokenprovider.cpp:248
+msgid "Insert the result of a custom sql query"
+msgstr ""
+
+#: tokenprovider.cpp:249
+msgid "Insert a custom variable"
+msgstr ""
+
+#: tokenprovider.cpp:254
+msgid "Date formated as configured in the preferences"
+msgstr ""
+
+#: tokenprovider.cpp:255
+msgid "Short Weekday Name"
+msgstr ""
+
+#: tokenprovider.cpp:256
+msgid "Full Weekday Name"
+msgstr ""
+
+#: tokenprovider.cpp:257
+msgid "Short Month Name"
+msgstr ""
+
+#: tokenprovider.cpp:258
+msgid "Full Month Name"
+msgstr ""
+
+#: tokenprovider.cpp:259
+#, fuzzy
+msgid "Date-Time"
+msgstr "Päivämäärä"
+
+#: tokenprovider.cpp:260
+#, fuzzy
+msgid "Century"
+msgstr "&Keskitä"
+
+#: tokenprovider.cpp:261
+msgid "Day Number (01-31)"
+msgstr ""
+
+#: tokenprovider.cpp:262
+msgid "Month-Day-year"
+msgstr ""
+
+#: tokenprovider.cpp:263
+msgid "Day Number ( 1-31)"
+msgstr ""
+
+#: tokenprovider.cpp:264
+msgid "Year-Month-day"
+msgstr ""
+
+#: tokenprovider.cpp:265
+msgid "Week Year (yy)"
+msgstr ""
+
+#: tokenprovider.cpp:266
+msgid "Week Year (yyyy)"
+msgstr ""
+
+#: tokenprovider.cpp:267
+msgid "Hour (01-24)"
+msgstr ""
+
+#: tokenprovider.cpp:268
+msgid "Hour (1-12)"
+msgstr ""
+
+#: tokenprovider.cpp:269
+msgid "Day of Year"
+msgstr ""
+
+#: tokenprovider.cpp:270
+msgid "Month Number (01-12)"
+msgstr ""
+
+#: tokenprovider.cpp:271
+msgid "Minute (00-59)"
+msgstr ""
+
+#: tokenprovider.cpp:272
+msgid "a.m./p.m."
+msgstr ""
+
+#: tokenprovider.cpp:273
+msgid "Time (h:m:s am/pm)"
+msgstr ""
+
+#: tokenprovider.cpp:274
+msgid "Time (HH:MM)"
+msgstr ""
+
+#: tokenprovider.cpp:275
+msgid "Seconds (00-59)"
+msgstr ""
+
+#: tokenprovider.cpp:276
+msgid "Time (HH:MM:SS)"
+msgstr ""
+
+#: tokenprovider.cpp:277
+msgid "Weekday (1=Monday...)"
+msgstr ""
+
+#: tokenprovider.cpp:278 tokenprovider.cpp:281
+msgid "Week Number (00-53)"
+msgstr ""
+
+#: tokenprovider.cpp:279
+msgid "Week Number (01-53)"
+msgstr ""
+
+#: tokenprovider.cpp:280
+msgid "Weekday (0=Sunday...)"
+msgstr ""
+
+#: tokenprovider.cpp:282
+msgid "Local Date"
+msgstr ""
+
+#: tokenprovider.cpp:283
+msgid "Local Time"
+msgstr ""
+
+#: tokenprovider.cpp:284
+msgid "Year (00-99)"
+msgstr ""
+
+#: tokenprovider.cpp:285
+msgid "Year (YYYY)"
+msgstr ""
+
+#: tokenprovider.cpp:286
+msgid "Offset from UTC"
+msgstr ""
+
+#: tokenprovider.cpp:287
+msgid "Timezone Name"
+msgstr ""
+
+#: tokenprovider.cpp:292
+msgid "Name"
+msgstr ""
+
+#: tokenprovider.cpp:296
+msgid "Full E-Mail"
+msgstr ""
+
+#: tokenprovider.cpp:319
+msgid "Formatted Address"
+msgstr ""
+
+#: tokenprovider.cpp:825
+msgid "ERROR: Empty SQL Query"
+msgstr ""
+
+#: xmlutils.cpp:344
+msgid ""
+"<qt>This appears file appears to be created by an older version of KBarcode."
+"<br>Please check if the used label definition is correct:<br><b>"
+msgstr ""
+"<qt>Tiedosto vaikuttaa olevan KBarcoden vanhemmalla versiolla luotu.Ole hyvä "
+"ja tarkista täsmääkö käytetty etiketin määritelmä:<br><b>"
+
+#, fuzzy
+#~ msgid "Code 11"
+#~ msgstr "Code 128"
+
+#, fuzzy
+#~ msgid "Code 2 of 5"
+#~ msgstr "Code 128"
+
+#, fuzzy
+#~ msgid "EAN 2"
+#~ msgstr "EAN 128"
+
+#, fuzzy
+#~ msgid "EAN 5"
+#~ msgstr "EAN 8"
+
+#, fuzzy
+#~ msgid "Interleaved 2 of 5"
+#~ msgstr "Lomitettu 2 5:stä (vain numeerinen)"
+
+#, fuzzy
+#~ msgid "Postnet"
+#~ msgstr "USPS Postnet"
+
+#, fuzzy
+#~ msgid "Royal Mail"
+#~ msgstr "Royal Mail 4 State"
+
+#, fuzzy
+#~ msgid "UPCA"
+#~ msgstr "UPC A"
+
+#, fuzzy
+#~ msgid "UPCE"
+#~ msgstr "UPC E"
+
+#~ msgid "Barcode Cache"
+#~ msgstr "Viivakoodin välimuisti"
+
+#, fuzzy
+#~ msgid "Barcode Cache Size:"
+#~ msgstr "Viivakoodin välimuistin koko:"
+
+#~ msgid "&Clear"
+#~ msgstr "&Tyhjennä"
+
+#~ msgid ""
+#~ "<qt>Specifies how many barcodes should be cached on the harddisk.If you "
+#~ "print lot's of articles, you should set this to be the same as the number "
+#~ "of articles in your database to get best speed results.One cached barcode "
+#~ "requires about 20kb of diskspace.</qt>"
+#~ msgstr ""
+#~ "<qt>Määrittelee kuinka monta viivakoodia tulee tallentaa  kiintolevylle "
+#~ "välimuistiin. Jos tulostat ison määrän nimikkeitä on suositeltavaa, että "
+#~ "asetat arvon samaksi kuin tietokannassasi olevan nimikkeiden lukumäärän.</"
+#~ "qt>"
+
+#~ msgid "Address Import"
+#~ msgstr "Osoitteiden tuonti"
+
+#~ msgid "Kbarcode"
+#~ msgstr "Kbarcode"
+
+#~ msgid "Barcode not valid!"
+#~ msgstr "Viivakoodi on epäkelpo!"
+
+#~ msgid "BarcodeCache"
+#~ msgstr "BarcodeCache"
+
+#~ msgid "BarcodeCombo"
+#~ msgstr "BarcodeCombo"
+
+#~ msgid "BarcodeWidget"
+#~ msgstr "BarcodeWidget"
+
+#~ msgid "BarCodeDialog"
+#~ msgstr "BarCodeDialog"
+
+#~ msgid "&Invert colors"
+#~ msgstr "K&äännä värit"
+
+#~ msgid "AdvancedBarcodeDialog"
+#~ msgstr "AdvancedBarcodeDialog"
+
+#~ msgid "TBarcodeDlg"
+#~ msgstr "TBarcodeDlg"
+
+#~ msgid "PDF417BarcodeDlg"
+#~ msgstr "PDF417BarcodeDlg"
+
+#~ msgid "DataMatrixDlg"
+#~ msgstr "DataMatrixDlg"
+
+#~ msgid "SequenceDlg"
+#~ msgstr "SequenceDlg"
+
+#~ msgid "ColorWidget"
+#~ msgstr "ColorWidget"
+
+#~ msgid "New Picture"
+#~ msgstr "Uusi kuva"
+
+#~ msgid "Undo Limit:"
+#~ msgstr "Peruutusten määrä:"
+
+#~ msgid "Image Creation"
+#~ msgstr "Kuvan luonti"
+
+#~ msgid "ConfigDialog"
+#~ msgstr "ConfigDialog"
+
+#~ msgid "ConfWizard"
+#~ msgstr "ConfWizard"
+
+#~ msgid "CSVImportDlg"
+#~ msgstr "CSVImportDlg"
+
+#~ msgid "DatabaseBrowser"
+#~ msgstr "DatabaseBrowser"
+
+#~ msgid "LabelPreview"
+#~ msgstr "LabelPreview"
+
+#~ msgid "DefinitionDialog"
+#~ msgstr "DefinitionDialog"
+
+#~ msgid "<b>No</b></p>"
+#~ msgstr "<b>Ei tukea</b></p>"
+
+#~ msgid "<b>Found</b></p>"
+#~ msgstr "<b>Kyllä</b></p>"
+
+#~ msgid ""
+#~ "<p><i>convert</i> is missing for <b>barcode support</b>. Please install "
+#~ "<i>ImageMagick.</i></p>"
+#~ msgstr ""
+#~ "<p><i>convert-ohjelma</i> puuttuu <b>viivakoodituesta</b>. Ole hyvä ja "
+#~ "asenna <i>ImageMagick.</i></p>"
+
+#~ msgid "DSMainWindow"
+#~ msgstr "DSMainWindow"
+
+#~ msgid "...as &IPL or ZPL"
+#~ msgstr "...&IPL:nä tai ZPL:nä"
+
+#~ msgid "Field 0"
+#~ msgstr "Kenttä 0"
+
+#~ msgid "Field 1"
+#~ msgstr "Kenttä 1"
+
+#~ msgid "Field 2"
+#~ msgstr "Kenttä 2"
+
+#~ msgid "Field 3"
+#~ msgstr "Kenttä 3"
+
+#~ msgid "Field 4"
+#~ msgstr "Kenttä 4"
+
+#~ msgid "Field 5"
+#~ msgstr "Kenttä 5"
+
+#~ msgid "Field 6"
+#~ msgstr "Kenttä 6"
+
+#~ msgid "Field 7"
+#~ msgstr "Kenttä 7"
+
+#~ msgid "Field 8"
+#~ msgstr "Kenttä 8"
+
+#~ msgid "Field 9"
+#~ msgstr "Kenttä 9"
+
+#~ msgid "Customer Number"
+#~ msgstr "Asiakkaan numero"
+
+#~ msgid "Line 0"
+#~ msgstr "Rivi 0"
+
+#~ msgid "Line 1"
+#~ msgstr "Rivi 1"
+
+#~ msgid "Line 2"
+#~ msgstr "Rivi 2"
+
+#~ msgid "Line 3"
+#~ msgstr "Rivi 3"
+
+#~ msgid "Line 4"
+#~ msgstr "Rivi 4"
+
+#~ msgid "Line 5"
+#~ msgstr "Rivi 5"
+
+#~ msgid "Line 6"
+#~ msgstr "Rivi 6"
+
+#~ msgid "Line 7"
+#~ msgstr "Rivi 7"
+
+#~ msgid "Line 8"
+#~ msgstr "Rivi 8"
+
+#~ msgid "Line 9"
+#~ msgstr "Rivi 9"
+
+#~ msgid "barcode_basic"
+#~ msgstr "viivakoodi perus"
+
+#~ msgid "customer"
+#~ msgstr "asiakas"
+
+#~ msgid "customer_text"
+#~ msgstr "asiakkaan teksti"
+
+#~ msgid "Encoding Type"
+#~ msgstr "Koodin tyyppi"
+
+#~ msgid "Resolution"
+#~ msgstr "Tarkkuus"
+
+#~ msgid "&Export..."
+#~ msgstr "&Vie..."
+
+#~ msgid "&Move by Value"
+#~ msgstr "&Siirrä arvon mukaan"
+
+#~ msgid "Position"
+#~ msgstr "Sijainti"
+
+#~ msgid "X Position (mm):"
+#~ msgstr "Sijainti X-akselilla (mm):"
+
+#~ msgid "Y Position (mm):"
+#~ msgstr "Sijainti Y-akselilla (mm):"
+
+#~ msgid "LabelEditor"
+#~ msgstr "LabelEditor"
+
+#~ msgid "BarcodeSettingsDlg"
+#~ msgstr "BarcodeSettingsDlg"
+
+#~ msgid "PictureSettings"
+#~ msgstr "PictureSettings"
+
+#~ msgid "PositionDialog"
+#~ msgstr "PositionDialog"
+
+#~ msgid "Label:"
+#~ msgstr "Etiketti:"
+
+#~ msgid "Article number:"
+#~ msgstr "Nimikenumero:"
+
+#~ msgid "Comment is empty. Please set it to a value."
+#~ msgstr "Kommentti-kentälle ei ole annettu arvoa. Anna sille jokin arvo."
+
+#~ msgid "Labels to print: %1"
+#~ msgstr "Tulostettavat etiketit: %1"
+
+#~ msgid "Different articles: %1"
+#~ msgstr "Erilaisia nimikkeitä: %1"
+
+#~ msgid "Different groups: %1"
+#~ msgstr "Erilaisia ryhmiä: %1"
+
+#~ msgid "Pages: %1"
+#~ msgstr "Sivuja: %1"
+
+#~ msgid "Label description: "
+#~ msgstr "Etiketin kuvaus: "
+
+#~ msgid "Images creation finished."
+#~ msgstr "Kuvien luonti päättyi."
+
+#~ msgid "LabelPrinter"
+#~ msgstr "LabelPrinter"
+
+#~ msgid "load label"
+#~ msgstr "lataa etiketti"
+
+#~ msgid "import data for batchprinting"
+#~ msgstr "tuo tietoja eräajotulostusta varten"
+
+#~ msgid "label for batchprinting"
+#~ msgstr "etiketti eräajotulostusta varten"
+
+#~ msgid "customer id for batchprinting"
+#~ msgstr "asiakastunniste eräajotulostusta varten"
+
+#~ msgid "print immediately in batch mode"
+#~ msgstr "tulosta välittömästi eräajona"
+
+#~ msgid "DSTextDrag"
+#~ msgstr "DSTextDrag"
+
+#~ msgid "Spell Checking"
+#~ msgstr "Oikoluku"
+
+#~ msgid "MultiLineEditDlg"
+#~ msgstr "MultiLineEditDlg"
+
+#~ msgid "MyCanvas"
+#~ msgstr "MyCanvas"
+
+#~ msgid "MyCanvasView"
+#~ msgstr "MyCanvasView"
+
+#~ msgid "MyDataTable"
+#~ msgstr "MyDataTable"
+
+#~ msgid "NewLabel"
+#~ msgstr "NewLabel"
+
+#~ msgid "PreviewDialog"
+#~ msgstr "PreviewDialog"
+
+#~ msgid "PrinterSettings"
+#~ msgstr "Tulostusasetukset"
+
+#~ msgid "PrintLabelDlg"
+#~ msgstr "PrintLabelDlg"
+
+#~ msgid "RectSettingsDlg"
+#~ msgstr "RectSettingsDlg"
+
+#~ msgid "LineSettingsDlg"
+#~ msgstr "LineSettingsDlg"
+
+#~ msgid "DSSmallDialogs::AddAllDialog"
+#~ msgstr "DSSmallDialogs::AddAllDialog"
+
+#~ msgid "', '"
+#~ msgstr "', '"
+
+#~ msgid "'"
+#~ msgstr "'"
+
+#~ msgid ", "
+#~ msgstr ", "
+
+#~ msgid "SqlTables"
+#~ msgstr "SqlTables"
+
+#~ msgid "SqlWidget"
+#~ msgstr "SqlWidget"
+
+# fuzzyish
+#~ msgid "Resized Item"
+#~ msgstr "Skaalattu objekti"
+
+#~ msgid "Moved Line"
+#~ msgstr "Siirretty viiva"
+
+#~ msgid "Changed Settings"
+#~ msgstr "Muutetut asetukset"
+
+# fuzzyish
+#~ msgid "Changed Text"
+#~ msgstr "Muutettu teksti"
+
+#~ msgid "Modified Rectangle or Ellipse"
+#~ msgstr "Muokattu nelikulmio tai ellipsi"
+
+# fuzzyish
+#~ msgid "Modified Line"
+#~ msgstr "Muokattu rivi"
+
+#~ msgid "<br></qt>"
+#~ msgstr "<br></qt>"
+
+#~ msgid "Optimize KBarcode for printing barcodes"
+#~ msgstr "Optimoi KBarcode viivakoodien tulostusta varten"
+
+#~ msgid "Optimize KBarcode to print pretty fonts"
+#~ msgstr "Optimoi KBarcode tulostamaan kauniita kirjasimia"
+
+#~ msgid ""
+#~ "Please select the printer mode you want to use for KBarcode.<br>Optimize "
+#~ "for barcodes is your choice as soon as you want to print <b>barcodes</b>, "
+#~ "otherwise they might <b>not be scanable</b> on all barcode scanners."
+#~ "<br><br>If you want to print <b>visiting cards</b> or similar things (CD-"
+#~ "Covers...), optimize KBarcode for printing pretty fonts."
+#~ msgstr ""
+#~ "Ole hyvä ja valitse itsellesi sopivin tulostuksen tila. Optimoi ohjelma "
+#~ "viivakoodien tulostusta varten jos sinulle on tärkeintä, että viivakoodi "
+#~ "on lukijalle mahdollisimman lukukelpoista. Jos haluat tulostaa "
+#~ "käyntikortteja ymv valitse tila joka on optimoitu tulostamaan kauniita "
+#~ "kirjasimia."
+
+#~ msgid ""
+#~ "Barcodes maybe not scannable if printed, with a resolution lower than "
+#~ "300dpi."
+#~ msgstr ""
+#~ "Viivakoodi joka tulostetaan eri tarkkudella kuin 300dpi voi olla "
+#~ "lukijalle lukukelvoton."
+
+#~ msgid "GNU barcode is not installed. Please install GNU Barcode."
+#~ msgstr "GNU Barcode ei ole käytettävissä. Asenna GNU Barcode."
+
+#~ msgid "Convert is not avaible, please install ImageMagick"
+#~ msgstr ""
+#~ "Convert-ohjelma ei ole käytettävissä. Ole hyvä ja asenna ImageMagick"
+
+#, fuzzy
+#~ msgid "pdf417_enc is not installed. Please install pdf417_enc."
+#~ msgstr "pdf417_enc ei ole käytettävissä. Ole hyvä ja asenna pdf417_enc."
+
+#~ msgid "Low Resolution (72dpi)"
+#~ msgstr "Matala tarkkuus (72dpi)"
+
+#~ msgid "Draw borders when printing labels"
+#~ msgstr "Piirrä ääriviivat etikettejä tulostaessa"
+
+#~ msgid "Print in &grayscale"
+#~ msgstr "Tulosta &harmaasävynä"
+
+#~ msgid "&Copy to Clipboard"
+#~ msgstr "&Kopioi leikepöydälle"
+
+#~ msgid "Fit to Window"
+#~ msgstr "Sovita ikkunaan"
+
+#~ msgid "Insert Text with database connection"
+#~ msgstr "Lisää teksti tietokannan tiedoista"
+
+#~ msgid "Scale Label"
+#~ msgstr "Skaalaa etiketti"
+
+#~ msgid "Settings for the barcode on your label:"
+#~ msgstr "Etiketin viivakoodin asetukset:"
+
+#~ msgid "Picture Settings"
+#~ msgstr "Kuvan asetukset"
+
+#~ msgid "&Ok"
+#~ msgstr "&Ok"
+
+#~ msgid ""
+#~ "We are going to re-create the tables 'barcode_basic', 'customer', "
+#~ "'customer_text' and 'label_def'"
+#~ msgstr ""
+#~ "Luodaan uudelleen tietokantataulut 'barcode_basic', 'customer', "
+#~ "'customer_text' ja 'label_def'"
+
+#~ msgid "We are going to delete the complete table: label_def "
+#~ msgstr "Poistamme koko tietokantataulun: label_def "
+
+#~ msgid "&Load From File"
+#~ msgstr "&Lataa tiedostosta"
+
+#~ msgid "You have to select a label first!"
+#~ msgstr "Sinun täytyy valita jokin etiketti ensin!"
+
+#~ msgid ""
+#~ "Labels to print: %1<br>Different Articles: %2<br>Different Groups: %"
+#~ "3<br>Pages: %4"
+#~ msgstr ""
+#~ "Etikettien lukumärä: %1<br>Erilaisia nimikkeitä: %2<br>Erilaisia ryhmiä: %"
+#~ "3<br>Sivuja: %4"
+
+#~ msgid "<br>Description: "
+#~ msgstr "<br>Etiketin kuvaus: "
+
+#~ msgid "IconTabBar"
+#~ msgstr "IconTabBar"
+
+#~ msgid "Text Properties"
+#~ msgstr "Tekstin ominaisuudet"
+
+#~ msgid "Position X:"
+#~ msgstr "Sijainti X-akselilla:"
+
+#~ msgid "Position Y:"
+#~ msgstr "Sijainti Y-akselilla:"
+
+#~ msgid "IconTabWidget"
+#~ msgstr "IconTabWidget"
+
+#~ msgid "TextProperties"
+#~ msgstr "TextProperties"
+
+#~ msgid "<qt>Can't drop database "
+#~ msgstr "<qt>Tietokantaa ei voitu poistaa "
+
+#, fuzzy
+#~ msgid "Spellcheck"
+#~ msgstr "Oikoluku"
+
+#, fuzzy
+#~ msgid "SpellChecker"
+#~ msgstr "Oikoluku"
+
+#~ msgid ""
+#~ "Move items around with your mouse.<br>You can configure their settings "
+#~ "after Double clicking on them!"
+#~ msgstr ""
+#~ "Voit siirrellä objekteja hiirelläsi.<br> Niiden asetuksia voi muokata "
+#~ "jälkeenpäin kaksoisnäpäyttämällä niitä!"
+
+#~ msgid "Enable &Fast Barcode Rendering"
+#~ msgstr "Ota käyttöön &nopea viivakoodin piirtyminen"
+
+#~ msgid "Text (HTML allowed):"
+#~ msgstr "Teksti (HTML sallittu)"
+
+#~ msgid "Changed Font"
+#~ msgstr "Muutettu kirjasin"
+
+# fuzzy
+#~ msgid "Changed Color"
+#~ msgstr "Muutettu väri"
+
+#~ msgid "Find:"
+#~ msgstr "Etsi:"
+
+#~ msgid "Website, testing, very good ideas and keeping me coding!"
+#~ msgstr "Verkkosivut, testausta ja hyviä ideoita!"
+
+#~ msgid "&Default"
+#~ msgstr "&Oletus"
+
+#, fuzzy
+#~ msgid "http://www.kbarcode.net"
+#~ msgstr "http://kbarcode.sourceforge.net"
+
+#~ msgid "&Data"
+#~ msgstr "&Tiedot"
+
+#~ msgid "<qt>Kbarcode is a free, full featured barcode solution for KDE."
+#~ msgstr "<qt>Kbarcode on vapaa, täysimittainen viivakoodiratkaisu KDE:lle."
+
+#~ msgid "localhost"
+#~ msgstr "localhost"
+
+#~ msgid "&New Label"
+#~ msgstr "&Uusi etiketti"
+
+#~ msgid "&Load Label"
+#~ msgstr "&Avaa etiketti"
+
+#~ msgid "&New Item"
+#~ msgstr "&Uusi tietue"
+
+#~ msgid "mm<br>"
+#~ msgstr "mm<br>"
+
+#~ msgid "Cut Top:"
+#~ msgstr "Leikkaa yläreunasta:"

@@ -1,0 +1,60 @@
+Hi Andrew,
+
+Saving as PNG or JPEG works for me, if you select PNG or JPEG in the filter combo box at the bottom of the save dialog. 
+The problem is that the default seems to be PBM if no other file format is selected and saving to PBM does not work for some reason (maybe the barcode is grayscale which is not support by PBM).
+Anyways, this is a useabillity problem in KBarcode which has to be addressed and will be addressed for the 2.0 release.
+
+Thanks for reporting and I hope the workaround with selecting the destination file format by hand will work for you.
+
+best regards,
+	Dom
+
+Am Tuesday, 7. February 2006 16:14 schrieb Andrew Lord:
+> Hi,
+>
+> The subject line says it all, really.  When I creat barcode images under
+> kbarcode, click 'Save' and enter a file name to save as (*.png or *.jpg), I
+> get an alert message saying "An error occurred during saving the image". 
+> The file fails to save.
+> Has anyone else experienced this difficulty or is there perhaps some
+> further information that I could send to help diagnose the cause of this
+> problem (such as the shell output, after booting and running from shell).
+>
+> Cheers,
+>
+> Andrew Lord
+>
+>
+> -------------------------------------------------------
+> This SF.net email is sponsored by: Splunk Inc. Do you grep through log
+> files for problems?  Stop!  Download the new AJAX search engine that makes
+> searching your log files as easy as surfing the  web.  DOWNLOAD SPLUNK!
+> http://sel.as-us.falkag.net/sel?cmd=lnk&kid=103432&bid=230486&dat=121642
+> _______________________________________________
+> Kbarcode-users mailing list
+> Kbarcode-users@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/kbarcode-users
+
+-- 
+**********************************************************************
+Dominik Seichter - domseichter@web.de
+KRename  - http://www.krename.net  - Powerful batch renamer for KDE
+KBarcode - http://www.kbarcode.net - Barcode and label printing
+SchafKopf - http://schafkopf.berlios.de - Schafkopf, a card game,  for KDE
+Alan - http://alan.sf.net - A Turing Machine in Java
+**********************************************************************
+================
+
+TBarcode support: See forum: 
+
+Ok, so here is an demonstration of what I want and how it is done with Tbarcode 2: 
+ 
+ /usr/bin/tbarcode -f PS -x 30 -y 30 -w 80 -h 30 -b 48 -d 64206119701234567 --text=below --font="Helvetica" --fontsize=14 -o footest.ps 
+ 
+================
+
+Dominik:
+-Change Label should start with current label
+-KMyMoney integration
+- --batch should work again!
+

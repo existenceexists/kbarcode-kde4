@@ -1,0 +1,3135 @@
+# translation of hu.po to Hungarian
+# translation of hu.po to Deutsch
+# Hungarian translation for KBarCode.
+# Copyright (C) 2002,2003 Free Software Foundation, Inc.
+# Sa'ndor Ja'ger <jager@puskas.hu>, 2002.
+# Dominik Seichter <domseichter@web.de>, 2003.
+# Sandor Jager <jager@puskas.hu>, 2003.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: hu\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-10-13 14:52+0200\n"
+"PO-Revision-Date: 2003-12-02 22:09+0100\n"
+"Last-Translator: Sandor Jager <jager@puskas.hu>\n"
+"Language-Team: Hungarian <hu@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.0.2\n"
+
+#: _translatorinfo.cpp:1
+msgid ""
+"_: NAME OF TRANSLATORS\n"
+"Your names"
+msgstr "Sandor Jager"
+
+#: _translatorinfo.cpp:3
+msgid ""
+"_: EMAIL OF TRANSLATORS\n"
+"Your emails"
+msgstr "jager@puskas.hu"
+
+#: barcodecombo.cpp:125
+#, fuzzy
+msgid "&Encoding Type:"
+msgstr "Kódolás típusa:"
+
+#: barcodecombo.cpp:134
+#, fuzzy
+msgid "&Value:"
+msgstr "Érték:"
+
+#: barcodecombo.cpp:159
+msgid "&Display text"
+msgstr "&Szöveg megjelenítése az ábrán"
+
+#: barcodecombo.cpp:164
+msgid "&Advanced..."
+msgstr "&Haladó"
+
+#: barcodecombo.cpp:168 propertywidget.cpp:481
+#, fuzzy
+msgid "&Insert Data Field..."
+msgstr "&Adatbázismező beszúrása"
+
+#: barcodecombo.cpp:173
+#, fuzzy
+msgid "&Margin:"
+msgstr "Margó:"
+
+#: barcodecombo.cpp:180 propertywidget.cpp:140 propertywidget.cpp:466
+#, fuzzy
+msgid "&Rotation:"
+msgstr "Elforgatás:"
+
+#: barcodecombo.cpp:187
+#, fuzzy
+msgid "&Scale (in permille):"
+msgstr "Méretarány (ezermil-ben):"
+
+#: barcodecombo.cpp:194
+#, fuzzy
+msgid "&Crop:"
+msgstr "Magasság:"
+
+#: barcodedialog.cpp:46
+msgid "Barcode Generator"
+msgstr "Vonalkód Generátor"
+
+#: barcodedialog.cpp:57
+msgid "&Generate"
+msgstr "&Generálás"
+
+#: barcodedialog.cpp:72
+msgid "&Print"
+msgstr "&Nyomtatás"
+
+#: barcodedialog.cpp:155
+msgid "An error occurred during saving the image"
+msgstr "Hiba történt a kép mentése közben"
+
+#: barcodedialogs.cpp:43
+msgid "Barcode Settings"
+msgstr "Vonalkód beállításai"
+
+#: barcodedialogs.cpp:49 barcodedialogs.cpp:258
+msgid "PDF417"
+msgstr "PDF417"
+
+#: barcodedialogs.cpp:55
+msgid "DataMatrix"
+msgstr "DataMatrix"
+
+#: barcodedialogs.cpp:61 barcodedialogs.cpp:108
+msgid "TBarcode"
+msgstr "TBarcode"
+
+#: barcodedialogs.cpp:67 barcodedialogs.cpp:480
+msgid "Barcode Writer in Pure Postscript"
+msgstr ""
+
+#: barcodedialogs.cpp:73 barcodedialogs.cpp:444
+msgid "Colors"
+msgstr "Színek"
+
+#: barcodedialogs.cpp:78 barcodedialogs.cpp:366
+msgid "Sequence"
+msgstr "Sorozat"
+
+#: barcodedialogs.cpp:116
+msgid "Module width (mm):"
+msgstr "Címkeszélesség (mm):"
+
+#: barcodedialogs.cpp:120
+#, fuzzy
+msgid "Barcode Height (mm):"
+msgstr "Magasság (mm-ben):"
+
+#: barcodedialogs.cpp:123
+msgid "&Translate escape sequences"
+msgstr "Escape szekvenciák fordí&tása"
+
+#: barcodedialogs.cpp:124
+msgid "&Text above barcode"
+msgstr "Szöveg a vonalkód fele&tt"
+
+#: barcodedialogs.cpp:125
+msgid "&Auto correction"
+msgstr "&Auto korrekció"
+
+#: barcodedialogs.cpp:129
+msgid "&Checksum calculation method:"
+msgstr "Ellenőrzőösszeg számító &eljárás:"
+
+#: barcodedialogs.cpp:143
+msgid ""
+"<qt>Change the module with used by tbarcode. Take a look into the tbarcode "
+"documentation for details. Normaly you do not want to change this value.</qt>"
+msgstr ""
+"<qt>A tbarcode által használt modul megváltoztatása. A részletekért nézd meg "
+"a tbarcode dokumentációját. Általában elmondható, hogy nem kell ezt "
+"megváltoztatni.</qt>"
+
+#: barcodedialogs.cpp:162
+msgid "No Checksum"
+msgstr "Nincs ellenőrzőösszeg"
+
+#: barcodedialogs.cpp:163
+msgid "Default Checksum Method"
+msgstr "Alapértelmezett ellenőrzőösszeg számítási eljárás"
+
+#: barcodedialogs.cpp:167
+msgid "Modulo 10 Checksum"
+msgstr "Modulo 10 ellenőrzőösszeg"
+
+#: barcodedialogs.cpp:174
+msgid "Module 43 (suggested for Code39 and Logmars, 1 digit)"
+msgstr "Module 43 (Code39 és Logmars címkékhez javasolt, 1 számjegy)"
+
+#: barcodedialogs.cpp:177
+msgid "Modula 47 (2 digits)"
+msgstr "Modula 47 (2 számjegy)"
+
+#: barcodedialogs.cpp:180
+msgid "Deutsche Post Leitcode"
+msgstr "Deutsche Post Leitcode"
+
+#: barcodedialogs.cpp:183
+msgid "Deutsche Post Identcode"
+msgstr "Deutsche Post Identcode"
+
+#: barcodedialogs.cpp:186
+msgid "Code 11 (1 digit)"
+msgstr "Code 11 (1 számjegy)"
+
+#: barcodedialogs.cpp:187
+msgid "Code 11 (2 digits)"
+msgstr "Code 11 (2 számjegy)"
+
+#: barcodedialogs.cpp:191
+msgid "USPS Postnet"
+msgstr "USPS Postnet"
+
+#: barcodedialogs.cpp:194
+msgid "MSI (1 digit)"
+msgstr "MSI (1 számjegy)"
+
+#: barcodedialogs.cpp:195
+msgid "MSI (2 digits)"
+msgstr "MSI (2 számjegy)"
+
+#: barcodedialogs.cpp:199 barkode.cpp:710
+msgid "Plessey"
+msgstr "Plessey"
+
+#: barcodedialogs.cpp:202
+msgid "EAN 8"
+msgstr "EAN 8"
+
+#: barcodedialogs.cpp:205
+msgid "EAN 13"
+msgstr "EAN 13"
+
+#: barcodedialogs.cpp:208
+msgid "UPC A"
+msgstr "UPC A"
+
+#: barcodedialogs.cpp:211
+msgid "UPC E"
+msgstr "UPC E"
+
+#: barcodedialogs.cpp:214
+msgid "EAN 128"
+msgstr "EAN 128"
+
+#: barcodedialogs.cpp:217
+msgid "Code 128"
+msgstr "Code 128"
+
+#: barcodedialogs.cpp:220
+msgid "Royal Mail 4 State"
+msgstr "Royal Mail 4 State"
+
+#: barcodedialogs.cpp:266
+msgid "Rows:"
+msgstr "Sorok:"
+
+#: barcodedialogs.cpp:270
+msgid "Columns:"
+msgstr "Oszlopok:"
+
+#: barcodedialogs.cpp:274
+msgid "Error correction level:"
+msgstr "Hibajavítási szint:"
+
+#: barcodedialogs.cpp:314
+msgid "Data Matrix symbol sizes (rows x cols):"
+msgstr "DataMatrix szimbólum mérete (sor x oszlop):"
+
+#: barcodedialogs.cpp:318
+msgid "Automatic calculation"
+msgstr "Automatikus számítás"
+
+#: barcodedialogs.cpp:372
+msgid "&Enable sequence"
+msgstr "&Sorozat engedélyezése"
+
+#: barcodedialogs.cpp:374
+msgid "Iterate over numbers 0-9"
+msgstr "Léptetés 0-9 között"
+
+#: barcodedialogs.cpp:375
+msgid "Iterate over characters A-Z"
+msgstr "Léptetés A-Z között"
+
+#: barcodedialogs.cpp:376
+msgid "Iterate over A-Z, 0-9"
+msgstr "Léptetés A-Z és 0-9 között"
+
+#: barcodedialogs.cpp:379
+msgid "Step:"
+msgstr "Lépésköz:"
+
+#: barcodedialogs.cpp:383
+msgid "Start:"
+msgstr "Kezdet:"
+
+#: barcodedialogs.cpp:455
+#, fuzzy
+msgid "Bar Color:"
+msgstr "Keretszín:"
+
+#: barcodedialogs.cpp:456
+#, fuzzy
+msgid "Background Color:"
+msgstr "Keretszín:"
+
+#: barcodedialogs.cpp:457
+#, fuzzy
+msgid "Text Color:"
+msgstr "Szöveg&szín"
+
+#: barcodedialogs.cpp:483
+#, fuzzy
+msgid "Enable &Checksum"
+msgstr "Nincs ellenőrzőösszeg"
+
+#: barcodeprinterdlg.cpp:31
+#, fuzzy
+msgid "Barcode Printer"
+msgstr "Vonalkód száma"
+
+#: barcodeprinterdlg.cpp:36
+#, fuzzy
+msgid "&Output Format:"
+msgstr "Kimeneti fileformátum:"
+
+#: barcodeprinterdlg.cpp:40
+msgid "&Print to File"
+msgstr ""
+
+#: barcodeprinterdlg.cpp:42 batchwizard.cpp:126 batchwizard.cpp:258
+#, fuzzy
+msgid "&Filename:"
+msgstr "Filenév"
+
+#: barcodeprinterdlg.cpp:46
+msgid "&Device:"
+msgstr ""
+
+#: barcodeprinterdlg.cpp:58
+msgid "TEC Printer (TEC)"
+msgstr ""
+
+#: barcodeprinterdlg.cpp:59
+msgid "Zebra Printer (ZPL)"
+msgstr ""
+
+#: barcodeprinterdlg.cpp:60
+msgid "Intermec Printer (IPL)"
+msgstr ""
+
+#: barcodeprinterdlg.cpp:61
+msgid "EPCL Printer (EPCL)"
+msgstr ""
+
+#: barkode.cpp:649
+#, fuzzy
+msgid " [GNU Barcode]"
+msgstr "Új vonalkód beszúrása"
+
+#: barkode.cpp:652
+#, fuzzy
+msgid " [PDF 417]"
+msgstr "PDF417"
+
+#: barkode.cpp:655
+#, fuzzy
+msgid " [TBarcode]"
+msgstr "TBarcode"
+
+#: barkode.cpp:658
+#, fuzzy
+msgid " [TBarcode2]"
+msgstr "TBarcode"
+
+#: barkode.cpp:661
+msgid " [Barcode Writer in Pure Postscript]"
+msgstr ""
+
+#: barkode.cpp:696
+msgid "Raw code 128"
+msgstr "Raw code 128"
+
+#: barkode.cpp:697
+msgid "Codabar"
+msgstr "Codabar"
+
+#: barkode.cpp:698
+#, fuzzy
+msgid "Codabar (no checksum)"
+msgstr "Code 39 (ellenőrzőösszeg nélkül)"
+
+#: barkode.cpp:699
+msgid "Code 128 (a,b,c: autoselection)"
+msgstr "Code 128 (a,b,c: automatikusan)"
+
+#: barkode.cpp:700
+msgid "Code 128B, full printable ascii"
+msgstr "Code 128B, nyomtatható ascii"
+
+#: barkode.cpp:701
+msgid "Code 128C (compact form digits)"
+msgstr "Code 128C (compact form digits)"
+
+#: barkode.cpp:702
+msgid "Code 39 (no checksum)"
+msgstr "Code 39 (ellenőrzőösszeg nélkül)"
+
+#: barkode.cpp:703
+msgid "Code 39"
+msgstr "Code 39"
+
+#: barkode.cpp:704
+msgid "Code 93"
+msgstr "Code 93"
+
+#: barkode.cpp:705
+msgid "EAN (EAN 8 or EAN 13)"
+msgstr "EAN (EAN 8 vagy EAN 13)"
+
+#: barkode.cpp:706
+msgid "interleaved 2 of 5 (only digits, no checksum)"
+msgstr "összefésült 2 az 5-ből (csak számok, ellenőrzőösszeg nélkül)"
+
+#: barkode.cpp:707
+msgid "interleaved 2 of 5 (only digits)"
+msgstr "összefésült 2 az 5-ből (csak számok)"
+
+#: barkode.cpp:708
+msgid "ISBN (still EAN13)"
+msgstr "ISBN (még mindig EAN13)"
+
+#: barkode.cpp:709
+msgid "MSI"
+msgstr "MSI"
+
+#: barkode.cpp:711
+msgid "UPC (12-digit EAN; UPCA and UPCB)"
+msgstr "UPC (12-digit EAN; UPCA és UPCB)"
+
+#: barkode.cpp:716
+msgid "pdf 417 2D Barcode"
+msgstr "pdf 417 2D vonalkód"
+
+#: batchprinter.cpp:111 batchprinter.cpp:341
+msgid "Printing..."
+msgstr "Nyomtatás folyamatban..."
+
+#: batchprinter.cpp:156 batchprinter.cpp:157 batchprinter.cpp:158
+#: batchprinter.cpp:159
+msgid "Group : "
+msgstr "Csoport : "
+
+#: batchprinter.cpp:161 batchprinter.cpp:162 batchprinter.cpp:163
+#: batchprinter.cpp:164
+msgid "Article No. : "
+msgstr "Cikkszám : "
+
+#: batchprinter.cpp:273
+msgid "Creating Images..."
+msgstr "Képek készítése..."
+
+#: batchprinter.cpp:337
+msgid "<qt>Can't open the file or device <b>%1</b></qt>."
+msgstr ""
+
+#: batchwizard.cpp:117
+#, fuzzy
+msgid ""
+"<qt>This wizard will guide you through the process of printing many labels "
+"with KBarcode.<br>The first step is to select the KBarcode label file you "
+"want to print.</qt>"
+msgstr ""
+"<br><br>Ez a varázsló végigvezet az adatbázishoz történő kapcsolódás "
+"konfigurálásán. Amennyiben a programot adatbázis-támogatás nélkül szeretnéd "
+"használni, kihagyhatod ezt a varázslót.</qt>"
+
+#: batchwizard.cpp:135
+#, fuzzy
+msgid "File Selection"
+msgstr "Fejezetszám"
+
+#: batchwizard.cpp:147
+msgid "Print &labels without data"
+msgstr ""
+
+#: batchwizard.cpp:148
+msgid "Print &articles from KBarcodes SQL database"
+msgstr ""
+
+#: batchwizard.cpp:149
+msgid "Import &variables and print"
+msgstr ""
+
+#: batchwizard.cpp:150
+msgid "Print &contacts from your addressbook"
+msgstr ""
+
+#: batchwizard.cpp:162
+msgid "Data Source"
+msgstr ""
+
+#: batchwizard.cpp:174
+#, fuzzy
+msgid "Print Data"
+msgstr "Nyomtatási minőség"
+
+#: batchwizard.cpp:185
+#, fuzzy
+msgid "Insert Row"
+msgstr "&Vonalkód beszúrása"
+
+#: batchwizard.cpp:187
+#, fuzzy
+msgid "Delete Row"
+msgstr "Objetum törlése"
+
+#: batchwizard.cpp:194
+#, fuzzy
+msgid "Import Variables"
+msgstr "Importálás a táblába:"
+
+#: batchwizard.cpp:206
+msgid ""
+"<qt>KBarcode has support for placing serial numbers on labels. If you did "
+"not use the [serial] token on your label in a text field or a barcode, you "
+"can skip this page.<br>Serial start is a free form start value containing at "
+"least one number. This number is increased for every printed label on the "
+"print out.</qt>"
+msgstr ""
+
+#: batchwizard.cpp:216 previewdialog.cpp:104
+#, fuzzy
+msgid "Serial start:"
+msgstr "Kezdet:"
+
+#: batchwizard.cpp:220 previewdialog.cpp:106
+msgid "Serial increment:"
+msgstr ""
+
+#: batchwizard.cpp:223
+#, fuzzy
+msgid "Serial Number"
+msgstr "Cikkszám"
+
+#: batchwizard.cpp:233
+msgid "&Print to a system printer or to a file"
+msgstr ""
+
+#: batchwizard.cpp:234
+#, fuzzy
+msgid "&Create images"
+msgstr "Ké&pek létrehozása..."
+
+#: batchwizard.cpp:239
+msgid "Print to a special &barcode printer"
+msgstr ""
+
+#: batchwizard.cpp:243
+#, fuzzy
+msgid "Output &Directory:"
+msgstr "Célkönyvtárat kiválasztása"
+
+#: batchwizard.cpp:249
+#, fuzzy
+msgid "Output File &Format:"
+msgstr "Kimeneti fileformátum:"
+
+#: batchwizard.cpp:259
+msgid "Use &article number for filename"
+msgstr "Cikk&szám használata filenévnek"
+
+#: batchwizard.cpp:260
+msgid "Use &barcode number for filename"
+msgstr "Vonal&kódszám használata filenévnek"
+
+#: batchwizard.cpp:261
+#, fuzzy
+msgid "Use &custom filename:"
+msgstr "Cikk&szám használata filenévnek"
+
+#: batchwizard.cpp:269
+msgid "&Keep window open after printing."
+msgstr ""
+
+#: batchwizard.cpp:287
+msgid "Output Device"
+msgstr ""
+
+#: batchwizard.cpp:298
+msgid "Customer name and no.:"
+msgstr "Ügyfél neve és száma:"
+
+#: batchwizard.cpp:305
+#, fuzzy
+msgid "&Add..."
+msgstr "&Haladó"
+
+#: batchwizard.cpp:306
+#, fuzzy
+msgid "&Import..."
+msgstr "&Importálás"
+
+#: batchwizard.cpp:307
+#, fuzzy
+msgid "&Edit..."
+msgstr "&Címkeszerkesztő..."
+
+#: batchwizard.cpp:309
+msgid "R&emove All"
+msgstr "Ö&sszes eltávolítása"
+
+#: batchwizard.cpp:312
+msgid "Import from File ..."
+msgstr "Importálás fileból ..."
+
+#: batchwizard.cpp:313
+msgid "Import from Clipboard ..."
+msgstr "Importálás vágólapról ..."
+
+#: batchwizard.cpp:314
+msgid "Import barcode_basic"
+msgstr "Barcode_basic importálása"
+
+#: batchwizard.cpp:318
+msgid "Index"
+msgstr "Index"
+
+#: batchwizard.cpp:319
+msgid "Number of Labels"
+msgstr "Címkék száma"
+
+#: batchwizard.cpp:320 configdialog.cpp:157 configdialog.cpp:163
+#: configdialog.cpp:169
+msgid "Article Number"
+msgstr "Cikkszám"
+
+#: batchwizard.cpp:321 configdialog.cpp:158 configdialog.cpp:164
+#: configdialog.cpp:170
+msgid "Group"
+msgstr "Csoport"
+
+#: batchwizard.cpp:343
+msgid "Enter &data manually"
+msgstr ""
+
+#: batchwizard.cpp:344
+msgid "Import variables from a &SQL table"
+msgstr ""
+
+#: batchwizard.cpp:345
+#, fuzzy
+msgid "Please enter a sql &query:"
+msgstr "Kérlek adj meg leírást:"
+
+#: batchwizard.cpp:349
+#, fuzzy
+msgid "Import from a &CSV file"
+msgstr "Importálás fileból ..."
+
+#: batchwizard.cpp:350
+msgid "Please select a csv &file:"
+msgstr ""
+
+#: batchwizard.cpp:353
+#, fuzzy
+msgid "&Encoding:"
+msgstr "Kódolás típusa:"
+
+#: batchwizard.cpp:362
+msgid "Available Variables:"
+msgstr ""
+
+#: batchwizard.cpp:380
+#, fuzzy
+msgid "&Number of labels to print:"
+msgstr "Címkék száma:"
+
+#: batchwizard.cpp:411
+msgid "Add all contacts to the list of contacts which will be printed."
+msgstr ""
+
+#: batchwizard.cpp:412
+msgid "Add selected contacts to the list of contacts which will be printed."
+msgstr ""
+
+#: batchwizard.cpp:413
+msgid ""
+"Remove selected contacts from the list of contacts which will be printed."
+msgstr ""
+
+#: batchwizard.cpp:414
+msgid "Remove all contacts from the list of contacts which will be printed."
+msgstr ""
+
+#: batchwizard.cpp:430
+msgid "All Addresses"
+msgstr ""
+
+#: batchwizard.cpp:431
+msgid "Selected Addresses"
+msgstr ""
+
+#: batchwizard.cpp:434 batchwizard.cpp:445
+#, fuzzy
+msgid "Given Name"
+msgstr "Filenév"
+
+#: batchwizard.cpp:435 batchwizard.cpp:446
+#, fuzzy
+msgid "Family Name"
+msgstr "Filenév"
+
+#: batchwizard.cpp:436 batchwizard.cpp:447
+msgid "Email Address"
+msgstr ""
+
+#: batchwizard.cpp:561
+#, fuzzy
+msgid "The label file %1 was not found"
+msgstr "A %1 fájl nem létezik."
+
+#: batchwizard.cpp:743
+msgid "Please enter a valid article ID"
+msgstr "Kérlek adj meg egy valós cikkszámok"
+
+#: batchwizard.cpp:901
+msgid "Separator is empty. Please set it to a value."
+msgstr "Üres szeparátor! Kérlek adj meg egy értéket!"
+
+#: batchwizard.cpp:972 batchwizard.cpp:974
+msgid "<qt>The following items can not be added:"
+msgstr "<qt>A következő elemeket nem lehet hozzáadni:"
+
+#: batchwizard.cpp:1056
+#, fuzzy
+msgid "<qt>Can't execute SQL query:<br>"
+msgstr "<qt>Nem hajtható végre a parancs:<br><b>"
+
+#: batchwizard.cpp:1083
+msgid "Can't open file: %1"
+msgstr ""
+
+#: commands.cpp:434
+msgid "New Rectangle"
+msgstr "Új négyszög"
+
+#: commands.cpp:448
+msgid "New Line"
+msgstr "Új vonal"
+
+#: commands.cpp:458
+msgid "New Text"
+msgstr "Új szöveg beszúrása"
+
+#: commands.cpp:475
+#, fuzzy
+msgid "New TextLine"
+msgstr "Új vonal"
+
+#: commands.cpp:492
+msgid "New Barcode"
+msgstr "Új vonalkód beszúrása"
+
+#: configdialog.cpp:46
+msgid "There are currently %1 cached barcodes."
+msgstr "Jelenleg %1 vonalkód van a gyorstárban."
+
+#: configdialog.cpp:50 confwizard.cpp:59
+msgid "Configure KBarcode"
+msgstr "KBarcode beállításai"
+
+#: configdialog.cpp:66
+msgid "SQL Settings"
+msgstr "SQL beállítások"
+
+#: configdialog.cpp:80
+msgid "Print Settings"
+msgstr "Nyomtatási beállítások"
+
+#: configdialog.cpp:88
+msgid "Medium Resolution (300dpi)"
+msgstr "Közepes felbontás (300dpi)"
+
+#: configdialog.cpp:89
+msgid "High Resolution (600dpi)"
+msgstr "Magas felbontás (600dpi)"
+
+#: configdialog.cpp:90
+msgid "Very High Resolution (1200dpi)"
+msgstr "Nagyon magas felbontás (1200dpi)"
+
+#: configdialog.cpp:110
+msgid "Printer Resolution:"
+msgstr "Nyomtatási felbontás:"
+
+#: configdialog.cpp:112
+msgid "Preview Page Format:"
+msgstr "Előnézeti kép formátuma:"
+
+#: configdialog.cpp:127 csvimportdlg.cpp:175
+msgid "Comment:"
+msgstr "Megjegyzés:"
+
+#: configdialog.cpp:134 csvimportdlg.cpp:182
+msgid "Separator:"
+msgstr "Szeparátor:"
+
+#: configdialog.cpp:141 csvimportdlg.cpp:189
+msgid "Quote Character:"
+msgstr "Aposztróf karakter:"
+
+#: configdialog.cpp:147
+msgid "&Use customer article no. for import"
+msgstr "Ügyfél &cikkszámának használata importálásnál"
+
+#: configdialog.cpp:153 csvimportdlg.cpp:156
+msgid "File Format:"
+msgstr "Fileformátum:"
+
+#: configdialog.cpp:156 configdialog.cpp:162 configdialog.cpp:168
+msgid "Quantity"
+msgstr "Mennyiség"
+
+#: configdialog.cpp:186
+msgid "Label Editor"
+msgstr "Címkeszerkesztő"
+
+#: configdialog.cpp:190
+msgid "&Create a new label on startup"
+msgstr "Új címke készítésének &felajánlása induláskor"
+
+#: configdialog.cpp:198
+msgid "Grid:"
+msgstr "Rajzrács mérete:"
+
+#: configdialog.cpp:205
+msgid "Grid Color:"
+msgstr "Rajzrács színe:"
+
+#: configdialog.cpp:207
+msgid "Date Format:"
+msgstr "Dátumformátum:"
+
+#: configdialog.cpp:215
+msgid "On New"
+msgstr "Új nyomtatandó esetén..."
+
+#: configdialog.cpp:219
+msgid "On New Article"
+msgstr "Új cikknél..."
+
+#: configdialog.cpp:226 configdialog.cpp:232
+msgid "No Line Break"
+msgstr "Ne legyen sortörés"
+
+#: configdialog.cpp:227 configdialog.cpp:233
+msgid "Line Break"
+msgstr "Sortörés"
+
+#: configdialog.cpp:228 configdialog.cpp:234
+msgid "Insert Label X"
+msgstr "X címke beszúrása"
+
+#: configdialog.cpp:229 configdialog.cpp:235
+msgid "New Page"
+msgstr "Új oldal"
+
+#: configdialog.cpp:230
+msgid "Article No."
+msgstr "Cikkszám"
+
+#: configdialog.cpp:236
+msgid "Group Name"
+msgstr "Csoport neve"
+
+#: configdialog.cpp:260
+msgid "On New Group"
+msgstr "Új csoportnál..."
+
+#: configdialog.cpp:348
+msgid "Preview: "
+msgstr "Előnézet:"
+
+#: confwizard.cpp:45
+msgid ""
+"KBarcode is a barcode and label printing application for KDE 3. It can be "
+"used to print every thing from simple business cards up to complex labels "
+"with several barcodes (e.g. article descriptions). KBarcode comes with an "
+"easy to use WYSIWYG label designer, a setup wizard, batch import of labels "
+"(directly from the delivery note), thousands of predefined labels, database "
+"management tools and translations in many languages. Even printing more than "
+"10.000 labels in one go is no problem for KBarcode. Additionally it is a "
+"simply xbarcode replacement for the creation of barcodes. All major types of "
+"barcodes like EAN, UPC, CODE39 and ISBN are supported."
+msgstr ""
+"A KBarcode egy vonalkód- és címkenyomtató alkalmazás KDE 3 alá. Segítségével "
+"egyszerű névjegykártyáktól kezdve akár több vonalkódos, összetett címkék is "
+"nyomtathatók. A KBarcode tartalmaz egy egyszerű WYSIWYG szövegszerkesztőt, "
+"beállításvarázslót, tömeges címkeimportálási lehetőséget, adatbázis-"
+"támogatást, és soknyelvű fordítást. Akár 10.000 címke kinyomtatása sem okoz "
+"gondot a KBarcode-nak. Továbbá egy egyszerű xbarcode helyettesítő a "
+"vonalkódok létrehozásához. Minden főbb vonalkód-típus mint például EAN, UPC, "
+"CODE39 és ISBN támogatottak."
+
+#: confwizard.cpp:101
+msgid "<qt><h1>Welcome to KBarcode</h1><br><br>"
+msgstr "<qt><h1>Üdvözöl a KBarcode!</h1><br><br>"
+
+#: confwizard.cpp:111
+msgid "Welcome"
+msgstr "Üdvözöllek"
+
+#: confwizard.cpp:124
+msgid "System Check"
+msgstr "Rendszerellenőrzés"
+
+#: confwizard.cpp:133
+msgid "&Use database with KBarcode"
+msgstr "Adatbázis &használata"
+
+#: confwizard.cpp:144 tokenprovider.cpp:207
+msgid "Database"
+msgstr "Adatbázis"
+
+#: confwizard.cpp:153
+msgid ""
+"KBarcode can create the required SQL tables for you.<br>KBarcode will add "
+"also some Label Definitions to the tables.<br>After that you can fill the "
+"tables with some example data."
+msgstr ""
+"A KBarcode létre tudja hozni a szükséges SQL táblákat,<br> valamint néhány "
+"címkedefiníciót is hozzáad a táblákhoz. Ezután lehetőség van a táblákba "
+"történő példaadatok importálására."
+
+#: confwizard.cpp:160 dsmainwindow.cpp:78
+msgid "&Create Tables"
+msgstr "Táblák &létrehozása"
+
+#: confwizard.cpp:165
+msgid "&Add Example Data"
+msgstr "&Minta adatok hozzáadása"
+
+#: confwizard.cpp:170
+msgid "Create Tables"
+msgstr "Táblák létrehozása"
+
+#: confwizard.cpp:196 confwizard.cpp:219 sqltables.cpp:468
+msgid "<qt>Connection failed:<br>"
+msgstr "<qt>Kapcsolódási hiba:<br>"
+
+#: confwizard.cpp:225
+msgid "Example data has been imported."
+msgstr "Mintaadatok sikeresen importálva."
+
+#: confwizard.cpp:236
+msgid ""
+"There are no Qt SQL drivers installed. KBarcode needs those drivers to "
+"access the different SQL databases. This drivers are part of the Qt Source "
+"distribution and should also be part of your distribution. Please install "
+"them first."
+msgstr ""
+"Nincsen Qt SQL driver telepítve. A KBarcodenak a különböző adatbázisok "
+"eléréséhez van erre szüksége. Ezek a driverek részei a Qt forráscsomagoknak, "
+"valamint szerepelniük kell a te disztribúciódban is. Kérlek először ezeket "
+"telepítsd fel."
+
+#: csvimportdlg.cpp:61
+msgid "&Import"
+msgstr "&Importálás"
+
+#: csvimportdlg.cpp:61
+msgid "Import the selected file into your tables."
+msgstr "A kiválasztott file importálása a táblákba."
+
+#: csvimportdlg.cpp:93
+#, fuzzy
+msgid "&Import Data"
+msgstr "Minta&adatok importálása"
+
+#: csvimportdlg.cpp:104
+#, fuzzy
+msgid "Other table..."
+msgstr "&Címke méretének megváltoztatása..."
+
+#: csvimportdlg.cpp:107
+msgid "&Load complete file into preview"
+msgstr ""
+
+#: csvimportdlg.cpp:109
+msgid "Load only a number of datasets:"
+msgstr ""
+
+#: csvimportdlg.cpp:120
+msgid "Column:"
+msgstr "Oszlop:"
+
+#: csvimportdlg.cpp:124
+msgid "Set"
+msgstr "Importálás"
+
+#: csvimportdlg.cpp:127
+msgid "Database field to use for this column:"
+msgstr "Ehhez az oszlophoz használt adatbázismező:"
+
+#: csvimportdlg.cpp:131
+msgid "File to import:"
+msgstr "Importálandó fájl:"
+
+#: csvimportdlg.cpp:133
+#, fuzzy
+msgid "Encoding:"
+msgstr "Kódolás típusa:"
+
+#: csvimportdlg.cpp:135
+msgid "Import into table:"
+msgstr "Importálás a táblába:"
+
+#: csvimportdlg.cpp:137
+#, fuzzy
+msgid "Table Name:"
+msgstr "Filenév"
+
+#: csvimportdlg.cpp:151
+#, fuzzy
+msgid "&Import Settings"
+msgstr "Nyomtatási beállítások"
+
+#: csvimportdlg.cpp:157
+#, fuzzy
+msgid "&CSV File"
+msgstr "CSV file &importálása..."
+
+#: csvimportdlg.cpp:158
+msgid "File with &fixed field width"
+msgstr ""
+
+#: csvimportdlg.cpp:162
+msgid "CSV File"
+msgstr ""
+
+#: csvimportdlg.cpp:163
+msgid "Fixed Field Width File"
+msgstr ""
+
+#: csvimportdlg.cpp:207
+msgid "&Add Field"
+msgstr ""
+
+#: csvimportdlg.cpp:210
+#, fuzzy
+msgid "&Remove Field"
+msgstr "Ö&sszes eltávolítása"
+
+#: csvimportdlg.cpp:357
+msgid "Cannot load data from the file:"
+msgstr ""
+
+#: csvimportdlg.cpp:378
+msgid "Could not import the following line:"
+msgstr "A következő sor importálása sikertelen volt:"
+
+#: csvimportdlg.cpp:383
+msgid "Data was imported successfully."
+msgstr "Adatok sikeresen importálva."
+
+#: databasebrowser.cpp:46
+msgid "Current Table: <b>"
+msgstr "Aktuális tábla: <b>"
+
+#: databasebrowser.cpp:98 kbarcode.cpp:87
+msgid "&Import CSV File..."
+msgstr "CSV file &importálása..."
+
+#: definition.cpp:547
+msgid ""
+"KBarcode is unable to find its label definitions.Please make sure that the "
+"file $KDEDIR/share/apps/kbarcode/labeldefinitions.sql does exist. This file "
+"is part of the KBarcode distribution. You will be prompted now to select the "
+"file containing the labeldefinitions."
+msgstr ""
+"A KBarcode nem találja a címkedefinícióit. Kérlek bizonyosodj meg róla, hogy "
+"a $KDEDIR/share/apps/kbarcode/labeldefinitions.sql létezik. Ez a file "
+"megtalálható a KBarcode disztribúcióban. A következőkben meg kell adnod a "
+"címkedefiníciókat tartalmazó filet."
+
+#: definitiondialog.cpp:82
+msgid "Add Label Definition"
+msgstr "Új címkestílus definiálása"
+
+#: definitiondialog.cpp:91 newlabel.cpp:64
+msgid "Producer:"
+msgstr "Gyártó:"
+
+#: definitiondialog.cpp:95 newlabel.cpp:67
+msgid "Type:"
+msgstr "Típus:"
+
+#: definitiondialog.cpp:99
+#, fuzzy
+msgid "Width (in %1):"
+msgstr "Szélesség (mm-ben):"
+
+#: definitiondialog.cpp:103
+#, fuzzy
+msgid "Height (in %1):"
+msgstr "Magasság (mm-ben):"
+
+#: definitiondialog.cpp:107
+msgid "Horizontal Gap:"
+msgstr "Vízszintes köz:"
+
+#: definitiondialog.cpp:111
+msgid "Vertical Gap:"
+msgstr "Függőleges köz:"
+
+#: definitiondialog.cpp:115
+msgid "Top Gap:"
+msgstr "Felső margó:"
+
+#: definitiondialog.cpp:119
+msgid "Left Gap:"
+msgstr "Bal margó:"
+
+#: definitiondialog.cpp:123
+msgid "Number Horizontal:"
+msgstr "Címkék száma vízszintesen:"
+
+#: definitiondialog.cpp:127
+msgid "Number Vertical:"
+msgstr "Címkék száma függőlegesen:"
+
+#: definitiondialog.cpp:142 definitiondialog.cpp:147 definitiondialog.cpp:152
+#: definitiondialog.cpp:157 definitiondialog.cpp:162 definitiondialog.cpp:167
+#: definitiondialog.cpp:172 definitiondialog.cpp:177 propertywidget.cpp:144
+#: propertywidget.cpp:484
+msgid "0"
+msgstr "0"
+
+#: definitiondialog.cpp:143 definitiondialog.cpp:148 definitiondialog.cpp:153
+#: definitiondialog.cpp:158 definitiondialog.cpp:163 definitiondialog.cpp:168
+msgid "0123456789."
+msgstr "0123456789."
+
+#: definitiondialog.cpp:189
+msgid "More &Information"
+msgstr "Több &információ"
+
+#: definitiondialog.cpp:196 smalldialogs.cpp:97
+msgid "&Add"
+msgstr "&Hozzáadás"
+
+#: definitiondialog.cpp:263 printersettings.cpp:45
+msgid "Custom"
+msgstr "Egyéni"
+
+#: definitiondialog.cpp:398
+msgid "Number of horizontal Labels"
+msgstr "Címkék száma vízszintesen"
+
+#: definitiondialog.cpp:400
+msgid "Number of vertical Labels"
+msgstr "Címkék száma függőlegesen"
+
+#: definitiondialog.cpp:404
+msgid "Gap Top"
+msgstr "Felső margó"
+
+#: definitiondialog.cpp:406
+msgid "Gap Left"
+msgstr "Bal margó"
+
+#: definitiondialog.cpp:411
+msgid "Vertical Gap"
+msgstr "Függőleges köz:"
+
+#: definitiondialog.cpp:412
+msgid "Horizontal Gap"
+msgstr "Vízszintes köz:"
+
+#: documentitemdlg.cpp:34
+#, fuzzy
+msgid "&Position && Size"
+msgstr "Pozíció: "
+
+#: documentitemdlg.cpp:37
+#, fuzzy
+msgid "&Border"
+msgstr "&Sorrend"
+
+#: documentitemdlg.cpp:42
+#, fuzzy
+msgid "&Fill Color"
+msgstr "Kitöltési szín:"
+
+#: documentitemdlg.cpp:47 labeleditor.cpp:526
+msgid "&Barcode"
+msgstr "&Vonalkód"
+
+#: documentitemdlg.cpp:52
+#, fuzzy
+msgid "&Rotation"
+msgstr "Elforgatás:"
+
+#: documentitemdlg.cpp:55 documentitemdlg.cpp:66
+#, fuzzy
+msgid "&Text"
+msgstr "Szöveg:"
+
+#: documentitemdlg.cpp:60 propertywidget.cpp:470
+#, fuzzy
+msgid "&Image"
+msgstr "... &képként"
+
+#: documentitemdlg.cpp:78
+msgid "&Visibility"
+msgstr ""
+
+#: documentitemdlg.cpp:109
+#, fuzzy
+msgid "Property changed"
+msgstr "Projektmenedzser"
+
+#: dsmainwindow.cpp:72
+msgid "&Start Configuration Wizard..."
+msgstr "&Konfigurációs varázsló..."
+
+#: dsmainwindow.cpp:74
+msgid "&Connect to Database"
+msgstr "Kapcsolódás az adat&bázishoz"
+
+#: dsmainwindow.cpp:81
+msgid "&Import Label Definitions"
+msgstr "Cí&mkedefiníciók importálása"
+
+#: dsmainwindow.cpp:84
+msgid "&Import Example Data"
+msgstr "Minta&adatok importálása"
+
+#: dsmainwindow.cpp:95
+msgid "&Action Map..."
+msgstr ""
+
+#: dsmainwindow.cpp:97
+msgid "&System Check..."
+msgstr "&Rendszerellenőrzés..."
+
+#: dsmainwindow.cpp:98
+msgid "&Barcode Help..."
+msgstr "&Barcode Súgó..."
+
+#: dsmainwindow.cpp:99
+msgid "&Donate..."
+msgstr "&Adományozás..."
+
+#: dsmainwindow.cpp:182
+msgid ""
+"<qt>The KBarcode documentation is avaible as PDF for download on our webpage."
+"<br><br>"
+msgstr ""
+"<qt>A KBarcode dokumentációja PDF formátumban honlapunkon elérhető.<br><br>"
+
+#: dsmainwindow.cpp:184
+msgid "Download Now"
+msgstr "Letöltés most"
+
+#: dsmainwindow.cpp:214
+msgid ""
+"<qt>It is possible to support the further development of KBarcode through "
+"donations. PayPal will be used for processing the donation.<br><br>"
+msgstr ""
+"<qt>Lehetőség van a KBarcode további fejlesztését adományokon keresztül "
+"támogatni, melyek a PayPal segítségével jutnak el rendeltetési helyükre."
+"<br><br>"
+
+#: dsmainwindow.cpp:217
+msgid "Donate Now"
+msgstr "Adományozás most"
+
+#: dsmainwindow.cpp:230
+msgid "<p><h3>Barcode Support</h3></p>"
+msgstr "<p><h3>Vonalkód támogatás</h3></p>"
+
+#: dsmainwindow.cpp:232 dsmainwindow.cpp:234 dsmainwindow.cpp:236
+#: dsmainwindow.cpp:238 dsmainwindow.cpp:240
+msgid "<b>No</b><br />"
+msgstr "<b>Nem</b><br />"
+
+#: dsmainwindow.cpp:232 dsmainwindow.cpp:234 dsmainwindow.cpp:236
+#: dsmainwindow.cpp:238 dsmainwindow.cpp:240
+msgid "<b>Found</b><br />"
+msgstr "<b>Talált</b><br />"
+
+#: dsmainwindow.cpp:243
+msgid ""
+"<p>To get <b>barcode support</b> you have to either install <i>GNU Barcode</"
+"i>, <i>TBarcode</i> or <i>PDF417 Enc</i>.</p>"
+msgstr ""
+"<p>A <b>vonalkód támogatáshoz</b> telepítened kell vagy a <i>GNU Barcode</"
+"i>, vagy a <i>TBarcode</i> vagy a <i>PDF417 Enc</i> programok valamelyikét.</"
+"p>"
+
+#: dsmainwindow.cpp:245
+msgid "<p><h3>Database Support</h3></p>"
+msgstr "<p><h3>Adatbázis támogatás</h3></p>"
+
+#: dsmainwindow.cpp:253
+msgid "<li>Driver found: "
+msgstr "<li>Megtalált illesztő: "
+
+#: dsmainwindow.cpp:258
+msgid ""
+"<p><b>No database drivers found. SQL database support is disabled.</b></p>"
+msgstr ""
+"<p><b>Nem sikerült adatbázis illesztőt találni. Az SQL adatbázis támogatás "
+"letiltva.</b></p>"
+
+#: imageitem.cpp:267
+msgid "Expression: "
+msgstr ""
+
+#: kactionmap.cpp:91
+msgid "Action Map"
+msgstr ""
+
+#: kactionmap.cpp:95
+msgid "Find and execute actions."
+msgstr ""
+
+#: kactionmap.cpp:116
+msgid "Action"
+msgstr ""
+
+#: kactionmap.cpp:117
+msgid "Shortcut"
+msgstr ""
+
+#: kactionmap.cpp:118 tokendialog.cpp:142 tokendialog.cpp:177
+#, fuzzy
+msgid "Description"
+msgstr "Címke leírása"
+
+#: kbarcode.cpp:51
+msgid "Barcode &Generator..."
+msgstr "Vonalkód &Generátor..."
+
+#: kbarcode.cpp:53
+msgid "&Label Editor..."
+msgstr "&Címkeszerkesztő..."
+
+#: kbarcode.cpp:54
+msgid "&Batch Printing..."
+msgstr "&Kötegelt nyomtatás..."
+
+#: kbarcode.cpp:55
+msgid "Edit SQL &Tables..."
+msgstr "SQL &táblák szerkesztése..."
+
+#: kbarcode.cpp:75
+msgid "&Edit Label Definitions"
+msgstr "&Címkedefiníciók szerkesztése"
+
+#: kbarcode.cpp:78
+msgid "&Edit Articles"
+msgstr "C&ikkek szerkesztése"
+
+#: kbarcode.cpp:81
+msgid "&Edit Customers"
+msgstr "Ü&gyfelek szerkesztése"
+
+#: kbarcode.cpp:84
+msgid "&Edit Customer Text"
+msgstr "Ügy&fél megj. szerkesztése"
+
+#: kbarcode.cpp:179
+msgid ""
+"%1 is no valid output format for --output. Valid values are POSTSCRIPT, "
+"IMAGE and BARCODE."
+msgstr ""
+
+#: label.cpp:188
+msgid "Static"
+msgstr "Állandó"
+
+#: labeleditor.cpp:351
+msgid "Select Label"
+msgstr "Címke kiválasztása"
+
+#: labeleditor.cpp:388
+msgid ""
+"<qt>The file <b>%1</b> cannot be loaded as the label definition is missing.</"
+"qt>"
+msgstr ""
+
+#: labeleditor.cpp:447
+msgid "Close &Label"
+msgstr "&Címke bezárása"
+
+#: labeleditor.cpp:449
+msgid "&Recent Files"
+msgstr "Elő&zőleg megnyitott"
+
+#: labeleditor.cpp:451
+msgid "&Import and Print Batch File..."
+msgstr "&Importálás és nyomtatás nagy tételben..."
+
+#: labeleditor.cpp:455
+msgid "&Change description..."
+msgstr "&Leírás megváltoztatása..."
+
+#: labeleditor.cpp:456
+msgid "&Delete Object"
+msgstr "Objetum &törlése"
+
+#: labeleditor.cpp:459
+msgid "Print to &Barcode Printer..."
+msgstr ""
+
+#: labeleditor.cpp:460
+#, fuzzy
+msgid "Print to &Image..."
+msgstr "Képek készítése..."
+
+#: labeleditor.cpp:461
+msgid "&Change Label..."
+msgstr "&Címke méretének megváltoztatása..."
+
+#: labeleditor.cpp:462
+msgid "Insert &Barcode"
+msgstr "&Vonalkód beszúrása"
+
+#: labeleditor.cpp:465
+msgid "Insert &Picture"
+msgstr "&Kép beszúrása"
+
+#: labeleditor.cpp:466
+msgid "Insert &Text"
+msgstr "&Szöveg beszúrása"
+
+#: labeleditor.cpp:467 multilineeditdlg.cpp:138 textlineedit.cpp:98
+#, fuzzy
+msgid "Insert &Data Field"
+msgstr "&Adatbázismező beszúrása"
+
+#: labeleditor.cpp:468
+#, fuzzy
+msgid "Insert &Text Line"
+msgstr "&Szöveg beszúrása"
+
+#: labeleditor.cpp:469
+msgid "Insert &Line"
+msgstr "V&onal beszúrása"
+
+#: labeleditor.cpp:470
+msgid "Insert &Rectangle"
+msgstr "&Négyszög beszúrása"
+
+#: labeleditor.cpp:471
+msgid "Insert &Ellipse"
+msgstr "&Ellipszis beszúrása"
+
+#: labeleditor.cpp:473
+msgid "&Grid"
+msgstr "&Rajzrács"
+
+#: labeleditor.cpp:474
+msgid "&Preview..."
+msgstr "&Előnézet..."
+
+#: labeleditor.cpp:481
+msgid "Address&book"
+msgstr "&Címjegyzék"
+
+#: labeleditor.cpp:482
+msgid "&Create Single Barcode..."
+msgstr "Önálló vonalkód &készítése..."
+
+#: labeleditor.cpp:525
+msgid "T&ools"
+msgstr "Esz&közök"
+
+#: labeleditor.cpp:585
+msgid "&On Top"
+msgstr "&Legfelül"
+
+#: labeleditor.cpp:586
+msgid "&Raise"
+msgstr "&Megemelés"
+
+#: labeleditor.cpp:587
+msgid "&Lower"
+msgstr "&Süllyesztés"
+
+#: labeleditor.cpp:588
+msgid "&To Background"
+msgstr "&Háttérbe"
+
+#: labeleditor.cpp:591
+msgid "Center &Horizontally"
+msgstr "&Vízszintesen középre"
+
+#: labeleditor.cpp:592
+msgid "Center &Vertically"
+msgstr "&Függőlegesen középre"
+
+#: labeleditor.cpp:594
+msgid "&Order"
+msgstr "&Sorrend"
+
+#: labeleditor.cpp:595
+msgid "&Center"
+msgstr "&Középre"
+
+#: labeleditor.cpp:598
+msgid "&Protect Position and Size"
+msgstr ""
+
+#: labeleditor.cpp:600
+msgid "&Properties"
+msgstr "&Tulajdonságok"
+
+#: labeleditor.cpp:678
+msgid "Label Description"
+msgstr "Címke leírása"
+
+#: labeleditor.cpp:679
+msgid "Please enter a description:"
+msgstr "Kérlek adj meg leírást:"
+
+#: labeleditor.cpp:708
+msgid "Size: "
+msgstr "Méret: "
+
+#: labeleditor.cpp:711
+msgid "Label Template: "
+msgstr "Címke sablon: "
+
+#: labeleditor.cpp:742
+#, fuzzy
+msgid "Protected Item"
+msgstr "Objektum áthelyezve"
+
+#: labeleditor.cpp:841
+msgid "Spellchecking"
+msgstr "Helyesírásellenőrzés"
+
+#: labeleditor.cpp:1015
+msgid "The file %1 does not exist."
+msgstr "A %1 fájl nem létezik."
+
+#: labeleditor.cpp:1050
+msgid ""
+"<qt>The document has been modified.<br><br>Do you want to save it ?</qt>"
+msgstr "<qt>A dokumentum megváltozott.<br><br>Kívánod elmenteni ?</qt>"
+
+#: main.cpp:35
+msgid ""
+"Load the file in KBarcode (if --batch is specified, the file will be used in "
+"batchprinting mode)"
+msgstr ""
+
+#: main.cpp:36
+msgid ""
+"Print any loaded files immediately on the default printer or on the printer "
+"specified by the --printer commandline option and exit afterwards"
+msgstr ""
+
+#: main.cpp:38
+msgid "Printer/destination to print on"
+msgstr "Nyomtató/Célpont megadása"
+
+#: main.cpp:39
+#, fuzzy
+msgid "KBarcode Modes:"
+msgstr "KBarcode"
+
+#: main.cpp:40
+#, fuzzy
+msgid "Start KBarcode as xbarcode replacement"
+msgstr "indítás egyszerű módban"
+
+#: main.cpp:41
+#, fuzzy
+msgid "Open the label editor"
+msgstr "indítás címkeszerkesztő módban"
+
+#: main.cpp:42
+#, fuzzy
+msgid "Start directly in batchprinting mode"
+msgstr "indítás kötegelt nyomtatási módban"
+
+#: main.cpp:43
+msgid "Additional options for batchprinting (--batch):"
+msgstr ""
+
+#: main.cpp:44
+msgid "Output format where mode is one of POSTSCRIPT|IMAGE|BARCODE"
+msgstr ""
+
+#: main.cpp:45
+msgid "Set the serial number to be used"
+msgstr ""
+
+#: main.cpp:46
+msgid ""
+"Increase a previously specified serial number using this value for each "
+"printed label"
+msgstr ""
+
+#: main.cpp:47
+msgid "Print <value> labels without any data"
+msgstr ""
+
+#: main.cpp:48
+msgid "Import variable data from a specified sql query"
+msgstr ""
+
+#: main.cpp:49
+msgid "Import variable data from a specified csv file"
+msgstr ""
+
+#: main.cpp:75
+#, fuzzy
+msgid "KBarcode"
+msgstr "Vonalkód"
+
+#: main.cpp:76
+msgid "KBarcode is a barcode and label printing application for KDE 3."
+msgstr "A KBarcode egy vonalkód- és címkenyomtató alkalmazás KDE3 alá."
+
+#: main.cpp:81
+msgid "Programmer"
+msgstr "Programozó"
+
+#: main.cpp:83
+msgid "Project Manager"
+msgstr "Projektmenedzser"
+
+#: main.cpp:86
+msgid "Wrote GNU Barcode on which kbarcode is based."
+msgstr "A GNU Barcode készítője, melyen a kbarcode is alapul."
+
+#: main.cpp:88
+msgid "Author of Barcode Writer in Pure Postscript"
+msgstr ""
+
+#: main.cpp:90
+msgid "Italian translation"
+msgstr "Olasz fordítás"
+
+#: main.cpp:92
+msgid "Finnish and Swedish translation, created the KBarcode icon"
+msgstr "Finn és svéd fordítás és a KBarcode ikon alkotója"
+
+#: main.cpp:93
+msgid "Spanish translation"
+msgstr "Spanyol fordítás"
+
+#: main.cpp:94
+msgid "Hungarian translation"
+msgstr "Magyar fordítás"
+
+#: main.cpp:96
+msgid "Tab icon code stolen from his excellent app qtella."
+msgstr "Kódrészletek a qtella nevű remek programjából."
+
+#: main.cpp:97
+msgid "Wrote the RichText KPart"
+msgstr "Ő írta a RichText KPart részt."
+
+#: main.cpp:98
+msgid "French Translation"
+msgstr "Francia fordítás"
+
+#: main.cpp:99
+msgid "Help with ZPL and IPL code"
+msgstr "Segítség a ZPL és IPL kódokhoz"
+
+#: main.cpp:100
+msgid "Wrote many patches to improve KBarcode"
+msgstr ""
+
+#: main.cpp:101
+#, fuzzy
+msgid "Made the Netherlands translation"
+msgstr "Olasz fordítás"
+
+#: main.cpp:102
+msgid "Added lot's of useful data fields to kbarcode"
+msgstr ""
+
+#: main.cpp:103
+msgid "Added TEC barcode printer support"
+msgstr ""
+
+#: main.cpp:104
+msgid "Added EPCL barcode printer support"
+msgstr ""
+
+#: measurements.cpp:51
+msgid "mm"
+msgstr ""
+
+#: measurements.cpp:52
+msgid "in"
+msgstr ""
+
+#: mimesources.cpp:33
+#, fuzzy
+msgid "Pasted Object"
+msgstr "Objetum &törlése"
+
+#: multilineeditdlg.cpp:96
+msgid "&Bold"
+msgstr "&Vastag"
+
+#: multilineeditdlg.cpp:99
+msgid "&Italic"
+msgstr "&Dőlt"
+
+#: multilineeditdlg.cpp:102
+msgid "&Underline"
+msgstr "&Aláhúzott"
+
+#: multilineeditdlg.cpp:105
+msgid "Text &Color..."
+msgstr "Szöveg&szín"
+
+#: multilineeditdlg.cpp:110
+msgid "&Font"
+msgstr "&Betű"
+
+#: multilineeditdlg.cpp:113
+msgid "Font &Size"
+msgstr "Betű&méret"
+
+#: multilineeditdlg.cpp:119
+msgid "Align &Left"
+msgstr "&Balra rendezés"
+
+#: multilineeditdlg.cpp:122
+msgid "Align &Center"
+msgstr "&Középre rendezés"
+
+#: multilineeditdlg.cpp:125
+msgid "Align &Right"
+msgstr "&Jobbra rendezés"
+
+#: multilineeditdlg.cpp:128
+msgid "&Justify"
+msgstr "&Sorkizárás"
+
+#: mycanvasview.cpp:152
+msgid "Position: "
+msgstr "Pozíció: "
+
+#: mycanvasview.cpp:281
+msgid "Item Moved"
+msgstr "Objektum áthelyezve"
+
+#: newlabel.cpp:41
+msgid "New Label"
+msgstr "Új címke"
+
+#: newlabel.cpp:49
+msgid "<h1>Create a new Label</h1><br><br>"
+msgstr "<h1>Új címke létrehozása</h1><br><br>"
+
+#: newlabel.cpp:51
+msgid "<h1>Change Label Size</h1><br><br>"
+msgstr "<h1>Címke méretének megváltoztatása</h1><br><br>"
+
+#: newlabel.cpp:56 tokenprovider.cpp:208
+msgid "Label"
+msgstr "Címke"
+
+#: newlabel.cpp:72
+msgid "&Start with an empty label"
+msgstr ""
+
+#: newlabel.cpp:102
+msgid "&Add own Label Definition"
+msgstr "&Saját címkedefiníció hozzáadása"
+
+#: newlabel.cpp:168
+msgid ""
+"<b>Format:</b><br>\n"
+"Width: "
+msgstr ""
+"<b>Formátum:</b><br>\n"
+"Szélesség: "
+
+#: newlabel.cpp:169
+#, fuzzy
+msgid "%1<br>Height: "
+msgstr "mm<br>Magasság: "
+
+#: newlabel.cpp:170
+#, fuzzy
+msgid "%2<br>Horizontal Gap: "
+msgstr "mm<br>Víszintes köz: "
+
+#: newlabel.cpp:171
+#, fuzzy
+msgid "%3<br>Vertical Gap: "
+msgstr "mm<br>Függőleges köz: "
+
+#: newlabel.cpp:172
+#, fuzzy
+msgid "%4<br>Top Gap: "
+msgstr "mm<br>Felső margó: "
+
+#: newlabel.cpp:173
+#, fuzzy
+msgid "%5<br>Left Gap: "
+msgstr "mm<br>Bal margó: "
+
+#: newlabel.cpp:192
+msgid "No label selected."
+msgstr ""
+
+#: previewdialog.cpp:89
+#, fuzzy
+msgid "Select &Address"
+msgstr "&Cím beszúrása..."
+
+#: previewdialog.cpp:95
+msgid "Customer Name and No.:"
+msgstr "Ügyfél neve és száma:"
+
+#: previewdialog.cpp:98
+msgid "Article Number:"
+msgstr "Cikkszám:"
+
+#: previewdialog.cpp:100 smalldialogs.cpp:45 smalldialogs.cpp:94
+msgid "Group:"
+msgstr "Csoport:"
+
+#: previewdialog.cpp:102
+msgid "Index:"
+msgstr "Index:"
+
+#: previewdialog.cpp:108
+#, fuzzy
+msgid "Addressbook entry:"
+msgstr "&Címjegyzék"
+
+#: printersettings.cpp:39
+msgid "ISO A3"
+msgstr "ISO A3"
+
+#: printersettings.cpp:40
+msgid "ISO A4"
+msgstr "ISO A4"
+
+#: printersettings.cpp:41
+msgid "ISO A5"
+msgstr "ISO A5"
+
+#: printersettings.cpp:42
+msgid "US Letter"
+msgstr "US Letter"
+
+#: printersettings.cpp:43
+msgid "US Legal"
+msgstr "US Legal"
+
+#: printersettings.cpp:44
+msgid "Screen"
+msgstr "Képernyő"
+
+#: printersettings.cpp:46
+msgid "ISO B5"
+msgstr "ISO B5"
+
+#: printersettings.cpp:47
+msgid "US Executive"
+msgstr "US Executive"
+
+#: printersettings.cpp:48
+msgid "ISO A0"
+msgstr "ISO A0"
+
+#: printersettings.cpp:49
+msgid "ISO A1"
+msgstr "ISO A1"
+
+#: printersettings.cpp:50
+msgid "ISO A2"
+msgstr "ISO A2"
+
+#: printersettings.cpp:51
+msgid "ISO A6"
+msgstr "ISO A6"
+
+#: printersettings.cpp:52
+msgid "ISO A7"
+msgstr "ISO A7"
+
+#: printersettings.cpp:53
+msgid "ISO A8"
+msgstr "ISO A8"
+
+#: printersettings.cpp:54
+msgid "ISO A9"
+msgstr "ISO A9"
+
+#: printersettings.cpp:55
+msgid "ISO B0"
+msgstr "ISO B0"
+
+#: printersettings.cpp:56
+msgid "ISO B1"
+msgstr "ISO B1"
+
+#: printersettings.cpp:57
+msgid "ISO B10"
+msgstr "ISO B10"
+
+#: printersettings.cpp:58
+msgid "ISO B2"
+msgstr "ISO B2"
+
+#: printersettings.cpp:59
+msgid "ISO B3"
+msgstr "ISO B3"
+
+#: printersettings.cpp:60
+msgid "ISO B4"
+msgstr "ISO B4"
+
+#: printersettings.cpp:61
+msgid "ISO B6"
+msgstr "ISO B6"
+
+#: printersettings.cpp:62
+msgid "ISO C5"
+msgstr "ISO C5"
+
+#: printersettings.cpp:63
+msgid "US Common 10"
+msgstr "íUS Common 10"
+
+#: printersettings.cpp:64
+msgid "ISO DL"
+msgstr "ISO DL"
+
+#: printersettings.cpp:65
+msgid "US Folio"
+msgstr "US Folio"
+
+#: printersettings.cpp:66
+msgid "US Ledger"
+msgstr "US Ledger"
+
+#: printersettings.cpp:67
+msgid "US Tabloid"
+msgstr "US Tabloid"
+
+#: printlabeldlg.cpp:36 smalldialogs.cpp:42 smalldialogs.cpp:88
+msgid "Number of labels:"
+msgstr "Címkék száma:"
+
+#: printlabeldlg.cpp:40
+msgid "Start at label position:"
+msgstr "Kezdődjön ennél a címkepozíciónál:"
+
+#: printlabeldlg.cpp:43
+msgid "&Print crop marks (borders)"
+msgstr "&Jelzővonalak nyomtatása (keretek):"
+
+#: propertywidget.cpp:56
+#, fuzzy
+msgid "Image Saved in KBarcode"
+msgstr "Vonalkód megváltoztatva"
+
+#: propertywidget.cpp:90
+msgid "&Border Visible"
+msgstr ""
+
+#: propertywidget.cpp:101 propertywidget.cpp:190 rectsettingsdlg.cpp:159
+msgid "Color:"
+msgstr "Szín:"
+
+#: propertywidget.cpp:103 rectsettingsdlg.cpp:161
+msgid "Line Width:"
+msgstr "Vonalszélesség:"
+
+#: propertywidget.cpp:105 rectsettingsdlg.cpp:81 rectsettingsdlg.cpp:163
+msgid "Line Style:"
+msgstr "Vonalstílus:"
+
+#: propertywidget.cpp:145 propertywidget.cpp:485
+#, fuzzy
+msgid "90"
+msgstr "0"
+
+#: propertywidget.cpp:146 propertywidget.cpp:486
+msgid "180"
+msgstr ""
+
+#: propertywidget.cpp:147 propertywidget.cpp:487
+msgid "270"
+msgstr ""
+
+#: propertywidget.cpp:212
+msgid "Barcode Settings:"
+msgstr "Vonalkód beállításai:"
+
+#: propertywidget.cpp:346
+msgid "&Protect item from being moved or resized"
+msgstr ""
+
+#: propertywidget.cpp:357
+#, fuzzy
+msgid "&Top:"
+msgstr "&Legfelül"
+
+#: propertywidget.cpp:358
+#, fuzzy
+msgid "&Left:"
+msgstr "Bal margó:"
+
+#: propertywidget.cpp:359
+#, fuzzy
+msgid "&Height:"
+msgstr "mm<br>Magasság: "
+
+#: propertywidget.cpp:360
+#, fuzzy
+msgid "&Width:"
+msgstr "Vonalszélesség:"
+
+#: propertywidget.cpp:471
+#, fuzzy
+msgid "&Load image from path"
+msgstr "Nem támogatott képformátum"
+
+#: propertywidget.cpp:475
+msgid "&Read image path from expression"
+msgstr ""
+
+#: propertywidget.cpp:489
+#, fuzzy
+msgid "&Size"
+msgstr "Méret: "
+
+#: propertywidget.cpp:491
+msgid "&None"
+msgstr ""
+
+#: propertywidget.cpp:493
+#, fuzzy
+msgid "S&cale"
+msgstr "Méret:"
+
+#: propertywidget.cpp:495
+#, fuzzy
+msgid "Mirror &Horizontaly"
+msgstr "&Vízszintesen középre"
+
+#: propertywidget.cpp:496
+#, fuzzy
+msgid "Mirror &Vertically"
+msgstr "&Függőlegesen középre"
+
+#: propertywidget.cpp:522
+msgid "Image format not supported for file: %1"
+msgstr ""
+
+#: propertywidget.cpp:611
+msgid "Evaluate JavsScript code to define the visibility of this item:"
+msgstr ""
+
+#: rectsettingsdlg.cpp:54 rectsettingsdlg.cpp:145
+msgid "Settings"
+msgstr "Beállítások"
+
+#: rectsettingsdlg.cpp:71
+msgid "&Enable Border"
+msgstr "&Keret engedélyezése"
+
+#: rectsettingsdlg.cpp:73
+msgid "Fill Color:"
+msgstr "Kitöltési szín:"
+
+#: rectsettingsdlg.cpp:77
+msgid "Border Color:"
+msgstr "Keretszín:"
+
+#: rectsettingsdlg.cpp:79
+msgid "Border Width:"
+msgstr "Keretvastagság:"
+
+#: smalldialogs.cpp:35
+msgid "Add Barcode_basic"
+msgstr "Barcode_basic hozzáadása"
+
+#: smalldialogs.cpp:61
+#, fuzzy
+msgid "Add Items"
+msgstr "Elem hozzáadása"
+
+#: smalldialogs.cpp:68
+#, fuzzy
+msgid "Edit Item"
+msgstr "Elem hozzáadása"
+
+#: smalldialogs.cpp:92
+#, fuzzy
+msgid "Article:"
+msgstr "Cikkszám"
+
+#: sqltables.cpp:117
+msgid "<qt>Unable to open database: "
+msgstr "<qt>Nem lehet megnyitni az adatbázist: "
+
+#: sqltables.cpp:139
+msgid "We are going to re-create the tables '"
+msgstr "A táblákat újból létre fogjuk hozni: '"
+
+#: sqltables.cpp:141
+msgid "' and '"
+msgstr "' és '"
+
+#: sqltables.cpp:164
+msgid "<qt>Can't create database "
+msgstr "<qt>Nem lehet létrehozni az adatbázist "
+
+#: sqltables.cpp:164
+msgid "<br>You can continue if the database exists already.</qt>"
+msgstr "<br>Folytathatod, ha az adatbázis már létezik.</qt>"
+
+#: sqltables.cpp:182
+msgid ""
+"KBarcode could not create the required database. Please create it manually."
+msgstr ""
+"A KBarcode nem tudta létrehozni a szükséges adatbázist. Kérlek hozd létre "
+"manuálisan."
+
+#: sqltables.cpp:264
+msgid "Created table "
+msgstr "Tábla sikeresen létrehozva: "
+
+#: sqltables.cpp:264
+msgid " successfully!"
+msgstr ""
+
+#: sqltables.cpp:268
+msgid "Can't connect to database."
+msgstr "Nem lehet csatlakozni az adatbázishoz."
+
+#: sqltables.cpp:277
+msgid "We are going to delete the complete table: "
+msgstr "Az egész táblát törölni fogjuk: "
+
+#: sqltables.cpp:299
+msgid "We are going to delete the complete tables: "
+msgstr "A következő táblákat törölni fogjuk: "
+
+#: sqltables.cpp:315
+msgid ""
+"Data file for import not found. Continuing without importing data. Please "
+"check your KBarcode installation."
+msgstr ""
+
+#: sqltables.cpp:320
+msgid "SQL import progress:"
+msgstr "SQL importálás állása:"
+
+#: sqltables.cpp:331
+msgid "Can't open the data file containing the label definitions."
+msgstr "Nem lehet megnyitni a címkedefiníciókat tartalmazó adatfájlt."
+
+#: sqltables.cpp:340
+msgid "<qt>Can't execute command:<br><b>"
+msgstr "<qt>Nem hajtható végre a parancs:<br><b>"
+
+#: sqltables.cpp:432
+msgid ""
+"The SQL tables of KBarcode have changed since the last version. KBarcode "
+"updated them without any loss of data."
+msgstr ""
+"A KBarcode utolsó verziója óta az SQL táblák felépítése megváltozott, ezért "
+"most a KBarcode adatvesztés nélkül frissítette őket."
+
+#: sqltables.cpp:453 sqltables.cpp:473
+msgid "Connected successfully to your database"
+msgstr "Sikeres kapcsolódás az adatbázishoz"
+
+#: sqltables.cpp:517
+msgid "Database Settings"
+msgstr "Adatbázis beállítások"
+
+#: sqltables.cpp:527
+msgid "Username :"
+msgstr "Felhasználói név :"
+
+#: sqltables.cpp:534
+msgid "Password :"
+msgstr "Jelszó :"
+
+#: sqltables.cpp:542
+msgid "Database :"
+msgstr "Adatbázis :"
+
+#: sqltables.cpp:549
+msgid "Host :"
+msgstr "Kiszolgáló :"
+
+#: sqltables.cpp:556
+msgid "Driver :"
+msgstr "Illesztő :"
+
+#: sqltables.cpp:569
+msgid "&Autoconnect on program start"
+msgstr "&Automatikus kapcsolódás a program indulásakor"
+
+#: sqltables.cpp:573
+msgid "&Test Settings"
+msgstr "Beállítások &tesztelése"
+
+#: sqltables.cpp:577
+msgid "<b>You have to test your database settings before you can procede.</b>"
+msgstr ""
+"<b>A továbblépés előtt tesztelned kell az adatbázis-beállításaidat.</b>"
+
+#: textlineedit.cpp:138
+msgid "&Mag. Vert.:"
+msgstr ""
+
+#: textlineedit.cpp:140
+msgid "&Mag. Hor.:"
+msgstr ""
+
+#: tokendialog.cpp:65 tokendialog.cpp:93 tokendialog.cpp:109
+#, fuzzy
+msgid "What do you want to insert?"
+msgstr "Hány címkét szeretne kinyomtatni?"
+
+#: tokendialog.cpp:67
+#, fuzzy
+msgid "Insert a &fixed data field"
+msgstr "&Adatbázismező beszúrása"
+
+#: tokendialog.cpp:68
+msgid "Insert a &custom SQL query, variable or JavaScript function"
+msgstr ""
+
+#: tokendialog.cpp:72
+msgid "Step 1 of 3"
+msgstr ""
+
+#: tokendialog.cpp:79
+msgid "Step 2 of 3"
+msgstr ""
+
+#: tokendialog.cpp:86
+msgid "Step 3 of 3"
+msgstr ""
+
+#: tokendialog.cpp:94
+msgid "&Select from a list of all tokens"
+msgstr ""
+
+#: tokendialog.cpp:95
+msgid "Insert printing &informations"
+msgstr ""
+
+#: tokendialog.cpp:96
+#, fuzzy
+msgid "&Insert a database field"
+msgstr "&Adatbázismező beszúrása"
+
+#: tokendialog.cpp:97
+msgid "Insert a &date/time function"
+msgstr ""
+
+#: tokendialog.cpp:98
+#, fuzzy
+msgid "Insert an &addressbook field"
+msgstr "&Cím beszúrása..."
+
+#: tokendialog.cpp:111
+msgid "Insert a custom &variable"
+msgstr ""
+
+#: tokendialog.cpp:112
+#, fuzzy
+msgid "Insert a &SQL query"
+msgstr "V&onal beszúrása"
+
+#: tokendialog.cpp:113
+msgid "Insert a &JavaScript function"
+msgstr ""
+
+#: tokendialog.cpp:135
+msgid "&Category:"
+msgstr ""
+
+#: tokendialog.cpp:139
+msgid "&Token:"
+msgstr ""
+
+#: tokendialog.cpp:141 tokendialog.cpp:176
+msgid "Token"
+msgstr ""
+
+#: tokendialog.cpp:146
+msgid "&Custom Expression to be inserted in the token."
+msgstr ""
+
+#: tokendialog.cpp:151
+msgid ""
+"<qt>Certain tokens, like for exaple the sqlquery token need arguments. In "
+"the case of the sqlquery token, the sure has to enter a sql query in this "
+"text field.</qt>"
+msgstr ""
+
+#: tokendialog.cpp:191
+#, fuzzy
+msgid "&Create a new custom variable"
+msgstr "Új címke készítésének &felajánlása induláskor"
+
+#: tokendialog.cpp:194
+msgid "&Insert an existing custom variable"
+msgstr ""
+
+#: tokendialog.cpp:219
+msgid ""
+"<qt><b>No SQL connection found!</b><br>You can build a query, but you will "
+"not be able to execute or test it right now.<br></qt>"
+msgstr ""
+
+#: tokendialog.cpp:224
+msgid "&SQL Query:"
+msgstr ""
+
+#: tokendialog.cpp:226
+msgid "&Test"
+msgstr ""
+
+#: tokendialog.cpp:231
+msgid "Query test results:"
+msgstr ""
+
+#: tokendialog.cpp:246
+msgid "/* Place your JavaScript code into this text field. */\n"
+msgstr ""
+
+#: tokendialog.cpp:339
+msgid "All"
+msgstr ""
+
+#: tokendialog.cpp:352 tokendialog.cpp:420
+#, fuzzy
+msgid "Variable defined by the user for this label."
+msgstr "Ehhez az oszlophoz használt adatbázismező:"
+
+#: tokendialog.cpp:417 tokenprovider.cpp:209
+#, fuzzy
+msgid "Custom Values"
+msgstr "Ügyfél neve"
+
+#: tokenprovider.cpp:210
+msgid "Date & Time"
+msgstr ""
+
+#: tokenprovider.cpp:211
+#, fuzzy
+msgid "Addressbook"
+msgstr "&Címjegyzék"
+
+#: tokenprovider.cpp:216
+#, fuzzy
+msgid "Article description from barcode_basic"
+msgstr "Fejezetszám"
+
+#: tokenprovider.cpp:217
+#, fuzzy
+msgid "Article number from barcode_basic"
+msgstr "Barcode_basic importálása"
+
+#: tokenprovider.cpp:224
+msgid "customer number of the current customer"
+msgstr ""
+
+#: tokenprovider.cpp:225
+msgid "name of the current customer"
+msgstr ""
+
+#: tokenprovider.cpp:226
+#, fuzzy
+msgid "Barcode number from barcode_basic"
+msgstr "Barcode_basic importálása"
+
+#: tokenprovider.cpp:228
+msgid "group of the current article"
+msgstr ""
+
+#: tokenprovider.cpp:229
+msgid "Barcode encoding type from barcode_basic"
+msgstr ""
+
+#: tokenprovider.cpp:230
+msgid "User readable barcode encoding type from barcode_basic"
+msgstr ""
+
+#: tokenprovider.cpp:235
+msgid "Path and filename of this file"
+msgstr ""
+
+#: tokenprovider.cpp:236
+msgid "number of labels currently printed during this printout"
+msgstr ""
+
+#: tokenprovider.cpp:237
+msgid "current column on the page"
+msgstr ""
+
+#: tokenprovider.cpp:238
+msgid "current row on the page"
+msgstr ""
+
+#: tokenprovider.cpp:239
+#, fuzzy
+msgid "Current page"
+msgstr "Aktuális tábla: <b>"
+
+#: tokenprovider.cpp:240
+#, fuzzy
+msgid "Current resolution"
+msgstr "Képernyőfelbontás"
+
+#: tokenprovider.cpp:241
+msgid "Include a serial number on your labels."
+msgstr ""
+
+#: tokenprovider.cpp:247
+msgid "Execute java script code"
+msgstr ""
+
+#: tokenprovider.cpp:248
+msgid "Insert the result of a custom sql query"
+msgstr ""
+
+#: tokenprovider.cpp:249
+msgid "Insert a custom variable"
+msgstr ""
+
+#: tokenprovider.cpp:254
+msgid "Date formated as configured in the preferences"
+msgstr ""
+
+#: tokenprovider.cpp:255
+msgid "Short Weekday Name"
+msgstr ""
+
+#: tokenprovider.cpp:256
+msgid "Full Weekday Name"
+msgstr ""
+
+#: tokenprovider.cpp:257
+msgid "Short Month Name"
+msgstr ""
+
+#: tokenprovider.cpp:258
+msgid "Full Month Name"
+msgstr ""
+
+#: tokenprovider.cpp:259
+#, fuzzy
+msgid "Date-Time"
+msgstr "Dátum"
+
+#: tokenprovider.cpp:260
+#, fuzzy
+msgid "Century"
+msgstr "&Középre"
+
+#: tokenprovider.cpp:261
+msgid "Day Number (01-31)"
+msgstr ""
+
+#: tokenprovider.cpp:262
+msgid "Month-Day-year"
+msgstr ""
+
+#: tokenprovider.cpp:263
+msgid "Day Number ( 1-31)"
+msgstr ""
+
+#: tokenprovider.cpp:264
+msgid "Year-Month-day"
+msgstr ""
+
+#: tokenprovider.cpp:265
+msgid "Week Year (yy)"
+msgstr ""
+
+#: tokenprovider.cpp:266
+msgid "Week Year (yyyy)"
+msgstr ""
+
+#: tokenprovider.cpp:267
+msgid "Hour (01-24)"
+msgstr ""
+
+#: tokenprovider.cpp:268
+msgid "Hour (1-12)"
+msgstr ""
+
+#: tokenprovider.cpp:269
+msgid "Day of Year"
+msgstr ""
+
+#: tokenprovider.cpp:270
+msgid "Month Number (01-12)"
+msgstr ""
+
+#: tokenprovider.cpp:271
+msgid "Minute (00-59)"
+msgstr ""
+
+#: tokenprovider.cpp:272
+msgid "a.m./p.m."
+msgstr ""
+
+#: tokenprovider.cpp:273
+msgid "Time (h:m:s am/pm)"
+msgstr ""
+
+#: tokenprovider.cpp:274
+msgid "Time (HH:MM)"
+msgstr ""
+
+#: tokenprovider.cpp:275
+msgid "Seconds (00-59)"
+msgstr ""
+
+#: tokenprovider.cpp:276
+msgid "Time (HH:MM:SS)"
+msgstr ""
+
+#: tokenprovider.cpp:277
+msgid "Weekday (1=Monday...)"
+msgstr ""
+
+#: tokenprovider.cpp:278 tokenprovider.cpp:281
+msgid "Week Number (00-53)"
+msgstr ""
+
+#: tokenprovider.cpp:279
+msgid "Week Number (01-53)"
+msgstr ""
+
+#: tokenprovider.cpp:280
+msgid "Weekday (0=Sunday...)"
+msgstr ""
+
+#: tokenprovider.cpp:282
+msgid "Local Date"
+msgstr ""
+
+#: tokenprovider.cpp:283
+msgid "Local Time"
+msgstr ""
+
+#: tokenprovider.cpp:284
+msgid "Year (00-99)"
+msgstr ""
+
+#: tokenprovider.cpp:285
+msgid "Year (YYYY)"
+msgstr ""
+
+#: tokenprovider.cpp:286
+msgid "Offset from UTC"
+msgstr ""
+
+#: tokenprovider.cpp:287
+msgid "Timezone Name"
+msgstr ""
+
+#: tokenprovider.cpp:292
+msgid "Name"
+msgstr ""
+
+#: tokenprovider.cpp:296
+msgid "Full E-Mail"
+msgstr ""
+
+#: tokenprovider.cpp:319
+msgid "Formatted Address"
+msgstr ""
+
+#: tokenprovider.cpp:825
+msgid "ERROR: Empty SQL Query"
+msgstr ""
+
+#: xmlutils.cpp:344
+msgid ""
+"<qt>This appears file appears to be created by an older version of KBarcode."
+"<br>Please check if the used label definition is correct:<br><b>"
+msgstr ""
+"<qt>Ezt a filet valószínűleg a KBarcode egy előző verziójával készítették."
+"<br>Kérlek ellenőrizd, hogy a címkedefiníció helyes-e:<br><b>"
+
+#, fuzzy
+#~ msgid "Code 11"
+#~ msgstr "Code 128"
+
+#, fuzzy
+#~ msgid "Code 2 of 5"
+#~ msgstr "Code 128"
+
+#, fuzzy
+#~ msgid "EAN 2"
+#~ msgstr "EAN 128"
+
+#, fuzzy
+#~ msgid "EAN 5"
+#~ msgstr "EAN 8"
+
+#, fuzzy
+#~ msgid "Interleaved 2 of 5"
+#~ msgstr "összefésült 2 az 5-ből (csak számok)"
+
+#, fuzzy
+#~ msgid "Postnet"
+#~ msgstr "USPS Postnet"
+
+#, fuzzy
+#~ msgid "Royal Mail"
+#~ msgstr "Royal Mail 4 State"
+
+#, fuzzy
+#~ msgid "UPCA"
+#~ msgstr "UPC A"
+
+#, fuzzy
+#~ msgid "UPCE"
+#~ msgstr "UPC E"
+
+#~ msgid "Barcode Cache"
+#~ msgstr "Vonalkód gyorstár"
+
+#~ msgid "Barcode Cache Size:"
+#~ msgstr "Vonalkód gyorstár mérete:"
+
+#~ msgid "&Clear"
+#~ msgstr "&Törlés"
+
+#~ msgid ""
+#~ "<qt>Specifies how many barcodes should be cached on the harddisk.If you "
+#~ "print lot's of articles, you should set this to be the same as the number "
+#~ "of articles in your database to get best speed results.One cached barcode "
+#~ "requires about 20kb of diskspace.</qt>"
+#~ msgstr ""
+#~ "<qt>Megadja hogy hány vonalkód legyen a gyorstárban. Ha sok cikket "
+#~ "nyomtatsz, akkor a legjobb sebesség eléréséhez célszerű ezt a cikkek "
+#~ "számával megegyezőre értékre állítani. Minden gyorstárban tárolt vonalkód "
+#~ "kb. 20kB tárterületet igényel.</qt>"
+
+#~ msgid "Address Import"
+#~ msgstr "Cím importálása"
+
+#~ msgid "Kbarcode"
+#~ msgstr "Kbarcode"
+
+#~ msgid "Barcode not valid!"
+#~ msgstr "Érvénytelen vonalkód!"
+
+#~ msgid "BarcodeCache"
+#~ msgstr "BarcodeCache"
+
+#~ msgid "BarcodeCombo"
+#~ msgstr "BarcodeCombo"
+
+#~ msgid "BarcodeWidget"
+#~ msgstr "BarcodeWidget"
+
+#~ msgid "BarCodeDialog"
+#~ msgstr "BarCodeDialog"
+
+#~ msgid "&Invert colors"
+#~ msgstr "Színek &invertálása"
+
+#~ msgid "AdvancedBarcodeDialog"
+#~ msgstr "AdvancedBarcodeDialog"
+
+#~ msgid "TBarcodeDlg"
+#~ msgstr "TBarcodeDlg"
+
+#~ msgid "PDF417BarcodeDlg"
+#~ msgstr "PDF417BarcodeDlg"
+
+#~ msgid "DataMatrixDlg"
+#~ msgstr "DataMatrixDlg"
+
+#~ msgid "SequenceDlg"
+#~ msgstr "SequenceDlg"
+
+#~ msgid "ColorWidget"
+#~ msgstr "ColorWidget"
+
+#~ msgid "New Picture"
+#~ msgstr "Új kép beszúrása"
+
+#~ msgid "Undo Limit:"
+#~ msgstr "Visszavonható műveletek száma:"
+
+#~ msgid "Image Creation"
+#~ msgstr "Képkészítés"
+
+#~ msgid "ConfigDialog"
+#~ msgstr "ConfigDialog"
+
+#~ msgid "ConfWizard"
+#~ msgstr "ConfWizard"
+
+#~ msgid "CSVImportDlg"
+#~ msgstr "CSVImportDlg"
+
+#~ msgid "DatabaseBrowser"
+#~ msgstr "DatabaseBrowser"
+
+#~ msgid "LabelPreview"
+#~ msgstr "LabelPreview"
+
+#~ msgid "DefinitionDialog"
+#~ msgstr "DefinitionDialog"
+
+#~ msgid "<b>No</b></p>"
+#~ msgstr "<b>Nem</b></p>"
+
+#~ msgid "<b>Found</b></p>"
+#~ msgstr "<b>Talált</b></p>"
+
+#~ msgid ""
+#~ "<p><i>convert</i> is missing for <b>barcode support</b>. Please install "
+#~ "<i>ImageMagick.</i></p>"
+#~ msgstr ""
+#~ "<p>A <i>convert</i> hiányzik <b>a vonalkód támogatáshoz</b>. Kérlek "
+#~ "telepítsd fel az<i>ImageMagick-et!</i></p>"
+
+#~ msgid "DSMainWindow"
+#~ msgstr "DSMainWindow"
+
+#~ msgid "...as &IPL or ZPL"
+#~ msgstr "... &IPL vagy ZPL formátumban"
+
+#~ msgid "Field 0"
+#~ msgstr "0. mező"
+
+#~ msgid "Field 1"
+#~ msgstr "1. mező"
+
+#~ msgid "Field 2"
+#~ msgstr "2. mező"
+
+#~ msgid "Field 3"
+#~ msgstr "3. mező"
+
+#~ msgid "Field 4"
+#~ msgstr "4. mező"
+
+#~ msgid "Field 5"
+#~ msgstr "5. mező"
+
+#~ msgid "Field 6"
+#~ msgstr "6. mező"
+
+#~ msgid "Field 7"
+#~ msgstr "7. mező"
+
+#~ msgid "Field 8"
+#~ msgstr "8. mező"
+
+#~ msgid "Field 9"
+#~ msgstr "9. mező"
+
+#~ msgid "Customer Number"
+#~ msgstr "Ügyfél száma"
+
+#~ msgid "Line 0"
+#~ msgstr "0. sor"
+
+#~ msgid "Line 1"
+#~ msgstr "1. sor"
+
+#~ msgid "Line 2"
+#~ msgstr "2. sor"
+
+#~ msgid "Line 3"
+#~ msgstr "3. sor"
+
+#~ msgid "Line 4"
+#~ msgstr "4. sor"
+
+#~ msgid "Line 5"
+#~ msgstr "5. sor"
+
+#~ msgid "Line 6"
+#~ msgstr "6. sor"
+
+#~ msgid "Line 7"
+#~ msgstr "7. sor"
+
+#~ msgid "Line 8"
+#~ msgstr "8. sor"
+
+#~ msgid "Line 9"
+#~ msgstr "9. sor"
+
+#~ msgid "barcode_basic"
+#~ msgstr "barcode_basic"
+
+#~ msgid "customer"
+#~ msgstr "customer"
+
+#~ msgid "customer_text"
+#~ msgstr "customer_text"
+
+#~ msgid "Encoding Type"
+#~ msgstr "Kódolás típusa"
+
+#~ msgid "Resolution"
+#~ msgstr "Felbontás"
+
+#~ msgid "&Export..."
+#~ msgstr "E&xportálás..."
+
+#~ msgid "&Move by Value"
+#~ msgstr "&Mozgatás koordinátákkal"
+
+#~ msgid "Position"
+#~ msgstr "Pozíció"
+
+#~ msgid "X Position (mm):"
+#~ msgstr "X pozíció (mm):"
+
+#~ msgid "Y Position (mm):"
+#~ msgstr "Y pozíció (mm):"
+
+#~ msgid "LabelEditor"
+#~ msgstr "LabelEditor"
+
+#~ msgid "BarcodeSettingsDlg"
+#~ msgstr "BarcodeSettingsDlg"
+
+#~ msgid "PictureSettings"
+#~ msgstr "PictureSettings"
+
+#~ msgid "PositionDialog"
+#~ msgstr "PositionDialog"
+
+#~ msgid "Label:"
+#~ msgstr "Címke:"
+
+#~ msgid "Article number:"
+#~ msgstr "Cikkszám:"
+
+#~ msgid "Comment is empty. Please set it to a value."
+#~ msgstr "Üres megjegyzés! Kérlek adj meg egy értéket!"
+
+#~ msgid "Labels to print: %1"
+#~ msgstr "Nyomtatandó címkék: %1"
+
+#~ msgid "Different articles: %1"
+#~ msgstr "Különböző cikkek: %1"
+
+#~ msgid "Different groups: %1"
+#~ msgstr "Különböző csoportok: %1"
+
+#~ msgid "Pages: %1"
+#~ msgstr "Oldalak: %1"
+
+#~ msgid "Label description: "
+#~ msgstr "Címke leírása: "
+
+#~ msgid "Images creation finished."
+#~ msgstr "Képkészítés befejezve."
+
+#~ msgid "LabelPrinter"
+#~ msgstr "LabelPrinter"
+
+#~ msgid "load label"
+#~ msgstr "címke betöltése"
+
+#~ msgid "import data for batchprinting"
+#~ msgstr "adat importálása kötegelt nyomtatáshoz"
+
+#~ msgid "label for batchprinting"
+#~ msgstr "címke kötegelt nyomtatáshoz"
+
+#~ msgid "customer id for batchprinting"
+#~ msgstr "ügyfélazonosító a kötegelt nyomtatáshoz"
+
+#~ msgid "print immediately in batch mode"
+#~ msgstr "azonnali nyomtatás kötegelt módban"
+
+#~ msgid "DSTextDrag"
+#~ msgstr "DSTextDrag"
+
+#~ msgid "Spell Checking"
+#~ msgstr "Helyesírásellenőrzés"
+
+#~ msgid "MultiLineEditDlg"
+#~ msgstr "MultiLineEditDlg"
+
+#~ msgid "MyCanvas"
+#~ msgstr "MyCanvas"
+
+#~ msgid "MyCanvasView"
+#~ msgstr "MyCanvasView"
+
+#~ msgid "MyDataTable"
+#~ msgstr "MyDataTable"
+
+#~ msgid "NewLabel"
+#~ msgstr "NewLabel"
+
+#~ msgid "PreviewDialog"
+#~ msgstr "PreviewDialog"
+
+#~ msgid "PrinterSettings"
+#~ msgstr "PrinterSettings"
+
+#~ msgid "PrintLabelDlg"
+#~ msgstr "PrintLabelDlg"
+
+#~ msgid "RectSettingsDlg"
+#~ msgstr "RectSettingsDlg"
+
+#~ msgid "LineSettingsDlg"
+#~ msgstr "LineSettingsDlg"
+
+#~ msgid "DSSmallDialogs::AddAllDialog"
+#~ msgstr "DSSmallDialogs::AddAllDialog"
+
+#~ msgid "', '"
+#~ msgstr "', '"
+
+#~ msgid "'"
+#~ msgstr "'"
+
+#~ msgid ", "
+#~ msgstr ", "
+
+#~ msgid "SqlTables"
+#~ msgstr "SqlTables"
+
+#~ msgid "SqlWidget"
+#~ msgstr "SqlWidget"
+
+#~ msgid "Resized Item"
+#~ msgstr "Objektum átméretezve"
+
+#~ msgid "Moved Line"
+#~ msgstr "Vonal áthelyezve"
+
+#~ msgid "Changed Settings"
+#~ msgstr "Beállítások megváltoztatva"
+
+#~ msgid "Changed Text"
+#~ msgstr "Szöveg megváltoztatva"
+
+#~ msgid "Modified Rectangle or Ellipse"
+#~ msgstr "Négyszög vagy ellipszis módosítva"
+
+#~ msgid "Modified Line"
+#~ msgstr "Vonal módosítva"
+
+#~ msgid "<br></qt>"
+#~ msgstr "<br></qt>"
+
+#~ msgid "Optimize KBarcode for printing barcodes"
+#~ msgstr "A KBarcode optimalizálása vonalkódnyomtatáshoz"
+
+#~ msgid "Optimize KBarcode to print pretty fonts"
+#~ msgstr "A KBarcode optimalizálása jóminőségű betűnyomtatáshoz"
+
+#, fuzzy
+#~ msgid ""
+#~ "Please select the printer mode you want to use for KBarcode.<br>Optimize "
+#~ "for barcodes is your choice as soon as you want to print <b>barcodes</b>, "
+#~ "otherwise they might <b>not be scanable</b> on all barcode scanners."
+#~ "<br><br>If you want to print <b>visiting cards</b> or similar things (CD-"
+#~ "Covers...), optimize KBarcode for printing pretty fonts."
+#~ msgstr ""
+#~ "Kérlek válaszd ki a KBarcode által használandó nyomtatási módot!<br> Ha "
+#~ "bármi olyat szeretnél nyomtatni amin <b>vonalkód</b> van, akkor válaszd a "
+#~ "vonalkódra optimalizálási üzemmódot, különben nem biztos, hogy minden "
+#~ "vonalkódolvasó fel tudja majd ismerni az ábrát. Egyéb esetekben (pl. "
+#~ "<b>belépőkártyák, CD borítók</b>) pedig a jóminőségű betűnyomtatás "
+#~ "üzemmód ajánlott."
+
+#~ msgid ""
+#~ "Barcodes maybe not scannable if printed, with a resolution lower than "
+#~ "300dpi."
+#~ msgstr ""
+#~ "Elképzelhető, hogy a vonalkód nem lesz leolvasható, ha nem 300dpi-vel "
+#~ "nyomtatódik ki."
+
+#~ msgid "GNU barcode is not installed. Please install GNU Barcode."
+#~ msgstr ""
+#~ "GNU barcode nincs telepítve. Kérlek telepítsd fel a GNU barcode programot!"
+
+#~ msgid "Convert is not avaible, please install ImageMagick"
+#~ msgstr ""
+#~ "Konvertálás nem érhető el, kérlek telepítsd fel az ImageMagick programot!"
+
+#~ msgid "pdf417_enc is not installed. Please install pdf417_enc."
+#~ msgstr "A pdf417_enc program nincs telepítve, kérlek telepítsd fel."
+
+#~ msgid "Low Resolution (72dpi)"
+#~ msgstr "Alacsony felbontás (72dpi)"
+
+#~ msgid "Draw borders when printing labels"
+#~ msgstr "Keret rajzolása címkenyomtatáskor"
+
+#~ msgid "Print in &grayscale"
+#~ msgstr "Nyomtatás &szürkeskálával"
+
+#~ msgid "&Copy to Clipboard"
+#~ msgstr "Másolás vágóla&pra"
+
+#~ msgid "Fit to Window"
+#~ msgstr "Ablakmérethez igazítás"
+
+#~ msgid "Insert Text with database connection"
+#~ msgstr "Szöveg beszúrása adatbázisból"
+
+#~ msgid "Scale Label"
+#~ msgstr "Címke méretezése"
+
+#~ msgid "Settings for the barcode on your label:"
+#~ msgstr "A cimkén lévő vonalkód beállításai:"
+
+#~ msgid "Picture Settings"
+#~ msgstr "Képbeállítások"
+
+#~ msgid "&Ok"
+#~ msgstr "&Ok"
+
+#~ msgid ""
+#~ "We are going to re-create the tables 'barcode_basic', 'customer', "
+#~ "'customer_text' and 'label_def'"
+#~ msgstr ""
+#~ "A következő táblák újra létre lesznek hozva:'barcode_basic', 'customer', "
+#~ "'customer_text' és 'label_def'"
+
+#~ msgid "We are going to delete the complete table: label_def "
+#~ msgstr "Törölni fogjuk az egész táblát: label_def "
+
+#~ msgid "&Load From File"
+#~ msgstr "&Betöltés fájlból"
+
+#~ msgid "You have to select a label first!"
+#~ msgstr "Először ki kell választani egy címkét!"
+
+#~ msgid ""
+#~ "Labels to print: %1<br>Different Articles: %2<br>Different Groups: %"
+#~ "3<br>Pages: %4"
+#~ msgstr ""
+#~ "Nyomtatandó címkék: %1<br>Eltérő cikkek: %2<br>Eltérő csoportok: %"
+#~ "3<br>Oldalak: %4"
+
+#~ msgid "<br>Description: "
+#~ msgstr "<br>Leírás: "
+
+#~ msgid "IconTabBar"
+#~ msgstr "IconTabBar"
+
+#~ msgid "Text Properties"
+#~ msgstr "Szöveg tulajdonságai"
+
+#~ msgid "Position X:"
+#~ msgstr "X pozíció:"
+
+#~ msgid "Position Y:"
+#~ msgstr "Y pozíció:"
+
+#~ msgid "IconTabWidget"
+#~ msgstr "IconTabWidget"
+
+#~ msgid "TextProperties"
+#~ msgstr "TextProperties"
+
+#~ msgid "<qt>Can't drop database "
+#~ msgstr "<qt>Nem lehet törölni az adatbázist"
+
+#, fuzzy
+#~ msgid "Spellcheck"
+#~ msgstr "Helyesírásellenőrzés"
+
+#, fuzzy
+#~ msgid "SpellChecker"
+#~ msgstr "Helyesírásellenőrzés"
+
+#~ msgid ""
+#~ "Move items around with your mouse.<br>You can configure their settings "
+#~ "after Double clicking on them!"
+#~ msgstr ""
+#~ "Az objektumokat az egérrel lehet mozgatni.<br>Beállításaik módosításához "
+#~ "kattints rájuk duplán!"
+
+#~ msgid "Enable &Fast Barcode Rendering"
+#~ msgstr "&Gyors vonalkódrajzolás engedélyezése"
+
+#~ msgid "Text (HTML allowed):"
+#~ msgstr "Szöveg (HTML engedélyezett):"
+
+#~ msgid "Changed Font"
+#~ msgstr "Betű megváltoztatása"
+
+#~ msgid "Changed Color"
+#~ msgstr "Szín megváltoztatása"
+
+#~ msgid "Find:"
+#~ msgstr "Keresés:"
+
+#~ msgid "Website, testing, very good ideas and keeping me coding!"
+#~ msgstr "Weboldal, tesztelés, sok jó ötlet ami munkát ad nekem :)"
+
+#~ msgid "&Default"
+#~ msgstr "&Alapértelmezett"
+
+#~ msgid "http://www.kbarcode.net"
+#~ msgstr "http://www.kbarcode.net"
+
+#~ msgid "&Data"
+#~ msgstr "&Adat"
+
+#~ msgid "<qt>Kbarcode is a free, full featured barcode solution for KDE."
+#~ msgstr ""
+#~ "<qt>Kbarcode egy ingyenes, nagy tudású vonalkód-generáló program KDE alá."
+
+#~ msgid "localhost"
+#~ msgstr "localhost"
+
+#~ msgid "You need a Database connection for this feature."
+#~ msgstr "A szolgáltatás igénybevételéhez adatbázis-kapcsolat szükséges."
+
+#~ msgid "&New Label"
+#~ msgstr "Ú&j címke"
+
+#~ msgid "&Load Label"
+#~ msgstr "Címke &betöltése"
+
+#~ msgid "&New Item"
+#~ msgstr "Új &elem"

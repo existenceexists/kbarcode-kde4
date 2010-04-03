@@ -1,0 +1,2676 @@
+# translation of fr.po to Français
+# translation of fr.po to
+# Copyright (C) 2003, 2006 Free Software Foundation, Inc.
+#
+# Yann Bouan <yann@bouan.net>, 2003.
+# Raphaël Pinson <raphink@ubuntu.com>, 2006.
+msgid ""
+msgstr ""
+"Project-Id-Version: fr\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-10-13 14:52+0200\n"
+"PO-Revision-Date: 2006-06-30 20:01+0200\n"
+"Last-Translator: Raphaël Pinson <raphink@ubuntu.com>\n"
+"Language-Team: Français <kde-francophone@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.2\n"
+"Plural-Forms:  nplurals=2; plural=(n > 1);\n"
+
+#: _translatorinfo.cpp:1
+msgid ""
+"_: NAME OF TRANSLATORS\n"
+"Your names"
+msgstr "Yann Bouan, Raphaël Pinson"
+
+#: _translatorinfo.cpp:3
+msgid ""
+"_: EMAIL OF TRANSLATORS\n"
+"Your emails"
+msgstr "yann@bouan.net, raphink@ubuntu.com"
+
+#: barcodecombo.cpp:125
+#, fuzzy
+msgid "&Encoding Type:"
+msgstr "Type d'Encodage :"
+
+#: barcodecombo.cpp:134
+#, fuzzy
+msgid "&Value:"
+msgstr "Valeur :"
+
+#: barcodecombo.cpp:159
+#, fuzzy
+msgid "&Display text"
+msgstr "&Texte d'Affichage"
+
+#: barcodecombo.cpp:164
+msgid "&Advanced..."
+msgstr ""
+
+#: barcodecombo.cpp:168 propertywidget.cpp:481
+#, fuzzy
+msgid "&Insert Data Field..."
+msgstr "Insérer Etiquette X"
+
+#: barcodecombo.cpp:173
+#, fuzzy
+msgid "&Margin:"
+msgstr "Marge:"
+
+#: barcodecombo.cpp:180 propertywidget.cpp:140 propertywidget.cpp:466
+#, fuzzy
+msgid "&Rotation:"
+msgstr "Rotation :"
+
+#: barcodecombo.cpp:187
+#, fuzzy
+msgid "&Scale (in permille):"
+msgstr "Dimension (en permille):"
+
+#: barcodecombo.cpp:194
+#, fuzzy
+msgid "&Crop:"
+msgstr "Rogner:"
+
+#: barcodedialog.cpp:46
+msgid "Barcode Generator"
+msgstr "Générateur de Code barre"
+
+#: barcodedialog.cpp:57
+#, fuzzy
+msgid "&Generate"
+msgstr "&Générer code-barre"
+
+#: barcodedialog.cpp:72
+#, fuzzy
+msgid "&Print"
+msgstr "&Imprimer"
+
+#: barcodedialog.cpp:155
+msgid "An error occurred during saving the image"
+msgstr "Une erreur est survenue lors de la sauvegarde"
+
+#: barcodedialogs.cpp:43
+msgid "Barcode Settings"
+msgstr "Propriété du Code barre"
+
+#: barcodedialogs.cpp:49 barcodedialogs.cpp:258
+msgid "PDF417"
+msgstr ""
+
+#: barcodedialogs.cpp:55
+msgid "DataMatrix"
+msgstr ""
+
+#: barcodedialogs.cpp:61 barcodedialogs.cpp:108
+#, fuzzy
+msgid "TBarcode"
+msgstr "Code-&Barre"
+
+#: barcodedialogs.cpp:67 barcodedialogs.cpp:480
+msgid "Barcode Writer in Pure Postscript"
+msgstr ""
+
+#: barcodedialogs.cpp:73 barcodedialogs.cpp:444
+#, fuzzy
+msgid "Colors"
+msgstr "Couleur du Quadrillage:"
+
+#: barcodedialogs.cpp:78 barcodedialogs.cpp:366
+msgid "Sequence"
+msgstr ""
+
+#: barcodedialogs.cpp:116
+#, fuzzy
+msgid "Module width (mm):"
+msgstr "Largeur (en mm):"
+
+#: barcodedialogs.cpp:120
+#, fuzzy
+msgid "Barcode Height (mm):"
+msgstr "Hauteur (en mm):"
+
+#: barcodedialogs.cpp:123
+msgid "&Translate escape sequences"
+msgstr ""
+
+#: barcodedialogs.cpp:124
+#, fuzzy
+msgid "&Text above barcode"
+msgstr "Enregi&strer code-barre"
+
+#: barcodedialogs.cpp:125
+msgid "&Auto correction"
+msgstr "Auto-&correction"
+
+#: barcodedialogs.cpp:129
+msgid "&Checksum calculation method:"
+msgstr "&Méthode de calcul de la somme de contrôle"
+
+#: barcodedialogs.cpp:143
+msgid ""
+"<qt>Change the module with used by tbarcode. Take a look into the tbarcode "
+"documentation for details. Normaly you do not want to change this value.</qt>"
+msgstr ""
+"<qt>Changer le module utilisé par tbarcode. Pour plus de détails, reportez-"
+"vous à la documentation de tbarcode. Vous ne devriez pas avoir à modifier "
+"cette valeur</qt>"
+
+#: barcodedialogs.cpp:162
+msgid "No Checksum"
+msgstr "Pas de somme de contrôle"
+
+#: barcodedialogs.cpp:163
+msgid "Default Checksum Method"
+msgstr "Méthode de somme de contrôle par défaut"
+
+#: barcodedialogs.cpp:167
+msgid "Modulo 10 Checksum"
+msgstr "Somme de contrôle par modulo 10"
+
+#: barcodedialogs.cpp:174
+msgid "Module 43 (suggested for Code39 and Logmars, 1 digit)"
+msgstr "Modulo 43 (conseillé pour le Code39 et le Logmars, à 1 digit) "
+
+#: barcodedialogs.cpp:177
+msgid "Modula 47 (2 digits)"
+msgstr "Modulo 47 (à 2 digits)"
+
+#: barcodedialogs.cpp:180
+msgid "Deutsche Post Leitcode"
+msgstr ""
+
+#: barcodedialogs.cpp:183
+msgid "Deutsche Post Identcode"
+msgstr ""
+
+#: barcodedialogs.cpp:186
+#, fuzzy
+msgid "Code 11 (1 digit)"
+msgstr "Code 128C (chiffres compacts)"
+
+#: barcodedialogs.cpp:187
+#, fuzzy
+msgid "Code 11 (2 digits)"
+msgstr "Code 128C (chiffres compacts)"
+
+#: barcodedialogs.cpp:191
+msgid "USPS Postnet"
+msgstr ""
+
+#: barcodedialogs.cpp:194
+msgid "MSI (1 digit)"
+msgstr ""
+
+#: barcodedialogs.cpp:195
+msgid "MSI (2 digits)"
+msgstr ""
+
+#: barcodedialogs.cpp:199 barkode.cpp:710
+msgid "Plessey"
+msgstr "Plessey"
+
+#: barcodedialogs.cpp:202
+msgid "EAN 8"
+msgstr ""
+
+#: barcodedialogs.cpp:205
+msgid "EAN 13"
+msgstr ""
+
+#: barcodedialogs.cpp:208
+msgid "UPC A"
+msgstr ""
+
+#: barcodedialogs.cpp:211
+msgid "UPC E"
+msgstr ""
+
+#: barcodedialogs.cpp:214
+msgid "EAN 128"
+msgstr ""
+
+#: barcodedialogs.cpp:217
+#, fuzzy
+msgid "Code 128"
+msgstr "Raw code 128"
+
+#: barcodedialogs.cpp:220
+msgid "Royal Mail 4 State"
+msgstr ""
+
+#: barcodedialogs.cpp:266
+msgid "Rows:"
+msgstr ""
+
+#: barcodedialogs.cpp:270
+#, fuzzy
+msgid "Columns:"
+msgstr "Commentaire :"
+
+#: barcodedialogs.cpp:274
+#, fuzzy
+msgid "Error correction level:"
+msgstr "Correction Y"
+
+#: barcodedialogs.cpp:314
+msgid "Data Matrix symbol sizes (rows x cols):"
+msgstr ""
+
+#: barcodedialogs.cpp:318
+msgid "Automatic calculation"
+msgstr ""
+
+#: barcodedialogs.cpp:372
+msgid "&Enable sequence"
+msgstr ""
+
+#: barcodedialogs.cpp:374
+msgid "Iterate over numbers 0-9"
+msgstr ""
+
+#: barcodedialogs.cpp:375
+msgid "Iterate over characters A-Z"
+msgstr ""
+
+#: barcodedialogs.cpp:376
+msgid "Iterate over A-Z, 0-9"
+msgstr ""
+
+#: barcodedialogs.cpp:379
+msgid "Step:"
+msgstr ""
+
+#: barcodedialogs.cpp:383
+#, fuzzy
+msgid "Start:"
+msgstr "Statique"
+
+#: barcodedialogs.cpp:455
+#, fuzzy
+msgid "Bar Color:"
+msgstr "Couleur du Quadrillage:"
+
+#: barcodedialogs.cpp:456
+#, fuzzy
+msgid "Background Color:"
+msgstr "Couleur du Quadrillage:"
+
+#: barcodedialogs.cpp:457
+#, fuzzy
+msgid "Text Color:"
+msgstr "&Couleur Texte "
+
+#: barcodedialogs.cpp:483
+msgid "Enable &Checksum"
+msgstr ""
+
+#: barcodeprinterdlg.cpp:31
+#, fuzzy
+msgid "Barcode Printer"
+msgstr "Numéro de Code barre"
+
+#: barcodeprinterdlg.cpp:36
+#, fuzzy
+msgid "&Output Format:"
+msgstr "Format du Fichier:"
+
+#: barcodeprinterdlg.cpp:40
+msgid "&Print to File"
+msgstr "&Imprimer dans un fichier"
+
+#: barcodeprinterdlg.cpp:42 batchwizard.cpp:126 batchwizard.cpp:258
+msgid "&Filename:"
+msgstr "Nom de &fichier"
+
+#: barcodeprinterdlg.cpp:46
+msgid "&Device:"
+msgstr "&Périphérique"
+
+#: barcodeprinterdlg.cpp:58
+msgid "TEC Printer (TEC)"
+msgstr ""
+
+#: barcodeprinterdlg.cpp:59
+msgid "Zebra Printer (ZPL)"
+msgstr ""
+
+#: barcodeprinterdlg.cpp:60
+msgid "Intermec Printer (IPL)"
+msgstr ""
+
+#: barcodeprinterdlg.cpp:61
+msgid "EPCL Printer (EPCL)"
+msgstr ""
+
+#: barkode.cpp:649
+#, fuzzy
+msgid " [GNU Barcode]"
+msgstr "Nouveau Code-barre"
+
+#: barkode.cpp:652
+msgid " [PDF 417]"
+msgstr ""
+
+#: barkode.cpp:655
+#, fuzzy
+msgid " [TBarcode]"
+msgstr "Code-&Barre"
+
+#: barkode.cpp:658
+#, fuzzy
+msgid " [TBarcode2]"
+msgstr "Code-&Barre"
+
+#: barkode.cpp:661
+msgid " [Barcode Writer in Pure Postscript]"
+msgstr ""
+
+#: barkode.cpp:696
+msgid "Raw code 128"
+msgstr "Raw code 128"
+
+#: barkode.cpp:697
+msgid "Codabar"
+msgstr "Codabar"
+
+#: barkode.cpp:698
+#, fuzzy
+msgid "Codabar (no checksum)"
+msgstr "Code 39 (sans checksum)"
+
+#: barkode.cpp:699
+msgid "Code 128 (a,b,c: autoselection)"
+msgstr "Code 128 (a,b,c: selection automatique)"
+
+#: barkode.cpp:700
+msgid "Code 128B, full printable ascii"
+msgstr "Code 128B, ascii imprimable"
+
+#: barkode.cpp:701
+msgid "Code 128C (compact form digits)"
+msgstr "Code 128C (chiffres compacts)"
+
+#: barkode.cpp:702
+msgid "Code 39 (no checksum)"
+msgstr "Code 39 (sans checksum)"
+
+#: barkode.cpp:703
+msgid "Code 39"
+msgstr "Code 39"
+
+#: barkode.cpp:704
+msgid "Code 93"
+msgstr "Code 93"
+
+#: barkode.cpp:705
+msgid "EAN (EAN 8 or EAN 13)"
+msgstr "EAN (EAN 8 ou EAN 13)"
+
+#: barkode.cpp:706
+msgid "interleaved 2 of 5 (only digits, no checksum)"
+msgstr "intercalé 2 sur 5 (chiffres uniquement, sans checksum)"
+
+#: barkode.cpp:707
+msgid "interleaved 2 of 5 (only digits)"
+msgstr "interleaved 2 of 5 (chiffres uniquement)"
+
+#: barkode.cpp:708
+msgid "ISBN (still EAN13)"
+msgstr "ISBN (still EAN13)"
+
+#: barkode.cpp:709
+msgid "MSI"
+msgstr "MSI"
+
+#: barkode.cpp:711
+msgid "UPC (12-digit EAN; UPCA and UPCB)"
+msgstr "UPC (12-digit EAN; UPCA et UPCB)"
+
+#: barkode.cpp:716
+msgid "pdf 417 2D Barcode"
+msgstr ""
+
+#: batchprinter.cpp:111 batchprinter.cpp:341
+#, fuzzy
+msgid "Printing..."
+msgstr "Impression..."
+
+#: batchprinter.cpp:156 batchprinter.cpp:157 batchprinter.cpp:158
+#: batchprinter.cpp:159
+#, fuzzy
+msgid "Group : "
+msgstr "Groupe "
+
+#: batchprinter.cpp:161 batchprinter.cpp:162 batchprinter.cpp:163
+#: batchprinter.cpp:164
+msgid "Article No. : "
+msgstr "Numéro d'Article"
+
+#: batchprinter.cpp:273
+msgid "Creating Images..."
+msgstr "Création des images..."
+
+#: batchprinter.cpp:337
+msgid "<qt>Can't open the file or device <b>%1</b></qt>."
+msgstr "<qt>Impossible d'ouvrir le fichier ou le périphérique <b>%1</b></qt>"
+
+#: batchwizard.cpp:117
+#, fuzzy
+msgid ""
+"<qt>This wizard will guide you through the process of printing many labels "
+"with KBarcode.<br>The first step is to select the KBarcode label file you "
+"want to print.</qt>"
+msgstr ""
+"<br><br>Ce guide vous aidera a configurer votre base de données pour une "
+"utilisation avec KBarcode. Si vous ne souhaitez pas utiliser de base de "
+"données avec KBarcode, vous pouvez sauter cette étape. </qt>"
+
+#: batchwizard.cpp:135
+#, fuzzy
+msgid "File Selection"
+msgstr "Description d'article"
+
+#: batchwizard.cpp:147
+msgid "Print &labels without data"
+msgstr "Imprimer des étiquettes sans données"
+
+#: batchwizard.cpp:148
+msgid "Print &articles from KBarcodes SQL database"
+msgstr "Imprimer des &articles depuis la base de données SQL de KBarcode."
+
+#: batchwizard.cpp:149
+msgid "Import &variables and print"
+msgstr "Importer des &variables et imprimer"
+
+#: batchwizard.cpp:150
+msgid "Print &contacts from your addressbook"
+msgstr "Imprimer des &contacts depuis le carnet d'adresses"
+
+#: batchwizard.cpp:162
+msgid "Data Source"
+msgstr "Source de données"
+
+#: batchwizard.cpp:174
+#, fuzzy
+msgid "Print Data"
+msgstr "Résolution de l'imprimante"
+
+#: batchwizard.cpp:185
+#, fuzzy
+msgid "Insert Row"
+msgstr "Insérer Code-&Barre"
+
+#: batchwizard.cpp:187
+#, fuzzy
+msgid "Delete Row"
+msgstr "Supprimer l'élément"
+
+#: batchwizard.cpp:194
+#, fuzzy
+msgid "Import Variables"
+msgstr "&Importer et Imprimer Fichier"
+
+#: batchwizard.cpp:206
+#, fuzzy
+msgid ""
+"<qt>KBarcode has support for placing serial numbers on labels. If you did "
+"not use the [serial] token on your label in a text field or a barcode, you "
+"can skip this page.<br>Serial start is a free form start value containing at "
+"least one number. This number is increased for every printed label on the "
+"print out.</qt>"
+msgstr ""
+"<qt>KBarcode peut placer des numéros de série sur les étiquettes. Si vous "
+"n'avez pas besoin de cette fonctionalité, vous pouvez passer cette étape. "
+"<br>Le début du numéro de série est une valeur contenant au moins un "
+"chiffre. Ce chiffre est imcrémenté pour chaque étiquette imprimée</qt"
+
+#: batchwizard.cpp:216 previewdialog.cpp:104
+msgid "Serial start:"
+msgstr "Début de la série :"
+
+#: batchwizard.cpp:220 previewdialog.cpp:106
+msgid "Serial increment:"
+msgstr "Incrément de la série :"
+
+#: batchwizard.cpp:223
+msgid "Serial Number"
+msgstr "Numéro de série"
+
+#: batchwizard.cpp:233
+msgid "&Print to a system printer or to a file"
+msgstr "&Imprimer sur une imprimante système ou dans un fichier"
+
+#: batchwizard.cpp:234
+#, fuzzy
+msgid "&Create images"
+msgstr "&Créer les Tables"
+
+#: batchwizard.cpp:239
+msgid "Print to a special &barcode printer"
+msgstr ""
+
+#: batchwizard.cpp:243
+#, fuzzy
+msgid "Output &Directory:"
+msgstr "Format du Fichier:"
+
+#: batchwizard.cpp:249
+#, fuzzy
+msgid "Output File &Format:"
+msgstr "Format du Fichier:"
+
+#: batchwizard.cpp:259
+msgid "Use &article number for filename"
+msgstr ""
+
+#: batchwizard.cpp:260
+msgid "Use &barcode number for filename"
+msgstr ""
+
+#: batchwizard.cpp:261
+msgid "Use &custom filename:"
+msgstr ""
+
+#: batchwizard.cpp:269
+msgid "&Keep window open after printing."
+msgstr ""
+
+#: batchwizard.cpp:287
+msgid "Output Device"
+msgstr ""
+
+#: batchwizard.cpp:298
+#, fuzzy
+msgid "Customer name and no.:"
+msgstr "Nom et Numéro du Client :"
+
+#: batchwizard.cpp:305
+#, fuzzy
+msgid "&Add..."
+msgstr "A&jouter"
+
+#: batchwizard.cpp:306
+#, fuzzy
+msgid "&Import..."
+msgstr "&Importer Données Exemple"
+
+#: batchwizard.cpp:307
+#, fuzzy
+msgid "&Edit..."
+msgstr "Editeur d'&Etiquette"
+
+#: batchwizard.cpp:309
+#, fuzzy
+msgid "R&emove All"
+msgstr "Supprim&er tout"
+
+#: batchwizard.cpp:312
+#, fuzzy
+msgid "Import from File ..."
+msgstr "&Importer et Imprimer Fichier"
+
+#: batchwizard.cpp:313
+#, fuzzy
+msgid "Import from Clipboard ..."
+msgstr "&Copier vers Presse Papier"
+
+#: batchwizard.cpp:314
+#, fuzzy
+msgid "Import barcode_basic"
+msgstr "KBarcode"
+
+#: batchwizard.cpp:318
+#, fuzzy
+msgid "Index"
+msgstr "Index"
+
+#: batchwizard.cpp:319
+msgid "Number of Labels"
+msgstr "Nombre d'Etiquettes"
+
+#: batchwizard.cpp:320 configdialog.cpp:157 configdialog.cpp:163
+#: configdialog.cpp:169
+msgid "Article Number"
+msgstr "Numéro d'article"
+
+#: batchwizard.cpp:321 configdialog.cpp:158 configdialog.cpp:164
+#: configdialog.cpp:170
+#, fuzzy
+msgid "Group"
+msgstr "Groupe"
+
+#: batchwizard.cpp:343
+msgid "Enter &data manually"
+msgstr ""
+
+#: batchwizard.cpp:344
+msgid "Import variables from a &SQL table"
+msgstr ""
+
+#: batchwizard.cpp:345
+#, fuzzy
+msgid "Please enter a sql &query:"
+msgstr "Veuillez entrer une description:"
+
+#: batchwizard.cpp:349
+#, fuzzy
+msgid "Import from a &CSV file"
+msgstr "&Importer et Imprimer Fichier"
+
+#: batchwizard.cpp:350
+msgid "Please select a csv &file:"
+msgstr ""
+
+#: batchwizard.cpp:353
+#, fuzzy
+msgid "&Encoding:"
+msgstr "Type d'Encodage :"
+
+#: batchwizard.cpp:362
+msgid "Available Variables:"
+msgstr ""
+
+#: batchwizard.cpp:380
+#, fuzzy
+msgid "&Number of labels to print:"
+msgstr "Nombre d'Etiquettes:"
+
+#: batchwizard.cpp:411
+msgid "Add all contacts to the list of contacts which will be printed."
+msgstr ""
+
+#: batchwizard.cpp:412
+msgid "Add selected contacts to the list of contacts which will be printed."
+msgstr ""
+
+#: batchwizard.cpp:413
+msgid ""
+"Remove selected contacts from the list of contacts which will be printed."
+msgstr ""
+
+#: batchwizard.cpp:414
+msgid "Remove all contacts from the list of contacts which will be printed."
+msgstr ""
+
+#: batchwizard.cpp:430
+msgid "All Addresses"
+msgstr ""
+
+#: batchwizard.cpp:431
+msgid "Selected Addresses"
+msgstr ""
+
+#: batchwizard.cpp:434 batchwizard.cpp:445
+#, fuzzy
+msgid "Given Name"
+msgstr "Nom de fichier"
+
+#: batchwizard.cpp:435 batchwizard.cpp:446
+#, fuzzy
+msgid "Family Name"
+msgstr "Nom de fichier"
+
+#: batchwizard.cpp:436 batchwizard.cpp:447
+msgid "Email Address"
+msgstr ""
+
+#: batchwizard.cpp:561
+#, fuzzy
+msgid "The label file %1 was not found"
+msgstr "Le fichier %1 n'existe pas."
+
+#: batchwizard.cpp:743
+msgid "Please enter a valid article ID"
+msgstr "Veuillez fournir un identifiant d'article valide"
+
+#: batchwizard.cpp:901
+msgid "Separator is empty. Please set it to a value."
+msgstr "Séparateur est vide  veuillez lui donner une valeur."
+
+#: batchwizard.cpp:972 batchwizard.cpp:974
+msgid "<qt>The following items can not be added:"
+msgstr "<qt>Les objets suivants ne peuvent être ajouté"
+
+#: batchwizard.cpp:1056
+#, fuzzy
+msgid "<qt>Can't execute SQL query:<br>"
+msgstr "<qt>Impossible d'executer la commande:<br><b>"
+
+#: batchwizard.cpp:1083
+msgid "Can't open file: %1"
+msgstr ""
+
+#: commands.cpp:434
+#, fuzzy
+msgid "New Rectangle"
+msgstr "Nouvelle page"
+
+#: commands.cpp:448
+#, fuzzy
+msgid "New Line"
+msgstr "Nouvelle Etiquette"
+
+#: commands.cpp:458
+#, fuzzy
+msgid "New Text"
+msgstr "Nouveau texte"
+
+#: commands.cpp:475
+#, fuzzy
+msgid "New TextLine"
+msgstr "Nouvelle Etiquette"
+
+#: commands.cpp:492
+msgid "New Barcode"
+msgstr "Nouveau Code-barre"
+
+#: configdialog.cpp:46
+msgid "There are currently %1 cached barcodes."
+msgstr ""
+
+#: configdialog.cpp:50 confwizard.cpp:59
+msgid "Configure KBarcode"
+msgstr "Configurer KBarcode"
+
+#: configdialog.cpp:66
+#, fuzzy
+msgid "SQL Settings"
+msgstr "Paramètres MySQL"
+
+#: configdialog.cpp:80
+msgid "Print Settings"
+msgstr "Imprimer Paramètres"
+
+#: configdialog.cpp:88
+#, fuzzy
+msgid "Medium Resolution (300dpi)"
+msgstr "Moyenne Résolution 300 ppp"
+
+#: configdialog.cpp:89
+msgid "High Resolution (600dpi)"
+msgstr "Haute Résolution 600 ppp"
+
+#: configdialog.cpp:90
+#, fuzzy
+msgid "Very High Resolution (1200dpi)"
+msgstr "Haute Résolution 600 ppp"
+
+#: configdialog.cpp:110
+#, fuzzy
+msgid "Printer Resolution:"
+msgstr "Résolution de l'imprimante"
+
+#: configdialog.cpp:112
+#, fuzzy
+msgid "Preview Page Format:"
+msgstr "Format du Fichier:"
+
+#: configdialog.cpp:127 csvimportdlg.cpp:175
+#, fuzzy
+msgid "Comment:"
+msgstr "Commentaire :"
+
+#: configdialog.cpp:134 csvimportdlg.cpp:182
+#, fuzzy
+msgid "Separator:"
+msgstr "Séparateur : "
+
+#: configdialog.cpp:141 csvimportdlg.cpp:189
+msgid "Quote Character:"
+msgstr "Caractère de citation:"
+
+#: configdialog.cpp:147
+#, fuzzy
+msgid "&Use customer article no. for import"
+msgstr "&Utiliser Numéro d'articles du client pour l'import"
+
+#: configdialog.cpp:153 csvimportdlg.cpp:156
+msgid "File Format:"
+msgstr "Format du Fichier:"
+
+#: configdialog.cpp:156 configdialog.cpp:162 configdialog.cpp:168
+#, fuzzy
+msgid "Quantity"
+msgstr "Quantité"
+
+#: configdialog.cpp:186
+#, fuzzy
+msgid "Label Editor"
+msgstr "Editeur d'&Etiquette"
+
+#: configdialog.cpp:190
+#, fuzzy
+msgid "&Create a new label on startup"
+msgstr "Dem&ander une nouvelle étiquette au démarrage de l'éditeur d'étiquette"
+
+#: configdialog.cpp:198
+#, fuzzy
+msgid "Grid:"
+msgstr "Quadrillage :"
+
+#: configdialog.cpp:205
+msgid "Grid Color:"
+msgstr "Couleur du Quadrillage:"
+
+#: configdialog.cpp:207
+msgid "Date Format:"
+msgstr "Format de la date:"
+
+#: configdialog.cpp:215
+msgid "On New"
+msgstr "A la création"
+
+#: configdialog.cpp:219
+msgid "On New Article"
+msgstr "A la création d'un Article"
+
+#: configdialog.cpp:226 configdialog.cpp:232
+msgid "No Line Break"
+msgstr "Pas de saut de ligne"
+
+#: configdialog.cpp:227 configdialog.cpp:233
+#, fuzzy
+msgid "Line Break"
+msgstr "Saut de ligne"
+
+#: configdialog.cpp:228 configdialog.cpp:234
+msgid "Insert Label X"
+msgstr "Insérer Etiquette X"
+
+#: configdialog.cpp:229 configdialog.cpp:235
+msgid "New Page"
+msgstr "Nouvelle page"
+
+#: configdialog.cpp:230
+msgid "Article No."
+msgstr "Numéro d'article"
+
+#: configdialog.cpp:236
+#, fuzzy
+msgid "Group Name"
+msgstr "Nom du groupe"
+
+#: configdialog.cpp:260
+msgid "On New Group"
+msgstr "A la création d'un groupe"
+
+#: configdialog.cpp:348
+#, fuzzy
+msgid "Preview: "
+msgstr "Aperçu "
+
+#: confwizard.cpp:45
+msgid ""
+"KBarcode is a barcode and label printing application for KDE 3. It can be "
+"used to print every thing from simple business cards up to complex labels "
+"with several barcodes (e.g. article descriptions). KBarcode comes with an "
+"easy to use WYSIWYG label designer, a setup wizard, batch import of labels "
+"(directly from the delivery note), thousands of predefined labels, database "
+"management tools and translations in many languages. Even printing more than "
+"10.000 labels in one go is no problem for KBarcode. Additionally it is a "
+"simply xbarcode replacement for the creation of barcodes. All major types of "
+"barcodes like EAN, UPC, CODE39 and ISBN are supported."
+msgstr ""
+"KBarcode est une application d'impression de code-barres et d'étiquettes "
+"pour KDE 3. Elle peut être utilisée pour imprimer tout type de document, de "
+"la carte de visite aux étiquettes complexes avec plusieurs codes-barre (ex. "
+"des descriptions d'articles). KBarcode possède une interface de type WYSIWYG "
+"(NdT : vous voyez ce que vous obtenez) facile à utiliser, un guide de "
+"paramétrage, une importation groupée d'étiquettes, des milliers d'étiquettes "
+"prédéfinies, des outils de gestion de base de données et des traductions "
+"dans plusieurs langues. Imprimer 10000 étiquettes d'une seule traite n'est "
+"pas un problème pour KBarcode. De plus c'est un remplacement simple pour "
+"xbarcode pour la création de codes-barre. Tous les principaux types de codes-"
+"barre, comme par exemple EAN, UPC, CODE39 et ISBN, sont supportés."
+
+#: confwizard.cpp:101
+msgid "<qt><h1>Welcome to KBarcode</h1><br><br>"
+msgstr "<qt><h1> Bienvenue dans KBarcode</h1><br><br>"
+
+#: confwizard.cpp:111
+#, fuzzy
+msgid "Welcome"
+msgstr "Bienvenue"
+
+#: confwizard.cpp:124
+msgid "System Check"
+msgstr "Vérification du système"
+
+#: confwizard.cpp:133
+#, fuzzy
+msgid "&Use database with KBarcode"
+msgstr "&Utiliser une Base de données avec KBarcode"
+
+#: confwizard.cpp:144 tokenprovider.cpp:207
+#, fuzzy
+msgid "Database"
+msgstr "Base de données"
+
+#: confwizard.cpp:153
+msgid ""
+"KBarcode can create the required SQL tables for you.<br>KBarcode will add "
+"also some Label Definitions to the tables.<br>After that you can fill the "
+"tables with some example data."
+msgstr ""
+"KBarcode peut créer les tables SQL nécessaires pour vous<br> KBarcode "
+"ajoutera aussi des Définitions d'Étiquettes aux tables.<br> Vous pourrez "
+"ensuite remplir les tables avec quelques données d'exemple."
+
+#: confwizard.cpp:160 dsmainwindow.cpp:78
+msgid "&Create Tables"
+msgstr "&Créer les Tables"
+
+#: confwizard.cpp:165
+msgid "&Add Example Data"
+msgstr "&Ajouter Exemple de Données"
+
+#: confwizard.cpp:170
+msgid "Create Tables"
+msgstr "Créer les Tables"
+
+#: confwizard.cpp:196 confwizard.cpp:219 sqltables.cpp:468
+msgid "<qt>Connection failed:<br>"
+msgstr "<qt>La Connexion a échoué :<br>"
+
+#: confwizard.cpp:225
+msgid "Example data has been imported."
+msgstr "Les données d'exemple ont été importées."
+
+#: confwizard.cpp:236
+msgid ""
+"There are no Qt SQL drivers installed. KBarcode needs those drivers to "
+"access the different SQL databases. This drivers are part of the Qt Source "
+"distribution and should also be part of your distribution. Please install "
+"them first."
+msgstr ""
+"Il n'y a pas de pilote QT SQL installé. KBarcode a besoin de ces pilotes "
+"pour accéder aux différentes bases SQL. Ces pilotes font partie des paquets "
+"sources de QT et devraient être présents dans votre distribution. Veuillez "
+"les installer."
+
+#: csvimportdlg.cpp:61
+#, fuzzy
+msgid "&Import"
+msgstr "&Importer Données Exemple"
+
+#: csvimportdlg.cpp:61
+msgid "Import the selected file into your tables."
+msgstr "Importer le fichier sélectionné dans les tables"
+
+#: csvimportdlg.cpp:93
+#, fuzzy
+msgid "&Import Data"
+msgstr "&Importer des données d'exemple"
+
+#: csvimportdlg.cpp:104
+#, fuzzy
+msgid "Other table..."
+msgstr "&Changer d'étiquette"
+
+#: csvimportdlg.cpp:107
+msgid "&Load complete file into preview"
+msgstr ""
+
+#: csvimportdlg.cpp:109
+msgid "Load only a number of datasets:"
+msgstr ""
+
+#: csvimportdlg.cpp:120
+msgid "Column:"
+msgstr "Colonne :"
+
+#: csvimportdlg.cpp:124
+msgid "Set"
+msgstr "Régler"
+
+#: csvimportdlg.cpp:127
+msgid "Database field to use for this column:"
+msgstr "Champ de base de données à utiliser pour cette colonne :"
+
+#: csvimportdlg.cpp:131
+msgid "File to import:"
+msgstr "Fichier à importer :"
+
+#: csvimportdlg.cpp:133
+msgid "Encoding:"
+msgstr "Type d'encodage :"
+
+#: csvimportdlg.cpp:135
+msgid "Import into table:"
+msgstr "Importer dans la table :"
+
+#: csvimportdlg.cpp:137
+#, fuzzy
+msgid "Table Name:"
+msgstr "Nom de fichier"
+
+#: csvimportdlg.cpp:151
+#, fuzzy
+msgid "&Import Settings"
+msgstr "Imprimer Paramètres"
+
+#: csvimportdlg.cpp:157
+#, fuzzy
+msgid "&CSV File"
+msgstr "&Importer le fichier du CVS..."
+
+#: csvimportdlg.cpp:158
+msgid "File with &fixed field width"
+msgstr ""
+
+#: csvimportdlg.cpp:162
+msgid "CSV File"
+msgstr ""
+
+#: csvimportdlg.cpp:163
+msgid "Fixed Field Width File"
+msgstr ""
+
+#: csvimportdlg.cpp:207
+msgid "&Add Field"
+msgstr ""
+
+#: csvimportdlg.cpp:210
+#, fuzzy
+msgid "&Remove Field"
+msgstr "Supprim&er tout"
+
+#: csvimportdlg.cpp:357
+msgid "Cannot load data from the file:"
+msgstr ""
+
+#: csvimportdlg.cpp:378
+msgid "Could not import the following line:"
+msgstr "Impossible d'importer la ligne suivante :"
+
+#: csvimportdlg.cpp:383
+msgid "Data was imported successfully."
+msgstr "Les données ont été importées avec succès."
+
+#: databasebrowser.cpp:46
+msgid "Current Table: <b>"
+msgstr "Table actuelle :<b>"
+
+#: databasebrowser.cpp:98 kbarcode.cpp:87
+msgid "&Import CSV File..."
+msgstr "&Importer le fichier du CVS..."
+
+#: definition.cpp:547
+msgid ""
+"KBarcode is unable to find its label definitions.Please make sure that the "
+"file $KDEDIR/share/apps/kbarcode/labeldefinitions.sql does exist. This file "
+"is part of the KBarcode distribution. You will be prompted now to select the "
+"file containing the labeldefinitions."
+msgstr ""
+"KBarcode ne peut trouver ses definitions d'étiquettes.Veuillez vous assurer  "
+"que le fichier $KDEDIR/share/apps/kbarcode/labeldefinitions.sql existe bien. "
+"Ce fichier fait partie de KBarCode. Sélectionnez maintenant le fichier "
+"contenant les définitions d'étiquettes."
+
+#: definitiondialog.cpp:82
+msgid "Add Label Definition"
+msgstr "Ajouter une définition d'étiquette"
+
+#: definitiondialog.cpp:91 newlabel.cpp:64
+msgid "Producer:"
+msgstr "Fabriquant :"
+
+#: definitiondialog.cpp:95 newlabel.cpp:67
+#, fuzzy
+msgid "Type:"
+msgstr "Type :"
+
+#: definitiondialog.cpp:99
+msgid "Width (in %1):"
+msgstr "Largeur (en %1) :"
+
+#: definitiondialog.cpp:103
+msgid "Height (in %1):"
+msgstr "Hauteur (en %1) :"
+
+#: definitiondialog.cpp:107
+msgid "Horizontal Gap:"
+msgstr "Espacement horizontal :"
+
+#: definitiondialog.cpp:111
+msgid "Vertical Gap:"
+msgstr "Espacement vertical :"
+
+#: definitiondialog.cpp:115
+msgid "Top Gap:"
+msgstr "Espacement supérieur :"
+
+#: definitiondialog.cpp:119
+msgid "Left Gap:"
+msgstr "Espacement à gauche :"
+
+#: definitiondialog.cpp:123
+msgid "Number Horizontal:"
+msgstr "Numéro horizontal :"
+
+#: definitiondialog.cpp:127
+msgid "Number Vertical:"
+msgstr "Numéro vertical :"
+
+#: definitiondialog.cpp:142 definitiondialog.cpp:147 definitiondialog.cpp:152
+#: definitiondialog.cpp:157 definitiondialog.cpp:162 definitiondialog.cpp:167
+#: definitiondialog.cpp:172 definitiondialog.cpp:177 propertywidget.cpp:144
+#: propertywidget.cpp:484
+#, fuzzy
+msgid "0"
+msgstr "0"
+
+#: definitiondialog.cpp:143 definitiondialog.cpp:148 definitiondialog.cpp:153
+#: definitiondialog.cpp:158 definitiondialog.cpp:163 definitiondialog.cpp:168
+msgid "0123456789."
+msgstr "0123456789."
+
+#: definitiondialog.cpp:189
+msgid "More &Information"
+msgstr "Plus d'&informations"
+
+#: definitiondialog.cpp:196 smalldialogs.cpp:97
+#, fuzzy
+msgid "&Add"
+msgstr "A&jouter"
+
+#: definitiondialog.cpp:263 printersettings.cpp:45
+#, fuzzy
+msgid "Custom"
+msgstr "Personnalisé"
+
+#: definitiondialog.cpp:398
+msgid "Number of horizontal Labels"
+msgstr "Nombre d'étiquettes horizontales"
+
+#: definitiondialog.cpp:400
+msgid "Number of vertical Labels"
+msgstr "Nombre d'étiquettes verticales"
+
+#: definitiondialog.cpp:404
+msgid "Gap Top"
+msgstr "Espacement supérieur"
+
+#: definitiondialog.cpp:406
+msgid "Gap Left"
+msgstr "Espacement à gauche"
+
+#: definitiondialog.cpp:411
+msgid "Vertical Gap"
+msgstr "Espacement vertical"
+
+#: definitiondialog.cpp:412
+msgid "Horizontal Gap"
+msgstr "Espacement horizontal"
+
+#: documentitemdlg.cpp:34
+msgid "&Position && Size"
+msgstr "&Position et Taille"
+
+#: documentitemdlg.cpp:37
+msgid "&Border"
+msgstr "&Bordure"
+
+#: documentitemdlg.cpp:42
+msgid "&Fill Color"
+msgstr "Couleur de remplissage :"
+
+#: documentitemdlg.cpp:47 labeleditor.cpp:526
+msgid "&Barcode"
+msgstr "Code-&barre"
+
+#: documentitemdlg.cpp:52
+msgid "&Rotation"
+msgstr "&Rotation :"
+
+#: documentitemdlg.cpp:55 documentitemdlg.cpp:66
+msgid "&Text"
+msgstr "&Texte : "
+
+#: documentitemdlg.cpp:60 propertywidget.cpp:470
+msgid "&Image"
+msgstr "&Image"
+
+#: documentitemdlg.cpp:78
+msgid "&Visibility"
+msgstr "&Visibilité"
+
+#: documentitemdlg.cpp:109
+msgid "Property changed"
+msgstr "Propriété modifiée"
+
+#: dsmainwindow.cpp:72
+msgid "&Start Configuration Wizard..."
+msgstr "&Démarrer l'assistant de configuration"
+
+#: dsmainwindow.cpp:74
+msgid "&Connect to Database"
+msgstr "Se &Connecter  à la base de données"
+
+#: dsmainwindow.cpp:81
+msgid "&Import Label Definitions"
+msgstr "&Importer des définitions d'étiquettes"
+
+#: dsmainwindow.cpp:84
+msgid "&Import Example Data"
+msgstr "&Importer des données d'exemple"
+
+#: dsmainwindow.cpp:95
+msgid "&Action Map..."
+msgstr ""
+
+#: dsmainwindow.cpp:97
+msgid "&System Check..."
+msgstr "&Vérification du système"
+
+#: dsmainwindow.cpp:98
+msgid "&Barcode Help..."
+msgstr "Aide sur les code-&barre..."
+
+#: dsmainwindow.cpp:99
+msgid "&Donate..."
+msgstr "Faire un &Don..."
+
+#: dsmainwindow.cpp:182
+msgid ""
+"<qt>The KBarcode documentation is avaible as PDF for download on our webpage."
+"<br><br>"
+msgstr ""
+"<qt> La documentation de KBarcode est disponible en PDF sur notre "
+"site<br><br>"
+
+#: dsmainwindow.cpp:184
+msgid "Download Now"
+msgstr "Télécharger maintenant"
+
+#: dsmainwindow.cpp:214
+msgid ""
+"<qt>It is possible to support the further development of KBarcode through "
+"donations. PayPal will be used for processing the donation.<br><br>"
+msgstr ""
+"<qt> Il est possible de soutenir le développement de KBarcode par don, en "
+"utilisant PayPal.<br><br>"
+
+#: dsmainwindow.cpp:217
+msgid "Donate Now"
+msgstr "Faire un don maintenant"
+
+#: dsmainwindow.cpp:230
+msgid "<p><h3>Barcode Support</h3></p>"
+msgstr "<p><h3>Support des codes-barre</h3></p>"
+
+#: dsmainwindow.cpp:232 dsmainwindow.cpp:234 dsmainwindow.cpp:236
+#: dsmainwindow.cpp:238 dsmainwindow.cpp:240
+msgid "<b>No</b><br />"
+msgstr "<b>Non</b><br />"
+
+#: dsmainwindow.cpp:232 dsmainwindow.cpp:234 dsmainwindow.cpp:236
+#: dsmainwindow.cpp:238 dsmainwindow.cpp:240
+msgid "<b>Found</b><br />"
+msgstr "<b>Trouvé</b><br />"
+
+#: dsmainwindow.cpp:243
+msgid ""
+"<p>To get <b>barcode support</b> you have to either install <i>GNU Barcode</"
+"i>, <i>TBarcode</i> or <i>PDF417 Enc</i>.</p>"
+msgstr ""
+"<p>Vous devez installer <i>GNU Barcode</i>, <i>TBarcode</i> ou <i>PDF417 "
+"Enc</i> afin d'avoir un <b>support des codes-barre</b>.</p>"
+
+#: dsmainwindow.cpp:245
+msgid "<p><h3>Database Support</h3></p>"
+msgstr "<p><h3>Support de bases de données</h3></p>"
+
+#: dsmainwindow.cpp:253
+msgid "<li>Driver found: "
+msgstr "<li>Pilote trouvé :"
+
+#: dsmainwindow.cpp:258
+msgid ""
+"<p><b>No database drivers found. SQL database support is disabled.</b></p>"
+msgstr ""
+"<p><b>Aucun pilote de base de données trouvé. Le support des bases de "
+"données SQL est désactivé</b></p>"
+
+#: imageitem.cpp:267
+msgid "Expression: "
+msgstr "Expréssion :"
+
+#: kactionmap.cpp:91
+msgid "Action Map"
+msgstr ""
+
+#: kactionmap.cpp:95
+msgid "Find and execute actions."
+msgstr ""
+
+#: kactionmap.cpp:116
+msgid "Action"
+msgstr ""
+
+#: kactionmap.cpp:117
+msgid "Shortcut"
+msgstr ""
+
+#: kactionmap.cpp:118 tokendialog.cpp:142 tokendialog.cpp:177
+#, fuzzy
+msgid "Description"
+msgstr "Légende"
+
+#: kbarcode.cpp:51
+msgid "Barcode &Generator..."
+msgstr "&Générateur de code-barre"
+
+#: kbarcode.cpp:53
+msgid "&Label Editor..."
+msgstr "Éditeur d'&étiquettes"
+
+#: kbarcode.cpp:54
+msgid "&Batch Printing..."
+msgstr "&Impression groupée"
+
+#: kbarcode.cpp:55
+msgid "Edit SQL &Tables..."
+msgstr "Éditer les &tables SQL..."
+
+#: kbarcode.cpp:75
+msgid "&Edit Label Definitions"
+msgstr "&Editer les définitions d'étiquettes"
+
+#: kbarcode.cpp:78
+msgid "&Edit Articles"
+msgstr "&Editer les articles"
+
+#: kbarcode.cpp:81
+msgid "&Edit Customers"
+msgstr "&Editer les clients"
+
+#: kbarcode.cpp:84
+msgid "&Edit Customer Text"
+msgstr "&Editer le texte des clients"
+
+#: kbarcode.cpp:179
+#, fuzzy
+msgid ""
+"%1 is no valid output format for --output. Valid values are POSTSCRIPT, "
+"IMAGE and BARCODE."
+msgstr ""
+"%1 n'est pas une un format d'export valid pour l'option --output. Les "
+"valeurs valides sont POSTSCRIPT, IMAGE et BARCODE."
+
+#: label.cpp:188
+#, fuzzy
+msgid "Static"
+msgstr "Statique"
+
+#: labeleditor.cpp:351
+msgid "Select Label"
+msgstr "Sélectionner une étiquette"
+
+#: labeleditor.cpp:388
+msgid ""
+"<qt>The file <b>%1</b> cannot be loaded as the label definition is missing.</"
+"qt>"
+msgstr ""
+"<qt>Le fichier <b>%1</b> ne peut pas être chargé car la définition "
+"d'étiquette est manquante.</qt>"
+
+#: labeleditor.cpp:447
+msgid "Close &Label"
+msgstr "&Fermer l'étiquette"
+
+#: labeleditor.cpp:449
+msgid "&Recent Files"
+msgstr "Fichiers &récents"
+
+#: labeleditor.cpp:451
+msgid "&Import and Print Batch File..."
+msgstr "&Importer et imprimer le fichier"
+
+#: labeleditor.cpp:455
+msgid "&Change description..."
+msgstr "&Changer la description..."
+
+#: labeleditor.cpp:456
+msgid "&Delete Object"
+msgstr "&Supprimer l'objet"
+
+#: labeleditor.cpp:459
+msgid "Print to &Barcode Printer..."
+msgstr "Imprimer sur une imprimante de codes-&barre"
+
+#: labeleditor.cpp:460
+msgid "Print to &Image..."
+msgstr "Imprimer dans une &image..."
+
+#: labeleditor.cpp:461
+msgid "&Change Label..."
+msgstr "&Changer d'étiquette"
+
+#: labeleditor.cpp:462
+msgid "Insert &Barcode"
+msgstr "Insérer un code-&barre"
+
+#: labeleditor.cpp:465
+msgid "Insert &Picture"
+msgstr "Insérer une &image"
+
+#: labeleditor.cpp:466
+msgid "Insert &Text"
+msgstr "Insérer du &texte"
+
+#: labeleditor.cpp:467 multilineeditdlg.cpp:138 textlineedit.cpp:98
+msgid "Insert &Data Field"
+msgstr "Insérer un champ de &données"
+
+#: labeleditor.cpp:468
+msgid "Insert &Text Line"
+msgstr "Insérer une ligne de &texte"
+
+#: labeleditor.cpp:469
+msgid "Insert &Line"
+msgstr "Insérer une &ligne"
+
+#: labeleditor.cpp:470
+msgid "Insert &Rectangle"
+msgstr "Insérer un &rectangle"
+
+#: labeleditor.cpp:471
+msgid "Insert &Ellipse"
+msgstr "Insérer une &élipse"
+
+#: labeleditor.cpp:473
+msgid "&Grid"
+msgstr "&Grille"
+
+#: labeleditor.cpp:474
+msgid "&Preview..."
+msgstr "A&perçu..."
+
+#: labeleditor.cpp:481
+msgid "Address&book"
+msgstr "&Répertoire"
+
+#: labeleditor.cpp:482
+msgid "&Create Single Barcode..."
+msgstr "&Créer un code-barre individuel"
+
+#: labeleditor.cpp:525
+msgid "T&ools"
+msgstr "&Outils"
+
+#: labeleditor.cpp:585
+msgid "&On Top"
+msgstr "À l'a&vant"
+
+#: labeleditor.cpp:586
+#, fuzzy
+msgid "&Raise"
+msgstr "&Élever"
+
+#: labeleditor.cpp:587
+#, fuzzy
+msgid "&Lower"
+msgstr "A&baisser"
+
+#: labeleditor.cpp:588
+msgid "&To Background"
+msgstr "À l'&arrière"
+
+#: labeleditor.cpp:591
+msgid "Center &Horizontally"
+msgstr "Centrer &horizontalement"
+
+#: labeleditor.cpp:592
+msgid "Center &Vertically"
+msgstr "Centrer &verticalement"
+
+#: labeleditor.cpp:594
+msgid "&Order"
+msgstr "Or&donner"
+
+#: labeleditor.cpp:595
+msgid "&Center"
+msgstr "&Centrer"
+
+#: labeleditor.cpp:598
+msgid "&Protect Position and Size"
+msgstr "&Protéger la position et la taille"
+
+#: labeleditor.cpp:600
+#, fuzzy
+msgid "&Properties"
+msgstr "&Propriétés"
+
+#: labeleditor.cpp:678
+msgid "Label Description"
+msgstr "Description de l'étiquette"
+
+#: labeleditor.cpp:679
+msgid "Please enter a description:"
+msgstr "Entrez une description :"
+
+#: labeleditor.cpp:708
+msgid "Size: "
+msgstr "Taille : "
+
+#: labeleditor.cpp:711
+msgid "Label Template: "
+msgstr "Modèle d'étiquette: "
+
+#: labeleditor.cpp:742
+msgid "Protected Item"
+msgstr "Elément protégé"
+
+#: labeleditor.cpp:841
+msgid "Spellchecking"
+msgstr "Vérification orthographique"
+
+#: labeleditor.cpp:1015
+msgid "The file %1 does not exist."
+msgstr "Le fichier %1 n'existe pas."
+
+#: labeleditor.cpp:1050
+msgid ""
+"<qt>The document has been modified.<br><br>Do you want to save it ?</qt>"
+msgstr "<qt>Le document a été modifié<br><br> Voulez-vous l'enregistrer ?</qt>"
+
+#: main.cpp:35
+msgid ""
+"Load the file in KBarcode (if --batch is specified, the file will be used in "
+"batchprinting mode)"
+msgstr ""
+"Charger le fichier dans KBarcode (si l'option --batch est spécifiée, le "
+"fichier sera utilisé en mode impression de groupe)"
+
+#: main.cpp:36
+msgid ""
+"Print any loaded files immediately on the default printer or on the printer "
+"specified by the --printer commandline option and exit afterwards"
+msgstr ""
+"Imprimer immédiatement tout fichier chargé sur l'imprimante par défaut ou "
+"l'imprimante spécifiée par l'option --printer de la ligne de commande, et "
+"quitte ensuite."
+
+#: main.cpp:38
+#, fuzzy
+msgid "Printer/destination to print on"
+msgstr "Imprimante ou destination de l'impression"
+
+#: main.cpp:39
+msgid "KBarcode Modes:"
+msgstr "Modes de KBarcode :"
+
+#: main.cpp:40
+msgid "Start KBarcode as xbarcode replacement"
+msgstr "Démarrer KBarcode comme remplacement xbarcode"
+
+#: main.cpp:41
+msgid "Open the label editor"
+msgstr "Ouvrir l'éditeur d'étiquettes"
+
+#: main.cpp:42
+msgid "Start directly in batchprinting mode"
+msgstr "Démarrer directement en mode d'impression de groupe"
+
+#: main.cpp:43
+msgid "Additional options for batchprinting (--batch):"
+msgstr "Options supplémentaires pour l'impression de groupe (--batch) :"
+
+#: main.cpp:44
+msgid "Output format where mode is one of POSTSCRIPT|IMAGE|BARCODE"
+msgstr ""
+
+#: main.cpp:45
+msgid "Set the serial number to be used"
+msgstr ""
+
+#: main.cpp:46
+msgid ""
+"Increase a previously specified serial number using this value for each "
+"printed label"
+msgstr ""
+
+#: main.cpp:47
+msgid "Print <value> labels without any data"
+msgstr ""
+
+#: main.cpp:48
+msgid "Import variable data from a specified sql query"
+msgstr ""
+
+#: main.cpp:49
+msgid "Import variable data from a specified csv file"
+msgstr ""
+
+#: main.cpp:75
+#, fuzzy
+msgid "KBarcode"
+msgstr "Code-&Barre"
+
+#: main.cpp:76
+msgid "KBarcode is a barcode and label printing application for KDE 3."
+msgstr ""
+"KBarcode est une application d'impression de code-barres et d'étiquettes "
+"pour KDE 3. "
+
+#: main.cpp:81
+msgid "Programmer"
+msgstr "Programmeur"
+
+#: main.cpp:83
+msgid "Project Manager"
+msgstr "Chef de Projet"
+
+#: main.cpp:86
+msgid "Wrote GNU Barcode on which kbarcode is based."
+msgstr "A écrit GNU Barcode qui sert de base pour KBarcode."
+
+#: main.cpp:88
+msgid "Author of Barcode Writer in Pure Postscript"
+msgstr ""
+
+#: main.cpp:90
+msgid "Italian translation"
+msgstr "Traducteur Italien"
+
+#: main.cpp:92
+msgid "Finnish and Swedish translation, created the KBarcode icon"
+msgstr "Traducteur Finlandais et Suédois, créateur de l'icone de KBarcode"
+
+#: main.cpp:93
+msgid "Spanish translation"
+msgstr "Traducteur Espagnol"
+
+#: main.cpp:94
+msgid "Hungarian translation"
+msgstr "Traducteur Hongrois"
+
+#: main.cpp:96
+msgid "Tab icon code stolen from his excellent app qtella."
+msgstr "Code de TabIcon volé de son excellent programme qtella."
+
+#: main.cpp:97
+msgid "Wrote the RichText KPart"
+msgstr "A écrit le Kpart pour RichText."
+
+#: main.cpp:98
+#, fuzzy
+msgid "French Translation"
+msgstr "Traducteur Espagnol"
+
+#: main.cpp:99
+msgid "Help with ZPL and IPL code"
+msgstr ""
+
+#: main.cpp:100
+msgid "Wrote many patches to improve KBarcode"
+msgstr ""
+
+#: main.cpp:101
+#, fuzzy
+msgid "Made the Netherlands translation"
+msgstr "Traducteur Italien"
+
+#: main.cpp:102
+msgid "Added lot's of useful data fields to kbarcode"
+msgstr ""
+
+#: main.cpp:103
+msgid "Added TEC barcode printer support"
+msgstr ""
+
+#: main.cpp:104
+msgid "Added EPCL barcode printer support"
+msgstr ""
+
+#: measurements.cpp:51
+msgid "mm"
+msgstr ""
+
+#: measurements.cpp:52
+msgid "in"
+msgstr ""
+
+#: mimesources.cpp:33
+#, fuzzy
+msgid "Pasted Object"
+msgstr "&Supprimer Objet"
+
+#: multilineeditdlg.cpp:96
+msgid "&Bold"
+msgstr "&Gras"
+
+#: multilineeditdlg.cpp:99
+msgid "&Italic"
+msgstr "&Italic"
+
+#: multilineeditdlg.cpp:102
+msgid "&Underline"
+msgstr "So&uligner"
+
+#: multilineeditdlg.cpp:105
+msgid "Text &Color..."
+msgstr "&Couleur Texte "
+
+#: multilineeditdlg.cpp:110
+#, fuzzy
+msgid "&Font"
+msgstr "&Police"
+
+#: multilineeditdlg.cpp:113
+msgid "Font &Size"
+msgstr "&Taille"
+
+#: multilineeditdlg.cpp:119
+#, fuzzy
+msgid "Align &Left"
+msgstr "Aligner à &gauche"
+
+#: multilineeditdlg.cpp:122
+#, fuzzy
+msgid "Align &Center"
+msgstr "&Centrer"
+
+#: multilineeditdlg.cpp:125
+#, fuzzy
+msgid "Align &Right"
+msgstr "Aligner à &droite"
+
+#: multilineeditdlg.cpp:128
+msgid "&Justify"
+msgstr "&Justifier"
+
+#: mycanvasview.cpp:152
+#, fuzzy
+msgid "Position: "
+msgstr "Position "
+
+#: mycanvasview.cpp:281
+msgid "Item Moved"
+msgstr "Elément déplacé"
+
+#: newlabel.cpp:41
+msgid "New Label"
+msgstr "Nouvelle Etiquette"
+
+#: newlabel.cpp:49
+msgid "<h1>Create a new Label</h1><br><br>"
+msgstr "<h1> Créer une Nouvelle Etiquette</h1><br><br>"
+
+#: newlabel.cpp:51
+msgid "<h1>Change Label Size</h1><br><br>"
+msgstr "<h1> Changerla Taille de l'Etiquette</h1><br><br>"
+
+#: newlabel.cpp:56 tokenprovider.cpp:208
+msgid "Label"
+msgstr "Etiquette"
+
+#: newlabel.cpp:72
+msgid "&Start with an empty label"
+msgstr ""
+
+#: newlabel.cpp:102
+msgid "&Add own Label Definition"
+msgstr "&Ajouter Definition d'Etiquette Personelle"
+
+#: newlabel.cpp:168
+msgid ""
+"<b>Format:</b><br>\n"
+"Width: "
+msgstr ""
+"<b> Format</b><br> \n"
+"Largeur:"
+
+#: newlabel.cpp:169
+#, fuzzy
+msgid "%1<br>Height: "
+msgstr "mm<br> Hauteur:"
+
+#: newlabel.cpp:170
+#, fuzzy
+msgid "%2<br>Horizontal Gap: "
+msgstr "mm<br> Espacement Horizontal:"
+
+#: newlabel.cpp:171
+#, fuzzy
+msgid "%3<br>Vertical Gap: "
+msgstr "mm<br>Espacement Vertical:"
+
+#: newlabel.cpp:172
+#, fuzzy
+msgid "%4<br>Top Gap: "
+msgstr "mm<br> Espacement En haut:"
+
+#: newlabel.cpp:173
+#, fuzzy
+msgid "%5<br>Left Gap: "
+msgstr "mm<br>  Espacement á Gauche:"
+
+#: newlabel.cpp:192
+msgid "No label selected."
+msgstr "Aucune étiquette sélectionnée."
+
+#: previewdialog.cpp:89
+msgid "Select &Address"
+msgstr "&Selectionner une adresse"
+
+#: previewdialog.cpp:95
+msgid "Customer Name and No.:"
+msgstr "Nom et Numéro du Client :"
+
+#: previewdialog.cpp:98
+msgid "Article Number:"
+msgstr "Numéro d'Article:"
+
+#: previewdialog.cpp:100 smalldialogs.cpp:45 smalldialogs.cpp:94
+#, fuzzy
+msgid "Group:"
+msgstr "Groupe :"
+
+#: previewdialog.cpp:102
+#, fuzzy
+msgid "Index:"
+msgstr "Index"
+
+#: previewdialog.cpp:108
+msgid "Addressbook entry:"
+msgstr "Entrée du carnet d'adresses :"
+
+#: printersettings.cpp:39
+msgid "ISO A3"
+msgstr ""
+
+#: printersettings.cpp:40
+msgid "ISO A4"
+msgstr ""
+
+#: printersettings.cpp:41
+msgid "ISO A5"
+msgstr ""
+
+#: printersettings.cpp:42
+msgid "US Letter"
+msgstr ""
+
+#: printersettings.cpp:43
+msgid "US Legal"
+msgstr ""
+
+#: printersettings.cpp:44
+msgid "Screen"
+msgstr ""
+
+#: printersettings.cpp:46
+msgid "ISO B5"
+msgstr ""
+
+#: printersettings.cpp:47
+msgid "US Executive"
+msgstr ""
+
+#: printersettings.cpp:48
+msgid "ISO A0"
+msgstr ""
+
+#: printersettings.cpp:49
+msgid "ISO A1"
+msgstr ""
+
+#: printersettings.cpp:50
+msgid "ISO A2"
+msgstr ""
+
+#: printersettings.cpp:51
+msgid "ISO A6"
+msgstr ""
+
+#: printersettings.cpp:52
+msgid "ISO A7"
+msgstr ""
+
+#: printersettings.cpp:53
+msgid "ISO A8"
+msgstr ""
+
+#: printersettings.cpp:54
+msgid "ISO A9"
+msgstr ""
+
+#: printersettings.cpp:55
+msgid "ISO B0"
+msgstr ""
+
+#: printersettings.cpp:56
+msgid "ISO B1"
+msgstr ""
+
+#: printersettings.cpp:57
+msgid "ISO B10"
+msgstr ""
+
+#: printersettings.cpp:58
+msgid "ISO B2"
+msgstr ""
+
+#: printersettings.cpp:59
+msgid "ISO B3"
+msgstr ""
+
+#: printersettings.cpp:60
+msgid "ISO B4"
+msgstr ""
+
+#: printersettings.cpp:61
+msgid "ISO B6"
+msgstr ""
+
+#: printersettings.cpp:62
+msgid "ISO C5"
+msgstr ""
+
+#: printersettings.cpp:63
+msgid "US Common 10"
+msgstr ""
+
+#: printersettings.cpp:64
+msgid "ISO DL"
+msgstr ""
+
+#: printersettings.cpp:65
+msgid "US Folio"
+msgstr ""
+
+#: printersettings.cpp:66
+msgid "US Ledger"
+msgstr ""
+
+#: printersettings.cpp:67
+msgid "US Tabloid"
+msgstr ""
+
+#: printlabeldlg.cpp:36 smalldialogs.cpp:42 smalldialogs.cpp:88
+#, fuzzy
+msgid "Number of labels:"
+msgstr "Nombre d'Etiquettes:"
+
+#: printlabeldlg.cpp:40
+msgid "Start at label position:"
+msgstr "Démarrer par l'Etiquette numéro:"
+
+#: printlabeldlg.cpp:43
+msgid "&Print crop marks (borders)"
+msgstr ""
+
+#: propertywidget.cpp:56
+#, fuzzy
+msgid "Image Saved in KBarcode"
+msgstr "Code-barre modifié"
+
+#: propertywidget.cpp:90
+msgid "&Border Visible"
+msgstr ""
+
+#: propertywidget.cpp:101 propertywidget.cpp:190 rectsettingsdlg.cpp:159
+#, fuzzy
+msgid "Color:"
+msgstr "Couleur du Quadrillage:"
+
+#: propertywidget.cpp:103 rectsettingsdlg.cpp:161
+msgid "Line Width:"
+msgstr ""
+
+#: propertywidget.cpp:105 rectsettingsdlg.cpp:81 rectsettingsdlg.cpp:163
+msgid "Line Style:"
+msgstr ""
+
+#: propertywidget.cpp:145 propertywidget.cpp:485
+#, fuzzy
+msgid "90"
+msgstr "0"
+
+#: propertywidget.cpp:146 propertywidget.cpp:486
+msgid "180"
+msgstr ""
+
+#: propertywidget.cpp:147 propertywidget.cpp:487
+msgid "270"
+msgstr ""
+
+#: propertywidget.cpp:212
+#, fuzzy
+msgid "Barcode Settings:"
+msgstr "Propriété du Code barre"
+
+#: propertywidget.cpp:346
+msgid "&Protect item from being moved or resized"
+msgstr ""
+
+#: propertywidget.cpp:357
+msgid "&Top:"
+msgstr "&Haut :"
+
+#: propertywidget.cpp:358
+msgid "&Left:"
+msgstr "&Gauche :"
+
+#: propertywidget.cpp:359
+msgid "&Height:"
+msgstr "&Hauteur :"
+
+#: propertywidget.cpp:360
+msgid "&Width:"
+msgstr "&Largeur :"
+
+#: propertywidget.cpp:471
+msgid "&Load image from path"
+msgstr "&Charger l'image depuis le chemin"
+
+#: propertywidget.cpp:475
+msgid "&Read image path from expression"
+msgstr "&Lire le chemin de l'image à partir de l'expression"
+
+#: propertywidget.cpp:489
+msgid "&Size"
+msgstr "&Taille :"
+
+#: propertywidget.cpp:491
+msgid "&None"
+msgstr "&Aucun"
+
+#: propertywidget.cpp:493
+msgid "S&cale"
+msgstr "A&juster"
+
+#: propertywidget.cpp:495
+msgid "Mirror &Horizontaly"
+msgstr "Miroir &horizontal"
+
+#: propertywidget.cpp:496
+msgid "Mirror &Vertically"
+msgstr "Miroir &vertical"
+
+#: propertywidget.cpp:522
+msgid "Image format not supported for file: %1"
+msgstr "Format d'image non supporté pour le fichier : %1"
+
+#: propertywidget.cpp:611
+msgid "Evaluate JavsScript code to define the visibility of this item:"
+msgstr "Évaluer le code JavaScript pour définir la visibilité de cet élément :"
+
+#: rectsettingsdlg.cpp:54 rectsettingsdlg.cpp:145
+#, fuzzy
+msgid "Settings"
+msgstr "&Tester les paramètres"
+
+#: rectsettingsdlg.cpp:71
+msgid "&Enable Border"
+msgstr "&Activer la bordure"
+
+#: rectsettingsdlg.cpp:73
+msgid "Fill Color:"
+msgstr "Couleur de remplissage :"
+
+#: rectsettingsdlg.cpp:77
+msgid "Border Color:"
+msgstr "Couleur de bordure :"
+
+#: rectsettingsdlg.cpp:79
+msgid "Border Width:"
+msgstr "Largeur de bordure :"
+
+#: smalldialogs.cpp:35
+#, fuzzy
+msgid "Add Barcode_basic"
+msgstr "KBarcode"
+
+#: smalldialogs.cpp:61
+#, fuzzy
+msgid "Add Items"
+msgstr "Ajouter Objet"
+
+#: smalldialogs.cpp:68
+#, fuzzy
+msgid "Edit Item"
+msgstr "Ajouter Objet"
+
+#: smalldialogs.cpp:92
+#, fuzzy
+msgid "Article:"
+msgstr "Numéro d'article"
+
+#: sqltables.cpp:117
+msgid "<qt>Unable to open database: "
+msgstr "<qt>Impossible d'ouvrir la base de données"
+
+#: sqltables.cpp:139
+#, fuzzy
+msgid "We are going to re-create the tables '"
+msgstr "Nous allons effacer la table: 'label_def'"
+
+#: sqltables.cpp:141
+msgid "' and '"
+msgstr ""
+
+#: sqltables.cpp:164
+msgid "<qt>Can't create database "
+msgstr "<qt>Impossible de créer la base de données"
+
+#: sqltables.cpp:164
+msgid "<br>You can continue if the database exists already.</qt>"
+msgstr "<br>Vous pouvez continuer si la base de données existe déjà.</qt>"
+
+#: sqltables.cpp:182
+msgid ""
+"KBarcode could not create the required database. Please create it manually."
+msgstr ""
+"KBarcode n'a pas pu créer la base de données requise. Merci de la créer "
+"manuellement."
+
+#: sqltables.cpp:264
+msgid "Created table "
+msgstr "Table Créée "
+
+#: sqltables.cpp:264
+msgid " successfully!"
+msgstr "avec succès!"
+
+#: sqltables.cpp:268
+msgid "Can't connect to database."
+msgstr "Impossible de ce connecter á la base de donnée"
+
+#: sqltables.cpp:277
+#, fuzzy
+msgid "We are going to delete the complete table: "
+msgstr "Nous allons effacer la table: 'label_def'"
+
+#: sqltables.cpp:299
+#, fuzzy
+msgid "We are going to delete the complete tables: "
+msgstr "Nous allons effacer la table: 'label_def'"
+
+#: sqltables.cpp:315
+msgid ""
+"Data file for import not found. Continuing without importing data. Please "
+"check your KBarcode installation."
+msgstr ""
+
+#: sqltables.cpp:320
+msgid "SQL import progress:"
+msgstr ""
+
+#: sqltables.cpp:331
+msgid "Can't open the data file containing the label definitions."
+msgstr "Impossible d'ouvrir le fichier contenant la définition des étiquettes."
+
+#: sqltables.cpp:340
+msgid "<qt>Can't execute command:<br><b>"
+msgstr "<qt>Impossible d'executer la commande:<br><b>"
+
+#: sqltables.cpp:432
+msgid ""
+"The SQL tables of KBarcode have changed since the last version. KBarcode "
+"updated them without any loss of data."
+msgstr ""
+
+#: sqltables.cpp:453 sqltables.cpp:473
+msgid "Connected successfully to your database"
+msgstr "Connection á votre base de donnée réussie."
+
+#: sqltables.cpp:517
+#, fuzzy
+msgid "Database Settings"
+msgstr "Propriété de l'Image"
+
+#: sqltables.cpp:527
+#, fuzzy
+msgid "Username :"
+msgstr "Nom d'utilisateur :"
+
+#: sqltables.cpp:534
+#, fuzzy
+msgid "Password :"
+msgstr "Mot de passe :"
+
+#: sqltables.cpp:542
+#, fuzzy
+msgid "Database :"
+msgstr "Base de données:"
+
+#: sqltables.cpp:549
+#, fuzzy
+msgid "Host :"
+msgstr "Serveur:"
+
+#: sqltables.cpp:556
+#, fuzzy
+msgid "Driver :"
+msgstr "Pilote:"
+
+#: sqltables.cpp:569
+#, fuzzy
+msgid "&Autoconnect on program start"
+msgstr "Connection &Automatique au démarage"
+
+#: sqltables.cpp:573
+msgid "&Test Settings"
+msgstr "&Tester les paramètres"
+
+#: sqltables.cpp:577
+#, fuzzy
+msgid "<b>You have to test your database settings before you can procede.</b>"
+msgstr "Configurez vos paramètres de base de donnée ici<br>"
+
+#: textlineedit.cpp:138
+msgid "&Mag. Vert.:"
+msgstr ""
+
+#: textlineedit.cpp:140
+msgid "&Mag. Hor.:"
+msgstr ""
+
+#: tokendialog.cpp:65 tokendialog.cpp:93 tokendialog.cpp:109
+#, fuzzy
+msgid "What do you want to insert?"
+msgstr "Combien d'Etiquettes voulez-vouz imprimer?"
+
+#: tokendialog.cpp:67
+#, fuzzy
+msgid "Insert a &fixed data field"
+msgstr "Insérer Etiquette X"
+
+#: tokendialog.cpp:68
+msgid "Insert a &custom SQL query, variable or JavaScript function"
+msgstr ""
+
+#: tokendialog.cpp:72
+msgid "Step 1 of 3"
+msgstr ""
+
+#: tokendialog.cpp:79
+msgid "Step 2 of 3"
+msgstr ""
+
+#: tokendialog.cpp:86
+msgid "Step 3 of 3"
+msgstr ""
+
+#: tokendialog.cpp:94
+msgid "&Select from a list of all tokens"
+msgstr ""
+
+#: tokendialog.cpp:95
+msgid "Insert printing &informations"
+msgstr ""
+
+#: tokendialog.cpp:96
+#, fuzzy
+msgid "&Insert a database field"
+msgstr "Insérer Etiquette X"
+
+#: tokendialog.cpp:97
+msgid "Insert a &date/time function"
+msgstr ""
+
+#: tokendialog.cpp:98
+#, fuzzy
+msgid "Insert an &addressbook field"
+msgstr "Insérer Code-&Barre"
+
+#: tokendialog.cpp:111
+msgid "Insert a custom &variable"
+msgstr ""
+
+#: tokendialog.cpp:112
+#, fuzzy
+msgid "Insert a &SQL query"
+msgstr "Insérer &Texte"
+
+#: tokendialog.cpp:113
+msgid "Insert a &JavaScript function"
+msgstr ""
+
+#: tokendialog.cpp:135
+msgid "&Category:"
+msgstr ""
+
+#: tokendialog.cpp:139
+msgid "&Token:"
+msgstr ""
+
+#: tokendialog.cpp:141 tokendialog.cpp:176
+msgid "Token"
+msgstr ""
+
+#: tokendialog.cpp:146
+msgid "&Custom Expression to be inserted in the token."
+msgstr ""
+
+#: tokendialog.cpp:151
+msgid ""
+"<qt>Certain tokens, like for exaple the sqlquery token need arguments. In "
+"the case of the sqlquery token, the sure has to enter a sql query in this "
+"text field.</qt>"
+msgstr ""
+
+#: tokendialog.cpp:191
+#, fuzzy
+msgid "&Create a new custom variable"
+msgstr "Dem&ander une nouvelle étiquette au démarrage de l'éditeur d'étiquette"
+
+#: tokendialog.cpp:194
+msgid "&Insert an existing custom variable"
+msgstr ""
+
+#: tokendialog.cpp:219
+msgid ""
+"<qt><b>No SQL connection found!</b><br>You can build a query, but you will "
+"not be able to execute or test it right now.<br></qt>"
+msgstr ""
+
+#: tokendialog.cpp:224
+msgid "&SQL Query:"
+msgstr ""
+
+#: tokendialog.cpp:226
+msgid "&Test"
+msgstr ""
+
+#: tokendialog.cpp:231
+msgid "Query test results:"
+msgstr ""
+
+#: tokendialog.cpp:246
+msgid "/* Place your JavaScript code into this text field. */\n"
+msgstr ""
+
+#: tokendialog.cpp:339
+msgid "All"
+msgstr ""
+
+#: tokendialog.cpp:352 tokendialog.cpp:420
+msgid "Variable defined by the user for this label."
+msgstr ""
+
+#: tokendialog.cpp:417 tokenprovider.cpp:209
+#, fuzzy
+msgid "Custom Values"
+msgstr "Nom du Client"
+
+#: tokenprovider.cpp:210
+msgid "Date & Time"
+msgstr ""
+
+#: tokenprovider.cpp:211
+msgid "Addressbook"
+msgstr ""
+
+#: tokenprovider.cpp:216
+#, fuzzy
+msgid "Article description from barcode_basic"
+msgstr "Description d'article"
+
+#: tokenprovider.cpp:217
+#, fuzzy
+msgid "Article number from barcode_basic"
+msgstr "KBarcode"
+
+#: tokenprovider.cpp:224
+msgid "customer number of the current customer"
+msgstr ""
+
+#: tokenprovider.cpp:225
+msgid "name of the current customer"
+msgstr ""
+
+#: tokenprovider.cpp:226
+#, fuzzy
+msgid "Barcode number from barcode_basic"
+msgstr "KBarcode"
+
+#: tokenprovider.cpp:228
+msgid "group of the current article"
+msgstr ""
+
+#: tokenprovider.cpp:229
+msgid "Barcode encoding type from barcode_basic"
+msgstr ""
+
+#: tokenprovider.cpp:230
+msgid "User readable barcode encoding type from barcode_basic"
+msgstr ""
+
+#: tokenprovider.cpp:235
+msgid "Path and filename of this file"
+msgstr ""
+
+#: tokenprovider.cpp:236
+msgid "number of labels currently printed during this printout"
+msgstr ""
+
+#: tokenprovider.cpp:237
+msgid "current column on the page"
+msgstr ""
+
+#: tokenprovider.cpp:238
+msgid "current row on the page"
+msgstr ""
+
+#: tokenprovider.cpp:239
+#, fuzzy
+msgid "Current page"
+msgstr "Table actuelle:<b>"
+
+#: tokenprovider.cpp:240
+#, fuzzy
+msgid "Current resolution"
+msgstr "Résolution de l'Écran"
+
+#: tokenprovider.cpp:241
+msgid "Include a serial number on your labels."
+msgstr ""
+
+#: tokenprovider.cpp:247
+msgid "Execute java script code"
+msgstr ""
+
+#: tokenprovider.cpp:248
+msgid "Insert the result of a custom sql query"
+msgstr ""
+
+#: tokenprovider.cpp:249
+msgid "Insert a custom variable"
+msgstr ""
+
+#: tokenprovider.cpp:254
+msgid "Date formated as configured in the preferences"
+msgstr ""
+
+#: tokenprovider.cpp:255
+msgid "Short Weekday Name"
+msgstr ""
+
+#: tokenprovider.cpp:256
+msgid "Full Weekday Name"
+msgstr ""
+
+#: tokenprovider.cpp:257
+msgid "Short Month Name"
+msgstr ""
+
+#: tokenprovider.cpp:258
+msgid "Full Month Name"
+msgstr ""
+
+#: tokenprovider.cpp:259
+#, fuzzy
+msgid "Date-Time"
+msgstr "Date"
+
+#: tokenprovider.cpp:260
+#, fuzzy
+msgid "Century"
+msgstr "&Centré"
+
+#: tokenprovider.cpp:261
+msgid "Day Number (01-31)"
+msgstr ""
+
+#: tokenprovider.cpp:262
+msgid "Month-Day-year"
+msgstr ""
+
+#: tokenprovider.cpp:263
+msgid "Day Number ( 1-31)"
+msgstr ""
+
+#: tokenprovider.cpp:264
+msgid "Year-Month-day"
+msgstr ""
+
+#: tokenprovider.cpp:265
+msgid "Week Year (yy)"
+msgstr ""
+
+#: tokenprovider.cpp:266
+msgid "Week Year (yyyy)"
+msgstr ""
+
+#: tokenprovider.cpp:267
+msgid "Hour (01-24)"
+msgstr ""
+
+#: tokenprovider.cpp:268
+msgid "Hour (1-12)"
+msgstr ""
+
+#: tokenprovider.cpp:269
+msgid "Day of Year"
+msgstr ""
+
+#: tokenprovider.cpp:270
+msgid "Month Number (01-12)"
+msgstr ""
+
+#: tokenprovider.cpp:271
+msgid "Minute (00-59)"
+msgstr ""
+
+#: tokenprovider.cpp:272
+msgid "a.m./p.m."
+msgstr ""
+
+#: tokenprovider.cpp:273
+msgid "Time (h:m:s am/pm)"
+msgstr ""
+
+#: tokenprovider.cpp:274
+msgid "Time (HH:MM)"
+msgstr ""
+
+#: tokenprovider.cpp:275
+msgid "Seconds (00-59)"
+msgstr ""
+
+#: tokenprovider.cpp:276
+msgid "Time (HH:MM:SS)"
+msgstr ""
+
+#: tokenprovider.cpp:277
+msgid "Weekday (1=Monday...)"
+msgstr ""
+
+#: tokenprovider.cpp:278 tokenprovider.cpp:281
+msgid "Week Number (00-53)"
+msgstr ""
+
+#: tokenprovider.cpp:279
+msgid "Week Number (01-53)"
+msgstr ""
+
+#: tokenprovider.cpp:280
+msgid "Weekday (0=Sunday...)"
+msgstr ""
+
+#: tokenprovider.cpp:282
+msgid "Local Date"
+msgstr ""
+
+#: tokenprovider.cpp:283
+msgid "Local Time"
+msgstr ""
+
+#: tokenprovider.cpp:284
+msgid "Year (00-99)"
+msgstr ""
+
+#: tokenprovider.cpp:285
+msgid "Year (YYYY)"
+msgstr ""
+
+#: tokenprovider.cpp:286
+msgid "Offset from UTC"
+msgstr ""
+
+#: tokenprovider.cpp:287
+msgid "Timezone Name"
+msgstr ""
+
+#: tokenprovider.cpp:292
+msgid "Name"
+msgstr ""
+
+#: tokenprovider.cpp:296
+msgid "Full E-Mail"
+msgstr ""
+
+#: tokenprovider.cpp:319
+msgid "Formatted Address"
+msgstr ""
+
+#: tokenprovider.cpp:825
+msgid "ERROR: Empty SQL Query"
+msgstr ""
+
+#: xmlutils.cpp:344
+msgid ""
+"<qt>This appears file appears to be created by an older version of KBarcode."
+"<br>Please check if the used label definition is correct:<br><b>"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Code 11"
+#~ msgstr "Raw code 128"
+
+#, fuzzy
+#~ msgid "Code 2 of 5"
+#~ msgstr "Raw code 128"
+
+#, fuzzy
+#~ msgid "Interleaved 2 of 5"
+#~ msgstr "interleaved 2 of 5 (chiffres uniquement)"
+
+#, fuzzy
+#~ msgid "Postnet"
+#~ msgstr "Position"
+
+#, fuzzy
+#~ msgid "Barcode Cache"
+#~ msgstr "KBarcode"
+
+#, fuzzy
+#~ msgid "Barcode Cache Size:"
+#~ msgstr "Propriété du Code barre"
+
+#, fuzzy
+#~ msgid "&Clear"
+#~ msgstr "&Centré"
+
+#~ msgid "Kbarcode"
+#~ msgstr "KBarcode"
+
+#~ msgid "Barcode not valid!"
+#~ msgstr "Code barre non valide!"

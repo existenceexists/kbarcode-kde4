@@ -1,0 +1,433 @@
+Changelog since Version 1.3.2:
+==============================
+
+Version 2.0.7
+
+Version 2.0.6
+    Dag Nygren contributed a patch which fixes printing from a CSV file
+    Check if files passed for batchprinting from the commandline do exist
+    Patch from Chris <chris@ac-drexler.de> fixing problems with SQLite
+    Patch from Váradi Zsolt Gyula to fix the long standing issue with
+	disappearing objects
+	
+Version 2.0.5
+    Fixed TBarcode2 detection in system check
+    Fixed checksum for TBarcode2
+    Improved CSV file import (works now with any table and fixed field
+    files)
+    Added new version of barcode writer in pure postscript
+    Supported barcodes are now parsed from barcode writer in pure postscript file
+    Fixed address printing
+	
+Version 2.0.4
+    Fixed compilation on KDE < 3.5
+    Fixed a database access bug
+    Raphael Pinson updated the french translation
+    Fixed text alignment in label editor
+	
+Version 2.0.3
+    Fixed adding articles from the SQL table
+    Fixed barcode support when only barcode writer in pure postscript is
+    available
+    Added an action map
+    Added the possibility to keep the batch printing window open after printing
+	
+Version 2.0.2
+    Fixed translations in the barcode combo
+    Fixed [field0] - [field9]
+    Fixed case sensitive barcode encoding in SQL database
+	
+Version 2.0.1
+    Fixed compilation on slackware amd64
+    Fixed spec file RHFC4
+    Added turkish translation by Furkan Duman
+    Barcode properties are used immediately in the barcode dialog
+    Added TBarcode2 support
+    Fixed database settings
+    Barcodes values are validated before generating a new barcode for
+    barcode writer in pure postscript. Requires PCRE.
+    Fixed database barcode modes
+	
+Version 2.0.0
+    Increased version number
+	
+Version 2.0.0rc2
+    Fixed saving barcodes to images (correct fileformat is now detected)
+    Fixed the --print commandline option with --batch
+    Updated german translation
+    Patch by Simon Munton fixes a crash
+    Fixed printing bug: Printing started on the second label
+    Updated Barcode Writer in Pure Postscript version
+    Fixed importing articles
+    Removed the build time dependency on GNU Barcode
+	
+Version 2.0.0rc1
+    Added missing #include <stdlib.h> to fix compilation
+    Fixed desktop files
+    Updated admin/ directory to KDE 3.5
+    Comitted a patch by Jan Zuchhold to support Codabar without checksum
+    Added default value for [serial] field
+    Improved commandline options, --prints now immediately and exits
+    KBarcode after printing.
+    Fixed 3 small memory leaks (one in the SQL code and one during XML parsing)
+    Selection is not removed after changing properties of a text element
+    Formattings in the text editor are kept for new paragraphs now
+	
+Version 1.9.10 
+    Show name of used barkode engine for encoding
+    Added support for Terry Burtons Barcode Writer in Pure Postscript as
+    new Barcode backend with many new suported barcode formats.
+
+Version 1.9.9
+    The encoding of input csv data can be specified
+    KDE addressbook integration. The addressbook can now be used as
+    datasource for batchprinting
+    Fixed CSV to SQL import
+    Fixed CSV import when the separator is part in a quoted region
+    Fixed a few memory leaks found by valgrind
+	
+Version 1.9.8
+    Added [col] and [row] tokens
+    Text fields have now a line distance of 1 instead of 1.5
+    Fixed center horizontally and vertically
+    Fixed barcode without text
+    Removed Undo Limit option from preferences (makes the dialog easier)
+    Fixed compilation on RH9, Mandrake 10
+    Fixed empty user defined fields
+    Added a busy cursor while creating databases
+    Uses references instead of pointers and fix a memory leak
+	
+Version 1.9.7
+    Fixed --label commandline option
+    Added text rotation support
+    Fixed printing out of the label. Positions on screen are now also
+    positions on the printer!
+    Fixed barcode resizing
+    Undo/Redo for raise/lower is now possible
+    Implemented a confortable wizard for inserting tokens
+	
+Version 1.9.6
+    Fixed y-scaling issues during printing
+    Faster barcode generation through the usage of pipes
+    Fixed image printing (images were not scaled on the printer)
+    Improved the layout of the visibility script dialog
+    Fixed clipping issues during printing
+    Fixed TBarcode Support
+    Fixed CSV Import
+	
+Version 1.9.5
+    Fixed next button in batchwizard for data import
+    Moved image creation settings from preferences to batchwizard
+    BatchWizard opens image creation directory after creating images
+    automatically
+    Added new commandline options and DCOP methods to allow for easier
+    scripting of KBarcode
+    Fixed file open from label editor (do not show new label dialog when
+    opening files)
+    Fixed enable/disable of KLineEdit in TokenDialog
+    Added JavaScript support
+    Removed LabelPrinter class (replaced by BatchWizard)	
+    Made the new label dialog smaller in size and therefore more useable
+    Fixed an image scaling bug
+    Greatly improved image support, image path can now also be an
+    expression
+    Fixed crashes in the label editor with undo/redo by making TCanvasItem
+    objects referencecounted
+	
+Version 1.9.4
+    Fixed barcode sequence start values and stepping
+    All legacy barcode should now load succesfully
+    Readded TBarcode and PDF417 support
+    Fixed PDF417 support
+    Fixed dancing objects in the labeleditor when resizing
+    Fixed undo delete
+    Make default grid size smaller
+    Added the sqlquery statement
+    Fixed drawing of invalid barcodes from the PixmapBarcode engine
+    Fixed resizing og items to a negative value (which is not allowed
+    anmore)
+    Improved the grid in the labeleditor a bit, still not perfect
+    Fixed compilation warnings
+    Added border support for TextLineItems
+    Added support for user defined variables
+    Added a completely new full featured and fantastic batch printing
+    wizard
+    Fixed CTRL+P short cut being used twice in labeleditor
+    Added CSVFile abstraction class to parse CSVFiles
+    Fixed memory leaks when printing to images
+	
+Version 1.9.3
+    Fixed positions of printed textitems
+    Improved printing speed
+    Fixed characters being dropped while printing
+    Added keyboard accessors to the barcode widget    
+    Merged Barkode - the new barcode engine for KBarcode
+    Fixed file extension being added twice when saving a barcode
+    Reenabled copy and paste of single barcodes
+    Added a protect position and size feature to the labeleditor
+
+Version 1.9.2
+    Generate button is now default in the barcode dialog
+    Size and position can be specified in inch now
+    Barcode are resized correctly in the label editor
+    Added a select/deselect all option to the label editor
+    Fixed barcode printing (they are printed in the correct size now)
+    Laurent Montel fixed a memory leak in NewLabel dialog
+    Faster compilation thanks to Laurent's include moc patch
+    Fixed a memory leak in NewItem commands
+    Fixed copy and paste of text objects
+    Fixed a memory leak when changing the size of an existing label 
+    Fixed lot's of printing bugs (text, barcode printing!)
+    Improved layout of BarcodeDialog and preview of large barcodes
+    Fixed a crash with PreviewDialog
+    Improved layout ot the TokenDialog (and size is stored now in the config)
+    Fixed edit properties menu action
+
+Version 1.9.1    
+    Merged EPCL Printer support from Brian Glass
+    Improved token selection
+    Refactored barcode printer codes
+    Faster image loading as PNG is now used internally (i.e smaller filesizes too)
+    More image options (scale, zoom,rotation readded,mirroring)
+    Fixed scrollbars in the LabelEditor for big labels
+    Merged TEC Printer support from Nyssa
+    Improved copy and paste support (select more than one item)
+    Fixed textprinting for all Qt versions
+    Added a dialog for easier printing to barcode printers 
+    Lot's of bug fixes and improvements
+
+Version 1.9.0
+    --- Only anounced on the Mailinglist ---
+    
+Version 1.8.2
+    Printing works on all kde versions again
+
+Version 1.8.1
+    Display a progress dialog when loading label definitions
+    Converted label definitions to UTF-8
+    Fix text printing with Qt 3.3.x
+    Fixed a bug which caused definitions to be loaded twice
+    Fixed compilation errors due to missing time.h include
+	
+Version 1.8.0
+    Minor changes
+
+Version 1.7.5
+    Added the option to change properties from the menus
+    Delete option gets disabled properly
+
+Version 1.7.4
+    Fixed CSV import in to batch printing mode
+    Updated automake
+    Replaced convert by ghostscript -> less dependencies and more speed!
+
+Version 1.7.3
+    Fixed compilation with --enable-final (added necessary ifdef's around headers)
+    Fixed compilation (don't declare default args in the implementation)
+    Fixed an UPC-A generation bug
+    Added a Polnish translation by Benedykt P. Barszcz
+    Fixed CSV import when the line does not end with the separator
+    Fixed barcode size being different on screen and printer
+    Fixed warnings about returnign reference to temporaries
+    Added --print option also for the label editor
+    
+Version 1.7.2
+    Major code refactoring to make everything cleaner and simpler
+    Faster because of using less tempfiles
+    Improved UI of Batch Printing dialog
+    Fixed bug in group completion support
+    Fixed CSV file import into PostgreSQL
+    KBarcode File Plugin is now part of the KBarcode Source distribution
+
+Version 1.7.1
+    Fixed grid not beeing updated
+    Speed improvements in token provider
+    Fixed printing
+    Improved DCOP interface
+    Fixed moving items on grid has been greatly improved
+    Serial indexing support
+    
+Version 1.7.0
+    The default page size is read from KDE
+    Increased speed when loading label definitions from file
+    Support for inch and millimeter
+    Added a powerful DCOP interface
+
+Version 1.6.2
+    Fixed an UPC-A generation bug
+    Added greek translation
+        
+Version 1.6.0
+    KDE 3.0.x compilation fixes
+    Fixed wrong barcode positions
+
+Version 1.6.0rc-2
+    Fixed the rect icon in the labeleditor
+    Fixed compilation with Qt 3.0.x
+    Fixed a crash for paragraphs with one character only
+    Improved printing of large pictures
+    Fixed a bug with text lines drawn twice
+
+Version 1.6.0rc-1
+    Build System fixes
+    Fixed a segmentation fault
+    Removed debug messages
+    Fixed focus of multi line edit dialog
+
+Version 1.5.5
+    Fixed compilation with Qt 3.1.x
+    Fixed some IPL issues
+    Fixed rich text rendering bug with empty paragraph
+    Fixed display of "field0-9" fields
+    Fixed spacing of the first line of each paragraph
+    Spellchecked German translation
+    Switched to KDevelop 3.0.0beta1
+
+Version 1.5.4
+    Further dynamic datafields fixes in the labeleditor
+    Using own rich text engine (-> anti aliased fonts in printout)
+    Removed screen resolution printing mode as 300dpi has better results
+    Simplified configuration wizard
+    greatly improved API documentation
+    Added system check utility
+    Updated German translation
+    Added experimental IPL support
+    
+Version 1.5.3
+    Fixed display of dynamic datafields in the label editor
+    Fixed a crash in the preview of the label editor
+    Fixed sequences with more barcodes on a label
+    Added ZPL export
+    Removed "USE" statement in DB code
+    Started work on an own rich text rendering implementation
+
+Version 1.5.2
+    Added TBarcode auto correction feature
+    Fixed copy and paste in the labeleditor
+    Lot's of database creation fixes
+    Added a progress dialog to the CSV import
+    Fixed a memory leak, when the definition where read from a file
+    Speed improvements when no database is used (because of caching)
+    
+Version 1.5.1
+    Added Advanced button for barcode settings
+    Added [resolution], [index], [page] keywords (datafields)
+    Added text above barcodes for tbarcode backend
+    Added escape sequence support for tbarcode backend
+    Added support to select more than one element in the label editor (press CTRL)
+    Added 1200dpi printing mode
+    Added PostgreSQL and SQLite support (ODBC should work, too)
+    Added API Documentation
+    Added support for barcode sequences
+    Added support for checkdigits with TBarcode
+    Enabling crop marks (borders) is now much easier
+    Cut/scale is now reset to 100/1000 if disabled
+    Fixed and improved the barcode cache
+    Fixed CSVImportDlg, which allowed to insert data in not existant table fields
+    Fixed placement of new items
+    Fixed preview in the label editor
+    Removed 72dpi printing mode completely
+    Removed convert -quality commandline option
+    Datafields are now even shown in the label editor
+    Changed double SQL datatypes to NUMERIC (and smallint to int)
+    Made some varchars in the SQL code larger (to varchar(255))
+    The index of the label can be specified in the label editor preview
+
+Version 1.5.0
+    Added TBarcode support (lot's of new barcode formats!)
+    Added harddisk barcode cache
+    Added CSV file import dialog
+    Added support to configure the preview page size
+    Added configuration of PDF417 err correction level and size
+    Update SQL Tables so that 2D barcodes will work
+    Fixed bug with barcode value not shown in the label editor
+    Fixed fonts with Qt 3.2
+    Removed some warning messages
+    Removed useless functions: copyBarcode and printBarcode
+    Removed grayscale option
+    Removed bg and fg colors, because they are not supported
+    Refactored SQL code to make it much easier (introduced SQL widget )
+    Changed default: labeleditor asks for new label on startup
+
+Version 1.4.1
+    Fixed compilation error with compound literals
+    
+Version 1.4.0
+    Fixed image positions when printing
+    
+Version 1.4.0-rc1
+    Fixed bugs with image rotation
+    Fixed printing of barcodes
+    Fixed recent files menu
+    Fixed automatic text resizing
+    Fixed bug with getting max length barcode values from the database
+
+Version 1.3.6
+    Don't use private KPrinter API
+    Fixed sql table creation
+    Fixed drawing of lines
+    Removed not working spellchecker
+    KBarcode defaults to printing at 300dpi
+    Updated Hungarian, Italian and Spanish translation
+    Added own grid icon
+    Updated documentation download URL
+    
+Version 1.3.5
+    Fixed free space around label in the label editor
+    Improved label preview dialog a lot
+    Align to grid can be undone now
+    Improved printing speed. Labels are read only once from harddisk.
+    Fixed database problems with batch printing
+    Cancelling of creating images works now
+    Pages are calculated correctly again
+    Improved layout of barcode dialog
+    Fixed saving of barcodes
+    
+Version 1.3.4
+    Added a button to insert all values from barcode_basic to batchprinting
+    Improved the configuration wizard
+    Improved batch printer GUI with import menu item
+    Fixed SQL connection bug in batch printer
+    Remove X, Y Correction stuff
+    Refactore printer setup code
+    Removed antialiased stuff, with Qt 3.2 we'll have pretty fonts anyway
+    Fixed a memory leak in the image generation code
+    Stopped maintaining two different printer codes, LabelEditor prints from the XML file now, too
+    Fixed printing for all resolutions
+    Improved the layout of the barcode dialog
+    Fixed closing of main window
+    Greatly enhanced PDF417 support
+    Restructered preferences dialog
+    Fixed textprinting bug
+    Removed useless functions scalePainter() & renderPix()
+    
+Version 1.3.3
+    Fixed Qt 3.0.x compilation
+    Fixed a segfault at startup
+    
+Version 1.3.2
+    Resizing with shift pressed keeps ratio now
+    Fixed image rotation
+    Fixed keyboard shortcuts
+    Refactor lot's of code in command.cpp
+    Fixed caption of Label Editor after using the preview
+    72dpi can only be selected in the preferences if it is better than screenresolution
+    Refactored some resolution calculations
+    Fixed a memory leak in MyCanvasView
+    Removed not working label scaling stuff
+    Added more free fields to the "barcode_basic" table to improve handling of labels without barcodes (e.g. address labels)
+    Improved and refactored printing code
+    Fixed resizing of the label editor window
+    Fixed grid and changed default gridsize to 20 pixels
+    Moved drawing toolbar to the left side of the window
+    Disable cut, copy and paste actions when no document is loaded
+    Ported lot's of dialogs to KDialogBase
+    Fixed move by value
+    Databases are updated automatically on connection
+    Fixed (one) undo/redo crash
+    Fixed badly broken batchprinting with database values
+    Fixed undo/redo crash
+    Improved printing speed a little bit
+    Fixed a crash with enabled grid
+
+
