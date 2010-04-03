@@ -19,8 +19,8 @@ class KAction;
 class KMenu;
 
 /** The base class of all main windows of KBarcode. It provides standard menu items
-  * for database connections, preferences, help, the first start wizard and donations.
-  * It checks also if this is the first start of KBarcode and if the configuration wizard
+  * for database connections, preferences, help, the first start assistant and donations.
+  * It checks also if this is the first start of KBarcode and if the configuration assistant
   * should be started.
   *
   * @author Dominik Seichter
@@ -33,7 +33,7 @@ class MainWindow : public KMainWindow {
         ~MainWindow();
 
         /** Is this the first start of KBarcode ?
-          * If true, the configuration wizard will
+          * If true, the configuration assistant will
           * be started automatically.
           */
         bool isFirstStart() const {

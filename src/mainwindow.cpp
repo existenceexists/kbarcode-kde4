@@ -11,7 +11,7 @@
 
 #include "mainwindow.h"
 #include "sqltables.h"
-#include "confwizard.h"
+#include "confassistant.h"
 #include "printersettings.h"
 #include "kbarcodesettings.h"
 #include "barkode.h"
@@ -64,8 +64,8 @@ void MainWindow::setupActions()
     KAction* quitAct = KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
     KAction* closeAct = KStandardAction::close( this, SLOT( close() ), actionCollection(), "close" );
     KAction* configureAct = KStandardAction::preferences( KBarcodeSettings::getInstance(), SLOT(configure()), actionCollection() );
-    KAction* wizardAct = new KAction( i18n("&Start Configuration Wizard..."), BarIcon("wizard"), 0, this,
-                                SLOT(wizard()), actionCollection(), "wizard" );
+    KAction* assistantAct = new KAction( i18n("&Start Configuration Assistant..."), BarIcon("assistant"), 0, this,
+                                SLOT(assistant()), actionCollection(), "assistant" );
     connectAct = new KAction(i18n("&Connect to Database"), BarIcon("connect_no"), 0, this, SLOT(connectMySQL()),
                                 actionCollection(),"connect" );
 
@@ -101,7 +101,7 @@ void MainWindow::setupActions()
     quitAct->plug( file );
 
     configureAct->plug( settings );
-    wizardAct->plug( settings );
+    assistantAct->plug( settings );
     connectAct->plug( settings );
     (new KActionSeparator( this ))->plug( settings );
     newTablesAct->plug( settings );
@@ -121,7 +121,7 @@ void MainWindow::setupActions()
 
 void MainWindow::loadConfig()
 {
-    KConfigGroup config = KGlobal::config()->group("Wizard");
+    KConfigGroup config = KGlobal::config()->group("Assistant");
 
     first = config.readEntry("firststart2", true );
 
@@ -139,7 +139,7 @@ void MainWindow::loadConfig()
 
 void MainWindow::saveConfig()
 {
-    KConfigGroup config = KGlobal::config()->group("Wizard");
+    KConfigGroup config = KGlobal::config()->group("Assistant");
 
     config.writeEntry("firststart2", false );
 
@@ -153,7 +153,7 @@ void MainWindow::saveConfig()
 void MainWindow::assistant()
 {
     // FIXME: create an assistant
-    ConfWizard* wiz = new ConfWizard( 0, "wiz", true );
+    ConfAssistant* wiz = new ConfAssistant( 0, "wiz", true );
     if( wiz->exec() == QDialog::Accepted && wiz->checkDatabase->isChecked() )
         SqlTables::getInstance()->connectMySQL();
 

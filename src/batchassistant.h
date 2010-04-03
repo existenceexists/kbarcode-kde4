@@ -1,5 +1,5 @@
 /***************************************************************************
-                          batchwizard.h  -  description
+                          batchassistant.h  -  description
                              -------------------
     begin                : Sun Mar 20 2005
     copyright            : (C) 2005 by Dominik Seichter
@@ -15,10 +15,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BATCHWIZARD_H
-#define BATCHWIZARD_H
+#ifndef BATCHASSISTANT_H
+#define BATCHASSISTANT_H
 
-#include <kwizard.h>
+#include <kassistantdialog.h>
 #include <QLabel>
 
 class BatchPrinter;
@@ -41,11 +41,11 @@ class QTable;
 class QVBox;
 class QWidgetStack;
 
-class BatchWizard : public KWizard {
+class BatchAssistant : public KAssistantDialog {
     Q_OBJECT
     public:
-        BatchWizard( QWidget* parent = NULL );
-        ~BatchWizard();
+        BatchAssistant( QWidget* parent = NULL );
+        ~BatchAssistant();
 
     	/** reimplemented DCOP method from BatchIface 
 	 *  Allow the user to add an article to print to KBarcode
@@ -81,14 +81,14 @@ class BatchWizard : public KWizard {
 	virtual void setFilename( const QString & url );
 
 	/** reimplemented DCOP method from BatchIface 
-	 *  Set the batchwizards mode to print from imported data
+	 *  Set the batchassistants mode to print from imported data
 	 *  and import the data from the csv file @p filname
 	 *  @p filename csv file to import
 	 */
 	virtual void setImportCsvFile( const QString & filename );
 
 	/** reimplemented DCOP method from BatchIface 
-	 *  Set the batchwizards mode to print from imported data
+	 *  Set the batchassistants mode to print from imported data
 	 *  and import the data from the sql query @p query
 	 *  @p query sql query to execute to get on user defined variables
 	 */
@@ -263,4 +263,4 @@ class BatchWizard : public KWizard {
 	KUrlRequester* m_url;
 };
 
-#endif // BATCHWIZARD_H
+#endif // BATCHASSISTANT_H

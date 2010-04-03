@@ -22,7 +22,7 @@
 #include "barcodeitem.h"
 #include "barcodeprinterdlg.h"
 #include "batchprinter.h"
-#include "batchwizard.h"
+#include "batchassistant.h"
 #include "commands.h"
 #include "configdialog.h"
 #include "databasebrowser.h"
@@ -1032,7 +1032,7 @@ void LabelEditor::startLoadEditor()
 
 void LabelEditor::batchPrint()
 {
-    new BatchWizard( NULL );
+    new BatchAssistant( NULL );
 }
 
 void LabelEditor::closeEvent( QCloseEvent* e )

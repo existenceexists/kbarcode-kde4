@@ -18,7 +18,7 @@
 #include "kbarcode.h"
 #include "barkode.h"
 #include "barcodegenerator.h"
-#include "batchwizard.h"
+#include "batchassistant.h"
 #include "labeleditor.h"
 #include "databasebrowser.h"
 #include "csvimportdlg.h"
@@ -123,7 +123,7 @@ void KBarcode::startLabelEditor()
 
 void KBarcode::startBatchPrint()
 {
-    new BatchWizard( this );
+    new BatchAssistant( this );
 }
 
 void KBarcode::editArticles()
@@ -214,7 +214,7 @@ bool KBarcode::parseCmdLine()
     for( int i = 0; i < args->count(); i++) 
 	if( mode == BATCH )
 	{
-	    BatchWizard* b = new BatchWizard();
+	    BatchAssistant* b = new BatchAssistant();
 	    b->setFilename( args->url( i ).path() );
 	    b->setOutputFormat( eFormat );
 	    b->setSerialNumber( serial, serialinc );
@@ -279,9 +279,9 @@ bool KBarcode::connectSQL()
     return SqlTables::getInstance()->connectMySQL();
 }
 
-void KBarcode::showWizard()
+void KBarcode::showAssistant()
 {
-    MainWindow::wizard();
+    MainWindow::assistant();
 }
 
 void KBarcode::showConfigure()

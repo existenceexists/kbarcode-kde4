@@ -37,17 +37,20 @@
 using namespace DSSmallDialogs;
 
 AddAllDialog::AddAllDialog(QWidget *parent)
-    : KDialogBase( KDialogBase::Plain, i18n("Add Barcode_basic"),
-      KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent)
+    : KDialog(parent)
 {
-    QVBoxLayout* layout = new QVBoxLayout( plainPage(), 6, 6 );
+	setCaption(i18n("Add Barcode_basic"));
+	setButtons(KDialog::Ok | KDialog::Cancel, KDialog::Ok);
+	QFrame *main_widget=new QFrame(this);
+	setMainWidget(main_widget);
+    QVBoxLayout* layout = new QVBoxLayout(main_widget, 6, 6 );
 
-    group = new KLineEdit( plainPage() );
-    number = new KIntNumInput( plainPage() );
+    group = new KLineEdit( main_widget);
+    number = new KIntNumInput( main_widget );
     number->setLabel( i18n( "Number of labels:" ) );
     number->setRange( 1, 10000, 1, false );
 
-    layout->addWidget( new QLabel( i18n("Group:"), plainPage() ) );
+    layout->addWidget( new QLabel( i18n("Group:"), main_widget) );
     layout->addWidget( group );
     layout->addWidget( number );
 }
@@ -63,16 +66,18 @@ int AddAllDialog::numberLabels() const
 }
 
 AddItemsDialog::AddItemsDialog(QWidget *parent)
-    : KDialogBase( KDialogBase::Plain, i18n("Add Items"),
-      KDialogBase::User1 | KDialogBase::Close, KDialogBase::User1, parent)
+    : KDialog(parent)
 {
+	setCaption(i18n("Add Items"));
+	setButtons(KDialog::User1 | KDialog::Close, KDialog::User1);
     init();
 }
 
 AddItemsDialog::AddItemsDialog( const QString & a, const QString & g, int c, QWidget* parent)
-    : KDialogBase( KDialogBase::Plain, i18n("Edit Item"),
-      KDialogBase::Ok| KDialogBase::Close, KDialogBase::Ok, parent)
+    : KDialog(parent)
 {
+	setCaption(i18n("Edit Item"));
+	setButtons(KDialogBase::Ok| KDialogBase::Close, KDialogBase::Ok);
     init();
     article->setText( a );
     group->setText( g );
@@ -81,25 +86,27 @@ AddItemsDialog::AddItemsDialog( const QString & a, const QString & g, int c, QWi
 
 void AddItemsDialog::init()
 {
-    plainPage()->setFrameStyle( QFrame::StyledPanel | QFrame::Sunken );
-    plainPage()->setLineWidth( 2 );
+	QFrame *main_widget=new QFrame(this);
+	setMainWidget(main_widget);
+	main_widget->setFrameStyle( QFrame::StyledPanel | QFrame::Sunken );
+    main_widget->setLineWidth( 2 );
 
-    QHBoxLayout* layout = new QHBoxLayout( plainPage(), 6, 6 );
+    QHBoxLayout* layout = new QHBoxLayout( main_widget, 6, 6 );
 
-    group = new KLineEdit( plainPage() );
-    article = new KLineEdit( plainPage() );
+    group = new KLineEdit( main_widget );
+    article = new KLineEdit( main_widget );
 
-    number = new KIntNumInput( plainPage() );
+    number = new KIntNumInput( main_widget );
     number->setLabel( i18n( "Number of labels:" ), Qt::AlignLeft | Qt::AlignVCenter );
     number->setRange( 1, 10000, 1, false );
 
     layout->addWidget( number );
-    layout->addWidget( new QLabel( i18n("Article:" ), plainPage() ) );
+    layout->addWidget( new QLabel( i18n("Article:" ), main_widget ) );
     layout->addWidget( article );
-    layout->addWidget( new QLabel( i18n("Group:"), plainPage() ) );
+    layout->addWidget( new QLabel( i18n("Group:"), main_widget ) );
     layout->addWidget( group );
 
-    setButtonText( KDialogBase::User1, i18n("&Add") );
+    setButtonText( KDialog::User1, i18n("&Add") );
 
     setupSql();
 

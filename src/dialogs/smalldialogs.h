@@ -19,7 +19,7 @@
 #define SMALLDIALOGS_H
 
 #include <qwidget.h>
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 class KCompletion;
 class KIntNumInput;
@@ -27,7 +27,7 @@ class KLineEdit;
 
 namespace DSSmallDialogs {
 
-    class AddAllDialog : public KDialogBase {
+    class AddAllDialog : public KDialog {
         Q_OBJECT
         public:
             AddAllDialog(QWidget *parent=0);
@@ -40,7 +40,7 @@ namespace DSSmallDialogs {
             KIntNumInput* number;
     };
 
-    class AddItemsDialog : public KDialogBase {
+    class AddItemsDialog : public KDialog {
         Q_OBJECT
         public:
             AddItemsDialog( QWidget* parent = 0 );

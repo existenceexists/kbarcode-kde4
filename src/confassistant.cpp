@@ -1,5 +1,5 @@
 /***************************************************************************
-                          confwizard.cpp  -  description
+                          confassistant.cpp  -  description
                              -------------------
     begin                : Son Jun 16 2002
     copyright            : (C) 2002 by Dominik Seichter
@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "confwizard.h"
+#include "confassistant.h"
 #include "sqltables.h"
 #include "printersettings.h"
 #include "mainwindow.h"
@@ -49,7 +49,7 @@ const char* description = I18N_NOOP(
         "KBarcode is a barcode and label printing application for KDE 3. It can "
         "be used to print every thing from simple business cards up to complex "
         "labels with several barcodes (e.g. article descriptions). KBarcode "
-        "comes with an easy to use WYSIWYG label designer, a setup wizard, "
+        "comes with an easy to use WYSIWYG label designer, a setup assistant, "
         "batch import of labels (directly from the delivery note), thousands "
         "of predefined labels, database management tools and translations "
         "in many languages. Even printing more than 10.000 labels in one go is "
@@ -57,8 +57,8 @@ const char* description = I18N_NOOP(
         "replacement for the creation of barcodes. All major types of barcodes "
         "like EAN, UPC, CODE39 and ISBN are supported." );
 
-ConfWizard::ConfWizard( QWidget* parent, bool modal )
-    : KWizard( parent, modal )
+ConfAssistant::ConfAssistant( QWidget* parent, bool modal )
+    : KAssistant( parent, modal )
 {
     setCaption( i18n( "Configure KBarcode" ) );
 
@@ -75,17 +75,17 @@ ConfWizard::ConfWizard( QWidget* parent, bool modal )
     connect( checkDatabase, SIGNAL( clicked() ), this, SLOT( useDatabase() ) );
 }
 
-ConfWizard::~ConfWizard()
+ConfAssistant::~ConfAssistant()
 { }
 
-void ConfWizard::accept()
+void ConfAssistant::accept()
 {
     sqlwidget->save( checkDatabase->isChecked() );
 
-    KWizard::accept();
+    KAssistant::accept();
 }
 
-void ConfWizard::setupPage1()
+void ConfAssistant::setupPage1()
 {
     page = new QWidget( this );
     pageLayout = new QVBoxLayout( page, 11, 6, "pageLayout");
@@ -115,7 +115,7 @@ void ConfWizard::setupPage1()
     addPage( page, i18n( "Welcome" ) );
 }
 
-void ConfWizard::setupPage0()
+void ConfAssistant::setupPage0()
 {
     QWidget* page_0 = new QWidget( this );
     QVBoxLayout* pageLayout = new QVBoxLayout( page_0, 11, 6, "pageLayout");
@@ -128,7 +128,7 @@ void ConfWizard::setupPage0()
     addPage( page_0, i18n("System Check") );
 }
 
-void ConfWizard::setupPage2()
+void ConfAssistant::setupPage2()
 {
     page_2 = new QWidget( this );
     pageLayout_2 = new QVBoxLayout( page_2, 11, 6, "pageLayout_2");
@@ -148,7 +148,7 @@ void ConfWizard::setupPage2()
     addPage( page_2, i18n( "Database" ) );
 }
 
-void ConfWizard::setupPage3()
+void ConfAssistant::setupPage3()
 {
     page_3 = new QWidget( this );
     pageLayout_3 = new QVBoxLayout( page_3, 11, 6, "pageLayout_3");
@@ -174,12 +174,12 @@ void ConfWizard::setupPage3()
     addPage( page_3, i18n( "Create Tables" ) );
 }
 
-void ConfWizard::testSettings( bool b )
+void ConfAssistant::testSettings( bool b )
 {
     setNextEnabled( page_2, b );
 }
 
-void ConfWizard::create()
+void ConfAssistant::create()
 {
     KApplication::setOverrideCursor( Qt::WaitCursor );
     if(!SqlTables::getInstance()->newTables( sqlwidget->username(), sqlwidget->password(), sqlwidget->hostname(), sqlwidget->database(), sqlwidget->driver() ) )
@@ -211,7 +211,7 @@ void ConfWizard::create()
     db->close();
 }
 
-void ConfWizard::example()
+void ConfAssistant::example()
 {
     QSqlDatabase* db = QSqlDatabase::addDatabase( sqlwidget->driver() );
     db->setDatabaseName( sqlwidget->database() );
@@ -231,9 +231,9 @@ void ConfWizard::example()
     db->close();
 }
 
-void ConfWizard::showPage( QWidget* page )
+void ConfAssistant::showPage( QWidget* page )
 {
-    QWizard::showPage(page);
+    QAssistant::showPage(page);
 
     if( page == page_2 && !sqlwidget->driverCount() ) {
         KMessageBox::information( this, i18n(
@@ -247,7 +247,7 @@ void ConfWizard::showPage( QWidget* page )
         finishButton()->setEnabled( true );
 }
 
-void ConfWizard::useDatabase()
+void ConfAssistant::useDatabase()
 {
     setFinishEnabled( page_2, !checkDatabase->isChecked() );
     setNextEnabled( page_2, false );
@@ -256,4 +256,4 @@ void ConfWizard::useDatabase()
 }
 
 
-#include "confwizard.moc"
+#include "confassistant.moc"

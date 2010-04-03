@@ -19,7 +19,7 @@
 #define PRINTLABELDLG_H
 
 #include <qwidget.h>
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 class QCheckBox;
 class KIntNumInput;
@@ -31,7 +31,7 @@ class KIntNumInput;
   * pages shall be printed and at which position the first
   * label should be printed.
   */
-class PrintLabelDlg : public KDialogBase  {
+class PrintLabelDlg : public KDialog  {
     Q_OBJECT
     public: 
         PrintLabelDlg(QWidget *parent=0);

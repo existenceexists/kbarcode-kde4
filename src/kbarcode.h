@@ -81,9 +81,9 @@ class KBarcode: public MainWindow {
           */
         bool connectSQL();
         /** allow DCOP interface
-          * to start the configuration wizard.
+          * to start the configuration assistant.
           */
-        void showWizard();
+        void showAssistant();
         /** show preferences from DCOP.
           */
         void showConfigure();

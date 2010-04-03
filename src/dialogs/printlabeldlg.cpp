@@ -33,6 +33,7 @@ PrintLabelDlg::PrintLabelDlg(QWidget *parent )
       KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent)
 {
     QVBoxLayout* box = new QVBoxLayout( plainPage() );
+	
 
     numLabels  = new KIntNumInput( plainPage() );
     numLabels->setLabel( i18n("Number of labels:" ), Qt::AlignLeft | Qt::AlignVCenter );

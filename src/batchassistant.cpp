@@ -1,5 +1,5 @@
 /***************************************************************************
-                          batchwizard.cpp  -  description
+                          batchassistant.cpp  -  description
                              -------------------
     begin                : Sun Mar 20 2005
     copyright            : (C) 2005 by Dominik Seichter
@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "batchwizard.h"
-#include "batchwizard.moc"
+#include "batchassistant.h"
+#include "batchassistant.moc"
 #include "barcodeprinterdlg.h"
 #include "batchprinter.h"
 #include "csvfile.h"
@@ -95,8 +95,8 @@ private:
 
 };
 
-BatchWizard::BatchWizard( QWidget* parent )
-    : KWizard( parent )
+BatchAssistant::BatchAssistant( QWidget* parent )
+    : KAssistant( parent )
 {
     setupPage1();
     setupPage2();
@@ -113,17 +113,17 @@ BatchWizard::BatchWizard( QWidget* parent )
     show();
 }
 
-BatchWizard::~BatchWizard()
+BatchAssistant::~BatchAssistant()
 {
     delete compGroup;
 }
 
-void BatchWizard::setupPage1()
+void BatchAssistant::setupPage1()
 {
     page1 = new QWidget( this );
     QVBoxLayout* pageLayout = new QVBoxLayout( page1, 11, 6, "pageLayout");
 
-    QLabel* label = new QLabel( i18n("<qt>This wizard will guide you through the process "
+    QLabel* label = new QLabel( i18n("<qt>This assistant will guide you through the process "
 				     "of printing many labels with KBarcode.<br>The first step "
 				     "is to select the KBarcode label file you want to print.</qt>"), page1 );
     pageLayout->addWidget( label );
@@ -146,7 +146,7 @@ void BatchWizard::setupPage1()
     connect( m_url, SIGNAL( textChanged( const QString & ) ), this, SLOT( enableControls() ) );
 }
 
-void BatchWizard::setupPage2()
+void BatchAssistant::setupPage2()
 {
     page2 = new QWidget( this );
     QVBoxLayout* pageLayout = new QVBoxLayout( page2, 11, 6, "pageLayout");
@@ -171,7 +171,7 @@ void BatchWizard::setupPage2()
     addPage( page2, i18n("Data Source") );
 }
 
-void BatchWizard::setupPage3()
+void BatchAssistant::setupPage3()
 {
     page3 = new QWidgetStack( this );
 
@@ -183,7 +183,7 @@ void BatchWizard::setupPage3()
     addPage( page3, i18n("Print Data") );
 }
 
-void BatchWizard::setupPage4()
+void BatchAssistant::setupPage4()
 {
     page4 = new QVBox( this );
     page4->setSpacing( 5 );
@@ -206,7 +206,7 @@ void BatchWizard::setupPage4()
     connect( buttonTableRemove, SIGNAL( clicked() ), this, SLOT( slotTableRemove() ) );
 }
 
-void BatchWizard::setupPage5()
+void BatchAssistant::setupPage5()
 {
     TokenProvider serial( this );
 
@@ -232,7 +232,7 @@ void BatchWizard::setupPage5()
     addPage( page5, i18n("Serial Number") );
 }
 
-void BatchWizard::setupPage10()
+void BatchAssistant::setupPage10()
 {
     page10 = new QWidget( this );
     QVBoxLayout* pageLayout = new QVBoxLayout( page10, 11, 6, "pageLayout");
@@ -296,7 +296,7 @@ void BatchWizard::setupPage10()
     addPage( page10, i18n("Output Device") );
 }
 
-void BatchWizard::setupStackPage1()
+void BatchAssistant::setupStackPage1()
 {
     stack1 = new QVBox( page3, "stack1" );
     stack1->setSpacing( 5 );
@@ -343,7 +343,7 @@ void BatchWizard::setupStackPage1()
     page3->addWidget( stack1 );
 }
 
-void BatchWizard::setupStackPage2()
+void BatchAssistant::setupStackPage2()
 {
     stack2 = new QHBox( page3, "stack2" );
     stack2->setSpacing( 5 );
@@ -380,7 +380,7 @@ void BatchWizard::setupStackPage2()
     page3->addWidget( stack2 );
 }
 
-void BatchWizard::setupStackPage3()
+void BatchAssistant::setupStackPage3()
 {
     stack3 = new QVBox( page3, "stack3" );
 
@@ -391,7 +391,7 @@ void BatchWizard::setupStackPage3()
     page3->addWidget( stack3 );
 }
 
-void BatchWizard::setupStackPage4()
+void BatchAssistant::setupStackPage4()
 {
     stack4 = new QWidget( page3, "stack4" );
     
@@ -469,7 +469,7 @@ void BatchWizard::setupStackPage4()
     page3->addWidget( stack4 );
 }
 
-void BatchWizard::setupSql()
+void BatchAssistant::setupSql()
 {
     SqlTables* tables = SqlTables::getInstance();
     if( !tables->isConnected() )
@@ -485,7 +485,7 @@ void BatchWizard::setupSql()
     }
 }
 
-void BatchWizard::enableControls()
+void BatchAssistant::enableControls()
 {
     setAppropriate( page4, radioVarImport->isChecked() );
 
@@ -526,7 +526,7 @@ void BatchWizard::enableControls()
 	setFinishEnabled( page10, true );
 }
 
-void BatchWizard::showPage( QWidget* p )
+void BatchAssistant::showPage( QWidget* p )
 {
     if( p == page3 )
     {
@@ -550,15 +550,15 @@ void BatchWizard::showPage( QWidget* p )
 	    return;
 
 
-    KWizard::showPage( p );
+    KAssistant::showPage( p );
 }
 
-void BatchWizard::accept()
+void BatchAssistant::accept()
 {
     printNow( QString::null );
 }
 
-void BatchWizard::printNow( const QString & printer, bool bUserInteraction )
+void BatchAssistant::printNow( const QString & printer, bool bUserInteraction )
 {
     BatchPrinter* batch = NULL;
     QPrinter* prn = NULL;
@@ -621,7 +621,7 @@ void BatchWizard::printNow( const QString & printer, bool bUserInteraction )
     }
 
     if( !checkKeepOpen->isChecked() )
-        KWizard::accept();
+        KAssistant::accept();
 
     KApplication::setOverrideCursor( QCursor( Qt::ArrowCursor ), true );
     setupBatchPrinter( batch, batchType );
@@ -631,7 +631,7 @@ void BatchWizard::printNow( const QString & printer, bool bUserInteraction )
     delete batch;
 }
 
-void BatchWizard::setupBatchPrinter( BatchPrinter* batch, int m )
+void BatchAssistant::setupBatchPrinter( BatchPrinter* batch, int m )
 {
     Definition* def = NULL;
     QString description;
@@ -730,7 +730,7 @@ void BatchWizard::setupBatchPrinter( BatchPrinter* batch, int m )
 }
 
 
-void BatchWizard::addItem()
+void BatchAssistant::addItem()
 {
     DSSmallDialogs::AddItemsDialog aid( this );
     aid.setGroupCompletion( compGroup );
@@ -740,12 +740,12 @@ void BatchWizard::addItem()
     aid.exec();
 }
 
-bool BatchWizard::slotAddItem( const QString & article, const QString & group, int count )
+bool BatchAssistant::slotAddItem( const QString & article, const QString & group, int count )
 {
     return this->addItem( article, group, count, true );
 }
 
-bool BatchWizard::addItem( const QString & article, const QString & group, int count, bool msg )
+bool BatchAssistant::addItem( const QString & article, const QString & group, int count, bool msg )
 {
     if( !article.isEmpty() && !existsArticle( article ) ) {
         if( msg )
@@ -766,7 +766,7 @@ bool BatchWizard::addItem( const QString & article, const QString & group, int c
     return true;
 }
 
-void BatchWizard::addGroupCompletion( const QString & group )
+void BatchAssistant::addGroupCompletion( const QString & group )
 {
     if( !group.isEmpty() ) 
     {
@@ -776,7 +776,7 @@ void BatchWizard::addGroupCompletion( const QString & group )
     }
 }
 
-bool BatchWizard::existsArticle( const QString & article )
+bool BatchAssistant::existsArticle( const QString & article )
 {
     if( article.isEmpty() )
         return false;
@@ -788,14 +788,14 @@ bool BatchWizard::existsArticle( const QString & article )
     return false;
 }
 
-void BatchWizard::editItem()
+void BatchAssistant::editItem()
 {
     QListViewItem* item = sqlList->selectedItem();
     if( item )
         changeItem( item, QPoint(0,0), 0 );
 }
 
-void BatchWizard::changeItem( QListViewItem* item, const QPoint &, int )
+void BatchAssistant::changeItem( QListViewItem* item, const QPoint &, int )
 {
     if(!item)
         return;
@@ -814,7 +814,7 @@ void BatchWizard::changeItem( QListViewItem* item, const QPoint &, int )
     }
 }
 
-void BatchWizard::removeItem() 
+void BatchAssistant::removeItem() 
 {
     QListViewItem* item = sqlList->firstChild();
     while( item ) 
@@ -841,19 +841,19 @@ void BatchWizard::removeItem()
     enableControls();
 }
 
-void BatchWizard::customerIdChanged( int index ) 
+void BatchAssistant::customerIdChanged( int index ) 
 {
     customerName->setCurrentItem( index );
     enableControls();
 }
 
-void BatchWizard::customerNameChanged( int index ) 
+void BatchAssistant::customerNameChanged( int index ) 
 {
     customerId->setCurrentItem( index );
     enableControls();
 }
 
-void BatchWizard::addAllItems() 
+void BatchAssistant::addAllItems() 
 {
     DSSmallDialogs::AddAllDialog* dlg = new DSSmallDialogs::AddAllDialog( this );
     if( dlg->exec() == QDialog::Accepted )
@@ -873,20 +873,20 @@ void BatchWizard::addAllItems()
     }
 }
 
-void BatchWizard::loadFromFile() 
+void BatchAssistant::loadFromFile() 
 {
     QString f = KFileDialog::getOpenFileName( 0, 0, this );
     if( !f.isEmpty() )
         loadFromFile( f );
 }
 
-void BatchWizard::loadFromClipboard() 
+void BatchAssistant::loadFromClipboard() 
 {
     QClipboard *cb = KApplication::clipboard();
     loadData( cb->text() );
 }
 
-void BatchWizard::loadFromFile( const QString & url ) 
+void BatchAssistant::loadFromFile( const QString & url ) 
 {
     QByteArray data;
     QFile file( url );
@@ -902,7 +902,7 @@ void BatchWizard::loadFromFile( const QString & url )
     loadData( QString( data ) );
 }
 
-void BatchWizard::loadData( const QString & data ) 
+void BatchAssistant::loadData( const QString & data ) 
 {
     labelprinterdata* lpdata = PrinterSettings::getInstance()->getData();
     if( lpdata->separator.isEmpty() ) 
@@ -980,7 +980,7 @@ void BatchWizard::loadData( const QString & data )
     enableControls();
 }
 
-void BatchWizard::fillByteArray()
+void BatchAssistant::fillByteArray()
 {
     if( m_bytearray_filename != m_url->url() )
     {
@@ -997,7 +997,7 @@ void BatchWizard::fillByteArray()
     }
 }
 
-void BatchWizard::fillVarList()
+void BatchAssistant::fillVarList()
 {
     fillByteArray();
     QDomDocument doc( "KBarcodeLabel" );
@@ -1031,7 +1031,7 @@ void BatchWizard::fillVarList()
     delete def;
 }
 
-void BatchWizard::fillAddressList()
+void BatchAssistant::fillAddressList()
 {
     KABC::AddressBook* ab = KABC::StdAddressBook::self();
     listAddress->clear();
@@ -1043,7 +1043,7 @@ void BatchWizard::fillAddressList()
     listAddress->setUpdatesEnabled( true );
 }
 
-bool BatchWizard::fillVarTable()
+bool BatchAssistant::fillVarTable()
 {
     // Clear the table
     m_varTable->setNumRows( 0 );
@@ -1127,24 +1127,24 @@ bool BatchWizard::fillVarTable()
     return true;
 }
 
-void BatchWizard::slotTableInsert()
+void BatchAssistant::slotTableInsert()
 {
     m_varTable->insertRows( m_varTable->numRows(), 1 );
 }
 
-void BatchWizard::slotTableRemove()
+void BatchAssistant::slotTableRemove()
 {
     QTableSelection sel = m_varTable->selection( m_varTable->currentSelection() );
     m_varTable->removeRow( sel.topRow() );
 }
 
-void BatchWizard::setFilename( const QString & url )
+void BatchAssistant::setFilename( const QString & url )
 {
     m_url->setURL( url );
     enableControls();
 }
 
-void BatchWizard::setImportSqlQuery( const QString & query )
+void BatchAssistant::setImportSqlQuery( const QString & query )
 {
     radioImportCSV->setChecked( false );
     radioImportManual->setChecked( false );
@@ -1162,7 +1162,7 @@ void BatchWizard::setImportSqlQuery( const QString & query )
     showPage( page4 );
 }
 
-void BatchWizard::setImportCsvFile( const QString & filename )
+void BatchAssistant::setImportCsvFile( const QString & filename )
 {
     radioImportCSV->setChecked( true );
     radioImportManual->setChecked( false );
@@ -1180,7 +1180,7 @@ void BatchWizard::setImportCsvFile( const QString & filename )
     showPage( page4 );
 }
 
-void BatchWizard::setNumLabels( const int n )
+void BatchAssistant::setNumLabels( const int n )
 {
     numLabels->setValue( n );
     radioSimple->setChecked( true );
@@ -1189,7 +1189,7 @@ void BatchWizard::setNumLabels( const int n )
     enableControls();
 }
 
-void BatchWizard::setOutputFormat( const int e )
+void BatchAssistant::setOutputFormat( const int e )
 {
     radioBarcode->setChecked( false );
     radioImage->setChecked( false );
@@ -1212,7 +1212,7 @@ void BatchWizard::setOutputFormat( const int e )
     enableControls();
 }
 
-void BatchWizard::setSerialNumber( const QString & val, int inc )
+void BatchAssistant::setSerialNumber( const QString & val, int inc )
 {
     serialInc->setValue( inc );
     serialStart->setText( val );
@@ -1220,31 +1220,31 @@ void BatchWizard::setSerialNumber( const QString & val, int inc )
     // Not needed here: enableControls();
 }
 
-void BatchWizard::slotAddAddress()
+void BatchAssistant::slotAddAddress()
 {
     moveAddress( listAddress, listSelectedAddress );
     enableControls();
 }
 
-void BatchWizard::slotAddAllAddress()
+void BatchAssistant::slotAddAllAddress()
 {
     moveAddress( listAddress, listSelectedAddress, true );
     enableControls();
 }
 
-void BatchWizard::slotRemoveAddress()
+void BatchAssistant::slotRemoveAddress()
 {
     moveAddress( listSelectedAddress, listAddress );
     enableControls();
 }
 
-void BatchWizard::slotRemoveAllAddress()
+void BatchAssistant::slotRemoveAllAddress()
 {
     moveAddress( listSelectedAddress, listAddress, true );
     enableControls();
 }
 
-void BatchWizard::moveAddress( QListView* src, QListView* dst, bool bAll )
+void BatchAssistant::moveAddress( QListView* src, QListView* dst, bool bAll )
 {
     QListViewItem* item = src->firstChild();
     QListViewItem* cur;

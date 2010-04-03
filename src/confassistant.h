@@ -1,5 +1,5 @@
 /***************************************************************************
-                          confwizard.h  -  description
+                          confassistant.h  -  description
                              -------------------
     begin                : Son Jun 16 2002
     copyright            : (C) 2002 by Dominik Seichter
@@ -15,10 +15,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef CONFWIZARD_H
-#define CONFWIZARD_H
+#ifndef CONFASSISTANT_H
+#define CONFASSISTANT_H
 
-#include <kwizard.h>
+#include <kassistantdialog.h>
 //Added by qt3to4:
 #include <QGridLayout>
 #include <QHBoxLayout>
@@ -38,15 +38,15 @@ class KUrlLabel;
 class QLabel;
 class QWidget;
 class SqlWidget;
-/** KBarcodes configuration wizard.
+/** KBarcodes configuration assistant.
   */
-class ConfWizard : public KWizard
+class ConfAssistant : public KAssistantDialog
 { 
     Q_OBJECT
 
     public:
-        ConfWizard( QWidget* parent = 0, bool modal = true );
-        ~ConfWizard();
+        ConfAssistant( QWidget* parent = 0, bool modal = true );
+        ~ConfAssistant();
 
         void showPage( QWidget* page );
 
@@ -105,4 +105,4 @@ class ConfWizard : public KWizard
         QVBoxLayout* Layout5_2;
 };
 
-#endif // CONFWIZARD_H
+#endif // CONFASSISTANT_H
