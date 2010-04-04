@@ -470,15 +470,21 @@ PropertyImage::PropertyImage( TokenProvider* token, QWidget* parent )
     comboRotation = new KComboBox( FALSE, this );
     label->setBuddy( comboRotation );
 
-    QVButtonGroup* groupFile = new QVButtonGroup( i18n("&Image"), this );
-    radioImagePath = new QRadioButton( i18n("&Load image from path"), groupFile );
-    imgUrl = new KUrlRequester( groupFile );
+    QButtonGroup* groupFile = new QButtonGroup( i18n("&Image"), this );
+    QVBoxLayout* group_file_layout = new QVBoxLayout;
+    radioImagePath = new QRadioButton( i18n("&Load image from path") );
+    group_file_layout->addWidget(radioImagePath);
+    imgUrl = new KUrlRequester;
+    group_file_layout->addWidget(imgUrl);
     imgUrl->setFilter( KImageIO::pattern( KImageIO::Reading ) );
     imgUrl->setMode( KFile::File | KFile::ExistingOnly | KFile::LocalOnly );
-    radioImageExpression = new QRadioButton( i18n("&Read image path from expression"), groupFile );
+    radioImageExpression = new QRadioButton( i18n("&Read image path from expression") );
+    group_file_layout->addWidget(radioImageExpression);
 
-    imgHBox = new QHBox( groupFile );
+    imgHBox = new QHBox;
     imgHBox->setSpacing( 5 );
+    group_file_layout->addWidget(imgHBox);
+    groupFile->setLayout(group_file_layout);
 
     imgExpression = new KLineEdit( imgHBox );
     buttonToken = new KPushButton( i18n("&Insert Data Field..."), imgHBox );
@@ -489,12 +495,16 @@ PropertyImage::PropertyImage( TokenProvider* token, QWidget* parent )
     comboRotation->addItem( i18n("180") );
     comboRotation->addItem( i18n("270") );
     
-    QVButtonGroup* group = new QVButtonGroup( i18n("&Size"), this );
+    QButtonGroup* group = new QButtonGroup( i18n("&Size"), this );
+    QVBoxLayout* group_layout = QVBoxLayout;n
     
-    radioOriginal = new QRadioButton( i18n("&None"), group );
-    radioZoomed = new QRadioButton( i18n("&Zoom"), group );
-    radioScaled = new QRadioButton( i18n("S&cale"), group );
-
+    radioOriginal = new QRadioButton( i18n("&None") );
+    group_layout->addWidget(radioOriginal);
+    radioZoomed = new QRadioButton( i18n("&Zoom") );
+    group_layout->addWidget(radioZoomed);
+    radioScaled = new QRadioButton( i18n("S&cale") );
+    group_layout->addWidget(radioScaled);
+    group->setLayout(group_layout);
     checkMirrorH = new QCheckBox( i18n("Mirror &Horizontaly"), this );
     checkMirrorV = new QCheckBox( i18n("Mirror &Vertically"), this );
 

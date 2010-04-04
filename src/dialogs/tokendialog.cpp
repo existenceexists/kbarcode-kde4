@@ -64,10 +64,14 @@ TokenDialog::TokenDialog(TokenProvider* token ,QWidget *parent)
 
 void TokenDialog::setupPage1()
 {
-    QVButtonGroup* page = new QVButtonGroup( i18n("What do you want to insert?") );
+    QButtonGroup* page = new QButtonGroup( i18n("What do you want to insert?") );
+    QVBoxLayout* page_layout=new QVBoxLayout;
 
-    radioFixed = new QRadioButton( i18n("Insert a &fixed data field"), page );
-    radioCustom = new QRadioButton( i18n("Insert a &custom SQL query, variable or JavaScript function"), page );
+    radioFixed = new QRadioButton( i18n("Insert a &fixed data field") );
+    page_layout->addWidget(radioFixed);
+    radioCustom = new QRadioButton( i18n("Insert a &custom SQL query, variable or JavaScript function") );
+    page_layout->addWidget(radioCustom);
+    page->setLayout(page_layout);
     
     radioFixed->setChecked( true );
 
@@ -92,14 +96,20 @@ void TokenDialog::setupStackPage1()
 {
     stackPage1 = new QVBox();
 
-    QVButtonGroup* group = new QVButtonGroup( i18n("What do you want to insert?"), stackPage1 );
-    radioAll = new QRadioButton( i18n("&Select from a list of all tokens"), group );
-    radioLabel = new QRadioButton( i18n("Insert printing &informations"), group );
-    radioSQL = new QRadioButton( i18n("&Insert a database field"), group );
-    radioDate = new QRadioButton( i18n("Insert a &date/time function"), group );
-    radioAddress = new QRadioButton( i18n("Insert an &addressbook field"), group );
-
+    QButtonGroup* group = new QButtonGroup( i18n("What do you want to insert?"), stackPage1 );
+    QVBoxLayout* group_layout = new QVBoxLayout;
+    radioAll = new QRadioButton( i18n("&Select from a list of all tokens") );
+    group_layout->addWidget(radioAll);
+    radioLabel = new QRadioButton( i18n("Insert printing &informations") );
+    group_layout->addWidget(radioLabel);
+    radioSQL = new QRadioButton( i18n("&Insert a database field") );
+    group_layout->addWidget(radioSQL);
+    radioDate = new QRadioButton( i18n("Insert a &date/time function") );
+    group_layout->addWidget(radioDate);
+    radioAddress = new QRadioButton( i18n("Insert an &addressbook field") );
     radioAll->setChecked( true );
+    group_layout->addWidget(radioAddress);
+    group->setLayout(group_layout);
 
     page2->addWidget( stackPage1 );
 }
@@ -108,14 +118,16 @@ void TokenDialog::setupStackPage2()
 {
     stackPage2 = new QVBox();
 
-    QVButtonGroup* group = new QVButtonGroup( i18n("What do you want to insert?"), stackPage2 );
-
-    radioVariable = new QRadioButton( i18n("Insert a custom &variable"), group );
-    radioSQLQuery = new QRadioButton( i18n("Insert a &SQL query"), group );
-    radioJavaScript = new QRadioButton( i18n("Insert a &JavaScript function"), group );
-
+    QButtonGroup* group = new QButtonGroup( i18n("What do you want to insert?"), stackPage2 );
+    QVBoxLayout* group_layout = new QVBoxLayout;
+    radioVariable = new QRadioButton( i18n("Insert a custom &variable") );
+    group_layout->addWidget(radioVariable);
+    radioSQLQuery = new QRadioButton( i18n("Insert a &SQL query") );
+    group_layout->addWidget(radioSQLQuery);
+    radioJavaScript = new QRadioButton( i18n("Insert a &JavaScript function") );
     radioVariable->setChecked( true );
-
+    group_layout->addWidget(radioJavaScript);
+    group->setLayout(group_layout);
     connect( radioVariable, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
     connect( radioSQLQuery, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
     connect( radioJavaScript, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
@@ -188,16 +200,20 @@ void TokenDialog::setupStack2Page2()
 
 void TokenDialog::setupStack2Page3() 
 {
-    stack2Page3 = new QVButtonGroup();
+    stack2Page3 = new QButtonGroup();
+    QVBoxLayout* group_layout = new QVBoxLayout;
 
-    radioVariableNew = new QRadioButton( i18n("&Create a new custom variable"), stack2Page3 );
-    editVariable = new KLineEdit( stack2Page3 );
+    radioVariableNew = new QRadioButton( i18n("&Create a new custom variable") );
+    group_layout->addWidget(radioVariableNew);
+    editVariable = new KLineEdit;
+    group_layout->addWidget(editVariable);
 
-    radioVariableExisting = new QRadioButton( i18n("&Insert an existing custom variable"), stack2Page3 );
-    listVariable = new KListBox( stack2Page3 );
-
+    radioVariableExisting = new QRadioButton( i18n("&Insert an existing custom variable") );
+    group_layout->addWidget(radioVariableExisting);
+    listVariable = new KListBox;
     radioVariableNew->setChecked( true );
-
+    group_layout->addWidget(listVariable);
+    stack2Page3->setLayout(group_layout);
     if( m_token )
         listVariable->insertStringList( m_token->listUserVars() );
 

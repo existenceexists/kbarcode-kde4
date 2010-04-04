@@ -40,7 +40,7 @@
 #include <qradiobutton.h>
 #include <q3sqlselectcursor.h> 
 #include <qtooltip.h>
-#include <qvbuttongroup.h>
+#include <QGroupBox>
 #include <q3widgetstack.h>
 //Added by qt3to4:
 #include <QHBoxLayout>
@@ -151,13 +151,18 @@ void BatchAssistant::setupPage2()
     page2 = new QWidget( this );
     QVBoxLayout* pageLayout = new QVBoxLayout( page2, 11, 6, "pageLayout");
 
-    QVButtonGroup* group = new QVButtonGroup( page2 );
-    
-    radioSimple = new QRadioButton( i18n("Print &labels without data"), group );
-    radioSqlArticles = new QRadioButton( i18n("Print &articles from KBarcodes SQL database"), group );
-    radioVarImport = new QRadioButton( i18n("Import &variables and print"), group );
-    radioAddressBook = new QRadioButton( i18n("Print &contacts from your addressbook"), group );
+    QButtonGroup* group = new QButtonGroup( page2 );
+    QVBoxLayout* button_layout=new QVBoxLayout;
+    radioSimple = new QRadioButton( i18n("Print &labels without data"));
+	button_layout->addWidget(radioSimple);
+    radioSqlArticles = new QRadioButton( i18n("Print &articles from KBarcodes SQL database"));
+	button_layout->addWidget(radioSqlArticles);
+    radioVarImport = new QRadioButton( i18n("Import &variables and print"));
+	button_layout->addWidget(radioVarImport);
+    radioAddressBook = new QRadioButton( i18n("Print &contacts from your addressbook"));
+	button_layout->addWidget(radioAddressBook);
     radioSimple->setChecked( true );
+	group->setLayout(button_layout);
 
     QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Expanding );
     pageLayout->addWidget( group );
@@ -237,15 +242,20 @@ void BatchAssistant::setupPage10()
     page10 = new QWidget( this );
     QVBoxLayout* pageLayout = new QVBoxLayout( page10, 11, 6, "pageLayout");
 
-    QVButtonGroup* group = new QVButtonGroup( page10 );
+    QButtonGroup* group = new QButtonGroup( page10 );
+	QVBoxLayout* button_layout = new QVBoxLayout;
     
-    radioPrinter = new QRadioButton( i18n("&Print to a system printer or to a file"), group );
-    radioImage = new QRadioButton( i18n("&Create images"), group );
+    radioPrinter = new QRadioButton( i18n("&Print to a system printer or to a file"));
+	button_layout->addWidget(radioPrinter);
+    radioImage = new QRadioButton( i18n("&Create images"));
+	button_layout->addWidget(radioImage);
 
-    imageBox = new QVBox( group );
+    imageBox = new QVBox;
     imageBox->setMargin( 10 );
-
-    radioBarcode = new QRadioButton( i18n("Print to a special &barcode printer"), group );
+	button_layout->addWidget(imageBox);
+    radioBarcode = new QRadioButton( i18n("Print to a special &barcode printer"));
+	button_layout->addWidget(radioBarcode);
+	group->setLayout(button_layout);
 
     QHBox* directoryBox = new QHBox( imageBox );
     directoryBox->setSpacing( 5 );
@@ -264,12 +274,18 @@ void BatchAssistant::setupPage10()
 	comboFormat->setCurrentItem( formats.findIndex( PNG_FORMAT ) );
     label->setBuddy( comboFormat );
 
-    QVButtonGroup* imageNameGroup = new  QVButtonGroup( i18n("&Filename:"), imageBox );
-    radioImageFilenameArticle = new QRadioButton( i18n("Use &article number for filename"), imageNameGroup );
-    radioImageFilenameBarcode = new QRadioButton( i18n("Use &barcode number for filename"), imageNameGroup );
-    radioImageFilenameCustom  = new QRadioButton( i18n("Use &custom filename:"), imageNameGroup );
+    QButtonGroup* imageNameGroup = new  QButtonGroup( i18n("&Filename:"), imageBox );
+    QVBoxLayout* image_button_layout = new QVBoxLayout;
+    radioImageFilenameArticle = new QRadioButton( i18n("Use &article number for filename"));
+	image_button_layout->addWidget(radioImageFilenameArticle);
+    radioImageFilenameBarcode = new QRadioButton( i18n("Use &barcode number for filename"));
+	image_button_layout->addWidget(radioImageFilenameBarcode);
+    radioImageFilenameCustom  = new QRadioButton( i18n("Use &custom filename:"));
+	image_button_layout->addWidget(radioImageFilenameCustom);
     editImageFilename = new KLineEdit( imageNameGroup );
     radioImageFilenameBarcode->setChecked( true );
+	image_button_layout->addWidget(editImageFilename);
+	imageNameGroup->setLayout(image_button_layout);
 
     labelInfo = new QLabel( page10 );
 
@@ -348,22 +364,32 @@ void BatchAssistant::setupStackPage2()
     stack2 = new QHBox( page3, "stack2" );
     stack2->setSpacing( 5 );
 
-    QVButtonGroup* group = new QVButtonGroup( stack2 );
-    radioImportManual = new QRadioButton( i18n("Enter &data manually"), group );
-    radioImportSql = new QRadioButton( i18n("Import variables from a &SQL table"), group );
-    labelSqlQuery = new QLabel( i18n("Please enter a sql &query:"), group );
-    importSqlQuery = new KLineEdit( group );
+    QButtonGroup* group = new QButtonGroup( stack2 );
+    QVBoxLayout* group_layout = new QVBoxLayout;
+    radioImportManual = new QRadioButton( i18n("Enter &data manually") );
+    group_layout->addWidget(radioImportManual);
+    radioImportSql = new QRadioButton( i18n("Import variables from a &SQL table") );
+    group_layout->addWidget(radioImportSql);
+    labelSqlQuery = new QLabel( i18n("Please enter a sql &query:") );
+    group_layout->addWidget(labelSqlQuery);
+    importSqlQuery = new KLineEdit;
+    group_layout->addWidget(importSqlQuery);
     labelSqlQuery->setBuddy( importSqlQuery );
 
-    radioImportCSV = new QRadioButton( i18n("Import from a &CSV file"), group );
-    labelCsvFile= new QLabel( i18n("Please select a csv &file:"), group );
-    importCsvFile = new KUrlRequester( group );
+    radioImportCSV = new QRadioButton( i18n("Import from a &CSV file") );
+    group_layout->addWidget(radioImportCSV);
+    labelCsvFile= new QLabel( i18n("Please select a csv &file:") );
+    group_layout->addWidget(labelCsvFile);
+    importCsvFile = new KUrlRequester;
+    group_layout->addWidget(importCsvFile);
     labelCsvFile->setBuddy( importCsvFile );
-    labelEncoding = new QLabel( i18n("&Encoding:"), group );
-    comboEncoding = new EncodingCombo( group );
+    labelEncoding = new QLabel( i18n("&Encoding:") );
+    group_layout->addWidget(labelEncoding);
+    comboEncoding = new EncodingCombo;
+    group_layout->addWidget(comboEncoding);
     labelEncoding->setBuddy( comboEncoding );
-
     radioImportManual->setChecked( true );
+    group->setLayout(group_layout);
 
     QVBox* box = new QVBox( stack2 );
     box->setSpacing( 5 );

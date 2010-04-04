@@ -164,10 +164,13 @@ void CSVImportDlg::createPage2()
     QSpacerItem* spacer1 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     QSpacerItem* spacer2 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
 
-    QHButtonGroup* buttonGroup = new QHButtonGroup( i18n("File Format:"), mainBox );
-    radioCSVFile = new QRadioButton( i18n("&CSV File"), buttonGroup );
-    radioFixedFile = new QRadioButton( i18n("File with &fixed field width"), buttonGroup );
-
+    QButtonGroup* buttonGroup = new QButtonGroup( i18n("File Format:"), mainBox );
+    QHBoxLayout* group_layout = new QHBoxLayout;
+    radioCSVFile = new QRadioButton( i18n("&CSV File") );
+    group_layout->addWidget(radioCSVFile);
+    radioFixedFile = new QRadioButton( i18n("File with &fixed field width") );
+    group_layout->addWidget(radioFixedFile);
+    buttonGroup->setLayout(group_layout);
     QHBox* hboxFrame = new QHBox( mainBox );
 
     groupCSV = new QGroupBox( i18n("CSV File"), hboxFrame );
