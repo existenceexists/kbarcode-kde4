@@ -46,7 +46,7 @@
 #include <QHBoxLayout>
 #include <QList>
 #include <QSqlQuery>
-#include <QSqlCursor>
+#include <QSqlQuery>
 #include <QFrame>
 #include <QSqlError>
 #include <QVBoxLayout>
@@ -501,13 +501,12 @@ void BatchAssistant::setupSql()
     if( !tables->isConnected() )
         return;
 
-    QSqlCursor cur( TABLE_CUSTOMER );
-    cur.select();
+    QSqlQuery cur( "select customer_no, customer_name from " TABLE_CUSTOMER );
     customerId->clear();
     customerName->clear();
     while ( cur.next() ) {
-        customerId->addItem( cur.value("customer_no" ).toString() );
-        customerName->addItem( cur.value("customer_name" ).toString() );
+        customerId->addItem( cur.value(0).toString() );
+        customerName->addItem( cur.value(1).toString() );
     }
 }
 
