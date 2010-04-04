@@ -28,14 +28,14 @@ class KCompletion;
 class KIntNumInput;
 class KLineEdit;
 class KListBox;
-class KListView;
+class QTreeWidget;
 class KPushButton;
 class KUrlRequester;
 class QCheckBox;
 class QHBox;
 class QLabel;
-class QListView;
-class QListViewItem;
+class QTreeWidget;
+class QTreeWidgetItem;
 class QRadioButton;
 class QTable;
 class QVBox;
@@ -131,7 +131,7 @@ class BatchAssistant : public KAssistantDialog {
 	void customerNameChanged( int index );
 	void addItem();
         bool slotAddItem( const QString & article, const QString & group, int count );
-	void changeItem( QListViewItem* item, const QPoint &, int );
+	void changeItem( QTreeWidgetItem* item, const QPoint &, int );
 	void editItem();
 	void removeItem();
 
@@ -145,7 +145,7 @@ class BatchAssistant : public KAssistantDialog {
         void slotRemoveAllAddress();
 
     private:
-        void moveAddress( QListView* src, QListView* dst, bool bAll = false );
+        void moveAddress( QTreeWidget* src, QTreeWidget* dst, bool bAll = false );
 
 	void fillByteArray();
 	void fillVarList();
@@ -238,10 +238,10 @@ class BatchAssistant : public KAssistantDialog {
 	QTable* m_varTable;
 	KListBox* m_varList;
 
-        KListView* listAddress;
-        KListView* listSelectedAddress;
+        QTreeWidget* listAddress;
+        QTreeWidget* listSelectedAddress;
 
-	KListView* sqlList;
+	QTreeWidget* sqlList;
 	KLineEdit* serialStart;
 
         QCheckBox* checkKeepOpen;

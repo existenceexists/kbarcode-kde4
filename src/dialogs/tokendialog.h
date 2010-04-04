@@ -25,9 +25,9 @@
 #include <QList>
 
 class KListBox;
-class KListView;
+class QTreeWidget;
 class QListBoxItem;
-class QListViewItem;
+class QTreeWidgetItem;
 class KLineEdit;
 class TokenProvider;
 
@@ -50,7 +50,7 @@ class TokenDialog : public QWizard {
 
  private slots:
     void categoryChanged( QListBoxItem* item );
-    void itemChanged( QListViewItem* item );
+    void itemChanged( QTreeWidgetItem* item );
 
  private:
     void initAll();
@@ -122,10 +122,10 @@ class TokenDialog : public QWizard {
     TokenProvider* m_token;
 
     KListBox* category;
-    KListView* allList;
+    QTreeWidget* allList;
     KLineEdit* lineEdit;
 
-    KListView* labelList;
+    QTreeWidget* labelList;
 };
 
 #endif

@@ -470,7 +470,7 @@ PropertyImage::PropertyImage( TokenProvider* token, QWidget* parent )
     comboRotation = new KComboBox( FALSE, this );
     label->setBuddy( comboRotation );
 
-    QButtonGroup* groupFile = new QButtonGroup( i18n("&Image"), this );
+    QGroupBox* groupFile = new QGroupBox( i18n("&Image"), this );
     QVBoxLayout* group_file_layout = new QVBoxLayout;
     radioImagePath = new QRadioButton( i18n("&Load image from path") );
     group_file_layout->addWidget(radioImagePath);
@@ -495,7 +495,7 @@ PropertyImage::PropertyImage( TokenProvider* token, QWidget* parent )
     comboRotation->addItem( i18n("180") );
     comboRotation->addItem( i18n("270") );
     
-    QButtonGroup* group = new QButtonGroup( i18n("&Size"), this );
+    QGroupBox* group = new QGroupBox( i18n("&Size"), this );
     QVBoxLayout* group_layout = QVBoxLayout;n
     
     radioOriginal = new QRadioButton( i18n("&None") );

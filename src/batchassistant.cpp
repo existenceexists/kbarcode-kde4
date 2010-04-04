@@ -47,9 +47,11 @@
 #include <QList>
 #include <QSqlQuery>
 #include <QSqlQuery>
+#include <QTreeWidgetItem>
 #include <QFrame>
 #include <QSqlError>
 #include <QVBoxLayout>
+#include <QGroupBox>
 
 #include <kabc/addressee.h>
 #include <kabc/addresseelist.h>
@@ -64,7 +66,7 @@
 #include <kimageio.h>
 #include <klineedit.h>
 #include <k3listbox.h>
-#include <k3listview.h>
+#include <klistwidget.h>
 #include <kmessagebox.h>
 #include <knuminput.h>
 #include <kmenu.h>
@@ -76,10 +78,10 @@
 
 #define PNG_FORMAT "PNG"
 
-class AddressListViewItem : public KListViewItem {
+class AddressListViewItem : public QTreeWidgetItem {
 public:
-    AddressListViewItem(QListView *parent, KABC::Addressee & addr )
-        : KListViewItem( parent ), m_address( addr )
+    AddressListViewItem(QTreeWidget *parent, KABC::Addressee & addr )
+        : QTreeWidgetItem( parent ), m_address( addr )
         {
             this->setText( 0, m_address.givenName() );
             this->setText( 1, m_address.familyName() );
@@ -96,7 +98,7 @@ private:
 };
 
 BatchAssistant::BatchAssistant( QWidget* parent )
-    : KAssistant( parent )
+    : KAssistantDialog( parent )
 {
     setupPage1();
     setupPage2();
@@ -151,7 +153,7 @@ void BatchAssistant::setupPage2()
     page2 = new QWidget( this );
     QVBoxLayout* pageLayout = new QVBoxLayout( page2, 11, 6, "pageLayout");
 
-    QButtonGroup* group = new QButtonGroup( page2 );
+    QGroupBox* group = new QGroupBox( page2 );
     QVBoxLayout* button_layout=new QVBoxLayout;
     radioSimple = new QRadioButton( i18n("Print &labels without data"));
 	button_layout->addWidget(radioSimple);
@@ -242,7 +244,7 @@ void BatchAssistant::setupPage10()
     page10 = new QWidget( this );
     QVBoxLayout* pageLayout = new QVBoxLayout( page10, 11, 6, "pageLayout");
 
-    QButtonGroup* group = new QButtonGroup( page10 );
+    QGroupBox* group = new QGroupBox( page10 );
 	QVBoxLayout* button_layout = new QVBoxLayout;
     
     radioPrinter = new QRadioButton( i18n("&Print to a system printer or to a file"));
@@ -274,7 +276,7 @@ void BatchAssistant::setupPage10()
 	comboFormat->setCurrentItem( formats.findIndex( PNG_FORMAT ) );
     label->setBuddy( comboFormat );
 
-    QButtonGroup* imageNameGroup = new  QButtonGroup( i18n("&Filename:"), imageBox );
+    QGroupBox* imageNameGroup = new  QGroupBox( i18n("&Filename:"), imageBox );
     QVBoxLayout* image_button_layout = new QVBoxLayout;
     radioImageFilenameArticle = new QRadioButton( i18n("Use &article number for filename"));
 	image_button_layout->addWidget(radioImageFilenameArticle);
@@ -364,7 +366,7 @@ void BatchAssistant::setupStackPage2()
     stack2 = new QHBox( page3, "stack2" );
     stack2->setSpacing( 5 );
 
-    QButtonGroup* group = new QButtonGroup( stack2 );
+    QGroupBox* group = new QGroupBox( stack2 );
     QVBoxLayout* group_layout = new QVBoxLayout;
     radioImportManual = new QRadioButton( i18n("Enter &data manually") );
     group_layout->addWidget(radioImportManual);

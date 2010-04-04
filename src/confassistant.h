@@ -25,7 +25,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 
-class QButtonGroup;
+class QGroupBox;
 class QCheckBox;
 class QVBoxLayout;
 class QHBoxLayout; 
@@ -89,8 +89,7 @@ class ConfAssistant : public KAssistantDialog
         QLabel* TextLabel1_2;
         KPushButton* buttonCreate;
         KPushButton* buttonExample;
-        QButtonGroup* groupDatabase;
-
+      
     protected:
         QVBoxLayout* pageLayout;
         QHBoxLayout* Layout8;
