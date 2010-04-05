@@ -32,8 +32,8 @@ class KLineEdit;
 class TokenProvider;
 
 class QRadioButton;
-class QWidgetStack;
-class QHBox;
+class QStackedWidget;
+class QWidget;
 class KComboBox;
 class QTextBrowser;
 class KPushButton;
@@ -106,8 +106,8 @@ class TokenDialog : public QWizard {
 
     QString m_result;
 
-    QWidgetStack* page2;
-    QWidgetStack* page3;
+    QStackedWidget* page2;
+    QStackedWidget* page3;
 
     QWidget* stackPage1;
     QWidget* stackPage2;

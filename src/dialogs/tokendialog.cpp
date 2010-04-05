@@ -80,23 +80,26 @@ void TokenDialog::setupPage1()
 
 void TokenDialog::setupPage2()
 {
-    page2 = new QWidgetStack();
+    page2 = new QStackedWidget();
 
     addPage( page2, i18n("Step 2 of 3") );
 }
 
 void TokenDialog::setupPage3()
 {
-    page3 = new QWidgetStack();
+    page3 = new QStackedWidget();
 
     addPage( page3, i18n("Step 3 of 3") );
 }
 
 void TokenDialog::setupStackPage1()
 {
-    stackPage1 = new QVBox();
+    stackPage1 = new QWidget;
+    QVBoxLayout* stackPage1_layout = new QVBoxLayout;
+    stackPage1->setLayout(stackPage1_layout);
 
-    QGroupBox* group = new QGroupBox( i18n("What do you want to insert?"), stackPage1 );
+    QGroupBox* group = new QGroupBox( i18n("What do you want to insert?"));
+    stackPage1_layout->addWidget(group);
     QVBoxLayout* group_layout = new QVBoxLayout;
     radioAll = new QRadioButton( i18n("&Select from a list of all tokens") );
     group_layout->addWidget(radioAll);
@@ -111,14 +114,17 @@ void TokenDialog::setupStackPage1()
     group_layout->addWidget(radioAddress);
     group->setLayout(group_layout);
 
-    page2->addWidget( stackPage1 );
+    page2->layout()->addWidget( stackPage1 );
 }
 
 void TokenDialog::setupStackPage2()
 {
-    stackPage2 = new QVBox();
+    stackPage2 = new QWidget();
+    QVBoxLayout* stackPage2_layout = new QVBoxLayout;
+    stackPage2->setLayout(stackPage2_layout);
 
-    QGroupBox* group = new QGroupBox( i18n("What do you want to insert?"), stackPage2 );
+    QGroupBox* group = new QGroupBox( i18n("What do you want to insert?") );
+    stackPage2_layout->addWidget(group);
     QVBoxLayout* group_layout = new QVBoxLayout;
     radioVariable = new QRadioButton( i18n("Insert a custom &variable") );
     group_layout->addWidget(radioVariable);
@@ -132,33 +138,43 @@ void TokenDialog::setupStackPage2()
     connect( radioSQLQuery, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
     connect( radioJavaScript, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
 
-    page2->addWidget( stackPage2 );
+    page2->layout()->addWidget( stackPage2 );
 }
 
 void TokenDialog::setupStack2Page1()
 {
-    stack2Page1 = new QWidget();
+    stack2Page1 = new QWidget;
 
     QVBoxLayout* layout = new QVBoxLayout( stack2Page1 );
     QSplitter* splitter = new QSplitter( stack2Page1 );
     layout->addWidget( splitter );
     
-    QVBox* left = new QVBox( splitter );
-    QVBox* right = new QVBox( splitter );
+    QWidget* left = new QWidget( splitter );
+    QVBoxLayout* left_layout = new QVBoxLayout;
+    left->setLayout(left_layout);
+    QWidget* right = new QWidget( splitter );
+    QVBoxLayout* right_layout = new QVBoxLayout;
+    right->setLayout(right_layout);
     
-    QLabel* label = new QLabel( i18n("&Category:"), left );
-    category = new KListBox( left );
+    QLabel* label = new QLabel( i18n("&Category:") );
+    left_layout->addWidget(label);
+    category = new KListBox;
+    left_layout->addWidget(category);
     label->setBuddy( category );
 
-    label = new QLabel( i18n("&Token:"), right );
-    allList = new QTreeWidget( right );
+    label = new QLabel( i18n("&Token:") );
+    right_layout->addWidget(label);
+    allList = new QTreeWidget;
+    right->addWidget(allList);
     allList->addColumn( i18n("Token"), 0 );
     allList->addColumn( i18n("Description"), 1 );
     allList->setColumnWidthMode( 0, QTreeWidget::Maximum );
     allList->setColumnWidthMode( 1, QTreeWidget::Maximum );
     label->setBuddy( allList );
-    label = new QLabel( i18n("&Custom Expression to be inserted in the token."), right );
-    lineEdit = new KLineEdit( right );
+    label = new QLabel( i18n("&Custom Expression to be inserted in the token.") );
+    right_layout->addWidget(label);
+    lineEdit = new KLineEdit;
+    right_layout->addWidget(lineEdit);
     lineEdit->setEnabled( false );
     label->setBuddy( lineEdit );
 
@@ -170,8 +186,8 @@ void TokenDialog::setupStack2Page1()
     int w = (width() / 4);
     sizes << w << w * 3;
     
-    left->setStretchFactor( category, 2 );
-    right->setStretchFactor( allList, 2 );
+    left_layout->setStretchFactor( category, 2 );
+    right_layout->setStretchFactor( allList, 2 );
     splitter->setSizes( sizes );
 
     connect( category, SIGNAL( executed( QListBoxItem* ) ), this, SLOT( categoryChanged( QListBoxItem* ) ) );
@@ -179,7 +195,7 @@ void TokenDialog::setupStack2Page1()
 
     initAll();
 
-    page3->addWidget( stack2Page1 );
+    page3->layout()->addWidget( stack2Page1 );
 }
 
 void TokenDialog::setupStack2Page2()
@@ -231,41 +247,53 @@ void TokenDialog::setupStack2Page3()
 
 void TokenDialog::setupStack2Page4() 
 {
-    stack2Page4 = new QVBox();
+    stack2Page4 = new QWidget();
+    QVBoxLayout* stack2Page4_layout = new QVBoxLayout;
+    stack2Page4->setLayout(stack2Page4_layout);
 
     if( !SqlTables::isConnected() )
-        new QLabel( i18n("<qt><b>No SQL connection found!</b><br>You can build a query, "
-                         "but you will not be able to execute or test it right now.<br></qt>"), stack2Page4 );
+        stack2Page4_layout->addWidget(new QLabel( i18n("<qt><b>No SQL connection found!</b><br>You can build a query, "
+						       "but you will not be able to execute or test it right now.<br></qt>")));
     
-    QHBox* hbox = new QHBox( stack2Page4 );
+    QWidget* hbox = new QWidget;
+    QHBoxLayout* hbox_layout = new QHBoxLayout;
+    hbox->setLayout(hbox_layout);
+    stack2Page4_layout->addWidget(hbox);
 
-    QLabel* label = new QLabel( i18n("&SQL Query:"), hbox );
-    editQuery = new KLineEdit( hbox );
-    buttonQuery = new KPushButton( i18n("&Test"), hbox );
+    QLabel* label = new QLabel( i18n("&SQL Query:"));
+    hbox_layout->addWidget(label);
+    editQuery = new KLineEdit;
+    hbox_layout->addWidget(editQuery);
+    buttonQuery = new KPushButton( i18n("&Test") );
+    hbox_layout->addWidget(buttonQuery);
     label->setBuddy( editQuery );
 
-    hbox->setStretchFactor( editQuery, 2 );
+    hbox_layout->setStretchFactor( editQuery, 2 );
 
-    new QLabel( i18n("Query test results:"), stack2Page4 );
-    textQueryResults = new QTextBrowser( stack2Page4 );
+    stack2Page4_layout->addWidget(new QLabel( i18n("Query test results:"));
+    textQueryResults = new QTextBrowser;
+    stack2Page4_layout->addWidget(textQueryResults);
     textQueryResults->setReadOnly( true );
 
     connect( buttonQuery, SIGNAL( clicked() ), this, SLOT( testQuery() ) );
     connect( editQuery, SIGNAL( textChanged( const QString & ) ), this, SLOT( enableControls() ) );
         
-    page3->addWidget( stack2Page4 );
+    page3->layout->addWidget( stack2Page4 );
 }
 
 void TokenDialog::setupStack2Page5() 
 {
-    stack2Page5 = new QVBox();
+    stack2Page5 = new QWidget();
+    QVBoxLayout* stack2Page5_layout = new QVBoxLayout;
+    stack2Page5->setLayout(stack2Page5_layout);
 
-    editJavaScript = new DSTextEdit( stack2Page5 );
+    editJavaScript = new DSTextEdit;
+    stack2Page5_layout->addWidget(editJavaScript);
     editJavaScript->setText( i18n("/* Place your JavaScript code into this text field. */\n") );
 
     connect( editJavaScript, SIGNAL( textChanged() ), SLOT( enableControls() ) );
 
-    page3->addWidget( stack2Page5 );
+    page3->layout()->addWidget( stack2Page5 );
 }
 
 void TokenDialog::accept()

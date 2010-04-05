@@ -32,14 +32,13 @@ class QTreeWidget;
 class KPushButton;
 class KUrlRequester;
 class QCheckBox;
-class QHBox;
+class QWidget;
 class QLabel;
 class QTreeWidget;
 class QTreeWidgetItem;
 class QRadioButton;
 class QTable;
-class QVBox;
-class QWidgetStack;
+class QStackedWidget;
 
 class BatchAssistant : public KAssistantDialog {
     Q_OBJECT
@@ -186,17 +185,17 @@ class BatchAssistant : public KAssistantDialog {
 
 	QWidget* page1;
 	QWidget* page2;
-	QWidgetStack* page3;
-	QVBox* page4;
-	QVBox* page5;
+	QStackedWidget* page3;
+	QWidget* page4;
+	QWidget* page5;
 	QWidget* page10;
 
-	QVBox* stack1;
-	QHBox* stack2;
-	QVBox* stack3;
+	QWidget* stack1;
+	QWidget* stack2;
+	QWidget* stack3;
         QWidget* stack4;
 
-	QVBox* imageBox;
+	QWidget* imageBox;
 
 	QLabel* labelInfo;
 	QLabel* labelSqlQuery;

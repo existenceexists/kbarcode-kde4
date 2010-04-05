@@ -52,6 +52,7 @@
 #include <QSqlError>
 #include <QVBoxLayout>
 #include <QGroupBox>
+#include <QStackedWidget>
 
 #include <kabc/addressee.h>
 #include <kabc/addresseelist.h>
@@ -180,7 +181,7 @@ void BatchAssistant::setupPage2()
 
 void BatchAssistant::setupPage3()
 {
-    page3 = new QWidgetStack( this );
+    page3 = new QStackedWidget( this );
 
     setupStackPage1();
     setupStackPage2();
@@ -192,20 +193,28 @@ void BatchAssistant::setupPage3()
 
 void BatchAssistant::setupPage4()
 {
-    page4 = new QVBox( this );
-    page4->setSpacing( 5 );
+    page4 = new QWidget( this );
+    QVBoxLayout* page4_layout = new QVBoxLayout;
+    page4_layout->setSpacing( 5 );
 
-    QHBox* hbox = new QHBox( page4 );
-    hbox->setSpacing( 5 );
+    QWidget* hbox = new QWidget;
+    page4_layout->addWidget(hbox);
+    QHBoxLayout* hbox_layout = new QHBoxLayout;
+    hbox_layout->setSpacing( 5 );
     
-    buttonTableInsert = new KPushButton( i18n("Insert Row"), hbox );
+    buttonTableInsert = new KPushButton( i18n("Insert Row") );
+    hbox_layout->addWidget(buttonTableInsert);
     buttonTableInsert->setIconSet( BarIconSet( "edit" ) );
-    buttonTableRemove = new KPushButton( i18n("Delete Row"), hbox );
+    buttonTableRemove = new KPushButton( i18n("Delete Row") );
+    hbox_layout->addWidget(buttonTableRemove);
     buttonTableRemove->setIconSet( BarIconSet( "editdelete") );
+    hbox->setLayout(hbox_layout);
 
-    m_varTable = new QTable( page4 );
+    m_varTable = new QTable;
+    page4_layout->addWidget(m_varTable);
     m_varTable->setReadOnly( false );
     m_varTable->setSelectionMode( QTable::SingleRow );
+    page4->setLayout(page4_layout);
 
     addPage( page4, i18n("Import Variables") );
 
@@ -217,24 +226,33 @@ void BatchAssistant::setupPage5()
 {
     TokenProvider serial( this );
 
-    page5 = new QVBox( this );
+    page5 = new QWidget( this );
+    QVBoxLayout* page5_layout = new QVBoxLayout;
 
-    new QLabel( i18n( "<qt>KBarcode has support for placing serial numbers on labels. "
+    QLabel *label = new QLabel( i18n( "<qt>KBarcode has support for placing serial numbers on labels. "
 		      "If you did not use the [serial] token on your label in "
 		      "a text field or a barcode, you can skip this page.<br>"
 		      "Serial start is a free form start value containing at least one "
 		      "number. This number is increased for every printed label on the "
-		      "print out.</qt>"), page5 );
+		      "print out.</qt>") );
+    page5_layout->addWidget(label);
 
-    QHBox* hbox = new QHBox( page5 );
-    hbox->setSpacing( 5 );
+    QWidget* hbox = new QWidget;
+    QHBoxLayout* hbox_layout = new QHBoxLayout;
+    page5_layout->addWidget(hbox);
+    hbox_layout->setSpacing( 5 );
     
-    new QLabel( i18n( "Serial start:" ), hbox );
-    serialStart = new KLineEdit( serial.serial(), hbox );
+    label = new QLabel( i18n( "Serial start:" ) );
+    hbox_layout->addWidget(label);
+    serialStart = new KLineEdit( serial.serial() );
+    hbox_layout->addWidget(serialStart);
 
-    serialInc = new KIntNumInput( 1, hbox );
+    serialInc = new KIntNumInput( 1 );
+    hbox_layout->addWidget(serialInc);
     serialInc->setLabel( i18n( "Serial increment:" ), Qt::AlignLeft | Qt::AlignVCenter );
     serialInc->setRange( 1, 10000, 1, false );
+    hbox->setLayout(hbox_layout);
+    page5->setLayout(page5_layout);
 
     addPage( page5, i18n("Serial Number") );
 }
@@ -245,19 +263,19 @@ void BatchAssistant::setupPage10()
     QVBoxLayout* pageLayout = new QVBoxLayout( page10, 11, 6, "pageLayout");
 
     QGroupBox* group = new QGroupBox( page10 );
-	QVBoxLayout* button_layout = new QVBoxLayout;
+    QVBoxLayout* button_layout = new QVBoxLayout;
     
     radioPrinter = new QRadioButton( i18n("&Print to a system printer or to a file"));
-	button_layout->addWidget(radioPrinter);
+    button_layout->addWidget(radioPrinter);
     radioImage = new QRadioButton( i18n("&Create images"));
-	button_layout->addWidget(radioImage);
+    button_layout->addWidget(radioImage);
 
     imageBox = new QVBox;
     imageBox->setMargin( 10 );
-	button_layout->addWidget(imageBox);
+    button_layout->addWidget(imageBox);
     radioBarcode = new QRadioButton( i18n("Print to a special &barcode printer"));
-	button_layout->addWidget(radioBarcode);
-	group->setLayout(button_layout);
+    button_layout->addWidget(radioBarcode);
+    group->setLayout(button_layout);
 
     QHBox* directoryBox = new QHBox( imageBox );
     directoryBox->setSpacing( 5 );
@@ -279,15 +297,15 @@ void BatchAssistant::setupPage10()
     QGroupBox* imageNameGroup = new  QGroupBox( i18n("&Filename:"), imageBox );
     QVBoxLayout* image_button_layout = new QVBoxLayout;
     radioImageFilenameArticle = new QRadioButton( i18n("Use &article number for filename"));
-	image_button_layout->addWidget(radioImageFilenameArticle);
+    image_button_layout->addWidget(radioImageFilenameArticle);
     radioImageFilenameBarcode = new QRadioButton( i18n("Use &barcode number for filename"));
-	image_button_layout->addWidget(radioImageFilenameBarcode);
+    image_button_layout->addWidget(radioImageFilenameBarcode);
     radioImageFilenameCustom  = new QRadioButton( i18n("Use &custom filename:"));
-	image_button_layout->addWidget(radioImageFilenameCustom);
+    image_button_layout->addWidget(radioImageFilenameCustom);
     editImageFilename = new KLineEdit( imageNameGroup );
     radioImageFilenameBarcode->setChecked( true );
-	image_button_layout->addWidget(editImageFilename);
-	imageNameGroup->setLayout(image_button_layout);
+    image_button_layout->addWidget(editImageFilename);
+    imageNameGroup->setLayout(image_button_layout);
 
     labelInfo = new QLabel( page10 );
 
@@ -363,8 +381,11 @@ void BatchAssistant::setupStackPage1()
 
 void BatchAssistant::setupStackPage2()
 {
-    stack2 = new QHBox( page3, "stack2" );
-    stack2->setSpacing( 5 );
+    stack2 = new QWidget("stack2" );
+    QHBoxLayout* stack2_layout = new QHBoxLayout;
+    stack2->setLayout(stack2_layout);
+    stack2_layout->setSpacing( 5 );
+    page3->layout()->addWidget(stack2);
 
     QGroupBox* group = new QGroupBox( stack2 );
     QVBoxLayout* group_layout = new QVBoxLayout;
@@ -393,10 +414,14 @@ void BatchAssistant::setupStackPage2()
     radioImportManual->setChecked( true );
     group->setLayout(group_layout);
 
-    QVBox* box = new QVBox( stack2 );
-    box->setSpacing( 5 );
-
-    new QLabel( i18n("Available Variables:"), box );
+    QWidget* box = new QWidget;
+    QVBoxLayout* box_layout = new QVBoxLayout;
+    box->setLayout(box_layout);
+    box_layout->setSpacing( 5 );
+    stack2->layout()->addWidget(box);
+    QLabel* label;
+    label = new QLabel( i18n("Available Variables:") );
+    box_layout->addWidget(label);
     m_varList = new KListBox( box );
 
     connect( radioImportManual, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
@@ -404,31 +429,40 @@ void BatchAssistant::setupStackPage2()
     connect( radioImportCSV, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
     connect( importSqlQuery, SIGNAL( textChanged( const QString & ) ), this, SLOT( enableControls() ) );
     connect( importCsvFile, SIGNAL( textChanged( const QString & ) ), this, SLOT( enableControls() ) );
-
-    page3->addWidget( stack2 );
 }
 
 void BatchAssistant::setupStackPage3()
 {
-    stack3 = new QVBox( page3, "stack3" );
+    stack3 = new QWidget( "stack3" );
+    QVBoxLayout* stack3_layout = new QVBoxLayout;
+    stack3->SetLayout(stack3_layout);
 
     numLabels = new KIntNumInput( 1, stack3 );
     numLabels->setRange( 1, 100000, 1, true );
     numLabels->setLabel( i18n("&Number of labels to print:"), Qt::AlignLeft | Qt::AlignVCenter );
 
-    page3->addWidget( stack3 );
+    page3->layout()->addWidget( stack3 );
 }
 
 void BatchAssistant::setupStackPage4()
 {
-    stack4 = new QWidget( page3, "stack4" );
+    stack4 = new QWidget( "stack4" );
+    page3->layout()->addWidget(stack4);
     
     QHBoxLayout* mainLayout = new QHBoxLayout( stack4 );
 
-    QVBox* list1 = new QVBox( stack4 );
-    QVBox* list2 = new QVBox( stack4 );
+    QWidget* list1 = new QWidget;
+    QVBoxLayout* list1_layout = new QVBoxLayout;
+    list1->setLayout(list1_layout);
+    stack4->layout()->addWidget(list1);
 
-    QFrame* buttons = new QFrame( stack4 );
+    QWidget* list2 = new QWidget;
+    QVBoxLayout* list2_layout = new QVBoxLayout;
+    list2->setLayout(list2_layout);
+    stack4->layout()->addWidget(list2);
+
+    QFrame* buttons = new QFrame;
+    stack4->layout()->addWidget(buttons);
     buttons->setMargin( 10 );
 
     QVBoxLayout* layout = new QVBoxLayout( buttons );
@@ -464,10 +498,12 @@ void BatchAssistant::setupStackPage4()
     mainLayout->setStretchFactor( list1, 2 );
     mainLayout->setStretchFactor( list2, 2 );
 
-    new QLabel( i18n("All Addresses"), list1 );
-    new QLabel( i18n("Selected Addresses"), list2 );
+    list1_layout->addWidget(new QLabel( i18n("All Addresses") ));
+    
+    list2_layout->addWidget(new QLabel( i18n("Selected Addresses") ));
 
-    listAddress = new KListView( list1 );
+    listAddress = new KListView;
+    list1_layout->addWidget(listAddress);
     listAddress->addColumn( i18n("Given Name"), 0 );
     listAddress->addColumn( i18n("Family Name"), 1 );
     listAddress->addColumn( i18n("Email Address"), 2 );
@@ -478,7 +514,8 @@ void BatchAssistant::setupStackPage4()
     listAddress->setColumnWidthMode( 1, QListView::Maximum );
     listAddress->setColumnWidthMode( 2, QListView::Maximum );
 
-    listSelectedAddress = new KListView( list2 );
+    listSelectedAddress = new KListView;
+    list2_layout->addWidget(listSelectedAddress);
     listSelectedAddress->addColumn( i18n("Given Name"), 0 );
     listSelectedAddress->addColumn( i18n("Family Name"), 1 );
     listSelectedAddress->addColumn( i18n("Email Address"), 2 );
@@ -494,7 +531,6 @@ void BatchAssistant::setupStackPage4()
     connect( buttonAddAllAddress, SIGNAL( clicked() ), this, SLOT( slotAddAllAddress() ) );
     connect( buttonRemoveAllAddress, SIGNAL( clicked() ), this, SLOT( slotRemoveAllAddress() ) );
 
-    page3->addWidget( stack4 );
 }
 
 void BatchAssistant::setupSql()
