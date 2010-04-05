@@ -37,7 +37,7 @@ class QLabel;
 class QTreeWidget;
 class QTreeWidgetItem;
 class QRadioButton;
-class QTable;
+class QTableWidget;
 class QStackedWidget;
 
 class BatchAssistant : public KAssistantDialog {
@@ -234,7 +234,7 @@ class BatchAssistant : public KAssistantDialog {
 	KIntNumInput* serialInc;
 	KIntNumInput* numLabels;
 
-	QTable* m_varTable;
+	QTableWidget* m_varTable;
 	KListBox* m_varList;
 
         QTreeWidget* listAddress;

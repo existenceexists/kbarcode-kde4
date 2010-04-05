@@ -53,6 +53,7 @@
 #include <QVBoxLayout>
 #include <QGroupBox>
 #include <QStackedWidget>
+#include <QTableWidget>
 
 #include <kabc/addressee.h>
 #include <kabc/addresseelist.h>
@@ -210,10 +211,11 @@ void BatchAssistant::setupPage4()
     buttonTableRemove->setIconSet( BarIconSet( "editdelete") );
     hbox->setLayout(hbox_layout);
 
-    m_varTable = new QTable;
+    m_varTable = new QTableWidget;
     page4_layout->addWidget(m_varTable);
-    m_varTable->setReadOnly( false );
-    m_varTable->setSelectionMode( QTable::SingleRow );
+    	
+	m_varTable->setSelectionBehavior(QTableWidget::SelectRows);
+	m_varTable->setSelectionMode(QTableWidget::SingleSelection);
     page4->setLayout(page4_layout);
 
     addPage( page4, i18n("Import Variables") );
@@ -270,31 +272,45 @@ void BatchAssistant::setupPage10()
     radioImage = new QRadioButton( i18n("&Create images"));
     button_layout->addWidget(radioImage);
 
-    imageBox = new QVBox;
-    imageBox->setMargin( 10 );
+    imageBox = new QWidget;
+	QVBoxLayout* imageBox_layout = new QVBoxLayout;
+    imageBox_layout->setMargin( 10 );
+	imageBox->setLayout(imageBox_layout);
+	
     button_layout->addWidget(imageBox);
     radioBarcode = new QRadioButton( i18n("Print to a special &barcode printer"));
     button_layout->addWidget(radioBarcode);
     group->setLayout(button_layout);
 
-    QHBox* directoryBox = new QHBox( imageBox );
-    directoryBox->setSpacing( 5 );
-    QLabel* label = new QLabel( i18n("Output &Directory:"), directoryBox );
-    imageDirPath = new KUrlRequester( directoryBox );
+    QWidget* directoryBox = new QWidget;
+	QHBoxLayout* directoryBox_layout = new QHBoxLayout;
+	directoryBox->setLayout(directoryBox_layout);
+	imageBox_layout->addWidget(imageBox);
+    directoryBox_layout->setSpacing( 5 );
+    QLabel* label = new QLabel( i18n("Output &Directory:") );
+	directoryBox_layout->addWidget(label);
+    imageDirPath = new KUrlRequester;
+	directoryBox_layout->addWidget(imageDirPath);
     imageDirPath->setMode( KFile::Directory | KFile::ExistingOnly | KFile::LocalOnly );
     label->setBuddy( directoryBox );
 
-    QHBox* formatBox = new QHBox( imageBox );
-    label = new QLabel( i18n("Output File &Format:"), formatBox );
+    QWidget* formatBox = new QWidget;
+	QHBoxLayout* formatBox_layout = new QHBoxLayout;
+	formatBox->setLayout(formatBox_layout);
+	imageBox_layout->addWidget(formatBox);
+    label = new QLabel( i18n("Output File &Format:") );
+	formatBox_layout->addWidget(label);
 
     QStringList formats = KImageIO::types( KImageIO::Writing );
-    comboFormat = new KComboBox( false, formatBox );
+    comboFormat = new KComboBox( false );
+	formatBox_layout->addWidget(comboFormat);
     comboFormat->insertStringList( formats );
     if( formats.contains( PNG_FORMAT ) )
-	comboFormat->setCurrentItem( formats.findIndex( PNG_FORMAT ) );
+	  comboFormat->setCurrentItem( formats.findIndex( PNG_FORMAT ) );
     label->setBuddy( comboFormat );
 
-    QGroupBox* imageNameGroup = new  QGroupBox( i18n("&Filename:"), imageBox );
+    QGroupBox* imageNameGroup = new  QGroupBox( i18n("&Filename:") );
+	imageBox_layout->addWidget(imageNameGroup);
     QVBoxLayout* image_button_layout = new QVBoxLayout;
     radioImageFilenameArticle = new QRadioButton( i18n("Use &article number for filename"));
     image_button_layout->addWidget(radioImageFilenameArticle);
@@ -307,11 +323,13 @@ void BatchAssistant::setupPage10()
     image_button_layout->addWidget(editImageFilename);
     imageNameGroup->setLayout(image_button_layout);
 
-    labelInfo = new QLabel( page10 );
+    labelInfo = new QLabel;
+	page10->layout()->addWidget(labelInfo);
 
     radioPrinter->setChecked( true );
 
-    checkKeepOpen = new QCheckBox( i18n("&Keep window open after printing."), page10 );
+    checkKeepOpen = new QCheckBox( i18n("&Keep window open after printing.") );
+	page10->layout()->addWidget(checkKeepOpen);
 
     QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Expanding );
     pageLayout->addWidget( group );
@@ -334,24 +352,39 @@ void BatchAssistant::setupPage10()
 
 void BatchAssistant::setupStackPage1()
 {
-    stack1 = new QVBox( page3, "stack1" );
-    stack1->setSpacing( 5 );
+    stack1 = new QWidget( "stack1" );
+	QVBoxLayout* stack1_layout = new QVBoxLayout;
+	stack1->setLayout(stack1_layout);
+    stack1_layout->setSpacing( 5 );
 
-    QHBox* hbox = new QHBox( stack1 );
-    hbox->setSpacing( 5 );
+    QWidget* hbox = new QWidget;
+	QHBoxLayout* hbox_layout = new QHBoxLayout;
+    hbox_layout->setSpacing( 5 );
+	hbox->setLayout(hbox_layout);
+	stack1_layout->addWidget(hbox);
 
-    new QLabel( i18n( "Customer name and no.:" ), hbox );
-    customerName = new KComboBox( false, hbox );
-    customerId = new KComboBox( false, hbox );
+    hbox_layout->addWidget( new QLabel( i18n( "Customer name and no.:" ) ));
+    customerName = new KComboBox( false );
+	hbox_layout->addWidget(customerName);
+    customerId = new KComboBox( false );
+	hbox_layout->addWidget(customerId);
 
-    QHBox* hButtonBox = new QHBox( stack1 );
-    hButtonBox->setSpacing( 5 );
+    QWidget* hButtonBox = new QWidget;
+	QHBoxLayout* hButtonBox_layout = new QHBoxLayout;
+	hButtonBox->setLayout(hButtonBox_layout);
+    hButtonBox_layout->setSpacing( 5 );
+	stack1_layout->addWidget(hButtonBox);
 
-    buttonAdd = new KPushButton( i18n( "&Add..." ), hButtonBox );
-    buttonImport = new KPushButton( i18n("&Import..."), hButtonBox );
-    buttonEdit = new KPushButton( i18n( "&Edit..." ), hButtonBox );
-    buttonRemove = new KPushButton( i18n("&Remove" ), hButtonBox );
-    buttonRemoveAll = new KPushButton( i18n("R&emove All"), hButtonBox );
+    buttonAdd = new KPushButton( i18n( "&Add..." ) );
+	hButtonBox_layout->addWidget(buttonAdd);
+    buttonImport = new KPushButton( i18n("&Import...") );
+	hButtonBox_layout->addWidget(buttonImport);
+    buttonEdit = new KPushButton( i18n( "&Edit..." ) );
+	hButtonBox_layout->addWidget(buttonEdit);
+    buttonRemove = new KPushButton( i18n("&Remove" ) );
+	hButtonBox_layout->addWidget(buttonRemove);
+    buttonRemoveAll = new KPushButton( i18n("R&emove All") );
+	hButtonBox_layout->addWidget(buttonRemoveAll);
 
     KMenu* mnuImport = new KMenu( this );
     mnuImport->insertItem( i18n("Import from File ..."), this, SLOT( loadFromFile() ) );
@@ -359,14 +392,16 @@ void BatchAssistant::setupStackPage1()
     mnuImport->insertItem( i18n("Import barcode_basic"), this, SLOT( addAllItems() ) );
     buttonImport->setPopup( mnuImport );
 
-    sqlList = new KListView( stack1 );
-    sqlList->addColumn( i18n("Index") );
-    sqlList->addColumn( i18n("Number of Labels") );
-    sqlList->addColumn( i18n("Article Number") );
-    sqlList->addColumn( i18n("Group") );
+    sqlList = new QTreeWidget( stack1 );
+	QTreeWidgetItem* header = new QTreeWidgetItem;
+	header->setText(0, i18n("Index"));
+	header->setText(1, i18n("Number of Labels") );
+	header->setText(2,  i18n("Article Number") );
+	header->setText(3, i18n("Group") );
+	sqlList->setHeaderItem(header);
     sqlList->setAllColumnsShowFocus( true );
-    connect( sqlList, SIGNAL(doubleClicked(QListViewItem*,const QPoint &,int)),
-             this, SLOT(changeItem(QListViewItem*,const QPoint &,int)));
+    connect( sqlList, SIGNAL(doubleClicked(QTreeWidgetItem*,const QPoint &,int)),
+             this, SLOT(changeItem(QTreeWidgetItem QPoint &,int)));
 
     connect( customerName, SIGNAL( activated(int) ), this, SLOT( customerNameChanged(int) ) );
     connect( customerId, SIGNAL( activated(int) ), this, SLOT( customerIdChanged(int) ) );
@@ -376,7 +411,7 @@ void BatchAssistant::setupStackPage1()
     connect( buttonRemoveAll, SIGNAL( clicked() ), sqlList, SLOT( clear() ) );
     connect( buttonRemoveAll, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
 
-    page3->addWidget( stack1 );
+    page3->layout()->addWidget( stack1 );
 }
 
 void BatchAssistant::setupStackPage2()
@@ -759,11 +794,16 @@ void BatchAssistant::setupBatchPrinter( BatchPrinter* batch, int m )
     else if( radioVarImport->isChecked() )
     {
 	TVariableList* tVariableList = new TVariableList;
-	for( int i=0; i<m_varTable->numRows(); i++ )
+	for( int i=0; i<m_varTable->rowCount(); i++ )
 	{
 	    QMap<QString, QString> map;
-	    for( int z=0; z<m_varTable->numCols(); z++ )
-		map[ m_varTable->horizontalHeader()->label( z ) ] = m_varTable->text( i, z );
+	    for( int z=0; z<m_varTable->columnCount(); z++ ) {
+		  QTableWidgetItem* item = m_varTable->item(i, z);
+		  if(item)
+			map[ m_varTable->horizontalHeader()->label( z ) ] = item->text();
+		  else
+			map[ m_varTable->horizontalHeader()->label( z ) ] = "";
+		}
 	    tVariableList->append( map );
 	}
 
@@ -772,8 +812,8 @@ void BatchAssistant::setupBatchPrinter( BatchPrinter* batch, int m )
     else if( radioAddressBook->isChecked() )
     {
         KABC::AddresseeList* list = new KABC::AddresseeList;
-        QListViewItem* item = listSelectedAddress->firstChild();
-        while( item ) 
+        QTreeWidgetItem* item = listSelectedAddress->firstChild();
+        while( item )
         {
             list->append( static_cast<AddressListViewItem*>(item)->address() );
             item = item->nextSibling();
