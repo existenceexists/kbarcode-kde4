@@ -344,13 +344,20 @@ PropertySize::PropertySize( QWidget* parent )
 {   
     const double low = -1000.0;
     const double max = 1000.0;
-    QVBox* box = new QVBox( this );
+    QWidget* box = new QWidget( this );
+	QVBoxLayout* box_layout = new QVBoxLayout;
+	box->setLayout(box_layout);
 
-    checkLock = new QCheckBox( i18n("&Protect item from being moved or resized"), box );    
-    numTop = new KDoubleNumInput( low, max, 0.0, 0.2, 3, box );
-    numLeft = new KDoubleNumInput( numTop, low, max, 0.0, 0.2, 3, box );
-    numHeight = new KDoubleNumInput( numLeft, low, max, 0.0, 0.2, 3, box );
-    numWidth = new KDoubleNumInput( numHeight, low, max, 0.0, 0.2, 3, box );
+    checkLock = new QCheckBox( i18n("&Protect item from being moved or resized"));
+	box_layout->addWidget(checkLock);
+    numTop = new KDoubleNumInput( low, max, 0.0, 0.2, 3 );
+    box_layout->addWidget(numTop);
+    numLeft = new KDoubleNumInput( numTop, low, max, 0.0, 0.2, 3 );
+    box_layout->addWidget(numLeft);
+    numHeight = new KDoubleNumInput( numLeft, low, max, 0.0, 0.2, 3 );
+    box_layout->addWidget(numHeight);
+    numWidth = new KDoubleNumInput( numHeight, low, max, 0.0, 0.2, 3 );
+    box_layout->addWidget(numWidth);
     
     numTop->setSuffix( Measurements::system() );
     numLeft->setSuffix( Measurements::system() );
@@ -481,13 +488,17 @@ PropertyImage::PropertyImage( TokenProvider* token, QWidget* parent )
     radioImageExpression = new QRadioButton( i18n("&Read image path from expression") );
     group_file_layout->addWidget(radioImageExpression);
 
-    imgHBox = new QHBox;
-    imgHBox->setSpacing( 5 );
+    imgHBox = new QWidget;
+    QHBoxLayout* imgHBox_layout = new QHBoxLayout;
+	imgHBox->setLayout(imgHBox_layout);
+    imgHBox_layout->setSpacing( 5 );
     group_file_layout->addWidget(imgHBox);
     groupFile->setLayout(group_file_layout);
 
-    imgExpression = new KLineEdit( imgHBox );
-    buttonToken = new KPushButton( i18n("&Insert Data Field..."), imgHBox );
+    imgExpression = new KLineEdit;
+	imgHBox_layout->addWidget(imgExpression);
+    buttonToken = new KPushButton( i18n("&Insert Data Field..."));
+	imgHBox_layout->addWidget(buttonToken);
     buttonToken->setIconSet( QIcon( SmallIcon("contents") ) );
 
     comboRotation->addItem( i18n("0") );

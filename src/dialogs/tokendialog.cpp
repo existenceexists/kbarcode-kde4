@@ -200,9 +200,12 @@ void TokenDialog::setupStack2Page1()
 
 void TokenDialog::setupStack2Page2()
 {
-    stack2Page2 = new QVBox();
+    stack2Page2 = new QWidget;
+	QVBoxLayout* stack2Page2_layout = new QVBoxLayout;
+	stack2Page2->setLayout(stack2Page2_layout);
 
-    labelList = new QTreeWidget( stack2Page2 );
+    labelList = new QTreeWidget;
+	stack2Page2_layout->addWidget(labelList);
     labelList->addColumn( i18n("Token"), 0 );
     labelList->addColumn( i18n("Description"), 1 );
     labelList->setColumnWidthMode( 0, QTreeWidget::Maximum );

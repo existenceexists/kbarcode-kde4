@@ -171,10 +171,14 @@ void CSVImportDlg::createPage2()
     radioFixedFile = new QRadioButton( i18n("File with &fixed field width") );
     group_layout->addWidget(radioFixedFile);
     buttonGroup->setLayout(group_layout);
-    QHBox* hboxFrame = new QHBox( mainBox );
+    QWidget* hboxFrame = new QWidget( mainBox );
+	QHBoxLayout* hboxFrameLayout = new QHBoxLayout;
+	hboxFrame->setLayout(hboxFrameLayout);
 
-    groupCSV = new QGroupBox( i18n("CSV File"), hboxFrame );
-    groupFixed = new QGroupBox( i18n("Fixed Field Width File"), hboxFrame );
+    groupCSV = new QGroupBox( i18n("CSV File"));
+	hboxFrameLayout->addWidget(groupCSV);
+    groupFixed = new QGroupBox( i18n("Fixed Field Width File"));
+	hboxFrameLayout->addWidget(groupFixed);
 
     groupCSV->setColumnLayout(0, Qt::Vertical );
     groupCSV->layout()->setSpacing( 6 );

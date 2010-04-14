@@ -58,8 +58,9 @@ const char* description = I18N_NOOP(
         "like EAN, UPC, CODE39 and ISBN are supported." );
 
 ConfAssistant::ConfAssistant( QWidget* parent, bool modal )
-    : KAssistant( parent, modal )
+    : KAssistantDialog( parent )
 {
+    setModal(modal);
     setCaption( i18n( "Configure KBarcode" ) );
 
     setupPage1();
@@ -82,7 +83,7 @@ void ConfAssistant::accept()
 {
     sqlwidget->save( checkDatabase->isChecked() );
 
-    KAssistant::accept();
+    KAssistantDialog::accept();
 }
 
 void ConfAssistant::setupPage1()

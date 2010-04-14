@@ -40,7 +40,7 @@ class TextLineEditor;
 //NY23
 class TokenProvider;
 
-class QHBox;
+class QWidget
 class KUrlRequester;
 class KLineEdit;
 class KPushButton;
@@ -182,7 +182,7 @@ class PropertyImage : public PropertyWidget {
         QCheckBox* checkMirrorH;
         QCheckBox* checkMirrorV;
 	
-	QHBox* imgHBox;
+	QWidget* imgHBox;
 
         KComboBox* comboRotation;
 	KUrlRequester* imgUrl;
