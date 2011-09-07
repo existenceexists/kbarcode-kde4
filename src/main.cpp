@@ -22,6 +22,7 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <QString>
+#include <QDebug>
 /*
 #include "kbarcode.h"
 #include "labeleditor.h"
@@ -48,11 +49,7 @@ void setupDirs()
             dirs->addPrefix( "/usr/" );
 
         // Print a warning:
-        QString newKdedirs = dirs->kfsstnd_prefixes();
-        QByteArray baNewKdedirs = newKdedirs.toLocal8Bit();
-        const char * charNewKdedirs = baNewKdedirs.constData();
-        qDebug("WARNING: Prefix changed: %s", charNewKdedirs );
-        //qDebug("WARNING: Prefix changed: %s", dirs->kfsstnd_prefixes().toAscii().constData() );
+        qDebug() << "WARNING: Prefix changed: " << dirs->kfsstnd_prefixes();
     }
 }
 
