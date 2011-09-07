@@ -21,18 +21,19 @@
 #include <kimageio.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
-
+#include <QString>
+/*
 #include "kbarcode.h"
 #include "labeleditor.h"
 #include "barcodegenerator.h"
-
+*/
 #ifndef VERSION
     #define VERSION "Unknown Version"
 #endif
 
 void setupDirs()
 {
-    if( locate("data", "kbarcode/logo.png").isEmpty() ) {
+    if( KStandardDirs::locate("data", "kbarcode/logo.png").isEmpty() ) {
         // Maybe KBarcode was not installed into $KDEDIR
         KStandardDirs* dirs = KGlobal::dirs();
         QString kdedir = dirs->kfsstnd_prefixes();
@@ -46,7 +47,7 @@ void setupDirs()
         if( !kdedir.contains( "/usr/" ) )
             dirs->addPrefix( "/usr/" );
 
-        qDebug("WARNING: Prefix changed: %s", dirs->kfsstnd_prefixes().toLatin1() );
+        qDebug("WARNING: Prefix changed: %s", dirs->kfsstnd_prefixes().toAscii().constData() );
     }
 }
 
@@ -54,7 +55,7 @@ int main(int argc, char *argv[])
 {
     KAboutData aboutData( "kbarcode", "kbarcode", ki18n("KBarcode"), VERSION,
             ki18n("KBarcode4 is a barcode and label printing application for KDE 4."),
-            KAboutData::License_GPL, ki18n("(c) 2001-2008, Dominik Seichter"), KLocalizedString()
+            KAboutData::License_GPL, ki18n("(c) 2001-2008, Dominik Seichter"), KLocalizedString(),
         "http://www.kbarcode.net", "kbarcode-users@lists.sourceforge.net" );
 
     aboutData.addAuthor(ki18n("Dominik Seichter"), ki18n("Programmer"), "domseichter@web.de");
@@ -111,11 +112,13 @@ int main(int argc, char *argv[])
 
     
     a.connect( &a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
-
+    /*
     KBarcode* kbc = new KBarcode( 0 );
     
     if( kbc->parseCmdLine() )
         return 0;
     else
         return a.exec();
+    */
+    return 0;
 }
