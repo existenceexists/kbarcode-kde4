@@ -16,7 +16,7 @@
  ***************************************************************************/
 
 #include "kbarcode.h"
-#include "barkode.h"
+/*#include "barkode.h"
 #include "barcodegenerator.h"
 #include "batchassistant.h"
 #include "labeleditor.h"
@@ -24,7 +24,7 @@
 #include "csvimportdlg.h"
 #include "sqltables.h"
 #include "kbarcodesettings.h"
-
+*/
 // Qt includes
 #include <q3groupbox.h>
 #include <qlayout.h>
@@ -50,7 +50,7 @@ KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
     setCentralWidget( w );
 
     buttonSingle = new KPushButton( i18n("Barcode &Generator..."), w );
-    buttonSingle->setEnabled( Barkode::haveBarcode() );
+    /*buttonSingle->setEnabled( Barkode::haveBarcode() );*/
     buttonEditor = new KPushButton( i18n("&Label Editor..."), w );
     buttonBatch = new KPushButton( i18n("&Batch Printing..."), w );
     buttonData = new KPushButton( i18n("Edit SQL &Tables..."), w );
@@ -65,15 +65,15 @@ KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
     layout->addWidget( buttonBatch );
     layout->addWidget( buttonData );
 
-    connect( buttonSingle, SIGNAL( clicked() ), this, SLOT( startBarcode() ) );
+    /*connect( buttonSingle, SIGNAL( clicked() ), this, SLOT( startBarcode() ) );
     connect( buttonEditor, SIGNAL( clicked() ), this, SLOT( startLabelEditor() ) );
     connect( buttonBatch, SIGNAL( clicked() ), this, SLOT( startBatchPrint() ) );
-    connect( SqlTables::getInstance(), SIGNAL( connectedSQL() ), this, SLOT( enableData() ) );
+    connect( SqlTables::getInstance(), SIGNAL( connectedSQL() ), this, SLOT( enableData() ) );*/
     
     setupActions();
     show();
 
-    KAction* editLabelDefAct = new KAction(i18n("&Edit Label Definitions"), "",
+    /*KAction* editLabelDefAct = new KAction(i18n("&Edit Label Definitions"), "",
                                 0, this, SLOT(editLabelDef()), actionCollection(), "design" );
 
     KAction* editArticleAct = new KAction(i18n("&Edit Articles"), "",
@@ -86,30 +86,30 @@ KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
                                 0, this, SLOT(editCustomerText()), actionCollection() );
 
     KAction* importCSVAct = new KAction(i18n("&Import CSV File..."), "",
-                                0, this, SLOT(importCSV()), actionCollection() );
+                                0, this, SLOT(importCSV()), actionCollection() );*/
                                 
     KMenu* data = new KMenu( buttonData );
-    editLabelDefAct->plug( data );
+    /*editLabelDefAct->plug( data );
     editArticleAct->plug( data );
     editCustomerAct->plug( data );
     editCustomerTextAct->plug( data );
     buttonData->setPopup( data );
     data->insertSeparator();
-    importCSVAct->plug( data );
+    importCSVAct->plug( data );*/
 
     enableData();
 }
-
+/*
 KBarcode::~KBarcode()
 {
     MainWindow::saveConfig();
 }
-
+*/
 void KBarcode::setupActions()
 {
     MainWindow::setupActions();
 }
-
+/*
 void KBarcode::startBarcode()
 {
     new BarcodeGenerator();
@@ -150,15 +150,15 @@ void KBarcode::enableData()
 {
     buttonData->setEnabled( SqlTables::getInstance()->isConnected() );
 }
-
+*/
 bool KBarcode::parseCmdLine()
 {
     enum { BARCODE, LABEL, BATCH, NONE } mode = NONE;
 
     KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
 
-    BatchPrinter::EOutputFormat eFormat = BatchPrinter::POSTSCRIPT;
-    LabelEditor* pEdit = NULL;
+    /*BatchPrinter::EOutputFormat eFormat = BatchPrinter::POSTSCRIPT;
+    LabelEditor* pEdit = NULL;*/
     QString serial;
     QString sqlquery   = QString::null;
     QString csvfile    = QString::null;
@@ -169,7 +169,7 @@ bool KBarcode::parseCmdLine()
     int numlabels      = -1;
 
     QString format = args->getOption("output");
-    if( format.toUpper() == "BARCODE" )
+    /*if( format.toUpper() == "BARCODE" )
 	eFormat = BatchPrinter::BCP;
     else if( format.toUpper() == "IMAGE" )
 	eFormat = BatchPrinter::IMAGE;
@@ -178,12 +178,12 @@ bool KBarcode::parseCmdLine()
     else
     {
 	KMessageBox::error( this, i18n("%1 is no valid output format for --output. Valid values are POSTSCRIPT, IMAGE and BARCODE.").arg( format ) );
-    }
+    }*/
 
     if( args->isSet("barcode") )
     {
 	mode = BARCODE;
-	startBarcode();
+	/*startBarcode();*/
     }
 
     if( args->isSet("batch") )
@@ -214,7 +214,7 @@ bool KBarcode::parseCmdLine()
     for( int i = 0; i < args->count(); i++) 
 	if( mode == BATCH )
 	{
-	    BatchAssistant* b = new BatchAssistant();
+	    /*BatchAssistant* b = new BatchAssistant();
 	    b->setFilename( args->url( i ).path() );
 	    b->setOutputFormat( eFormat );
 	    b->setSerialNumber( serial, serialinc );
@@ -231,22 +231,22 @@ bool KBarcode::parseCmdLine()
             {
 		b->printNow( printer, false );
                 delete b;
-            }
+            }*/
 	}
 	else
         {
-	    pEdit = new LabelEditor( 0, args->url( i ).path() );
+	    /*pEdit = new LabelEditor( 0, args->url( i ).path() );
             if( bPrintNow )
                 // TODO: use the printer set by the printer commandline option
-                pEdit->print(); 
+                pEdit->print(); */
         }
 
     if( !args->count() && mode == LABEL )
     {
-        pEdit = new LabelEditor();
+        /*pEdit = new LabelEditor();
         if( bPrintNow )
             // TODO: use the printer set by the printer commandline option
-            pEdit->print(); 
+            pEdit->print(); */
 
     }
 
@@ -263,7 +263,7 @@ bool KBarcode::parseCmdLine()
     else
         return false;    
 }
-
+/*
 void KBarcode::importCSV()
 {
     new CSVImportDlg( this );
@@ -288,6 +288,6 @@ void KBarcode::showConfigure()
 {
     KBarcodeSettings::getInstance()->configure();
 }
-
+*/
 
 #include "kbarcode.moc"

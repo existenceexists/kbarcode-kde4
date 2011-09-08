@@ -27,14 +27,14 @@ set(kbarcode_SRCS
  # gnubarcode.cpp
  # gnubarkodeengine.cpp
  # imageitem.cpp
- # kbarcode.cpp
+  kbarcode.cpp
  # kbarcodesettings.cpp
  # label.cpp
  # labeleditor.cpp
  # labelutils.cpp
  # lineitem.cpp
   main.cpp
- # mainwindow.cpp
+  mainwindow.cpp
  # measurements.cpp
  # mimesources.cpp
  # mycanvasitem.cpp

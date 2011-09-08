@@ -1,0 +1,7 @@
+# Created by František Brožka 7.9.2011 .
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/logo.png ${CMAKE_CURRENT_BINARY_DIR}/logo.png COPYONLY)
+
+message(STATUS "\${CMAKE_CURRENT_SOURCE_DIR} is: ${CMAKE_CURRENT_SOURCE_DIR}")
+message(STATUS "\${CMAKE_CURRENT_BINARY_DIR} is: ${CMAKE_CURRENT_BINARY_DIR}")
+

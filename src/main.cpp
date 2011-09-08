@@ -21,11 +21,12 @@
 #include <kimageio.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
+
 #include <QString>
-#include <QDebug>
-/*
+#include <QtDebug>
+
 #include "kbarcode.h"
-#include "labeleditor.h"
+/*#include "labeleditor.h"
 #include "barcodegenerator.h"
 */
 #ifndef VERSION
@@ -114,13 +115,13 @@ int main(int argc, char *argv[])
 
     
     a.connect( &a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
-    /*
+    
     KBarcode* kbc = new KBarcode( 0 );
     
     if( kbc->parseCmdLine() )
         return 0;
     else
         return a.exec();
-    */
-    return 0;
+    
+    /*return 0;*/
 }

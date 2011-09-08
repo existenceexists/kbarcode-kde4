@@ -10,12 +10,12 @@
  */
 
 #include "mainwindow.h"
-#include "sqltables.h"
+/*#include "sqltables.h"
 #include "confassistant.h"
 #include "printersettings.h"
 #include "kbarcodesettings.h"
 #include "barkode.h"
-
+*/
 // Qt includes
 #include <qcheckbox.h>
 #include <q3textbrowser.h>
@@ -63,21 +63,21 @@ void MainWindow::setupActions()
 {
     KAction* quitAct = KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
     KAction* closeAct = KStandardAction::close( this, SLOT( close() ), actionCollection(), "close" );
-    KAction* configureAct = KStandardAction::preferences( KBarcodeSettings::getInstance(), SLOT(configure()), actionCollection() );
+    /*KAction* configureAct = KStandardAction::preferences( KBarcodeSettings::getInstance(), SLOT(configure()), actionCollection() );*/
     KAction* assistantAct = new KAction( i18n("&Start Configuration Assistant..."), BarIcon("assistant"), 0, this,
                                 SLOT(assistant()), actionCollection(), "assistant" );
-    connectAct = new KAction(i18n("&Connect to Database"), BarIcon("connect_no"), 0, this, SLOT(connectMySQL()),
-                                actionCollection(),"connect" );
+    /*connectAct = new KAction(i18n("&Connect to Database"), BarIcon("connect_no"), 0, this, SLOT(connectMySQL()),
+                                actionCollection(),"connect" );*/
 
 
     KAction* newTablesAct = new KAction( i18n("&Create Tables"), "", 0, this,
                                 SLOT(newTables()), actionCollection(), "tables" );
 
-    importLabelDefAct = new KAction( i18n("&Import Label Definitions"), "", 0, SqlTables::getInstance(),
+    /*importLabelDefAct = new KAction( i18n("&Import Label Definitions"), "", 0, SqlTables::getInstance(),
                                 SLOT(importLabelDef()), actionCollection(), "import" );
 
     importExampleAct = new KAction( i18n("&Import Example Data"), "", 0, SqlTables::getInstance(),
-                                SLOT(importExampleData()), actionCollection(), "import" );
+                                SLOT(importExampleData()), actionCollection(), "import" );*/
                                 
     KMenu* file = new KMenu( this );
     KMenu* settings = new KMenu( this );
@@ -100,15 +100,15 @@ void MainWindow::setupActions()
     closeAct->plug( file );
     quitAct->plug( file );
 
-    configureAct->plug( settings );
+    /*configureAct->plug( settings );
     assistantAct->plug( settings );
-    connectAct->plug( settings );
+    connectAct->plug( settings );*/
     (new KActionSeparator( this ))->plug( settings );
     newTablesAct->plug( settings );
-    importLabelDefAct->plug( settings );
-    importExampleAct->plug( settings );
+    /*importLabelDefAct->plug( settings );
+    importExampleAct->plug( settings );*/
 
-    SqlTables* tables = SqlTables::getInstance();
+    /*SqlTables* tables = SqlTables::getInstance();
     if( tables->getData().autoconnect && autoconnect && !first ) {
         tables->connectMySQL();
         autoconnect = false;
@@ -116,9 +116,9 @@ void MainWindow::setupActions()
 
     connectAct->setEnabled( !SqlTables::isConnected() );
     importLabelDefAct->setEnabled( !connectAct->isEnabled() );
-    importExampleAct->setEnabled( !connectAct->isEnabled() );
+    importExampleAct->setEnabled( !connectAct->isEnabled() );*/
 }
-
+/*
 void MainWindow::loadConfig()
 {
     KConfigGroup config = KGlobal::config()->group("Assistant");
@@ -169,7 +169,7 @@ void MainWindow::connectMySQL()
     if( !connectAct->isEnabled() )
         emit connectedSQL();
 }
-
+*/
 void MainWindow::appHelpActivated()
 {
 	// TODO: the documentation should be rewritten, along with this link
@@ -194,12 +194,12 @@ void MainWindow::startInfo()
     if( !info.isEmpty() )
         KToolInvocation::invokeBrowser( info );
 }
-
+/*
 bool MainWindow::newTables()
 {
     return SqlTables::getInstance()->newTables();
 }
-
+*/
 void MainWindow::donations()
 {
     // orig =https://www.paypal.com/xclick/business=domseichter%40web.de&item_name=Support+KBarcode+Development&item_number=0&image_url=http%3A//www.kbarcode.net/themes/DeepBlue/images/logo.gif&no_shipping=1&return=http%3A//www.kbarcode.net&cancel_return=http%3A//www.kbarcode.net&cn=Suggestions%2C+Comments%3F&tax=0&currency_code=EUR
@@ -211,7 +211,7 @@ void MainWindow::donations()
         "<a href=\"" + url + "\">" +  
         i18n("Donate Now") + "</a></qt>", QString::null, QString::null, KMessageBox::AllowLink );
 }
-
+/*
 QString MainWindow::systemCheck()
 {
 	// TODO: break i18n puzzles
@@ -257,5 +257,5 @@ QString MainWindow::systemCheck()
 
     return text;
 }
-
+*/
 #include "mainwindow.moc"
