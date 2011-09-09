@@ -44,7 +44,7 @@
 KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
     : MainWindow( parent, f )
 {
-    QGroupBox* w = new QGroupBox( this );
+    Q3GroupBox* w = new Q3GroupBox( this );
     w->setColumnLayout(0, Qt::Vertical );
     QVBoxLayout* layout = new QVBoxLayout( w->layout() );
     setCentralWidget( w );

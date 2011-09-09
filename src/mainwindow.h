@@ -14,6 +14,7 @@
 
 #include <qwidget.h>
 #include <kmainwindow.h>
+#include <KActionCollection>
 
 class KAction;
 class KMenu;
@@ -47,6 +48,7 @@ class MainWindow : public KMainWindow {
           * access.
           */
         static QString systemCheck();
+	KActionCollection *actionCollection() const;
 
     public slots:
         void assistant();

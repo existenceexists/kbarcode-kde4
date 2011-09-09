@@ -34,6 +34,8 @@
 #include <krun.h>
 #include <kglobal.h>
 #include <ktoolinvocation.h>
+#include <KActionCollection>
+#include <KStandardAction>
 
 bool MainWindow::autoconnect = true;
 bool MainWindow::startassistant = true;
@@ -45,8 +47,8 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags f)
     first = false;
     loadConfig();
 
-    setAutoSaveSettings( QString("Window") + name, true );
-    connect( kapp, SIGNAL( aboutToQuit() ), this, SLOT( saveConfig() ) );
+    setAutoSaveSettings( QString("Window") + QString(objectName()), true );
+    /*connect( kapp, SIGNAL( aboutToQuit() ), this, SLOT( saveConfig() ) );*/
 
     if( first && startassistant ) {
         assistant();
@@ -62,16 +64,16 @@ MainWindow::~MainWindow()
 void MainWindow::setupActions()
 {
     KAction* quitAct = KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
-    KAction* closeAct = KStandardAction::close( this, SLOT( close() ), actionCollection(), "close" );
+    KAction* closeAct = KStandardAction::close( this, SLOT( close() ), actionCollection());
     /*KAction* configureAct = KStandardAction::preferences( KBarcodeSettings::getInstance(), SLOT(configure()), actionCollection() );*/
-    KAction* assistantAct = new KAction( i18n("&Start Configuration Assistant..."), BarIcon("assistant"), 0, this,
-                                SLOT(assistant()), actionCollection(), "assistant" );
+    /*KAction* assistantAct = new KAction( i18n("&Start Configuration Assistant..."), BarIcon("assistant"), 0, this,
+                                SLOT(assistant()), actionCollection(), "assistant" );*/
     /*connectAct = new KAction(i18n("&Connect to Database"), BarIcon("connect_no"), 0, this, SLOT(connectMySQL()),
                                 actionCollection(),"connect" );*/
 
 
-    KAction* newTablesAct = new KAction( i18n("&Create Tables"), "", 0, this,
-                                SLOT(newTables()), actionCollection(), "tables" );
+    /*KAction* newTablesAct = new KAction( i18n("&Create Tables"), "", 0, this,
+                                SLOT(newTables()), actionCollection(), "tables" );*/
 
     /*importLabelDefAct = new KAction( i18n("&Import Label Definitions"), "", 0, SqlTables::getInstance(),
                                 SLOT(importLabelDef()), actionCollection(), "import" );
@@ -97,15 +99,15 @@ void MainWindow::setupActions()
     menuBar()->insertItem( i18n("&Settings"), settings );
     menuBar()->insertItem( i18n("&Help"), hlpMenu );
 
-    closeAct->plug( file );
-    quitAct->plug( file );
+    /*closeAct->plug( file );
+    quitAct->plug( file );*/
 
     /*configureAct->plug( settings );
     assistantAct->plug( settings );
     connectAct->plug( settings );*/
-    (new KActionSeparator( this ))->plug( settings );
+    /*(new KActionSeparator( this ))->plug( settings );
     newTablesAct->plug( settings );
-    /*importLabelDefAct->plug( settings );
+    importLabelDefAct->plug( settings );
     importExampleAct->plug( settings );*/
 
     /*SqlTables* tables = SqlTables::getInstance();
@@ -190,7 +192,7 @@ void MainWindow::showCheck()
 
 void MainWindow::startInfo()
 {
-	QString info = locate("appdata", "barcodes.html");
+	QString info = KStandardDirs::locate("appdata", "barcodes.html");
     if( !info.isEmpty() )
         KToolInvocation::invokeBrowser( info );
 }
@@ -258,4 +260,14 @@ QString MainWindow::systemCheck()
     return text;
 }
 */
+/*Frank:*/
+KActionCollection *MainWindow::actionCollection() const
+ {
+   if ( !d->m_actionCollection )
+   {
+       d->m_actionCollection = new KActionCollection( this );
+       d->m_actionCollection->setObjectName( "KXMLGUIClient-KActionCollection" );
+   }
+   return d->m_actionCollection;
+ }
 #include "mainwindow.moc"
