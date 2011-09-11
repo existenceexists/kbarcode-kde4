@@ -23,6 +23,7 @@
 #endif
 
 #include <qstring.h>
+#include <Q3GroupBox>
 
 enum linebreak {
     NO_BREAK,

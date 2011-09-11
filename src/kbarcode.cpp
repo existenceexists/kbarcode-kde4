@@ -26,7 +26,9 @@
 #include "kbarcodesettings.h"
 */
 // Qt includes
-#include <q3groupbox.h>
+//#include <q3groupbox.h>
+#include <Qt3Support>
+#include <Q3GroupBox>
 #include <qlayout.h>
 //Added by qt3to4:
 #include <QVBoxLayout>
@@ -44,7 +46,7 @@
 KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
     : MainWindow( parent, f )
 {
-    Q3GroupBox* w = new Q3GroupBox( this );
+    Q3GroupBox* w = new Q3GroupBox( this, "Q3GroupBox-name" );
     w->setColumnLayout(0, Qt::Vertical );
     QVBoxLayout* layout = new QVBoxLayout( w->layout() );
     setCentralWidget( w );
@@ -99,58 +101,58 @@ KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
 
     enableData();
 }
-/*
+
 KBarcode::~KBarcode()
 {
-    MainWindow::saveConfig();
+    /*MainWindow::saveConfig();*/
 }
-*/
+
 void KBarcode::setupActions()
 {
     MainWindow::setupActions();
 }
-/*
+
 void KBarcode::startBarcode()
 {
-    new BarcodeGenerator();
+    /*new BarcodeGenerator();*/
 }
 
 void KBarcode::startLabelEditor()
 {
-    LabelEditor* ed = new LabelEditor( NULL, QString::null  );
-    ed->startupDlg( LabelEditor::eCreateNewLabel, QString::null );
+    /*LabelEditor* ed = new LabelEditor( NULL, QString::null  );
+    ed->startupDlg( LabelEditor::eCreateNewLabel, QString::null );*/
 }
 
 void KBarcode::startBatchPrint()
 {
-    new BatchAssistant( this );
+    /*new BatchAssistant( this );*/
 }
 
 void KBarcode::editArticles()
 {
-    new DatabaseBrowser( TABLE_BASIC, NULL );
+    /*new DatabaseBrowser( TABLE_BASIC, NULL );*/
 }
 
 void KBarcode::editCustomers()
 {
-    new DatabaseBrowser( TABLE_CUSTOMER, NULL );
+    /*new DatabaseBrowser( TABLE_CUSTOMER, NULL );*/
 }
 
 void KBarcode::editCustomerText()
 {
-    new DatabaseBrowser( TABLE_CUSTOMER_TEXT, NULL );
+    /*new DatabaseBrowser( TABLE_CUSTOMER_TEXT, NULL );*/
 }
 
 void KBarcode::editLabelDef()
 {
-    new DatabaseBrowser( TABLE_LABEL_DEF, NULL );
+    /*new DatabaseBrowser( TABLE_LABEL_DEF, NULL );*/
 }
 
 void KBarcode::enableData()
 {
-    buttonData->setEnabled( SqlTables::getInstance()->isConnected() );
+    /*buttonData->setEnabled( SqlTables::getInstance()->isConnected() );*/
 }
-*/
+
 bool KBarcode::parseCmdLine()
 {
     enum { BARCODE, LABEL, BATCH, NONE } mode = NONE;
@@ -263,31 +265,32 @@ bool KBarcode::parseCmdLine()
     else
         return false;    
 }
-/*
+
 void KBarcode::importCSV()
 {
-    new CSVImportDlg( this );
+    /*new CSVImportDlg( this );*/
 }
 
 bool KBarcode::isSQLConnected() const
 {
-    return SqlTables::isConnected();
+    /*return SqlTables::isConnected();*/
+    return true;
 }
 
 bool KBarcode::connectSQL()
 {
-    return SqlTables::getInstance()->connectMySQL();
+    /*return SqlTables::getInstance()->connectMySQL();*/
+    return true;
 }
 
 void KBarcode::showAssistant()
 {
-    MainWindow::assistant();
+    /*MainWindow::assistant();*/
 }
 
 void KBarcode::showConfigure()
 {
-    KBarcodeSettings::getInstance()->configure();
+    /*KBarcodeSettings::getInstance()->configure();*/
 }
-*/
 
 #include "kbarcode.moc"

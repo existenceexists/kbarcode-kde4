@@ -41,7 +41,7 @@ bool MainWindow::autoconnect = true;
 bool MainWindow::startassistant = true;
 
 MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags f)
-    : KMainWindow(parent,f)
+    : KXmlGuiWindow(parent,f)
 {
     connectAct = 0;
     first = false;
@@ -51,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags f)
     /*connect( kapp, SIGNAL( aboutToQuit() ), this, SLOT( saveConfig() ) );*/
 
     if( first && startassistant ) {
-        assistant();
+        /*assistant();*/
         startassistant = false;
     }
     
@@ -120,10 +120,10 @@ void MainWindow::setupActions()
     importLabelDefAct->setEnabled( !connectAct->isEnabled() );
     importExampleAct->setEnabled( !connectAct->isEnabled() );*/
 }
-/*
+
 void MainWindow::loadConfig()
 {
-    KConfigGroup config = KGlobal::config()->group("Assistant");
+    /*KConfigGroup config = KGlobal::config()->group("Assistant");
 
     first = config.readEntry("firststart2", true );
 
@@ -136,12 +136,12 @@ void MainWindow::loadConfig()
         autoconnect = false;
     }
 
-    KBarcodeSettings::getInstance()->loadConfig();
+    KBarcodeSettings::getInstance()->loadConfig();*/
 }
 
 void MainWindow::saveConfig()
 {
-    KConfigGroup config = KGlobal::config()->group("Assistant");
+    /*KConfigGroup config = KGlobal::config()->group("Assistant");
 
     config.writeEntry("firststart2", false );
 
@@ -149,29 +149,29 @@ void MainWindow::saveConfig()
     SqlTables::getInstance()->saveConfig();
     KBarcodeSettings::getInstance()->saveConfig();
 
-    config.sync();
+    config.sync();*/
 }
 
 void MainWindow::assistant()
 {
     // FIXME: create an assistant
-    ConfAssistant* wiz = new ConfAssistant( 0, "wiz", true );
+    /*ConfAssistant* wiz = new ConfAssistant( 0, "wiz", true );
     if( wiz->exec() == QDialog::Accepted && wiz->checkDatabase->isChecked() )
         SqlTables::getInstance()->connectMySQL();
 
-    delete wiz;
+    delete wiz;*/
 }
 
 void MainWindow::connectMySQL()
 {
-    connectAct->setEnabled( !SqlTables::getInstance()->connectMySQL() );
+    /*connectAct->setEnabled( !SqlTables::getInstance()->connectMySQL() );
     importLabelDefAct->setEnabled( !connectAct->isEnabled() );
     importExampleAct->setEnabled( !connectAct->isEnabled() );
 
     if( !connectAct->isEnabled() )
-        emit connectedSQL();
+        emit connectedSQL();*/
 }
-*/
+
 void MainWindow::appHelpActivated()
 {
 	// TODO: the documentation should be rewritten, along with this link
@@ -184,10 +184,10 @@ void MainWindow::appHelpActivated()
 
 void MainWindow::showCheck()
 {
-    QTextBrowser* b = new QTextBrowser( 0, "b" );
+    /*QTextBrowser* b = new QTextBrowser( 0, "b" );
     b->setText( MainWindow::systemCheck() );
     b->resize( 320, 240 );
-    b->show();
+    b->show();*/
 }
 
 void MainWindow::startInfo()
@@ -196,12 +196,14 @@ void MainWindow::startInfo()
     if( !info.isEmpty() )
         KToolInvocation::invokeBrowser( info );
 }
-/*
+
 bool MainWindow::newTables()
 {
-    return SqlTables::getInstance()->newTables();
+    /*return SqlTables::getInstance()->newTables();*/
+    // Frank:
+    return false;
 }
-*/
+
 void MainWindow::donations()
 {
     // orig =https://www.paypal.com/xclick/business=domseichter%40web.de&item_name=Support+KBarcode+Development&item_number=0&image_url=http%3A//www.kbarcode.net/themes/DeepBlue/images/logo.gif&no_shipping=1&return=http%3A//www.kbarcode.net&cancel_return=http%3A//www.kbarcode.net&cn=Suggestions%2C+Comments%3F&tax=0&currency_code=EUR
@@ -213,13 +215,13 @@ void MainWindow::donations()
         "<a href=\"" + url + "\">" +  
         i18n("Donate Now") + "</a></qt>", QString::null, QString::null, KMessageBox::AllowLink );
 }
-/*
+
 QString MainWindow::systemCheck()
 {
 	// TODO: break i18n puzzles
 	// TODO: rename Barkode to something more visual
 	
-    bool gnubarcode = !Barkode::haveGNUBarcode();
+    /*bool gnubarcode = !Barkode::haveGNUBarcode();
     bool pdf = !Barkode::havePDFBarcode();
     bool tbarcode = !Barkode::haveTBarcode();
     bool tbarcode2 = !Barkode::haveTBarcode2();
@@ -257,17 +259,14 @@ QString MainWindow::systemCheck()
     } else
         text.append( i18n("<p><b>No database drivers found. SQL database support is disabled.</b></p>") );
 
-    return text;
+    return text;*/
+    // Frank:
+    return QString("Frank");
 }
-*/
-/*Frank:*/
-KActionCollection *MainWindow::actionCollection() const
- {
-   if ( !d->m_actionCollection )
-   {
-       d->m_actionCollection = new KActionCollection( this );
-       d->m_actionCollection->setObjectName( "KXMLGUIClient-KActionCollection" );
-   }
-   return d->m_actionCollection;
- }
+
+void MainWindow::slotFunctionMap()
+{
+    /*created by Frank*/
+}
+
 #include "mainwindow.moc"

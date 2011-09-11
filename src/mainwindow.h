@@ -13,8 +13,8 @@
 #define MAINWINDOW_H
 
 #include <qwidget.h>
-#include <kmainwindow.h>
-#include <KActionCollection>
+/*#include <kmainwindow.h>*/
+#include <KXmlGuiWindow>
 
 class KAction;
 class KMenu;
@@ -27,7 +27,7 @@ class KMenu;
   * @author Dominik Seichter
   */
 
-class MainWindow : public KMainWindow {
+class MainWindow : public KXmlGuiWindow {
     Q_OBJECT
     public:
         MainWindow(QWidget *parent=0, Qt::WFlags f = Qt::WType_TopLevel | Qt::WDestructiveClose );
@@ -48,7 +48,6 @@ class MainWindow : public KMainWindow {
           * access.
           */
         static QString systemCheck();
-	KActionCollection *actionCollection() const;
 
     public slots:
         void assistant();

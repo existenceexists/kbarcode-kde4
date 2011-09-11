@@ -77,7 +77,7 @@ kde4_add_executable(kbarcode ${kbarcode_SRCS})
 
 target_link_libraries(kbarcode ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS}
 			       ${KDE4_KIO_LIBS} ${KDE4_KMETADATA}
-			       ${KDE4_KJS_LIBS} )
+			       ${KDE4_KJS_LIBS} ${QT_QT3SUPPORT_LIBRARY})
 
 install(TARGETS kbarcode DESTINATION ${BIN_INSTALL_DIR})
 
