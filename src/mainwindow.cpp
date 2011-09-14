@@ -63,14 +63,21 @@ MainWindow::~MainWindow()
 
 void MainWindow::setupActions()
 {
-    KAction* quitAct = KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
-    KAction* closeAct = KStandardAction::close( this, SLOT( close() ), actionCollection());
+    /*KAction* quitAct = KStandardAction::quit(kapp, SLOT(quit()), actionCollection());*/
+    KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
+    /*KAction* closeAct = KStandardAction::close( this, SLOT( close() ), actionCollection());*/
+    KStandardAction::close( this, SLOT( close() ), actionCollection());
     /*KAction* configureAct = KStandardAction::preferences( KBarcodeSettings::getInstance(), SLOT(configure()), actionCollection() );*/
     /*KAction* assistantAct = new KAction( i18n("&Start Configuration Assistant..."), BarIcon("assistant"), 0, this,
-                                SLOT(assistant()), actionCollection(), "assistant" );*/
+                                SLOT(assistant()), actionCollection());*/
+    KAction* assistantAct = new KAction(this);
+    assistantAct->setText(i18n("&Start Configuration Assistant..."));
+    assistantAct->setIcon(BarIcon("assistant"));
+    actionCollection()->addAction("assistant", assistantAct);
+    connect(assistantAct, SIGNAL(triggered(bool)), this, SLOT(assistant()));
+    
     /*connectAct = new KAction(i18n("&Connect to Database"), BarIcon("connect_no"), 0, this, SLOT(connectMySQL()),
                                 actionCollection(),"connect" );*/
-
 
     /*KAction* newTablesAct = new KAction( i18n("&Create Tables"), "", 0, this,
                                 SLOT(newTables()), actionCollection(), "tables" );*/
@@ -81,7 +88,7 @@ void MainWindow::setupActions()
     importExampleAct = new KAction( i18n("&Import Example Data"), "", 0, SqlTables::getInstance(),
                                 SLOT(importExampleData()), actionCollection(), "import" );*/
                                 
-    KMenu* file = new KMenu( this );
+    /*KMenu* file = new KMenu( this );
     KMenu* settings = new KMenu( this );
     KMenu* hlpMenu = helpMenu();
     int helpid = hlpMenu->idAt( 0 );
@@ -97,7 +104,7 @@ void MainWindow::setupActions()
 
     menuBar()->insertItem( i18n("&File"), file );
     menuBar()->insertItem( i18n("&Settings"), settings );
-    menuBar()->insertItem( i18n("&Help"), hlpMenu );
+    menuBar()->insertItem( i18n("&Help"), hlpMenu );*/
 
     /*closeAct->plug( file );
     quitAct->plug( file );*/
@@ -119,6 +126,8 @@ void MainWindow::setupActions()
     connectAct->setEnabled( !SqlTables::isConnected() );
     importLabelDefAct->setEnabled( !connectAct->isEnabled() );
     importExampleAct->setEnabled( !connectAct->isEnabled() );*/
+    
+    setupGUI(Default, "mainwindowui.rc");
 }
 
 void MainWindow::loadConfig()

@@ -1,5 +1,6 @@
 
 add_subdirectory( pics )
+add_subdirectory( xml )
 
 include_directories( ${CMAKE_SOURCE_DIR} ${KDE4_INCLUDE_DIR} ${KDE4_INCLUDES}
   ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} dialogs )
@@ -73,14 +74,14 @@ set(kbarcode_SRCS
 kde4_add_ui_files( kbarcode_SRCS
   )
 
-kde4_add_executable(kbarcode ${kbarcode_SRCS})
+kde4_add_executable(kbarcode002 ${kbarcode_SRCS})
 
-target_link_libraries(kbarcode ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS}
+target_link_libraries(kbarcode002 ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS}
 			       ${KDE4_KIO_LIBS} ${KDE4_KMETADATA}
 			       ${KDE4_KJS_LIBS} ${QT_QT3SUPPORT_LIBRARY})
 
-install(TARGETS kbarcode DESTINATION ${BIN_INSTALL_DIR})
-
+install(TARGETS kbarcode002 DESTINATION ${BIN_INSTALL_DIR})
+#install(FILES xml/mainwindowui.rc DESTINATION  ${DATA_INSTALL_DIR}/kbarcode002)
 
 ########### install files ###############
 

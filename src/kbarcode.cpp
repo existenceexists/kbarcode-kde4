@@ -26,10 +26,11 @@
 #include "kbarcodesettings.h"
 */
 // Qt includes
-//#include <q3groupbox.h>
-#include <Qt3Support>
-#include <Q3GroupBox>
-#include <qlayout.h>
+// #include <q3groupbox.h>
+// #include <Qt3Support>
+// #include <Q3GroupBox>
+// #include <qlayout.h>
+#include <QGroupBox>
 //Added by qt3to4:
 #include <QVBoxLayout>
 
@@ -46,9 +47,8 @@
 KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
     : MainWindow( parent, f )
 {
-    Q3GroupBox* w = new Q3GroupBox( this, "Q3GroupBox-name" );
-    w->setColumnLayout(0, Qt::Vertical );
-    QVBoxLayout* layout = new QVBoxLayout( w->layout() );
+    QGroupBox* w = new QGroupBox(this);
+    QVBoxLayout* layout = new QVBoxLayout(this);
     setCentralWidget( w );
 
     buttonSingle = new KPushButton( i18n("Barcode &Generator..."), w );
@@ -58,14 +58,18 @@ KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
     buttonData = new KPushButton( i18n("Edit SQL &Tables..."), w );
     buttonData->setEnabled( false );
     
-    buttonSingle->setIconSet( BarIconSet( "barcode" ) );
+    /*buttonSingle->setIconSet( BarIconSet( "barcode" ) );
     buttonEditor->setIconSet( BarIconSet( "edit" ) );
-    buttonBatch->setIconSet( BarIconSet( "fileprint" ) );
+    buttonBatch->setIconSet( BarIconSet( "fileprint" ) );*/
+    buttonSingle->setIcon( KIcon( "barcode" ) );
+    buttonEditor->setIcon( KIcon( "edit" ) );
+    buttonBatch->setIcon( KIcon( "fileprint" ) );
 
     layout->addWidget( buttonSingle );
     layout->addWidget( buttonEditor );
     layout->addWidget( buttonBatch );
     layout->addWidget( buttonData );
+    w->setLayout(layout);
 
     /*connect( buttonSingle, SIGNAL( clicked() ), this, SLOT( startBarcode() ) );
     connect( buttonEditor, SIGNAL( clicked() ), this, SLOT( startLabelEditor() ) );
