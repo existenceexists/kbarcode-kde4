@@ -44,11 +44,18 @@
 #include <kpushbutton.h>
 #include <kmessagebox.h>
 
+// Frank: delete these 3 lines:
+#include <iostream>
+//using namespace std;
+#include <typeinfo>
+
 KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
     : MainWindow( parent, f )
 {
     QGroupBox* w = new QGroupBox(this);
-    QVBoxLayout* layout = new QVBoxLayout(this);
+    /*QVBoxLayout* layout = new QVBoxLayout(this);*/
+    QVBoxLayout* vLayout = new QVBoxLayout();
+    /*setCentralWidget( w );*/
     setCentralWidget( w );
 
     buttonSingle = new KPushButton( i18n("Barcode &Generator..."), w );
@@ -65,11 +72,30 @@ KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
     buttonEditor->setIcon( KIcon( "edit" ) );
     buttonBatch->setIcon( KIcon( "fileprint" ) );
 
-    layout->addWidget( buttonSingle );
-    layout->addWidget( buttonEditor );
-    layout->addWidget( buttonBatch );
-    layout->addWidget( buttonData );
-    w->setLayout(layout);
+    vLayout->addWidget( buttonSingle );
+    vLayout->addWidget( buttonEditor );
+    vLayout->addWidget( buttonBatch );
+    vLayout->addWidget( buttonData );
+    //w->setLayout(layout);
+    //QLayout * wLayout = w->layout();
+    QLayout * wLayout = w->layout();
+    QLayout * nullPtr = 0;
+    std::cout << "wLayout init" << std::endl;
+    /*if (typeid(wLayout) != typeid(nullPtr)) {
+        std::cout << "typeid(0) == " << typeid(nullPtr).name() << std::endl;
+        std::cout << "wLayout == " << typeid(wLayout).name() << std::endl;
+        wLayout->addItem(vLayout);
+	std::cout << "addItem(vLayout)" << std::endl;*/
+    if (wLayout == 0) {
+        std::cout << "wLayout == 0" << std::endl;
+        //std::cout << "wLayout == 0 .. typeid == " << typeid(*wLayout).name() << std::endl;
+        w->setLayout(vLayout);
+    } else {
+        std::cout << "typeid(0) == " << typeid(nullPtr).name() << std::endl;
+        std::cout << "wLayout == " << typeid(wLayout).name() << std::endl;
+        wLayout->addItem(vLayout);
+        std::cout << "addItem(vLayout)" << std::endl;
+    }
 
     /*connect( buttonSingle, SIGNAL( clicked() ), this, SLOT( startBarcode() ) );
     connect( buttonEditor, SIGNAL( clicked() ), this, SLOT( startLabelEditor() ) );

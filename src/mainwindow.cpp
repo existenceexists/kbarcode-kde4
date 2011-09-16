@@ -127,7 +127,7 @@ void MainWindow::setupActions()
     importLabelDefAct->setEnabled( !connectAct->isEnabled() );
     importExampleAct->setEnabled( !connectAct->isEnabled() );*/
     
-    setupGUI(Default, "mainwindowui.rc");
+    setupGUI(Default, "kbarcode003/mainwindowui.rc");
 }
 
 void MainWindow::loadConfig()
