@@ -9,6 +9,9 @@
   <MenuBar>
     <Menu name="settings" >
       <Action name="assistant" />
+      <Action name="connect" />
+      <Separator />
+      <Action name="tables" />
     </Menu>
   </MenuBar>
   

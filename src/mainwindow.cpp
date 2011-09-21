@@ -20,6 +20,7 @@
 #include <qcheckbox.h>
 #include <q3textbrowser.h>
 #include <qsqldatabase.h>
+#include <QString>
 
 // KDE includes
 #include <kaction.h>
@@ -36,6 +37,9 @@
 #include <ktoolinvocation.h>
 #include <KActionCollection>
 #include <KStandardAction>
+
+// -!F:
+#include <QDebug>
 
 bool MainWindow::autoconnect = true;
 bool MainWindow::startassistant = true;
@@ -60,9 +64,11 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags f)
 MainWindow::~MainWindow()
 {
 }
-
-void MainWindow::setupActions()
+// -!F:
+void MainWindow::setupActions(QString directoryName=QString())
 {
+    kbarcodeDirectoryName = directoryName;// -!F:
+    
     /*KAction* quitAct = KStandardAction::quit(kapp, SLOT(quit()), actionCollection());*/
     KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
     /*KAction* closeAct = KStandardAction::close( this, SLOT( close() ), actionCollection());*/
@@ -72,20 +78,29 @@ void MainWindow::setupActions()
                                 SLOT(assistant()), actionCollection());*/
     KAction* assistantAct = new KAction(this);
     assistantAct->setText(i18n("&Start Configuration Assistant..."));
-    assistantAct->setIcon(BarIcon("assistant"));
+    assistantAct->setIcon(BarIcon("/usr/share/app-install/icons/assistant.png"));// -!F:
     actionCollection()->addAction("assistant", assistantAct);
     connect(assistantAct, SIGNAL(triggered(bool)), this, SLOT(assistant()));
     
     /*connectAct = new KAction(i18n("&Connect to Database"), BarIcon("connect_no"), 0, this, SLOT(connectMySQL()),
                                 actionCollection(),"connect" );*/
+    connectAct = new KAction(this);
+    connectAct->setText(i18n("&Connect to Database"));
+    connectAct->setIcon(BarIcon("/usr/share/icons/crystalsvg/16x16/actions/connect_no.png"));// -!F:
+    actionCollection()->addAction("connect", connectAct);
+    connect(connectAct, SIGNAL(triggered(bool)), this, SLOT(connectMySQL()));
 
     /*KAction* newTablesAct = new KAction( i18n("&Create Tables"), "", 0, this,
                                 SLOT(newTables()), actionCollection(), "tables" );*/
+    KAction* newTablesAct = new KAction(this);
+    newTablesAct->setText(i18n("&Create Tables"));
+    actionCollection()->addAction("tables", newTablesAct);
+    connect(newTablesAct, SIGNAL(triggered(bool)), this, SLOT(newTables()));
 
     /*importLabelDefAct = new KAction( i18n("&Import Label Definitions"), "", 0, SqlTables::getInstance(),
-                                SLOT(importLabelDef()), actionCollection(), "import" );
+                                SLOT(importLabelDef()), actionCollection(), "import" );*/
 
-    importExampleAct = new KAction( i18n("&Import Example Data"), "", 0, SqlTables::getInstance(),
+    /*importExampleAct = new KAction( i18n("&Import Example Data"), "", 0, SqlTables::getInstance(),
                                 SLOT(importExampleData()), actionCollection(), "import" );*/
                                 
     /*KMenu* file = new KMenu( this );
@@ -127,7 +142,26 @@ void MainWindow::setupActions()
     importLabelDefAct->setEnabled( !connectAct->isEnabled() );
     importExampleAct->setEnabled( !connectAct->isEnabled() );*/
     
-    setupGUI(Default, "kbarcode003/mainwindowui.rc");
+    // Set window icon. -!F:
+    //setWindowIcon(KIcon(this->kbarcodeDirectoryName + QString("/hi16-app-kbarcode.png")));
+    if (KGlobal::dirs()->addResourceDir(
+            "appdata", QString("/home/fanda/tmp/share/apps/") +
+            this->kbarcodeDirectoryName)) {
+        setWindowIcon(KIcon(KStandardDirs::locate(
+            "appdata", QString("hi16-app-kbarcode.png"))));
+    }
+    /*setWindowIcon(KIcon(KStandardDirs::locate(
+            "appdata", QString("share/apps/") + this->kbarcodeDirectoryName +
+            QString("/hi16-app-kbarcode.png"))));*/
+    /*setWindowIcon(KIcon(QString("share/apps/") + this->kbarcodeDirectoryName +
+            QString("/hi16-app-kbarcode.png")));
+    qDebug() << QString("share/apps/") + this->kbarcodeDirectoryName +
+            QString("/hi16-app-kbarcode.png");
+    qDebug() << "KStandardDirs::locate = " << KStandardDirs::locate(
+            "appdata", QString("share/apps/") + this->kbarcodeDirectoryName +
+            QString("/hi16-app-kbarcode.png"));*/
+    
+    setupGUI(Default, this->kbarcodeDirectoryName + QString("/mainwindowui.rc"));
 }
 
 void MainWindow::loadConfig()

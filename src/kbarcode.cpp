@@ -33,9 +33,11 @@
 #include <QGroupBox>
 //Added by qt3to4:
 #include <QVBoxLayout>
+#include <QString>
 
 // KDE includes
 #include <kaction.h>
+#include <KActionCollection>
 #include <kapplication.h>
 #include <kcmdlineargs.h>
 #include <kiconloader.h>
@@ -44,14 +46,11 @@
 #include <kpushbutton.h>
 #include <kmessagebox.h>
 
-// Frank: delete these 3 lines:
-#include <iostream>
-//using namespace std;
-#include <typeinfo>
-
 KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
     : MainWindow( parent, f )
 {
+    kbarcodeDirectoryName = QString("kbarcode003");// -!F:
+    
     QGroupBox* w = new QGroupBox(this);
     /*QVBoxLayout* layout = new QVBoxLayout(this);*/
     QVBoxLayout* vLayout = new QVBoxLayout();
@@ -63,63 +62,76 @@ KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
     buttonEditor = new KPushButton( i18n("&Label Editor..."), w );
     buttonBatch = new KPushButton( i18n("&Batch Printing..."), w );
     buttonData = new KPushButton( i18n("Edit SQL &Tables..."), w );
-    buttonData->setEnabled( false );
+    /*buttonData->setEnabled( false );// -!F:*/
     
     /*buttonSingle->setIconSet( BarIconSet( "barcode" ) );
     buttonEditor->setIconSet( BarIconSet( "edit" ) );
     buttonBatch->setIconSet( BarIconSet( "fileprint" ) );*/
-    buttonSingle->setIcon( KIcon( "barcode" ) );
-    buttonEditor->setIcon( KIcon( "edit" ) );
-    buttonBatch->setIcon( KIcon( "fileprint" ) );
+    /*KIconLoader *iconLoader = new KIconLoader;*/
+    /*iconLoader->addExtraDesktopThemes();*/
+    /*buttonSingle->setIcon( KIcon( "view-barcode", iconLoader ) );
+    buttonEditor->setIcon( KIcon( "document-edit", iconLoader ) );
+    buttonBatch->setIcon( KIcon( "document-print", iconLoader ) );*/
+    buttonSingle->setIcon( KIcon( "view-barcode" ) );
+    buttonEditor->setIcon( KIcon( "document-edit" ) );
+    buttonBatch->setIcon( KIcon( "document-print" ) );
+
 
     vLayout->addWidget( buttonSingle );
     vLayout->addWidget( buttonEditor );
     vLayout->addWidget( buttonBatch );
     vLayout->addWidget( buttonData );
-    //w->setLayout(layout);
-    //QLayout * wLayout = w->layout();
+    
     QLayout * wLayout = w->layout();
-    QLayout * nullPtr = 0;
-    std::cout << "wLayout init" << std::endl;
-    /*if (typeid(wLayout) != typeid(nullPtr)) {
-        std::cout << "typeid(0) == " << typeid(nullPtr).name() << std::endl;
-        std::cout << "wLayout == " << typeid(wLayout).name() << std::endl;
-        wLayout->addItem(vLayout);
-	std::cout << "addItem(vLayout)" << std::endl;*/
     if (wLayout == 0) {
-        std::cout << "wLayout == 0" << std::endl;
-        //std::cout << "wLayout == 0 .. typeid == " << typeid(*wLayout).name() << std::endl;
         w->setLayout(vLayout);
     } else {
-        std::cout << "typeid(0) == " << typeid(nullPtr).name() << std::endl;
-        std::cout << "wLayout == " << typeid(wLayout).name() << std::endl;
         wLayout->addItem(vLayout);
-        std::cout << "addItem(vLayout)" << std::endl;
     }
 
-    /*connect( buttonSingle, SIGNAL( clicked() ), this, SLOT( startBarcode() ) );
+    connect( buttonSingle, SIGNAL( clicked() ), this, SLOT( startBarcode() ) );
     connect( buttonEditor, SIGNAL( clicked() ), this, SLOT( startLabelEditor() ) );
     connect( buttonBatch, SIGNAL( clicked() ), this, SLOT( startBatchPrint() ) );
-    connect( SqlTables::getInstance(), SIGNAL( connectedSQL() ), this, SLOT( enableData() ) );*/
+    /*connect( SqlTables::getInstance(), SIGNAL( connectedSQL() ), this, SLOT( enableData() ) );*/
     
     setupActions();
     show();
 
     /*KAction* editLabelDefAct = new KAction(i18n("&Edit Label Definitions"), "",
-                                0, this, SLOT(editLabelDef()), actionCollection(), "design" );
+                                0, this, SLOT(editLabelDef()), actionCollection(), "design" );*/
+    KAction* editLabelDefAct = new KAction(this);
+    editLabelDefAct->setText(i18n("&Edit Label Definitions"));
+    actionCollection()->addAction("editLabelDefAct", editLabelDefAct);
+    connect(editLabelDefAct, SIGNAL(triggered(bool)), this, SLOT(editLabelDef()));
 
-    KAction* editArticleAct = new KAction(i18n("&Edit Articles"), "",
-                                0, this, SLOT(editArticles()), actionCollection(), "design" );
+    /*KAction* editArticleAct = new KAction(i18n("&Edit Articles"), "",
+                                0, this, SLOT(editArticles()), actionCollection(), "design" );*/
+    KAction* editArticleAct = new KAction(this);
+    editArticleAct->setText(i18n("&Edit Articles"));
+    actionCollection()->addAction("editArticleAct", editArticleAct);
+    connect(editArticleAct, SIGNAL(triggered(bool)), this, SLOT(editArticles()));
 
-    KAction* editCustomerAct = new KAction(i18n("&Edit Customers"), "",
-                                0, this, SLOT(editCustomers()), actionCollection(), "design" );
+    /*KAction* editCustomerAct = new KAction(i18n("&Edit Customers"), "",
+                                0, this, SLOT(editCustomers()), actionCollection(), "design" );*/
+    KAction* editCustomerAct = new KAction(this);
+    editCustomerAct->setText(i18n("&Edit Customers"));
+    actionCollection()->addAction("editCustomerAct", editCustomerAct);
+    connect(editCustomerAct, SIGNAL(triggered(bool)), this, SLOT(editCustomers()));
 
-    KAction* editCustomerTextAct = new KAction(i18n("&Edit Customer Text"), "",
-                                0, this, SLOT(editCustomerText()), actionCollection() );
+    /*KAction* editCustomerTextAct = new KAction(i18n("&Edit Customer Text"), "",
+                                0, this, SLOT(editCustomerText()), actionCollection() );*/
+    KAction* editCustomerTextAct = new KAction(this);
+    editCustomerTextAct->setText(i18n("&Edit Customer Text"));
+    actionCollection()->addAction("editCustomerTextAct", editCustomerTextAct);
+    connect(editCustomerTextAct, SIGNAL(triggered(bool)), this, SLOT(editCustomerText()));
 
-    KAction* importCSVAct = new KAction(i18n("&Import CSV File..."), "",
+    /*KAction* importCSVAct = new KAction(i18n("&Import CSV File..."), "",
                                 0, this, SLOT(importCSV()), actionCollection() );*/
-                                
+    KAction* importCSVAct = new KAction(this);
+    importCSVAct->setText(i18n("&Import CSV File..."));
+    actionCollection()->addAction("importCSVAct", importCSVAct);
+    connect(importCSVAct, SIGNAL(triggered(bool)), this, SLOT(importCSV()));
+    
     KMenu* data = new KMenu( buttonData );
     /*editLabelDefAct->plug( data );
     editArticleAct->plug( data );
@@ -128,6 +140,13 @@ KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
     buttonData->setPopup( data );
     data->insertSeparator();
     importCSVAct->plug( data );*/
+    data->addAction(editLabelDefAct);
+    data->addAction(editArticleAct);
+    data->addAction(editCustomerAct);
+    data->addAction(editCustomerTextAct);
+    data->addSeparator();
+    data->addAction(importCSVAct);
+    buttonData->setMenu(data);
 
     enableData();
 }
@@ -139,7 +158,7 @@ KBarcode::~KBarcode()
 
 void KBarcode::setupActions()
 {
-    MainWindow::setupActions();
+    MainWindow::setupActions(kbarcodeDirectoryName);
 }
 
 void KBarcode::startBarcode()
