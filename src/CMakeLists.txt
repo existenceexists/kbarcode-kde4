@@ -74,14 +74,20 @@ set(kbarcode_SRCS
 kde4_add_ui_files( kbarcode_SRCS
   )
 
-kde4_add_executable(kbarcode003 ${kbarcode_SRCS})
+message("\${ProjectName} is: ${ProjectName}")
 
-target_link_libraries(kbarcode003 ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS}
-			       ${KDE4_KIO_LIBS} ${KDE4_KMETADATA}
-			       ${KDE4_KJS_LIBS} ${QT_QT3SUPPORT_LIBRARY})
+if(ProjectName)
+  
+  kde4_add_executable(${ProjectName} ${kbarcode_SRCS})
+  
+  target_link_libraries(${ProjectName} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS}
+  			       ${KDE4_KIO_LIBS} ${KDE4_KMETADATA}
+  			       ${KDE4_KJS_LIBS} ${QT_QT3SUPPORT_LIBRARY})
+  
+  install(TARGETS ${ProjectName} DESTINATION ${BIN_INSTALL_DIR})
+  #install(FILES xml/mainwindowui.rc DESTINATION  ${DATA_INSTALL_DIR}/kbarcode002)
 
-install(TARGETS kbarcode003 DESTINATION ${BIN_INSTALL_DIR})
-#install(FILES xml/mainwindowui.rc DESTINATION  ${DATA_INSTALL_DIR}/kbarcode002)
+endif(ProjectName)
 
 ########### install files ###############
 

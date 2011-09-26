@@ -1,4 +1,6 @@
-project(kbarcode003)
+set(ProjectName kbarcode004)
+
+project(${ProjectName})
 
 # search packages used by KDE
 find_package(KDE4 REQUIRED)

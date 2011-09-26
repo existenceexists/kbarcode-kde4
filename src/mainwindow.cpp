@@ -40,6 +40,9 @@
 
 // -!F:
 #include <QDebug>
+#include <QList>
+#include <QKeySequence>
+#include <QShortcut>
 
 bool MainWindow::autoconnect = true;
 bool MainWindow::startassistant = true;
@@ -115,9 +118,25 @@ void MainWindow::setupActions(QString directoryName=QString())
     hlpMenu->insertSeparator(-2);
     hlpMenu->insertItem( SmallIconSet("system"), i18n("&System Check..."), this, SLOT(showCheck() ), 0, -1, 0 );
     hlpMenu->insertItem( SmallIconSet("barcode"), i18n("&Barcode Help..."), this, SLOT( startInfo() ), 0, -1, 0 );
-    hlpMenu->insertItem( i18n("&Donate..."), this, SLOT( donations() ), 0, -1, 0 );
+    hlpMenu->insertItem( i18n("&Donate..."), this, SLOT( donations() ), 0, -1, 0 );*/
+    
+    /*KMenu* hlpMenu = helpMenu();
+    QAction* firstAction = hlpMenu->actions()[0];
+    hlpMenu->removeAction(firstAction);
+    menuBar()->removeAction(hlpMenu->menuAction());
+    
+    KAction* helpAct = new KAction(this);
+    helpAct->setText(i18n("&Help"));
+    helpAct->setIcon(KIcon("help-contents"));// -!F:
+    helpAct->setShortcut(Qt::Key_F1);
+    actionCollection()->addAction("helpAct", helpAct);
+    connect(helpAct, SIGNAL(triggered(bool)), this, SLOT(appHelpActivated()));
+    
+    hlpMenu->insertAction(hlpMenu->actions()[0], helpAct);
+    menuBar()->addMenu(hlpMenu);*/
+    
 
-    menuBar()->insertItem( i18n("&File"), file );
+    /*menuBar()->insertItem( i18n("&File"), file );
     menuBar()->insertItem( i18n("&Settings"), settings );
     menuBar()->insertItem( i18n("&Help"), hlpMenu );*/
 
@@ -161,7 +180,154 @@ void MainWindow::setupActions(QString directoryName=QString())
             "appdata", QString("share/apps/") + this->kbarcodeDirectoryName +
             QString("/hi16-app-kbarcode.png"));*/
     
+    //QWidget * mainMenuBar = menuWidget();
+    //const QString helpName = QString("helpMenu");
+    //QString("help")
+    //QList<KMenu *> 
+    /*if (!(menuBar()->findChildren<KMenu *>()).isEmpty()) {
+        qDebug() << "helpMenu found";
+    }*/
+    /*KMenu* hlpMenu1 = helpMenu();
+    QList<QAction *> helpMenuActionsList1 = hlpMenu1->actions();
+    qDebug() << "helpMenuActionsList1 size = " << helpMenuActionsList1.size();
+    hlpMenu1->removeAction(helpMenuActionsList1[0]);
+    
+    KAction* helpAct = new KAction(this);
+    helpAct->setText(i18n("&Help"));
+    helpAct->setIcon(KIcon("help-contents"));// -!F:
+    helpAct->setShortcut(Qt::Key_F1);
+    actionCollection()->addAction("helpAct", helpAct);
+    connect(helpAct, SIGNAL(triggered(bool)), this, SLOT(appHelpActivated()));*/
+    
+    /*hlpMenu1->insertAction(hlpMenu1->actions()[0], helpAct);
+    
+    QList<QAction *> menuBarActionsList = menuBar()->actions();
+    //qDebug() << "menuBarActionsList size = " << menuBarActionsList.size();*/
+    //menuBar()->clear();
+    //menuBar()->addMenu(menuBarChildrenList[0]);
+    /*menuBar()->addMenu(menuBarChildrenList[1]);*/
+    /*menuBar()->addAction(menuBarActionsList[0]);
+    menuBar()->addAction(menuBarActionsList[1]);*/
+    //menuBar()->addMenu(hlpMenu1);
+    
+    QShortcut f1Shortcut(helpMenu()->actions()[0]->shortcut(), this);
+    QKeySequence f1ShortcutKeySequence = f1Shortcut.key();
+    //helpMenu()->actions()[0]->setShortcut(QKeySequence());
+    //releaseShortcut(QShortcut(helpMenu()->actions()[0]->shortcut(), this).id());
+    //qDebug() << "QShortcut" << helpMenu()->actions()[0]->shortcut().toString() << QShortcut(helpMenu()->actions()[0]->shortcut(), this).id();
+    qDebug() << "F1 QShortcut" << f1ShortcutKeySequence.toString() << f1Shortcut.id();
+    //QShortcut(helpMenu()->actions()[0]->shortcut(), this).disconnect();
+    //QShortcut(helpMenu()->actions()[0]->shortcut(), this).setEnabled(false);
+    
+    /*KMenu* hlpMenu2 = helpMenu();
+    QList<QAction *> helpMenuActionsList2 = hlpMenu2->actions();
+    //KAction * firstAction = (KAction *) helpMenuActionsList[0];
+    QAction * firstAction2 = helpMenuActionsList2[0];
+    firstAction2->blockSignals(true);
+    hlpMenu2->removeAction(firstAction2);
+    actionCollection()->removeAction(firstAction2);*/
+    
+    
     setupGUI(Default, this->kbarcodeDirectoryName + QString("/mainwindowui.rc"));
+    
+    //releaseShortcut(QShortcut(helpMenu()->actions()[0]->shortcut(), this).id());
+    //releaseShortcut(QShortcut(helpMenu()->actions()[0]->shortcut(), this).id());
+    if (!(f1Shortcut.disconnect())) {
+        qDebug() << "QShortcut not disconnected";
+    }
+    //QShortcut(helpMenu()->actions()[0]->shortcut(), this).setEnabled(false);
+    f1Shortcut.setEnabled(false);
+    
+    //if ((QShortcut(helpMenu()->actions()[0]->shortcut(), this).isEnabled())) {
+    if (f1Shortcut.isEnabled()) {
+        qDebug() << "F1 QShortcut is enabled";
+    }
+    //QObject::disconnect(QShortcut(helpMenu()->actions()[0]->shortcut(), this), 0, 0, 0);
+    
+    
+    //KAction * action1 = (KAction *) helpMenu()->actions()[0];
+    //KShortcut f1Shortcut2 = action1->shortcut();
+    
+    
+    KMenu* hlpMenu = helpMenu();
+    /*if ((hlpMenu->actions()).isEmpty()) {
+        qDebug() << "helpMenu has no actions";
+    }*/
+    /*QAction* firstAction = (hlpMenu->actions())[0];
+    hlpMenu->removeAction(firstAction);*/
+    //menuBar()->removeAction(hlpMenu->menuAction());*/
+    QList<QAction *> helpMenuActionsList = hlpMenu->actions();
+    KAction * firstAction = (KAction *) helpMenuActionsList[0];
+    //QAction * firstAction = helpMenuActionsList[0];
+    
+    /*KShortcut f1Shortcut2 = firstAction->shortcut();
+    f1Shortcut2.remove(QKeySequence(Qt::Key_F1));
+    f1Shortcut2.setPrimary(QKeySequence());
+    f1Shortcut2.setAlternate(QKeySequence());
+    firstAction->setShortcut(f1Shortcut2);*/
+    //firstAction->setShortcut(QKeySequence());
+    //firstAction->setShortcut(f1Shortcut);
+    //firstAction->setShortcut(
+    //firstAction->setVisible(false);
+    if ((firstAction->shortcut()).isEmpty()) {
+        qDebug() << "KShortcut is empty";
+    }
+    
+    KShortcut helpShortcut = KStandardShortcut::help();
+    helpShortcut.remove(QKeySequence(Qt::Key_F1));
+    helpShortcut.setPrimary(QKeySequence());
+    helpShortcut.setAlternate(QKeySequence());
+    firstAction->setShortcut(helpShortcut);
+    //firstAction->disconnect();
+    //setShortcutEnabled(f1Shortcut.id(), false);
+    //firstAction->blockSignals(true);
+    hlpMenu->removeAction(firstAction);
+    actionCollection()->removeAction(firstAction);
+    //delete firstAction;
+    //firstAction->~QAction();
+    //setShortcutEnabled(f1Shortcut.id(), false);
+    
+    KAction* helpAct = new KAction(this);
+    helpAct->setText(i18n("&Help"));
+    helpAct->setIcon(KIcon("help-contents"));// -!F:
+    helpAct->setShortcut(QKeySequence(Qt::Key_F1));
+    //helpAct->setShortcut(f1Shortcut2);
+    //helpAct->setShortcut(firstAction->shortcut());
+    actionCollection()->addAction("helpAct", helpAct);
+    connect(helpAct, SIGNAL(triggered(bool)), this, SLOT(appHelpActivated()));
+    
+    hlpMenu->insertAction(hlpMenu->actions()[0], helpAct);
+    
+    //menuBar()->removeAction(hlpMenu->menuAction());
+    //menuBar()->removeAction(hlpMenu);
+    //QList<QMenu *> menuBarChild = menuBar()->findChildren<QMenu *>();
+    //qDebug() << "menuBarChild size = " << menuBarChild.size();
+    //QList<QMenu *> menuBarChildrenList = menuBarChild[0]->findChildren<QMenu *>();
+    //qDebug() << "menuBarChildrenList size = " << menuBarChildrenList.size();
+    QList<QAction *> menuBarActionsList = menuBar()->actions();
+    //qDebug() << "menuBarActionsList size = " << menuBarActionsList.size();
+    menuBar()->clear();
+    //menuBar()->addMenu(menuBarChildrenList[0]);
+    //menuBar()->addMenu(menuBarChildrenList[1]);
+    menuBar()->addAction(menuBarActionsList[0]);
+    menuBar()->addAction(menuBarActionsList[1]);
+    menuBar()->addMenu(hlpMenu);
+    
+    //QShortcut f1Shortcut2(helpMenu()->actions()[0]->shortcut(), this);
+    //setShortcutEnabled(f1Shortcut2.id(), false);
+    
+    /*KAction* helpAct = new KAction(this);
+    helpAct->setText(i18n("&Help"));
+    helpAct->setIcon(KIcon("help-contents"));// -!F:
+    helpAct->setShortcut(Qt::Key_F1);
+    actionCollection()->addAction("helpAct", helpAct);
+    connect(helpAct, SIGNAL(triggered(bool)), this, SLOT(appHelpActivated()));
+    
+    hlpMenu->insertAction(hlpMenu->actions()[0], helpAct);
+    //menuBar()->addMenu(hlpMenu);*/
+    /*if ((menuBar()->findChildren<QMenu *>()).isEmpty()) {
+        qDebug() << "children not found";
+    }*/
 }
 
 void MainWindow::loadConfig()
