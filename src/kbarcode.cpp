@@ -49,7 +49,7 @@
 KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
     : MainWindow( parent, f )
 {
-    kbarcodeDirectoryName = QString("kbarcode004");// -!F:
+    kbarcodeDirectoryName = QString("kbarcode005");// -!F:
     
     QGroupBox* w = new QGroupBox(this);
     /*QVBoxLayout* layout = new QVBoxLayout(this);*/
@@ -67,9 +67,9 @@ KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
     /*buttonSingle->setIconSet( BarIconSet( "barcode" ) );
     buttonEditor->setIconSet( BarIconSet( "edit" ) );
     buttonBatch->setIconSet( BarIconSet( "fileprint" ) );*/
-    /*KIconLoader *iconLoader = new KIconLoader;*/
-    /*iconLoader->addExtraDesktopThemes();*/
-    /*buttonSingle->setIcon( KIcon( "view-barcode", iconLoader ) );
+    /*KIconLoader *iconLoader = new KIconLoader;// -!F:
+    iconLoader->addExtraDesktopThemes();
+    buttonSingle->setIcon( KIcon( "view-barcode", iconLoader ) );
     buttonEditor->setIcon( KIcon( "document-edit", iconLoader ) );
     buttonBatch->setIcon( KIcon( "document-print", iconLoader ) );*/
     buttonSingle->setIcon( KIcon( "view-barcode" ) );

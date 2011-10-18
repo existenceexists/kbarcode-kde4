@@ -20,9 +20,9 @@ set(kbarcode_SRCS
  # confassistant.cpp
  # csvfile.cpp
  # databasebrowser.cpp
- # definition.cpp
+  definition.cpp
  # documentitem.cpp
- # dsrichtext.cpp
+  dsrichtext.cpp
  # dstextedit.cpp
  # encodingcombo.cpp
  # gnubarcode.cpp
@@ -32,11 +32,11 @@ set(kbarcode_SRCS
  # kbarcodesettings.cpp
  # label.cpp
  # labeleditor.cpp
- # labelutils.cpp
+  labelutils.cpp
  # lineitem.cpp
   main.cpp
   mainwindow.cpp
- # measurements.cpp
+  measurements.cpp
  # mimesources.cpp
  # mycanvasitem.cpp
  # mycanvasview.cpp
@@ -47,7 +47,7 @@ set(kbarcode_SRCS
  # propertywidget.cpp
  # purepostscript.cpp
  # rectitem.cpp
- # sqltables.cpp
+  sqltables.cpp
  # tbarcode2.cpp
  # tcanvasitem.cpp
  # tec.cpp

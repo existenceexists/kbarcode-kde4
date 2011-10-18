@@ -161,7 +161,7 @@ Definition::Definition( const QString & producer, const QString & type, QWidget*
 
 	initProgress();
 
-        QString s;
+        /*QString s;
         while( file->readLine( s, 1000 ) != -1 ) {
             if( s.isEmpty() || s.left( 1 ) == "#" )
                 continue;
@@ -173,7 +173,23 @@ Definition::Definition( const QString & producer, const QString & type, QWidget*
                 init( p.getId() );
                 break;
             }
+        }*/
+        QTextStream s( file );
+        QString line = s.readLine();
+        while( !line.isNull() ) {
+            if( line.isEmpty() || line.left( 1 ) == "#" )
+                continue;
+
+	    increaseProgress();
+
+            PrivateParser p( line );
+            if( p.getProducer() ==producer && p.getType() == type ) {
+                init( p.getId() );
+                break;
+            }
+            line = s.readLine();
         }
+	
 
 	destroyProgress();
     }
@@ -303,12 +319,18 @@ bool Definition::openFile()
         KConfigGroup config = KGlobal::config()->group( "Definitions" );
         
         // copy file to new location
-        QString fname = config.readEntry( "defpath", locate( "data", "kbarcode/labeldefinitions.sql" ) );
+        QString fname = config.readEntry( "defpath", KStandardDirs::locate( "data", "kbarcode/labeldefinitions.sql" ) );
         if( !QFile::exists( fname ) || fname.isEmpty() ) 
             return ( showFileError() ? openFile() : false );
 
-        if(!filecopy( (const char*)fname, (const char*)f ))
+        QByteArray baFname = fname.toUtf8();
+	const char *cFname = baFname.constData();
+	QByteArray baF = f.toUtf8();
+	const char *cF = baF.constData();
+	/*if(!filecopy( (const char*)fname, (const char*)f ))//F-delete*/
+	if(!filecopy( cFname, cF )) {
             return ( showFileError() ? openFile() : false );
+	}
     }
 
     file = new QFile( f );
@@ -454,7 +476,7 @@ int Definition::writeFile( const Measurements & c, QString type, QString produce
                   I2S(c.gapVMM()) + ", " + I2S(c.gapHMM()) + ", " +
                   I2S(c.numH()) + ", " + I2S(c.numV()) + ", NULL, NULL )";
         
-    QString s;
+    /*QString s;
     while( file->readLine( s, 1000 ) != -1 ) {
         if( s.isEmpty() || s.left( 1 ) == "#" ) {
             data.append( s );
@@ -472,7 +494,30 @@ int Definition::writeFile( const Measurements & c, QString type, QString produce
             datawritten = true;
         } else
             data.append( s );
+    }*/
+    QTextStream s( file );
+    QString line = s.readLine();
+    while( !line.isNull() ) {
+        if( line.isEmpty() || line.left( 1 ) == "#" ) {
+            data.append( line );
+            continue;
+        }
+            
+        PrivateParser p( line );
+        if( p.getId().toInt() > index )
+            index = p.getId().toInt();
+
+        if( p.getType() == type && p.getProducer() == producer ) {
+            // update an item already present in the list
+            entry = entry.prepend( "INSERT INTO " TABLE_LABEL_DEF " VALUES (" + I2S(p.getId().toInt()) );
+            data.append( entry );
+            datawritten = true;
+        } else {
+            data.append( line );
+	}
+	line = s.readLine();
     }
+    
 
     if( !datawritten ) {
         entry = entry.prepend( "INSERT INTO " TABLE_LABEL_DEF " VALUES (" + I2S(index+1) );
@@ -528,8 +573,10 @@ int Definition::writeSQL( const Measurements & c, QString type, QString producer
             " WHERE manufacture = '" + producer + "' AND"
             " type = '" + type + "'" );
 
+        QByteArray baLQ = query.lastQuery().toLatin1();
+        char * lastQuery = baLQ.data();
         if(!query.isValid())
-            qDebug("Query to update values not valid!\n%s\n", query.lastQuery().toLatin1() );
+            qDebug("Query to update values not valid!\n%s\n", lastQuery );
     }
 
     QSqlQuery qi("SELECT label_no FROM " TABLE_LABEL_DEF " WHERE manufacture='" + producer + "' AND type='" + type + "'" );
@@ -551,7 +598,8 @@ bool Definition::showFileError()
                  "You will be prompted now to select the file containing the labeldefinitions."),
                  "", "NoDefinitionsFound" );
 
-        QString f = KFileDialog::getOpenFileName( QString::null, QString::null, 0 );
+        /*QString f = KFileDialog::getOpenFileName( QString::null, QString::null, 0 );*/
+	QString f = KFileDialog::getOpenFileName();
         if( !f.isEmpty() && QFile::exists( f ) ) {
             KConfigGroup config = KGlobal::config()->group( "Definitions" );
             config.writeEntry( "defpath", f );

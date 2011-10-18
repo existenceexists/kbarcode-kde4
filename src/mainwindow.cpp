@@ -10,8 +10,8 @@
  */
 
 #include "mainwindow.h"
-/*#include "sqltables.h"
-#include "confassistant.h"
+#include "sqltables.h"
+/*#include "confassistant.h"
 #include "printersettings.h"
 #include "kbarcodesettings.h"
 #include "barkode.h"
@@ -43,6 +43,8 @@
 #include <QList>
 #include <QKeySequence>
 #include <QShortcut>
+#include <iostream>
+using namespace std;
 
 bool MainWindow::autoconnect = true;
 bool MainWindow::startassistant = true;
@@ -67,8 +69,8 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags f)
 MainWindow::~MainWindow()
 {
 }
-// -!F:
-void MainWindow::setupActions(QString directoryName=QString())
+
+void MainWindow::setupActions(QString directoryName=QString()) // -!F:
 {
     kbarcodeDirectoryName = directoryName;// -!F:
     
@@ -81,7 +83,9 @@ void MainWindow::setupActions(QString directoryName=QString())
                                 SLOT(assistant()), actionCollection());*/
     KAction* assistantAct = new KAction(this);
     assistantAct->setText(i18n("&Start Configuration Assistant..."));
-    assistantAct->setIcon(BarIcon("/usr/share/app-install/icons/assistant.png"));// -!F:
+    //assistantAct->setIcon(BarIcon("/usr/share/app-install/icons/assistant.png"));// -!F:
+    //assistantAct->setIcon(BarIcon("/usr/share/icons/crystalsvg/16x16/actions/wizard.png"));// -!F:
+    assistantAct->setIcon(BarIcon("/usr/share/icons/crystalsvg/16x16/actions/wizard.png"));// -!F:
     actionCollection()->addAction("assistant", assistantAct);
     connect(assistantAct, SIGNAL(triggered(bool)), this, SLOT(assistant()));
     
@@ -102,10 +106,48 @@ void MainWindow::setupActions(QString directoryName=QString())
 
     /*importLabelDefAct = new KAction( i18n("&Import Label Definitions"), "", 0, SqlTables::getInstance(),
                                 SLOT(importLabelDef()), actionCollection(), "import" );*/
+    KAction * importLabelDefAct = new KAction(this);
+    importLabelDefAct->setText(i18n("&Import Label Definitions"));
+    actionCollection()->addAction("importLabelDef", importLabelDefAct);
+    connect(importLabelDefAct, SIGNAL(triggered(bool)), SqlTables::getInstance(), SLOT(importLabelDef()));
 
     /*importExampleAct = new KAction( i18n("&Import Example Data"), "", 0, SqlTables::getInstance(),
                                 SLOT(importExampleData()), actionCollection(), "import" );*/
-                                
+    KAction * importExampleAct = new KAction(this);
+    importExampleAct->setText(i18n("&Import Example Data"));
+    actionCollection()->addAction("importExample", importExampleAct);
+    connect(importExampleAct, SIGNAL(triggered(bool)), SqlTables::getInstance(), SLOT(importExampleData()));
+    
+    KAction* helpAct = new KAction(this);
+    helpAct->setText(i18n("&Help"));
+    helpAct->setIcon(KIcon("help-contents"));
+    helpAct->setShortcut(Qt::Key_F1);
+    actionCollection()->addAction("helpAct", helpAct);
+    connect(helpAct, SIGNAL(triggered(bool)), this, SLOT(appHelpActivated()));
+    
+    /*// actionMapAct made by Frank:
+    KAction* actionMapAct = new KAction(this);
+    actionMapAct->setText(i18n("&Action Map..."));
+    actionCollection()->addAction("actionMapAct", actionMapAct);
+    connect(actionMapAct, SIGNAL(triggered(bool)), this, SLOT(slotFunctionMap()));*/
+    
+    KAction* systemCheckAct = new KAction(this);
+    systemCheckAct->setText(i18n("&System Check..."));
+    systemCheckAct->setIcon(KIcon("/usr/share/icons/crystalsvg/16x16/devices/system.png"));// -!F:
+    actionCollection()->addAction("systemCheckAct", systemCheckAct);
+    connect(systemCheckAct, SIGNAL(triggered(bool)), this, SLOT(showCheck()));
+    
+    KAction* barcodeHelpAct = new KAction(this);
+    barcodeHelpAct->setText(i18n("&Barcode Help..."));
+    barcodeHelpAct->setIcon(KIcon("view-barcode"));
+    actionCollection()->addAction("barcodeHelpAct", barcodeHelpAct);
+    connect(barcodeHelpAct, SIGNAL(triggered(bool)), this, SLOT(startInfo()));
+    
+    KAction* donateAct = new KAction(this);
+    donateAct->setText(i18n("&Donate..."));
+    actionCollection()->addAction("donateAct", donateAct);
+    connect(donateAct, SIGNAL(triggered(bool)), this, SLOT(donations()));
+    
     /*KMenu* file = new KMenu( this );
     KMenu* settings = new KMenu( this );
     KMenu* hlpMenu = helpMenu();
@@ -120,22 +162,6 @@ void MainWindow::setupActions(QString directoryName=QString())
     hlpMenu->insertItem( SmallIconSet("barcode"), i18n("&Barcode Help..."), this, SLOT( startInfo() ), 0, -1, 0 );
     hlpMenu->insertItem( i18n("&Donate..."), this, SLOT( donations() ), 0, -1, 0 );*/
     
-    /*KMenu* hlpMenu = helpMenu();
-    QAction* firstAction = hlpMenu->actions()[0];
-    hlpMenu->removeAction(firstAction);
-    menuBar()->removeAction(hlpMenu->menuAction());
-    
-    KAction* helpAct = new KAction(this);
-    helpAct->setText(i18n("&Help"));
-    helpAct->setIcon(KIcon("help-contents"));// -!F:
-    helpAct->setShortcut(Qt::Key_F1);
-    actionCollection()->addAction("helpAct", helpAct);
-    connect(helpAct, SIGNAL(triggered(bool)), this, SLOT(appHelpActivated()));
-    
-    hlpMenu->insertAction(hlpMenu->actions()[0], helpAct);
-    menuBar()->addMenu(hlpMenu);*/
-    
-
     /*menuBar()->insertItem( i18n("&File"), file );
     menuBar()->insertItem( i18n("&Settings"), settings );
     menuBar()->insertItem( i18n("&Help"), hlpMenu );*/
@@ -151,7 +177,7 @@ void MainWindow::setupActions(QString directoryName=QString())
     importLabelDefAct->plug( settings );
     importExampleAct->plug( settings );*/
 
-    /*SqlTables* tables = SqlTables::getInstance();
+    SqlTables* tables = SqlTables::getInstance();
     if( tables->getData().autoconnect && autoconnect && !first ) {
         tables->connectMySQL();
         autoconnect = false;
@@ -159,212 +185,47 @@ void MainWindow::setupActions(QString directoryName=QString())
 
     connectAct->setEnabled( !SqlTables::isConnected() );
     importLabelDefAct->setEnabled( !connectAct->isEnabled() );
-    importExampleAct->setEnabled( !connectAct->isEnabled() );*/
+    importExampleAct->setEnabled( !connectAct->isEnabled() );
     
-    // Set window icon. -!F:
+    // Set window icon.
     //setWindowIcon(KIcon(this->kbarcodeDirectoryName + QString("/hi16-app-kbarcode.png")));
     if (KGlobal::dirs()->addResourceDir(
-            "appdata", QString("/home/fanda/tmp/share/apps/") +
+            "appdata", QString("/home/fanda/tmp/share/apps/") + // -!F:
             this->kbarcodeDirectoryName)) {
         setWindowIcon(KIcon(KStandardDirs::locate(
             "appdata", QString("hi16-app-kbarcode.png"))));
     }
-    /*setWindowIcon(KIcon(KStandardDirs::locate(
-            "appdata", QString("share/apps/") + this->kbarcodeDirectoryName +
-            QString("/hi16-app-kbarcode.png"))));*/
-    /*setWindowIcon(KIcon(QString("share/apps/") + this->kbarcodeDirectoryName +
-            QString("/hi16-app-kbarcode.png")));
-    qDebug() << QString("share/apps/") + this->kbarcodeDirectoryName +
-            QString("/hi16-app-kbarcode.png");
-    qDebug() << "KStandardDirs::locate = " << KStandardDirs::locate(
-            "appdata", QString("share/apps/") + this->kbarcodeDirectoryName +
-            QString("/hi16-app-kbarcode.png"));*/
     
-    //QWidget * mainMenuBar = menuWidget();
-    //const QString helpName = QString("helpMenu");
-    //QString("help")
-    //QList<KMenu *> 
-    /*if (!(menuBar()->findChildren<KMenu *>()).isEmpty()) {
-        qDebug() << "helpMenu found";
-    }*/
-    //KMenu* hlpMenu1 = helpMenu();
-    /*QList<QAction *> helpMenuActionsList1 = hlpMenu1->actions();
-    qDebug() << "helpMenuActionsList1 size = " << helpMenuActionsList1.size();
-    hlpMenu1->removeAction(helpMenuActionsList1[0]);*/
-    
-    KAction* helpAct = new KAction(this);
-    helpAct->setText(i18n("&Help"));
-    helpAct->setIcon(KIcon("help-contents"));
-    helpAct->setShortcut(Qt::Key_F1);
-    actionCollection()->addAction("helpAct", helpAct);
-    connect(helpAct, SIGNAL(triggered(bool)), this, SLOT(appHelpActivated()));
-    
-    //helpMenu()->insertAction(helpMenu()->actions()[0], helpAct);
-    //hlpMenu1->insertAction(hlpMenu1->actions()[0], helpAct);
-    
-    /*QList<QAction *> menuBarActionsList = menuBar()->actions();
-    //qDebug() << "menuBarActionsList size = " << menuBarActionsList.size();*/
-    //menuBar()->clear();
-    //menuBar()->addMenu(menuBarChildrenList[0]);
-    /*menuBar()->addMenu(menuBarChildrenList[1]);*/
-    /*menuBar()->addAction(menuBarActionsList[0]);
-    menuBar()->addAction(menuBarActionsList[1]);*/
-    //menuBar()->addMenu(hlpMenu1);
-    
-    /*QShortcut f1Shortcut(helpMenu()->actions()[0]->shortcut(), this);
-    QKeySequence f1ShortcutKeySequence = f1Shortcut.key();
-    //helpMenu()->actions()[0]->setShortcut(QKeySequence());
-    //releaseShortcut(QShortcut(helpMenu()->actions()[0]->shortcut(), this).id());
-    //qDebug() << "QShortcut" << helpMenu()->actions()[0]->shortcut().toString() << QShortcut(helpMenu()->actions()[0]->shortcut(), this).id();
-    qDebug() << "F1 QShortcut" << f1ShortcutKeySequence.toString() << f1Shortcut.id();*/
-    //QShortcut(helpMenu()->actions()[0]->shortcut(), this).disconnect();
-    //QShortcut(helpMenu()->actions()[0]->shortcut(), this).setEnabled(false);
-    
-    /*KMenu* hlpMenu2 = helpMenu();
-    QList<QAction *> helpMenuActionsList2 = hlpMenu2->actions();
-    //KAction * firstAction = (KAction *) helpMenuActionsList[0];
-    QAction * firstAction2 = helpMenuActionsList2[0];
-    firstAction2->blockSignals(true);
-    hlpMenu2->removeAction(firstAction2);
-    actionCollection()->removeAction(firstAction2);*/
-    
-    //KStandardAction::help(this, SLOT(appHelpActivated()), actionCollection());
-    //KStandardAction::helpContents(this, SLOT(appHelp()), actionCollection());
-    /*KAction * helpAct = KStandardAction::helpContents(this, SLOT(appHelpActivated()), actionCollection());
-    helpAct->setShortcut(QKeySequence());*/
-    /*connect(helpAct, SIGNAL(triggered(bool)), this, SLOT(appHelpActivated()));*/
-    /*KAction * helpAct = KStandardAction::create(KStandardAction::HelpContents,
-        this, SLOT(appHelpActivated()), actionCollection());*/
-    /*helpAct->setShortcut(QKeySequence(Qt::Key_F1));
-    actionCollection()->addAction("helpAct", helpAct);
-    connect(helpAct, SIGNAL(triggered(bool)), this, SLOT(appHelpActivated()));*/
-    //KStandardAction::keyBindings( (QObject*) guiFactory(), SLOT( configureShortcuts() ), actionCollection() );
-    
+    // Let KDE4 create the main window.
     setupGUI(Default, this->kbarcodeDirectoryName + QString("/mainwindowui.rc"));
     
+    // Adjust the help menu of the main window automatically created by setupGUI():
+    // First remove the "Kbarcode Handbook F1" action:
     QAction *helpContentsAction = actionCollection()->action("help_contents");
     if (!(helpContentsAction == 0)) {
         helpContentsAction->setEnabled(false);
         delete helpContentsAction;
     };
-    //KAction * helpAct = KStandardAction::helpContents(this, SLOT(appHelpActivated()), actionCollection());
-    //helpMenu()->insertAction(helpMenu()->actions()[0], helpAct);
-    //releaseShortcut(QShortcut(helpMenu()->actions()[0]->shortcut(), this).id());
-    //releaseShortcut(QShortcut(helpMenu()->actions()[0]->shortcut(), this).id());
-    /*if (!(f1Shortcut.disconnect())) {
-        qDebug() << "QShortcut not disconnected";
-    }
-    //QShortcut(helpMenu()->actions()[0]->shortcut(), this).setEnabled(false);
-    f1Shortcut.setEnabled(false);
-    
-    //if ((QShortcut(helpMenu()->actions()[0]->shortcut(), this).isEnabled())) {
-    if (f1Shortcut.isEnabled()) {
-        qDebug() << "F1 QShortcut is enabled";
-    }*/
-    //QObject::disconnect(QShortcut(helpMenu()->actions()[0]->shortcut(), this), 0, 0, 0);
-    
-    
-    //KAction * action1 = (KAction *) helpMenu()->actions()[0];
-    //KShortcut f1Shortcut2 = action1->shortcut();
-    
-    
-    /*KMenu* hlpMenu = helpMenu();*/
-    /*if ((hlpMenu->actions()).isEmpty()) {
-        qDebug() << "helpMenu has no actions";
-    }*/
-    /*QAction* firstAction = (hlpMenu->actions())[0];
-    hlpMenu->removeAction(firstAction);*/
-    //menuBar()->removeAction(hlpMenu->menuAction());*/
-    /*QList<QAction *> helpMenuActionsList = hlpMenu->actions();
-    KAction * firstAction = (KAction *) helpMenuActionsList[0];*/
-    //QAction * firstAction = helpMenuActionsList[0];
-    
-    /*KShortcut f1Shortcut2 = firstAction->shortcut();
-    f1Shortcut2.remove(QKeySequence(Qt::Key_F1));
-    f1Shortcut2.setPrimary(QKeySequence());
-    f1Shortcut2.setAlternate(QKeySequence());
-    firstAction->setShortcut(f1Shortcut2);*/
-    //firstAction->setShortcut(QKeySequence());
-    //firstAction->setShortcut(f1Shortcut);
-    //firstAction->setShortcut(
-    //firstAction->setVisible(false);
-    /*if ((firstAction->shortcut()).isEmpty()) {
-        qDebug() << "KShortcut is empty";
-    }
-    
-    KShortcut helpShortcut = KStandardShortcut::help();
-    helpShortcut.remove(QKeySequence(Qt::Key_F1));
-    helpShortcut.setPrimary(QKeySequence());
-    helpShortcut.setAlternate(QKeySequence());
-    firstAction->setShortcut(helpShortcut);
-    //firstAction->disconnect();
-    //setShortcutEnabled(f1Shortcut.id(), false);
-    //firstAction->blockSignals(true);
-    hlpMenu->removeAction(firstAction);
-    actionCollection()->removeAction(firstAction);
-    //delete firstAction;
-    //firstAction->~QAction();
-    //setShortcutEnabled(f1Shortcut.id(), false);*/
-    
-    /*KAction* helpAct = new KAction(this);
-    helpAct->setText(i18n("&Help"));
-    helpAct->setIcon(KIcon("help-contents"));// -!F:
-    helpAct->setShortcut(QKeySequence(Qt::Key_F1));
-    //helpAct->setShortcut(f1Shortcut2);
-    //helpAct->setShortcut(firstAction->shortcut());
-    actionCollection()->addAction("helpAct", helpAct);
-    connect(helpAct, SIGNAL(triggered(bool)), this, SLOT(appHelpActivated()));*/
-    
-    //hlpMenu->insertAction(hlpMenu->actions()[0], helpAct);
-    
-    //menuBar()->removeAction(hlpMenu->menuAction());
-    //menuBar()->removeAction(hlpMenu);
-    //QList<QMenu *> menuBarChild = menuBar()->findChildren<QMenu *>();
-    //qDebug() << "menuBarChild size = " << menuBarChild.size();
-    //QList<QMenu *> menuBarChildrenList = menuBarChild[0]->findChildren<QMenu *>();
-    //qDebug() << "menuBarChildrenList size = " << menuBarChildrenList.size();
-    /*QList<QAction *> menuBarActionsList = menuBar()->actions();
-    qDebug() << "menuBarActionsList size = " << menuBarActionsList.size();
-    menuBar()->clear();
-    //menuBar()->addMenu(menuBarChildrenList[0]);
-    //menuBar()->addMenu(menuBarChildrenList[1]);
-    menuBar()->addAction(menuBarActionsList[0]);
-    menuBar()->addAction(menuBarActionsList[1]);
-    menuBar()->addMenu(hlpMenu);
-    menuBar()->addAction(menuBarActionsList[3]);*/
-    
-    //QShortcut f1Shortcut2(helpMenu()->actions()[0]->shortcut(), this);
-    //setShortcutEnabled(f1Shortcut2.id(), false);
-    
-    /*KAction* helpAct = new KAction(this);
-    helpAct->setText(i18n("&Help"));
-    helpAct->setIcon(KIcon("help-contents"));// -!F:
-    helpAct->setShortcut(Qt::Key_F1);
-    actionCollection()->addAction("helpAct", helpAct);
-    connect(helpAct, SIGNAL(triggered(bool)), this, SLOT(appHelpActivated()));
-    
-    hlpMenu->insertAction(hlpMenu->actions()[0], helpAct);
-    //menuBar()->addMenu(hlpMenu);*/
-    /*if ((menuBar()->findChildren<QMenu *>()).isEmpty()) {
-        qDebug() << "children not found";
-    }*/
-    
-    /*KMenu * hlpMenu = customHelpMenu();
-    hlpMenu->insertAction(hlpMenu->actions()[0], helpAct);
-    menuBar()->addMenu(hlpMenu);*/
     
     QList<QAction *> menuBarActionsList = menuBar()->actions();
-    qDebug() << "menuBarActionsList size = " << menuBarActionsList.size();
     
     menuBar()->clear();
     
     KMenu * hlpMenu = customHelpMenu();
     hlpMenu->removeAction(hlpMenu->actions()[0]);
+    //hlpMenu->insertAction(hlpMenu->actions()[0], actionMapAct);// Action Map was removed in the last published version
+    //hlpMenu->insertSeparator(hlpMenu->actions()[0]);
+    hlpMenu->insertAction(hlpMenu->actions()[1], systemCheckAct);
+    hlpMenu->insertSeparator(hlpMenu->actions()[1]);
+    hlpMenu->insertAction(hlpMenu->actions()[1], donateAct);
+    hlpMenu->insertSeparator(hlpMenu->actions()[1]);
+    hlpMenu->insertAction(hlpMenu->actions()[0], barcodeHelpAct);
     hlpMenu->insertAction(hlpMenu->actions()[0], helpAct);
     
     menuBar()->addAction(menuBarActionsList[0]);
     menuBar()->addAction(menuBarActionsList[1]);
     menuBar()->addAction(menuBarActionsList[2]);
+    //menuBar()->addAction(menuBarActionsList[3]);// the fourth action is the old help menu
     menuBar()->addMenu(hlpMenu);
 }
 
@@ -417,6 +278,33 @@ void MainWindow::connectMySQL()
 
     if( !connectAct->isEnabled() )
         emit connectedSQL();*/
+    // -!F: the original code (the code above) in this member function gives a runtime error
+    
+    connectAct->setEnabled( !SqlTables::getInstance()->connectMySQL() );
+    //cout << "connectAct->setEnabled" << endl;
+    QAction * importLabelDefAct = actionCollection()->action("importLabelDef");// -!F: Why importLabelDefAct->setEnabled(false/true) doesn't work (gives a runtime error)?
+    if (!(importLabelDefAct == 0)) {
+        importLabelDefAct->setEnabled( !connectAct->isEnabled() );
+    };
+    /*QAction * importLabelDefActQ = (QAction *) importLabelDefAct;
+    if (!(importLabelDefActQ == 0)) {
+        importLabelDefActQ->setEnabled( !connectAct->isEnabled() );
+    };*/
+    //this->importLabelDefAct->setEnabled( false );
+    /*try { importLabelDefAct->setEnabled( true ); }
+    catch (exception& ex) { cout << ex.what() << endl; }*/
+    /*importLabelDefAct->setEnabled( !connectAct->isEnabled() );
+    //cout << "importLabelDefAct->setEnabled" << endl;
+    importExampleAct->setEnabled( !connectAct->isEnabled() );
+    //cout << "importExampleAct->setEnabled" << endl;*/
+    QAction * importExampleAct = actionCollection()->action("importExample");// -!F: Why importExampleAct->setEnabled(false/true) doesn't work (gives a runtime error)?
+    if (!(importExampleAct == 0)) {
+        importExampleAct->setEnabled( !connectAct->isEnabled() );
+    };
+
+    if( !connectAct->isEnabled() )
+        emit connectedSQL();
+    //cout << "if( !connectAct->isEnabled" << endl;
 }
 
 void MainWindow::appHelpActivated()
@@ -439,16 +327,18 @@ void MainWindow::showCheck()
 
 void MainWindow::startInfo()
 {
-	QString info = KStandardDirs::locate("appdata", "barcodes.html");
+    /*QString info = KStandardDirs::locate("appdata", "barcodes.html");// -!F: uncomment this and comment out the following locate():*/
+    QString info = KStandardDirs::locate("appdata", 
+        "/home/fanda/programovani/c++/frank_scripts/kbarcode/downloads/kbarcode-2.0.7/kbarcode/barcodes.html");// -!F:
     if( !info.isEmpty() )
         KToolInvocation::invokeBrowser( info );
 }
 
 bool MainWindow::newTables()
 {
-    /*return SqlTables::getInstance()->newTables();*/
-    // Frank:
-    return false;
+    return SqlTables::getInstance()->newTables();
+    /*// Frank:
+    return false;*/
 }
 
 void MainWindow::donations()
@@ -511,9 +401,9 @@ QString MainWindow::systemCheck()
     return QString("Frank");
 }
 
-void MainWindow::slotFunctionMap()
+/*void MainWindow::slotFunctionMap()//created by Frank, delete this member function
 {
-    /*created by Frank*/
-}
+    //created by Frank, delete this member function
+}*/
 
 #include "mainwindow.moc"

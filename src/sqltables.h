@@ -44,7 +44,8 @@
 // Holds all information
 // necessary for connecting
 // to a database
-typedef struct mysqldata {
+/*typedef struct mysqldata {*/
+struct mysqldata {
     QString username;
     QString password;
     QString hostname;   // localhost
@@ -164,6 +165,7 @@ class SqlTables : public QObject {
         
         bool connected;
 
+        QSqlDatabase dbInstance;
         QSqlDatabase* db;
         mysqldata sqldata;
 

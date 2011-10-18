@@ -63,7 +63,7 @@ class MainWindow : public KXmlGuiWindow {
         bool newTables();
         void donations();
         void showCheck();
-        void slotFunctionMap();
+        //void slotFunctionMap();
 
     protected slots:
         void loadConfig();

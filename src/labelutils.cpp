@@ -35,6 +35,10 @@
 // own includes
 #include "printersettings.h"
 
+// -!F:
+#include <QDesktopWidget>
+#include <Q3SimpleRichText>
+
 #define CONVERSION_FACTOR 25.4000508001016
 
 LabelUtils::LabelUtils()
@@ -48,7 +52,8 @@ double LabelUtils::pixelToMm( double pixel, const QPaintDevice* device, int mode
 {
     if (device == 0)
     {
-        device = KApplication::desktop();
+        QDesktopWidget * qDW = KApplication::desktop();
+        device = (QPaintDevice *) qDW;
     }
     
     if( mode == DpiX )
@@ -103,7 +108,7 @@ const QString LabelUtils::getModeFromCaption( const QString & cap )
 
 QSize LabelUtils::stringSize( const QString & t )
 {
-    QSimpleRichText srt( t, KApplication::font() );
+    Q3SimpleRichText srt( t, KApplication::font() );
     QSize s;
     s.setWidth( srt.widthUsed() );
     s.setHeight( srt.height() );
@@ -114,7 +119,7 @@ QSize LabelUtils::stringSize( const QString & t )
 void LabelUtils::renderString( QPainter* painter, const QString & t, const QRect & rect, double scalex, double scaley )
 {
     // DSRichText cannot calculate the width on its own
-    QSimpleRichText srt( t, KApplication::font() );
+    Q3SimpleRichText srt( t, KApplication::font() );
     int width = (rect.width() > 0) ? rect.width() : srt.widthUsed();
     int height = (rect.height() > 0) ? rect.height() : srt.height();
     
@@ -129,7 +134,7 @@ void LabelUtils::renderString( QPainter* painter, const QString & t, const QRect
 
 QPixmap* LabelUtils::drawString( const QString & t, int w, int h, double rot )
 {
-    QSimpleRichText srt( t, KApplication::font() );
+    Q3SimpleRichText srt( t, KApplication::font() );
 
     int width = (w > 0) ? w : srt.widthUsed();
     int height = (h > 0) ? h : srt.height();

@@ -139,7 +139,7 @@ void DSRichText::draw( QPainter* p )
 
     painter = p;
     painter->save();
-    painter->setClipRect( xpos, ypos, int(w*sx), int(h*sy), QPainter::CoordPainter );
+    painter->setClipRect( xpos, ypos, int(w*sx), int(h*sy) );
 
     for( unsigned int z = 0; z < line_p.count(); z++ ) {
         LineList lines = line_p[z];
@@ -277,7 +277,7 @@ QFont DSRichText::parseStyle( const QString & s, QColor* color )
     QFont f = m_base;
     *color = m_color;
     
-    for ( int i = 0; i < style.contains(';')+1; i++ ) {
+    for ( int i = 0; i < style.count(';')+1; i++ ) {// -!F: Is +1 enough? Yes, probably.
         QString s = style.section( ';', i, i );
         if( s.isEmpty() )
             continue;

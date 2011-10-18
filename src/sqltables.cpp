@@ -43,6 +43,11 @@
 #include <kstandarddirs.h>
 #include <kglobal.h>
 
+// added by Frank, experiment:
+#include <QSqlError>
+#include <QProgressDialog>
+#include <QTextStream>
+
 QMap<QString,SqlDescription*> drivers;
 
 class MySqlDescription : public SqlDescription {
@@ -111,7 +116,8 @@ const SqlDescription* SqlTables::driver() const
 }
 bool SqlTables::connectMySQL()
 {
-    db = QSqlDatabase::addDatabase( sqldata.driver );
+    dbInstance = QSqlDatabase::addDatabase( sqldata.driver );
+    db = & dbInstance;
 
     db->setDatabaseName( sqldata.database );
     db->setUserName( sqldata.username );
@@ -149,7 +155,8 @@ bool SqlTables::newTables( const QString & username, const QString & password, c
     if( !drivers[driver] )
         return false;
 
-    QSqlDatabase*dbase = QSqlDatabase::addDatabase(driver, drivers[driver]->initdb( database ) );
+    QSqlDatabase dbaseInstance = QSqlDatabase::addDatabase(driver, drivers[driver]->initdb( database ) );
+    QSqlDatabase* dbase = & dbaseInstance;
     dbase->setDatabaseName( drivers[driver]->initdb( database ) );
     dbase->setUserName( username );
     dbase->setPassword( password );
@@ -164,7 +171,7 @@ bool SqlTables::newTables( const QString & username, const QString & password, c
             while( existing.next() )
                 found = true;
 
-            QSqlQuery firstquery( NULL, dbase );
+            QSqlQuery firstquery( NULL, *dbase );
             if( !found && !firstquery.exec("CREATE DATABASE " + database + ";")) {
                 if( KMessageBox::warningContinueCancel( 0, i18n("<qt>Can't create database ")+ database + i18n("<br>You can continue if the database exists already.</qt>")
                     + firstquery.lastError().databaseText() ) == KMessageBox::Cancel ) {
@@ -178,7 +185,8 @@ bool SqlTables::newTables( const QString & username, const QString & password, c
         QSqlDatabase::removeDatabase(drivers[driver]->initdb( database ));
 
         // The database is created, now connect to the one specified by the user
-        dbase = QSqlDatabase::addDatabase(driver, database );
+        dbaseInstance = QSqlDatabase::addDatabase(driver, database );
+        dbase = & dbaseInstance;
         dbase->setDatabaseName( database );
         dbase->setUserName( username );
         dbase->setPassword( password );
@@ -190,7 +198,7 @@ bool SqlTables::newTables( const QString & username, const QString & password, c
         }
 
 
-        QSqlQuery query( NULL, dbase );
+        QSqlQuery query( NULL, *dbase );
 
         // barcode_basic
         query.exec("DROP TABLE " TABLE_BASIC );
@@ -283,13 +291,13 @@ void SqlTables::importLabelDef()
         KMessageBox::Cancel )
         return;
 
-    QSqlQuery query( QString::null, db );
+    QSqlQuery query( QString::null, dbInstance );
     exec( &query, "delete from " TABLE_LABEL_DEF );
 
     QString f = KStandardDirs::locateLocal( "data", "kbarcode/labeldefinitions.sql" );
     if( !QFile::exists( f ) ) {
         KConfigGroup config = KGlobal::config()->group( "Definitions" );
-        f = config.readEntry( "defpath", locate( "data", "kbarcode/labeldefinitions.sql" ) );
+        f = config.readEntry( "defpath", KStandardDirs::locate( "data", "kbarcode/labeldefinitions.sql" ) );
     }
 
     importData( f, db );
@@ -304,7 +312,7 @@ void SqlTables::importExampleData()
         KMessageBox::Cancel )
         return;
 
-    importData( locate("appdata", "exampledata.sql"), db );
+    importData( KStandardDirs::locate("appdata", "exampledata.sql"), db );
 }
 
 void SqlTables::importData( const QString & filename, QSqlDatabase* db )
@@ -321,16 +329,19 @@ void SqlTables::importData( const QString & filename, QSqlDatabase* db )
     }
 
     QFile data( filename);
-    QProgressDialog* dlg = new QProgressDialog( i18n("SQL import progress:"),  QString::null, data.size(), 0, "dlg", true );
+    //QProgressDialog* dlg = new QProgressDialog( i18n("SQL import progress:"),  QString::null, data.size(), 0, "dlg", true );// -!F:
+    QProgressDialog* dlg = new QProgressDialog( i18n("SQL import progress:"),  QString::null, 0, data.size());
 
     if( data.open( QIODevice::ReadOnly ) ) {
-        QString s;
-        QSqlQuery query( QString::null, db );
-        while( data.readLine( s, 1024 ) != -1 )
-            if( !s.isEmpty() ) {
-                dlg->setProgress( dlg->progress() + s.length() );
-                exec( &query, s );
+        QTextStream s( & data );
+        QSqlQuery query( QString::null, * db );
+	QString line = s.readLine();
+        while( !line.isNull() )
+            if( !line.isEmpty() ) {
+                dlg->setValue( dlg->value() + line.length() );
+                exec( &query, line );
             }
+            line = s.readLine();
     } else
         KMessageBox::sorry( 0, i18n("Can't open the data file containing the label definitions.") );
 
@@ -437,7 +448,8 @@ void SqlTables::updateTables()
 
 bool SqlTables::testSettings( const QString & username, const QString & password, const QString & hostname, const QString & database, const QString & driver )
 {
-    QSqlDatabase* db = QSqlDatabase::addDatabase( driver );
+    QSqlDatabase dbInstance = QSqlDatabase::addDatabase( driver );
+    QSqlDatabase* db = & dbInstance;
     if( !drivers[driver] )
       return false;
 
@@ -458,7 +470,8 @@ bool SqlTables::testSettings( const QString & username, const QString & password
         return true;
     }
 
-    db = QSqlDatabase::addDatabase( driver );
+    dbInstance = QSqlDatabase::addDatabase( driver );
+    db = & dbInstance;
     
     db->setDatabaseName( drivers[driver]->initdb( database ) );
 
@@ -515,7 +528,7 @@ SqlWidget::SqlWidget( bool showlabel, QWidget* parent, const char* name )
 {
     QVBoxLayout* layout = new QVBoxLayout( this );
 
-    QGroupBox* groupDatabase = new QGroupBox( this );
+    Q3GroupBox* groupDatabase = new Q3GroupBox( this );
     groupDatabase->setTitle( i18n( "Database Settings" ) );
     groupDatabase->setColumnLayout(0, Qt::Vertical );
     groupDatabase->layout()->setSpacing( 6 );
@@ -590,7 +603,7 @@ SqlWidget::SqlWidget( bool showlabel, QWidget* parent, const char* name )
     m_autoconnect->setChecked( sqldata.autoconnect );
     for( int i = 0; i < m_driver->count(); i++ )
         if( m_driver->text(i) == sqldata.driver )
-            m_driver->setCurrentItem( i );
+            m_driver->setCurrentItem( m_driver->text(i) );
 }
 
 SqlWidget::~SqlWidget()
