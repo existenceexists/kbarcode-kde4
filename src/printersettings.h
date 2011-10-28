@@ -24,7 +24,7 @@
 
 class KUrl;
 
-typedef struct labelprinterdata {
+struct labelprinterdata {
    int articleEvent1;
    int articleEvent2;
    int articleEvent3;
@@ -46,7 +46,7 @@ typedef struct labelprinterdata {
    QString quote;
 };
 
-typedef struct PageFormatInfo
+struct PageFormatInfo
 {
     QPrinter::PageSize qprinter;
     const char* shortName; // Short name

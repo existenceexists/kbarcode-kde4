@@ -43,7 +43,7 @@ set(kbarcode_SRCS
  # mydatatable.cpp
  # newlabel.cpp
  # pixmapbarcode.cpp
- # printersettings.cpp
+  printersettings.cpp
  # propertywidget.cpp
  # purepostscript.cpp
  # rectitem.cpp

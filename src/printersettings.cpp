@@ -18,6 +18,10 @@
 #include "printersettings.h"
 #include "kbarcode.h"
 
+// QT includes
+#include <QtGui/QPrinter>
+#include <QtGui/QPrintDialog>
+
 // KDE includes
 #include <kapplication.h>
 #include <kcombobox.h>
@@ -71,8 +75,9 @@ const PageFormatInfo pageFormatInfo[]=
 PrinterSettings* PrinterSettings::printerInstance = 0;
 
 PrinterSettings::PrinterSettings()
-    :QObject( 0, "printersettings" )
+    :QObject( 0 )
 {
+    setObjectName("printersettings");
     lpdata = new labelprinterdata;
     loadConfig();
 
@@ -95,7 +100,7 @@ void PrinterSettings::loadConfig()
 {
     KConfigGroup config = KGlobal::config()->group( "Printer" );
 
-    lpdata->articleEvent1 = (enum linebreak)config.readEntry("articleEvent1", NO_BREAK );
+    /*lpdata->articleEvent1 = (enum linebreak)config.readEntry("articleEvent1", NO_BREAK );// -!F: delete these lines that are commented out
     lpdata->articleEvent2 = (enum linebreak)config.readEntry("articleEvent2", NO_BREAK );
     lpdata->articleEvent3 = (enum linebreak)config.readEntry("articleEvent3", NO_BREAK );
     lpdata->articleEvent4 = (enum linebreak)config.readEntry("articleEvent4", NO_BREAK );
@@ -104,18 +109,28 @@ void PrinterSettings::loadConfig()
     lpdata->groupEvent3 = (enum linebreak)config.readEntry("groupEvent3", NO_BREAK );
     lpdata->groupEvent4 = (enum linebreak)config.readEntry("groupEvent4", NO_BREAK );
     lpdata->useCustomNo = config.readEntry("UseArticleCustomerNo", false );
-    lpdata->quality = config.readEntry( "quality", Middle );
+    lpdata->quality = config.readEntry( "quality", Middle );*/
+    lpdata->articleEvent1 = (enum linebreak)config.readEntry("articleEvent1", int(NO_BREAK) );
+    lpdata->articleEvent2 = (enum linebreak)config.readEntry("articleEvent2", int(NO_BREAK) );
+    lpdata->articleEvent3 = (enum linebreak)config.readEntry("articleEvent3", int(NO_BREAK) );
+    lpdata->articleEvent4 = (enum linebreak)config.readEntry("articleEvent4", int(NO_BREAK) );
+    lpdata->groupEvent1 = (enum linebreak)config.readEntry("groupEvent1", int(NO_BREAK) );
+    lpdata->groupEvent2 = (enum linebreak)config.readEntry("groupEvent2", int(NO_BREAK) );
+    lpdata->groupEvent3 = (enum linebreak)config.readEntry("groupEvent3", int(NO_BREAK) );
+    lpdata->groupEvent4 = (enum linebreak)config.readEntry("groupEvent4", int(NO_BREAK) );
+    lpdata->useCustomNo = config.readEntry("UseArticleCustomerNo", false );
+    lpdata->quality = config.readEntry( "quality", int(Middle) );
     
     if( lpdata->quality != High && lpdata->quality != Middle  && lpdata->quality != VeryHigh )
         lpdata->quality = Middle;
 
     config = KGlobal::config()->group( "BatchPrinting" );
     
-    lpdata->comment = config.readEntry("comment", "#" );
-    lpdata->separator = config.readEntry("separator", ";" );
-    lpdata->quote = config.readEntry("quote", "");
+    lpdata->comment = config.readEntry("comment", QString("#") );
+    lpdata->separator = config.readEntry("separator", QString(";") );
+    lpdata->quote = config.readEntry("quote", QString(""));
     lpdata->border = config.readEntry("border", false );
-    lpdata->format = config.readEntry("PageSize", -1 );
+    lpdata->format = config.readEntry("PageSize", int(-1) );
     
     // get default page size from KDE
     if( lpdata->format == -1 )
@@ -160,22 +175,25 @@ int PrinterSettings::getQuality() const
 
 QPrinter* PrinterSettings::setupPrinter( const KUrl & url, QWidget* parent, bool immediately, const QString & prn )
 {
-    QPrinter* printer = new QPrinter( true, (enum QPrinter::PrinterMode)getQuality() );
+    QPrinter* printer = new QPrinter( (enum QPrinter::PrinterMode)getQuality() );
     if( getData()->quality == Middle )
         printer->setResolution( 300 );
     else if( getData()->quality == VeryHigh )
         printer->setResolution( 1200 );
 
-    printer->setFullPage( true ); // don't use build in margin system
+    printer->setFullPage( true ); // don't use built-in margin system
 
-    if( !immediately && !printer->setup( parent ) )
+    QPrintDialog printDialog(printer, parent);
+    if( !immediately && !printDialog.exec() )
         return 0;
 
+    /*if( immediately && !prn.isEmpty() )
+        printer->autoConfigure( prn );*/
     if( immediately && !prn.isEmpty() )
-        printer->autoConfigure( prn );
+        printer->setPrinterName( prn );// -!F: Is this the right replacement of autoConfigure() ?
 
     if( !url.isValid() )
-        printer->setDocFileName( url.fileName() );
+        printer->setOutputFileName( url.fileName() );
         
     return printer;
 }

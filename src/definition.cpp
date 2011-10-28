@@ -83,7 +83,7 @@ class PrivateParser {
 PrivateParser::PrivateParser( QString line, bool all )
 {
     line = line.trimmed();
-    int pos = line.find("(");
+    int pos = line.indexOf("(");
     line = line.mid( pos + 1, line.length() - pos - 1 );
 
     m_label_def_id = line.section( ",", 0, 0 ).trimmed();
@@ -310,7 +310,7 @@ void Definition::getFileMeasurements( const QString & label_def_id )
 bool Definition::openFile()
 {
     if( file ) {
-        file->at( 0 );
+        file->seek( 0 );
         return true;        
     }
 
@@ -345,7 +345,7 @@ bool Definition::openFile()
     // but does also cost lot's of memory
     array = new QByteArray();
     *array = file->readAll();
-    file->at( 0 );
+    file->seek( 0 );
 
     return true;
 }
@@ -531,7 +531,7 @@ int Definition::writeFile( const Measurements & c, QString type, QString produce
     }
 
     QTextStream t( file );
-    for( unsigned int i = 0; i < data.count(); i++ )
+    for( int i = 0; i < data.count(); i++ )
         t << data[i].replace( QRegExp("\\n"), "" ) << "\n";
 
     // get the file back to the normal stage
@@ -616,7 +616,7 @@ bool Definition::showFileError()
 int Definition::getClosest( const QString & producer, const QString & type )
 {
     QStringList t = Definition::getTypes(producer); 
-    for( unsigned int z = 0; z < t.count(); z++ )  {
+    for( int z = 0; z < t.count(); z++ )  {
         if( t[z] == type ) {
             Definition d( producer, type );
             return d.getId();

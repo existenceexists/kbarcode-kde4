@@ -23,7 +23,7 @@
 #include <qimage.h>
 #include <QPaintDevice>
 #include <qpainter.h>
-#include <q3simplerichtext.h>
+#include <q3simplerichtext.h>// -!F:
 //Added by qt3to4:
 #include <QPixmap>
 
@@ -97,13 +97,13 @@ double LabelUtils::pixelToPixelY( double unit, const QPaintDevice* src, const QP
 const QString LabelUtils::getTypeFromCaption( const QString & cap )
 {
     // TODO: remove this function
-    QString search = cap.right( cap.length() - cap.find(":") - 1 ).toLower().trimmed();
+    QString search = cap.right( cap.length() - cap.indexOf(":") - 1 ).toLower().trimmed();
     return search;
 }
 
 const QString LabelUtils::getModeFromCaption( const QString & cap )
 {
-    return cap.left( cap.find(":") ).toLower().trimmed();
+    return cap.left( cap.indexOf(":") ).toLower().trimmed();
 }
 
 QSize LabelUtils::stringSize( const QString & t )

@@ -26,7 +26,7 @@
 #include "kbarcodesettings.h"
 */
 // Qt includes
-// #include <q3groupbox.h>
+// #include <q3groupbox.h>// -!F:
 // #include <Qt3Support>
 // #include <Q3GroupBox>
 // #include <qlayout.h>

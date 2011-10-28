@@ -49,7 +49,7 @@ Another example
 DSRichText::DSRichText( const QString & t )
     : text( t )
 {
-    if( text.find("<html>") == -1 )
+    if( text.indexOf("<html>") == -1 )
         text = "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style=\"font-size:10pt;font-family:Nimbus Sans l\"><p>"
                + t + "</p></body></html>";
 
@@ -68,7 +68,7 @@ DSRichText::DSRichText( const QString & t )
         m_base = parseStyle( parse( tmp, "style=\"", "\"", pos ), &m_color );
     }
 
-    pos = text.find( "<p", 0 ); // initalize pos correctly
+    pos = text.indexOf( "<p", 0 ); // initalize pos correctly
     while( parseParagraph() ); // empty while loop
 }
 
@@ -105,11 +105,11 @@ void DSRichText::updateSpacing( QList<formated_line>* l, QFontMetrics* fm )
 
 void DSRichText::fillLines()
 {
-    for( unsigned int z = 0; z < word_p.count(); z++ ) {
+    for( int z = 0; z < word_p.count(); z++ ) {
         WordList words = word_p[z];
         LineList lines;
         initLine( &lines );
-        for( unsigned int i = 0; i < words.count(); i++ ) {
+        for( int i = 0; i < words.count(); i++ ) {
             formated_word word = words[i];
             lines.last().line = lines.last().line | word.line;
 
@@ -141,19 +141,19 @@ void DSRichText::draw( QPainter* p )
     painter->save();
     painter->setClipRect( xpos, ypos, int(w*sx), int(h*sy) );
 
-    for( unsigned int z = 0; z < line_p.count(); z++ ) {
+    for( int z = 0; z < line_p.count(); z++ ) {
         LineList lines = line_p[z];
         if( lines.count() && z )
             y += int( lines[0].lineSpacing * 0.5);
 
-        for( unsigned int i = 0; i < lines.count(); i++ ) {
+        for( int i = 0; i < lines.count(); i++ ) {
             formated_line l = lines[i];
             
             if( l.formats.count() && l.formats[0].alignment == Qt::AlignJustify && i != lines.count() - 1 ) {
                 // last line in a paragraph is not justified (in blocksatz mode)!
                 drawJustified( &l );
             } else {
-                for( unsigned int z = 0; z < l.formats.count(); z++ ) {
+                for( int z = 0; z < l.formats.count(); z++ ) {
                     formated_word f = l.formats[z];
             
                     painter->setFont( f.font );
@@ -187,7 +187,7 @@ void DSRichText::draw( QPainter* p )
 void DSRichText::drawJustified( formated_line* line )
 {
     int all = 0;
-    for( unsigned int z = 0; z < line->formats.count(); z++ ) {
+    for( int z = 0; z < line->formats.count(); z++ ) {
         line->formats[z].text = line->formats[z].text.trimmed();
         QFontMetrics fm( line->formats[z].font );
         all += fm.width( line->formats[z].text );
@@ -195,7 +195,7 @@ void DSRichText::drawJustified( formated_line* line )
 
     int x = 0;
     int space = (w - all) / (line->formats.count() - 1);
-    for( unsigned int z = 0; z < line->formats.count(); z++ ) {
+    for( int z = 0; z < line->formats.count(); z++ ) {
         painter->setFont( line->formats[z].font );
         painter->setPen( QPen( line->formats[z].color ) );
 
@@ -233,7 +233,7 @@ bool DSRichText::parseParagraph()
         return true;
     }
 
-    for( unsigned int i = 0; i < d.length(); ) {
+    for( int i = 0; i < d.length(); ) {
         if( d[i] == '<' || i == (d.length() - 1) ) {
             if( i == (d.length() - 1) )
                 data.append( d[i] );
@@ -248,7 +248,7 @@ bool DSRichText::parseParagraph()
                 break;
 
             if( d[i] == '<' ) {
-                QString span = d.mid( i, d.find( ">", i ) - i + 1 );
+                QString span = d.mid( i, d.indexOf( ">", i ) - i + 1 );
                 i += span.length();
 
                 if( span.startsWith( "<span " ) ) {
@@ -315,11 +315,11 @@ QFont DSRichText::parseStyle( const QString & s, QColor* color )
 
 QString DSRichText::parse( const QString & t, const QString & find, const QString & find2, int start )
 {
-    int s = t.find( find, start );
+    int s = t.indexOf( find, start );
     if( s == -1 || s < start )
         return QString::null;
 
-    int pend = t.find( find2, s + find.length() );
+    int pend = t.indexOf( find2, s + find.length() );
     if( pend == -1 || pend < (signed int)(s + find.length()) )
         return QString::null;
 
@@ -370,8 +370,8 @@ int DSRichText::parseAlignment( const QString & align )
 
 void DSRichText::parseWords( const QString & t, formated_word* w, WordList* words )
 {
-    unsigned int p = 0;
-    for( unsigned int i = 0; i < t.length(); i++ ) {
+    int p = 0;
+    for( int i = 0; i < t.length(); i++ ) {
         if( (t[i].isSpace() && p != i) || i == t.length() - 1 ) {
             formated_word word = *w;
 
@@ -413,7 +413,7 @@ QString DSRichText::parseParagraphTag( const QString &t, int* alignment )
     } else if( d.startsWith("<p ") ) {
         *alignment = parseAlignment( parse( d, "align=\"", "\"", 0 ) );
         if( d.contains( ">" ) ) {
-            int x = d.find(">" ) + 1;
+            int x = d.indexOf(">" ) + 1;
             d = d.mid( x, d.length() - x );
         }
     }

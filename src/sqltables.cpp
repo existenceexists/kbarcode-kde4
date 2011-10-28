@@ -4,7 +4,7 @@
     begin                : Son Dez 29 2002
     copyright            : (C) 2002 by Dominik Seichter
     email                : domseichter@web.de
- ***************************************************************************/
+ ****************************************************************************/
 
 /***************************************************************************
  *                                                                         *
@@ -21,7 +21,8 @@
 // Qt includes
 #include <qcheckbox.h>
 #include <qfile.h>
-#include <q3groupbox.h>
+//#include <q3groupbox.h>// -!F:
+#include <QGroupBox>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qmap.h>
@@ -81,8 +82,9 @@ class SQLiteDescription : public SqlDescription {
 };
 
 SqlTables::SqlTables( QObject* parent )
-    : QObject( parent, "sqltables" )
+    : QObject( parent )
 {
+    setObjectName("sqltables");
     drivers.insert( "QMYSQL3", new MySqlDescription() );
     drivers.insert( "QPSQL7", new PostgreSQLDescription() );
     /* The same driver plugin is used for QDBC and SQLite */
@@ -345,7 +347,8 @@ void SqlTables::importData( const QString & filename, QSqlDatabase* db )
     } else
         KMessageBox::sorry( 0, i18n("Can't open the data file containing the label definitions.") );
 
-    dlg->close( true );
+    dlg->close();
+    delete dlg;
     data.close();
 }
 
@@ -400,8 +403,8 @@ void SqlTables::updateTables()
 
     QSqlQuery query("SHOW FIELDS FROM " TABLE_BASIC );
     while ( query.next() )
-        if( fields.grep( query.value( 0 ).toString(), false ).count() ) {
-            fields.remove( query.value( 0 ).toString() );
+        if( fields.filter( query.value( 0 ).toString(), Qt::CaseInsensitive ).count() ) {
+            fields.removeAll( query.value( 0 ).toString() );
         }
 
     if( fields.count() ) {
@@ -524,19 +527,25 @@ const QString SqlTables::getBarcodeMaxLength( const QString & name )
 }
 
 SqlWidget::SqlWidget( bool showlabel, QWidget* parent, const char* name )
-    : QWidget( parent, name )
+    : QWidget( parent )
 {
+    setObjectName(name);
+    
     QVBoxLayout* layout = new QVBoxLayout( this );
 
-    Q3GroupBox* groupDatabase = new Q3GroupBox( this );
+    QGroupBox* groupDatabase = new QGroupBox( this );
     groupDatabase->setTitle( i18n( "Database Settings" ) );
-    groupDatabase->setColumnLayout(0, Qt::Vertical );
+    /*groupDatabase->setColumnLayout(0, Qt::Vertical );
     groupDatabase->layout()->setSpacing( 6 );
-    groupDatabase->layout()->setMargin( 11 );
-    QVBoxLayout* groupDatabaseLayout = new QVBoxLayout( groupDatabase->layout() );
+    groupDatabase->layout()->setContentsMargins( 11, 11, 11, 11 );*/
+    QVBoxLayout* groupDatabaseLayout = new QVBoxLayout( groupDatabase );
     groupDatabaseLayout->setAlignment( Qt::AlignTop );
+    
+    groupDatabaseLayout->setSpacing( 6 );
+    groupDatabaseLayout->setContentsMargins( 11, 11, 11, 11 );
 
-    QGridLayout* grid = new QGridLayout( 2, 2 );
+    /*QGridLayout* grid = new QGridLayout( 2, 2 );*/
+    QGridLayout* grid = new QGridLayout();
 
     QLabel* label = new QLabel( groupDatabase );
     label->setText( i18n("Username :") );
@@ -590,8 +599,22 @@ SqlWidget::SqlWidget( bool showlabel, QWidget* parent, const char* name )
     groupDatabaseLayout->addWidget( buttonTest );
     if( showlabel )
         groupDatabaseLayout->addWidget( new QLabel( i18n("<b>You have to test your database settings before you can procede.</b>"), groupDatabase ) );
+    
+    QLayout * gLayout = groupDatabase->layout();// This block of lines was added by Frank
+    if (gLayout == 0) {
+        groupDatabase->setLayout(groupDatabaseLayout);
+    } else {
+        gLayout->addItem(groupDatabaseLayout);
+    }
 
-    layout->add( groupDatabase );
+    layout->addWidget( groupDatabase );
+    
+    QLayout * tLayout = this->layout();// This block of lines was added by Frank
+    if (tLayout == 0) {
+        this->setLayout(layout);
+    } else {
+        tLayout->addItem(layout);
+    }
 
     connect( buttonTest, SIGNAL( clicked() ), this, SLOT( testSettings() ) );
 
@@ -602,8 +625,8 @@ SqlWidget::SqlWidget( bool showlabel, QWidget* parent, const char* name )
     m_database->setText( sqldata.database );
     m_autoconnect->setChecked( sqldata.autoconnect );
     for( int i = 0; i < m_driver->count(); i++ )
-        if( m_driver->text(i) == sqldata.driver )
-            m_driver->setCurrentItem( m_driver->text(i) );
+        if( m_driver->itemText(i) == sqldata.driver )
+            m_driver->setCurrentItem( m_driver->itemText(i) );
 }
 
 SqlWidget::~SqlWidget()
