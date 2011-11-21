@@ -4,7 +4,7 @@
     begin                : Son Dez 29 2002
     copyright            : (C) 2002 by Dominik Seichter
     email                : domseichter@web.de
- ****************************************************************************/
+ ***************************************************************************/
 
 /***************************************************************************
  *                                                                         *
@@ -530,6 +530,11 @@ SqlWidget::SqlWidget( bool showlabel, QWidget* parent, const char* name )
     : QWidget( parent )
 {
     setObjectName(name);
+    //setMaximumWidth(1000);// -!F:
+    //setMaximumHeight(1000);// -!F:
+    /**setMaximumSize(QWIDGETSIZE_MAX,QWIDGETSIZE_MAX);
+    setMinimumSize(0,0);
+    setFixedSize ( 1000, 1000 );*/
     
     QVBoxLayout* layout = new QVBoxLayout( this );
 
@@ -540,7 +545,6 @@ SqlWidget::SqlWidget( bool showlabel, QWidget* parent, const char* name )
     groupDatabase->layout()->setContentsMargins( 11, 11, 11, 11 );*/
     QVBoxLayout* groupDatabaseLayout = new QVBoxLayout( groupDatabase );
     groupDatabaseLayout->setAlignment( Qt::AlignTop );
-    
     groupDatabaseLayout->setSpacing( 6 );
     groupDatabaseLayout->setContentsMargins( 11, 11, 11, 11 );
 
@@ -600,21 +604,23 @@ SqlWidget::SqlWidget( bool showlabel, QWidget* parent, const char* name )
     if( showlabel )
         groupDatabaseLayout->addWidget( new QLabel( i18n("<b>You have to test your database settings before you can procede.</b>"), groupDatabase ) );
     
-    QLayout * gLayout = groupDatabase->layout();// This block of lines was added by Frank
+    /**QLayout * gLayout = groupDatabase->layout();// This block of lines was added by Frank
     if (gLayout == 0) {
         groupDatabase->setLayout(groupDatabaseLayout);
     } else {
         gLayout->addItem(groupDatabaseLayout);
-    }
+    }*/
+    groupDatabase->setLayout(groupDatabaseLayout);
 
     layout->addWidget( groupDatabase );
     
-    QLayout * tLayout = this->layout();// This block of lines was added by Frank
+    /**QLayout * tLayout = this->layout();// This block of lines was added by Frank
     if (tLayout == 0) {
         this->setLayout(layout);
     } else {
         tLayout->addItem(layout);
-    }
+    }*/
+    setLayout(layout);
 
     connect( buttonTest, SIGNAL( clicked() ), this, SLOT( testSettings() ) );
 
@@ -687,6 +693,13 @@ int SqlWidget::driverCount() const
 {
     return m_driver->count();
 }
+
+// -!F: test1() is for debugging purposes only, delete this method
+int SqlWidget::test1() 
+{
+    return maximumSize().width();
+}
+
 
 
 #include "sqltables.moc"

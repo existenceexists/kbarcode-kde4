@@ -1,4 +1,4 @@
-set(ProjectName kbarcode005)
+set(ProjectName kbarcode006)
 
 project(${ProjectName})
 
@@ -16,4 +16,5 @@ include (MacroLibrary)
 
 add_definitions (-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
 
+set(CMAKE_CXX_FLAGS "-g -Wall")
 add_subdirectory(src)

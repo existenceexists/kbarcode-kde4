@@ -17,7 +17,7 @@ set(kbarcode_SRCS
  # batchprinter.cpp
  # batchassistant.cpp
  # commands.cpp
- # confassistant.cpp
+  confassistant.cpp
  # csvfile.cpp
  # databasebrowser.cpp
   definition.cpp

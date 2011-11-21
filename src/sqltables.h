@@ -205,6 +205,8 @@ class SqlWidget : public QWidget {
         int driverCount() const;
 
         void save( bool usedb = true );
+	
+	int test1();// -!F: delete this line
 
     signals:
         void databaseWorking( bool b );

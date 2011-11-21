@@ -11,9 +11,9 @@
 
 #include "mainwindow.h"
 #include "sqltables.h"
-/*#include "confassistant.h"
+#include "confassistant.h"
 #include "printersettings.h"
-#include "kbarcodesettings.h"
+/*#include "kbarcodesettings.h"
 #include "barkode.h"
 */
 // Qt includes
@@ -263,11 +263,11 @@ void MainWindow::saveConfig()
 void MainWindow::assistant()
 {
     // FIXME: create an assistant
-    /*ConfAssistant* wiz = new ConfAssistant( 0, "wiz", true );
+    ConfAssistant* wiz = new ConfAssistant( 0, QString("wiz"), true );
     if( wiz->exec() == QDialog::Accepted && wiz->checkDatabase->isChecked() )
         SqlTables::getInstance()->connectMySQL();
 
-    delete wiz;*/
+    delete wiz;
 }
 
 void MainWindow::connectMySQL()
@@ -397,7 +397,7 @@ QString MainWindow::systemCheck()
         text.append( i18n("<p><b>No database drivers found. SQL database support is disabled.</b></p>") );
 
     return text;*/
-    // Frank:
+    // added by Frank, delete the following line:
     return QString("Frank");
 }
 

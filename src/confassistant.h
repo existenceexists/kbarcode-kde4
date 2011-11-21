@@ -45,10 +45,11 @@ class ConfAssistant : public KAssistantDialog
     Q_OBJECT
 
     public:
-        ConfAssistant( QWidget* parent = 0, bool modal = true );
+        ConfAssistant( QWidget* parent = 0, QString name = QString("wiz"), bool modal = true );
         ~ConfAssistant();
 
-        void showPage( QWidget* page );
+        /*void showPage( QWidget* page );*/
+	void configureCurrentPage( KPageWidgetItem * page );
 
         // used in mainwindow.cpp
         // not a clean API, but I am lazy :-(
@@ -64,6 +65,8 @@ class ConfAssistant : public KAssistantDialog
 
     protected slots:
         void accept();
+	void next();
+	void back();
         
     private:
         void setupPage1();
@@ -102,6 +105,10 @@ class ConfAssistant : public KAssistantDialog
         QVBoxLayout* Layout6;
         QVBoxLayout* pageLayout_3;
         QVBoxLayout* Layout5_2;
+	
+	bool page2FinishButtonEnable;
+	bool page2NextButtonEnable;
+	bool page3FinishButtonEnable;
 };
 
 #endif // CONFASSISTANT_H
