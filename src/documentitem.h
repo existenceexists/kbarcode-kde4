@@ -23,6 +23,7 @@
 #include <q3sortedlist.h> 
 #include <qstring.h>
 #include <QTextStream>
+#include <QDesktopWidget>// -!F: ?
 
 #include <qcolor.h>
 #include <qpen.h>
@@ -100,8 +101,10 @@ public:
     void setCanvasItem( TCanvasItem* item );
     TCanvasItem* canvasItem() const;
     
-    void setPaintDevice( QPaintDevice* device );
-    QPaintDevice* paintDevice() const;
+    /*void setPaintDevice( QPaintDevice* device );*/// -!F: original, delete, 
+    void setPaintDevice( QDesktopWidget* device );
+    /*QPaintDevice* paintDevice() const;*/// -!F: original, delete, 
+    QDesktopWidget* paintDevice() const;
     
     void setTokenProvider( TokenProvider* token );
     TokenProvider* tokenProvider() const;
@@ -209,7 +212,8 @@ private:
 
      QString m_visibilityScript;
 
-     QPaintDevice* m_device;     
+     /*QPaintDevice* m_device;*/
+     QDesktopWidget* m_device;
      TCanvasItem* m_canvasitem;
      TokenProvider* m_token;
 };

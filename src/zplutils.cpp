@@ -40,7 +40,7 @@ struct { int size; int c; int h; int w; } iplfonttable[] = {
 };
 
 BarcodePrinterDevice::BarcodePrinterDevice( double dpix, double dpiy )
-    : QPaintDevice( 0 )
+    : QPaintDevice()
 {
     m_resolution_x = dpix;
     m_resolution_y = dpiy;
@@ -254,7 +254,7 @@ QString IPLUtils::footer()
     ipl += field( "<ESC>E3<CAN>" );  // choose format number 3
 
     for( unsigned int i = 0; i < m_values.count(); i++ )
-        ipl += field( m_values[i] + ( i != m_values.count() - 1 ? "<CR>" : QString::null ) );
+        ipl += field( m_values[i] + ( i != (m_values.count() - 1) ? QString("<CR>") : QString::null ) );
 
     // end actual data
     ipl += field( "<ETB>" );

@@ -16,7 +16,7 @@
  ***************************************************************************/
 
 #include "kbarcodesettings.h"
-#include "configdialog.h"
+#include "dialogs/configdialog.h"
 #include "sqltables.h"
 #include "printersettings.h"
 
@@ -34,6 +34,7 @@
 KBarcodeSettings* KBarcodeSettings::m_instance = 0;
 int KBarcodeSettings::gridsize = 30;
 bool KBarcodeSettings::newdlg = true;
+/*QColor KBarcodeSettings::gridcolor = Qt::black;*/
 QColor KBarcodeSettings::gridcolor = Qt::black;
 QString KBarcodeSettings::dateFormat = "";
 
@@ -72,7 +73,9 @@ void KBarcodeSettings::loadConfig()
     QColor tmpc( Qt::lightGray );
 
     gridsize = config.readEntry("grid", 5);
-    gridcolor = config.readEntry("gridcolor", &tmpc );
+    /*gridcolor = config.readEntry("gridcolor", &tmpc );*/
+    QColor gridcolor = config.readEntry("gridcolor", tmpc );
+    /**gridcolor = gridcolor1.rgb();*/
     newdlg = config.readEntry("AskNewDlg", true );
     dateFormat = config.readEntry("DateFormat", "dd-MM-yyyy" );
 }
@@ -91,7 +94,7 @@ void KBarcodeSettings::configure()
         int oldgrid = gridsize;
         QColor oldcolor = gridcolor;
         gridsize = cd->spinGrid->value();
-        gridcolor = cd->colorGrid->color();
+        gridcolor = cd->colorGrid->color().rgb();
         // gridsize or gridcolor has been changed
         if( oldgrid != gridsize || oldcolor != gridcolor )
             emit updateGrid( gridsize );

@@ -28,7 +28,7 @@
 #include "mainwindow.h"
 #include "xmlutils.h"
 
-#include <kdialogbase.h>
+/*#include <kdialogbase.h>*/// -!F: uncomment
 #include <qdialog.h>
 #include <qmap.h>
 //Added by qt3to4:

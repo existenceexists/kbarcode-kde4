@@ -48,7 +48,7 @@ class MainWindow : public KXmlGuiWindow {
           * access.
           */
         static QString systemCheck();
-        QString kbarcodeDirectoryName;// -!F:
+        QString kbarcodeDirectoryName;// -!F: delete
 
     public slots:
         void assistant();

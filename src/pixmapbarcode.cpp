@@ -22,7 +22,9 @@
 #include <stdlib.h>
 
 #include <kapplication.h>
-#include <k3process.h>
+//#include <k3process.h>// -!F: delete
+#include <KProcess>
+#include <kshell.h>
 #include <ktemporaryfile.h>
 
 #include <qbuffer.h>
@@ -33,6 +35,9 @@
 #include <QPaintDevice>
 #include <qpixmap.h>
 #include <q3textstream.h>
+#include <QDebug>
+#include <QByteArray>
+#include <QDesktopWidget>
 
 /* Margin added by GNU Barcode to the barcodes */
 #define BARCODE_MARGIN 10     
@@ -136,8 +141,11 @@ bool PixmapBarcode::createPixmap( QPixmap* target, int resx, int resy )
                    barkode->background() == Qt::white &&
                    barkode->textColor() == Qt::black );
 
-    KTemporaryFile* input = new KTemporaryFile( QString::null, bMonocrome ? ".pbm" : ".ppm" );
-    input->file()->close();
+    /*KTemporaryFile* input = new KTemporaryFile( QString::null, bMonocrome ? ".pbm" : ".ppm" );*/
+    KTemporaryFile* input = new KTemporaryFile();
+    input->setSuffix(bMonocrome ? ".pbm" : ".ppm");
+    /*input->file()->close();*/
+    input->close();
 
     if( Barkode::engineForType( barkode->type() ) == PDF417 ) {
         if(!createPdf417( input )) {
@@ -178,7 +186,8 @@ bool PixmapBarcode::createPixmap( QPixmap* target, int resx, int resy )
         cmd += input->name();
 	cmd += " -sNOPAUSE -q - -c showpage quit";
 	
-        qDebug("cmd: " + cmd );
+        /*qDebug("cmd: " + cmd );*/
+	qDebug() << "cmd: " + cmd;
 	gs_pipe = popen( cmd.toLatin1(), "w" );
         if( !gs_pipe )
 	{
@@ -196,7 +205,9 @@ bool PixmapBarcode::createPixmap( QPixmap* target, int resx, int resy )
 
     free( postscript );
 
-    input->unlink();
+    /*input->unlink();*/
+    //input->aboutToClose();// -!F: delete. Is this the rigth replacement of file->unlink() ?
+    input->close();// -!F: Is this the rigth replacement of file->unlink() ?
     delete input;
 
     return true;
@@ -216,7 +227,8 @@ bool PixmapBarcode::createPostscript( char** postscript, long* postscript_size )
     */
     {
         cmd = "barcode -E -b ";
-        cmd += KShellProcess::quote( barkode->parsedValue() ) + (barkode->textVisible() ? "" : " -n");
+        /*cmd += KShellProcess::quote( barkode->parsedValue() ) + (barkode->textVisible() ? "" : " -n");*/
+	cmd += KShell::quoteArg( barkode->parsedValue() ) + (barkode->textVisible() ? "" : " -n");
         cmd += " -e " + barkode->type();
     }
     
@@ -236,7 +248,7 @@ QRect PixmapBarcode::bbox( const char* data, long size )
     QByteArray array;
     array.setRawData( data, size );
     
-    QBuffer b( array );
+    QBuffer b( & array );
     if( !b.open( QIODevice::ReadOnly ) )
         return s;
     
@@ -248,7 +260,9 @@ QRect PixmapBarcode::bbox( const char* data, long size )
         if( text.startsWith( bbox ) )
         {
             text = text.right( text.length() - len );
-            sscanf( (const char*)text, "%d %d %d %d", &x, &y, &w, &h );
+            QByteArray textByteArray = text.toUtf8();
+            const char* cString = textByteArray.constData();
+            sscanf( cString, "%d %d %d %d", &x, &y, &w, &h );
             s = QRect( x, y, w, h );
             break;
         }
@@ -354,29 +368,51 @@ bool PixmapBarcode::createPdf417( KTemporaryFile* output )
         return false;
     }
 
-    KTemporaryFile text( QString::null, ".txt" );
-    QTextStream t( text.file() );
+    /*KTemporaryFile text( QString::null, ".txt" );*/
+    KTemporaryFile * text = new KTemporaryFile();
+    text->setSuffix(".txt");
+    /*QTextStream t( text.file() );*/
+    QTextStream t( text );
     t << barkode->parsedValue();
-    text.file()->close();
+    text->close();
 
     // ps does not work because bounding box information is missing
     // pbm cannot be loaded by KImgIO (works fine in GIMP)
     // gif is the only other option
-    KShellProcess proc;
-    proc << "pdf417_enc" << "-tgif" << text.name() << output->name()
+    /*KShellProcess proc;*/
+    KProcess proc;
+    /*proc << "pdf417_enc" << "-tgif" << text.name() << output->name()
          << options->row()
          << options->col()
-         << options->err();
+         << options->err();*/
+    QString cmd;
+    cmd += "pdf417_enc";
+    cmd += " ";
+    cmd += "-tgif";
+    cmd += " ";
+    cmd += text->name();
+    cmd += " ";
+    cmd += output->name();
+    cmd += " ";
+    cmd += options->row();
+    cmd += " ";
+    cmd += options->col();
+    cmd += " ";
+    cmd += options->err();
+    proc.setShellCommand(cmd);
          
-    proc.start( KProcess::Block, KProcess::NoCommunication );
-    proc.resume();
+    /*proc.start( KProcess::Block, KProcess::NoCommunication );
+    proc.resume();*/
+    proc.start();
 
     if( proc.exitStatus() ) {
-        text.unlink();
+        /*text.unlink();*/
+	text->close();
         return false;
     }
 
-    text.unlink();    
+    /*text.unlink();*/
+    text->close();
     return true;    
 }
 
@@ -420,7 +456,9 @@ void PixmapBarcode::cleanUp( KTemporaryFile* file, QPixmap* target )
 {
     target->resize( 0, 0 );
 
-    file->unlink();
+    /*file->unlink();*/
+    //file->aboutToClose();// -!F: delete. Is this the rigth replacement of file->unlink() ?
+    file->close();// -!F: Is this the rigth replacement of file->unlink() ?
     delete file;
 }
 

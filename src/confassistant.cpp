@@ -46,9 +46,7 @@
 #include <kurllabel.h>
 #include <kstandarddirs.h>
 
-// -!F:
-#include <QDebug>
-
+#include <QDebug>// -!F: delete
 
 const char* description = I18N_NOOP(
         "KBarcode is a barcode and label printing application for KDE 3. It can "
@@ -80,7 +78,7 @@ ConfAssistant::ConfAssistant( QWidget* parent, QString name, bool modal )
     //qDebug() << "point 5";
 
     /*setNextEnabled( page_2, false );*/
-    //page_2->enableButtonOk(false);// -!F: What is the right replacement of setNextEnabled( page_2, false ) ?
+    //page_2->enableButtonOk(false);// -!F: done: What is the right replacement of setNextEnabled( page_2, false ) ?
     
     /*helpButton()->hide();*/
     //enableLinkedHelp(false);// -!F: Is this the right replacement of helpButton()->hide() ?
@@ -138,7 +136,7 @@ void ConfAssistant::setupPage1()
 
     TextLabel2_2 = new QLabel( page );
     TextLabel2_2->setMaximumWidth(700);// -!F:
-    TextLabel2_2->setWordWrap(true);// -!F:
+    TextLabel2_2->setWordWrap(true);
     TextLabel2_2->setText( i18n( "<qt><h1>Welcome to KBarcode</h1><br><br>") +
         i18n( description ) + "</qt>" );
     Layout8->addWidget( TextLabel2_2 );
@@ -201,40 +199,10 @@ void ConfAssistant::setupPage2()
     pageLayout_2->addItem( spacer_5 );
     //qDebug() << "point b 3 3";
     
-    /*QLayout * page2Layout = page_2->layout();
-    if (page2Layout == 0) {
-        page_2->setLayout(pageLayout_2);
-	qDebug() << "point b setLayout";
-    } else {
-        page2Layout->addItem(pageLayout_2);
-	qDebug() << "point b addItem";
-    }*/
     page_2->setLayout(pageLayout_2);
-    //page_2->setMaximumWidth(1000);// -!F:
-    //page_2->setMaximumHeight(1000);// -!F:
-    /*qDebug() << "point b 3 4";
-    page_2->setMaximumSize(QWIDGETSIZE_MAX,QWIDGETSIZE_MAX);
-    qDebug() << "point b 3 5";
-    page_2->setMinimumSize(0,0);
-    qDebug() << "point b 3 6";
-    setFixedSize ( 1100, 1100 );*/
-    //qDebug() << "point b 3 7";
 
-    //qDebug() << "point setupPage2 3a";
-    //qDebug() << sqlwidget->isWidgetType();
-    /*qDebug() << "sqlwidget: size constraint: " << sqlwidget->layout()->sizeConstraint();
-    qDebug() << "page_2: size constraint: " << page_2->layout()->sizeConstraint();
-    qDebug() << "point setupPage2 4a";
-    if (page_2->layout() == 0) {// -!F:
-        qDebug() << "setupPage2 layout is 0";
-    }
-    qDebug() << "point setupPage2 4b";
-    qDebug() << page_2->layout()->maximumSize().width() << "," << page_2->layout()->maximumSize().height();
-    qDebug() << page_2->size().width() << "," << page_2->size().height();
-    qDebug() << "point setupPage2 5";*/
     KPageWidgetItem * page_2Item = addPage( page_2, i18n( "Database" ) );
     page_2Item->setObjectName("page_2");
-    //qDebug() << "point setupPage2 end";
 }
 
 void ConfAssistant::setupPage3()
@@ -251,7 +219,6 @@ void ConfAssistant::setupPage3()
     TextLabel1_2->setText( i18n( "KBarcode can create the required SQL tables for you.<br>KBarcode will add also some Label Definitions to the tables.<br>After that you can fill the tables with some example data." ) );
     //TextLabel1_2->setAlignment( int( Qt::WordBreak | Qt::AlignVCenter ) );
     TextLabel1_2->setAlignment(Qt::AlignVCenter);
-    //Qt::TextWordWrap// -!F: del
     TextLabel1_2->setWordWrap(true);
     pageLayout_3->addWidget( TextLabel1_2 );
 
@@ -278,7 +245,7 @@ void ConfAssistant::setupPage3()
 
 void ConfAssistant::testSettings( bool b )
 {
-    /*setNextEnabled( page_2, b );*/// -!F: What is the right replacement of setNextEnabled( page_2, b ) ?
+    /*setNextEnabled( page_2, b );*/// -!F: done: What is the right replacement of setNextEnabled( page_2, b ) ?
     page2NextButtonEnable = b;
     enableButton(KDialog::User2, page2NextButtonEnable);
 }
@@ -337,24 +304,6 @@ void ConfAssistant::example()
     db->close();
 }
 
-/*void ConfAssistant::showPage( QWidget* page )
-{
-    
-    if( page == page_2 && !sqlwidget->driverCount() ) {
-        KMessageBox::information( this, i18n(
-            "There are no Qt SQL drivers installed. "
-            "KBarcode needs those drivers to access the different SQL databases. "
-            "This drivers are part of the Qt Source distribution and should also be part of "
-            "your distribution. Please install them first.") );
-    }
-    
-    if ( page == page_3 ) {
-        //finishButton()->setEnabled( true );
-	showButton(KDialog::User1, true);
-        enableButton(KDialog::User1, true);
-    }
-}*/
-
 /* configureCurrentPage() is called by the slots next() and back() */
 void ConfAssistant::configureCurrentPage( KPageWidgetItem * page )
 {
@@ -402,14 +351,14 @@ void ConfAssistant::useDatabase()
 {
     /*setFinishEnabled( page_2, !checkDatabase->isChecked() );// -!F: done: I must probably modify the structure of this class and it's use to achieve the same result?
     setNextEnabled( page_2, false );
-    setFinishEnabled( page_3, checkDatabase->isChecked() );// -!F: In the original code this IMHO conflicts with showPage().
+    setFinishEnabled( page_3, checkDatabase->isChecked() );// -!F: done: In the original code this IMHO conflicts with showPage().
     sqlwidget->setEnabled( checkDatabase->isChecked() );*/
     page2FinishButtonEnable = (!checkDatabase->isChecked());
     page2NextButtonEnable = false;
     //page2NextButtonEnable = !page2NextButtonEnable;
     enableButton(KDialog::User1, page2FinishButtonEnable);
     enableButton(KDialog::User2, page2NextButtonEnable);
-    page3FinishButtonEnable = (checkDatabase->isChecked());// -!F: In the original code this IMHO conflicts with showPage().
+    page3FinishButtonEnable = (checkDatabase->isChecked());// -!F: done: In the original code this IMHO conflicts with showPage().
     //enableButton(KDialog::User1, !checkDatabase->isChecked());
     //enableButton(KDialog::User2, false);
     sqlwidget->setEnabled( checkDatabase->isChecked() );

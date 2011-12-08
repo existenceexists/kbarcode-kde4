@@ -26,7 +26,7 @@
 #include <labelutils.h>
 
 TCanvasItem::TCanvasItem( MyCanvasView* cv )
-    : QCanvasRectangle( cv->canvas() ),
+    : Q3CanvasRectangle( cv->canvas() ),
       ReferenceCounted()
 {
     m_view = cv;
@@ -42,7 +42,7 @@ TCanvasItem::~TCanvasItem()
 
 void TCanvasItem::setZ( double z )
 {
-    QCanvasRectangle::setZ( z );
+    Q3CanvasRectangle::setZ( z );
 
     if( m_item )
         m_item->setZ( (int)z );
@@ -50,7 +50,7 @@ void TCanvasItem::setZ( double z )
 
 void TCanvasItem::setSize( int width, int height )
 {
-    QCanvasRectangle::setSize( width, height );
+    Q3CanvasRectangle::setSize( width, height );
     
     if( m_item )
     {
@@ -71,13 +71,13 @@ void TCanvasItem::setSizeMM( int w, int h )
     if( m_item )
     {
         m_item->setSizeMM( w, h );
-        QCanvasRectangle::setSize( m_item->boundingRect().width(), m_item->boundingRect().height() );
+        Q3CanvasRectangle::setSize( m_item->boundingRect().width(), m_item->boundingRect().height() );
     }
 }
 
 void TCanvasItem::moveBy( double dx, double dy )
 {
-    QCanvasRectangle::moveBy( dx, dy );
+    Q3CanvasRectangle::moveBy( dx, dy );
     
     if( m_item )
     {
@@ -98,7 +98,7 @@ void TCanvasItem::moveMM( int x, int y )
 	LabelUtils l;
 	// the QCanvasRectangle::move is done before the real move
         // as we get dancing TCanvasItems on the screen otherwise
-        QCanvasRectangle::move( l.mmToPixel( x / 1000.0, m_view, LabelUtils::DpiX ) + m_view->getTranslation().x(), 
+        Q3CanvasRectangle::move( l.mmToPixel( x / 1000.0, m_view, LabelUtils::DpiX ) + m_view->getTranslation().x(), 
 				l.mmToPixel( y / 1000.0, m_view, LabelUtils::DpiY ) + m_view->getTranslation().y() );
         m_item->moveMM( x, y );
     }
@@ -111,10 +111,11 @@ void TCanvasItem::drawShape (QPainter & painter)
     if( m_item )
     {
         if( z() != (int)m_item->z() )
-            QCanvasRectangle::setZ( m_item->z() );
+            Q3CanvasRectangle::setZ( m_item->z() );
         
         painter.save();
-        painter.setClipRect( boundingRect(), QPainter::CoordPainter );
+        /*painter.setClipRect( boundingRect(), QPainter::CoordPainter );*/
+	painter.setClipRect( boundingRect() );
         painter.translate( m_view->getTranslation().x(), m_view->getTranslation().y() );
         m_item->draw( &painter );
         painter.restore();
@@ -163,8 +164,8 @@ void TCanvasItem::setItem (DocumentItem* item)
         m_item->setCanvasItem( this );
         this->setZ( m_item->z() );
 
-        QCanvasRectangle::move( m_item->boundingRect().x() + m_view->getTranslation().x(), m_item->boundingRect().y() + m_view->getTranslation().y() );
-        QCanvasRectangle::setSize( m_item->boundingRect().width(), m_item->boundingRect().height() );
+        Q3CanvasRectangle::move( m_item->boundingRect().x() + m_view->getTranslation().x(), m_item->boundingRect().y() + m_view->getTranslation().y() );
+        Q3CanvasRectangle::setSize( m_item->boundingRect().width(), m_item->boundingRect().height() );
         update();
     }
 }
@@ -176,7 +177,7 @@ DocumentItem* TCanvasItem::item () const
 
 void TCanvasItem::update()
 {
-    QCanvasRectangle::update();
+    Q3CanvasRectangle::update();
 }
 
 int TCanvasItem::rtti() const
@@ -199,7 +200,7 @@ void TCanvasItem::show()
     if (!isVisible())
     {
         this->addRef();
-        ((QCanvasItem*) this)->show();
+        ((Q3CanvasItem*) this)->show();
     }
 }
 
@@ -216,7 +217,7 @@ void TCanvasItem::hide()
     {
         if (isVisible())
         {
-            ((QCanvasItem*) this)->hide(); 
+            ((Q3CanvasItem*) this)->hide(); 
             this->remRef();
         }
     }

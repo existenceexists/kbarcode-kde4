@@ -13,12 +13,13 @@
 #include "sqltables.h"
 #include "confassistant.h"
 #include "printersettings.h"
-/*#include "kbarcodesettings.h"
+/*#include "kbarcodesettings.h"*/
 #include "barkode.h"
-*/
+
 // Qt includes
 #include <qcheckbox.h>
-#include <q3textbrowser.h>// -!F:
+//#include <q3textbrowser.h>// -!F: delete
+#include <QTextBrowser>
 #include <qsqldatabase.h>
 #include <QString>
 
@@ -72,7 +73,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::setupActions(QString directoryName=QString()) // -!F:
 {
-    kbarcodeDirectoryName = directoryName;// -!F:
+    kbarcodeDirectoryName = directoryName;// -!F: delete
     
     /*KAction* quitAct = KStandardAction::quit(kapp, SLOT(quit()), actionCollection());*/
     KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
@@ -319,10 +320,11 @@ void MainWindow::appHelpActivated()
 
 void MainWindow::showCheck()
 {
-    /*QTextBrowser* b = new QTextBrowser( 0, "b" );
+    QTextBrowser* b = new QTextBrowser( 0 );
+    b->setObjectName("b");
     b->setText( MainWindow::systemCheck() );
     b->resize( 320, 240 );
-    b->show();*/
+    b->show();
 }
 
 void MainWindow::startInfo()
@@ -401,7 +403,7 @@ QString MainWindow::systemCheck()
     return QString("Frank");
 }
 
-/*void MainWindow::slotFunctionMap()//created by Frank, delete this member function
+/*void MainWindow::slotFunctionMap()// -!F: created by Frank, delete this member function
 {
     //created by Frank, delete this member function
 }*/

@@ -212,12 +212,14 @@ void DocumentItem::setZ( int z )
     m_z = z;
 }
 
-void DocumentItem::setPaintDevice( QPaintDevice* device )
+/*void DocumentItem::setPaintDevice( QPaintDevice* device )*/// -!F: original, delete, 
+void DocumentItem::setPaintDevice( QDesktopWidget* device )
 {
     m_device = device;
 }
 
-QPaintDevice* DocumentItem::paintDevice() const
+/*QPaintDevice* DocumentItem::paintDevice() const*/// -!F: original, delete, 
+QDesktopWidget* DocumentItem::paintDevice() const
 {
     return m_device;
 }

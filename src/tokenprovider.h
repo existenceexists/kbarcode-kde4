@@ -69,9 +69,11 @@ namespace KJSEmbed {
     class KJSEmbedPart;
 }
 #else
-namespace KJS {
+/*namespace KJS {
     class Interpreter;
-}
+}*/
+class KJSInterpreter;
+
 #endif // NO_KJS_EMBED
 
 class QPaintDevice;
@@ -233,7 +235,8 @@ class TokenProvider {
         static QMap<ECategories, QString> s_captions;
 
 #ifdef NO_KJS_EMBED
-	static KJS::Interpreter* s_interpreter;
+	/*static KJS::Interpreter* s_interpreter;*/// -!F: original, delete, 
+	static KJSInterpreter* s_interpreter;
 #else	
 	static KJSEmbed::KJSEmbedPart* s_interpreter;
 #endif // NO_KJS_EMBED

@@ -35,7 +35,10 @@
 
 #ifdef USE_JAVASCRIPT
 #ifdef NO_KJS_EMBED
-#include <kjs/interpreter.h>
+//#include <kjs/interpreter.h>
+#include <kjs/kjsinterpreter.h>
+//#include <kjs/completion.h>// -!F:
+//#include <kjs/value.h>// -!F:
 #else
 #include <kjsembed/kjsembedpart.h>
 #endif // NO_KJS_EMBED
@@ -165,7 +168,8 @@ TokenProvider::TokenProvider( QPaintDevice* paintdevice )
 
 #ifdef USE_JAVASCRIPT
 #ifdef NO_KJS_EMBED
-    s_interpreter = new KJS::Interpreter();
+    /*s_interpreter = new KJS::Interpreter();*/
+    s_interpreter = new KJSInterpreter();
 #else
     s_interpreter = new KJSEmbed::KJSEmbedPart();
 #endif // NO_KJS_EMBED
@@ -179,7 +183,8 @@ TokenProvider::~TokenProvider()
 QList<tCategories> TokenProvider::s_categories;
 QMap<TokenProvider::ECategories,QString> TokenProvider::s_captions;
 #ifdef NO_KJS_EMBED
-KJS::Interpreter* TokenProvider::s_interpreter = NULL;
+/*KJS::Interpreter* TokenProvider::s_interpreter = NULL;*/
+KJSInterpreter* TokenProvider::s_interpreter = NULL;
 #else
 KJSEmbed::KJSEmbedPart* TokenProvider::s_interpreter = NULL;
 #endif // NO_KJS_EMBED
@@ -293,20 +298,20 @@ void TokenProvider::init()
         category.tokens.append( tToken( TOK_ADDRESS_FAMILY_NAME, KABC::Addressee::familyNameLabel() ) );
         category.tokens.append( tToken( TOK_ADDRESS_EMAIL, KABC::Addressee::emailLabel() ) );
         category.tokens.append( tToken( TOK_ADDRESS_FULL_EMAIL, i18n("Full E-Mail") ) );
-        category.tokens.append( tToken( TOK_ADDRESS_PHONE_PREF, KABC::PhoneNumber::label( KABC::PhoneNumber::Pref ) ) );
-        category.tokens.append( tToken( TOK_ADDRESS_PHONE_HOME, KABC::PhoneNumber::label( KABC::PhoneNumber::Home ) ) );
-        category.tokens.append( tToken( TOK_ADDRESS_PHONE_WORK, KABC::PhoneNumber::label( KABC::PhoneNumber::Work ) ) );
-        category.tokens.append( tToken( TOK_ADDRESS_PHONE_MSG, KABC::PhoneNumber::label( KABC::PhoneNumber::Msg ) ) );
-        category.tokens.append( tToken( TOK_ADDRESS_PHONE_VOICE, KABC::PhoneNumber::label( KABC::PhoneNumber::Voice ) ) );
-        category.tokens.append( tToken( TOK_ADDRESS_PHONE_FAX, KABC::PhoneNumber::label( KABC::PhoneNumber::Fax ) ) );
-        category.tokens.append( tToken( TOK_ADDRESS_PHONE_CELL, KABC::PhoneNumber::label( KABC::PhoneNumber::Cell ) ) );
-        category.tokens.append( tToken( TOK_ADDRESS_PHONE_VIDEO, KABC::PhoneNumber::label( KABC::PhoneNumber::Video ) ) );
-        category.tokens.append( tToken( TOK_ADDRESS_PHONE_BBS, KABC::PhoneNumber::label( KABC::PhoneNumber::Bbs ) ) ); 
-        category.tokens.append( tToken( TOK_ADDRESS_PHONE_MODEM, KABC::PhoneNumber::label( KABC::PhoneNumber::Modem ) ) );
-        category.tokens.append( tToken( TOK_ADDRESS_PHONE_CAR, KABC::PhoneNumber::label( KABC::PhoneNumber::Car ) ) );
-        category.tokens.append( tToken( TOK_ADDRESS_PHONE_ISDN, KABC::PhoneNumber::label( KABC::PhoneNumber::Isdn ) ) );
-        category.tokens.append( tToken( TOK_ADDRESS_PHONE_PCS, KABC::PhoneNumber::label( KABC::PhoneNumber::Pcs ) ) );
-        category.tokens.append( tToken( TOK_ADDRESS_PHONE_PAGER, KABC::PhoneNumber::label( KABC::PhoneNumber::Pager ) ) );
+        category.tokens.append( tToken( TOK_ADDRESS_PHONE_PREF, KABC::PhoneNumber::typeLabel( KABC::PhoneNumber::Pref ) ) );
+        category.tokens.append( tToken( TOK_ADDRESS_PHONE_HOME, KABC::PhoneNumber::typeLabel( KABC::PhoneNumber::Home ) ) );
+        category.tokens.append( tToken( TOK_ADDRESS_PHONE_WORK, KABC::PhoneNumber::typeLabel( KABC::PhoneNumber::Work ) ) );
+        category.tokens.append( tToken( TOK_ADDRESS_PHONE_MSG, KABC::PhoneNumber::typeLabel( KABC::PhoneNumber::Msg ) ) );
+        category.tokens.append( tToken( TOK_ADDRESS_PHONE_VOICE, KABC::PhoneNumber::typeLabel( KABC::PhoneNumber::Voice ) ) );
+        category.tokens.append( tToken( TOK_ADDRESS_PHONE_FAX, KABC::PhoneNumber::typeLabel( KABC::PhoneNumber::Fax ) ) );
+        category.tokens.append( tToken( TOK_ADDRESS_PHONE_CELL, KABC::PhoneNumber::typeLabel( KABC::PhoneNumber::Cell ) ) );
+        category.tokens.append( tToken( TOK_ADDRESS_PHONE_VIDEO, KABC::PhoneNumber::typeLabel( KABC::PhoneNumber::Video ) ) );
+        category.tokens.append( tToken( TOK_ADDRESS_PHONE_BBS, KABC::PhoneNumber::typeLabel( KABC::PhoneNumber::Bbs ) ) ); 
+        category.tokens.append( tToken( TOK_ADDRESS_PHONE_MODEM, KABC::PhoneNumber::typeLabel( KABC::PhoneNumber::Modem ) ) );
+        category.tokens.append( tToken( TOK_ADDRESS_PHONE_CAR, KABC::PhoneNumber::typeLabel( KABC::PhoneNumber::Car ) ) );
+        category.tokens.append( tToken( TOK_ADDRESS_PHONE_ISDN, KABC::PhoneNumber::typeLabel( KABC::PhoneNumber::Isdn ) ) );
+        category.tokens.append( tToken( TOK_ADDRESS_PHONE_PCS, KABC::PhoneNumber::typeLabel( KABC::PhoneNumber::Pcs ) ) );
+        category.tokens.append( tToken( TOK_ADDRESS_PHONE_PAGER, KABC::PhoneNumber::typeLabel( KABC::PhoneNumber::Pager ) ) );
         category.tokens.append( tToken( TOK_ADDRESS_ADDRESS_POB, KABC::Address::postOfficeBoxLabel() ) );
         category.tokens.append( tToken( TOK_ADDRESS_ADDRESS_EXTENDED, KABC::Address::extendedLabel() ) );
         category.tokens.append( tToken( TOK_ADDRESS_ADDRESS_STREET, KABC::Address::streetLabel() ) );
@@ -342,10 +347,14 @@ void TokenProvider::findBrackets( QString & text, QString (TokenProvider::*parse
     int num, pos = -1, a;
     QString token;
 
-    if( text.contains("]", FALSE) <= 0 || text.isEmpty() )
+    /*if( text.contains("]", FALSE) <= 0 || text.isEmpty() )*/
+    /*if( text.contains("]", Qt::CaseInsensitive) <= 0 || text.isEmpty() )*/// -!F: delete
+    if( text.count("]", Qt::CaseInsensitive) <= 0 || text.isEmpty() )
         return;
 
-    num = text.contains("[", FALSE);
+    /*num = text.contains("[", FALSE);*/
+    /*num = (int) text.contains("[", Qt::CaseInsensitive);*/// -!F: delete
+    num = text.count("[", Qt::CaseInsensitive);
     if(num <= 0 )
         return;
 
@@ -858,10 +867,16 @@ QString TokenProvider::jsParse( const QString & script )
 
 #else
     // Maybe we need no Completion object for KJSEmbed
-    KJS::Completion comp = s_interpreter->evaluate( KJS::UString( script.toLatin1() ) );
-    KJS::Value val = comp.value();
-    if( val.isValid() )
-	ret = val.toString( s_interpreter->globalExec() ).cstring().c_str();
+    /*KJS::Completion comp = s_interpreter->evaluate( KJS::UString( script.toLatin1() ) );
+    KJS::Value val = comp.value();*/
+    KJSResult comp = s_interpreter->evaluate( script );
+    KJSObject val = comp.value();
+    /*if( val.isValid() )
+	ret = val.toString( s_interpreter->globalExec() ).cstring().c_str();*/
+    if (!val.isUndefined() && !val.isNull())
+    {
+        ret = val.toString( s_interpreter->globalContext() );
+    }
 #endif
 
 #endif // USE_JAVASCRIPT
@@ -873,11 +888,17 @@ bool TokenProvider::jsParseToBool( const QString & script )
 {
 #ifdef USE_JAVASCRIPT
     // Maybe we need no Completion object for KJSEmbed
-    KJS::Completion comp = s_interpreter->evaluate( KJS::UString( script.toLatin1() ) );
-    KJS::Value val = comp.value();
-    if( val.isValid() )
+    /*KJS::Completion comp = s_interpreter->evaluate( KJS::UString( script.toLatin1() ) );
+    KJS::Value val = comp.value();*/
+    KJSResult comp = s_interpreter->evaluate( script );
+    KJSObject val = comp.value();
+    /*if( val.isValid() )
     {
 	return val.toBoolean( s_interpreter->globalExec() );
+    }*/
+    if (!val.isUndefined() && !val.isNull())
+    {
+        return val.toBoolean( s_interpreter->globalContext() );
     }
 #endif // USE_JAVASCRIPT
 
@@ -903,7 +924,10 @@ const QString TokenProvider::createSerial()
         tmpstr.setNum(splitit.cap(2).length());
         QString formatstring = "%0" + tmpstr + "lu";
 
-        s = prenum + tmpstr.sprintf(formatstring, tmp) + postnum;
+        /*s = prenum + tmpstr.sprintf(formatstring, tmp) + postnum;*/
+        QByteArray formatstringByteArray = formatstring.toUtf8();
+        const char* formatstringChar = formatstringByteArray.constData();
+	s = prenum + tmpstr.sprintf(formatstringChar, tmp) + postnum;
         m_update = true;
     }
 

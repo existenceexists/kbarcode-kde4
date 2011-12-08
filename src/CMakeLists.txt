@@ -11,9 +11,9 @@ add_definitions( ${KDE4_DEFINITIONS} )
 set(kbarcode_SRCS
  # barcodecombo.cpp
  # barcodegenerator.cpp
- # barcodeitem.cpp
- # barkode.cpp
- # barkodeengine.cpp
+  barcodeitem.cpp
+  barkode.cpp
+  barkodeengine.cpp
  # batchprinter.cpp
  # batchassistant.cpp
  # commands.cpp
@@ -21,45 +21,45 @@ set(kbarcode_SRCS
  # csvfile.cpp
  # databasebrowser.cpp
   definition.cpp
- # documentitem.cpp
+  documentitem.cpp
   dsrichtext.cpp
  # dstextedit.cpp
  # encodingcombo.cpp
- # gnubarcode.cpp
+  gnubarcode.cpp
  # gnubarkodeengine.cpp
- # imageitem.cpp
+  imageitem.cpp
   kbarcode.cpp
- # kbarcodesettings.cpp
+  kbarcodesettings.cpp
  # label.cpp
  # labeleditor.cpp
   labelutils.cpp
- # lineitem.cpp
+  lineitem.cpp
   main.cpp
   mainwindow.cpp
   measurements.cpp
  # mimesources.cpp
- # mycanvasitem.cpp
+  mycanvasitem.cpp
  # mycanvasview.cpp
  # mydatatable.cpp
  # newlabel.cpp
- # pixmapbarcode.cpp
+  pixmapbarcode.cpp
   printersettings.cpp
  # propertywidget.cpp
- # purepostscript.cpp
- # rectitem.cpp
+  purepostscript.cpp
+  rectitem.cpp
   sqltables.cpp
- # tbarcode2.cpp
- # tcanvasitem.cpp
+  tbarcode2.cpp
+  tcanvasitem.cpp
  # tec.cpp
- # textitem.cpp
+  textitem.cpp
  # textlineedit.cpp
- # textlineitem.cpp
- # tokenprovider.cpp
- # xmlutils.cpp
- # zplutils.cpp
+  textlineitem.cpp
+  tokenprovider.cpp
+  xmlutils.cpp
+  zplutils.cpp
  # dialogs/barcodedialogs.cpp
  # dialogs/barcodeprinterdlg.cpp
- # dialogs/configdialog.cpp
+  dialogs/configdialog.cpp
  # dialogs/csvimportdlg.cpp
  # dialogs/definitiondialog.cpp
  # dialogs/documentitemdlg.cpp
@@ -82,7 +82,15 @@ if(ProjectName)
   
   target_link_libraries(${ProjectName} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS}
   			       ${KDE4_KIO_LIBS} ${KDE4_KMETADATA}
-  			       ${KDE4_KJS_LIBS} ${QT_QT3SUPPORT_LIBRARY})
+  			       ${KDE4_KJS_LIBS} ${QT_QT3SUPPORT_LIBRARY}
+${KDE4_KJSAPI_LIBS} #${KDE4_KABC_LIBS}
+#${KDE4_PIM_LIBS}
+#${KDE4_KPIMIDENTITIES_LIBS} #${KDE4_KPIMUTILS_LIBS}
+#${KDE4_AKONADI_LIBS}
+#${KDEPIMLIBS_AKONADI_LIBS}
+${KDEPIMLIBS_KABC_LIBS}
+#${akonadi_kabc_LIB_DEPENDS} ${KDE4_AKONADI_KABC_LIBRARY}
+  )
   
   install(TARGETS ${ProjectName} DESTINATION ${BIN_INSTALL_DIR})
   #install(FILES xml/mainwindowui.rc DESTINATION  ${DATA_INSTALL_DIR}/kbarcode002)

@@ -27,6 +27,7 @@
 
 #include <qpainter.h>
 #include <QPixmap>
+#include <QImageWriter>
 
 #include <klocale.h>
 #include <kcodecs.h> 
@@ -67,14 +68,29 @@ void ImageItem::drawZpl( QTextStream* stream )
     createImage();
     
     QBuffer buffer;
-    if( buffer.open( QIODevice::WriteOnly ) )
+    /*if( buffer.open( QIODevice::WriteOnly ) ) // -!F: original, delete
     {
-        // TODO: bmp????
+        // TODO: bmp????-
         QImageIO io( &buffer, "PNG" ); 
         QImage image = m_tmp.convertToImage();
         // create a black and white image
         io.setImage( image.convertDepth( 1 ) );
         io.write();
+        buffer.close();
+
+        QByteArray data = buffer.buffer();
+        *stream << ZPLUtils::fieldOrigin( rect().x(), rect().y() );
+        *stream << "~DYD,p,P," << QString::number( data.size() ) + ",0,";
+        for( unsigned int i=0;i<data.size();i++)
+            *stream << data[i];
+    }*/
+    if( buffer.open( QIODevice::WriteOnly ) )
+    {
+        // TODO: bmp????-
+        QImageWriter io( &buffer, QByteArray("PNG") ); 
+        QImage image = m_tmp.toImage();
+        // create a black and white image
+        io.write(image.convertToFormat(QImage::Format_Mono));
         buffer.close();
 
         QByteArray data = buffer.buffer();
@@ -219,7 +235,7 @@ void ImageItem::createImage()
 
 	if( !img.isNull() )
 	{
-	    if( m_rotation != 0.0 )        
+	    if( m_rotation != 0.0 )
 	    {
 		QMatrix matrix;
 		matrix.rotate( m_rotation );
@@ -230,17 +246,20 @@ void ImageItem::createImage()
 	    // but use faster scaling for onscreen operations
 	    if( m_scaling != eImage_Original )
 	    {
-		if( DocumentItem::paintDevice()->isExtDev() )
+		/*if( DocumentItem::paintDevice()->isExtDev() )// -!F: original, delete, What is the right replacement of isExtDev() ? They say no replacement is available.
 		    img = img.smoothScale( rect().width(), rect().height(), 
 					   (m_scaling == eImage_Scaled ? Qt::ScaleMin : QImage::ScaleFree) );
 		else
 		    img = img.scale( rect().width(), rect().height(), 
-				     (m_scaling == eImage_Scaled ? Qt::ScaleMin : QImage::ScaleFree) );
+				     (m_scaling == eImage_Scaled ? Qt::ScaleMin : QImage::ScaleFree) );*/
+		img = img.scaled( rect().width(), rect().height(), 
+			(m_scaling == eImage_Scaled ? Qt::KeepAspectRatio : Qt::IgnoreAspectRatio),
+			Qt::SmoothTransformation );
 	    }
 	    else
 	    {
 		// we have to scale because of the bigger printer resolution
-		if( DocumentItem::paintDevice()->isExtDev() )
+		/*if( DocumentItem::paintDevice()->isExtDev() )// -!F: original, delete,  What is the right replacement of isExtDev() ? They say no replacement is available.
 		{
 		    QPaintDevice* device = DocumentItem::paintDevice();
 		    
@@ -248,7 +267,13 @@ void ImageItem::createImage()
                                           (int)(img.width() * ((double)device->logicalDpiX()/QX11Info::appDpiX())),
                                           (int)(img.height() * ((double)device->logicalDpiY()/QX11Info::appDpiY())),
                                           Qt::ScaleMin );
-		}
+		}*/
+		QPaintDevice* device = DocumentItem::paintDevice();
+		
+		img = img.scaled(
+                    (int)(img.width() * ((double)device->logicalDpiX()/QX11Info::appDpiX())),
+                    (int)(img.height() * ((double)device->logicalDpiY()/QX11Info::appDpiY())),
+                    Qt::KeepAspectRatio );
 	    }
 
 	    if( m_mirror_h || m_mirror_v )

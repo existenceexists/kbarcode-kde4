@@ -63,7 +63,7 @@ void TextItem::draw(QPainter* painter)
     double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();
 
     QColorGroup cg;
-    QSimpleRichText srt( t, painter->font() );
+    Q3SimpleRichText srt( t, painter->font() );
 
     /*
     int width = (rect().width() < (int)((double)srt.widthUsed()*scalex) && autosize) ? srt.widthUsed() : rect().width();

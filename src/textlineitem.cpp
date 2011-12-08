@@ -55,7 +55,7 @@ void TextLineItem::draw(QPainter* painter)
 {
     QString text = tokenProvider() ? tokenProvider()->parse( m_text ) : m_text;
     QColorGroup cg;
-    QSimpleRichText srt( text, painter->font() );
+    Q3SimpleRichText srt( text, painter->font() );
     
     QPaintDevice* device = DocumentItem::paintDevice();
     double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();

@@ -19,6 +19,7 @@
 #define KBARCODESETTINGS_H
 
 #include <qobject.h>
+#include <QColor>
 
 /**
     A singleton which is responsible for loading and saving KBarcodes settings.
