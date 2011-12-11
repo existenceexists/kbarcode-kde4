@@ -96,7 +96,7 @@ void ImageItem::drawZpl( QTextStream* stream )
         QByteArray data = buffer.buffer();
         *stream << ZPLUtils::fieldOrigin( rect().x(), rect().y() );
         *stream << "~DYD,p,P," << QString::number( data.size() ) + ",0,";
-        for( unsigned int i=0;i<data.size();i++)
+        for( int i=0;i<data.size();i++)
             *stream << data[i];
     }
     stream -> flush();
@@ -115,7 +115,7 @@ void ImageItem::drawEPcl( QTextStream* stream )
     // m_tmp is an image which has all transformations
     // (i.e. rotation, scaling, flipping) already apllied
             
-	QImage si = m_tmp.convertToImage();
+	QImage si = m_tmp.toImage();
 	int width = si.width();
 	int height = si.height();
 	int c;
@@ -152,7 +152,7 @@ void ImageItem::loadXML(QDomElement* element)
     QByteArray out;
     if( !element->text().isEmpty() )
     {
-	KCodecs::base64Decode( element->text().utf8(), out );
+	KCodecs::base64Decode( element->text().toUtf8(), out );
 	m_pixmap.loadFromData( out, "PNG" );
     }
 
@@ -219,7 +219,8 @@ EImageScaling ImageItem::scaling() const
 
 void ImageItem::updateImage()
 {
-    m_tmp.resize( QSize(0,0) );
+    /*m_tmp.resize( QSize(0,0) );*/// -!F: original, delete
+    m_tmp = m_tmp.copy(QRect(QPoint(0, 0), QSize(0,0)));
 }
 
 void ImageItem::createImage()
@@ -231,7 +232,7 @@ void ImageItem::createImage()
 	if( m_pixmap.isNull() )
 	    img.load( tokenProvider() ? tokenProvider()->parse( m_expression ) : m_expression );
 	else
-	    img = m_pixmap.convertToImage();
+	    img = m_pixmap.toImage();
 
 	if( !img.isNull() )
 	{
@@ -277,7 +278,7 @@ void ImageItem::createImage()
 	    }
 
 	    if( m_mirror_h || m_mirror_v )
-		img = img.mirror( m_mirror_h, m_mirror_v );
+		img = img.mirrored( m_mirror_h, m_mirror_v );
 	    
 	    m_tmp.convertFromImage( img );
 	}
@@ -288,7 +289,7 @@ void ImageItem::createImage()
 	    
 	    // make sure that we do not get a 0 0 0 0 rectangle
 	    QRect myrect( 0, 0, rect().width() ? rect().width() : 100 , rect().height() ? rect().height() : 80 );
-	    m_tmp.resize( rect().width(), rect().height() );
+	    m_tmp = m_tmp.copy(0, 0, rect().width(), rect().height() );
 	    
 	    QPainter painter( &m_tmp );
 	    painter.fillRect( myrect, Qt::white );

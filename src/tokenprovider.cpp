@@ -358,8 +358,10 @@ void TokenProvider::findBrackets( QString & text, QString (TokenProvider::*parse
     if(num <= 0 )
         return;
 
-    pos = text.findRev("[", pos);
-    a = text.find("]", pos );
+    /*pos = text.findRev("[", pos);*/// -!F: original, delete
+    pos = text.lastIndexOf("[", pos);
+    /*a = text.find("]", pos );*/// -!F: original, delete
+    a = text.indexOf("]", pos );
     if( a < 0 && pos >= 0 )
         return;
 
@@ -402,7 +404,7 @@ QString TokenProvider::parse( const QString & text )
 
 QStringList TokenProvider::listUserVars()
 {
-    unsigned int i;
+    int i;
     DocumentItem* item;
     QStringList lst;
     QString t;
@@ -526,7 +528,8 @@ QString TokenProvider::process( const QString & t )
     if( t == TOK_DATE )
         ret = QDateTime::currentDateTime().toString( KBarcodeSettings::getDateFormat() );
     
-    if( date_reg_exp.search(t,0) != -1 ) 
+    /*if( date_reg_exp.search(t,0) != -1 ) */// -!F: original, delete
+    if( date_reg_exp.indexIn(t,0) != -1 )
     {
 	time_t label_time;
 	struct tm label_time_struct;
@@ -535,7 +538,10 @@ QString TokenProvider::process( const QString & t )
 	label_time = time(&label_time) ;
 	localtime_r(&label_time,&label_time_struct) ;
 
-        strftime(temp_time_str,sizeof temp_time_str - 1, date_reg_exp.cap(1).ascii(),&label_time_struct);
+        /*strftime(temp_time_str,sizeof temp_time_str - 1, date_reg_exp.cap(1).ascii(),&label_time_struct);*/// -!F: original, delete
+	QByteArray dateRExpByteArray = date_reg_exp.cap(1).toAscii();
+	const char * date_reg_exp_1_chars = dateRExpByteArray.constData();
+	strftime(temp_time_str,sizeof temp_time_str - 1, date_reg_exp_1_chars, &label_time_struct);
         ret = temp_time_str;
     }
 
@@ -911,7 +917,7 @@ const QString TokenProvider::createSerial()
     QString s = QString::null;
     // Split string into prenum, number and postnum parts
     QRegExp splitit("(\\D*)(\\d+)(.*)");
-    int pos = splitit.search(m_serial);
+    int pos = splitit.indexIn(m_serial);
 
     // Is there anything to increment ?
     if (pos > -1) {

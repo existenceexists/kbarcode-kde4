@@ -255,14 +255,14 @@ const QString Barkode::parsedValue()
 
     int pos = 0, counter = 1;
 
-    pos = text.find("#", pos);
+    pos = text.indexOf("#", pos);
     pos++;
     while( text[pos] == '#' ) {
         text.remove(pos, 1);
         counter++;
     }
 
-    pos = text.find("#", 0);
+    pos = text.indexOf("#", 0);
     QString temp;
 
     if( sequenceMode() == NUM ) {
@@ -308,7 +308,7 @@ EEngine Barkode::engineForType( const QString & type )
 {
     EEngine engine = NONE;
     
-    for( unsigned int i=0;i<s_info.count();i++)
+    for( int i=0;i<s_info.count();i++)
         if( s_info[i].xml == type )
         {
             engine = s_info[i].engine;
@@ -574,7 +574,7 @@ void Barkode::setDatamatrixSize( int s )
 
 bool Barkode::hasFeature( const QString & type, unsigned int feature )
 {
-    for( unsigned int i = 0; i < s_info.count(); i++ )
+    for( int i = 0; i < s_info.count(); i++ )
         if( s_info[i].xml == type )
             return (s_info[i].features & feature) == feature;
             
@@ -583,7 +583,7 @@ bool Barkode::hasFeature( const QString & type, unsigned int feature )
 
 int Barkode::internalType( const QString & type )
 {
-    for( unsigned int i = 0; i < s_info.count(); i++ )
+    for( int i = 0; i < s_info.count(); i++ )
         if( s_info[i].xml == type )
             return s_info[i].internal;
             
@@ -595,7 +595,7 @@ const QStringList* Barkode::encodingTypes()
     if( !s_encoding )
     {
         s_encoding = new QStringList;
-        for( unsigned int i = 0; i < s_info.count(); i++ )
+        for( int i = 0; i < s_info.count(); i++ )
             s_encoding->append( s_info[i].name );
         //s_encoding->sort();
     }
@@ -603,27 +603,27 @@ const QStringList* Barkode::encodingTypes()
     return s_encoding;
 }
 
-const QString & Barkode::typeFromName( const QString & name )
+const QString Barkode::typeFromName( const QString & name )
 {
-    for( unsigned int i = 0; i < s_info.count(); i++ )
+    for( int i = 0; i < s_info.count(); i++ )
         if( s_info[i].name == name )
             return s_info[i].xml;
             
-    return NULL;
+    return QString();
 }
 
-const QString & Barkode::nameFromType( const QString & type )
+const QString Barkode::nameFromType( const QString & type )
 {
-    for( unsigned int i = 0; i < s_info.count(); i++ )
+    for( int i = 0; i < s_info.count(); i++ )
         if( s_info[i].xml == type )
             return s_info[i].name;
             
-    return NULL;
+    return QString();
 }
 
 QString* Barkode::validatorFromType( const QString & type )
 {
-    for( unsigned int i = 0; i < s_info.count(); i++ )
+    for( int i = 0; i < s_info.count(); i++ )
         if( s_info[i].xml == type )
             return &(s_info[i].validator);
 
@@ -632,7 +632,7 @@ QString* Barkode::validatorFromType( const QString & type )
 
 QString* Barkode::validatorNotFromType( const QString & type )
 {
-    for( unsigned int i = 0; i < s_info.count(); i++ )
+    for( int i = 0; i < s_info.count(); i++ )
         if( s_info[i].xml == type )
             return &(s_info[i].validatorNot);
 

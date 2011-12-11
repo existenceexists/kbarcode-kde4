@@ -25,7 +25,20 @@
 #include <qstring.h>
 
 // font table for IPL, thanks to Erich Kitzmueller
-struct { int size; int c; int h; int w; } iplfonttable[] = {
+/*struct { int size; int c; int h; int w; } iplfonttable[] = {// -!F: original, delete
+    { 4, 7, 1, 1 },
+    { 5, 0, 1, 1 },
+    { 6, 1, 1, 1 },
+    { 7, 2, 1, 1 },
+    { 8, 20, 1, 1 },
+    { 10, 24, 1, 1 },
+    { 11, 23, 1, 1 },
+    { 12, 21, 1, 1 },
+    { 14, 2, 2, 2 },
+    { 16, 20, 2, 2 },
+    { 19, 22, 1, 1 }
+};*/
+struct iplfont { int size; int c; int h; int w; } iplfonttable[] = {
     { 4, 7, 1, 1 },
     { 5, 0, 1, 1 },
     { 6, 1, 1, 1 },
@@ -253,7 +266,7 @@ QString IPLUtils::footer()
     // start with actual data
     ipl += field( "<ESC>E3<CAN>" );  // choose format number 3
 
-    for( unsigned int i = 0; i < m_values.count(); i++ )
+    for( int i = 0; i < m_values.count(); i++ )
         ipl += field( m_values[i] + ( i != (m_values.count() - 1) ? QString("<CR>") : QString::null ) );
 
     // end actual data

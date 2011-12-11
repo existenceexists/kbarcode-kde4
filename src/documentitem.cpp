@@ -128,7 +128,7 @@ void DocumentItem::setBoundingRect( const QRect & rect )
     r.setHeight( (int)(l.pixelToMm( rect.height(), m_device, LabelUtils::DpiY ) * 1000.0 ) );
 
     // avoid resizing to negative values
-    setRectMM( r.normalize() );
+    setRectMM( r.normalized() );
 }
 
 QRect DocumentItem::boundingRect() const
@@ -149,7 +149,7 @@ QRect DocumentItem::boundingRect() const
 void DocumentItem::setRect( const QRect & rect)
 {
     // avoid resizing to negative values
-    QRect r = rect.normalize();
+    QRect r = rect.normalized();
     setBoundingRect( QRect( r.x() - m_pen.width(), r.y() - m_pen.width(), r.width() + 2 * m_pen.width(), r.height() + 2 * m_pen.width() ) );
 }
 
@@ -164,7 +164,7 @@ QRect DocumentItem::rect() const
 void DocumentItem::setRectMM( const QRect & rect )
 {
     // avoid resizing to negative values
-    m_rect = rect.normalize();
+    m_rect = rect.normalized();
 }
 
 QRect DocumentItem::rectMM() const

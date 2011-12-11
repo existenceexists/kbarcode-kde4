@@ -75,7 +75,7 @@ PurePostscriptBarcode::PurePostscriptBarcode()
         return;
     }
 
-    /*QFile pureFile( s_path );// -!F: delete block
+    /*QFile pureFile( s_path );// -!F: original, delete block
     if( pureFile.open( QIODevice::ReadOnly ) )
     {
         while( pureFile.readLine( line, MAX_LINE_LENGTH ) != -1 )
@@ -147,7 +147,7 @@ void PurePostscriptBarcode::initInfo( TBarcodeInfoList* info )
 {
     PurePostscriptBarcode::init();
 
-    /*QFile pureFile( s_path );
+    /*QFile pureFile( s_path );// -!F: original, delete
     if( pureFile.open( QIODevice::ReadOnly ) )
     {
         QString encoder;
@@ -226,7 +226,7 @@ void PurePostscriptBarcode::initInfo( TBarcodeInfoList* info )
                     example = line.right( line.length() - QString( EXAMPLE ).length() );
 
                     // we should have a complete encoder now.
-                    /*info->append( Barkode::createInfo( QString("ps_") + encoder, description, PURE_POSTSCRIPT, PUREADV | COLORED ) );*/
+                    /*info->append( Barkode::createInfo( QString("ps_") + encoder, description, PURE_POSTSCRIPT, PUREADV | COLORED ) );*/// -!F: original, delete
                     QString encoderWithPrefix = QString("ps_") + encoder;
                     QByteArray encoderByteArray = encoderWithPrefix.toUtf8();
                     const char* encoderCChar = encoderByteArray.constData();
@@ -274,23 +274,23 @@ QRect PurePostscriptBarcode::bbox( const char* postscript, long postscript_size 
     long    len    = 0;
     QRect   size;
 
-    /*KTemporaryFile psfile( QString::null, ".ps" );*/
+    /*KTemporaryFile psfile( QString::null, ".ps" );*/// -!F: original, delete
     KTemporaryFile * psfile = new KTemporaryFile();
     psfile->setSuffix(".ps");
-    /*psfile.file()->write( postscript, postscript_size );
+    /*psfile.file()->write( postscript, postscript_size );// -!F: original, delete
     psfile.file()->close();*/
     psfile->write( postscript, postscript_size );
     psfile->close();
 
-    /*if( !readFromPipe( QString( gs_bbox ).arg( psfile.file()->name() ).toLatin1(), &buffer, &len ) || !len )*/
-    if( !readFromPipe( QString( gs_bbox ).arg( psfile->name() ).toLatin1(), &buffer, &len ) || !len )
+    /*if( !readFromPipe( QString( gs_bbox ).arg( psfile.file()->name() ).toLatin1(), &buffer, &len ) || !len )*/// -!F: original, delete
+    if( !readFromPipe( QString( gs_bbox ).arg( psfile->fileName() ).toLatin1(), &buffer, &len ) || !len )
     {
-        /*psfile.unlink();*/
+        /*psfile.unlink();*/// -!F: original, delete
 	psfile->close();
         return QRect( 0, 0, 0, 0 );
     }
     else
-        /*psfile.unlink();*/
+        /*psfile.unlink();*/// -!F: original, delete
 	psfile->close();
 
     size = PixmapBarcode::bbox( buffer, len );

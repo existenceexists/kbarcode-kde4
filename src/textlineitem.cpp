@@ -130,7 +130,8 @@ void TextLineItem::drawEPcl( QTextStream* stream )
     // TODO:
     // provide an API which simplifies wordwrapping for
     // barcode printers
-	QStringList lines = QStringList::split( "\n", t );
+	/*QStringList lines = QStringList::split( "\n", t );*/// -!F: original, delete
+	QStringList lines = t.split("\n");
 
 	QStringList::Iterator line = lines.begin();
 	for( int i=0; line != lines.end(); ++line, ++i ){

@@ -16,15 +16,15 @@
  ***************************************************************************/
 
 #include "kbarcode.h"
-/*#include "barkode.h"
-#include "barcodegenerator.h"
+#include "barkode.h"
+/*#include "barcodegenerator.h"*/
 #include "batchassistant.h"
-#include "labeleditor.h"
+/*#include "labeleditor.h"
 #include "databasebrowser.h"
-#include "csvimportdlg.h"
+#include "csvimportdlg.h"*/
 #include "sqltables.h"
 #include "kbarcodesettings.h"
-*/
+
 // Qt includes
 // #include <q3groupbox.h>// -!F:
 // #include <Qt3Support>
@@ -49,25 +49,24 @@
 KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
     : MainWindow( parent, f )
 {
-    kbarcodeDirectoryName = QString("kbarcode007");// -!F:
+    kbarcodeDirectoryName = QString("kbarcode008");// -!F: delete in the end
     
     QGroupBox* w = new QGroupBox(this);
     /*QVBoxLayout* layout = new QVBoxLayout(this);*/
     QVBoxLayout* vLayout = new QVBoxLayout();
-    /*setCentralWidget( w );*/
     setCentralWidget( w );
 
     buttonSingle = new KPushButton( i18n("Barcode &Generator..."), w );
-    /*buttonSingle->setEnabled( Barkode::haveBarcode() );*/
+    buttonSingle->setEnabled( Barkode::haveBarcode() );
     buttonEditor = new KPushButton( i18n("&Label Editor..."), w );
     buttonBatch = new KPushButton( i18n("&Batch Printing..."), w );
     buttonData = new KPushButton( i18n("Edit SQL &Tables..."), w );
-    /*buttonData->setEnabled( false );// -!F:*/
+    buttonData->setEnabled( false );
     
-    /*buttonSingle->setIconSet( BarIconSet( "barcode" ) );
+    /*buttonSingle->setIconSet( BarIconSet( "barcode" ) );// -!F: original, delete
     buttonEditor->setIconSet( BarIconSet( "edit" ) );
     buttonBatch->setIconSet( BarIconSet( "fileprint" ) );*/
-    /*KIconLoader *iconLoader = new KIconLoader;// -!F:
+    /*KIconLoader *iconLoader = new KIconLoader;// -!F: delete
     iconLoader->addExtraDesktopThemes();
     buttonSingle->setIcon( KIcon( "view-barcode", iconLoader ) );
     buttonEditor->setIcon( KIcon( "document-edit", iconLoader ) );
@@ -92,40 +91,40 @@ KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
     connect( buttonSingle, SIGNAL( clicked() ), this, SLOT( startBarcode() ) );
     connect( buttonEditor, SIGNAL( clicked() ), this, SLOT( startLabelEditor() ) );
     connect( buttonBatch, SIGNAL( clicked() ), this, SLOT( startBatchPrint() ) );
-    /*connect( SqlTables::getInstance(), SIGNAL( connectedSQL() ), this, SLOT( enableData() ) );*/
+    connect( SqlTables::getInstance(), SIGNAL( connectedSQL() ), this, SLOT( enableData() ) );
     
     setupActions();
     show();
 
-    /*KAction* editLabelDefAct = new KAction(i18n("&Edit Label Definitions"), "",
+    /*KAction* editLabelDefAct = new KAction(i18n("&Edit Label Definitions"), "",// -!F: original, delete
                                 0, this, SLOT(editLabelDef()), actionCollection(), "design" );*/
     KAction* editLabelDefAct = new KAction(this);
     editLabelDefAct->setText(i18n("&Edit Label Definitions"));
     actionCollection()->addAction("editLabelDefAct", editLabelDefAct);
     connect(editLabelDefAct, SIGNAL(triggered(bool)), this, SLOT(editLabelDef()));
 
-    /*KAction* editArticleAct = new KAction(i18n("&Edit Articles"), "",
+    /*KAction* editArticleAct = new KAction(i18n("&Edit Articles"), "",// -!F: original, delete
                                 0, this, SLOT(editArticles()), actionCollection(), "design" );*/
     KAction* editArticleAct = new KAction(this);
     editArticleAct->setText(i18n("&Edit Articles"));
     actionCollection()->addAction("editArticleAct", editArticleAct);
     connect(editArticleAct, SIGNAL(triggered(bool)), this, SLOT(editArticles()));
 
-    /*KAction* editCustomerAct = new KAction(i18n("&Edit Customers"), "",
+    /*KAction* editCustomerAct = new KAction(i18n("&Edit Customers"), "",// -!F: original, delete
                                 0, this, SLOT(editCustomers()), actionCollection(), "design" );*/
     KAction* editCustomerAct = new KAction(this);
     editCustomerAct->setText(i18n("&Edit Customers"));
     actionCollection()->addAction("editCustomerAct", editCustomerAct);
     connect(editCustomerAct, SIGNAL(triggered(bool)), this, SLOT(editCustomers()));
 
-    /*KAction* editCustomerTextAct = new KAction(i18n("&Edit Customer Text"), "",
+    /*KAction* editCustomerTextAct = new KAction(i18n("&Edit Customer Text"), "",// -!F: original, delete
                                 0, this, SLOT(editCustomerText()), actionCollection() );*/
     KAction* editCustomerTextAct = new KAction(this);
     editCustomerTextAct->setText(i18n("&Edit Customer Text"));
     actionCollection()->addAction("editCustomerTextAct", editCustomerTextAct);
     connect(editCustomerTextAct, SIGNAL(triggered(bool)), this, SLOT(editCustomerText()));
 
-    /*KAction* importCSVAct = new KAction(i18n("&Import CSV File..."), "",
+    /*KAction* importCSVAct = new KAction(i18n("&Import CSV File..."), "",// -!F: original, delete
                                 0, this, SLOT(importCSV()), actionCollection() );*/
     KAction* importCSVAct = new KAction(this);
     importCSVAct->setText(i18n("&Import CSV File..."));
@@ -133,7 +132,7 @@ KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
     connect(importCSVAct, SIGNAL(triggered(bool)), this, SLOT(importCSV()));
     
     KMenu* data = new KMenu( buttonData );
-    /*editLabelDefAct->plug( data );
+    /*editLabelDefAct->plug( data );// -!F: original, delete
     editArticleAct->plug( data );
     editCustomerAct->plug( data );
     editCustomerTextAct->plug( data );
@@ -153,7 +152,7 @@ KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
 
 KBarcode::~KBarcode()
 {
-    /*MainWindow::saveConfig();*/
+    MainWindow::saveConfig();
 }
 
 void KBarcode::setupActions()
@@ -199,7 +198,7 @@ void KBarcode::editLabelDef()
 
 void KBarcode::enableData()
 {
-    /*buttonData->setEnabled( SqlTables::getInstance()->isConnected() );*/
+    buttonData->setEnabled( SqlTables::getInstance()->isConnected() );
 }
 
 bool KBarcode::parseCmdLine()
@@ -322,24 +321,23 @@ void KBarcode::importCSV()
 
 bool KBarcode::isSQLConnected() const
 {
-    /*return SqlTables::isConnected();*/
-    return true;
+    return SqlTables::isConnected();
 }
 
 bool KBarcode::connectSQL()
 {
-    /*return SqlTables::getInstance()->connectMySQL();*/
-    return true;
+    return SqlTables::getInstance()->connectMySQL();
+    /*return true;*/// -!F: delete
 }
 
 void KBarcode::showAssistant()
 {
-    /*MainWindow::assistant();*/
+    MainWindow::assistant();
 }
 
 void KBarcode::showConfigure()
 {
-    /*KBarcodeSettings::getInstance()->configure();*/
+    KBarcodeSettings::getInstance()->configure();
 }
 
 #include "kbarcode.moc"

@@ -188,11 +188,11 @@ class Barkode {
     /** Convert the uservisible encoding type @p name
       * to the internal identifier
       */
-    static const QString & typeFromName( const QString & name );
+    static const QString typeFromName( const QString & name );
     /** Convert the internal identifier @p type 
       * to the user visible encoding name
       */
-    static const QString & nameFromType( const QString & type );
+    static const QString nameFromType( const QString & type );
 
     static QString* validatorFromType( const QString & type );
     static QString* validatorNotFromType( const QString & type );

@@ -13,7 +13,7 @@
 #include "sqltables.h"
 #include "confassistant.h"
 #include "printersettings.h"
-/*#include "kbarcodesettings.h"*/
+#include "kbarcodesettings.h"
 #include "barkode.h"
 
 // Qt includes
@@ -39,13 +39,8 @@
 #include <KActionCollection>
 #include <KStandardAction>
 
-// -!F:
-#include <QDebug>
+// -!F: added by Frank, keep it:
 #include <QList>
-#include <QKeySequence>
-#include <QShortcut>
-#include <iostream>
-using namespace std;
 
 bool MainWindow::autoconnect = true;
 bool MainWindow::startassistant = true;
@@ -61,7 +56,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags f)
     connect( kapp, SIGNAL( aboutToQuit() ), this, SLOT( saveConfig() ) );
 
     if( first && startassistant ) {
-        /*assistant();*/
+        assistant();
         startassistant = false;
     }
     
@@ -226,15 +221,15 @@ void MainWindow::setupActions(QString directoryName=QString()) // -!F:
     menuBar()->addAction(menuBarActionsList[0]);
     menuBar()->addAction(menuBarActionsList[1]);
     menuBar()->addAction(menuBarActionsList[2]);
-    //menuBar()->addAction(menuBarActionsList[3]);// the fourth action is the old help menu
+    //menuBar()->addAction(menuBarActionsList[3]);// -!F: delete, the fourth action is the old help menu
     menuBar()->addMenu(hlpMenu);
 }
 
 void MainWindow::loadConfig()
 {
-    /*KConfigGroup config = KGlobal::config()->group("Assistant");
+    KConfigGroup config = KGlobal::config()->group("Assistant");
 
-    first = config.readEntry("firststart2", true );
+    bool first = config.readEntry("firststart2", true );
 
     SqlTables* tables = SqlTables::getInstance();
     if( tables->getData().autoconnect && !first && autoconnect && connectAct ) {
@@ -245,12 +240,12 @@ void MainWindow::loadConfig()
         autoconnect = false;
     }
 
-    KBarcodeSettings::getInstance()->loadConfig();*/
+    KBarcodeSettings::getInstance()->loadConfig();
 }
 
 void MainWindow::saveConfig()
 {
-    /*KConfigGroup config = KGlobal::config()->group("Assistant");
+    KConfigGroup config = KGlobal::config()->group("Assistant");
 
     config.writeEntry("firststart2", false );
 
@@ -258,7 +253,7 @@ void MainWindow::saveConfig()
     SqlTables::getInstance()->saveConfig();
     KBarcodeSettings::getInstance()->saveConfig();
 
-    config.sync();*/
+    config.sync();
 }
 
 void MainWindow::assistant()
@@ -273,13 +268,13 @@ void MainWindow::assistant()
 
 void MainWindow::connectMySQL()
 {
-    /*connectAct->setEnabled( !SqlTables::getInstance()->connectMySQL() );
+    /*connectAct->setEnabled( !SqlTables::getInstance()->connectMySQL() );// -!F: original, delete
     importLabelDefAct->setEnabled( !connectAct->isEnabled() );
     importExampleAct->setEnabled( !connectAct->isEnabled() );
 
     if( !connectAct->isEnabled() )
         emit connectedSQL();*/
-    // -!F: the original code (the code above) in this member function gives a runtime error
+    // -!F: the original code (the code above) in this member function gives a runtime error. Why?
     
     connectAct->setEnabled( !SqlTables::getInstance()->connectMySQL() );
     //cout << "connectAct->setEnabled" << endl;
@@ -287,14 +282,14 @@ void MainWindow::connectMySQL()
     if (!(importLabelDefAct == 0)) {
         importLabelDefAct->setEnabled( !connectAct->isEnabled() );
     };
-    /*QAction * importLabelDefActQ = (QAction *) importLabelDefAct;
+    /*QAction * importLabelDefActQ = (QAction *) importLabelDefAct;// -!F: delete
     if (!(importLabelDefActQ == 0)) {
         importLabelDefActQ->setEnabled( !connectAct->isEnabled() );
     };*/
-    //this->importLabelDefAct->setEnabled( false );
+    //this->importLabelDefAct->setEnabled( false );// -!F: delete
     /*try { importLabelDefAct->setEnabled( true ); }
     catch (exception& ex) { cout << ex.what() << endl; }*/
-    /*importLabelDefAct->setEnabled( !connectAct->isEnabled() );
+    /*importLabelDefAct->setEnabled( !connectAct->isEnabled() );// -!F: delete
     //cout << "importLabelDefAct->setEnabled" << endl;
     importExampleAct->setEnabled( !connectAct->isEnabled() );
     //cout << "importExampleAct->setEnabled" << endl;*/
@@ -305,7 +300,7 @@ void MainWindow::connectMySQL()
 
     if( !connectAct->isEnabled() )
         emit connectedSQL();
-    //cout << "if( !connectAct->isEnabled" << endl;
+    //cout << "if( !connectAct->isEnabled" << endl;// -!F: delete
 }
 
 void MainWindow::appHelpActivated()
@@ -339,8 +334,6 @@ void MainWindow::startInfo()
 bool MainWindow::newTables()
 {
     return SqlTables::getInstance()->newTables();
-    /*// Frank:
-    return false;*/
 }
 
 void MainWindow::donations()
@@ -360,7 +353,7 @@ QString MainWindow::systemCheck()
 	// TODO: break i18n puzzles
 	// TODO: rename Barkode to something more visual
 	
-    /*bool gnubarcode = !Barkode::haveGNUBarcode();
+    bool gnubarcode = !Barkode::haveGNUBarcode();
     bool pdf = !Barkode::havePDFBarcode();
     bool tbarcode = !Barkode::haveTBarcode();
     bool tbarcode2 = !Barkode::haveTBarcode2();
@@ -398,14 +391,7 @@ QString MainWindow::systemCheck()
     } else
         text.append( i18n("<p><b>No database drivers found. SQL database support is disabled.</b></p>") );
 
-    return text;*/
-    // added by Frank, delete the following line:
-    return QString("Frank");
+    return text;
 }
-
-/*void MainWindow::slotFunctionMap()// -!F: created by Frank, delete this member function
-{
-    //created by Frank, delete this member function
-}*/
 
 #include "mainwindow.moc"

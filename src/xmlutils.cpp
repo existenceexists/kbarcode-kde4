@@ -83,15 +83,17 @@ void XMLUtils::readXMLHeader( QDomDocument* doc, QString & description, bool & k
                 QDomNode n = e.firstChild();
                 while( !n.isNull() ) {
                     QDomElement e = n.toElement(); // try to convert the node to an element.
-                    if( !e.isNull() )                                                  
-                        if( e.tagName() == "description" )
+                    if( !e.isNull() ) {
+                        if( e.tagName() == "description" ) {
                             description = e.text();
-                        else if( e.tagName() == "id" ) {
-                            if( *def )
+                        } else if( e.tagName() == "id" ) {
+                            if( *def ) {
                                 delete *def;
+			    }
                             *def = readDefinition( &e );
                         }
 
+		    }
                     n = n.nextSibling();
                 }
             }
@@ -129,7 +131,7 @@ void XMLUtils::readDocumentItems( DocumentItemList* list, QDomDocument* doc, Tok
         // legacy loading
         while( !n.isNull() ) {
             QDomElement e = n.toElement(); // try to convert the node to an element.
-            if( !e.isNull() )
+            if( !e.isNull() ) {
                 if( e.tagName() == "barcode" ) {
                     BarcodeItem* bcode = new BarcodeItem();
 		    ((DocumentItem*)bcode)->setTokenProvider( token );
@@ -196,6 +198,7 @@ void XMLUtils::readDocumentItems( DocumentItemList* list, QDomDocument* doc, Tok
                     list->append( cl );
                 }
             n = n.nextSibling();
+	    }
         }
     }
     else

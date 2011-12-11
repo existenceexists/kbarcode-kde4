@@ -122,7 +122,7 @@ bool TBarcode2::createPostscript( char** postscript, long* postscript_size )
     const char* barkodeParsedValueChar = barkodeParsedValueByteArray.constData();
     cmd = cmd.sprintf( "tbarcode -f PS -b %s -d %s  -t %s --translation=%s --autocorrect=%s --modulewidth=%.3f -h %i --checkdigit=%i --72dpiraster\n", 
 		       barkodeTypeChar,
-		       /*KShellProcess::quote(  barkode->parsedValue() ).toLatin1()*/
+		       /*KShellProcess::quote(  barkode->parsedValue() ).toLatin1()*/// -!F: original, delete
 		       barkodeParsedValueChar,
                        text, tbarcode->escape() ? "on" : "off", 
                        tbarcode->autocorrect() ? "on" : "off", 
@@ -130,7 +130,7 @@ bool TBarcode2::createPostscript( char** postscript, long* postscript_size )
                        tbarcode->height(),
                        tbarcode->checksum() );
 
-    /*qDebug( "Cmd = " + cmd );*/
+    /*qDebug( "Cmd = " + cmd );*/// -!F: original, delete
     qDebug() << "Cmd = " + cmd;
     if( !readFromPipe( cmd.toLatin1(), postscript, postscript_size ) )
         return false;
@@ -146,22 +146,22 @@ QRect TBarcode2::bbox( const char* postscript, long postscript_size )
     long    len    = 0;
     QRect   size;
 
-    /*KTemporaryFile psfile( QString::null, ".ps" );*/
+    /*KTemporaryFile psfile( QString::null, ".ps" );*/// -!F: original, delete
     KTemporaryFile * psfile = new KTemporaryFile();
     psfile->setSuffix(".ps");
-    /*psfile.file()->write( postscript, postscript_size );
+    /*psfile.file()->write( postscript, postscript_size );// -!F: original, delete
     psfile.file()->close();*/
     psfile->write( postscript, postscript_size );
     psfile->close();
 
-    if( !readFromPipe( QString( gs_bbox ).arg( psfile->name() ).toLatin1(), &buffer, &len ) || !len )
+    if( !readFromPipe( QString( gs_bbox ).arg( psfile->fileName() ).toLatin1(), &buffer, &len ) || !len )
     {
-        /*psfile.unlink();*/
+        /*psfile.unlink();*/// -!F: original, delete
 	psfile->close();
         return QRect( 0, 0, 0, 0 );
     }
     else
-        /*psfile.unlink();*/
+        /*psfile.unlink();*/// -!F: original, delete
 	psfile->close();
 
     size = PixmapBarcode::bbox( buffer, len );
