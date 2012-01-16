@@ -126,7 +126,8 @@ class SqlTables : public QObject {
           * @return bool
           */
         static bool isConnected() {
-            return getInstance()->connected;
+            /*return getInstance()->connected;*/// -!F: original, uncomment
+            return true;// -!F: delete
         }
 
         const SqlDescription* driver() const;

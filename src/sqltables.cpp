@@ -138,7 +138,9 @@ bool SqlTables::connectMySQL()
         Definition::updateProducer();
     }
 
-    return connected;
+    /*return connected;*/// -!F: original, uncomment this 
+    //emit connectedSQL();// -!F: delete
+    return true;// -!F: delete
 }
 
 bool SqlTables::newTables()
@@ -653,10 +655,11 @@ void SqlWidget::save( bool usedb )
 
 void SqlWidget::testSettings()
 {
-    emit databaseWorking(
+    /*emit databaseWorking(
     SqlTables::getInstance()->testSettings( m_username->text(), m_password->text(),
                                             m_hostname->text(), m_database->text(),
-                                            m_driver->currentText() ) );
+                                            m_driver->currentText() ) );*/// -!F: original, uncomment
+    emit databaseWorking(true);// -!F: delete
 }
 
 const QString SqlWidget::username() const
