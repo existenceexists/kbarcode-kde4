@@ -25,19 +25,19 @@
 #include <qcheckbox.h>
 #include <qcursor.h>
 #include <qfile.h>
-#include <q3frame.h>
-#include <q3groupbox.h>
+//#include <q3frame.h>
+//#include <q3groupbox.h>
 //#include <qhbuttongroup.h>
-#include <q3header.h>
+//#include <q3header.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <q3listbox.h>
-#include <q3progressdialog.h>
+//#include <q3listbox.h>
+//#include <q3progressdialog.h>
 #include <qsqlquery.h>
-#include <q3table.h>
+//#include <q3table.h>
 #include <qradiobutton.h>
 #include <QTextStream>
-#include <q3vbox.h>
+//#include <q3vbox.h>
 #include <QTableWidget>
 #include <QHeaderView>
 #include <QWidget>
@@ -115,7 +115,7 @@ void CSVImportDlg::createPage1()
     QVBoxLayout* layout = new QVBoxLayout( box );
     layout->setContentsMargins( 6, 6, 6, 6 );
     layout->setSpacing( 6 );
-    QGridLayout* grid = new QGridLayout( 2 );
+    QGridLayout* grid = new QGridLayout();
 
     requester = new KUrlRequester( box );
     comboEncoding = new EncodingCombo( box );
@@ -130,18 +130,22 @@ void CSVImportDlg::createPage1()
     checkLoadAll = new QCheckBox( i18n("&Load complete file into preview"), box );
     spinLoadOnly = new KIntNumInput( box );
     spinLoadOnly->setLabel( i18n("Load only a number of datasets:"), Qt::AlignLeft | Qt::AlignVCenter );
-    spinLoadOnly->setRange( 0, 10000, 1, false );
+    spinLoadOnly->setRange( 0, 10000, 1 );
+    spinLoadOnly->setSliderEnabled( false );
     checkLoadAll->setChecked( true );
 
     table = new QTableWidget( box );
     /*table->setReadOnly( true );*/// -!F: original, delete
 
     frame = new QFrame( box );
-    QHBoxLayout* layout2 = new QHBoxLayout( frame, 6, 6 );
+    QHBoxLayout* layout2 = new QHBoxLayout( frame );
+    layout2->setContentsMargins( 6, 6, 6, 6 );
+    layout2->setSpacing( 6 );
     
     spinCol = new KIntNumInput( frame );
     spinCol->setLabel( i18n("Column:"), Qt::AlignLeft | Qt::AlignVCenter );
-    spinCol->setRange( 0, 0, 0, false );
+    spinCol->setRange( 0, 0, 1 );
+    spinCol->setSliderEnabled( false );
 
     comboField = new KComboBox( false, frame );
     buttonSet = new KPushButton( i18n("Set"), frame );
@@ -174,7 +178,9 @@ void CSVImportDlg::createPage2()
 {
     labelprinterdata* lb = PrinterSettings::getInstance()->getData();
     QFrame* mainBox = new QFrame();
-    QVBoxLayout* layout = new QVBoxLayout( mainBox, 6, 6 );
+    QVBoxLayout* layout = new QVBoxLayout( mainBox );
+    layout->setContentsMargins( 6, 6, 6, 6 );
+    layout->setSpacing( 6 );
     QSpacerItem* spacer1 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     QSpacerItem* spacer2 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
 
@@ -199,8 +205,9 @@ void CSVImportDlg::createPage2()
     groupCSVLaout->setSpacing( 6 );
     groupCSVLaout->setContentsMargins( 11, 11, 11, 11 );
 
-    QVBoxLayout* vbox = new QVBoxLayout( groupCSVLaout );
-    QGridLayout* grid = new QGridLayout( 2, 2 );
+    QVBoxLayout* vbox = new QVBoxLayout();
+    groupCSVLaout->addLayout( vbox );
+    QGridLayout* grid = new QGridLayout();
     grid->setSpacing( 6 );
     grid->setContentsMargins( 11, 11, 11, 11 );
     
@@ -233,7 +240,8 @@ void CSVImportDlg::createPage2()
     groupFixed->setLayout( groupFixedLayoutMain );
     groupFixedLayoutMain->setSpacing( 6 );
     groupFixedLayoutMain->setContentsMargins( 11, 11, 11, 11 );
-    QHBoxLayout* groupFixedLayout = new QHBoxLayout( groupFixedLayoutMain );
+    QHBoxLayout* groupFixedLayout = new QHBoxLayout();
+    groupFixedLayoutMain->addLayout( groupFixedLayout );
     groupFixedLayout->setAlignment( Qt::AlignTop );
 
     listWidth = new KListWidget( groupFixed );
@@ -249,7 +257,9 @@ void CSVImportDlg::createPage2()
     spinNumber->setValue( 1 );
     spinNumber->setFocus();
 
-    QVBoxLayout* layout2 = new QVBoxLayout( 0, 6, 6 );
+    QVBoxLayout* layout2 = new QVBoxLayout();
+    layout2->setContentsMargins( 6, 6, 6, 6 );
+    layout2->setSpacing( 6 );
     layout2->addWidget( buttonAdd );
     layout2->addWidget( buttonRemove );
     layout2->addWidget( spinNumber );
@@ -273,7 +283,7 @@ void CSVImportDlg::settingsChanged()
     QStringList list;
 
     int i = 0;
-    unsigned int z;
+    int z;
 
     initCsvFile( &file );
 
@@ -307,7 +317,8 @@ void CSVImportDlg::settingsChanged()
     }
     
     table->setRowCount( i );
-    spinCol->setRange( 1, table->columnCount(), 1, false );
+    spinCol->setRange( 1, table->columnCount(), 1 );
+    spinCol->setSliderEnabled( false );
        
     enableControls();
 }
@@ -329,7 +340,7 @@ void CSVImportDlg::setCol()
 
 QString CSVImportDlg::getDatabaseName() 
 {
-    bool b = comboSQL->currentItem() == (comboSQL->count()-1);
+    bool b = comboSQL->currentIndex() == (comboSQL->count()-1);
 
     databaseName->setEnabled( b );
     return b ? databaseName->text() : comboSQL->currentText();
@@ -375,7 +386,7 @@ void CSVImportDlg::accept()
     QList<int> headers;
     QStringList list;
     QString name = getDatabaseName();
-    int i = 0;
+    /*int i = 0;*/// -!F: original, delete
 
     QString q = "INSERT INTO " + name + " (";
     for( int c = 0; c < table->horizontalHeader()->count(); c++ ) {
@@ -406,7 +417,7 @@ void CSVImportDlg::accept()
         list = file.readNextLine();
 
         QString line = q;
-        for( unsigned int c = 0; c < headers.count(); c++ )
+        for( int c = 0; c < headers.count(); c++ )
             line.append( "'" + list[ headers[c] ] + "'" + "," );
 
         // remove last ","
@@ -435,7 +446,7 @@ void CSVImportDlg::addWidth()
 
 void CSVImportDlg::removeWidth()
 {
-    unsigned int i = 0;
+    int i = 0;
     do {
         if(listWidth->item( i )->isSelected()) {
             listWidth->removeItemWidget( listWidth->item( i ) );
@@ -451,7 +462,7 @@ QList<int> CSVImportDlg::getFieldWidth()
 {
     QList<int> list;
 
-    for( unsigned int i=0;i<listWidth->count();i++ ) 
+    for( int i=0;i<listWidth->count();i++ ) 
         list << listWidth->item( i )->text().toInt();
 
     return list;
