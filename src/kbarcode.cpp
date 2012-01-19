@@ -17,11 +17,11 @@
 
 #include "kbarcode.h"
 #include "barkode.h"
-/*#include "barcodegenerator.h"*/
+/*#include "barcodegenerator.h"*/// -!F: original, uncomment 
 #include "batchassistant.h"
 /*#include "labeleditor.h"
-#include "databasebrowser.h"
-#include "csvimportdlg.h"*/
+#include "databasebrowser.h"*/// -!F: original, uncomment
+#include "dialogs/csvimportdlg.h"
 #include "sqltables.h"
 #include "kbarcodesettings.h"
 
@@ -316,7 +316,7 @@ bool KBarcode::parseCmdLine()
 
 void KBarcode::importCSV()
 {
-    /*new CSVImportDlg( this );*/
+    new CSVImportDlg( this );
 }
 
 bool KBarcode::isSQLConnected() const

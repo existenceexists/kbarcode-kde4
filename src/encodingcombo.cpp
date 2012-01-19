@@ -36,7 +36,7 @@ EncodingCombo::EncodingCombo( QWidget* parent )
         QTextCodec *codecForEnc = KGlobal::charsets()->codecForName(encodings[i], found);
         if (found && ( (codecForEnc->name() == sEncoding) || (encodings[i] == sEncoding) ) )
         {
-            this->setCurrentItem(i);
+            this->setCurrentIndex(i);
             break;
         }
     }

@@ -15,10 +15,11 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "csvimportdlg.h"
+#include "dialogs/csvimportdlg.h"
 #include "printersettings.h"
 #include "sqltables.h"
 #include "encodingcombo.h"
+#include "csvfile.h"
 
 // Qt includes
 #include <qcheckbox.h>
@@ -26,7 +27,7 @@
 #include <qfile.h>
 #include <q3frame.h>
 #include <q3groupbox.h>
-#include <qhbuttongroup.h>
+//#include <qhbuttongroup.h>
 #include <q3header.h>
 #include <qlabel.h>
 #include <qlayout.h>
@@ -37,6 +38,10 @@
 #include <qradiobutton.h>
 #include <QTextStream>
 #include <q3vbox.h>
+#include <QTableWidget>
+#include <QHeaderView>
+#include <QWidget>
+#include <QDebug>
 //Added by qt3to4:
 #include <QHBoxLayout>
 #include <QGridLayout>
@@ -47,22 +52,25 @@
 #include <kapplication.h>
 #include <kcombobox.h>
 #include <klineedit.h>
+#include <klistwidget.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <knuminput.h>
 #include <kpushbutton.h>
 #include <kurlrequester.h>
-#include "csvfile.h"
 
 // import from labelprinter.cpp
 extern QString removeQuote( QString text, QString quote );
 
 const char* NOFIELD = "<NONE>";
 
-CSVImportDlg::CSVImportDlg(QWidget *parent )
+CSVImportDlg::CSVImportDlg(QWidget *parent, const char *name )
     : KPageDialog( parent )
 {
     setFaceType( KPageDialog::Tabbed );
+    if ( name != 0 ) {
+        setObjectName( name );
+    }
     setCaption( i18n("Import") );
     setButtons( KDialog::Ok | KDialog::Close );
     setDefaultButton( KDialog::Ok );
@@ -80,6 +88,7 @@ CSVImportDlg::CSVImportDlg(QWidget *parent )
     connect( databaseName, SIGNAL( textChanged( const QString & ) ), this, SLOT( updateFields() ) );
     connect( comboEncoding, SIGNAL( activated( int ) ), this, SLOT( settingsChanged() ) );
     connect( table->horizontalHeader(), SIGNAL( clicked( int ) ), this, SLOT( updateCol( int ) ) );
+    /*connect( table, SIGNAL( clicked( int ) ), this, SLOT( handleClickedOnTable( int ) ) );*/// -!F: delete
     connect( radioCSVFile, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
     connect( radioFixedFile, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
     connect( buttonAdd, SIGNAL( clicked() ), this, SLOT( addWidth() ) );
@@ -101,8 +110,11 @@ CSVImportDlg::~CSVImportDlg()
 
 void CSVImportDlg::createPage1()
 {
-    QFrame* box = addPage( i18n("&Import Data") );
-    QVBoxLayout* layout = new QVBoxLayout( box, 6, 6 );
+    
+    QFrame* box = new QFrame();
+    QVBoxLayout* layout = new QVBoxLayout( box );
+    layout->setContentsMargins( 6, 6, 6, 6 );
+    layout->setSpacing( 6 );
     QGridLayout* grid = new QGridLayout( 2 );
 
     requester = new KUrlRequester( box );
@@ -121,8 +133,8 @@ void CSVImportDlg::createPage1()
     spinLoadOnly->setRange( 0, 10000, 1, false );
     checkLoadAll->setChecked( true );
 
-    table = new QTable( box );
-    table->setReadOnly( true );
+    table = new QTableWidget( box );
+    /*table->setReadOnly( true );*/// -!F: original, delete
 
     frame = new QFrame( box );
     QHBoxLayout* layout2 = new QHBoxLayout( frame, 6, 6 );
@@ -154,12 +166,14 @@ void CSVImportDlg::createPage1()
     layout->addWidget( table );
     layout->setStretchFactor( table, 2 );
     layout->addWidget( frame );
+    /*KPageWidgetItem* boxItem = addPage( box, i18n("&Import Data") );*/// -!F: delete
+    addPage( box, i18n("&Import Data") );
 }
 
 void CSVImportDlg::createPage2()
 {
     labelprinterdata* lb = PrinterSettings::getInstance()->getData();
-    QFrame* mainBox = addPage( i18n("&Import Settings") );
+    QFrame* mainBox = new QFrame();
     QVBoxLayout* layout = new QVBoxLayout( mainBox, 6, 6 );
     QSpacerItem* spacer1 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     QSpacerItem* spacer2 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
@@ -180,14 +194,15 @@ void CSVImportDlg::createPage2()
     groupFixed = new QGroupBox( i18n("Fixed Field Width File"));
 	hboxFrameLayout->addWidget(groupFixed);
 
-    groupCSV->setColumnLayout(0, Qt::Vertical );
-    groupCSV->layout()->setSpacing( 6 );
-    groupCSV->layout()->setMargin( 11 );
+    /*groupCSV->setColumnLayout(0, Qt::Vertical );*/// -!F: original, delete
+    QVBoxLayout *groupCSVLaout = new QVBoxLayout;
+    groupCSVLaout->setSpacing( 6 );
+    groupCSVLaout->setContentsMargins( 11, 11, 11, 11 );
 
-    QVBoxLayout* vbox = new QVBoxLayout( groupCSV->layout() );
+    QVBoxLayout* vbox = new QVBoxLayout( groupCSVLaout );
     QGridLayout* grid = new QGridLayout( 2, 2 );
     grid->setSpacing( 6 );
-    grid->setMargin( 11 );
+    grid->setContentsMargins( 11, 11, 11, 11 );
     
     QLabel* label = new QLabel( groupCSV );
     label->setText( i18n("Comment:") );
@@ -213,13 +228,15 @@ void CSVImportDlg::createPage2()
     vbox->addLayout( grid );
     vbox->addItem( spacer1 );
 
-    groupFixed->setColumnLayout(0, Qt::Horizontal );
-    groupFixed->layout()->setSpacing( 6 );
-    groupFixed->layout()->setMargin( 11 );
-    QHBoxLayout* groupFixedLayout = new QHBoxLayout( groupFixed->layout() );
+    /*groupFixed->setColumnLayout(0, Qt::Horizontal );*/// -!F: original, delete
+    QHBoxLayout* groupFixedLayoutMain = new QHBoxLayout;
+    groupFixed->setLayout( groupFixedLayoutMain );
+    groupFixedLayoutMain->setSpacing( 6 );
+    groupFixedLayoutMain->setContentsMargins( 11, 11, 11, 11 );
+    QHBoxLayout* groupFixedLayout = new QHBoxLayout( groupFixedLayoutMain );
     groupFixedLayout->setAlignment( Qt::AlignTop );
 
-    listWidth = new KListBox( groupFixed );
+    listWidth = new KListWidget( groupFixed );
 
     buttonAdd = new KPushButton( groupFixed );
     buttonAdd->setText( i18n( "&Add Field" ) );
@@ -228,7 +245,7 @@ void CSVImportDlg::createPage2()
     buttonRemove->setText( i18n( "&Remove Field" ) );
 
     spinNumber = new KIntNumInput( groupFixed );
-    spinNumber->setMinValue( 0 );
+    spinNumber->setMinimum( 0 );
     spinNumber->setValue( 1 );
     spinNumber->setFocus();
 
@@ -245,11 +262,14 @@ void CSVImportDlg::createPage2()
     layout->addWidget( hboxFrame );
 
     radioCSVFile->setChecked( true );
+    
+    /*KPageWidgetItem* mainBox = addPage( mainBox, i18n("&Import Settings") );*/// -!F: delete
+    addPage( mainBox, i18n("&Import Settings") );
 }
 
 void CSVImportDlg::settingsChanged()
 {
-    CSVFile file( requester->url() );
+    CSVFile file( requester->url().url() );
     QStringList list;
 
     int i = 0;
@@ -257,8 +277,8 @@ void CSVImportDlg::settingsChanged()
 
     initCsvFile( &file );
 
-    table->setNumCols( 0 );
-    table->setNumRows( 0 );
+    table->setColumnCount( 0 );
+    table->setRowCount( 0 );
 
     if( !file.isValid() )
         return;
@@ -267,15 +287,18 @@ void CSVImportDlg::settingsChanged()
     {
         list = file.readNextLine();
 
-        if( table->numCols() < (int)list.count() )
-            table->setNumCols( list.count() );
+        if( table->columnCount() < (int)list.count() )
+            table->setColumnCount( list.count() );
             
-        if( table->numRows() <= i )
+        if( table->rowCount() <= i )
             // add 100 rows to get a reasonable speed
-            table->setNumRows( i + 100 );
+            table->setRowCount( i + 100 );
 
         for( z = 0; z < list.count(); z++ )
-            table->setText( i, z, list[z] );
+            table->item( i, z )->setText( list[z] );
+            /*int flags = table->item( i, z )->flags();
+            flags = flags & 
+            table->item( i, z )->setFlags(...);*/// -!F: delete
             
         if( !checkLoadAll->isChecked() && i > spinLoadOnly->value() ) 
             break;
@@ -283,8 +306,8 @@ void CSVImportDlg::settingsChanged()
         i++;
     }
     
-    table->setNumRows( i );
-    spinCol->setRange( 1, table->numCols(), 1, false );
+    table->setRowCount( i );
+    spinCol->setRange( 1, table->columnCount(), 1, false );
        
     enableControls();
 }
@@ -294,13 +317,13 @@ void CSVImportDlg::setCol()
     QString text = comboField->currentText();
     int v = spinCol->value() - 1;
     if( text == NOFIELD )
-        table->horizontalHeader()->setLabel( v, QString::number( v + 1 ) );
+        table->horizontalHeaderItem( v )->setText( QString::number( v + 1 ) );
     else {
         for( int i = 0; i < table->horizontalHeader()->count(); i++ )
-            if( table->horizontalHeader()->label( i ) == text )
-                table->horizontalHeader()->setLabel( i, QString::number( i + 1 ) );
+            if( table->horizontalHeaderItem( i )->text() == text )
+                table->horizontalHeaderItem( i )->setText( QString::number( i + 1 ) );
                 
-        table->horizontalHeader()->setLabel( v, text );
+        table->horizontalHeaderItem( v )->setText( text );
     }
 }
 
@@ -318,18 +341,18 @@ void CSVImportDlg::updateFields()
     QString name = getDatabaseName();
 
     comboField->clear();
-    comboField->add( NOFIELD );
+    comboField->addItem( NOFIELD );
     QSqlQuery query( SqlTables::getInstance()->driver()->showColumns( name ) );
     while( query.next() )
         comboField->addItem( query.value( 0 ).toString() );
 
     for( int i = 0; i < table->horizontalHeader()->count(); i++ )
-        table->horizontalHeader()->setLabel( i, QString::number( i + 1 ) );
+        table->horizontalHeaderItem( i )->setText( QString::number( i + 1 ) );
 }
 
 void CSVImportDlg::enableControls()
 {
-    bool b = table->numRows() && table->numCols();
+    bool b = table->rowCount() && table->columnCount();
     
     groupCSV->setEnabled( radioCSVFile->isChecked() );
     groupFixed->setEnabled( radioFixedFile->isChecked() );
@@ -347,8 +370,8 @@ void CSVImportDlg::updateCol( int c )
 
 void CSVImportDlg::accept()
 {
-    CSVFile file( requester->url() );
-    QHeader* h = table->horizontalHeader();
+    CSVFile file( requester->url().url() );
+    /*QHeaderView* h = table->horizontalHeader();*/// -!F: original, delete
     QList<int> headers;
     QStringList list;
     QString name = getDatabaseName();
@@ -357,9 +380,10 @@ void CSVImportDlg::accept()
     QString q = "INSERT INTO " + name + " (";
     for( int c = 0; c < table->horizontalHeader()->count(); c++ ) {
         bool ok = true;
-        h->label( c ).toInt( &ok );
+        /*h->label( c ).toInt( &ok );*/// -!F: original, delete
+        table->horizontalHeaderItem( c )->text().toInt( &ok );
         if( !ok ) {
-            q = q + table->horizontalHeader()->label( c ) + ",";
+            q = q + table->horizontalHeaderItem( c )->text() + ",";
             headers << c;
         }
     }
@@ -372,7 +396,7 @@ void CSVImportDlg::accept()
 
     initCsvFile( &file );
     if( !file.isValid() )
-        KMessageBox::error( this, i18n("Cannot load data from the file:") + requester->url() );
+        KMessageBox::error( this, i18n("Cannot load data from the file:") + requester->url().url() );
 
     
 
@@ -393,18 +417,19 @@ void CSVImportDlg::accept()
 
         QSqlQuery query;
         if( !query.exec( line ) )
-            qDebug( i18n("Could not import the following line:") + line );
+            qDebug() << i18n("Could not import the following line:") + line;
             //KMessageBox::error( this, i18n("Could not import the following line:") + line );
     }
 
     KApplication::restoreOverrideCursor();
     KMessageBox::information( this, i18n("Data was imported successfully.") );
-    KDialogBase::accept();
+    /*QDialog::accept();*/// -!F: delete
+    KPageDialog::accept();// -!F: 
 }
 
 void CSVImportDlg::addWidth()
 {
-    listWidth->insertItem( QString("%1").arg(spinNumber->value()), -1 );
+    listWidth->addItem( QString("%1").arg(spinNumber->value()) );
     settingsChanged();
 }
 
@@ -412,9 +437,9 @@ void CSVImportDlg::removeWidth()
 {
     unsigned int i = 0;
     do {
-        if(listWidth->isSelected( i )) {
-            listWidth->removeItem( i );
-            listWidth->setSelected( i-1, true );
+        if(listWidth->item( i )->isSelected()) {
+            listWidth->removeItemWidget( listWidth->item( i ) );
+            listWidth->item( i-1 )->setSelected( true );
             return;
         } else
             i++;
@@ -427,7 +452,7 @@ QList<int> CSVImportDlg::getFieldWidth()
     QList<int> list;
 
     for( unsigned int i=0;i<listWidth->count();i++ ) 
-        list << listWidth->text( i ).toInt();
+        list << listWidth->item( i )->text().toInt();
 
     return list;
 }

@@ -29,12 +29,13 @@ class EncodingCombo;
 class KComboBox;
 class KIntNumInput;
 class KLineEdit;
+class KListWidget;
 class KPushButton;
 class KUrlRequester;
 class QCheckBox;
 class QFrame;
 class QGroupBox;
-class QTable;
+class QTableWidget;
 class QRadioButton;
 
 /** Import a CSV (comma separated value) file into
@@ -47,7 +48,7 @@ class QRadioButton;
   *
   * @author Dominik Seichter
   */
-class CSVImportDlg : public KDialogBase  {
+class CSVImportDlg : public KPageDialog {
     Q_OBJECT
     public: 
         CSVImportDlg(QWidget *parent=0, const char *name=0);
@@ -102,7 +103,7 @@ class CSVImportDlg : public KDialogBase  {
         KPushButton* buttonSet;
         KUrlRequester* requester;
         QFrame* frame;
-        QTable* table;
+        QTableWidget* table;
         KLineEdit* databaseName;
 
         QRadioButton* radioCSVFile;
@@ -115,7 +116,7 @@ class CSVImportDlg : public KDialogBase  {
         QGroupBox* groupCSV;
         QGroupBox* groupFixed;
 
-        KListBox* listWidth;
+        KListWidget* listWidth;
         KPushButton* buttonAdd;
         KPushButton* buttonRemove;
         KIntNumInput* spinNumber;

@@ -18,13 +18,13 @@ set(kbarcode_SRCS
  # batchassistant.cpp
  # commands.cpp
   confassistant.cpp
- # csvfile.cpp
+  csvfile.cpp
  # databasebrowser.cpp
   definition.cpp
   documentitem.cpp
   dsrichtext.cpp
  # dstextedit.cpp
- # encodingcombo.cpp
+  encodingcombo.cpp
   gnubarcode.cpp
  # gnubarkodeengine.cpp
   imageitem.cpp
@@ -60,7 +60,7 @@ set(kbarcode_SRCS
  # dialogs/barcodedialogs.cpp
  # dialogs/barcodeprinterdlg.cpp
   dialogs/configdialog.cpp
- # dialogs/csvimportdlg.cpp
+  dialogs/csvimportdlg.cpp
  # dialogs/definitiondialog.cpp
  # dialogs/documentitemdlg.cpp
  # dialogs/multilineeditdlg.cpp
