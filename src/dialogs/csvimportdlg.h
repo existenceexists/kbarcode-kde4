@@ -123,6 +123,8 @@ class CSVImportDlg : public KPageDialog {
 
         QCheckBox* checkLoadAll;
         KIntNumInput* spinLoadOnly;
+        
+        bool noWidthItemsSelected;
 
     protected slots:
         void accept();

@@ -101,6 +101,8 @@ CSVImportDlg::CSVImportDlg(QWidget *parent, const char *name )
 
     updateFields();
     enableControls();
+    
+    noWidthItemsSelected = true;// There are no items added to listWidth.
         
     show();
 }
@@ -485,6 +487,10 @@ void CSVImportDlg::accept()
 void CSVImportDlg::addWidth()
 {
     listWidth->addItem( QString("%1").arg(spinNumber->value()) );
+    if ( noWidthItemsSelected ) {
+        noWidthItemsSelected = false;
+        listWidth->item( 0 )->setSelected( true );
+    }
     settingsChanged();
 }
 
@@ -501,13 +507,13 @@ void CSVImportDlg::removeWidth()
             listWidth->removeItemWidget( item );
             delete item;
             if ( listWidth->count() == 0 ) {//don't select anything
-                return;
+                noWidthItemsSelected = true;
             } else if ( i > 0 ) {
                 listWidth->item( i-1 )->setSelected( true );
             } else {
                 listWidth->item( i )->setSelected( true );
             }
-            return;
+            break;
         } else
             i++;
     } while( i < listWidth->count() );
