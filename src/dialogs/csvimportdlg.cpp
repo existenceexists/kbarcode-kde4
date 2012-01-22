@@ -291,7 +291,7 @@ void CSVImportDlg::settingsChanged()
 
     initCsvFile( &file );
 
-    table->clear();// -!F: keep
+    table->clear();// -!F: keep, does this prevent a memory leak of new QTableWidgetItem( list[z] ) ?
     table->setColumnCount( 0 );
     table->setRowCount( 0 );
     //qDebug() << "settingsChanged 1";
@@ -329,13 +329,22 @@ void CSVImportDlg::settingsChanged()
         }
         //qDebug() << "rowCount passed";
 
-        for( z = 0; z < list.count(); z++ ) {
-            QTableWidgetItem * item = new QTableWidgetItem( list[z] );
-            table->setItem( i, z, item );
-            /*table->item( i, z )->setText( list[z] );*/// -!F: delete
-            /*int flags = table->item( i, z )->flags();
-            flags = flags & 
-            table->item( i, z )->setFlags(...);*/// -!F: delete
+        for( z = 0; z < table->columnCount(); z++ ) {
+            if ( z < list.count() ) {// There should be a text in the table cell.
+                QTableWidgetItem * item = new QTableWidgetItem( list[z] );// -!F: memory leak? or does table->clear() delete it
+                Qt::ItemFlags itemFlags = item->flags() & ~Qt::ItemIsEditable;// Set the item as noneditable
+                item->setFlags( itemFlags );
+                table->setItem( i, z, item );
+                /*table->item( i, z )->setText( list[z] );*/// -!F: delete
+                /*int flags = table->item( i, z )->flags();
+                flags = flags & 
+                table->item( i, z )->setFlags(...);*/// -!F: delete
+            } else {// There should be no text in the table cell.
+                QTableWidgetItem * item = new QTableWidgetItem();// -!F: memory leak? or does table->clear() delete it
+                Qt::ItemFlags itemFlags = item->flags() & ~Qt::ItemIsEditable;
+                item->setFlags( itemFlags );
+                table->setItem( i, z, item );
+            }
         }
         //qDebug() << "for list.count() passed";
         
