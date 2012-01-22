@@ -25,19 +25,11 @@
 #include <qcheckbox.h>
 #include <qcursor.h>
 #include <qfile.h>
-//#include <q3frame.h>
-//#include <q3groupbox.h>
-//#include <qhbuttongroup.h>
-//#include <q3header.h>
 #include <qlabel.h>
 #include <qlayout.h>
-//#include <q3listbox.h>
-//#include <q3progressdialog.h>
 #include <qsqlquery.h>
-//#include <q3table.h>
 #include <qradiobutton.h>
 #include <QTextStream>
-//#include <q3vbox.h>
 #include <QTableWidget>
 #include <QHeaderView>
 #include <QWidget>
@@ -89,7 +81,6 @@ CSVImportDlg::CSVImportDlg(QWidget *parent, const char *name )
     connect( databaseName, SIGNAL( textChanged( const QString & ) ), this, SLOT( updateFields() ) );
     connect( comboEncoding, SIGNAL( activated( int ) ), this, SLOT( settingsChanged() ) );
     connect( table->horizontalHeader(), SIGNAL( sectionClicked( int ) ), this, SLOT( updateCol( int ) ) );
-    /*connect( table, SIGNAL( clicked( int ) ), this, SLOT( handleClickedOnTable( int ) ) );*/// -!F: delete
     connect( radioCSVFile, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
     connect( radioFixedFile, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
     connect( buttonAdd, SIGNAL( clicked() ), this, SLOT( addWidth() ) );
@@ -132,14 +123,13 @@ void CSVImportDlg::createPage1()
     databaseName = new KLineEdit( box );
     checkLoadAll = new QCheckBox( i18n("&Load complete file into preview"), box );
     spinLoadOnly = new KIntNumInput( box );
-    /*spinLoadOnly->setLabel( i18n("Load only a number of datasets:"), Qt::AlignLeft | Qt::AlignVCenter );*/// -!F: original, the label does not display, delete?
+    /*spinLoadOnly->setLabel( i18n("Load only a number of datasets:"), Qt::AlignLeft | Qt::AlignVCenter );*/// -!F: original, the label is not displayed, delete?
     spinLoadOnly->setLabel( i18n("Load only a number of datasets:"), Qt::AlignLeft | Qt::AlignTop );
     spinLoadOnly->setRange( 0, 10000, 1 );
     spinLoadOnly->setSliderEnabled( false );
     checkLoadAll->setChecked( true );
 
     table = new QTableWidget( box );
-    /*table->setReadOnly( true );*/// -!F: original, delete
 
     frame = new QFrame( box );
     QHBoxLayout* layout2 = new QHBoxLayout( frame );
@@ -147,7 +137,7 @@ void CSVImportDlg::createPage1()
     layout2->setSpacing( 6 );
     
     spinCol = new KIntNumInput( frame );
-    /*spinCol->setLabel( i18n("Column:"), Qt::AlignLeft | Qt::AlignVCenter );*/// -!F: original, the label does not display, delete?
+    /*spinCol->setLabel( i18n("Column:"), Qt::AlignLeft | Qt::AlignVCenter );*/// -!F: original, the label is not displayed, delete?
     spinCol->setLabel( i18n("Column:"), Qt::AlignLeft | Qt::AlignTop );
     spinCol->setRange( 0, 0, 1 );
     spinCol->setSliderEnabled( false );
@@ -175,7 +165,6 @@ void CSVImportDlg::createPage1()
     layout->addWidget( table );
     layout->setStretchFactor( table, 2 );
     layout->addWidget( frame );
-    /*KPageWidgetItem* boxItem = addPage( box, i18n("&Import Data") );*/// -!F: delete
     addPage( box, i18n("&Import Data") );
 }
 
@@ -205,7 +194,6 @@ void CSVImportDlg::createPage2()
     groupFixed = new QGroupBox( i18n("Fixed Field Width File"));
 	hboxFrameLayout->addWidget(groupFixed);
 
-    /*groupCSV->setColumnLayout(0, Qt::Vertical );*/// -!F: original, delete
     QVBoxLayout *groupCSVLaout = new QVBoxLayout;
     groupCSV->setLayout(groupCSVLaout);
     groupCSVLaout->setSpacing( 6 );
@@ -241,7 +229,6 @@ void CSVImportDlg::createPage2()
     vbox->addLayout( grid );
     vbox->addItem( spacer1 );
 
-    /*groupFixed->setColumnLayout(0, Qt::Horizontal );*/// -!F: original, delete
     QHBoxLayout* groupFixedLayoutMain = new QHBoxLayout;
     groupFixed->setLayout( groupFixedLayoutMain );
     groupFixedLayoutMain->setSpacing( 6 );
@@ -279,7 +266,6 @@ void CSVImportDlg::createPage2()
 
     radioCSVFile->setChecked( true );
     
-    /*KPageWidgetItem* mainBox = addPage( mainBox, i18n("&Import Settings") );*/// -!F: delete
     addPage( mainBox, i18n("&Import Settings") );
 }
 
@@ -296,40 +282,34 @@ void CSVImportDlg::settingsChanged()
     table->clear();// -!F: keep, does this prevent a memory leak of new QTableWidgetItem( list[z] ) ?
     table->setColumnCount( 0 );
     table->setRowCount( 0 );
-    //qDebug() << "settingsChanged 1";
 
     if( !file.isValid() ) {
-        //qDebug() << "!file.isValid()";
         return;
     }
     
-    //qDebug() << "entering while loop";
     while( !file.isEof() )
     {
         list = file.readNextLine();
-        //qDebug() << "a line was read";
 
         if( table->columnCount() < (int)list.count() ) {
-            int oldColumnCount = table->columnCount();// -!F: keep
-            if ( oldColumnCount <= 0 ) {// -!F: keep
+            int oldColumnCount = table->columnCount();
+            if ( oldColumnCount <= 0 ) {
                 oldColumnCount = 1;
             }
             table->setColumnCount( list.count() );
             // Now set all the horizontal header items so that we can get an item later in the method setCol() .
             // Otherwise we would get a runtime error if we would call the method setCol() .
-            for( int j = oldColumnCount - 1; j < list.count(); j++ ) {// -!F: keep
+            for( int j = oldColumnCount - 1; j < list.count(); j++ ) {
                 QString numberString;
                 QTableWidgetItem * headerItem = new QTableWidgetItem( numberString.setNum( j + 1 ) );
                 table->setHorizontalHeaderItem( j, headerItem );
             }
         }
-        //qDebug() << "columnCount passed";
             
         if( table->rowCount() <= i ) {
             // add 100 rows to get a reasonable speed
             table->setRowCount( i + 100 );
         }
-        //qDebug() << "rowCount passed";
 
         for( z = 0; z < table->columnCount(); z++ ) {
             if ( z < list.count() ) {// There should be a text in the table cell.
@@ -337,10 +317,6 @@ void CSVImportDlg::settingsChanged()
                 Qt::ItemFlags itemFlags = item->flags() & ~Qt::ItemIsEditable;// Set the item as noneditable
                 item->setFlags( itemFlags );
                 table->setItem( i, z, item );
-                /*table->item( i, z )->setText( list[z] );*/// -!F: delete
-                /*int flags = table->item( i, z )->flags();
-                flags = flags & 
-                table->item( i, z )->setFlags(...);*/// -!F: delete
             } else {// There should be no text in the table cell.
                 QTableWidgetItem * item = new QTableWidgetItem();// -!F: memory leak? or does table->clear() delete it
                 Qt::ItemFlags itemFlags = item->flags() & ~Qt::ItemIsEditable;
@@ -348,17 +324,13 @@ void CSVImportDlg::settingsChanged()
                 table->setItem( i, z, item );
             }
         }
-        //qDebug() << "for list.count() passed";
         
         if( !checkLoadAll->isChecked() && i > spinLoadOnly->value() ) {
-            //qDebug() << "i > spinLoadOnly->value()";
             break;
         }
-        //qDebug() << "!checkLoadAll->isChecked()";
 
         i++;
     }
-    //qDebug() << "settingsChanged 3";
     
     table->setRowCount( i );
     spinCol->setRange( 1, table->columnCount(), 1 );
@@ -428,16 +400,13 @@ void CSVImportDlg::updateCol( int c )
 void CSVImportDlg::accept()
 {
     CSVFile file( requester->url().path() );
-    /*QHeaderView* h = table->horizontalHeader();*/// -!F: original, delete
     QList<int> headers;
     QStringList list;
     QString name = getDatabaseName();
-    /*int i = 0;*/// -!F: original, delete
 
     QString q = "INSERT INTO " + name + " (";
     for( int c = 0; c < table->horizontalHeader()->count(); c++ ) {
         bool ok = true;
-        /*h->label( c ).toInt( &ok );*/// -!F: original, delete
         table->horizontalHeaderItem( c )->text().toInt( &ok );
         if( !ok ) {
             q = q + table->horizontalHeaderItem( c )->text() + ",";
@@ -480,8 +449,7 @@ void CSVImportDlg::accept()
 
     KApplication::restoreOverrideCursor();
     KMessageBox::information( this, i18n("Data was imported successfully.") );
-    /*QDialog::accept();*/// -!F: delete
-    KPageDialog::accept();// -!F: keep
+    KPageDialog::accept();
 }
 
 void CSVImportDlg::addWidth()

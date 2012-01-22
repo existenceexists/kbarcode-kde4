@@ -33,35 +33,12 @@ CSVFile::CSVFile( const QString & filename )
     m_quote = PrinterSettings::getInstance()->getData()->quote;
     m_separator = PrinterSettings::getInstance()->getData()->separator;
     m_comment = PrinterSettings::getInstance()->getData()->comment;
-
-    /*QFile * m_file_p = new QFile;// -!F: delete
-    QTextStream * m_stream_p = new QTextStream;
-    m_file = *m_file_p;
-    m_stream = *m_stream_p;// -!F: delete
-    QFile m_file;
-    QTextStream m_stream;*/
     
-    m_file.setFileName( filename );// -!F: keep
-    qDebug() << "true : " << true;
-    qDebug() << "QFile::exists( filename ) == " << QFile::exists( filename );
-    qDebug() << "QFile::exists( m_file.fileName() ) == " << QFile::exists( m_file.fileName() );
-    qDebug() << "filename == " << filename;
-    qDebug() << "m_file.fileName() == " << m_file.fileName();
-    if ( QFile::exists( filename ) || QFile::exists( m_file.fileName() )) {
-        qDebug() << "+++++ filename exists +++++";
-    } else {
-        qDebug() << "----- filename does NOT exist -----";
-    }
-    m_file.open( QIODevice::ReadOnly );// -!F: original, 
-    /*if (m_file.open( QIODevice::ReadOnly )) {
-        qDebug() << "1) file opened m_file.isOpen() == " << m_file.isOpen();
-    }*/// -!F: delete
+    m_file.setFileName( filename );
+    m_file.open( QIODevice::ReadOnly );
 
     if( m_file.isOpen() ) {
-        qDebug() << "m_file.isOpen()";
-        qDebug() << "2) m_file.isOpen() == " << m_file.isOpen();
         m_stream.setDevice( &m_file );
-        qDebug() << "3) m_file.isOpen() == " << m_file.isOpen();
     }
 }
 

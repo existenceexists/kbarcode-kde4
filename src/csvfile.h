@@ -109,11 +109,9 @@ class CSVFile {
 bool CSVFile::isValid() const
 {
     if( !m_stream.device() ) {
-        qDebug() << "!m_stream.device()";
         return false;
     }
 
-    qDebug() << "m_stream.device()->isOpen()" << m_stream.device()->isOpen();
     return m_stream.device()->isOpen();
 }
 
