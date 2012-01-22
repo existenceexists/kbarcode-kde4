@@ -333,7 +333,11 @@ void CSVImportDlg::settingsChanged()
     }
     
     table->setRowCount( i );
-    spinCol->setRange( 1, table->columnCount(), 1 );
+    if ( table->columnCount() > 0 ) {
+        spinCol->setRange( 1, table->columnCount(), 1 );
+    } else {
+        spinCol->setRange( 0, 0, 1 );
+    }
     spinCol->setSliderEnabled( false );
        
     enableControls();
