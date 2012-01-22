@@ -18,10 +18,11 @@
 #ifndef CSVFILE_H
 #define CSVFILE_H
 
-#include <qfile.h>
+#include <QFile>
 #include <qstringlist.h>
 #include <QTextStream>
 #include <QList>
+#include <QDebug>
 
 class QBuffer;
 
@@ -107,9 +108,12 @@ class CSVFile {
 
 bool CSVFile::isValid() const
 {
-    if( !m_stream.device() )
-	return false;
+    if( !m_stream.device() ) {
+        qDebug() << "!m_stream.device()";
+        return false;
+    }
 
+    qDebug() << "m_stream.device()->isOpen()" << m_stream.device()->isOpen();
     return m_stream.device()->isOpen();
 }
 

@@ -21,6 +21,9 @@
 
 #include <qbuffer.h>
 #include <qtextcodec.h>
+#include <QDebug>
+#include <QFile>
+#include <QTextStream>
 
 CSVFile::CSVFile( const QString & filename )
 {
@@ -31,11 +34,35 @@ CSVFile::CSVFile( const QString & filename )
     m_separator = PrinterSettings::getInstance()->getData()->separator;
     m_comment = PrinterSettings::getInstance()->getData()->comment;
 
-    m_file.setName( filename );
-    m_file.open( QIODevice::ReadOnly );
+    /*QFile * m_file_p = new QFile;// -!F: delete
+    QTextStream * m_stream_p = new QTextStream;
+    m_file = *m_file_p;
+    m_stream = *m_stream_p;// -!F: delete
+    QFile m_file;
+    QTextStream m_stream;*/
+    
+    m_file.setFileName( filename );// -!F: keep
+    qDebug() << "true : " << true;
+    qDebug() << "QFile::exists( filename ) == " << QFile::exists( filename );
+    qDebug() << "QFile::exists( m_file.fileName() ) == " << QFile::exists( m_file.fileName() );
+    qDebug() << "filename == " << filename;
+    qDebug() << "m_file.fileName() == " << m_file.fileName();
+    if ( QFile::exists( filename ) || QFile::exists( m_file.fileName() )) {
+        qDebug() << "+++++ filename exists +++++";
+    } else {
+        qDebug() << "----- filename does NOT exist -----";
+    }
+    m_file.open( QIODevice::ReadOnly );// -!F: original, 
+    /*if (m_file.open( QIODevice::ReadOnly )) {
+        qDebug() << "1) file opened m_file.isOpen() == " << m_file.isOpen();
+    }*/// -!F: delete
 
-    if( m_file.isOpen() )
-	m_stream.setDevice( &m_file );
+    if( m_file.isOpen() ) {
+        qDebug() << "m_file.isOpen()";
+        qDebug() << "2) m_file.isOpen() == " << m_file.isOpen();
+        m_stream.setDevice( &m_file );
+        qDebug() << "3) m_file.isOpen() == " << m_file.isOpen();
+    }
 }
 
 CSVFile::CSVFile( QBuffer & buf )
@@ -136,7 +163,7 @@ QStringList CSVFile::readFixedLine( const QString & line )
     QString     data( line );
     QStringList list;
 
-    for( unsigned int i=0;i<m_width.count();i++ )
+    for( int i=0;i<m_width.count();i++ )
     {
         list << data.left( m_width[i] );
         data = data.right( data.length() - m_width[i] );
