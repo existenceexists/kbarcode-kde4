@@ -431,6 +431,8 @@ void CSVImportDlg::accept()
     
 
     KApplication::setOverrideCursor( QCursor( Qt::WaitCursor) );
+    int queriesNum = 0;// Number of all sql queries.
+    int queriesFailedNum = 0;// How many sql queries failed.
     while( !file.isEof() )
     {
         list = file.readNextLine();
@@ -446,14 +448,39 @@ void CSVImportDlg::accept()
         line = line + ");";
 
         QSqlQuery query;
-        if( !query.exec( line ) )
+        if( !query.exec( line ) ) {
             qDebug() << i18n("Could not import the following line:") + line;
             //KMessageBox::error( this, i18n("Could not import the following line:") + line );
+            queriesFailedNum += 1;
+        }
+        queriesNum += 1;
     }
 
     KApplication::restoreOverrideCursor();
-    KMessageBox::information( this, i18n("Data was imported successfully.") );
-    KPageDialog::accept();
+    
+    // Show a message that informs how many sql queries were executed succesfully.
+    // Destroy the csv import dialog dialog only if at least some of the sql queries were executed succesfully.
+    if ( queriesFailedNum == 0 ) {// No sql queries failed.
+        KMessageBox::information( this, i18n("Data was imported successfully.") + QString("\n")
+            + i18np("%1 of %1 sql query was executed successfully.", 
+            "All %1 of %1 sql queries were executed successfully.", queriesNum, queriesNum) );
+        KPageDialog::accept();// Destroy the csv import dialog.
+    } else if ( (queriesNum - queriesFailedNum) == 0 ) {// All sql queries failed.
+        KMessageBox::information( this, i18n("No data was imported successfully.") + QString("\n")
+            + i18np("%1 of %2 sql query failed.", 
+            "All %1 of %2 sql queries failed.", queriesNum, queriesFailedNum, queriesNum)
+            + QString("\n")
+            + i18n("No sql query was executed successfully.") );
+            // No not destroy the csv import dialog.
+    } else {// Only some of the sql queries failed.
+        KMessageBox::information( this, i18n("Only a part of data was imported successfully.") + QString("\n")
+            + i18np("%1 of %2 sql queries failed.", "%1 of %2 sql queries failed.", 
+            queriesFailedNum, queriesFailedNum, queriesNum)
+            + QString("\n")
+            + i18np("%1 of %2 sql was query executed successfully.", "%1 of %2 sql queries were executed successfully.", 
+            queriesNum - queriesFailedNum, queriesNum - queriesFailedNum, queriesNum) );
+        KPageDialog::accept();// Destroy the csv import dialog.
+    }
 }
 
 void CSVImportDlg::addWidth()
