@@ -66,6 +66,7 @@ ConfAssistant::ConfAssistant( QWidget* parent, QString name, bool modal )
     setObjectName(name);
     setModal(modal);
     setCaption( i18n( "Configure KBarcode" ) );
+    setWindowIcon( KIcon( KStandardDirs::locate( "appdata", QString( "hi16-app-kbarcode.png" ) ) ) );// -!F: 
 
     //qDebug() << "point 1";
     setupPage1();
@@ -128,14 +129,16 @@ void ConfAssistant::setupPage1()
     Layout7->setObjectName("Layout7");
 
     logo = new QLabel( page );
-    logo->setPixmap( KStandardDirs::locate("data", "kbarcode/logo.png") );
+    /*logo->setPixmap( KStandardDirs::locate("data", "kbarcode/logo.png") );*/// -!F: 
+    logo->setPixmap( KStandardDirs::locate( "appdata", "logo.png" ) );// -!F: 
     QSpacerItem* spacer = new QSpacerItem( 0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding );
     pageLayout->addWidget( logo );
     Layout7->addItem( spacer );
     Layout8->addLayout( Layout7 );
 
     TextLabel2_2 = new QLabel( page );
-    TextLabel2_2->setMaximumWidth(700);// -!F:
+    //TextLabel2_2->setMaximumWidth(700);// -!F: delete
+    TextLabel2_2->setMinimumHeight(350);// -!F: keep
     TextLabel2_2->setWordWrap(true);
     TextLabel2_2->setText( i18n( "<qt><h1>Welcome to KBarcode</h1><br><br>") +
         i18n( description ) + "</qt>" );

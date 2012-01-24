@@ -79,9 +79,10 @@ void MainWindow::setupActions(QString directoryName=QString()) // -!F:
                                 SLOT(assistant()), actionCollection());*/
     KAction* assistantAct = new KAction(this);
     assistantAct->setText(i18n("&Start Configuration Assistant..."));
-    //assistantAct->setIcon(BarIcon("/usr/share/app-install/icons/assistant.png"));// -!F:
-    //assistantAct->setIcon(BarIcon("/usr/share/icons/crystalsvg/16x16/actions/wizard.png"));// -!F:
-    assistantAct->setIcon(BarIcon("/usr/share/icons/crystalsvg/16x16/actions/wizard.png"));// -!F:
+    //assistantAct->setIcon(BarIcon("/usr/share/app-install/icons/assistant.png"));// -!F: delete
+    //assistantAct->setIcon(BarIcon("/usr/share/icons/crystalsvg/16x16/actions/wizard.png"));// -!F: delete
+    /*assistantAct->setIcon(BarIcon("/usr/share/icons/crystalsvg/16x16/actions/wizard.png"));*/// -!F: delete
+    assistantAct->setIcon(BarIcon("tools-wizard"));// -!F: keep
     actionCollection()->addAction("assistant", assistantAct);
     connect(assistantAct, SIGNAL(triggered(bool)), this, SLOT(assistant()));
     
@@ -89,7 +90,8 @@ void MainWindow::setupActions(QString directoryName=QString()) // -!F:
                                 actionCollection(),"connect" );*/
     connectAct = new KAction(this);
     connectAct->setText(i18n("&Connect to Database"));
-    connectAct->setIcon(BarIcon("/usr/share/icons/crystalsvg/16x16/actions/connect_no.png"));// -!F:
+    /*connectAct->setIcon(BarIcon("/usr/share/icons/crystalsvg/16x16/actions/connect_no.png"));*/// -!F: delete
+    connectAct->setIcon(BarIcon("network-connect"));// -!F: keep
     actionCollection()->addAction("connect", connectAct);
     connect(connectAct, SIGNAL(triggered(bool)), this, SLOT(connectMySQL()));
 
@@ -129,13 +131,14 @@ void MainWindow::setupActions(QString directoryName=QString()) // -!F:
     
     KAction* systemCheckAct = new KAction(this);
     systemCheckAct->setText(i18n("&System Check..."));
-    systemCheckAct->setIcon(KIcon("/usr/share/icons/crystalsvg/16x16/devices/system.png"));// -!F:
+    /*systemCheckAct->setIcon(KIcon("/usr/share/icons/crystalsvg/16x16/devices/system.png"));*/// -!F:
+    systemCheckAct->setIcon(KIcon("computer"));// -!F: keep
     actionCollection()->addAction("systemCheckAct", systemCheckAct);
     connect(systemCheckAct, SIGNAL(triggered(bool)), this, SLOT(showCheck()));
     
     KAction* barcodeHelpAct = new KAction(this);
     barcodeHelpAct->setText(i18n("&Barcode Help..."));
-    barcodeHelpAct->setIcon(KIcon("view-barcode"));
+    barcodeHelpAct->setIcon(KIcon("view-barcode"));// -!F: keep
     actionCollection()->addAction("barcodeHelpAct", barcodeHelpAct);
     connect(barcodeHelpAct, SIGNAL(triggered(bool)), this, SLOT(startInfo()));
     
@@ -186,7 +189,7 @@ void MainWindow::setupActions(QString directoryName=QString()) // -!F:
     // Set window icon.
     //setWindowIcon(KIcon(this->kbarcodeDirectoryName + QString("/hi16-app-kbarcode.png")));
     if (KGlobal::dirs()->addResourceDir(
-            "appdata", QString("/home/fanda/tmp/share/apps/") + // -!F:
+            "appdata", QString("/home/fanda/programovani/c++/frank_scripts/kbarcode/executables/share/apps/") + // -!F:
             this->kbarcodeDirectoryName)) {
         setWindowIcon(KIcon(KStandardDirs::locate(
             "appdata", QString("hi16-app-kbarcode.png"))));
@@ -217,6 +220,8 @@ void MainWindow::setupActions(QString directoryName=QString()) // -!F:
     hlpMenu->insertSeparator(hlpMenu->actions()[1]);
     hlpMenu->insertAction(hlpMenu->actions()[0], barcodeHelpAct);
     hlpMenu->insertAction(hlpMenu->actions()[0], helpAct);
+    hlpMenu->actions()[ 12 ]->setIcon( KIcon ( KStandardDirs::locate(
+            "appdata", QString( "hi16-app-kbarcode.png" ) ) ) );
     
     menuBar()->addAction(menuBarActionsList[0]);
     menuBar()->addAction(menuBarActionsList[1]);
