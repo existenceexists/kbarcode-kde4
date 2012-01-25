@@ -75,6 +75,7 @@ void MainWindow::setupActions(QString directoryName=QString()) // -!F:
     /*KAction* closeAct = KStandardAction::close( this, SLOT( close() ), actionCollection());*/
     KStandardAction::close( this, SLOT( close() ), actionCollection());
     /*KAction* configureAct = KStandardAction::preferences( KBarcodeSettings::getInstance(), SLOT(configure()), actionCollection() );*/
+    KStandardAction::preferences( KBarcodeSettings::getInstance(), SLOT(configure()), actionCollection() );
     /*KAction* assistantAct = new KAction( i18n("&Start Configuration Assistant..."), BarIcon("assistant"), 0, this,
                                 SLOT(assistant()), actionCollection());*/
     KAction* assistantAct = new KAction(this);

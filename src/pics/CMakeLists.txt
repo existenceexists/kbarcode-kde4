@@ -3,6 +3,7 @@
 #configure_file(${CMAKE_CURRENT_SOURCE_DIR}/logo.png ${CMAKE_CURRENT_BINARY_DIR}/logo.png COPYONLY)
 install(FILES 
     hi16-app-kbarcode.png 
+    hi32-app-kbarcode.png
     logo.png
     DESTINATION ${DATA_INSTALL_DIR}/${ProjectName})
 

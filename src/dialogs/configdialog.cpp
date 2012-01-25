@@ -49,6 +49,7 @@
 #include <kglobal.h>
 #include <kvbox.h>
 #include <kpagewidgetmodel.h>
+#include <kstandarddirs.h>
 
 const QString cached = I18N_NOOP( "There are currently %1 cached barcodes." );
 
@@ -62,6 +63,7 @@ ConfigDialog::ConfigDialog( QWidget* parent )
     setButtons( KDialog::Ok | KDialog::Cancel );
     setDefaultButton( KDialog::Ok );
     setModal( true );
+    setWindowIcon( KIcon( KStandardDirs::locate( "appdata", QString( "hi16-app-kbarcode.png" ) ) ) );
 
     setupTab2(); // Printer
     setupTab1(); // SQL
@@ -78,7 +80,7 @@ void ConfigDialog::setupTab1( )
 {
     KVBox* page = new KVBox();
     KPageWidgetItem* item = addPage( page, i18n( "SQL Settings" ) );
-    item->setIcon( KIcon( "connect_no" ) );
+    item->setIcon( KIcon( "network-connect" ) );
 
     sqlwidget = new SqlWidget( false, page );
 
@@ -90,12 +92,13 @@ void ConfigDialog::setupTab2()
 {
     labelprinterdata* lb = PrinterSettings::getInstance()->getData();
 
-    KVBox* page = new KVBox();
-    KPageWidgetItem* item = addPage( page, i18n( "Print Settings" ) );
-    item->setIcon( KIcon( "fileprint" ) );
+    QWidget * page = new QWidget();
 
-    QHBoxLayout* Layout0 = new QHBoxLayout( page );
-    QHBoxLayout* Layout1 = new QHBoxLayout( page );
+    QVBoxLayout* layoutMain = new QVBoxLayout();
+    QHBoxLayout* Layout0 = new QHBoxLayout();
+    QHBoxLayout* Layout1 = new QHBoxLayout();
+    layoutMain->addLayout( Layout0 );
+    layoutMain->addLayout( Layout1 );
 
     // QSpacerItem* spacer = new QSpacerItem( 0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding );
 
@@ -132,60 +135,62 @@ void ConfigDialog::setupTab2()
     Layout0->addWidget( printerQuality );
     Layout1->addWidget( new QLabel( i18n( "Preview Page Format:" ), this ) );
     Layout1->addWidget( pageFormat );
+    
+    page->setLayout( layoutMain );
+    KPageWidgetItem* item = addPage( page, i18n( "Print Settings" ) );
+    item->setIcon( KIcon( "document-print" ) );
 }
 
 void ConfigDialog::setupTab3()
 {
     labelprinterdata* lb = PrinterSettings::getInstance()->getData();
 
-    QWidget* page = new QWidget( this );
-    KPageWidgetItem* item = addPage( page, i18n( "Import" ) );
-    item->setIcon( KIcon( "fileimport" ) );
+    QWidget* page = new QWidget();
 
-    QGridLayout* grid = new QGridLayout( page );
+    QGridLayout* grid = new QGridLayout();
 
-    QLabel* label = new QLabel( page );
+    QLabel* label = new QLabel();
     label->setText( i18n( "Comment:" ) );
     grid->addWidget( label, 0, 0 );
 
-    comment = new KLineEdit( lb->comment, page );
+    comment = new KLineEdit( lb->comment );
     grid->addWidget( comment, 0, 1 );
 
-    label = new QLabel( page );
+    label = new QLabel();
     label->setText( i18n( "Separator:" ) );
     grid->addWidget( label, 1, 0 );
 
-    separator = new KLineEdit( lb->separator, page );
+    separator = new KLineEdit( lb->separator );
     grid->addWidget( separator, 1, 1 );
 
-    label = new QLabel( page );
+    label = new QLabel();
     label->setText( i18n( "Quote Character:" ) );
     grid->addWidget( label, 2, 0 );
 
-    quote  = new KLineEdit( lb->quote, page );
+    quote  = new KLineEdit( lb->quote );
     grid->addWidget( quote, 2, 1 );
 
-    checkUseCustomNo = new QCheckBox( i18n( "&Use customer article no. for import" ), page );
+    checkUseCustomNo = new QCheckBox( i18n( "&Use customer article no. for import" ) );
     checkUseCustomNo->setChecked( lb->useCustomNo );
 
     grid->addWidget( checkUseCustomNo, 3, 0, 1, 2 );
 
-    QHBoxLayout* Layout1 = new QHBoxLayout( page );
-    Layout1->addWidget( new QLabel( i18n( "File Format:" ), page ) );
+    QHBoxLayout* Layout1 = new QHBoxLayout();
+    Layout1->addWidget( new QLabel( i18n( "File Format:" ) ) );
 
-    combo1 = new KComboBox( page );
+    combo1 = new KComboBox();
     combo1->addItem( i18n( "Quantity" ) );
     combo1->addItem( i18n( "Article Number" ) );
     combo1->addItem( i18n( "Group" ) );
     Layout1->addWidget( combo1 );
 
-    combo2 = new KComboBox( page );
+    combo2 = new KComboBox();
     combo2->addItem( i18n( "Quantity" ) );
     combo2->addItem( i18n( "Article Number" ) );
     combo2->addItem( i18n( "Group" ) );
     Layout1->addWidget( combo2 );
 
-    combo3 = new KComboBox( page );
+    combo3 = new KComboBox();
     combo3->addItem( i18n( "Quantity" ) );
     combo3->addItem( i18n( "Article Number" ) );
     combo3->addItem( i18n( "Group" ) );
@@ -201,13 +206,15 @@ void ConfigDialog::setupTab3()
     combo3->setCurrentIndex( config.readEntry( "Data2", 2 ) );
 
     page->setLayout( grid );
+    KPageWidgetItem* item = addPage( page, i18n( "Import" ) );
+    item->setIcon( KIcon( "document-import" ) );
 }
 
 void ConfigDialog::setupTab4()
 {
     QWidget* page = new QWidget( this );
     KPageWidgetItem* item = addPage( page, i18n( "Label Editor" ) );
-    item->setIcon( KIcon( "kbarcode" ) );
+    item->setIcon( KIcon( KStandardDirs::locate( "appdata", "hi32-app-kbarcode.png" ) ) );
 
     QGridLayout* tabLayout = new QGridLayout( page );
 
@@ -243,7 +250,7 @@ void ConfigDialog::setupTab5()
 
     KVBox* page = new KVBox();
     KPageWidgetItem* item = addPage( page, i18n( "On New" ) );
-    item->setIcon( KIcon( "filenew" ) );
+    item->setIcon( KIcon( "document-new" ) );
 
     QStringList alist, glist;
     alist.append( i18n( "No Line Break" ) );
