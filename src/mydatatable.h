@@ -23,7 +23,7 @@
 
 /** A table to modify SQL tables.
   */
-class MyDataTable : public QDataTable  {
+class MyDataTable : public Q3DataTable  {
    Q_OBJECT
    public:
         MyDataTable(QWidget *parent=0);

@@ -19,8 +19,8 @@
 #include "barkode.h"
 /*#include "barcodegenerator.h"*/// -!F: original, uncomment 
 #include "batchassistant.h"
-/*#include "labeleditor.h"
-#include "databasebrowser.h"*/// -!F: original, uncomment
+/*#include "labeleditor.h"*/// -!F: original, uncomment
+#include "databasebrowser.h"
 #include "dialogs/csvimportdlg.h"
 #include "sqltables.h"
 #include "kbarcodesettings.h"
@@ -178,22 +178,22 @@ void KBarcode::startBatchPrint()
 
 void KBarcode::editArticles()
 {
-    /*new DatabaseBrowser( TABLE_BASIC, NULL );*/
+    new DatabaseBrowser( TABLE_BASIC, NULL );
 }
 
 void KBarcode::editCustomers()
 {
-    /*new DatabaseBrowser( TABLE_CUSTOMER, NULL );*/
+    new DatabaseBrowser( TABLE_CUSTOMER, NULL );
 }
 
 void KBarcode::editCustomerText()
 {
-    /*new DatabaseBrowser( TABLE_CUSTOMER_TEXT, NULL );*/
+    new DatabaseBrowser( TABLE_CUSTOMER_TEXT, NULL );
 }
 
 void KBarcode::editLabelDef()
 {
-    /*new DatabaseBrowser( TABLE_LABEL_DEF, NULL );*/
+    new DatabaseBrowser( TABLE_LABEL_DEF, NULL );
 }
 
 void KBarcode::enableData()

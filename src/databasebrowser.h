@@ -20,8 +20,14 @@
 
 #include "mainwindow.h"
 
+/*#include <kfinddialog.h>// -!F: keep, 
+#include <kfind.h>*/
+
 class KAction;
-class KEdFind;
+//class KEdFind;// -!F: original, delete
+class KFindDialog;// -!F: keep
+class KFind;// -!F: keep
+class KXmlGuiWindow;
 class KMenuBar;
 class KToolBar;
 class KPushButton;
@@ -30,7 +36,7 @@ class MyDataTable;
 /** A database browser widget. Allows small changes to SQL tables
   * and is mostly used for having a quick look on the tables.
   */
-class DatabaseBrowser : public MainWindow{
+class DatabaseBrowser : public KXmlGuiWindow{
     Q_OBJECT
     public:
         DatabaseBrowser( QString _database, QWidget *parent=0);
@@ -47,7 +53,7 @@ class DatabaseBrowser : public MainWindow{
         void paste();
 
         void find();
-        void findNext();
+        void slotFindNext();
 
         void import();
 
@@ -59,7 +65,10 @@ class DatabaseBrowser : public MainWindow{
         KAction* deleteAct;
         KAction* newAct;
 
-        KEdFind* findDlg;
+        KFindDialog * findDlg;
+        KFind * findObject;
+        
+        bool findDialogExists;
 
         QString m_find;
         bool m_direction;

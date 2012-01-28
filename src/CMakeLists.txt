@@ -19,7 +19,7 @@ set(kbarcode_SRCS
  # commands.cpp
   confassistant.cpp
   csvfile.cpp
- # databasebrowser.cpp
+  databasebrowser.cpp
   definition.cpp
   documentitem.cpp
   dsrichtext.cpp
@@ -40,7 +40,7 @@ set(kbarcode_SRCS
  # mimesources.cpp
   mycanvasitem.cpp
  # mycanvasview.cpp
- # mydatatable.cpp
+  mydatatable.cpp
  # newlabel.cpp
   pixmapbarcode.cpp
   printersettings.cpp
