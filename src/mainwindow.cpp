@@ -41,6 +41,7 @@
 
 // -!F: added by Frank, keep it:
 #include <QList>
+#include <QDebug>
 
 bool MainWindow::autoconnect = true;
 bool MainWindow::startassistant = true;
@@ -189,15 +190,17 @@ void MainWindow::setupActions(QString directoryName=QString()) // -!F:
     
     // Set window icon.
     //setWindowIcon(KIcon(this->kbarcodeDirectoryName + QString("/hi16-app-kbarcode.png")));
-    if (KGlobal::dirs()->addResourceDir(
+    if (!KGlobal::dirs()->addResourceDir(
             "appdata", QString("/home/fanda/programovani/c++/frank_scripts/kbarcode/executables/share/apps/") + // -!F:
             this->kbarcodeDirectoryName)) {
-        setWindowIcon(KIcon(KStandardDirs::locate(
-            "appdata", QString("hi16-app-kbarcode.png"))));
+        qDebug() << QString("The addition of the following folder as a resource dir failed: ") 
+            + QString("/home/fanda/programovani/c++/frank_scripts/kbarcode/executables/share/apps/");
     }
+    setWindowIcon( KIcon( KStandardDirs::locate( "appdata", QString("hi16-app-kbarcode.png") ) ) );
     
     // Let KDE4 create the main window.
-    setupGUI(Default, this->kbarcodeDirectoryName + QString("/mainwindowui.rc"));
+    /*setupGUI(Default, this->kbarcodeDirectoryName + QString("/mainwindowui.rc"));*/// -!F: delete
+    setupGUI(Default, KStandardDirs::locate( "appdata", QString("mainwindowui.rc")));
     
     // Adjust the help menu of the main window automatically created by setupGUI():
     // First remove the "Kbarcode Handbook F1" action:

@@ -41,6 +41,7 @@
 #include <kstatusbar.h>
 #include <KActionCollection>
 #include <KStandardAction>
+#include <kstandarddirs.h>
 #include <kxmlguiwindow.h>
 #include <ktoolbar.h>
 
@@ -64,7 +65,8 @@ DatabaseBrowser::DatabaseBrowser( QString _database, QWidget *parent)
     connect( (QObject*) table, SIGNAL( cursorChanged( QSql::Op ) ),
              SqlTables::getInstance(), SIGNAL( tablesChanged() ) );
 
-    connect( this, SIGNAL( connectedSQL() ), this, SLOT( setupSql() ) );
+    /*connect( this, SIGNAL( connectedSQL() ), this, SLOT( setupSql() ) );*/// -!F: original, keep, this line gives the warning: Object::connect: No such signal DatabaseBrowser::connectedSQL()
+    connect( SqlTables::getInstance(), SIGNAL( connectedSQL() ), this, SLOT( setupSql() ) );// -!F: is this the right correction of the previous line ?
 
     /*findDlg = 0;*/// -!F: original, delete
     findDialogExists = false;
@@ -91,7 +93,7 @@ DatabaseBrowser::~DatabaseBrowser()
 
 void DatabaseBrowser::setupActions()
 {
-    KXmlGuiWindow::setupGUI();
+    KXmlGuiWindow::setupGUI( Default, KStandardDirs::locate( "appdata", QString("databasebrowserui.rc") ) );
     
     KMenu* editMenu = new KMenu( this );
     editMenu->setTitle( i18n("&Edit") );
@@ -100,7 +102,7 @@ void DatabaseBrowser::setupActions()
     KAction* acopy = KStandardAction::copy( this, SLOT( copy() ), actionCollection() );
     KAction* apaste = KStandardAction::paste( this, SLOT( paste() ), actionCollection() );
     KAction* afind = KStandardAction::find( this, SLOT( find() ), actionCollection() );
-    /*menuBar()->insertItem( i18n("&Edit"), editMenu, -1, 1 );*/
+    /*menuBar()->insertItem( i18n("&Edit"), editMenu, -1, 1 );*/// -!F: original, delete
 
     /*acut->plug( editMenu );
     acopy->plug( editMenu );
@@ -128,6 +130,14 @@ void DatabaseBrowser::setupActions()
     editMenu->addAction( aimport );
     
     menuBar()->insertMenu( menuBar()->actions()[1], editMenu );
+    
+    /*menuBar()->actions()[ -1 ]->actions()[ 8 ]->setIcon( KIcon ( KStandardDirs::locate(
+            "appdata", QString( "hi16-app-kbarcode.png" ) ) ) );*/// -!F: delete
+    /*helpMenu()->actions()[ 4 ]->setIcon( KIcon ( KStandardDirs::locate(
+            "appdata", QString( "hi16-app-kbarcode.png" ) ) ) );*/// -!F: delete
+    actionCollection()->action( "help_about_app" )->setIcon( KIcon ( KStandardDirs::locate(
+        "appdata", QString( "hi16-app-kbarcode.png" ) ) ) );;
+    setWindowIcon( KIcon( KStandardDirs::locate( "appdata", QString("hi16-app-kbarcode.png") ) ) );
         
     /*acut->plug( toolBar() );
     acopy->plug( toolBar() );
