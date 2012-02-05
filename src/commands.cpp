@@ -29,6 +29,9 @@
 #include "textlineitem.h"
 //NY26
 
+#include <Q3Canvas>
+#include <Q3CanvasItem>
+#include <Q3CanvasItemList>
 
 // KDE includes
 #include <kapplication.h>
@@ -36,7 +39,7 @@
 #include <QPixmap>
 #include <krandom.h>
 
-QPoint getFreePos( QCanvas* c )
+QPoint getFreePos( Q3Canvas* c )
 {
     MyCanvas* canvas = (MyCanvas*)c;
     
@@ -75,7 +78,7 @@ bool CommandUtils::canvasHasItem()
 {
     if( m_canvas_item && c )
     {
-        QCanvasItemList list = c->allItems();
+        Q3CanvasItemList list = c->allItems();
         for( unsigned int i=0;i<list.count();i++)
             if( m_canvas_item == list[i] )
                 return true;
@@ -100,7 +103,7 @@ void CommandUtils::documentItemDeleted()
 }
 
 NewItemCommand::NewItemCommand( MyCanvasView* view, const QString & name )
-    : QObject(), KCommand()
+    : QObject(), K3Command()
 {
     cv = view;
     m_name = name;

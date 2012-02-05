@@ -9,21 +9,21 @@ add_definitions( ${KDE4_DEFINITIONS} )
 ########### next target ###############
 
 set(kbarcode_SRCS
- # barcodecombo.cpp
- # barcodegenerator.cpp
+  barcodecombo.cpp
+  barcodegenerator.cpp
   barcodeitem.cpp
   barkode.cpp
   barkodeengine.cpp
  # batchprinter.cpp
  # batchassistant.cpp
- # commands.cpp
+  commands.cpp
   confassistant.cpp
   csvfile.cpp
   databasebrowser.cpp
   definition.cpp
   documentitem.cpp
   dsrichtext.cpp
- # dstextedit.cpp
+  dstextedit.cpp
   encodingcombo.cpp
   gnubarcode.cpp
  # gnubarkodeengine.cpp
@@ -37,9 +37,9 @@ set(kbarcode_SRCS
   main.cpp
   mainwindow.cpp
   measurements.cpp
- # mimesources.cpp
+  mimesources.cpp
   mycanvasitem.cpp
- # mycanvasview.cpp
+  mycanvasview.cpp
   mydatatable.cpp
  # newlabel.cpp
   pixmapbarcode.cpp
@@ -57,7 +57,7 @@ set(kbarcode_SRCS
   tokenprovider.cpp
   xmlutils.cpp
   zplutils.cpp
- # dialogs/barcodedialogs.cpp
+  dialogs/barcodedialogs.cpp
  # dialogs/barcodeprinterdlg.cpp
   dialogs/configdialog.cpp
   dialogs/csvimportdlg.cpp
@@ -68,7 +68,7 @@ set(kbarcode_SRCS
  # dialogs/printlabeldlg.cpp
  # dialogs/rectsettingsdlg.cpp
  # dialogs/smalldialogs.cpp
- # dialogs/tokendialog.cpp  
+  dialogs/tokendialog.cpp  
   )
 
 kde4_add_ui_files( kbarcode_SRCS
@@ -90,6 +90,7 @@ ${KDE4_KJSAPI_LIBS} #${KDE4_KABC_LIBS}
 #${KDEPIMLIBS_AKONADI_LIBS}
 ${KDEPIMLIBS_KABC_LIBS}
 #${akonadi_kabc_LIB_DEPENDS} ${KDE4_AKONADI_KABC_LIBRARY}
+${KDE4_KDE3SUPPORT_LIBS}
   )
   
   install(TARGETS ${ProjectName} DESTINATION ${BIN_INSTALL_DIR})

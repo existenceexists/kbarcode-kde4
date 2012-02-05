@@ -66,8 +66,8 @@ class Definition;
 class QColor;
 class QLabel;
 class QPoint;
-class KCommandHistory;
-class KMacroCommand;
+class K3CommandHistory;
+class K3MacroCommand;
 class KRuler;
 class KStatusBar;
 class MyCanvasView : public Q3CanvasView
@@ -103,7 +103,7 @@ class MyCanvasView : public Q3CanvasView
 
         void setCurrent( Q3CanvasItem* item );
 
-        void setHistory( KCommandHistory* hist ) {
+        void setHistory( K3CommandHistory* hist ) {
             history = hist;
         }
 
@@ -148,15 +148,15 @@ class MyCanvasView : public Q3CanvasView
         
     private:
         void setSelected( Q3CanvasItem* item = 0, bool control = false );
-        KMacroCommand* getMoveCommand();
+        K3MacroCommand* getMoveCommand();
         
         Definition* def;
 
         KRuler* rulerv;
         KRuler* rulerh;
 
-        KCommandHistory* history;
-        KMacroCommand* m_commov;
+        K3CommandHistory* history;
+        K3MacroCommand* m_commov;
         MyCanvas* canv;
 
         int mouseid;

@@ -21,21 +21,21 @@
 #include <q3dragobject.h>
 #include "documentitem.h"
 
-class KCommandHistory;
+class K3CommandHistory;
 class TokenProvider;
 class MyCanvasView;
 
-class DocumentItemDrag : public QMimeData {
+class DocumentItemDrag : public Q3StoredDrag {
     Q_OBJECT
     public:
         DocumentItemDrag( QWidget* dragSource = NULL );
         
-        static QString mimeType();
+        static const char * mimeType();// -!F: Replace const char* with QString.
         
         void setDocumentItem( DocumentItemList* list );
 
         static bool canDecode( QMimeSource * );
-        static bool decode( QMimeSource *, MyCanvasView* cv, TokenProvider* token, KCommandHistory* history );
+        static bool decode( QMimeSource *, MyCanvasView* cv, TokenProvider* token, K3CommandHistory* history );
 };
 
 #endif

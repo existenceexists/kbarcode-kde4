@@ -38,7 +38,8 @@ class MyCanvasRectangle;
 class MyCanvasView;
 class CanvasBarcode;
 class PictureRectangle;
-class QCanvasItem;
+class Q3Canvas;
+class Q3CanvasItem;
 class QColor;
 class QFont;
 class QImage;
@@ -66,7 +67,7 @@ class CommandUtils : public QObject {
         void documentItemDeleted();
         
     protected:
-        QCanvas* c;
+        Q3Canvas* c;
         TCanvasItem* m_canvas_item;
 };
 
@@ -81,7 +82,7 @@ class CommandUtils : public QObject {
   *
   * @author Dominik Seichter
   */
-class NewItemCommand : public QObject, public KCommand {
+class NewItemCommand : public QObject, public K3Command {
     Q_OBJECT
     public:
         NewItemCommand( MyCanvasView* view, const QString & name );
@@ -124,7 +125,7 @@ class NewItemCommand : public QObject, public KCommand {
         QString m_name;    
 };
 
-class ResizeCommand : public KCommand, CommandUtils {
+class ResizeCommand : public K3Command, CommandUtils {
     public:
         ResizeCommand( TCanvasItem* it, bool shift = false ) 
             : CommandUtils( it )
@@ -150,7 +151,7 @@ class ResizeCommand : public KCommand, CommandUtils {
 
 /** Move a TCanvasItem on the canvas
  */
-class MoveCommand : public KCommand, CommandUtils {
+class MoveCommand : public K3Command, CommandUtils {
     public:
         /**
          * @param cx move in x direction cx mm
@@ -175,7 +176,7 @@ class MoveCommand : public KCommand, CommandUtils {
         int y;
 };
 
-class ChangeZCommand : public KCommand, CommandUtils {
+class ChangeZCommand : public K3Command, CommandUtils {
     public:
         ChangeZCommand( int z, TCanvasItem* it );
         
@@ -189,7 +190,7 @@ class ChangeZCommand : public KCommand, CommandUtils {
         int m_z, m_oldz;
 };
 
-class LockCommand : public KCommand, CommandUtils {
+class LockCommand : public K3Command, CommandUtils {
     public:
         LockCommand( bool lock, TCanvasItem* it )
             : CommandUtils( it )
@@ -207,7 +208,7 @@ class LockCommand : public KCommand, CommandUtils {
         bool m_locked;
 };
 
-class PictureCommand : public KCommand, CommandUtils {
+class PictureCommand : public K3Command, CommandUtils {
     public:
         PictureCommand( double r, bool mirrorh, bool mirrorv, EImageScaling s, ImageItem* it );
         ~PictureCommand() {}
@@ -233,7 +234,7 @@ class PictureCommand : public KCommand, CommandUtils {
         ImageItem* m_item;
 };
 
-class TextChangeCommand : public KCommand, CommandUtils {
+class TextChangeCommand : public K3Command, CommandUtils {
     public:
         TextChangeCommand( TextItem* it, QString t );
         ~TextChangeCommand() { }
@@ -248,7 +249,7 @@ class TextChangeCommand : public KCommand, CommandUtils {
         TextItem* m_item;
 };
 
-class TextRotationCommand : public KCommand, protected CommandUtils {
+class TextRotationCommand : public K3Command, protected CommandUtils {
     public:
         TextRotationCommand( double rot, TextItem* t  );
 
@@ -265,7 +266,7 @@ class TextRotationCommand : public KCommand, protected CommandUtils {
 
 
 //NY28
-class TextLineChangeCommand : public KCommand, CommandUtils {
+class TextLineChangeCommand : public K3Command, CommandUtils {
     public:
         TextLineChangeCommand( TextLineItem* it, QString t, int font, int magvert, int maghor );
         ~TextLineChangeCommand() { }
@@ -284,7 +285,7 @@ class TextLineChangeCommand : public KCommand, CommandUtils {
 };
 //NY28
 
-class BarcodeCommand : public KCommand, CommandUtils {
+class BarcodeCommand : public K3Command, CommandUtils {
     public:
         BarcodeCommand( BarcodeItem* bcode, Barkode* d );
         ~BarcodeCommand() {
@@ -363,7 +364,7 @@ class NewBarcodeCommand : public NewItemCommand {
 	TokenProvider* m_token;
 };
 
-class DeleteCommand : public KCommand, CommandUtils {
+class DeleteCommand : public K3Command, CommandUtils {
     public:
         DeleteCommand( TCanvasItem* it ) 
             : CommandUtils( it )
@@ -378,7 +379,7 @@ class DeleteCommand : public KCommand, CommandUtils {
         }
 };
 
-class BorderCommand : public KCommand, protected CommandUtils {
+class BorderCommand : public K3Command, protected CommandUtils {
     public:
         BorderCommand( bool border, const QPen & pen, DocumentItem* item );
         
@@ -397,7 +398,7 @@ class BorderCommand : public KCommand, protected CommandUtils {
         DocumentItem* m_item;
 };
 
-class FillCommand : public KCommand, protected CommandUtils {
+class FillCommand : public K3Command, protected CommandUtils {
     public:
         FillCommand(  QColor c, RectItem* r  );
 
@@ -412,7 +413,7 @@ class FillCommand : public KCommand, protected CommandUtils {
         RectItem* m_item;
 };
 
-class ScriptCommand : public KCommand, CommandUtils {
+class ScriptCommand : public K3Command, CommandUtils {
     public:
         ScriptCommand( const QString & script, TCanvasItem* it )
             : CommandUtils( it )

@@ -25,6 +25,7 @@
 
 #include <qbuffer.h>
 #include <qdom.h>
+#include <QString>
 
 class DragCommand : public NewItemCommand {
     public:
@@ -46,11 +47,11 @@ class DragCommand : public NewItemCommand {
 
 
 DocumentItemDrag::DocumentItemDrag( QWidget* dragSource )
-    : QStoredDrag( DocumentItemDrag::mimeType(), dragSource )
+    : Q3StoredDrag( DocumentItemDrag::mimeType(), dragSource )
 {
 }
 
-QString DocumentItemDrag::mimeType()
+const char * DocumentItemDrag::mimeType()// -!F: Replace const char* with QString.
 {
     return "application/x-kbarcode-document-item";
 }
@@ -58,7 +59,7 @@ QString DocumentItemDrag::mimeType()
 void DocumentItemDrag::setDocumentItem( DocumentItemList* list )
 {
     QByteArray data;
-    QBuffer buffer( data );
+    QBuffer buffer( & data );
     if( buffer.open( QIODevice::WriteOnly ) )
     {
         QDomDocument doc("KBarcodeClipboard");
@@ -76,7 +77,7 @@ void DocumentItemDrag::setDocumentItem( DocumentItemList* list )
         doc.save( t, 0 );
         
         buffer.close();
-        setData( data );    
+        setEncodedData( data );    
     }
 }
 
@@ -85,7 +86,7 @@ bool DocumentItemDrag::canDecode( QMimeSource* e )
     return e->provides( DocumentItemDrag::mimeType() );
 }
 
-bool DocumentItemDrag::decode( QMimeSource* mime, MyCanvasView* cv, TokenProvider* token, KCommandHistory* history )
+bool DocumentItemDrag::decode( QMimeSource* mime, MyCanvasView* cv, TokenProvider* token, K3CommandHistory* history )
 {
     QByteArray data = mime->encodedData( DocumentItemDrag::mimeType() );
     QDomDocument doc( "KBarcodeClipboard" );
@@ -94,7 +95,7 @@ bool DocumentItemDrag::decode( QMimeSource* mime, MyCanvasView* cv, TokenProvide
     
     QDomNode n = doc.documentElement();
     QDomNodeList list = n.childNodes();
-    KMacroCommand* commands = new KMacroCommand( i18n("Paste") );
+    K3MacroCommand* commands = new K3MacroCommand( i18n("Paste") );
     
     for( unsigned int i=0;i<list.length();i++)
     {

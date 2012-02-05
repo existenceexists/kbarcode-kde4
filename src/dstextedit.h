@@ -21,23 +21,23 @@
 #include <qnamespace.h> 
 
 #if QT_VERSION >= 0x030100
-    #include <ktextedit.h>
+    #include <k3textedit.h>
 #else
     #include <q3textedit.h>
 #endif
 
 // Otherwise moc will complain
 #if QT_VERSION >= 0x030100
-  #define TextEditBase KTextEdit
+  #define TextEditBase K3TextEdit
 #else
-  #define TextEditBase QTextEdit
+  #define TextEditBase Q3TextEdit
 #endif 
 
 class DSTextEdit : public TextEditBase {
     Q_OBJECT
         
   public:
-    DSTextEdit( QWidget* parent );
+    DSTextEdit( QWidget* parent=0 );
 
     //virtual void moveCursor( CursorAction action, bool select );
   private slots:

@@ -18,28 +18,30 @@
 #ifndef TOKENDIALOG_H
 #define TOKENDIALOG_H
 
-#include <QWizard>
+#include <k3wizard.h>
 #include "documentitem.h"
 #include "tokenprovider.h"
 //Added by qt3to4:
 #include <QList>
 
-class KListBox;
-class QTreeWidget;
-class QListBoxItem;
-class QTreeWidgetItem;
+class K3ListBox;
+class Q3ListView;
+class Q3ListBoxItem;
+class Q3ListViewItem;
 class KLineEdit;
 class TokenProvider;
+class K3Wizard;
+class K3ListView;
 
 class QRadioButton;
-class QStackedWidget;
+class Q3WidgetStack;
 class QWidget;
 class KComboBox;
-class QTextBrowser;
+class Q3TextBrowser;
 class KPushButton;
 class DSTextEdit;
 
-class TokenDialog : public QWizard {
+class TokenDialog : public K3Wizard {
     
  Q_OBJECT
 
@@ -49,8 +51,8 @@ class TokenDialog : public QWizard {
     inline const QString & token() const { return m_result; }
 
  private slots:
-    void categoryChanged( QListBoxItem* item );
-    void itemChanged( QTreeWidgetItem* item );
+    void categoryChanged( Q3ListBoxItem* item );
+    void itemChanged( Q3ListViewItem* item );
 
  private:
     void initAll();
@@ -96,18 +98,18 @@ class TokenDialog : public QWizard {
     QRadioButton* radioVariableExisting;
     
     KLineEdit* editVariable;
-    KListBox* listVariable;
+    K3ListBox* listVariable;
 
     KLineEdit* editQuery;
-    QTextBrowser* textQueryResults;
+    Q3TextBrowser* textQueryResults;
     KPushButton* buttonQuery;
 
     DSTextEdit* editJavaScript;
 
     QString m_result;
 
-    QStackedWidget* page2;
-    QStackedWidget* page3;
+    Q3WidgetStack* page2;
+    Q3WidgetStack* page3;
 
     QWidget* stackPage1;
     QWidget* stackPage2;
@@ -121,11 +123,11 @@ class TokenDialog : public QWizard {
     QList<tToken> m_tokens;
     TokenProvider* m_token;
 
-    KListBox* category;
-    QTreeWidget* allList;
+    K3ListBox* category;
+    K3ListView* allList;
     KLineEdit* lineEdit;
 
-    QTreeWidget* labelList;
+    Q3ListView* labelList;
 };
 
 #endif

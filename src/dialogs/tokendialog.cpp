@@ -23,6 +23,7 @@
 #include <klineedit.h>
 #include <k3listbox.h>
 #include <k3listview.h>
+#include <k3wizard.h>
 #include <klocale.h>
 
 #include <q3hbox.h> 
@@ -32,9 +33,13 @@
 #include <qtooltip.h>
 #include <QList>
 #include <q3vbox.h>
-#include <qvbuttongroup.h>
+//#include <qvbuttongroup.h>
+#include <QGroupBox>
 #include <q3widgetstack.h>
 #include <qradiobutton.h>
+#include <QWidget>
+#include <QObject>
+#include <Q3ListBoxItem>
 //Added by qt3to4:
 #include <QVBoxLayout>
 #include <kcombobox.h>
@@ -42,7 +47,7 @@
 #include <kpushbutton.h>
 
 TokenDialog::TokenDialog(TokenProvider* token ,QWidget *parent)
-    : QWizard( parent ), m_token( token )
+    : K3Wizard( parent ), m_token( token )
 {
     m_custom_tokens = m_token->listUserVars();
 
@@ -65,7 +70,7 @@ TokenDialog::TokenDialog(TokenProvider* token ,QWidget *parent)
 void TokenDialog::setupPage1()
 {
     QGroupBox* page = new QGroupBox( i18n("What do you want to insert?") );
-    QVBoxLayout* page_layout=new QVBoxLayout;
+    QVBoxLayout* page_layout = new QVBoxLayout;
 
     radioFixed = new QRadioButton( i18n("Insert a &fixed data field") );
     page_layout->addWidget(radioFixed);
@@ -80,14 +85,14 @@ void TokenDialog::setupPage1()
 
 void TokenDialog::setupPage2()
 {
-    page2 = new QStackedWidget();
+    page2 = new Q3WidgetStack( this );
 
     addPage( page2, i18n("Step 2 of 3") );
 }
 
 void TokenDialog::setupPage3()
 {
-    page3 = new QStackedWidget();
+    page3 = new Q3WidgetStack( this );
 
     addPage( page3, i18n("Step 3 of 3") );
 }
@@ -158,18 +163,18 @@ void TokenDialog::setupStack2Page1()
     
     QLabel* label = new QLabel( i18n("&Category:") );
     left_layout->addWidget(label);
-    category = new KListBox;
+    category = new K3ListBox;
     left_layout->addWidget(category);
     label->setBuddy( category );
 
     label = new QLabel( i18n("&Token:") );
     right_layout->addWidget(label);
-    allList = new QTreeWidget;
-    right->addWidget(allList);
+    allList = new K3ListView;
+    right_layout->addWidget(allList);
     allList->addColumn( i18n("Token"), 0 );
     allList->addColumn( i18n("Description"), 1 );
-    allList->setColumnWidthMode( 0, QTreeWidget::Maximum );
-    allList->setColumnWidthMode( 1, QTreeWidget::Maximum );
+    allList->setColumnWidthMode( 0, Q3ListView::Maximum );
+    allList->setColumnWidthMode( 1, Q3ListView::Maximum );
     label->setBuddy( allList );
     label = new QLabel( i18n("&Custom Expression to be inserted in the token.") );
     right_layout->addWidget(label);
@@ -191,7 +196,7 @@ void TokenDialog::setupStack2Page1()
     splitter->setSizes( sizes );
 
     connect( category, SIGNAL( executed( QListBoxItem* ) ), this, SLOT( categoryChanged( QListBoxItem* ) ) );
-    connect( allList, SIGNAL( clicked( QTreeWidgetItem* ) ), this, SLOT( itemChanged( QTreeWidgetItem* ) ) );
+    connect( allList, SIGNAL( clicked( Q3ListViewItem* ) ), this, SLOT( itemChanged( Q3ListViewItem* ) ) );
 
     initAll();
 
@@ -204,15 +209,15 @@ void TokenDialog::setupStack2Page2()
 	QVBoxLayout* stack2Page2_layout = new QVBoxLayout;
 	stack2Page2->setLayout(stack2Page2_layout);
 
-    labelList = new QTreeWidget;
+    labelList = new K3ListView;
 	stack2Page2_layout->addWidget(labelList);
     labelList->addColumn( i18n("Token"), 0 );
     labelList->addColumn( i18n("Description"), 1 );
-    labelList->setColumnWidthMode( 0, QTreeWidget::Maximum );
-    labelList->setColumnWidthMode( 1, QTreeWidget::Maximum );
+    labelList->setColumnWidthMode( 0, Q3ListView::Maximum );
+    labelList->setColumnWidthMode( 1, Q3ListView::Maximum );
 
     connect( labelList, SIGNAL( selectionChanged() ), this, SLOT( enableControls() ) );
-    connect( labelList, SIGNAL( doubleClicked( QTreeWidgetItem *, const QPoint &, int ) ), this, SLOT( accept() ) );
+    connect( labelList, SIGNAL( doubleClicked( Q3ListViewItem *, const QPoint &, int ) ), this, SLOT( accept() ) );
 
     page3->addWidget( stack2Page2 );
 }
@@ -229,7 +234,7 @@ void TokenDialog::setupStack2Page3()
 
     radioVariableExisting = new QRadioButton( i18n("&Insert an existing custom variable") );
     group_layout->addWidget(radioVariableExisting);
-    listVariable = new KListBox;
+    listVariable = new K3ListBox;
     radioVariableNew->setChecked( true );
     group_layout->addWidget(listVariable);
     stack2Page3->setLayout(group_layout);
@@ -273,15 +278,15 @@ void TokenDialog::setupStack2Page4()
 
     hbox_layout->setStretchFactor( editQuery, 2 );
 
-    stack2Page4_layout->addWidget(new QLabel( i18n("Query test results:"));
-    textQueryResults = new QTextBrowser;
+    stack2Page4_layout->addWidget(new QLabel( i18n("Query test results:")));
+    textQueryResults = new Q3TextBrowser;
     stack2Page4_layout->addWidget(textQueryResults);
     textQueryResults->setReadOnly( true );
 
     connect( buttonQuery, SIGNAL( clicked() ), this, SLOT( testQuery() ) );
     connect( editQuery, SIGNAL( textChanged( const QString & ) ), this, SLOT( enableControls() ) );
         
-    page3->layout->addWidget( stack2Page4 );
+    page3->layout()->addWidget( stack2Page4 );
 }
 
 void TokenDialog::setupStack2Page5() 
@@ -323,7 +328,7 @@ void TokenDialog::accept()
     }
     else
     {
-        QTreeWidgetItem* item = ( radioAll->isChecked() ? allList->selectedItem() : labelList->selectedItem() );
+        Q3ListViewItem* item = ( radioAll->isChecked() ? allList->selectedItem() : labelList->selectedItem() );
 
         if( item )
         {
@@ -339,7 +344,7 @@ void TokenDialog::accept()
         }
     }
 
-    KWizard::accept();
+    K3Wizard::accept();
 }
 
 void TokenDialog::showPage( QWidget* w )
@@ -377,7 +382,7 @@ void TokenDialog::showPage( QWidget* w )
             page2->raiseWidget( stackPage2 );
     }
 
-    KWizard::showPage( w );
+    K3Wizard::showPage( w );
 }
 
 void TokenDialog::initAll()
@@ -385,10 +390,10 @@ void TokenDialog::initAll()
     unsigned int i, z;
     QList<tCategories>* categories = TokenProvider::getTokens();
 
-    category->addItem( i18n("All") );
+    category->insertItem( i18n("All") );
     
     for( i = 0; i < categories->count(); i++ )
-        category->addItem( TokenProvider::captionForCategory( (TokenProvider::ECategories)(*categories)[i].category ) );
+        category->insertItem( TokenProvider::captionForCategory( (TokenProvider::ECategories)(*categories)[i].category ) );
 
     for( i = 0; i < categories->count(); i++ )
 	for( z = 0; z < (*categories)[i].tokens.count(); z++ )
@@ -427,7 +432,7 @@ void TokenDialog::initStackPage2()
         if( (*categories)[i].category == cat )
         {
             for( unsigned int z = 0; z < (*categories)[i].tokens.count(); z++ )
-                labelList->insertItem( new QTreeWidgetItem( labelList, QString( "[%1]").arg( (*categories)[i].tokens[z].token ),
+                labelList->insertItem( new K3ListViewItem( labelList, QString( "[%1]").arg( (*categories)[i].tokens[z].token ),
                                                      (*categories)[i].tokens[z].description ) );
             
             break;
@@ -435,7 +440,7 @@ void TokenDialog::initStackPage2()
     }
 }
 
-void TokenDialog::categoryChanged( QListBoxItem* item )
+void TokenDialog::categoryChanged( Q3ListBoxItem* item )
 {
     unsigned int i;
     QList<tCategories>* categories = TokenProvider::getTokens();
@@ -445,7 +450,7 @@ void TokenDialog::categoryChanged( QListBoxItem* item )
     if( item->prev() == 0 )
     {
         for( i = 0; i < m_tokens.count(); i++ )
-	    allList->insertItem( new QTreeWidgetItem( allList, QString( "[%1]").arg( m_tokens[i].token ),
+	    allList->insertItem( new K3ListViewItem( allList, QString( "[%1]").arg( m_tokens[i].token ),
 						 m_tokens[i].description ) );
     } 
     else
@@ -455,7 +460,7 @@ void TokenDialog::categoryChanged( QListBoxItem* item )
             if( TokenProvider::captionForCategory( (TokenProvider::ECategories)(*categories)[i].category ) == item->text() )
             {
                 for( unsigned int z = 0; z < (*categories)[i].tokens.count(); z++ )
-                    allList->insertItem( new QTreeWidgetItem( allList, QString( "[%1]").arg( (*categories)[i].tokens[z].token ),
+                    allList->insertItem( new K3ListViewItem( allList, QString( "[%1]").arg( (*categories)[i].tokens[z].token ),
                                       (*categories)[i].tokens[z].description ) );
                 
                 break;
@@ -465,12 +470,12 @@ void TokenDialog::categoryChanged( QListBoxItem* item )
 	// TODO: comparing by a user visible string cries for bugs!!!
 	if( item->text() == i18n("Custom Values") )
 	    for( i=0;i<m_custom_tokens.count();i++ )
-		allList->insertItem( new QTreeWidgetItem( allList, QString( "[%1]").arg( m_custom_tokens[i] ), 
+		allList->insertItem( new K3ListViewItem( allList, QString( "[%1]").arg( m_custom_tokens[i] ), 
 						     i18n("Variable defined by the user for this label.") ) );
     }
 }
 
-void TokenDialog::itemChanged( QTreeWidgetItem* item )
+void TokenDialog::itemChanged( Q3ListViewItem* item )
 {
     for( unsigned int i = 0; i < m_tokens.count(); i++ )
     {

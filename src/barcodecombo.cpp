@@ -16,7 +16,7 @@
  ***************************************************************************/
 
 #include "barcodecombo.h"
-#include "barcodedialogs.h"
+#include "dialogs/barcodedialogs.h"
 #include "barkode.h"
 #include "tokendialog.h"
 
