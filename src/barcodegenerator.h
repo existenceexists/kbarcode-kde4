@@ -43,6 +43,7 @@ class QVBoxLayout;
 class QHBoxLayout; 
 class QGridLayout;
 class TokenProvider;
+class QScrollArea;
 
 /** This class provides a dialog, where the user can create a single barcode
   * and print it, copy it to the clipboard or save it in various image formats.
@@ -69,6 +70,7 @@ class BarcodeGenerator : public QDialog
         KPushButton* buttonCopy;
         KPushButton* buttonClose;
         QLabel* barcode;
+        QScrollArea* sv;
 
     private slots:
         void generate();

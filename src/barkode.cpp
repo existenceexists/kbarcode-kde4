@@ -68,6 +68,7 @@ enum {
 #include <q3picture.h>
 #include <qpixmap.h>
 #include <qsize.h>
+#include <QDebug>// -!F:
 
 #include <klocale.h>
 #include <kstandarddirs.h>
@@ -215,6 +216,7 @@ const QPicture Barkode::picture()
 void Barkode::drawInvalid( QPainter & painter, int x, int y )
 {
     QRect rect( x, y, size().width(), size().height() );
+    qDebug() << "Barkode::drawInvalid: " << x << y << size().width() << size().height();
     painter.save();
     painter.fillRect( rect, Qt::white );
     painter.setPen( QPen( Qt::red, 2 ) );
@@ -231,12 +233,17 @@ const QSize Barkode::size() const
 
 const QPixmap Barkode::pixmap( double scalex, double scaley )
 {
-    QPixmap pixmap( (int)(size().width() * scalex), (int)(size().height() * scaley) );
+    QPixmap pixmap( (int)(size().width() * scalex), (int)(size().height() * scaley) );// -!F: original, uncomment
+    /*QPixmap * pixmap1 = new QPixmap( (int)(size().width() * scalex), (int)(size().height() * scaley) );// -!F: delete
+    QPixmap pixmap = * pixmap1;*/// -!F: delete
+    qDebug() << "pixmap.height = " << pixmap.height() << "pixmap.width = " << pixmap.width();
     if( !pixmap.isNull() )
     {
         QPainter painter( &pixmap );
         painter.scale( scalex, scaley );
+        qDebug() << "scalex = " << scalex << "scaley = " << scaley;
         painter.fillRect( 0, 0, size().width(), size().height(), m_background );
+        qDebug() << "size().width() = " << size().width() << "size().height() = " << size().height();
         drawBarcode( painter );
     }
     
@@ -354,14 +361,19 @@ void Barkode::updateEngine()
 
 void Barkode::drawBarcode(  QPainter & painter, int x, int y ) 
 { 
-    if( m_engine )
+    if( m_engine ) {
         m_engine->drawBarcode( painter, x, y );
+        qDebug() << "Barkode::drawBarcode 1";
+    }
 }
 
 void Barkode::update( const QPaintDevice* device )
 {
-    if( m_engine )
+    if( m_engine ) {
+        qDebug() << "Barkode::update 1";
         m_engine->update( device );
+        qDebug() << "Barkode::update 2";
+    }
 }
 
 ////////////////////////////////////////////////////////////
