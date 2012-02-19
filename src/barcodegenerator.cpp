@@ -136,6 +136,8 @@ void BarcodeGenerator::generate()
     //qDebug() << "generate 4";
 
     //qDebug() << "generate 1 height:" << d.pixmap().height() << "generate width:" << d.pixmap().width();
+    delete barcode;
+    barcode = new QLabel( NULL );
     barcode->setPixmap( d.pixmap() );// -!F: original, uncomment
     /*QPixmap pixmapTest( 100, 100 );
     pixmapTest.fill();*/// -!F: delete
@@ -146,7 +148,7 @@ void BarcodeGenerator::generate()
     painterTest.drawRect( rect );*/// -!F: delete
     //barcode->setPixmap( pixmapTest );// -!F: delete
     sv->setWidget( barcode );
-    barcode->show();// -!F: delete
+    //barcode->show();// -!F: delete
     //qDebug() << "generate 2 height:" << barcode->pixmap()->height() << "generate width:" << barcode->pixmap()->width();
 
     buttonSave->setEnabled( !barcode->pixmap()->isNull() );
