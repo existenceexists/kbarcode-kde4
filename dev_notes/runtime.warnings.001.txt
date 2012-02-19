@@ -1,0 +1,14 @@
+Runtime Warnings - Kbarcode:
+- Prefix changed: ...,
+- QFSFileEngine::open: No file name specified
+Cannot read validation rules from
+- 2 warnings after moving the mouse cursor over confassistant dialog:
+QInotifyFileSystemWatcherEngine::addPaths: ...
+QFileSystemWatcher: failed to add paths: /home/fanda/.config/ibus/bus
+- Warnings after an attempt to connect to a database:
+QSqlDatabasePrivate::removeDatabase ...,
+QSqlQuery::exec: database not open
+Can't import data, database not open!
+- Warnings triggered when creating a databasebrowser widget like so:
+Q3SqlCursor::setName: unable to build record, does 'label_def' exist?
+- When using the barcode generator: barcode: can't encode "12345678"
