@@ -13,6 +13,3 @@ Can't import data, database not open!
 - Warnings triggered when creating a databasebrowser widget like so:
 Q3SqlCursor::setName: unable to build record, does 'label_def' exist?
 - When using the barcode generator: barcode: can't encode "12345678"
-- When clicked on the button "Insert Data Field" in the barcode generator window:
-Object::connect: No such signal K3ListBox::executed( QListBoxItem* )
-Object::connect: No such signal K3ListBox::doubleClicked( QListBoxItem*, const QPoint & )

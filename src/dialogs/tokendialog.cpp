@@ -195,7 +195,7 @@ void TokenDialog::setupStack2Page1()
     right_layout->setStretchFactor( allList, 2 );
     splitter->setSizes( sizes );
 
-    connect( category, SIGNAL( executed( QListBoxItem* ) ), this, SLOT( categoryChanged( QListBoxItem* ) ) );
+    connect( category, SIGNAL( executed( Q3ListBoxItem* ) ), this, SLOT( categoryChanged( Q3ListBoxItem* ) ) );
     connect( allList, SIGNAL( clicked( Q3ListViewItem* ) ), this, SLOT( itemChanged( Q3ListViewItem* ) ) );
 
     initAll();
@@ -248,7 +248,7 @@ void TokenDialog::setupStack2Page3()
     connect( radioVariableExisting, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
     connect( editVariable, SIGNAL( textChanged( const QString & ) ), this, SLOT( enableControls() ) );
     connect( listVariable, SIGNAL( highlighted( int ) ), this, SLOT( enableControls() ) );
-    connect( listVariable, SIGNAL( doubleClicked( QListBoxItem*, const QPoint & ) ), this, SLOT( accept() ) );
+    connect( listVariable, SIGNAL( doubleClicked( Q3ListBoxItem*, const QPoint & ) ), this, SLOT( accept() ) );
 
     page3->addWidget( stack2Page3 );
 }
