@@ -39,8 +39,6 @@
 #include <QByteArray>
 #include <QDesktopWidget>
 
-#include <QDebug>// -!F: delete
-
 /* Margin added by GNU Barcode to the barcodes */
 #define BARCODE_MARGIN 10     
 
@@ -122,18 +120,15 @@ void PixmapBarcode::drawBarcode( QPainter & painter, int x, int y )
 {
     if( p.isNull() ) {
         createBarcode( &p, painter.device() );
-        qDebug() << "if( p.isNull() ) executed";
     }
     
     if( p.isNull() ) // still no barcode....
     {
         barkode->drawInvalid( painter, x, y );
-        qDebug() << "second if( p.isNull() ) executed";
         return;
     }
         
     painter.drawPixmap( x, y, p );
-    qDebug() << "painter.drawPixmap( x, y, p ); executed";
 }
 
 bool PixmapBarcode::createPixmap( QPixmap* target, int resx, int resy )
@@ -150,16 +145,13 @@ bool PixmapBarcode::createPixmap( QPixmap* target, int resx, int resy )
     /*KTemporaryFile* input = new KTemporaryFile( QString::null, bMonocrome ? ".pbm" : ".ppm" );*/// -!F: original, delete
     KTemporaryFile* input = new KTemporaryFile();
     input->setSuffix(bMonocrome ? ".pbm" : ".ppm");
-    qDebug() << "input->fileName(): " << input->fileName();
     /*input->file()->close();*/// -!F: original, delete
     /*input->close();*/// -!F: added, keep or put somewhere else?
     input->open();
-    qDebug() << "input->fileName(): " << input->fileName();
 
     if( Barkode::engineForType( barkode->type() ) == PDF417 ) {
         if(!createPdf417( input )) {
             cleanUp( input, target );
-            qDebug() << "if(!createPdf417( input )) executed";
             return false;
         }
 
@@ -168,7 +160,6 @@ bool PixmapBarcode::createPixmap( QPixmap* target, int resx, int resy )
         if( !createPostscript( &postscript, &postscript_size ) )
         {
             cleanUp( input, target );
-            qDebug() << "if( !createPostscript( &postscript, &postscript_size ) )";
             return false;
         }
 
@@ -178,7 +169,6 @@ bool PixmapBarcode::createPixmap( QPixmap* target, int resx, int resy )
 	{
 	    // GNU Barcode was not able to encode this barcode
 	    cleanUp( input, target );
-            qDebug() << "if( !postscript_size )";
 	    return false;
 	}
 
@@ -211,12 +201,7 @@ bool PixmapBarcode::createPixmap( QPixmap* target, int resx, int resy )
 	fwrite( postscript, sizeof(char), postscript_size, gs_pipe );
 	pclose( gs_pipe );
 
-        //target->load( input->fileName(), "PBM" );// -!F: original, uncomment and delete the following lines
-        if ( !target->load( input->fileName(), "PBM" ) ) {// -!F: delete
-            qDebug() << "!target->load( input->fileName(), PBM ) )";// -!F: delete
-        } else {// -!F: delete
-            qDebug() << "pixmap height = " << target->height() << "pixmap width = " << target->width();// -!F: delete
-        }
+        target->load( input->fileName(), "PBM" );
     }
         
 
@@ -347,7 +332,6 @@ void PixmapBarcode::createBarcode( QPixmap* target, const QPaintDevice* device )
     // no matching barcode found in cache
     if( !cached ) {
         if( !createPixmap( target, resx, resy ) ) {
-            qDebug() << "if( !createPixmap( target, resx, resy ) ) return;";
             return;
         }
     } else {
@@ -515,7 +499,6 @@ QPixmap PixmapBarcode::cut( QPixmap* pic, double cut)
 QPixmap PixmapBarcode::addMargin( QPixmap* pic )
 {
     QPixmap p(500, 500);
-    qDebug() << "addMargin 1";
 
     /* We have to handle UPC special because of the checksum character
      * which is printed on the right margin.

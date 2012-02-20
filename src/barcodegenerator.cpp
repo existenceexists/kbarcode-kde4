@@ -46,8 +46,6 @@
 #include <QVBoxLayout>
 #include <QString>
 
-#include <QDebug>// -!F: delete
-
 BarcodeGenerator::BarcodeGenerator( QWidget* parent )
     : QDialog( parent, false)
 {
@@ -127,29 +125,14 @@ BarcodeGenerator::~BarcodeGenerator()
 void BarcodeGenerator::generate()
 {        
     Barkode d;
-    //qDebug() << "generate 1";
     widget->getData( d );
-    //qDebug() << "generate 2";
     d.setTokenProvider( m_token );
-    //qDebug() << "generate 3";
     d.update( KApplication::desktop() );
-    //qDebug() << "generate 4";
 
-    //qDebug() << "generate 1 height:" << d.pixmap().height() << "generate width:" << d.pixmap().width();
     delete barcode;
     barcode = new QLabel( NULL );
-    barcode->setPixmap( d.pixmap() );// -!F: original, uncomment
-    /*QPixmap pixmapTest( 100, 100 );
-    pixmapTest.fill();*/// -!F: delete
-    /*QPainter painterTest( &pixmapTest );
-    QRect rect( 0, 0, 100, 100 );
-    painterTest.fillRect( rect, Qt::white );
-    painterTest.setPen( QPen( Qt::red, 2 ) );
-    painterTest.drawRect( rect );*/// -!F: delete
-    //barcode->setPixmap( pixmapTest );// -!F: delete
+    barcode->setPixmap( d.pixmap() );
     sv->setWidget( barcode );
-    //barcode->show();// -!F: delete
-    //qDebug() << "generate 2 height:" << barcode->pixmap()->height() << "generate width:" << barcode->pixmap()->width();
 
     buttonSave->setEnabled( !barcode->pixmap()->isNull() );
     buttonPrint->setEnabled( !barcode->pixmap()->isNull() );
