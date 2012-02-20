@@ -119,7 +119,7 @@ void TokenDialog::setupStackPage1()
     group_layout->addWidget(radioAddress);
     group->setLayout(group_layout);
 
-    page2->layout()->addWidget( stackPage1 );
+    page2->addWidget( stackPage1 );
 }
 
 void TokenDialog::setupStackPage2()
@@ -143,7 +143,7 @@ void TokenDialog::setupStackPage2()
     connect( radioSQLQuery, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
     connect( radioJavaScript, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
 
-    page2->layout()->addWidget( stackPage2 );
+    page2->addWidget( stackPage2 );
 }
 
 void TokenDialog::setupStack2Page1()
@@ -200,7 +200,7 @@ void TokenDialog::setupStack2Page1()
 
     initAll();
 
-    page3->layout()->addWidget( stack2Page1 );
+    page3->addWidget( stack2Page1 );
 }
 
 void TokenDialog::setupStack2Page2()
@@ -286,7 +286,7 @@ void TokenDialog::setupStack2Page4()
     connect( buttonQuery, SIGNAL( clicked() ), this, SLOT( testQuery() ) );
     connect( editQuery, SIGNAL( textChanged( const QString & ) ), this, SLOT( enableControls() ) );
         
-    page3->layout()->addWidget( stack2Page4 );
+    page3->addWidget( stack2Page4 );
 }
 
 void TokenDialog::setupStack2Page5() 
@@ -301,7 +301,7 @@ void TokenDialog::setupStack2Page5()
 
     connect( editJavaScript, SIGNAL( textChanged() ), SLOT( enableControls() ) );
 
-    page3->layout()->addWidget( stack2Page5 );
+    page3->addWidget( stack2Page5 );
 }
 
 void TokenDialog::accept()
