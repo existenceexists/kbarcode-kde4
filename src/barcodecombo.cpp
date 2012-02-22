@@ -168,11 +168,12 @@ BarcodeWidget::BarcodeWidget(QWidget *parent)
 
     buttonToken = new KPushButton( i18n("&Insert Data Field..."), this );
     /*buttonToken->setIcon( QIcon( SmallIcon("contents") ) );*/// -!F: original, del
-    buttonToken->setIcon( KIcon( SmallIcon("contents") ) );
+    buttonToken->setIcon( KIcon( SmallIcon("view-table-of-contents-ltr") ) );
     grid->addWidget( buttonToken, 4, 3 );
     
     spinMargin = new KIntNumInput( this );
-    spinMargin->setLabel( i18n( "&Margin:" ), Qt::AlignLeft | Qt::AlignVCenter );
+    /*spinMargin->setLabel( i18n( "&Margin:" ), Qt::AlignLeft | Qt::AlignVCenter );*/// -!F: original, del
+    spinMargin->setLabel( i18n( "&Margin:" ), Qt::AlignLeft | Qt::AlignTop );
     spinMargin->setRange( 0, 10000, 1 );
     spinMargin->setSliderEnabled( false );
     spinMargin->setValue( 10 );
@@ -181,7 +182,8 @@ BarcodeWidget::BarcodeWidget(QWidget *parent)
     grid->addWidget( spinMargin, 5, 0, 1, 2 );
 
     spinRotation = new KIntNumInput( this );
-    spinRotation->setLabel( i18n( "&Rotation:" ), Qt::AlignLeft | Qt::AlignVCenter );
+    /*spinRotation->setLabel( i18n( "&Rotation:" ), Qt::AlignLeft | Qt::AlignVCenter );*/// -!F: original, del
+    spinRotation->setLabel( i18n( "&Rotation:" ), Qt::AlignLeft | Qt::AlignTop );
     spinRotation->setRange( 0, 360, 90 );
     spinRotation->setSliderEnabled( false );
     spinRotation->setValue( 0 );
@@ -191,7 +193,8 @@ BarcodeWidget::BarcodeWidget(QWidget *parent)
 
     /*spinScale = new KIntNumInput( spinMargin, 1000, this );*/// -!F: original, del
     spinScale = new KIntNumInput( this );
-    spinScale->setLabel( i18n("&Scale (in permille):"), Qt::AlignLeft | Qt::AlignVCenter );
+    /*spinScale->setLabel( i18n("&Scale (in permille):"), Qt::AlignLeft | Qt::AlignVCenter );*/// -!F: original, del
+    spinScale->setLabel( i18n("&Scale (in permille):"), Qt::AlignLeft | Qt::AlignTop );
     spinScale->setRange( 100, 10000, 100 );
     spinScale->setSliderEnabled( false );
     spinScale->setValue( 1000 );
@@ -201,7 +204,8 @@ BarcodeWidget::BarcodeWidget(QWidget *parent)
 
     /*spinCut = new KIntNumInput( spinRotation, 100, this );*/// -!F: original, del
     spinCut = new KIntNumInput( this );
-    spinCut->setLabel( i18n("&Crop:"), Qt::AlignLeft | Qt::AlignVCenter );
+    /*spinCut->setLabel( i18n("&Crop:"), Qt::AlignLeft | Qt::AlignVCenter );*/// -!F: original, del
+    spinCut->setLabel( i18n("&Crop:"), Qt::AlignLeft | Qt::AlignTop );
     spinCut->setRange( 1, 100, 1 );
     spinCut->setSliderEnabled( false );
     spinCut->setValue( 100 );
