@@ -94,14 +94,14 @@ BarcodeCombo::BarcodeCombo(QWidget *parent)
     : KComboBox( false, parent )
 
 {
-    this->insertStringList( *Barkode::encodingTypes() );
+    this->addItems( *Barkode::encodingTypes() );
 }
 
 BarcodeCombo::~BarcodeCombo()
 {
 }
 
-const QString & BarcodeCombo::getEncodingType()
+const QString BarcodeCombo::getEncodingType()
 {
     return Barkode::typeFromName( currentText() );
 }
@@ -117,7 +117,7 @@ BarcodeWidget::BarcodeWidget(QWidget *parent)
 {
     m_token = NULL;
 
-    QGridLayout* grid = new QGridLayout( this, 6, 6 );
+    QGridLayout* grid = new QGridLayout( this );
 
     labelStandard = new QLabel( i18n( "&Encoding Type:" ), this );
     grid->addWidget( labelStandard, 1, 0 );
@@ -125,7 +125,8 @@ BarcodeWidget::BarcodeWidget(QWidget *parent)
     comboStandard = new BarcodeCombo( this );
     connect( comboStandard, SIGNAL( activated(int) ), this, SLOT( encodingChanged() ) );
     connect( comboStandard, SIGNAL( activated(int) ), this, SLOT( changed() ) );
-    grid->addMultiCellWidget( comboStandard, 1, 1, 1, 3 );
+    /*grid->addMultiCellWidget( comboStandard, 1, 1, 1, 3 );*/// -!F: original, del
+    grid->addWidget( comboStandard, 1, 1, 1, 3 );
     labelStandard->setBuddy( comboStandard );
     
     labelData = new QLabel( i18n( "&Value:" ), this );
@@ -136,23 +137,26 @@ BarcodeWidget::BarcodeWidget(QWidget *parent)
     labelData->setBuddy( data );
     connect( data, SIGNAL( textChanged( const QString & ) ), this, SLOT( changed() ) );
     connect( data, SIGNAL( textChanged( const QString & ) ), this, SLOT( slotValidateValue() ) );
-    grid->addMultiCellWidget( data, 2, 2, 1, 3 );
+    /*grid->addMultiCellWidget( data, 2, 2, 1, 3 );*/// -!F: original, del
+    grid->addWidget( data, 2, 1, 1, 3 );
 
 #if QT_VERSION >= 0x030100
         multi = new KTextEdit( this );
 #else
         multi = new QTextEdit( this );
 #endif
-    multi->setTextFormat( Qt::PlainText );
+    /*multi->setTextFormat( Qt::PlainText );*/// -!F: original, no replacement of this? delete
     multi->setWordWrapMode( QTextOption::NoWrap );
     multi->setEnabled( false );
     multi->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
     multi->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
     multi->hide();
     connect( multi, SIGNAL( textChanged() ), this, SLOT( changed() ) );    
-    grid->addMultiCellWidget( multi, 3, 3, 1, 3 );
+    /*grid->addMultiCellWidget( multi, 3, 3, 1, 3 );*/// -!F: original, del
+    grid->addWidget( multi, 3, 1, 1, 3 );
     
-    checkText = new QCheckBox( this, "checkText" );
+    checkText = new QCheckBox( this );
+    checkText->setObjectName( "checkText" );
     checkText->setText( i18n( "&Display text" ) );
     checkText->setChecked( true );
     connect( checkText, SIGNAL( clicked() ), this, SLOT( changed() ) );
@@ -163,35 +167,47 @@ BarcodeWidget::BarcodeWidget(QWidget *parent)
     grid->addWidget( buttonAdvanced, 4, 2 );
 
     buttonToken = new KPushButton( i18n("&Insert Data Field..."), this );
-    buttonToken->setIconSet( QIcon( SmallIcon("contents") ) );
+    /*buttonToken->setIcon( QIcon( SmallIcon("contents") ) );*/// -!F: original, del
+    buttonToken->setIcon( KIcon( SmallIcon("contents") ) );
     grid->addWidget( buttonToken, 4, 3 );
     
     spinMargin = new KIntNumInput( this );
     spinMargin->setLabel( i18n( "&Margin:" ), Qt::AlignLeft | Qt::AlignVCenter );
-    spinMargin->setRange( 0, 10000, 1, false );
+    spinMargin->setRange( 0, 10000, 1 );
+    spinMargin->setSliderEnabled( false );
     spinMargin->setValue( 10 );
     connect( spinMargin, SIGNAL( valueChanged(int) ), this, SLOT( changed() ) );
-    grid->addMultiCellWidget( spinMargin, 5, 5, 0, 1 );
+    /*grid->addMultiCellWidget( spinMargin, 5, 5, 0, 1 );*/// -!F: original, del
+    grid->addWidget( spinMargin, 5, 0, 1, 2 );
 
     spinRotation = new KIntNumInput( this );
     spinRotation->setLabel( i18n( "&Rotation:" ), Qt::AlignLeft | Qt::AlignVCenter );
-    spinRotation->setRange( 0, 360, 90, false );
+    spinRotation->setRange( 0, 360, 90 );
+    spinRotation->setSliderEnabled( false );
     spinRotation->setValue( 0 );
     connect( spinRotation, SIGNAL( valueChanged(int) ), this, SLOT( changed() ) );
-    grid->addMultiCellWidget( spinRotation, 5, 5, 2, 3 );
+    /*grid->addMultiCellWidget( spinRotation, 5, 5, 2, 3 );*/// -!F: original, del
+    grid->addWidget( spinRotation, 5, 2, 1, 2 );
 
-    spinScale = new KIntNumInput( spinMargin, 1000, this );
+    /*spinScale = new KIntNumInput( spinMargin, 1000, this );*/// -!F: original, del
+    spinScale = new KIntNumInput( this );
     spinScale->setLabel( i18n("&Scale (in permille):"), Qt::AlignLeft | Qt::AlignVCenter );
-    spinScale->setRange( 100, 10000, 100, false );
+    spinScale->setRange( 100, 10000, 100 );
+    spinScale->setSliderEnabled( false );
     spinScale->setValue( 1000 );
     connect( spinScale, SIGNAL( valueChanged(int) ), this, SLOT( changed() ) );
-    grid->addMultiCellWidget( spinScale, 6, 6, 0, 1 );
+    /*grid->addMultiCellWidget( spinScale, 6, 6, 0, 1 );*/// -!F: original, del
+    grid->addWidget( spinScale, 6, 0, 1, 2 );
 
-    spinCut = new KIntNumInput( spinRotation, 100, this );
+    /*spinCut = new KIntNumInput( spinRotation, 100, this );*/// -!F: original, del
+    spinCut = new KIntNumInput( this );
     spinCut->setLabel( i18n("&Crop:"), Qt::AlignLeft | Qt::AlignVCenter );
-    spinCut->setRange( 1, 100, 1, false );
+    spinCut->setRange( 1, 100, 1 );
+    spinCut->setSliderEnabled( false );
+    spinCut->setValue( 100 );
     connect( spinCut, SIGNAL( valueChanged(int) ), this, SLOT( changed() ) );
-    grid->addMultiCellWidget( spinCut, 6, 6, 2, 3 );
+    /*grid->addMultiCellWidget( spinCut, 6, 6, 2, 3 );*/// -!F: original, del
+    grid->addWidget( spinCut, 6, 2, 1, 2 );
 
     connect( buttonAdvanced, SIGNAL( clicked() ), this, SLOT( advanced() ) );
     connect( buttonToken, SIGNAL( clicked() ), this, SLOT( tokens() ) );
@@ -308,15 +324,17 @@ void BarcodeWidget::tokens()
 	if( data->isEnabled() )
 	    data->insert( tokendlg.token() );
 	else
-	    multi->insert( tokendlg.token() );
+	    multi->insertPlainText( tokendlg.token() );
     }
 }
 
 void BarcodeWidget::slotValidateValue()
 {
-    QColor c = data->hasAcceptableInput() ? this->foregroundColor() : Qt::red;
-
     QPalette palette;
+    /*QColor c = data->hasAcceptableInput() ? this->foregroundColor() : Qt::red;*/// -!F: original, del
+    QColor c = data->hasAcceptableInput() ? palette.color( this->foregroundRole() ) : Qt::red;
+
+    /*QPalette palette;*/// -!F: original, del
     palette.setColor(data->foregroundRole(), c);
     data->setPalette(palette);    
 }

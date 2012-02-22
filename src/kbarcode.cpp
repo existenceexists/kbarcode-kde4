@@ -49,7 +49,7 @@
 KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
     : MainWindow( parent, f )
 {
-    kbarcodeDirectoryName = QString("kbarcode010");// -!F: delete in the end
+    kbarcodeDirectoryName = QString("kbarcode011");// -!F: delete in the end
     
     QGroupBox* w = new QGroupBox(this);
     /*QVBoxLayout* layout = new QVBoxLayout(this);*/

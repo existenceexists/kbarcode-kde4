@@ -61,7 +61,7 @@ class BarcodeCombo : public KComboBox  {
         BarcodeCombo(QWidget *parent=0);
         ~BarcodeCombo();
 
-        const QString & getEncodingType();
+        const QString getEncodingType();
         void setEncodingType( const QString & type );
 };
 

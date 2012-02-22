@@ -34,7 +34,6 @@
 #include <qpainter.h>
 #include <QPaintDevice>
 #include <qpixmap.h>
-#include <q3textstream.h>
 #include <QDebug>
 #include <QByteArray>
 #include <QDesktopWidget>
@@ -147,7 +146,7 @@ bool PixmapBarcode::createPixmap( QPixmap* target, int resx, int resy )
     input->setSuffix(bMonocrome ? ".pbm" : ".ppm");
     /*input->file()->close();*/// -!F: original, delete
     /*input->close();*/// -!F: added, keep or put somewhere else?
-    input->open();
+    input->open();// -!F: added, keep
 
     if( Barkode::engineForType( barkode->type() ) == PDF417 ) {
         if(!createPdf417( input )) {
