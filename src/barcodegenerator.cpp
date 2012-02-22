@@ -31,6 +31,7 @@
 #include <kmessagebox.h>
 #include <qprinter.h>
 #include <kpushbutton.h>
+#include <kstandarddirs.h>
 
 // Qt includes
 #include <qclipboard.h>
@@ -47,13 +48,26 @@
 #include <QString>
 
 BarcodeGenerator::BarcodeGenerator( QWidget* parent )
-    : QDialog( parent, false)
+    : QDialog( parent )
 {
-    setCaption( i18n( "Barcode Generator" ) );
+    setWindowTitle( i18n( "Barcode Generator" ) );
+    setWindowIcon( KIcon( KStandardDirs::locate( "appdata", QString("hi16-app-kbarcode.png") ) ) );
 
-    BarcodeGeneratorLayout = new QHBoxLayout( this, 11, 6, "BarcodeGeneratorLayout");
-    Layout5 = new QVBoxLayout( 0, 0, 6, "Layout5");
-    Layout6 = new QVBoxLayout( 0, 0, 6, "Layout2");
+    /*BarcodeGeneratorLayout = new QHBoxLayout( this, 11, 6, "BarcodeGeneratorLayout");*/// -!F: original, del
+    BarcodeGeneratorLayout = new QHBoxLayout( this );
+    BarcodeGeneratorLayout->setObjectName( "BarcodeGeneratorLayout" );
+    BarcodeGeneratorLayout->setContentsMargins( 11, 11, 11, 11 );
+    BarcodeGeneratorLayout->setSpacing( 6 );
+    /*Layout5 = new QVBoxLayout( 0, 0, 6, "Layout5");*/// -!F: original, del
+    Layout5 = new QVBoxLayout();
+    Layout5->setObjectName( "Layout5" );
+    Layout5->setContentsMargins( 0, 0, 0, 0 );
+    Layout5->setSpacing( 6 );
+    /*Layout6 = new QVBoxLayout( 0, 0, 6, "Layout2");*/// -!F: original, del
+    Layout6 = new QVBoxLayout();
+    Layout6->setObjectName( "Layout2" );
+    Layout6->setContentsMargins( 0, 0, 0, 0 );
+    Layout6->setSpacing( 6 );
     widget = new BarcodeWidget( this );
 
     m_token = new TokenProvider( KApplication::desktop()->screen() );
@@ -62,33 +76,33 @@ BarcodeGenerator::BarcodeGenerator( QWidget* parent )
     buttonGenerate = new KPushButton( this );
     buttonGenerate->setText( i18n( "&Generate" ) );
     buttonGenerate->setEnabled( Barkode::haveBarcode() );
-    buttonGenerate->setIconSet( SmallIconSet("barcode") );
+    buttonGenerate->setIcon( KIcon("view-barcode") );
     
     buttonSave = new KPushButton( this );
     buttonSave->setText( i18n( "&Save" ) );
     buttonSave->setEnabled( false );
-    buttonSave->setIconSet( SmallIconSet("filesave") );
+    buttonSave->setIcon( KIcon("document-save") );
         
     buttonCopy = new KPushButton( this );
     buttonCopy->setText( i18n("&Copy") );
     buttonCopy->setEnabled( false );
-    buttonCopy->setIconSet( SmallIconSet("editcopy") );
+    buttonCopy->setIcon( KIcon("edit-copy") );
     
     buttonPrint = new KPushButton( this );
     buttonPrint->setText( i18n("&Print") );
     buttonPrint->setEnabled( false );
-    buttonPrint->setIconSet( SmallIconSet("fileprint") );
+    buttonPrint->setIcon( KIcon("document-print") );
     
     buttonClose = new KPushButton( this );
     buttonClose->setText( i18n("&Close" ) );
-    buttonClose->setIconSet( SmallIconSet("fileclose") );
+    buttonClose->setIcon( KIcon("dialog-close") );
     
 
-    /*QScrollArea* sv = new QScrollArea( this );*/// -!F: original
+    /*QScrollArea* sv = new QScrollArea( this );*/// -!F: original, del
     sv = new QScrollArea( this );
     
     barcode = new QLabel( NULL );
-    /*sv->setWidget( barcode );*/// -!F: original
+    /*sv->setWidget( barcode );*/// -!F: original, del
     connect( buttonGenerate, SIGNAL( clicked() ), this, SLOT( generate() ) );
     connect( buttonSave, SIGNAL( clicked() ), this, SLOT( save() ) );
     connect( buttonPrint, SIGNAL( clicked() ), this, SLOT( print() ) );
@@ -187,7 +201,7 @@ void BarcodeGenerator::print()
     double scalex = (double)printer->logicalDpiX() / (double)QX11Info::appDpiX();
     double scaley = (double)printer->logicalDpiY() / (double)QX11Info::appDpiY();
     
-    QPicture picture;
+    Q3Picture picture;
     QPainter p( printer );
     p.scale( scalex, scaley );
     // TODO: center barcode
