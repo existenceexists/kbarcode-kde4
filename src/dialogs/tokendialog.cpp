@@ -183,7 +183,7 @@ void TokenDialog::setupStack2Page1()
     lineEdit->setEnabled( false );
     label->setBuddy( lineEdit );
 
-    QToolTip::add( lineEdit, i18n("<qt>Certain tokens, like for exaple the sqlquery token need arguments. "
+    lineEdit->setToolTip( i18n("<qt>Certain tokens, like for exaple the sqlquery token need arguments. "
 				  "In the case of the sqlquery token, the sure has to enter a sql query in "
 				  "this text field.</qt>" ) );
 
@@ -332,7 +332,7 @@ void TokenDialog::accept()
 
         if( item )
         {
-            for( unsigned int i = 0; i < m_tokens.count(); i++ )
+            for( int i = 0; i < m_tokens.count(); i++ )
                 if( QString( "[%1]").arg( m_tokens[i].token ) == item->text( 0 ) )
                 {
                     if( m_tokens[i].appendix )
@@ -387,7 +387,7 @@ void TokenDialog::showPage( QWidget* w )
 
 void TokenDialog::initAll()
 {
-    unsigned int i, z;
+    int i, z;
     QList<tCategories>* categories = TokenProvider::getTokens();
 
     category->insertItem( i18n("All") );
@@ -431,7 +431,7 @@ void TokenDialog::initStackPage2()
     {
         if( (*categories)[i].category == cat )
         {
-            for( unsigned int z = 0; z < (*categories)[i].tokens.count(); z++ )
+            for( int z = 0; z < (*categories)[i].tokens.count(); z++ )
                 labelList->insertItem( new K3ListViewItem( labelList, QString( "[%1]").arg( (*categories)[i].tokens[z].token ),
                                                      (*categories)[i].tokens[z].description ) );
             
@@ -442,7 +442,7 @@ void TokenDialog::initStackPage2()
 
 void TokenDialog::categoryChanged( Q3ListBoxItem* item )
 {
-    unsigned int i;
+    int i;
     QList<tCategories>* categories = TokenProvider::getTokens();
     allList->clear();
     lineEdit->setEnabled( false );
@@ -459,7 +459,7 @@ void TokenDialog::categoryChanged( Q3ListBoxItem* item )
         {
             if( TokenProvider::captionForCategory( (TokenProvider::ECategories)(*categories)[i].category ) == item->text() )
             {
-                for( unsigned int z = 0; z < (*categories)[i].tokens.count(); z++ )
+                for( int z = 0; z < (*categories)[i].tokens.count(); z++ )
                     allList->insertItem( new K3ListViewItem( allList, QString( "[%1]").arg( (*categories)[i].tokens[z].token ),
                                       (*categories)[i].tokens[z].description ) );
                 
@@ -477,7 +477,7 @@ void TokenDialog::categoryChanged( Q3ListBoxItem* item )
 
 void TokenDialog::itemChanged( Q3ListViewItem* item )
 {
-    for( unsigned int i = 0; i < m_tokens.count(); i++ )
+    for( int i = 0; i < m_tokens.count(); i++ )
     {
 	if( QString( "[%1]").arg( m_tokens[i].token ) == item->text( 0 ) )
 	{
@@ -498,9 +498,10 @@ void TokenDialog::enableControls()
     listVariable->setEnabled( radioVariableExisting->isChecked() );
     editVariable->setEnabled( radioVariableNew->isChecked() );    
 
-    if( editVariable->isEnabled() && !editVariable->text().isEmpty() ||
-        listVariable->isEnabled() && listVariable->currentItem() != -1 ) 
+    if( ( editVariable->isEnabled() && !editVariable->text().isEmpty() ) ||
+        ( listVariable->isEnabled() && ( listVariable->currentItem() != -1 ) ) ) {
         setFinishEnabled( page3, true );
+    }
 
     buttonQuery->setEnabled( radioSQLQuery->isChecked() && !editQuery->text().isEmpty() && SqlTables::isConnected() );
     if( radioSQLQuery->isChecked() && !editQuery->text().isEmpty() ) 
