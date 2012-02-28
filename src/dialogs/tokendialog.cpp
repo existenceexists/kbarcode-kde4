@@ -20,10 +20,10 @@
 #include "sqltables.h"
 #include "dstextedit.h"
 
+#include <kassistantdialog.h>
 #include <klineedit.h>
 #include <k3listbox.h>
 #include <k3listview.h>
-#include <k3wizard.h>
 #include <klocale.h>
 
 #include <q3hbox.h> 
@@ -35,7 +35,7 @@
 #include <q3vbox.h>
 //#include <qvbuttongroup.h>
 #include <QGroupBox>
-#include <q3widgetstack.h>
+#include <QStackedWidget>
 #include <qradiobutton.h>
 #include <QWidget>
 #include <QObject>
@@ -47,7 +47,7 @@
 #include <kpushbutton.h>
 
 TokenDialog::TokenDialog(TokenProvider* token ,QWidget *parent)
-    : K3Wizard( parent ), m_token( token )
+    : KAssistantDialog( parent ), m_token( token )
 {
     m_custom_tokens = m_token->listUserVars();
 
@@ -80,21 +80,24 @@ void TokenDialog::setupPage1()
     
     radioFixed->setChecked( true );
 
-    addPage( page, i18n("Step 1 of 3") );
+    KPageWidgetItem * page1Item = addPage( page, i18n("Step 1 of 3") );
+    page1Item->setObjectName("page1");
 }
 
 void TokenDialog::setupPage2()
 {
-    page2 = new Q3WidgetStack( this );
+    page2 = new QStackedWidget( this );
 
-    addPage( page2, i18n("Step 2 of 3") );
+    KPageWidgetItem * page2Item = addPage( page2, i18n("Step 2 of 3") );
+    page2Item->setObjectName("page2");
 }
 
 void TokenDialog::setupPage3()
 {
-    page3 = new Q3WidgetStack( this );
+    page3 = new QStackedWidget( this );
 
-    addPage( page3, i18n("Step 3 of 3") );
+    KPageWidgetItem * page3Item = addPage( page3, i18n("Step 3 of 3") );
+    page3Item->setObjectName("page3");
 }
 
 void TokenDialog::setupStackPage1()
@@ -344,45 +347,58 @@ void TokenDialog::accept()
         }
     }
 
-    K3Wizard::accept();
+    KAssistantDialog::accept();
 }
 
-void TokenDialog::showPage( QWidget* w )
+void TokenDialog::next()
 {
-    if( w == page3 ) 
+    KAssistantDialog::next();
+    
+    configureCurrentPage(currentPage());
+}
+
+void TokenDialog::back()
+{
+    KAssistantDialog::back();
+    
+    configureCurrentPage(currentPage());
+}
+
+void TokenDialog::configureCurrentPage( KPageWidgetItem* w )
+{
+    if( w->objectName() == QString("page3") )
     {
+        enableButton( KDialog::User1, false );
         if( radioCustom->isChecked() ) 
         {
             if( radioVariable->isChecked() )
-                page3->raiseWidget( stack2Page3 );
+                page3->setCurrentWidget( stack2Page3 );
             else if( radioSQLQuery->isChecked() )
-                page3->raiseWidget( stack2Page4 );
+                page3->setCurrentWidget( stack2Page4 );
             else if( radioJavaScript->isChecked() ) 
             {
-                page3->raiseWidget( stack2Page5 );
+                page3->setCurrentWidget( stack2Page5 );
                 editJavaScript->setFocus();
             }
         }
         else
         {
             if( radioAll->isChecked() )
-                page3->raiseWidget( stack2Page1 );
+                page3->setCurrentWidget( stack2Page1 );
             else 
             {
                 initStackPage2();
-                page3->raiseWidget( stack2Page2 );
+                page3->setCurrentWidget( stack2Page2 );
             }
         }
     }
-    else if( w == page2 ) 
+    else if( w->objectName() == QString("page2") )
     {
         if( radioFixed->isChecked() )
-            page2->raiseWidget( stackPage1 );
+            page2->setCurrentWidget( stackPage1 );
         else if( radioCustom->isChecked() )
-            page2->raiseWidget( stackPage2 );
+            page2->setCurrentWidget( stackPage2 );
     }
-
-    K3Wizard::showPage( w );
 }
 
 void TokenDialog::initAll()
@@ -493,30 +509,34 @@ void TokenDialog::itemChanged( Q3ListViewItem* item )
 
 void TokenDialog::enableControls()
 {
-    setFinishEnabled( page3, false );
+    enableButton( KDialog::User1, false );
 
     listVariable->setEnabled( radioVariableExisting->isChecked() );
     editVariable->setEnabled( radioVariableNew->isChecked() );    
 
     if( ( editVariable->isEnabled() && !editVariable->text().isEmpty() ) ||
         ( listVariable->isEnabled() && ( listVariable->currentItem() != -1 ) ) ) {
-        setFinishEnabled( page3, true );
+        enableButton( KDialog::User1, true );
     }
 
     buttonQuery->setEnabled( radioSQLQuery->isChecked() && !editQuery->text().isEmpty() && SqlTables::isConnected() );
-    if( radioSQLQuery->isChecked() && !editQuery->text().isEmpty() ) 
-        setFinishEnabled( page3, true );
+    if( radioSQLQuery->isChecked() && !editQuery->text().isEmpty() ) {
+        enableButton( KDialog::User1, true );
+    }
 
-    if( radioJavaScript->isChecked() && !editJavaScript->text().isEmpty() )
-        setFinishEnabled( page3, true );
+    if( radioJavaScript->isChecked() && !editJavaScript->text().isEmpty() ) {
+        enableButton( KDialog::User1, true );
+    }
 
     if( !radioCustom->isChecked() )
     {
-        if( !radioAll->isChecked() && labelList->selectedItem() )
-            setFinishEnabled( page3, true );
+        if( !radioAll->isChecked() && labelList->selectedItem() ) {
+            enableButton( KDialog::User1, true );
+        }
         
-        if( radioAll->isChecked() && allList->selectedItem() )
-            setFinishEnabled( page3, true );
+        if( radioAll->isChecked() && allList->selectedItem() ) {
+            enableButton( KDialog::User1, true );
+        }
     }
 }
 

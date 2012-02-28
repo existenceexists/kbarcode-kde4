@@ -18,9 +18,9 @@
 #ifndef TOKENDIALOG_H
 #define TOKENDIALOG_H
 
-#include <k3wizard.h>
 #include "documentitem.h"
 #include "tokenprovider.h"
+#include <kassistantdialog.h>
 //Added by qt3to4:
 #include <QList>
 
@@ -30,18 +30,19 @@ class Q3ListBoxItem;
 class Q3ListViewItem;
 class KLineEdit;
 class TokenProvider;
-class K3Wizard;
+class KAssistantDialog;
 class K3ListView;
+class KPageWidgetItem;
 
 class QRadioButton;
-class Q3WidgetStack;
+class QStackedWidget;
 class QWidget;
 class KComboBox;
 class Q3TextBrowser;
 class KPushButton;
 class DSTextEdit;
 
-class TokenDialog : public K3Wizard {
+class TokenDialog : public KAssistantDialog {
     
  Q_OBJECT
 
@@ -74,10 +75,12 @@ class TokenDialog : public K3Wizard {
  private slots:
      void enableControls();
      void testQuery();
+     void next();
+     void back();
 
  protected:
     void accept();
-    void showPage( QWidget* w );
+    void configureCurrentPage( KPageWidgetItem* w );
 
  private:
     QStringList m_custom_tokens;
@@ -108,8 +111,8 @@ class TokenDialog : public K3Wizard {
 
     QString m_result;
 
-    Q3WidgetStack* page2;
-    Q3WidgetStack* page3;
+    QStackedWidget* page2;
+    QStackedWidget* page3;
 
     QWidget* stackPage1;
     QWidget* stackPage2;
