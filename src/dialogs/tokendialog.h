@@ -122,6 +122,12 @@ class TokenDialog : public KAssistantDialog {
     QWidget* stack2Page3;
     QWidget* stack2Page4;
     QWidget* stack2Page5;
+    
+    bool enableFinishButtonStack2Page1;
+    bool enableFinishButtonStack2Page2;
+    bool enableFinishButtonStack2Page3;
+    bool enableFinishButtonStack2Page4;
+    bool enableFinishButtonStack2Page5;
 
     QList<tToken> m_tokens;
     TokenProvider* m_token;

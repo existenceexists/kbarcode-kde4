@@ -63,6 +63,12 @@ TokenDialog::TokenDialog(TokenProvider* token ,QWidget *parent)
     setupStack2Page3();
     setupStack2Page4();
     setupStack2Page5();
+    
+    enableFinishButtonStack2Page1 = false;
+    enableFinishButtonStack2Page2 = false;
+    enableFinishButtonStack2Page3 = false;
+    enableFinishButtonStack2Page4 = false;
+    enableFinishButtonStack2Page5 = false;
 
     enableControls();
 }
@@ -152,6 +158,7 @@ void TokenDialog::setupStackPage2()
 void TokenDialog::setupStack2Page1()
 {
     stack2Page1 = new QWidget;
+    stack2Page1->setObjectName( "stack2Page1" );
 
     QVBoxLayout* layout = new QVBoxLayout( stack2Page1 );
     QSplitter* splitter = new QSplitter( stack2Page1 );
@@ -209,6 +216,7 @@ void TokenDialog::setupStack2Page1()
 void TokenDialog::setupStack2Page2()
 {
     stack2Page2 = new QWidget;
+    stack2Page2->setObjectName( "stack2Page2" );
 	QVBoxLayout* stack2Page2_layout = new QVBoxLayout;
 	stack2Page2->setLayout(stack2Page2_layout);
 
@@ -228,6 +236,7 @@ void TokenDialog::setupStack2Page2()
 void TokenDialog::setupStack2Page3() 
 {
     stack2Page3 = new QGroupBox();
+    stack2Page3->setObjectName( "stack2Page3" );
     QVBoxLayout* group_layout = new QVBoxLayout;
 
     radioVariableNew = new QRadioButton( i18n("&Create a new custom variable") );
@@ -259,6 +268,7 @@ void TokenDialog::setupStack2Page3()
 void TokenDialog::setupStack2Page4() 
 {
     stack2Page4 = new QWidget();
+    stack2Page4->setObjectName( "stack2Page4" );
     QVBoxLayout* stack2Page4_layout = new QVBoxLayout;
     stack2Page4->setLayout(stack2Page4_layout);
 
@@ -295,6 +305,7 @@ void TokenDialog::setupStack2Page4()
 void TokenDialog::setupStack2Page5() 
 {
     stack2Page5 = new QWidget();
+    stack2Page5->setObjectName( "stack2Page5" );
     QVBoxLayout* stack2Page5_layout = new QVBoxLayout;
     stack2Page5->setLayout(stack2Page5_layout);
 
@@ -368,36 +379,46 @@ void TokenDialog::configureCurrentPage( KPageWidgetItem* w )
 {
     if( w->objectName() == QString("page3") )
     {
-        enableButton( KDialog::User1, false );
         if( radioCustom->isChecked() ) 
         {
-            if( radioVariable->isChecked() )
+            if( radioVariable->isChecked() ) {
                 page3->setCurrentWidget( stack2Page3 );
-            else if( radioSQLQuery->isChecked() )
+                enableButton( KDialog::User1, enableFinishButtonStack2Page3 );
+            }
+            else if( radioSQLQuery->isChecked() ) {
                 page3->setCurrentWidget( stack2Page4 );
+                enableButton( KDialog::User1, enableFinishButtonStack2Page4 );
+            }
             else if( radioJavaScript->isChecked() ) 
             {
                 page3->setCurrentWidget( stack2Page5 );
+                enableButton( KDialog::User1, enableFinishButtonStack2Page5 );
                 editJavaScript->setFocus();
             }
         }
         else
         {
-            if( radioAll->isChecked() )
+            if( radioAll->isChecked() ) {
                 page3->setCurrentWidget( stack2Page1 );
+                enableButton( KDialog::User1, enableFinishButtonStack2Page1 );
+            }
             else 
             {
                 initStackPage2();
                 page3->setCurrentWidget( stack2Page2 );
+                /*enableButton( KDialog::User1, enableFinishButtonStack2Page2 );*/// -!F: added, delete
+                enableButton( KDialog::User1, false );
             }
         }
     }
     else if( w->objectName() == QString("page2") )
     {
-        if( radioFixed->isChecked() )
+        if( radioFixed->isChecked() ) {
             page2->setCurrentWidget( stackPage1 );
-        else if( radioCustom->isChecked() )
+        }
+        else if( radioCustom->isChecked() ) {
             page2->setCurrentWidget( stackPage2 );
+        }
     }
 }
 
@@ -509,34 +530,51 @@ void TokenDialog::itemChanged( Q3ListViewItem* item )
 
 void TokenDialog::enableControls()
 {
-    enableButton( KDialog::User1, false );
+    enableFinishButtonStack2Page1 = false;
+    enableFinishButtonStack2Page2 = false;
+    enableFinishButtonStack2Page3 = false;
+    enableFinishButtonStack2Page4 = false;
+    enableFinishButtonStack2Page5 = false;
 
     listVariable->setEnabled( radioVariableExisting->isChecked() );
     editVariable->setEnabled( radioVariableNew->isChecked() );    
 
     if( ( editVariable->isEnabled() && !editVariable->text().isEmpty() ) ||
         ( listVariable->isEnabled() && ( listVariable->currentItem() != -1 ) ) ) {
-        enableButton( KDialog::User1, true );
+        enableFinishButtonStack2Page3 = true;
     }
 
     buttonQuery->setEnabled( radioSQLQuery->isChecked() && !editQuery->text().isEmpty() && SqlTables::isConnected() );
     if( radioSQLQuery->isChecked() && !editQuery->text().isEmpty() ) {
-        enableButton( KDialog::User1, true );
+        enableFinishButtonStack2Page4 = true;
     }
 
     if( radioJavaScript->isChecked() && !editJavaScript->text().isEmpty() ) {
-        enableButton( KDialog::User1, true );
+        enableFinishButtonStack2Page5 = true;
     }
 
     if( !radioCustom->isChecked() )
     {
         if( !radioAll->isChecked() && labelList->selectedItem() ) {
-            enableButton( KDialog::User1, true );
+            enableFinishButtonStack2Page2 = true;
         }
         
         if( radioAll->isChecked() && allList->selectedItem() ) {
-            enableButton( KDialog::User1, true );
+            enableFinishButtonStack2Page1 = true;
         }
+    }
+    
+    QString widgetName = page3->currentWidget()->objectName();
+    if( widgetName == QString( "stack2Page1" ) ) {
+        enableButton( KDialog::User1, enableFinishButtonStack2Page1 );
+    } else if( widgetName == QString( "stack2Page2" ) ) {
+        enableButton( KDialog::User1, enableFinishButtonStack2Page2 );
+    } else if( widgetName == QString( "stack2Page3" ) ) {
+        enableButton( KDialog::User1, enableFinishButtonStack2Page3 );
+    } else if( widgetName == QString( "stack2Page4" ) ) {
+        enableButton( KDialog::User1, enableFinishButtonStack2Page4 );
+    } else if( widgetName == QString( "stack2Page5" ) ) {
+        enableButton( KDialog::User1, enableFinishButtonStack2Page5 );
     }
 }
 
