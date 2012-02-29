@@ -22,7 +22,7 @@
 
 #include <kassistantdialog.h>
 #include <klineedit.h>
-#include <k3listbox.h>
+#include <klistwidget.h>
 #include <k3listview.h>
 #include <klocale.h>
 
@@ -40,6 +40,7 @@
 #include <QWidget>
 #include <QObject>
 #include <Q3ListBoxItem>
+#include <QModelIndex>
 //Added by qt3to4:
 #include <QVBoxLayout>
 #include <kcombobox.h>
@@ -173,7 +174,7 @@ void TokenDialog::setupStack2Page1()
     
     QLabel* label = new QLabel( i18n("&Category:") );
     left_layout->addWidget(label);
-    category = new K3ListBox;
+    category = new KListWidget;
     left_layout->addWidget(category);
     label->setBuddy( category );
 
@@ -205,7 +206,7 @@ void TokenDialog::setupStack2Page1()
     right_layout->setStretchFactor( allList, 2 );
     splitter->setSizes( sizes );
 
-    connect( category, SIGNAL( executed( Q3ListBoxItem* ) ), this, SLOT( categoryChanged( Q3ListBoxItem* ) ) );
+    connect( category, SIGNAL( executed( QListWidgetItem* ) ), this, SLOT( categoryChanged( QListWidgetItem* ) ) );
     connect( allList, SIGNAL( clicked( Q3ListViewItem* ) ), this, SLOT( itemChanged( Q3ListViewItem* ) ) );
 
     initAll();
@@ -246,12 +247,12 @@ void TokenDialog::setupStack2Page3()
 
     radioVariableExisting = new QRadioButton( i18n("&Insert an existing custom variable") );
     group_layout->addWidget(radioVariableExisting);
-    listVariable = new K3ListBox;
+    listVariable = new KListWidget;
     radioVariableNew->setChecked( true );
     group_layout->addWidget(listVariable);
     stack2Page3->setLayout(group_layout);
     if( m_token )
-        listVariable->insertStringList( m_token->listUserVars() );
+        listVariable->addItems( m_token->listUserVars() );
 
     if( !listVariable->count() )
         radioVariableExisting->setEnabled( false );
@@ -259,8 +260,8 @@ void TokenDialog::setupStack2Page3()
     connect( radioVariableNew, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
     connect( radioVariableExisting, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
     connect( editVariable, SIGNAL( textChanged( const QString & ) ), this, SLOT( enableControls() ) );
-    connect( listVariable, SIGNAL( highlighted( int ) ), this, SLOT( enableControls() ) );
-    connect( listVariable, SIGNAL( doubleClicked( Q3ListBoxItem*, const QPoint & ) ), this, SLOT( accept() ) );
+    connect( listVariable, SIGNAL( currentItemChanged( QListWidgetItem*, QListWidgetItem* ) ), this, SLOT( enableControls() ) );
+    connect( listVariable, SIGNAL( doubleClicked( QListWidgetItem*, const QPoint & ) ), this, SLOT( accept() ) );
 
     page3->addWidget( stack2Page3 );
 }
@@ -331,7 +332,7 @@ void TokenDialog::accept()
                     m_result.prepend( '$' );
             }
             else if( radioVariableExisting->isChecked() )
-                m_result = listVariable->currentText();
+                m_result = listVariable->currentItem()->text();
         }
         else if( radioSQLQuery->isChecked() )
             m_result = QString( "sqlquery:%2").arg( editQuery->text() );
@@ -427,10 +428,10 @@ void TokenDialog::initAll()
     int i, z;
     QList<tCategories>* categories = TokenProvider::getTokens();
 
-    category->insertItem( i18n("All") );
+    category->addItem( i18n("All") );
     
     for( i = 0; i < categories->count(); i++ )
-        category->insertItem( TokenProvider::captionForCategory( (TokenProvider::ECategories)(*categories)[i].category ) );
+        category->addItem( TokenProvider::captionForCategory( (TokenProvider::ECategories)(*categories)[i].category ) );
 
     for( i = 0; i < categories->count(); i++ )
 	for( z = 0; z < (*categories)[i].tokens.count(); z++ )
@@ -443,7 +444,7 @@ void TokenDialog::initAll()
             m_tokens.append( tToken(  custom_tokens[i], i18n("Variable defined by the user for this label.") ) );
     }
 
-    category->setCurrentItem( 0 );
+    category->setCurrentItem( category->item( 0 ) );
     categoryChanged( category->item( 0 ) );
 }
 
@@ -477,14 +478,14 @@ void TokenDialog::initStackPage2()
     }
 }
 
-void TokenDialog::categoryChanged( Q3ListBoxItem* item )
+void TokenDialog::categoryChanged( QListWidgetItem* item )
 {
     int i;
     QList<tCategories>* categories = TokenProvider::getTokens();
     allList->clear();
     lineEdit->setEnabled( false );
 
-    if( item->prev() == 0 )
+    if( category->row( item ) == 0 )
     {
         for( i = 0; i < m_tokens.count(); i++ )
 	    allList->insertItem( new K3ListViewItem( allList, QString( "[%1]").arg( m_tokens[i].token ),
@@ -537,10 +538,10 @@ void TokenDialog::enableControls()
     enableFinishButtonStack2Page5 = false;
 
     listVariable->setEnabled( radioVariableExisting->isChecked() );
-    editVariable->setEnabled( radioVariableNew->isChecked() );    
+    editVariable->setEnabled( radioVariableNew->isChecked() );
 
     if( ( editVariable->isEnabled() && !editVariable->text().isEmpty() ) ||
-        ( listVariable->isEnabled() && ( listVariable->currentItem() != -1 ) ) ) {
+        ( listVariable->isEnabled() && ( listVariable->currentItem() != 0 ) ) ) {
         enableFinishButtonStack2Page3 = true;
     }
 

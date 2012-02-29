@@ -24,9 +24,9 @@
 //Added by qt3to4:
 #include <QList>
 
-class K3ListBox;
+class KListWidget;
 class Q3ListView;
-class Q3ListBoxItem;
+class QListWidgetItem;
 class Q3ListViewItem;
 class KLineEdit;
 class TokenProvider;
@@ -52,7 +52,7 @@ class TokenDialog : public KAssistantDialog {
     inline const QString & token() const { return m_result; }
 
  private slots:
-    void categoryChanged( Q3ListBoxItem* item );
+    void categoryChanged( QListWidgetItem* item );
     void itemChanged( Q3ListViewItem* item );
 
  private:
@@ -101,7 +101,7 @@ class TokenDialog : public KAssistantDialog {
     QRadioButton* radioVariableExisting;
     
     KLineEdit* editVariable;
-    K3ListBox* listVariable;
+    KListWidget* listVariable;
 
     KLineEdit* editQuery;
     Q3TextBrowser* textQueryResults;
@@ -132,7 +132,7 @@ class TokenDialog : public KAssistantDialog {
     QList<tToken> m_tokens;
     TokenProvider* m_token;
 
-    K3ListBox* category;
+    KListWidget* category;
     K3ListView* allList;
     KLineEdit* lineEdit;
 
