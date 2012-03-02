@@ -31,7 +31,8 @@ class Q3ListViewItem;
 class KLineEdit;
 class TokenProvider;
 class KAssistantDialog;
-class K3ListView;
+class QTreeWidget;
+class QTreeWidgetItem;
 class KPageWidgetItem;
 
 class QRadioButton;
@@ -53,7 +54,7 @@ class TokenDialog : public KAssistantDialog {
 
  private slots:
     void categoryChanged( QListWidgetItem* item );
-    void itemChanged( Q3ListViewItem* item );
+    void itemChanged( QTreeWidgetItem* item );
 
  private:
     void initAll();
@@ -133,10 +134,10 @@ class TokenDialog : public KAssistantDialog {
     TokenProvider* m_token;
 
     KListWidget* category;
-    K3ListView* allList;
+    QTreeWidget* allList;
     KLineEdit* lineEdit;
 
-    Q3ListView* labelList;
+    QTreeWidget* labelList;
 };
 
 #endif
