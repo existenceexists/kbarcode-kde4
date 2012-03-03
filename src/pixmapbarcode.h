@@ -121,6 +121,8 @@ class PixmapBarcode : public BarkodeEngine
     private:
         QPixmap p;
         PDF417Options m_pdf417_options;
+        int pixmapBarcodeWidth;
+        int pixmapBarcodeHeight;
 };
 
 EEngine PixmapBarcode::engine() const

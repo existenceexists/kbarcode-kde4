@@ -180,8 +180,11 @@ bool PixmapBarcode::createPixmap( QPixmap* target, int resx, int resy )
             sw = (double)(size.x() + size.width());
             sh = (double)(size.y() + size.height());
         }
+        
+        pixmapBarcodeWidth = int(sw*(double)barkode->scaling());
+        pixmapBarcodeHeight = int(sh*(double)barkode->scaling());
 
-	cmd = QString("gs -g%1x%2").arg(int(sw*(double)barkode->scaling())).arg(int(sh*(double)barkode->scaling()));
+	cmd = QString("gs -g%1x%2").arg(pixmapBarcodeWidth).arg(pixmapBarcodeHeight);
 	cmd += " -r" + QString::number( resx*(double)barkode->scaling()) + "x" + QString::number( resy*(double)barkode->scaling() );
 	cmd += QString(" -sDEVICE=%1 -sOutputFile=").arg( bMonocrome ? "pbmraw" : "ppm" );
         cmd += input->fileName();
@@ -325,6 +328,9 @@ void PixmapBarcode::createBarcode( QPixmap* target, const QPaintDevice* device )
 {
     int resx = device->logicalDpiX();
     int resy = device->logicalDpiY();
+    
+    pixmapBarcodeWidth = 0;
+    pixmapBarcodeHeight = 0;
 
     QPixmap* cached = 0;//BarcodeCache::instance()->read( barcode, resx, resy, value );
 
@@ -497,7 +503,7 @@ QPixmap PixmapBarcode::cut( QPixmap* pic, double cut)
 
 QPixmap PixmapBarcode::addMargin( QPixmap* pic )
 {
-    QPixmap p(500, 500);
+    QPixmap p( pixmapBarcodeWidth, pixmapBarcodeHeight );
 
     /* We have to handle UPC special because of the checksum character
      * which is printed on the right margin.

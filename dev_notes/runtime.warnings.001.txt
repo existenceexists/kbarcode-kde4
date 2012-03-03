@@ -15,3 +15,9 @@ Q3SqlCursor::setName: unable to build record, does 'label_def' exist?
 - When using the barcode generator: barcode: can't encode "12345678"
 - When using the barcode generator to generate a barcode preview:
 "cmd: gs -g226x133 -r96x96 -sDEVICE=pbmraw -sOutputFile=/tmp/kde-fanda/kbarcodezg3310.pbm -sNOPAUSE -q - -c showpage quit"
+- When using the barcode generator to generate a barcode preview of a value produced by a javascript function:
+barcode: can't encode "ERROR: No JavaScript interpreter present!"
+Or:
+evaluate() threw an exception
+Or when using the encoding type "Code 128 (a,b,c: autoselection) [GNU Barcode]" and "Code 128B, full printable ascii [GNU Barcode]" :
+As a preview is displayed a barcode with the text: "ERROR: No Javascript interpreter present!"
