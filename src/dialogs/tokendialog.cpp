@@ -23,30 +23,25 @@
 #include <kassistantdialog.h>
 #include <klineedit.h>
 #include <klistwidget.h>
-#include <k3listview.h>
 #include <klocale.h>
 
-#include <q3hbox.h> 
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qsplitter.h>
 #include <qtooltip.h>
 #include <QList>
-#include <q3vbox.h>
-//#include <qvbuttongroup.h>
 #include <QGroupBox>
 #include <QStackedWidget>
 #include <qradiobutton.h>
 #include <QWidget>
 #include <QObject>
-#include <Q3ListBoxItem>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include <QStringList>
 //Added by qt3to4:
 #include <QVBoxLayout>
 #include <kcombobox.h>
-#include <q3textbrowser.h>
+#include <QTextBrowser>
 #include <kpushbutton.h>
 
 TokenDialog::TokenDialog(TokenProvider* token ,QWidget *parent)
@@ -301,7 +296,7 @@ void TokenDialog::setupStack2Page4()
     hbox_layout->setStretchFactor( editQuery, 2 );
 
     stack2Page4_layout->addWidget(new QLabel( i18n("Query test results:")));
-    textQueryResults = new Q3TextBrowser;
+    textQueryResults = new QTextBrowser;
     stack2Page4_layout->addWidget(textQueryResults);
     textQueryResults->setReadOnly( true );
 

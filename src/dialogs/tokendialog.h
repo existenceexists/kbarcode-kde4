@@ -25,9 +25,7 @@
 #include <QList>
 
 class KListWidget;
-class Q3ListView;
 class QListWidgetItem;
-class Q3ListViewItem;
 class KLineEdit;
 class TokenProvider;
 class KAssistantDialog;
@@ -39,7 +37,7 @@ class QRadioButton;
 class QStackedWidget;
 class QWidget;
 class KComboBox;
-class Q3TextBrowser;
+class QTextBrowser;
 class KPushButton;
 class DSTextEdit;
 
@@ -105,7 +103,7 @@ class TokenDialog : public KAssistantDialog {
     KListWidget* listVariable;
 
     KLineEdit* editQuery;
-    Q3TextBrowser* textQueryResults;
+    QTextBrowser* textQueryResults;
     KPushButton* buttonQuery;
 
     DSTextEdit* editJavaScript;
