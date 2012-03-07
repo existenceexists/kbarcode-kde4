@@ -27,7 +27,6 @@
 #include <qdom.h>
 #include <QString>
 #include <QMimeData>
-#include <QMimeSource>
 
 class DragCommand : public NewItemCommand {
     public:
@@ -51,8 +50,6 @@ class DragCommand : public NewItemCommand {
 DocumentItemDrag::DocumentItemDrag()
     : QMimeData()
 {
-    /*setData( DocumentItemDrag::mimeType() );
-    this->dragSource = dragSource;*/// -!F: delete
 }
 
 const char * DocumentItemDrag::mimeType()// -!F: Replace const char* with QString.
@@ -85,14 +82,14 @@ void DocumentItemDrag::setDocumentItem( DocumentItemList* list )
     }
 }
 
-bool DocumentItemDrag::canDecode( QMimeSource* e )
+bool DocumentItemDrag::canDecode( QMimeData* e )
 {
-    return e->provides( DocumentItemDrag::mimeType() );
+    return e->hasFormat( DocumentItemDrag::mimeType() );// -!F: Is QMimeData::hasFormat the right replacement of QMimeSource::provides ?
 }
 
-bool DocumentItemDrag::decode( QMimeSource* mime, MyCanvasView* cv, TokenProvider* token, K3CommandHistory* history )
+bool DocumentItemDrag::decode( QMimeData* mime, MyCanvasView* cv, TokenProvider* token, K3CommandHistory* history )
 {
-    QByteArray data = mime->encodedData( DocumentItemDrag::mimeType() );
+    QByteArray data = mime->data( DocumentItemDrag::mimeType() );
     QDomDocument doc( "KBarcodeClipboard" );
     if( !doc.setContent( data ) )
         return false;

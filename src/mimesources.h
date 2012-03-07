@@ -24,7 +24,6 @@
 class K3CommandHistory;
 class TokenProvider;
 class MyCanvasView;
-class QMimeSource;
 
 class DocumentItemDrag : public QMimeData {
     Q_OBJECT
@@ -35,8 +34,8 @@ class DocumentItemDrag : public QMimeData {
         
         void setDocumentItem( DocumentItemList* list );
 
-        static bool canDecode( QMimeSource * );
-        static bool decode( QMimeSource *, MyCanvasView* cv, TokenProvider* token, K3CommandHistory* history );
+        static bool canDecode( QMimeData * );
+        static bool decode( QMimeData *, MyCanvasView* cv, TokenProvider* token, K3CommandHistory* history );
 };
 
 #endif
