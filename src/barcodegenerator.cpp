@@ -46,6 +46,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QString>
+#include <QMimeData>
 
 BarcodeGenerator::BarcodeGenerator( QWidget* parent )
     : QDialog( parent )
@@ -232,7 +233,8 @@ void BarcodeGenerator::copy()
     DocumentItemDrag* drag = new DocumentItemDrag();
     drag->setDocumentItem( &list );
 
-    kapp->clipboard()->setData( drag, QClipboard::Clipboard );
+    /*kapp->clipboard()->setData( drag, QClipboard::Clipboard );*/// -!F: original, delete
+    kapp->clipboard()->setMimeData( drag );
 }
 
 #include "barcodegenerator.moc"

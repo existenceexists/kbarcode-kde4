@@ -26,6 +26,8 @@
 #include <qbuffer.h>
 #include <qdom.h>
 #include <QString>
+#include <QMimeData>
+#include <QMimeSource>
 
 class DragCommand : public NewItemCommand {
     public:
@@ -46,9 +48,11 @@ class DragCommand : public NewItemCommand {
 
 
 
-DocumentItemDrag::DocumentItemDrag( QWidget* dragSource )
-    : Q3StoredDrag( DocumentItemDrag::mimeType(), dragSource )
+DocumentItemDrag::DocumentItemDrag()
+    : QMimeData()
 {
+    /*setData( DocumentItemDrag::mimeType() );
+    this->dragSource = dragSource;*/// -!F: delete
 }
 
 const char * DocumentItemDrag::mimeType()// -!F: Replace const char* with QString.
@@ -67,7 +71,7 @@ void DocumentItemDrag::setDocumentItem( DocumentItemList* list )
         doc.appendChild( root );
         
         XMLUtils xml;
-        for( unsigned int i=0;i<list->count();i++)
+        for( int i=0;i<list->count();i++)
         {
             DocumentItem* item = list->at( i );
             xml.writeXMLDocumentItem( &root, &item );
@@ -77,7 +81,7 @@ void DocumentItemDrag::setDocumentItem( DocumentItemList* list )
         doc.save( t, 0 );
         
         buffer.close();
-        setEncodedData( data );    
+        setData( DocumentItemDrag::mimeType(), data );    
     }
 }
 

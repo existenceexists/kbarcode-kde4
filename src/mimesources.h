@@ -18,17 +18,18 @@
 #ifndef MIMESOURCES_H
 #define MIMESOURCES_H
 
-#include <q3dragobject.h>
+#include <QMimeData>
 #include "documentitem.h"
 
 class K3CommandHistory;
 class TokenProvider;
 class MyCanvasView;
+class QMimeSource;
 
-class DocumentItemDrag : public Q3StoredDrag {
+class DocumentItemDrag : public QMimeData {
     Q_OBJECT
     public:
-        DocumentItemDrag( QWidget* dragSource = NULL );
+        DocumentItemDrag();
         
         static const char * mimeType();// -!F: Replace const char* with QString.
         
