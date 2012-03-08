@@ -65,7 +65,7 @@ enum {
 #include <qdom.h>
 #include <qfile.h>
 #include <qpainter.h>
-#include <q3picture.h>
+#include <QPicture>
 #include <qpixmap.h>
 #include <qsize.h>
 

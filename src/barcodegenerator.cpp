@@ -39,7 +39,7 @@
 #include <qlayout.h>
 #include <qpainter.h>
 #include <QPaintDevice>
-#include <q3picture.h>
+#include <QPicture>
 #include <QDesktopWidget>
 #include <QScrollArea>
 #include <QX11Info>
@@ -202,7 +202,7 @@ void BarcodeGenerator::print()
     double scalex = (double)printer->logicalDpiX() / (double)QX11Info::appDpiX();
     double scaley = (double)printer->logicalDpiY() / (double)QX11Info::appDpiY();
     
-    Q3Picture picture;
+    QPicture picture;
     QPainter p( printer );
     p.scale( scalex, scaley );
     // TODO: center barcode
