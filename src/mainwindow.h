@@ -48,7 +48,7 @@ class MainWindow : public KXmlGuiWindow {
           * access.
           */
         static QString systemCheck();
-        QString kbarcodeDirectoryName;// -!F: delete
+        /*QString kbarcodeDirectoryName;*/// -!F: delete
 
     public slots:
         void assistant();
@@ -70,7 +70,7 @@ class MainWindow : public KXmlGuiWindow {
         void saveConfig();
 
     protected:
-        void setupActions(QString directoryName);
+        void setupActions();
 
         static bool autoconnect;
         static bool startassistant;

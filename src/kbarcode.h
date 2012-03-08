@@ -53,7 +53,6 @@ class KBarcode: public MainWindow {
          *  \returns true if the application should exit after this function
          */          
         bool parseCmdLine();
-	QString kbarcodeDirectoryName;// -!F:
 
     private slots:
         void startBarcode();

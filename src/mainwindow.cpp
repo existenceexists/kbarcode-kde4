@@ -67,9 +67,9 @@ MainWindow::~MainWindow()
 {
 }
 
-void MainWindow::setupActions(QString directoryName=QString()) // -!F:
+void MainWindow::setupActions() // -!F:
 {
-    kbarcodeDirectoryName = directoryName;// -!F: delete
+    /*kbarcodeDirectoryName = directoryName;*/// -!F: delete
     
     /*KAction* quitAct = KStandardAction::quit(kapp, SLOT(quit()), actionCollection());*/
     KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
@@ -190,12 +190,12 @@ void MainWindow::setupActions(QString directoryName=QString()) // -!F:
     
     // Set window icon.
     //setWindowIcon(KIcon(this->kbarcodeDirectoryName + QString("/hi16-app-kbarcode.png")));
-    if (!KGlobal::dirs()->addResourceDir(
+    /*if (!KGlobal::dirs()->addResourceDir(
             "appdata", QString("/home/fanda/programovani/c++/frank_scripts/kbarcode/executables/share/apps/") + // -!F:
             this->kbarcodeDirectoryName)) {
         qDebug() << QString("The addition of the following folder as a resource dir failed: ") 
             + QString("/home/fanda/programovani/c++/frank_scripts/kbarcode/executables/share/apps/");
-    }
+    }*/// -!F: delete
     setWindowIcon( KIcon( KStandardDirs::locate( "appdata", QString("hi16-app-kbarcode.png") ) ) );
     
     // Let KDE4 create the main window.

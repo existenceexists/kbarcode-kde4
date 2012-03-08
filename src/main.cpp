@@ -35,7 +35,7 @@
 
 void setupDirs()
 {
-    if( KStandardDirs::locate("data", "kbarcode/logo.png").isEmpty() ) {
+    if( KStandardDirs::locate("appdata", "logo.png").isEmpty() ) {// -!F: see my todo file
         // Maybe KBarcode was not installed into $KDEDIR
         KStandardDirs* dirs = KGlobal::dirs();
         QString kdedir = dirs->kfsstnd_prefixes();
@@ -56,7 +56,7 @@ void setupDirs()
 
 int main(int argc, char *argv[])
 {
-    KAboutData aboutData( "kbarcode", "kbarcode", ki18n("KBarcode"), VERSION,
+    KAboutData aboutData( "kbarcode011", "kbarcode", ki18n("KBarcode"), VERSION,
             ki18n("KBarcode4 is a barcode and label printing application for KDE 4."),
             KAboutData::License_GPL, ki18n("(c) 2001-2008, Dominik Seichter"), KLocalizedString(),
         "http://www.kbarcode.net", "kbarcode-users@lists.sourceforge.net" );
