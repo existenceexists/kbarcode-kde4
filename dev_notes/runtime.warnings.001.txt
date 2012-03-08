@@ -1,6 +1,5 @@
 Runtime Warnings - Kbarcode:
 
-- Prefix changed: ...,
 - QFSFileEngine::open: No file name specified
 Cannot read validation rules from
 - 2 warnings after moving the mouse cursor over confassistant dialog:
@@ -12,7 +11,7 @@ QSqlQuery::exec: database not open
 Can't import data, database not open!
 - Warnings triggered when creating a databasebrowser widget like so:
 Q3SqlCursor::setName: unable to build record, does 'label_def' exist?
-- When using the barcode generator: barcode: can't encode "12345678"
+- When using the barcode generator: barcode: can't encode "12345678" - It's allright, do not fix.
 - When using the barcode generator to generate a barcode preview:
 "cmd: gs -g226x133 -r96x96 -sDEVICE=pbmraw -sOutputFile=/tmp/kde-fanda/kbarcodezg3310.pbm -sNOPAUSE -q - -c showpage quit"
 - When using the barcode generator to generate a barcode preview of a value produced by a javascript function:
