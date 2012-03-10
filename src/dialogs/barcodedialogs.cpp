@@ -378,12 +378,12 @@ SequenceDlg::SequenceDlg( QWidget *parent )
     radioAlphaNum = new QRadioButton( i18n( "Iterate over A-Z, 0-9" ), this );
 
     spinStep = new KIntNumInput( this );
-    spinStep->setLabel( i18n( "Step:" ), Qt::AlignLeft | Qt::AlignVCenter );
+    spinStep->setLabel( i18n( "Step:" ), Qt::AlignLeft | Qt::AlignTop );
     spinStep->setRange( -100, 100, 1 );
     spinStep->setSliderEnabled( false );
     
     spinStart = new KIntNumInput( 1, this );
-    spinStart->setLabel( i18n( "Start:" ), Qt::AlignLeft | Qt::AlignVCenter );
+    spinStart->setLabel( i18n( "Start:" ), Qt::AlignLeft | Qt::AlignTop );
     spinStart->setRange( -100000, 100000, 1 );
     spinStart->setSliderEnabled( false );
     
