@@ -44,7 +44,7 @@ namespace DSSmallDialogs {
         Q_OBJECT
         public:
             AddItemsDialog( QWidget* parent = 0 );
-            AddItemsDialog( const QString & a, const QString & g, int c, QWidget* parent = 0 );
+            AddItemsDialog( const QString & a, const QString & g, int c, QWidget* parent = 0, const char* name = 0 );
 
             void setGroupCompletion( KCompletion* c );
 

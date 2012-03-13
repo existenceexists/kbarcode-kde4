@@ -14,8 +14,8 @@ set(kbarcode_SRCS
   barcodeitem.cpp
   barkode.cpp
   barkodeengine.cpp
- # batchprinter.cpp
- # batchassistant.cpp
+  batchprinter.cpp
+  batchassistant.cpp
   commands.cpp
   confassistant.cpp
   csvfile.cpp
@@ -30,7 +30,7 @@ set(kbarcode_SRCS
   imageitem.cpp
   kbarcode.cpp
   kbarcodesettings.cpp
- # label.cpp
+  label.cpp
  # labeleditor.cpp
   labelutils.cpp
   lineitem.cpp
@@ -50,7 +50,7 @@ set(kbarcode_SRCS
   sqltables.cpp
   tbarcode2.cpp
   tcanvasitem.cpp
- # tec.cpp
+  tec.cpp
   textitem.cpp
  # textlineedit.cpp
   textlineitem.cpp
@@ -58,16 +58,16 @@ set(kbarcode_SRCS
   xmlutils.cpp
   zplutils.cpp
   dialogs/barcodedialogs.cpp
- # dialogs/barcodeprinterdlg.cpp
+  dialogs/barcodeprinterdlg.cpp
   dialogs/configdialog.cpp
   dialogs/csvimportdlg.cpp
  # dialogs/definitiondialog.cpp
  # dialogs/documentitemdlg.cpp
  # dialogs/multilineeditdlg.cpp
  # dialogs/previewdialog.cpp
- # dialogs/printlabeldlg.cpp
+  dialogs/printlabeldlg.cpp
  # dialogs/rectsettingsdlg.cpp
- # dialogs/smalldialogs.cpp
+  dialogs/smalldialogs.cpp
   dialogs/tokendialog.cpp  
   )
 

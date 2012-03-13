@@ -27,7 +27,7 @@ class KComboBox;
 class KCompletion;
 class KIntNumInput;
 class KLineEdit;
-class KListBox;
+class K3ListBox;
 class QTreeWidget;
 class KPushButton;
 class KUrlRequester;
@@ -39,6 +39,10 @@ class QTreeWidgetItem;
 class QRadioButton;
 class QTableWidget;
 class QStackedWidget;
+class K3ListView;
+class Q3ListView;
+class Q3ListViewItem;
+class Q3Table;
 
 class BatchAssistant : public KAssistantDialog {
     Q_OBJECT
@@ -130,7 +134,8 @@ class BatchAssistant : public KAssistantDialog {
 	void customerNameChanged( int index );
 	void addItem();
         bool slotAddItem( const QString & article, const QString & group, int count );
-	void changeItem( QTreeWidgetItem* item, const QPoint &, int );
+	/*void changeItem( QTreeWidgetItem* item, const QPoint &, int );*/// -!F: original, uncomment
+        void changeItem( Q3ListViewItem* item, const QPoint &, int );
 	void editItem();
 	void removeItem();
 
@@ -144,7 +149,8 @@ class BatchAssistant : public KAssistantDialog {
         void slotRemoveAllAddress();
 
     private:
-        void moveAddress( QTreeWidget* src, QTreeWidget* dst, bool bAll = false );
+        /*void moveAddress( QTreeWidget* src, QTreeWidget* dst, bool bAll = false );*/// -!F: original, uncomment
+        void moveAddress( Q3ListView* src, Q3ListView* dst, bool bAll = false );
 
 	void fillByteArray();
 	void fillVarList();
@@ -189,6 +195,8 @@ class BatchAssistant : public KAssistantDialog {
 	QWidget* page4;
 	QWidget* page5;
 	QWidget* page10;
+        
+        KPageWidgetItem * page4Item;
 
 	QWidget* stack1;
 	QWidget* stack2;
@@ -234,13 +242,17 @@ class BatchAssistant : public KAssistantDialog {
 	KIntNumInput* serialInc;
 	KIntNumInput* numLabels;
 
-	QTableWidget* m_varTable;
-	KListBox* m_varList;
+	/*QTableWidget* m_varTable;*/// -!F: original, uncomment
+        Q3Table* m_varTable;
+	K3ListBox* m_varList;
 
-        QTreeWidget* listAddress;
-        QTreeWidget* listSelectedAddress;
+        /*QTreeWidget* listAddress;
+        QTreeWidget* listSelectedAddress;*/// -!F: original, uncomment
+        K3ListView* listAddress;
+        K3ListView* listSelectedAddress;
 
-	QTreeWidget* sqlList;
+	/*QTreeWidget* sqlList;*/// -!F: original, uncomment
+        K3ListView* sqlList;
 	KLineEdit* serialStart;
 
         QCheckBox* checkKeepOpen;

@@ -73,9 +73,10 @@ AddItemsDialog::AddItemsDialog(QWidget *parent)
     init();
 }
 
-AddItemsDialog::AddItemsDialog( const QString & a, const QString & g, int c, QWidget* parent)
+AddItemsDialog::AddItemsDialog( const QString & a, const QString & g, int c, QWidget* parent, const char* name = 0 )
     : KDialog(parent)
 {
+    setObjectName( name );
 	setCaption(i18n("Edit Item"));
 	setButtons(KDialogBase::Ok| KDialogBase::Close, KDialogBase::Ok);
     init();

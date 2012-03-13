@@ -17,14 +17,14 @@
 
 #include "batchassistant.h"
 #include "batchassistant.moc"
-#include "barcodeprinterdlg.h"
+#include "dialogs/barcodeprinterdlg.h"
 #include "batchprinter.h"
 #include "csvfile.h"
 #include "definition.h"
 #include "encodingcombo.h"
 #include "printersettings.h"
-#include "printlabeldlg.h"
-#include "smalldialogs.h"
+#include "dialogs/printlabeldlg.h"
+#include "dialogs/smalldialogs.h"
 #include "sqltables.h"
 #include "tokenprovider.h"
 #include "xmlutils.h"
@@ -42,6 +42,10 @@
 #include <qtooltip.h>
 #include <QGroupBox>
 #include <q3widgetstack.h>
+#include <Q3Frame>
+#include <Q3ListView>
+#include <Q3ListViewItem>
+#include <Q3TableSelection>
 //Added by qt3to4:
 #include <QHBoxLayout>
 #include <QList>
@@ -74,16 +78,21 @@
 #include <kmenu.h>
 #include <kpushbutton.h>
 #include <kurlrequester.h>
+#include <k3listview.h>
 #include <q3table.h>
 #include <q3vbox.h>
 #include <kglobal.h>
+#include <KUrl>
 
 #define PNG_FORMAT "PNG"
 
-class AddressListViewItem : public QTreeWidgetItem {
+/*class AddressListViewItem : public QTreeWidgetItem {*/// -!F: original, uncomment
+class AddressListViewItem : public Q3ListViewItem {
 public:
-    AddressListViewItem(QTreeWidget *parent, KABC::Addressee & addr )
-        : QTreeWidgetItem( parent ), m_address( addr )
+    /*AddressListViewItem(QTreeWidget *parent, KABC::Addressee & addr )
+        : QTreeWidgetItem( parent ), m_address( addr )*/// -!F: original, uncomment
+    AddressListViewItem(Q3ListView *parent, KABC::Addressee & addr )
+        : Q3ListViewItem( parent ), m_address( addr )
         {
             this->setText( 0, m_address.givenName() );
             this->setText( 1, m_address.familyName() );
@@ -211,14 +220,15 @@ void BatchAssistant::setupPage4()
     buttonTableRemove->setIconSet( BarIconSet( "editdelete") );
     hbox->setLayout(hbox_layout);
 
-    m_varTable = new QTableWidget;
+    /*m_varTable = new QTableWidget;*/// -!F: original, uncomment
+    m_varTable = new Q3Table;
     page4_layout->addWidget(m_varTable);
-    	
-	m_varTable->setSelectionBehavior(QTableWidget::SelectRows);
-	m_varTable->setSelectionMode(QTableWidget::SingleSelection);
+    m_varTable->setSelectionMode( Q3Table::SingleRow );
+    /*m_varTable->setSelectionBehavior(QTableWidget::SelectRows);
+    m_varTable->setSelectionMode(QTableWidget::SingleSelection);*/// -!F: original, uncomment
     page4->setLayout(page4_layout);
 
-    addPage( page4, i18n("Import Variables") );
+    page4Item = addPage( page4, i18n("Import Variables") );
 
     connect( buttonTableInsert, SIGNAL( clicked() ), this, SLOT( slotTableInsert() ) );
     connect( buttonTableRemove, SIGNAL( clicked() ), this, SLOT( slotTableRemove() ) );
@@ -306,10 +316,10 @@ void BatchAssistant::setupPage10()
 	formatBox_layout->addWidget(comboFormat);
     comboFormat->insertStringList( formats );
     if( formats.contains( PNG_FORMAT ) )
-	  comboFormat->setCurrentItem( formats.findIndex( PNG_FORMAT ) );
+	  comboFormat->setCurrentIndex( formats.indexOf( PNG_FORMAT ) );// -!F: Does this work as expected ? originally setCurrentItem(...)
     label->setBuddy( comboFormat );
 
-    QGroupBox* imageNameGroup = new  QGroupBox( i18n("&Filename:") );
+    QGroupBox* imageNameGroup = new QGroupBox( i18n("&Filename:") );
 	imageBox_layout->addWidget(imageNameGroup);
     QVBoxLayout* image_button_layout = new QVBoxLayout;
     radioImageFilenameArticle = new QRadioButton( i18n("Use &article number for filename"));
@@ -352,7 +362,8 @@ void BatchAssistant::setupPage10()
 
 void BatchAssistant::setupStackPage1()
 {
-    stack1 = new QWidget( "stack1" );
+    stack1 = new QWidget;
+    stack1->setObjectName( "stack1" );
 	QVBoxLayout* stack1_layout = new QVBoxLayout;
 	stack1->setLayout(stack1_layout);
     stack1_layout->setSpacing( 5 );
@@ -392,13 +403,17 @@ void BatchAssistant::setupStackPage1()
     mnuImport->insertItem( i18n("Import barcode_basic"), this, SLOT( addAllItems() ) );
     buttonImport->setPopup( mnuImport );
 
-    sqlList = new QTreeWidget( stack1 );
-	QTreeWidgetItem* header = new QTreeWidgetItem;
+    sqlList = new K3ListView( stack1 );
+    sqlList->addColumn( i18n("Index") );// -!F: delete these 4 lines
+    sqlList->addColumn( i18n("Number of Labels") );
+    sqlList->addColumn( i18n("Article Number") );
+    sqlList->addColumn( i18n("Group") );
+	/*QTreeWidgetItem* header = new QTreeWidgetItem;
 	header->setText(0, i18n("Index"));
 	header->setText(1, i18n("Number of Labels") );
 	header->setText(2,  i18n("Article Number") );
 	header->setText(3, i18n("Group") );
-	sqlList->setHeaderItem(header);
+	sqlList->setHeaderItem(header);*/// -!F: original, uncomment
     sqlList->setAllColumnsShowFocus( true );
     connect( sqlList, SIGNAL(doubleClicked(QTreeWidgetItem*,const QPoint &,int)),
              this, SLOT(changeItem(QTreeWidgetItem QPoint &,int)));
@@ -416,7 +431,8 @@ void BatchAssistant::setupStackPage1()
 
 void BatchAssistant::setupStackPage2()
 {
-    stack2 = new QWidget("stack2" );
+    stack2 = new QWidget;
+    stack2->setObjectName( "stack2" );
     QHBoxLayout* stack2_layout = new QHBoxLayout;
     stack2->setLayout(stack2_layout);
     stack2_layout->setSpacing( 5 );
@@ -443,7 +459,7 @@ void BatchAssistant::setupStackPage2()
     labelCsvFile->setBuddy( importCsvFile );
     labelEncoding = new QLabel( i18n("&Encoding:") );
     group_layout->addWidget(labelEncoding);
-    comboEncoding = new EncodingCombo;
+    comboEncoding = new EncodingCombo( group );
     group_layout->addWidget(comboEncoding);
     labelEncoding->setBuddy( comboEncoding );
     radioImportManual->setChecked( true );
@@ -457,7 +473,7 @@ void BatchAssistant::setupStackPage2()
     QLabel* label;
     label = new QLabel( i18n("Available Variables:") );
     box_layout->addWidget(label);
-    m_varList = new KListBox( box );
+    m_varList = new K3ListBox( box );
 
     connect( radioImportManual, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
     connect( radioImportSql, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
@@ -468,9 +484,10 @@ void BatchAssistant::setupStackPage2()
 
 void BatchAssistant::setupStackPage3()
 {
-    stack3 = new QWidget( "stack3" );
+    stack3 = new QWidget;
+    stack3->setObjectName( "stack3" );
     QVBoxLayout* stack3_layout = new QVBoxLayout;
-    stack3->SetLayout(stack3_layout);
+    stack3->setLayout(stack3_layout);
 
     numLabels = new KIntNumInput( 1, stack3 );
     numLabels->setRange( 1, 100000, 1, true );
@@ -481,7 +498,8 @@ void BatchAssistant::setupStackPage3()
 
 void BatchAssistant::setupStackPage4()
 {
-    stack4 = new QWidget( "stack4" );
+    stack4 = new QWidget;
+    stack4->setObjectName( "stack4" );
     page3->layout()->addWidget(stack4);
     
     QHBoxLayout* mainLayout = new QHBoxLayout( stack4 );
@@ -496,7 +514,7 @@ void BatchAssistant::setupStackPage4()
     list2->setLayout(list2_layout);
     stack4->layout()->addWidget(list2);
 
-    QFrame* buttons = new QFrame;
+    Q3Frame* buttons = new Q3Frame( stack4 );
     stack4->layout()->addWidget(buttons);
     buttons->setMargin( 10 );
 
@@ -537,7 +555,7 @@ void BatchAssistant::setupStackPage4()
     
     list2_layout->addWidget(new QLabel( i18n("Selected Addresses") ));
 
-    listAddress = new KListView;
+    listAddress = new K3ListView;
     list1_layout->addWidget(listAddress);
     listAddress->addColumn( i18n("Given Name"), 0 );
     listAddress->addColumn( i18n("Family Name"), 1 );
@@ -545,11 +563,11 @@ void BatchAssistant::setupStackPage4()
     listAddress->setMultiSelection( true );
     listAddress->setAllColumnsShowFocus( true );
 
-    listAddress->setColumnWidthMode( 0, QListView::Maximum );
-    listAddress->setColumnWidthMode( 1, QListView::Maximum );
-    listAddress->setColumnWidthMode( 2, QListView::Maximum );
+    listAddress->setColumnWidthMode( 0, Q3ListView::Maximum );
+    listAddress->setColumnWidthMode( 1, Q3ListView::Maximum );
+    listAddress->setColumnWidthMode( 2, Q3ListView::Maximum );
 
-    listSelectedAddress = new KListView;
+    listSelectedAddress = new K3ListView;
     list2_layout->addWidget(listSelectedAddress);
     listSelectedAddress->addColumn( i18n("Given Name"), 0 );
     listSelectedAddress->addColumn( i18n("Family Name"), 1 );
@@ -557,9 +575,9 @@ void BatchAssistant::setupStackPage4()
     listSelectedAddress->setMultiSelection( true );
     listSelectedAddress->setAllColumnsShowFocus( true );
 
-    listSelectedAddress->setColumnWidthMode( 0, QListView::Maximum );
-    listSelectedAddress->setColumnWidthMode( 1, QListView::Maximum );
-    listSelectedAddress->setColumnWidthMode( 2, QListView::Maximum );
+    listSelectedAddress->setColumnWidthMode( 0, Q3ListView::Maximum );
+    listSelectedAddress->setColumnWidthMode( 1, Q3ListView::Maximum );
+    listSelectedAddress->setColumnWidthMode( 2, Q3ListView::Maximum );
 
     connect( buttonAddAddress, SIGNAL( clicked() ), this, SLOT( slotAddAddress() ) );
     connect( buttonRemoveAddress, SIGNAL( clicked() ), this, SLOT( slotRemoveAddress() ) );
@@ -585,7 +603,7 @@ void BatchAssistant::setupSql()
 
 void BatchAssistant::enableControls()
 {
-    setAppropriate( page4, radioVarImport->isChecked() );
+    setAppropriate( page4Item, radioVarImport->isChecked() );
 
     radioSqlArticles->setEnabled( SqlTables::getInstance()->isConnected() );
     radioImportSql->setEnabled( SqlTables::getInstance()->isConnected() );
@@ -603,25 +621,28 @@ void BatchAssistant::enableControls()
 
     imageBox->setEnabled( radioImage->isChecked() );
 
-    if( radioImportSql->isChecked() )
-	setNextEnabled( page3, !importSqlQuery->text().isEmpty() );
-    else if( radioImportCSV->isChecked() )
-	setNextEnabled( page3, !importCsvFile->url().isEmpty() );
-    else if( radioImportManual->isChecked() )
-	setNextEnabled( page3, true );
+    if( radioImportSql->isChecked() ) {
+	/*setNextEnabled( page3, !importSqlQuery->text().isEmpty() );*/// -!F: original, del
+    } else if( radioImportCSV->isChecked() ) {
+	/*setNextEnabled( page3, !importCsvFile->url().isEmpty() );*/// -!F: original, del
+    } else if( radioImportManual->isChecked() ) {
+	/*setNextEnabled( page3, true );*/// -!F: original, del
+    }
 
     editImageFilename->setEnabled( radioImageFilenameCustom->isChecked() );
     radioImageFilenameArticle->setEnabled( radioSqlArticles->isChecked() );
 
-    setNextEnabled( page1, !m_url->url().isEmpty() );
+    /*setNextEnabled( page1, !m_url->url().isEmpty() );*/// -!F: original, del
     
-    if( radioAddressBook->isChecked() )
-        setNextEnabled( page3, listSelectedAddress->childCount() );
+    if( radioAddressBook->isChecked() ) {
+        /*setNextEnabled( page3, listSelectedAddress->childCount() );*/// -!F: original, del
+    }
 
-    if( radioImage->isChecked() )
-	setFinishEnabled( page10, !imageDirPath->url().isEmpty() );
-    else
-	setFinishEnabled( page10, true );
+    if( radioImage->isChecked() ) {
+	/*setFinishEnabled( page10, !imageDirPath->url().isEmpty() );*/// -!F: original, del
+    } else {
+	/*setFinishEnabled( page10, true );*/// -!F: original, del
+    }
 }
 
 void BatchAssistant::showPage( QWidget* p )
@@ -629,26 +650,28 @@ void BatchAssistant::showPage( QWidget* p )
     if( p == page3 )
     {
 	if( radioSqlArticles->isChecked() )
-	    page3->raiseWidget( stack1 );
+	    page3->setCurrentWidget( stack1 );
 	else if( radioVarImport->isChecked() )
 	{
-	    page3->raiseWidget( stack2 );
+	    page3->setCurrentWidget( stack2 );
 	    fillVarList();
 	}
 	else if( radioSimple->isChecked() )
-	    page3->raiseWidget( stack3 );
+	    page3->setCurrentWidget( stack3 );
         else if( radioAddressBook->isChecked() )
         {
-            page3->raiseWidget( stack4 );
+            page3->setCurrentWidget( stack4 );
             fillAddressList();
         }
     }
-    else if( p == page4 )
-	if( !fillVarTable() )
+    else if( p == page4 ) {
+	if( !fillVarTable() ) {
 	    return;
+        }
+    }
 
 
-    KAssistant::showPage( p );
+    /*KAssistant::showPage( p );*/// -!F: original, del
 }
 
 void BatchAssistant::accept()
@@ -663,9 +686,9 @@ void BatchAssistant::printNow( const QString & printer, bool bUserInteraction )
     int batchType = 0;
 
     // let's check if the label file does even exist!
-    if( !QFile::exists( m_url->url() ) ) 
+    if( !QFile::exists( m_url->url().path() ) ) 
     {
-        KMessageBox::error( this, QString( i18n("The label file %1 was not found") ).arg( m_url->url()) );
+        KMessageBox::error( this, QString( i18n("The label file %1 was not found") ).arg( m_url->url().path() ) );
         return;
     }
 
@@ -704,7 +727,7 @@ void BatchAssistant::printNow( const QString & printer, bool bUserInteraction )
     }
     else if( radioImage->isChecked() )
     {
-	batch = new BatchPrinter( imageDirPath->url(), this );
+	batch = new BatchPrinter( imageDirPath->url().path(), this );
 	if( radioImageFilenameArticle->isChecked() )
 	    batch->setImageFilename( BatchPrinter::E_ARTICLE );
 	else if( radioImageFilenameBarcode->isChecked() )
@@ -719,7 +742,8 @@ void BatchAssistant::printNow( const QString & printer, bool bUserInteraction )
     }
 
     if( !checkKeepOpen->isChecked() )
-        KAssistant::accept();
+        /*KAssistant::accept();*/// -!F: original, del
+        KAssistantDialog::accept();
 
     KApplication::setOverrideCursor( QCursor( Qt::ArrowCursor ), true );
     setupBatchPrinter( batch, batchType );
@@ -743,13 +767,13 @@ void BatchAssistant::setupBatchPrinter( BatchPrinter* batch, int m )
     XMLUtils util;
     util.readXMLHeader( &doc, description, kbarcode18, &def );
 
-    QBuffer buffer( m_bytearray );
+    QBuffer buffer( & m_bytearray );
     if( !buffer.open( QIODevice::ReadOnly ) )
         return;
 
     batch->setBuffer( &buffer );
     batch->setSerial( serialStart->text(), serialInc->value() );
-    batch->setName( m_url->url() );
+    batch->setName( m_url->url().path() );
     batch->setDefinition( def );
     batch->setImageFormat( comboFormat->currentText() );
 
@@ -763,7 +787,7 @@ void BatchAssistant::setupBatchPrinter( BatchPrinter* batch, int m )
 	sqlList->sort();
 
 	QList<BatchPrinter::data>* dlist = new QList<BatchPrinter::data>;
-	QListViewItem* item = sqlList->firstChild();
+	Q3ListViewItem* item = sqlList->firstChild();
 	while( item ) 
 	{
 	    BatchPrinter::data m_data;
@@ -794,15 +818,18 @@ void BatchAssistant::setupBatchPrinter( BatchPrinter* batch, int m )
     else if( radioVarImport->isChecked() )
     {
 	TVariableList* tVariableList = new TVariableList;
-	for( int i=0; i<m_varTable->rowCount(); i++ )
+	/*for( int i=0; i<m_varTable->rowCount(); i++ )*/// -!F: original, uncomment
+        for( int i=0; i<m_varTable->numRows(); i++ )
 	{
 	    QMap<QString, QString> map;
-	    for( int z=0; z<m_varTable->columnCount(); z++ ) {
-		  QTableWidgetItem* item = m_varTable->item(i, z);
+	    /*for( int z=0; z<m_varTable->columnCount(); z++ ) {*/// -!F: original, uncomment
+            for( int z=0; z<m_varTable->numCols(); z++ ) {
+		  /*QTableWidgetItem* item = m_varTable->item(i, z);
 		  if(item)
 			map[ m_varTable->horizontalHeader()->label( z ) ] = item->text();
 		  else
-			map[ m_varTable->horizontalHeader()->label( z ) ] = "";
+			map[ m_varTable->horizontalHeader()->label( z ) ] = "";*/// -!F: original, uncomment
+                map[ m_varTable->horizontalHeader()->label( z ) ] = m_varTable->text( i, z );
 		}
 	    tVariableList->append( map );
 	}
@@ -812,7 +839,8 @@ void BatchAssistant::setupBatchPrinter( BatchPrinter* batch, int m )
     else if( radioAddressBook->isChecked() )
     {
         KABC::AddresseeList* list = new KABC::AddresseeList;
-        QTreeWidgetItem* item = listSelectedAddress->firstChild();
+        /*QTreeWidgetItem* item = listSelectedAddress->firstChild();*/// -!F: original, uncomment
+        Q3ListViewItem* item = listSelectedAddress->firstChild();
         while( item )
         {
             list->append( static_cast<AddressListViewItem*>(item)->address() );
@@ -859,7 +887,7 @@ bool BatchAssistant::addItem( const QString & article, const QString & group, in
     QString temp;
     temp.sprintf("%0*i", 5, sqlList->childCount() + 1 );
 
-    KListViewItem* item = new KListViewItem( sqlList, temp, QString( "%1" ).arg( count ),
+    Q3ListViewItem* item = new Q3ListViewItem( sqlList, temp, QString( "%1" ).arg( count ),
                           article, group );
     sqlList->insertItem( item );
 
@@ -893,12 +921,12 @@ bool BatchAssistant::existsArticle( const QString & article )
 
 void BatchAssistant::editItem()
 {
-    QListViewItem* item = sqlList->selectedItem();
+    Q3ListViewItem* item = sqlList->selectedItem();
     if( item )
         changeItem( item, QPoint(0,0), 0 );
 }
 
-void BatchAssistant::changeItem( QListViewItem* item, const QPoint &, int )
+void BatchAssistant::changeItem( Q3ListViewItem* item, const QPoint &, int )
 {
     if(!item)
         return;
@@ -919,12 +947,12 @@ void BatchAssistant::changeItem( QListViewItem* item, const QPoint &, int )
 
 void BatchAssistant::removeItem() 
 {
-    QListViewItem* item = sqlList->firstChild();
+    Q3ListViewItem* item = sqlList->firstChild();
     while( item ) 
     {
         if( item->isSelected() ) 
 	{
-            QListViewItem* it = item->nextSibling();
+            Q3ListViewItem* it = item->nextSibling();
             delete item;
 
             while( it ) 
@@ -946,13 +974,13 @@ void BatchAssistant::removeItem()
 
 void BatchAssistant::customerIdChanged( int index ) 
 {
-    customerName->setCurrentItem( index );
+    customerName->setCurrentIndex( index );
     enableControls();
 }
 
 void BatchAssistant::customerNameChanged( int index ) 
 {
-    customerId->setCurrentItem( index );
+    customerId->setCurrentIndex( index );
     enableControls();
 }
 
@@ -969,7 +997,7 @@ void BatchAssistant::addAllItems()
 	while( query.next() ) 
 	{
 	    temp.sprintf("%0*i", 5, sqlList->childCount() + 1 );
-	    new KListViewItem( sqlList, temp, num, query.value( 0 ).toString(), group );
+	    new Q3ListViewItem( sqlList, temp, num, query.value( 0 ).toString(), group );
 	}
 
         enableControls();
@@ -978,7 +1006,8 @@ void BatchAssistant::addAllItems()
 
 void BatchAssistant::loadFromFile() 
 {
-    QString f = KFileDialog::getOpenFileName( 0, 0, this );
+    /*QString f = KFileDialog::getOpenFileName( 0, 0, this );*/// -!F: original
+    QString f = KFileDialog::getOpenFileName( KUrl(), QString(), this );// -!F: is this the right replacement ?
     if( !f.isEmpty() )
         loadFromFile( f );
 }
@@ -996,7 +1025,7 @@ void BatchAssistant::loadFromFile( const QString & url )
     
     if( !file.open( QIODevice::ReadOnly ) ) 
     {
-        qDebug("Unable to open file: %s", url.toLatin1() );
+        qDebug("Unable to open file: %s", qPrintable( url ) );
         return;
     }
 
@@ -1020,7 +1049,8 @@ void BatchAssistant::loadData( const QString & data )
                    config.readEntry("Data2", 2 ) };
 
     bool custom_article_no = lpdata->useCustomNo;
-    QBuffer buf( data.utf8() );
+    QByteArray baData = data.toUtf8();
+    QBuffer buf( & baData );
     CSVFile file( buf );
 
     QStringList list, dropped;
@@ -1085,9 +1115,9 @@ void BatchAssistant::loadData( const QString & data )
 
 void BatchAssistant::fillByteArray()
 {
-    if( m_bytearray_filename != m_url->url() )
+    if( m_bytearray_filename != m_url->url().path() )
     {
-	QFile f( m_url->url() );
+	QFile f( m_url->url().path() );
 	if ( !f.open( QIODevice::ReadOnly ) )
 	{
 	    m_bytearray_filename = QString::null;
@@ -1109,7 +1139,7 @@ void BatchAssistant::fillVarList()
     
     XMLUtils util;
     DocumentItemList list;
-    list.setAutoDelete( true );
+    /*list.setAutoDelete( true );*/// -!F: DocumentItemList has no member named setAutoDelete, what is the correct replacement of this?
 
     TokenProvider token( this );
     Definition* def = NULL;
@@ -1155,7 +1185,7 @@ bool BatchAssistant::fillVarTable()
     {
 	int y = 0;
 	int x;
-	QSqlSelectCursor query( importSqlQuery->text(), SqlTables::getInstance()->database() );
+	Q3SqlSelectCursor query( importSqlQuery->text(), * SqlTables::getInstance()->database() );
 	query.select();
 	if( query.lastError().type() != QSqlError::None )
 	{
@@ -1176,7 +1206,7 @@ bool BatchAssistant::fillVarTable()
     }
     else if( radioImportCSV->isChecked() )
     {
-	CSVFile file( importCsvFile->url() );
+	CSVFile file( importCsvFile->url().path() );
         file.setEncoding( comboEncoding->currentText() );
 
 	QStringList heading;
@@ -1186,7 +1216,7 @@ bool BatchAssistant::fillVarTable()
         file.setCSVFile(true);
 	if( !file.isValid() )
 	{
-	    KMessageBox::error( this, QString( i18n("Can't open file: %1") ).arg( importCsvFile->url() ) );
+	    KMessageBox::error( this, QString( i18n("Can't open file: %1") ).arg( importCsvFile->url().path() ) );
 	    return false;
 	}
 
@@ -1208,11 +1238,11 @@ bool BatchAssistant::fillVarTable()
                     printf("numRows=%i\n", m_varTable->numCols() );
 		    for( int x = 0; x < m_varTable->numCols(); x++ )
                     {
-                        printf("horizontal header=%s\n", m_varTable->horizontalHeader()->label( x ).toLower().toLatin1() );
-                        printf("heading=%s\n", heading[z].toLower().toLatin1() );
+                        printf("horizontal header=%s\n", qPrintable( m_varTable->horizontalHeader()->label( x ).toLower() ) );
+                        printf("heading=%s\n", qPrintable( heading[z].toLower() ) );
 			if( m_varTable->horizontalHeader()->label( x ).toLower() == heading[z].toLower() )
 			{
-                            printf("Reading: (%s)\n", data[z].toLatin1());
+                            printf("Reading: (%s)\n", qPrintable( data[z] ));
 			    m_varTable->setText( i, x, data[z] );
 			    break;
 			}
@@ -1237,13 +1267,13 @@ void BatchAssistant::slotTableInsert()
 
 void BatchAssistant::slotTableRemove()
 {
-    QTableSelection sel = m_varTable->selection( m_varTable->currentSelection() );
+    Q3TableSelection sel = m_varTable->selection( m_varTable->currentSelection() );
     m_varTable->removeRow( sel.topRow() );
 }
 
 void BatchAssistant::setFilename( const QString & url )
 {
-    m_url->setURL( url );
+    m_url->setUrl( url );
     enableControls();
 }
 
@@ -1275,7 +1305,7 @@ void BatchAssistant::setImportCsvFile( const QString & filename )
     radioSqlArticles->setChecked( false );
     radioSimple->setChecked( false );
 
-    importCsvFile->setURL( filename );
+    importCsvFile->setUrl( filename );
 
     enableControls();
 
@@ -1347,10 +1377,10 @@ void BatchAssistant::slotRemoveAllAddress()
     enableControls();
 }
 
-void BatchAssistant::moveAddress( QListView* src, QListView* dst, bool bAll )
+void BatchAssistant::moveAddress( Q3ListView* src, Q3ListView* dst, bool bAll )
 {
-    QListViewItem* item = src->firstChild();
-    QListViewItem* cur;
+    Q3ListViewItem* item = src->firstChild();
+    Q3ListViewItem* cur;
 
     while( item ) 
     {
