@@ -34,6 +34,7 @@
 #include <qpen.h>
 #include <q3sqlcursor.h>
 #include <qxml.h>
+#include <QDomDocument>
 //Added by qt3to4:
 #include <QSqlQuery>
 
@@ -79,10 +80,16 @@ void Label::epcl( QTextStream* stream )
 {
     *stream << EPCLUtils::header();
     
-    DocumentItem* item;
+    /*DocumentItem* item;
     for( item = m_list.first();item;item=m_list.next())
 	if( drawThisItem( item ) )
-	    item->drawEPcl( stream );
+	    item->drawEPcl( stream );*/// -!F: original, delete
+    QList<DocumentItem*>::iterator i;
+    for( i = m_list.begin(); i != m_list.end(); ++i ) {
+        if( drawThisItem( *i ) ) {
+            (*i)->drawEPcl( stream );
+        }
+    }
     
     *stream << EPCLUtils::footer();
     
@@ -94,10 +101,16 @@ void Label::ipl( QTextStream* stream )
     IPLUtils utils;
     *stream << utils.header();
     
-    DocumentItem* item;
+    /*DocumentItem* item;
     for( item = m_list.first();item;item=m_list.next())
 	if( drawThisItem( item ) )
-	    item->drawIpl( stream, &utils );
+	    item->drawIpl( stream, &utils );*/// -!F: original, delete
+    QList<DocumentItem*>::iterator i;
+    for( i = m_list.begin(); i != m_list.end(); ++i ) {
+        if( drawThisItem( *i ) ) {
+            (*i)->drawIpl( stream, &utils );
+        }
+    }
     
     *stream << utils.footer();
     
@@ -109,10 +122,16 @@ void Label::zpl( QTextStream* stream )
 {
     *stream << ZPLUtils::header();
     
-    DocumentItem* item;
+    /*DocumentItem* item;
     for( item = m_list.first();item;item=m_list.next())
 	if( drawThisItem( item ) )
-	    item->drawZpl( stream );
+	    item->drawZpl( stream );*/// -!F: original, delete
+    QList<DocumentItem*>::iterator i;
+    for( i = m_list.begin(); i != m_list.end(); ++i ) {
+        if( drawThisItem( *i ) ) {
+            (*i)->drawZpl( stream );
+        }
+    }
     
     *stream << ZPLUtils::footer();
     
@@ -123,9 +142,12 @@ void Label::InitBarcodes()
 {
     bool firstbarcode = true;
     
-    DocumentItem* item;
-    for( item = m_list.first();item;item=m_list.next())
+    /*DocumentItem* item;
+    for( item = m_list.first();item;item=m_list.next())*/// -!F: original, delete
+    QList<DocumentItem*>::iterator i;
+    for( i = m_list.begin(); i != m_list.end(); ++i ) 
     {
+        DocumentItem* item = *i;
         if( item->rtti() == eRtti_Barcode )
         {
 	    /*
@@ -161,8 +183,11 @@ void Label::draw( QPainter* painter, int x, int y )
 
     InitBarcodes();
 
-    DocumentItem* item;
-    for( item = m_list.first();item;item=m_list.next())
+    /*DocumentItem* item;
+    for( item = m_list.first();item;item=m_list.next())*/// -!F: original, delete
+    QList<DocumentItem*>::iterator i;
+    for( i = m_list.begin(); i != m_list.end(); ++i ) {
+        DocumentItem* item = *i;
 	if( drawThisItem( item ) )
 	{
 	    // add x and y to clip coordinates
@@ -183,10 +208,12 @@ void Label::draw( QPainter* painter, int x, int y )
 	    
 	    painter->save();
 	    painter->translate( x,y );
-	    painter->setClipRect( clip, QPainter::CoordPainter );
+	    /*painter->setClipRect( clip, QPainter::CoordPainter );*/// -!F: original, what is the correct replacement of this ?
+	    painter->setClipRect( clip );
 	    item->draw( painter );
 	    painter->restore();
 	}
+    }
 }
 
 void Label::setBarcodeValue( Barkode* barcode )
@@ -238,20 +265,23 @@ void Label::load( QIODevice* device )
     delete definition;
     
     readDocumentItems( &m_list, &doc, NULL, kbarcode18 );
-    m_list.setAutoDelete( true );
+    /*m_list.setAutoDelete( true );*/// -!F: DocumentItemList has no member named setAutoDelete, what is the correct replacement of this?
                 
     // sort the list by z index
-    m_list.sort();
+    /*m_list.sort();*/// -!F: original, is qSort() the right replacement ?
+    qSort( m_list );
     
-    DocumentItem* item;
-    for( item = m_list.first();item;item=m_list.next())
-    {
+    /*DocumentItem* item;
+    for( item = m_list.first();item;item=m_list.next())*/// -!F: original, delete
+    QList<DocumentItem*>::iterator i;
+    for( i = m_list.begin(); i != m_list.end(); ++i ) {
+        DocumentItem* item = *i;
         // set the paint device for all items
         item->setPaintDevice( m_printer );
         item->setTokenProvider( this );
     }
     
-    device->close();    
+    device->close();
 }
 
 void Label::getXLabel( double x, double y, double width, double height, QPainter* painter, int mode, QString value )
@@ -262,7 +292,7 @@ void Label::getXLabel( double x, double y, double width, double height, QPainter
         painter->drawLine( (int)x, (int)y, int(x+width), int(y+height) );
         painter->drawLine( (int)x, int(y+height), int(x+width), (int)y );
     } else if( mode == ARTICLE_GROUP_NO ) {
-        painter->setPen( QPen( QPen::black, 1 ) );
+        painter->setPen( QPen( Qt::black, 1 ) );
         QFont f( "helvetica", 15 );
         int w = 0;
         do {
@@ -301,10 +331,16 @@ bool Label::drawThisItem( const DocumentItem* item )
 
 bool Label::update() 
 {
-    DocumentItem* item;
+    /*DocumentItem* item;
     for( item = m_list.first();item;item=m_list.next())
 	if( !item->visibilityScript().isEmpty() && item->visibilityScript() != "true" )
-	    return true;
+	    return true;*/// -!F: original, delete
+    QList<DocumentItem*>::iterator i;
+    for( i = m_list.begin(); i != m_list.end(); ++i ) {
+        if( !(*i)->visibilityScript().isEmpty() && (*i)->visibilityScript() != "true" ) {
+            return true;
+        }
+    }
 	    
     return TokenProvider::update();
 }

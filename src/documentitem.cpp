@@ -25,6 +25,7 @@
 #include <qpen.h>
 #include <qpainter.h>
 #include <qdom.h>
+#include <QPaintDevice>
 
 DocumentItem::DocumentItem()
     : QObject(), XMLUtils()
@@ -36,7 +37,7 @@ void DocumentItem::init()
 {
     m_canvasitem = NULL;
     m_token = NULL;
-    m_device = KApplication::desktop();
+    m_device = (QPaintDevice*) KApplication::desktop();
     
     m_z = 0;    
     m_border = true;
@@ -212,14 +213,14 @@ void DocumentItem::setZ( int z )
     m_z = z;
 }
 
-/*void DocumentItem::setPaintDevice( QPaintDevice* device )*/// -!F: original, delete, 
-void DocumentItem::setPaintDevice( QDesktopWidget* device )
+void DocumentItem::setPaintDevice( QPaintDevice* device )// -!F: original,
+/*void DocumentItem::setPaintDevice( QDesktopWidget* device )*/// -!F: delete, 
 {
     m_device = device;
 }
 
-/*QPaintDevice* DocumentItem::paintDevice() const*/// -!F: original, delete, 
-QDesktopWidget* DocumentItem::paintDevice() const
+QPaintDevice* DocumentItem::paintDevice() const// -!F: original, 
+/*QDesktopWidget* DocumentItem::paintDevice() const*/// -!F: delete, 
 {
     return m_device;
 }
