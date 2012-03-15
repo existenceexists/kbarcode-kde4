@@ -40,7 +40,7 @@ AddAllDialog::AddAllDialog(QWidget *parent)
     : KDialog(parent)
 {
 	setCaption(i18n("Add Barcode_basic"));
-	setButtons(KDialog::Ok | KDialog::Cancel, KDialog::Ok);
+	setButtons(KDialog::Ok | KDialog::Cancel);
 	QFrame *main_widget=new QFrame(this);
 	setMainWidget(main_widget);
     QVBoxLayout* layout = new QVBoxLayout(main_widget, 6, 6 );
@@ -69,16 +69,16 @@ AddItemsDialog::AddItemsDialog(QWidget *parent)
     : KDialog(parent)
 {
 	setCaption(i18n("Add Items"));
-	setButtons(KDialog::User1 | KDialog::Close, KDialog::User1);
+	setButtons(KDialog::User1 | KDialog::Close);
     init();
 }
 
-AddItemsDialog::AddItemsDialog( const QString & a, const QString & g, int c, QWidget* parent, const char* name = 0 )
+AddItemsDialog::AddItemsDialog( const QString & a, const QString & g, int c, QWidget* parent, const char* name )
     : KDialog(parent)
 {
     setObjectName( name );
 	setCaption(i18n("Edit Item"));
-	setButtons(KDialogBase::Ok| KDialogBase::Close, KDialogBase::Ok);
+	setButtons(KDialog::Ok| KDialog::Close);
     init();
     article->setText( a );
     group->setText( g );

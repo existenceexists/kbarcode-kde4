@@ -31,6 +31,9 @@
 #include <q3progressdialog.h>
 #include <q3sqlcursor.h>
 #include <qvalidator.h>
+#include <QDomDocument>
+#include <QDomNode>
+#include <QDomElement>
 //Added by qt3to4:
 #include <QSqlQuery>
 
@@ -215,7 +218,7 @@ QString tec452(const QString &url, int count, const QString &art, const QString 
 QString convZeros( int count, int zeros )
 {
 QString str= QString("%1").arg(count);
-int l=strlen(str); //get the string length
+int l=str.length(); //get the string length
 for(;l<zeros;l++) str = QString("0") + str;
 return str;
 }
@@ -640,7 +643,10 @@ int fd, res;
 char buf[1];
 QString result;
 
-fd = open(file, O_RDONLY);
+QByteArray baFile = file.toLocal8Bit();
+char * charFile = baFile.data();
+
+fd = open(charFile, O_RDONLY);
 if (fd <0) return "Port Error.";
 res=read(fd,buf,1);
 while (res == 1){

@@ -29,21 +29,24 @@
 #include <klocale.h>
 
 PrintLabelDlg::PrintLabelDlg(QWidget *parent )
-    : KDialogBase( KDialogBase::Plain, i18n("Print"),
-      KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent)
+    : /*KDialogBase( KDialogBase::Plain, i18n("Print"),
+      KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent)*/
+      KDialog ( parent )
 {
-    QVBoxLayout* box = new QVBoxLayout( plainPage() );
+    QWidget *page = new QWidget( this );
+    QVBoxLayout* box = new QVBoxLayout;
+    page->setLayout( box );
 	
 
-    numLabels  = new KIntNumInput( plainPage() );
+    numLabels  = new KIntNumInput();
     numLabels->setLabel( i18n("Number of labels:" ), Qt::AlignLeft | Qt::AlignVCenter );
     numLabels->setRange( 1, 100000, 1, false );
     
-    numPos = new KIntNumInput( numLabels, 1, plainPage() );
+    numPos = new KIntNumInput( 1 );
     numPos->setLabel( i18n("Start at label position:" ), Qt::AlignLeft | Qt::AlignVCenter );
     numPos->setRange( 1, 100, 1, false );
 
-    checkBorder = new QCheckBox( i18n("&Print crop marks (borders)"), plainPage() );
+    checkBorder = new QCheckBox( i18n("&Print crop marks (borders)"), page );
     checkBorder->setChecked( PrinterSettings::getInstance()->getData()->border );
     
     QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Expanding );
