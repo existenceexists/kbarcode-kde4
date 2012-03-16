@@ -84,6 +84,8 @@
 #include <kglobal.h>
 #include <KUrl>
 
+#include <QDebug>// -!F: del
+
 #define PNG_FORMAT "PNG"
 
 /*class AddressListViewItem : public QTreeWidgetItem {*/// -!F: original, uncomment
@@ -295,7 +297,7 @@ void BatchAssistant::setupPage10()
     QWidget* directoryBox = new QWidget;
 	QHBoxLayout* directoryBox_layout = new QHBoxLayout;
 	directoryBox->setLayout(directoryBox_layout);
-	imageBox_layout->addWidget(imageBox);
+	/*imageBox_layout->addWidget(imageBox);*/// -!F: original, delete
     directoryBox_layout->setSpacing( 5 );
     QLabel* label = new QLabel( i18n("Output &Directory:") );
 	directoryBox_layout->addWidget(label);
@@ -334,12 +336,12 @@ void BatchAssistant::setupPage10()
     imageNameGroup->setLayout(image_button_layout);
 
     labelInfo = new QLabel;
-	page10->layout()->addWidget(labelInfo);
+	pageLayout->addWidget(labelInfo);
 
     radioPrinter->setChecked( true );
 
     checkKeepOpen = new QCheckBox( i18n("&Keep window open after printing.") );
-	page10->layout()->addWidget(checkKeepOpen);
+	pageLayout->addWidget(checkKeepOpen);
 
     QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Expanding );
     pageLayout->addWidget( group );
@@ -415,8 +417,10 @@ void BatchAssistant::setupStackPage1()
 	header->setText(3, i18n("Group") );
 	sqlList->setHeaderItem(header);*/// -!F: original, uncomment
     sqlList->setAllColumnsShowFocus( true );
-    connect( sqlList, SIGNAL(doubleClicked(QTreeWidgetItem*,const QPoint &,int)),
-             this, SLOT(changeItem(QTreeWidgetItem QPoint &,int)));
+    /*connect( sqlList, SIGNAL(doubleClicked(QTreeWidgetItem*,const QPoint &,int)),
+             this, SLOT(changeItem(QTreeWidgetItem QPoint &,int)));*/// -!F: original, uncomment
+    connect( sqlList, SIGNAL(doubleClicked(Q3ListViewItem*,const QPoint &,int)),
+             this, SLOT(changeItem(Q3ListViewItem*, const QPoint &,int)));
 
     connect( customerName, SIGNAL( activated(int) ), this, SLOT( customerNameChanged(int) ) );
     connect( customerId, SIGNAL( activated(int) ), this, SLOT( customerIdChanged(int) ) );
