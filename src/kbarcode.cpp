@@ -19,6 +19,7 @@
 #include "barkode.h"
 #include "barcodegenerator.h"
 #include "batchassistant.h"
+#include "batchprinter.h"
 /*#include "labeleditor.h"*/// -!F: original, uncomment
 #include "databasebrowser.h"
 #include "dialogs/csvimportdlg.h"
@@ -173,7 +174,7 @@ void KBarcode::startLabelEditor()
 
 void KBarcode::startBatchPrint()
 {
-    /*new BatchAssistant( this );*/
+    new BatchAssistant( this );
 }
 
 void KBarcode::editArticles()
@@ -207,8 +208,8 @@ bool KBarcode::parseCmdLine()
 
     KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
 
-    /*BatchPrinter::EOutputFormat eFormat = BatchPrinter::POSTSCRIPT;
-    LabelEditor* pEdit = NULL;*/
+    BatchPrinter::EOutputFormat eFormat = BatchPrinter::POSTSCRIPT;
+    /*LabelEditor* pEdit = NULL;*/// -!F: original, uncomment
     QString serial;
     QString sqlquery   = QString::null;
     QString csvfile    = QString::null;
@@ -219,7 +220,7 @@ bool KBarcode::parseCmdLine()
     int numlabels      = -1;
 
     QString format = args->getOption("output");
-    /*if( format.toUpper() == "BARCODE" )
+    if( format.toUpper() == "BARCODE" )
 	eFormat = BatchPrinter::BCP;
     else if( format.toUpper() == "IMAGE" )
 	eFormat = BatchPrinter::IMAGE;
@@ -228,12 +229,12 @@ bool KBarcode::parseCmdLine()
     else
     {
 	KMessageBox::error( this, i18n("%1 is no valid output format for --output. Valid values are POSTSCRIPT, IMAGE and BARCODE.").arg( format ) );
-    }*/
+    }
 
     if( args->isSet("barcode") )
     {
 	mode = BARCODE;
-	/*startBarcode();*/
+	startBarcode();
     }
 
     if( args->isSet("batch") )
@@ -264,7 +265,7 @@ bool KBarcode::parseCmdLine()
     for( int i = 0; i < args->count(); i++) 
 	if( mode == BATCH )
 	{
-	    /*BatchAssistant* b = new BatchAssistant();
+	    BatchAssistant* b = new BatchAssistant();
 	    b->setFilename( args->url( i ).path() );
 	    b->setOutputFormat( eFormat );
 	    b->setSerialNumber( serial, serialinc );
@@ -281,7 +282,7 @@ bool KBarcode::parseCmdLine()
             {
 		b->printNow( printer, false );
                 delete b;
-            }*/
+            }
 	}
 	else
         {
@@ -311,7 +312,7 @@ bool KBarcode::parseCmdLine()
         return true;
     }
     else
-        return false;    
+        return false;
 }
 
 void KBarcode::importCSV()
