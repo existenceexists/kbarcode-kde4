@@ -83,6 +83,7 @@
 #include <q3vbox.h>
 #include <kglobal.h>
 #include <KUrl>
+#include <kpagewidgetmodel.h>
 
 #include <QDebug>// -!F: del
 
@@ -122,10 +123,11 @@ BatchAssistant::BatchAssistant( QWidget* parent )
 
     compGroup = new KCompletion();
 
-    enableControls();
+    /*enableControls();*/// -!F: original, del
     setupSql();
 
     show();
+    enableControls();
 }
 
 BatchAssistant::~BatchAssistant()
@@ -156,7 +158,8 @@ void BatchAssistant::setupPage1()
     pageLayout->addWidget( m_url );
     pageLayout->addItem( spacer );
 
-    addPage( page1, i18n("File Selection") );
+    KPageWidgetItem * page1Item = addPage( page1, i18n("File Selection") );
+    page1Item->setObjectName("page1");
 
     connect( m_url, SIGNAL( textChanged( const QString & ) ), this, SLOT( enableControls() ) );
 }
@@ -188,7 +191,8 @@ void BatchAssistant::setupPage2()
     connect( radioVarImport, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
     connect( radioAddressBook, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
 
-    addPage( page2, i18n("Data Source") );
+    KPageWidgetItem * page2Item = addPage( page2, i18n("Data Source") );
+    page2Item->setObjectName("page2");
 }
 
 void BatchAssistant::setupPage3()
@@ -200,7 +204,8 @@ void BatchAssistant::setupPage3()
     setupStackPage3();
     setupStackPage4();
 
-    addPage( page3, i18n("Print Data") );
+    page3Item = addPage( page3, i18n("Print Data") );
+    page3Item->setObjectName("page3");
 }
 
 void BatchAssistant::setupPage4()
@@ -231,6 +236,7 @@ void BatchAssistant::setupPage4()
     page4->setLayout(page4_layout);
 
     page4Item = addPage( page4, i18n("Import Variables") );
+    page4Item->setObjectName("page4");
 
     connect( buttonTableInsert, SIGNAL( clicked() ), this, SLOT( slotTableInsert() ) );
     connect( buttonTableRemove, SIGNAL( clicked() ), this, SLOT( slotTableRemove() ) );
@@ -268,7 +274,8 @@ void BatchAssistant::setupPage5()
     hbox->setLayout(hbox_layout);
     page5->setLayout(page5_layout);
 
-    addPage( page5, i18n("Serial Number") );
+    KPageWidgetItem * page5Item = addPage( page5, i18n("Serial Number") );
+    page5Item->setObjectName("page5");
 }
 
 void BatchAssistant::setupPage10()
@@ -297,7 +304,7 @@ void BatchAssistant::setupPage10()
     QWidget* directoryBox = new QWidget;
 	QHBoxLayout* directoryBox_layout = new QHBoxLayout;
 	directoryBox->setLayout(directoryBox_layout);
-	/*imageBox_layout->addWidget(imageBox);*/// -!F: original, delete
+	imageBox_layout->addWidget(directoryBox);// -!F: 
     directoryBox_layout->setSpacing( 5 );
     QLabel* label = new QLabel( i18n("Output &Directory:") );
 	directoryBox_layout->addWidget(label);
@@ -359,7 +366,8 @@ void BatchAssistant::setupPage10()
 
     connect( imageDirPath, SIGNAL( textChanged( const QString & ) ), this, SLOT( enableControls() ) );
 
-    addPage( page10, i18n("Output Device") );
+    KPageWidgetItem * page10Item = addPage( page10, i18n("Output Device") );
+    page10Item->setObjectName("page10");
 }
 
 void BatchAssistant::setupStackPage1()
@@ -627,31 +635,47 @@ void BatchAssistant::enableControls()
 
     if( radioImportSql->isChecked() ) {
 	/*setNextEnabled( page3, !importSqlQuery->text().isEmpty() );*/// -!F: original, del
+	page3NextButtonEnable = !importSqlQuery->text().isEmpty();
     } else if( radioImportCSV->isChecked() ) {
 	/*setNextEnabled( page3, !importCsvFile->url().isEmpty() );*/// -!F: original, del
+	page3NextButtonEnable = !importCsvFile->url().isEmpty();
     } else if( radioImportManual->isChecked() ) {
 	/*setNextEnabled( page3, true );*/// -!F: original, del
+	page3NextButtonEnable = true;
     }
 
     editImageFilename->setEnabled( radioImageFilenameCustom->isChecked() );
     radioImageFilenameArticle->setEnabled( radioSqlArticles->isChecked() );
 
     /*setNextEnabled( page1, !m_url->url().isEmpty() );*/// -!F: original, del
+    page1NextButtonEnable = !m_url->url().path().isEmpty();
     
     if( radioAddressBook->isChecked() ) {
         /*setNextEnabled( page3, listSelectedAddress->childCount() );*/// -!F: original, del
+        page3NextButtonEnable = listSelectedAddress->childCount();
     }
 
     if( radioImage->isChecked() ) {
 	/*setFinishEnabled( page10, !imageDirPath->url().isEmpty() );*/// -!F: original, del
+	page10FinishButtonEnable = !imageDirPath->url().isEmpty();
     } else {
 	/*setFinishEnabled( page10, true );*/// -!F: original, del
+	page10FinishButtonEnable = true;
+    }
+    
+    QString currentPageName = currentPage()->objectName();
+    if( currentPageName == QString( "page1" ) ) {
+        enableButton( KDialog::User2, page1NextButtonEnable );
+    } else if( currentPageName == QString( "page3" ) ) {
+        enableButton( KDialog::User2, page3NextButtonEnable );
+    } else if( currentPageName == QString( "page10" ) ) {
+        enableButton( KDialog::User1, page10FinishButtonEnable );
     }
 }
 
-void BatchAssistant::showPage( QWidget* p )
+void BatchAssistant::configureCurrentPage( KPageWidgetItem* page )
 {
-    if( p == page3 )
+    if( page->objectName() == QString( "page3" ) )
     {
 	if( radioSqlArticles->isChecked() )
 	    page3->setCurrentWidget( stack1 );
@@ -668,14 +692,30 @@ void BatchAssistant::showPage( QWidget* p )
             fillAddressList();
         }
     }
-    else if( p == page4 ) {
+    else if( page->objectName() == QString( "page4" ) ) {
 	if( !fillVarTable() ) {
-	    return;
+	    KAssistantDialog::back();
         }
     }
 
 
     /*KAssistant::showPage( p );*/// -!F: original, del
+}
+
+/* This slot is called when a user clicks the next button.*/
+void BatchAssistant::next() 
+{
+    KAssistantDialog::next();
+    
+    configureCurrentPage(currentPage());
+}
+
+/* This slot is called when a user clicks the next button.*/
+void BatchAssistant::back() 
+{
+    KAssistantDialog::back();
+    
+    configureCurrentPage(currentPage());
 }
 
 void BatchAssistant::accept()
@@ -1295,8 +1335,11 @@ void BatchAssistant::setImportSqlQuery( const QString & query )
 
     enableControls();
 
-    showPage( page3 );
-    showPage( page4 );
+    /*showPage( page3 );
+    showPage( page4 );*/// -!F: original, are the following lines the right replacement ?
+    configureCurrentPage( page3Item );
+    configureCurrentPage( page4Item );
+    setCurrentPage( page4Item );
 }
 
 void BatchAssistant::setImportCsvFile( const QString & filename )
@@ -1313,8 +1356,11 @@ void BatchAssistant::setImportCsvFile( const QString & filename )
 
     enableControls();
 
-    showPage( page3 );
-    showPage( page4 );
+    /*showPage( page3 );
+    showPage( page4 );*/// -!F: original, are the following lines the right replacement ?
+    configureCurrentPage( page3Item );
+    configureCurrentPage( page4Item );
+    setCurrentPage( page4Item );
 }
 
 void BatchAssistant::setNumLabels( const int n )

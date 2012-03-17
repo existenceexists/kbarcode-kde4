@@ -43,6 +43,7 @@ class K3ListView;
 class Q3ListView;
 class Q3ListViewItem;
 class Q3Table;
+class KPageWidgetItem;
 
 class BatchAssistant : public KAssistantDialog {
     Q_OBJECT
@@ -147,6 +148,9 @@ class BatchAssistant : public KAssistantDialog {
         void slotAddAllAddress();
         void slotRemoveAddress();
         void slotRemoveAllAddress();
+        
+        void next();
+        void back();
 
     private:
         /*void moveAddress( QTreeWidget* src, QTreeWidget* dst, bool bAll = false );*/// -!F: original, uncomment
@@ -177,7 +181,7 @@ class BatchAssistant : public KAssistantDialog {
 
     protected:
 	void accept();
-	void showPage( QWidget* w );
+	void configureCurrentPage( KPageWidgetItem* page );
 
     private:
 	/** m_bytearray_filename is set whenever
@@ -197,6 +201,7 @@ class BatchAssistant : public KAssistantDialog {
 	QWidget* page10;
         
         KPageWidgetItem * page4Item;
+        KPageWidgetItem * page3Item;
 
 	QWidget* stack1;
 	QWidget* stack2;
@@ -272,6 +277,10 @@ class BatchAssistant : public KAssistantDialog {
 	KPushButton* buttonTableRemove;
 
 	KUrlRequester* m_url;
+        
+        bool page1NextButtonEnable;
+        bool page3NextButtonEnable;
+        bool page10FinishButtonEnable;
 };
 
 #endif // BATCHASSISTANT_H
