@@ -289,16 +289,16 @@ void BatchAssistant::setupPage10()
     radioPrinter = new QRadioButton( i18n("&Print to a system printer or to a file"));
     button_layout->addWidget(radioPrinter);
     radioImage = new QRadioButton( i18n("&Create images"));
-    button_layout->addWidget(radioImage);
 
     imageBox = new QWidget;
 	QVBoxLayout* imageBox_layout = new QVBoxLayout;
     imageBox_layout->setMargin( 10 );
 	imageBox->setLayout(imageBox_layout);
 	
-    button_layout->addWidget(imageBox);
     radioBarcode = new QRadioButton( i18n("Print to a special &barcode printer"));
     button_layout->addWidget(radioBarcode);
+    button_layout->addWidget(radioImage);
+    /*button_layout->addWidget(imageBox);*/// -!F: if imageBox is put into QGroupBox group, radio buttons don't behave as desired
     group->setLayout(button_layout);
 
     QWidget* directoryBox = new QWidget;
@@ -352,6 +352,7 @@ void BatchAssistant::setupPage10()
 
     QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Expanding );
     pageLayout->addWidget( group );
+    pageLayout->addWidget(imageBox);
     pageLayout->addItem( spacer );
     pageLayout->addWidget( labelInfo );
     pageLayout->addWidget( checkKeepOpen );
