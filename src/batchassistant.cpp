@@ -84,6 +84,7 @@
 #include <kglobal.h>
 #include <KUrl>
 #include <kpagewidgetmodel.h>
+#include <KAction>
 
 #include <QDebug>// -!F: del
 
@@ -138,7 +139,10 @@ BatchAssistant::~BatchAssistant()
 void BatchAssistant::setupPage1()
 {
     page1 = new QWidget( this );
-    QVBoxLayout* pageLayout = new QVBoxLayout( page1, 11, 6, "pageLayout");
+    QVBoxLayout* pageLayout = new QVBoxLayout( page1 );
+    pageLayout->setContentsMargins( 11, 11, 11, 11 );
+    pageLayout->setSpacing( 6 );
+    pageLayout->setObjectName( "page1Layout" );
 
     QLabel* label = new QLabel( i18n("<qt>This assistant will guide you through the process "
 				     "of printing many labels with KBarcode.<br>The first step "
@@ -167,7 +171,10 @@ void BatchAssistant::setupPage1()
 void BatchAssistant::setupPage2()
 {
     page2 = new QWidget( this );
-    QVBoxLayout* pageLayout = new QVBoxLayout( page2, 11, 6, "pageLayout");
+    QVBoxLayout* pageLayout = new QVBoxLayout( page2 );
+    pageLayout->setContentsMargins( 11, 11, 11, 11 );
+    pageLayout->setSpacing( 6 );
+    pageLayout->setObjectName( "page2Layout" );
 
     QGroupBox* group = new QGroupBox( page2 );
     QVBoxLayout* button_layout=new QVBoxLayout;
@@ -221,10 +228,10 @@ void BatchAssistant::setupPage4()
     
     buttonTableInsert = new KPushButton( i18n("Insert Row") );
     hbox_layout->addWidget(buttonTableInsert);
-    buttonTableInsert->setIconSet( BarIconSet( "edit" ) );
+    buttonTableInsert->setIcon( KIcon( "document-edit" ) );
     buttonTableRemove = new KPushButton( i18n("Delete Row") );
     hbox_layout->addWidget(buttonTableRemove);
-    buttonTableRemove->setIconSet( BarIconSet( "editdelete") );
+    buttonTableRemove->setIcon( KIcon( "edit-delete") );
     hbox->setLayout(hbox_layout);
 
     /*m_varTable = new QTableWidget;*/// -!F: original, uncomment
@@ -270,7 +277,8 @@ void BatchAssistant::setupPage5()
     serialInc = new KIntNumInput( 1 );
     hbox_layout->addWidget(serialInc);
     serialInc->setLabel( i18n( "Serial increment:" ), Qt::AlignLeft | Qt::AlignVCenter );
-    serialInc->setRange( 1, 10000, 1, false );
+    serialInc->setRange( 1, 10000, 1 );
+    serialInc->setSliderEnabled( false );
     hbox->setLayout(hbox_layout);
     page5->setLayout(page5_layout);
 
@@ -281,7 +289,10 @@ void BatchAssistant::setupPage5()
 void BatchAssistant::setupPage10()
 {
     page10 = new QWidget( this );
-    QVBoxLayout* pageLayout = new QVBoxLayout( page10, 11, 6, "pageLayout");
+    QVBoxLayout* pageLayout = new QVBoxLayout( page10 );
+    pageLayout->setContentsMargins( 11, 11, 11, 11 );
+    pageLayout->setSpacing( 6 );
+    pageLayout->setObjectName( "page10Layout" );
 
     QGroupBox* group = new QGroupBox( page10 );
     QVBoxLayout* button_layout = new QVBoxLayout;
@@ -323,7 +334,7 @@ void BatchAssistant::setupPage10()
     QStringList formats = KImageIO::types( KImageIO::Writing );
     comboFormat = new KComboBox( false );
 	formatBox_layout->addWidget(comboFormat);
-    comboFormat->insertStringList( formats );
+    comboFormat->insertItems( 0, formats );
     if( formats.contains( PNG_FORMAT ) )
 	  comboFormat->setCurrentIndex( formats.indexOf( PNG_FORMAT ) );// -!F: Does this work as expected ? originally setCurrentItem(...)
     label->setBuddy( comboFormat );
@@ -408,11 +419,26 @@ void BatchAssistant::setupStackPage1()
     buttonRemoveAll = new KPushButton( i18n("R&emove All") );
 	hButtonBox_layout->addWidget(buttonRemoveAll);
 
+    KAction* importFromFileAct = new KAction( this );
+    importFromFileAct->setText( i18n( "Import from File ..." ) );
+    connect( importFromFileAct, SIGNAL( triggered( bool ) ), this, SLOT( loadFromFile() ) );
+
+    KAction* importFromClipboardAct = new KAction( this );
+    importFromClipboardAct->setText( i18n( "Import from Clipboard ..." ) );
+    connect( importFromClipboardAct, SIGNAL( triggered( bool ) ), this, SLOT( loadFromClipboard() ) );
+
+    KAction* importBarcode_basicAct = new KAction( this );
+    importBarcode_basicAct->setText( i18n( "Import barcode_basic" ) );
+    connect( importBarcode_basicAct, SIGNAL( triggered( bool ) ), this, SLOT( addAllItems() ) );
+    
     KMenu* mnuImport = new KMenu( this );
-    mnuImport->insertItem( i18n("Import from File ..."), this, SLOT( loadFromFile() ) );
+    /*mnuImport->insertItem( i18n("Import from File ..."), this, SLOT( loadFromFile() ) );
     mnuImport->insertItem( i18n("Import from Clipboard ..."), this, SLOT( loadFromClipboard() ) );
-    mnuImport->insertItem( i18n("Import barcode_basic"), this, SLOT( addAllItems() ) );
-    buttonImport->setPopup( mnuImport );
+    mnuImport->insertItem( i18n("Import barcode_basic"), this, SLOT( addAllItems() ) );*/// -!F: original, delete
+    mnuImport->addAction( importFromFileAct );
+    mnuImport->addAction( importFromClipboardAct );
+    mnuImport->addAction( importBarcode_basicAct );
+    buttonImport->setMenu( mnuImport );
 
     sqlList = new K3ListView( stack1 );
     sqlList->addColumn( i18n("Index") );// -!F: delete these 4 lines
@@ -503,7 +529,8 @@ void BatchAssistant::setupStackPage3()
     stack3->setLayout(stack3_layout);
 
     numLabels = new KIntNumInput( 1, stack3 );
-    numLabels->setRange( 1, 100000, 1, true );
+    numLabels->setRange( 1, 100000, 1 );
+    numLabels->setSliderEnabled( true );
     numLabels->setLabel( i18n("&Number of labels to print:"), Qt::AlignLeft | Qt::AlignVCenter );
 
     page3->layout()->addWidget( stack3 );
@@ -540,15 +567,15 @@ void BatchAssistant::setupStackPage4()
     buttonRemoveAddress = new KPushButton( buttons );;
     buttonRemoveAllAddress = new KPushButton( buttons );
 
-    buttonAddAllAddress->setIconSet( BarIconSet( "2rightarrow" ) );
-    buttonAddAddress->setIconSet( BarIconSet( "1rightarrow" ) );
-    buttonRemoveAddress->setIconSet( BarIconSet( "1leftarrow" ) );
-    buttonRemoveAllAddress->setIconSet( BarIconSet( "2leftarrow" ) );
+    buttonAddAllAddress->setIcon( KIcon( "arrow-right-double" ) );
+    buttonAddAddress->setIcon( KIcon( "arrow-right" ) );
+    buttonRemoveAddress->setIcon( KIcon( "arrow-left" ) );
+    buttonRemoveAllAddress->setIcon( KIcon( "arrow-left-double" ) );
 
-    QToolTip::add( buttonAddAllAddress, i18n("Add all contacts to the list of contacts which will be printed.") );
-    QToolTip::add( buttonAddAddress, i18n("Add selected contacts to the list of contacts which will be printed.") );
-    QToolTip::add( buttonRemoveAddress, i18n("Remove selected contacts from the list of contacts which will be printed.") );
-    QToolTip::add( buttonRemoveAllAddress, i18n("Remove all contacts from the list of contacts which will be printed.") );
+    buttonAddAllAddress->setToolTip( i18n("Add all contacts to the list of contacts which will be printed.") );
+    buttonAddAddress->setToolTip( i18n("Add selected contacts to the list of contacts which will be printed.") );
+    buttonRemoveAddress->setToolTip( i18n("Remove selected contacts from the list of contacts which will be printed.") );
+    buttonRemoveAllAddress->setToolTip( i18n("Remove all contacts from the list of contacts which will be printed.") );
 
     layout->addItem( spacer1 );
     layout->addWidget( buttonAddAllAddress );
@@ -790,7 +817,7 @@ void BatchAssistant::printNow( const QString & printer, bool bUserInteraction )
         /*KAssistant::accept();*/// -!F: original, del
         KAssistantDialog::accept();
 
-    KApplication::setOverrideCursor( QCursor( Qt::ArrowCursor ), true );
+    KApplication::changeOverrideCursor( QCursor( Qt::ArrowCursor ) );
     setupBatchPrinter( batch, batchType );
     KApplication::restoreOverrideCursor();
 
@@ -1200,7 +1227,7 @@ void BatchAssistant::fillVarList()
     m_varList->clear();
     m_varList->insertStringList( vars );
     m_varTable->setNumCols( vars.count() );
-    for( unsigned int i = 0; i < vars.count(); i++ )
+    for( int i = 0; i < vars.count(); i++ )
     {
 	vars[i] = vars[i].right( vars[i].length() - 1 );
 	m_varTable->horizontalHeader()->setLabel( i, vars[i] );
@@ -1278,7 +1305,7 @@ bool BatchAssistant::fillVarTable()
 		    m_varTable->setNumRows( i + 100 );	      
 
                 printf("datacount=%i\n", data.count() );
-		for( unsigned int z = 0; z < data.count(); z++ )
+		for( int z = 0; z < data.count(); z++ )
 		{
                     printf("numRows=%i\n", m_varTable->numCols() );
 		    for( int x = 0; x < m_varTable->numCols(); x++ )

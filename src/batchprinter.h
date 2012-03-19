@@ -46,7 +46,7 @@ typedef QList< QMap<QString,QString> > TVariableList;
 class BatchPrinter
 {
     public:
-        typedef enum EOutputFormat { POSTSCRIPT = 0, IMAGE, BCP };
+        enum EOutputFormat { POSTSCRIPT = 0, IMAGE, BCP };
         enum EImageFileName { E_ARTICLE, E_BARCODE, E_CUSTOM };
 
         struct data {
@@ -167,7 +167,7 @@ class BatchPrinter
           */
 	QString m_image_format;
 
-        unsigned int m_cur_data_count;
+        int m_cur_data_count;
 
         /** format for bcp output
           */
