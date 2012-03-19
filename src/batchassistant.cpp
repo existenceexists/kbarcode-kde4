@@ -718,12 +718,16 @@ void BatchAssistant::configureCurrentPage( KPageWidgetItem* page )
         {
             page3->setCurrentWidget( stack4 );
             fillAddressList();
+            enableControls();
         }
     }
     else if( page->objectName() == QString( "page4" ) ) {
 	if( !fillVarTable() ) {
-	    KAssistantDialog::back();
+	    back();
         }
+    }
+    else if( page->objectName() == QString( "page10" ) ) {
+        enableButton( KDialog::User1, page10FinishButtonEnable );
     }
 
 
@@ -1366,6 +1370,7 @@ void BatchAssistant::setImportSqlQuery( const QString & query )
     /*showPage( page3 );
     showPage( page4 );*/// -!F: original, are the following lines the right replacement ?
     configureCurrentPage( page3Item );
+    setCurrentPage( page3Item );
     configureCurrentPage( page4Item );
     setCurrentPage( page4Item );
 }
@@ -1387,6 +1392,7 @@ void BatchAssistant::setImportCsvFile( const QString & filename )
     /*showPage( page3 );
     showPage( page4 );*/// -!F: original, are the following lines the right replacement ?
     configureCurrentPage( page3Item );
+    setCurrentPage( page3Item );
     configureCurrentPage( page4Item );
     setCurrentPage( page4Item );
 }
