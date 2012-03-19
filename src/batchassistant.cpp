@@ -276,7 +276,7 @@ void BatchAssistant::setupPage5()
 
     serialInc = new KIntNumInput( 1 );
     hbox_layout->addWidget(serialInc);
-    serialInc->setLabel( i18n( "Serial increment:" ), Qt::AlignLeft | Qt::AlignVCenter );
+    serialInc->setLabel( i18n( "Serial increment:" ), Qt::AlignLeft | Qt::AlignTop );
     serialInc->setRange( 1, 10000, 1 );
     serialInc->setSliderEnabled( false );
     hbox->setLayout(hbox_layout);
@@ -315,7 +315,7 @@ void BatchAssistant::setupPage10()
     QWidget* directoryBox = new QWidget;
 	QHBoxLayout* directoryBox_layout = new QHBoxLayout;
 	directoryBox->setLayout(directoryBox_layout);
-	imageBox_layout->addWidget(directoryBox);// -!F: 
+	imageBox_layout->addWidget(directoryBox);// -!F: keep
     directoryBox_layout->setSpacing( 5 );
     QLabel* label = new QLabel( i18n("Output &Directory:") );
 	directoryBox_layout->addWidget(label);
@@ -394,19 +394,18 @@ void BatchAssistant::setupStackPage1()
 	QHBoxLayout* hbox_layout = new QHBoxLayout;
     hbox_layout->setSpacing( 5 );
 	hbox->setLayout(hbox_layout);
-	stack1_layout->addWidget(hbox);
 
     hbox_layout->addWidget( new QLabel( i18n( "Customer name and no.:" ) ));
     customerName = new KComboBox( false );
 	hbox_layout->addWidget(customerName);
     customerId = new KComboBox( false );
 	hbox_layout->addWidget(customerId);
+        stack1_layout->addWidget(hbox);
 
     QWidget* hButtonBox = new QWidget;
 	QHBoxLayout* hButtonBox_layout = new QHBoxLayout;
 	hButtonBox->setLayout(hButtonBox_layout);
     hButtonBox_layout->setSpacing( 5 );
-	stack1_layout->addWidget(hButtonBox);
 
     buttonAdd = new KPushButton( i18n( "&Add..." ) );
 	hButtonBox_layout->addWidget(buttonAdd);
@@ -418,6 +417,7 @@ void BatchAssistant::setupStackPage1()
 	hButtonBox_layout->addWidget(buttonRemove);
     buttonRemoveAll = new KPushButton( i18n("R&emove All") );
 	hButtonBox_layout->addWidget(buttonRemoveAll);
+    stack1_layout->addWidget(hButtonBox);
 
     KAction* importFromFileAct = new KAction( this );
     importFromFileAct->setText( i18n( "Import from File ..." ) );
@@ -452,6 +452,7 @@ void BatchAssistant::setupStackPage1()
 	header->setText(3, i18n("Group") );
 	sqlList->setHeaderItem(header);*/// -!F: original, uncomment
     sqlList->setAllColumnsShowFocus( true );
+    stack1_layout->addWidget( sqlList );
     /*connect( sqlList, SIGNAL(doubleClicked(QTreeWidgetItem*,const QPoint &,int)),
              this, SLOT(changeItem(QTreeWidgetItem QPoint &,int)));*/// -!F: original, uncomment
     connect( sqlList, SIGNAL(doubleClicked(Q3ListViewItem*,const QPoint &,int)),
@@ -503,16 +504,18 @@ void BatchAssistant::setupStackPage2()
     labelEncoding->setBuddy( comboEncoding );
     radioImportManual->setChecked( true );
     group->setLayout(group_layout);
+    stack2_layout->addWidget( group );
 
     QWidget* box = new QWidget;
     QVBoxLayout* box_layout = new QVBoxLayout;
     box->setLayout(box_layout);
     box_layout->setSpacing( 5 );
-    stack2->layout()->addWidget(box);
     QLabel* label;
     label = new QLabel( i18n("Available Variables:") );
     box_layout->addWidget(label);
     m_varList = new K3ListBox( box );
+    box_layout->addWidget( m_varList );
+    stack2_layout->addWidget( box );
 
     connect( radioImportManual, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
     connect( radioImportSql, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
@@ -531,7 +534,8 @@ void BatchAssistant::setupStackPage3()
     numLabels = new KIntNumInput( 1, stack3 );
     numLabels->setRange( 1, 100000, 1 );
     numLabels->setSliderEnabled( true );
-    numLabels->setLabel( i18n("&Number of labels to print:"), Qt::AlignLeft | Qt::AlignVCenter );
+    numLabels->setLabel( i18n("&Number of labels to print:"), Qt::AlignLeft | Qt::AlignTop );
+    stack3_layout->addWidget( numLabels );
 
     page3->layout()->addWidget( stack3 );
 }
@@ -742,7 +746,7 @@ void BatchAssistant::next()
     configureCurrentPage(currentPage());
 }
 
-/* This slot is called when a user clicks the next button.*/
+/* This slot is called when a user clicks the back button.*/
 void BatchAssistant::back() 
 {
     KAssistantDialog::back();
@@ -1261,6 +1265,11 @@ bool BatchAssistant::fillVarTable()
     {
 	int y = 0;
 	int x;
+        if( !SqlTables::getInstance()->database() )
+        {
+            KMessageBox::error( this, i18n("<qt>Can't connect to a database.</qt>") );
+            return false;
+        }
 	Q3SqlSelectCursor query( importSqlQuery->text(), * SqlTables::getInstance()->database() );
 	query.select();
 	if( query.lastError().type() != QSqlError::None )
