@@ -135,8 +135,8 @@ class BatchAssistant : public KAssistantDialog {
 	void customerNameChanged( int index );
 	void addItem();
         bool slotAddItem( const QString & article, const QString & group, int count );
-	/*void changeItem( QTreeWidgetItem* item, const QPoint &, int );*/// -!F: original, uncomment
-        void changeItem( Q3ListViewItem* item, const QPoint &, int );
+	void changeItem( QTreeWidgetItem* item, int column );
+        /*void changeItem( Q3ListViewItem* item, const QPoint &, int );*/// -!F: del
 	void editItem();
 	void removeItem();
 
@@ -153,8 +153,8 @@ class BatchAssistant : public KAssistantDialog {
         void back();
 
     private:
-        /*void moveAddress( QTreeWidget* src, QTreeWidget* dst, bool bAll = false );*/// -!F: original, uncomment
-        void moveAddress( Q3ListView* src, Q3ListView* dst, bool bAll = false );
+        void moveAddress( QTreeWidget* src, QTreeWidget* dst, bool bAll = false );
+        /*void moveAddress( Q3ListView* src, Q3ListView* dst, bool bAll = false );*/// -!F: delete
 
 	void fillByteArray();
 	void fillVarList();
@@ -251,13 +251,12 @@ class BatchAssistant : public KAssistantDialog {
         Q3Table* m_varTable;
 	K3ListBox* m_varList;
 
-        /*QTreeWidget* listAddress;
-        QTreeWidget* listSelectedAddress;*/// -!F: original, uncomment
-        K3ListView* listAddress;
-        K3ListView* listSelectedAddress;
+        QTreeWidget* listAddress;
+        QTreeWidget* listSelectedAddress;
+        /*K3ListView* listAddress;
+        K3ListView* listSelectedAddress;*/// -!F: delete
 
-	/*QTreeWidget* sqlList;*/// -!F: original, uncomment
-        K3ListView* sqlList;
+	QTreeWidget* sqlList;
 	KLineEdit* serialStart;
 
         QCheckBox* checkKeepOpen;

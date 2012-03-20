@@ -34,18 +34,21 @@
 #include <qclipboard.h>
 #include <qcursor.h>
 #include <qdom.h>
-#include <q3header.h>
+//#include <q3header.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qradiobutton.h>
-#include <q3sqlselectcursor.h> 
-#include <qtooltip.h>
+#include <q3sqlselectcursor.h>
 #include <QGroupBox>
-#include <q3widgetstack.h>
-#include <Q3Frame>
+#include <QFrame>
 #include <Q3ListView>
 #include <Q3ListViewItem>
 #include <Q3TableSelection>
+#include <QDebug>
+#include <QTreeWidget>
+#include <QAbstractItemView>
+#include <QList>
+#include <QStringList>
 //Added by qt3to4:
 #include <QHBoxLayout>
 #include <QList>
@@ -86,17 +89,15 @@
 #include <kpagewidgetmodel.h>
 #include <KAction>
 
-#include <QDebug>// -!F: del
-
 #define PNG_FORMAT "PNG"
 
-/*class AddressListViewItem : public QTreeWidgetItem {*/// -!F: original, uncomment
-class AddressListViewItem : public Q3ListViewItem {
+class AddressListViewItem : public QTreeWidgetItem {
+/*class AddressListViewItem : public Q3ListViewItem {*/// -!F: del
 public:
-    /*AddressListViewItem(QTreeWidget *parent, KABC::Addressee & addr )
-        : QTreeWidgetItem( parent ), m_address( addr )*/// -!F: original, uncomment
-    AddressListViewItem(Q3ListView *parent, KABC::Addressee & addr )
-        : Q3ListViewItem( parent ), m_address( addr )
+    AddressListViewItem(QTreeWidget *parent, KABC::Addressee & addr )
+        : QTreeWidgetItem( parent ), m_address( addr )
+    /*AddressListViewItem(Q3ListView *parent, KABC::Addressee & addr )
+        : Q3ListViewItem( parent ), m_address( addr )*/// -!F: del
         {
             this->setText( 0, m_address.givenName() );
             this->setText( 1, m_address.familyName() );
@@ -303,7 +304,7 @@ void BatchAssistant::setupPage10()
 
     imageBox = new QWidget;
 	QVBoxLayout* imageBox_layout = new QVBoxLayout;
-    imageBox_layout->setMargin( 10 );
+    imageBox_layout->setContentsMargins( 10, 10, 10, 10 );
 	imageBox->setLayout(imageBox_layout);
 	
     radioBarcode = new QRadioButton( i18n("Print to a special &barcode printer"));
@@ -440,23 +441,19 @@ void BatchAssistant::setupStackPage1()
     mnuImport->addAction( importBarcode_basicAct );
     buttonImport->setMenu( mnuImport );
 
-    sqlList = new K3ListView( stack1 );
-    sqlList->addColumn( i18n("Index") );// -!F: delete these 4 lines
-    sqlList->addColumn( i18n("Number of Labels") );
-    sqlList->addColumn( i18n("Article Number") );
-    sqlList->addColumn( i18n("Group") );
-	/*QTreeWidgetItem* header = new QTreeWidgetItem;
+    sqlList = new QTreeWidget( stack1 );
+	QTreeWidgetItem* header = new QTreeWidgetItem;
 	header->setText(0, i18n("Index"));
 	header->setText(1, i18n("Number of Labels") );
 	header->setText(2,  i18n("Article Number") );
 	header->setText(3, i18n("Group") );
-	sqlList->setHeaderItem(header);*/// -!F: original, uncomment
+	sqlList->setHeaderItem(header);
     sqlList->setAllColumnsShowFocus( true );
     stack1_layout->addWidget( sqlList );
-    /*connect( sqlList, SIGNAL(doubleClicked(QTreeWidgetItem*,const QPoint &,int)),
-             this, SLOT(changeItem(QTreeWidgetItem QPoint &,int)));*/// -!F: original, uncomment
-    connect( sqlList, SIGNAL(doubleClicked(Q3ListViewItem*,const QPoint &,int)),
-             this, SLOT(changeItem(Q3ListViewItem*, const QPoint &,int)));
+    connect( sqlList, SIGNAL( itemDoubleClicked( QTreeWidgetItem *, int ) ),
+             this, SLOT( changeItem( QTreeWidgetItem *, int ) ) );
+    /*connect( sqlList, SIGNAL(doubleClicked(Q3ListViewItem*,const QPoint &,int)),
+             this, SLOT(changeItem(Q3ListViewItem*, const QPoint &,int)));*/// -!F: del
 
     connect( customerName, SIGNAL( activated(int) ), this, SLOT( customerNameChanged(int) ) );
     connect( customerId, SIGNAL( activated(int) ), this, SLOT( customerIdChanged(int) ) );
@@ -547,28 +544,26 @@ void BatchAssistant::setupStackPage4()
     page3->layout()->addWidget(stack4);
     
     QHBoxLayout* mainLayout = new QHBoxLayout( stack4 );
+    stack4->setLayout( mainLayout );
 
     QWidget* list1 = new QWidget;
     QVBoxLayout* list1_layout = new QVBoxLayout;
     list1->setLayout(list1_layout);
-    stack4->layout()->addWidget(list1);
 
     QWidget* list2 = new QWidget;
     QVBoxLayout* list2_layout = new QVBoxLayout;
     list2->setLayout(list2_layout);
-    stack4->layout()->addWidget(list2);
 
-    Q3Frame* buttons = new Q3Frame( stack4 );
-    stack4->layout()->addWidget(buttons);
-    buttons->setMargin( 10 );
-
+    QFrame* buttons = new QFrame( stack4 );
     QVBoxLayout* layout = new QVBoxLayout( buttons );
+    layout->setContentsMargins( 10, 10, 10, 10 );
+    buttons->setLayout( layout );
     QSpacerItem* spacer1 = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Expanding );
     QSpacerItem* spacer2 = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Expanding );
 
     buttonAddAllAddress  = new KPushButton( buttons );
     buttonAddAddress = new KPushButton( buttons );
-    buttonRemoveAddress = new KPushButton( buttons );;
+    buttonRemoveAddress = new KPushButton( buttons );
     buttonRemoveAllAddress = new KPushButton( buttons );
 
     buttonAddAllAddress->setIcon( KIcon( "arrow-right-double" ) );
@@ -599,29 +594,39 @@ void BatchAssistant::setupStackPage4()
     
     list2_layout->addWidget(new QLabel( i18n("Selected Addresses") ));
 
-    listAddress = new K3ListView;
+    listAddress = new QTreeWidget;
     list1_layout->addWidget(listAddress);
-    listAddress->addColumn( i18n("Given Name"), 0 );
+    /*listAddress->addColumn( i18n("Given Name"), 0 );
     listAddress->addColumn( i18n("Family Name"), 1 );
-    listAddress->addColumn( i18n("Email Address"), 2 );
-    listAddress->setMultiSelection( true );
+    listAddress->addColumn( i18n("Email Address"), 2 );*/// -!F: delete
+    QTreeWidgetItem* header = new QTreeWidgetItem;
+    header->setText(0, i18n("Given Name"));
+    header->setText(1, i18n("Family Name") );
+    header->setText(2,  i18n("Email Address") );
+    listAddress->setHeaderItem(header);
+    listAddress->setSelectionMode( QAbstractItemView::MultiSelection );
     listAddress->setAllColumnsShowFocus( true );
 
-    listAddress->setColumnWidthMode( 0, Q3ListView::Maximum );
-    listAddress->setColumnWidthMode( 1, Q3ListView::Maximum );
-    listAddress->setColumnWidthMode( 2, Q3ListView::Maximum );
+    listAddress->resizeColumnToContents( 0 );
+    listAddress->resizeColumnToContents( 1 );
+    listAddress->resizeColumnToContents( 2 );
 
-    listSelectedAddress = new K3ListView;
+    listSelectedAddress = new QTreeWidget;
     list2_layout->addWidget(listSelectedAddress);
-    listSelectedAddress->addColumn( i18n("Given Name"), 0 );
+    /*listSelectedAddress->addColumn( i18n("Given Name"), 0 );
     listSelectedAddress->addColumn( i18n("Family Name"), 1 );
-    listSelectedAddress->addColumn( i18n("Email Address"), 2 );
-    listSelectedAddress->setMultiSelection( true );
+    listSelectedAddress->addColumn( i18n("Email Address"), 2 );*/// -!F: delete
+    QTreeWidgetItem* header2 = new QTreeWidgetItem;
+    header2->setText( 0, i18n("Given Name") );
+    header2->setText( 1, i18n("Family Name") );
+    header2->setText( 2, i18n("Email Address") );
+    listSelectedAddress->setHeaderItem( header2 );
+    listSelectedAddress->setSelectionMode( QAbstractItemView::MultiSelection );
     listSelectedAddress->setAllColumnsShowFocus( true );
 
-    listSelectedAddress->setColumnWidthMode( 0, Q3ListView::Maximum );
-    listSelectedAddress->setColumnWidthMode( 1, Q3ListView::Maximum );
-    listSelectedAddress->setColumnWidthMode( 2, Q3ListView::Maximum );
+    listSelectedAddress->resizeColumnToContents( 0 );
+    listSelectedAddress->resizeColumnToContents( 1 );
+    listSelectedAddress->resizeColumnToContents( 2 );
 
     connect( buttonAddAddress, SIGNAL( clicked() ), this, SLOT( slotAddAddress() ) );
     connect( buttonRemoveAddress, SIGNAL( clicked() ), this, SLOT( slotRemoveAddress() ) );
@@ -659,9 +664,9 @@ void BatchAssistant::enableControls()
     labelEncoding->setEnabled( radioImportCSV->isChecked() );
     comboEncoding->setEnabled( radioImportCSV->isChecked() );
 
-    buttonRemove->setEnabled( sqlList->childCount() );
-    buttonRemoveAll->setEnabled(sqlList->childCount() );
-    buttonEdit->setEnabled( sqlList->childCount() );
+    buttonRemove->setEnabled( sqlList->topLevelItemCount() );
+    buttonRemoveAll->setEnabled(sqlList->topLevelItemCount() );
+    buttonEdit->setEnabled( sqlList->topLevelItemCount() );
 
     imageBox->setEnabled( radioImage->isChecked() );
 
@@ -684,7 +689,7 @@ void BatchAssistant::enableControls()
     
     if( radioAddressBook->isChecked() ) {
         /*setNextEnabled( page3, listSelectedAddress->childCount() );*/// -!F: original, del
-        page3NextButtonEnable = listSelectedAddress->childCount();
+        page3NextButtonEnable = listSelectedAddress->topLevelItemCount();
     }
 
     if( radioImage->isChecked() ) {
@@ -863,11 +868,12 @@ void BatchAssistant::setupBatchPrinter( BatchPrinter* batch, int m )
 	batch->setCustomer( customerId->currentText() );
 	
         // sort by group
-	sqlList->setSorting( 3, true );
-	sqlList->sort();
+	sqlList->setSortingEnabled( true );
+	sqlList->sortItems( 3, Qt::AscendingOrder );
 
+        int itemIndex = 0;
 	QList<BatchPrinter::data>* dlist = new QList<BatchPrinter::data>;
-	Q3ListViewItem* item = sqlList->firstChild();
+	QTreeWidgetItem* item = sqlList->topLevelItem( itemIndex );
 	while( item ) 
 	{
 	    BatchPrinter::data m_data;
@@ -877,7 +883,8 @@ void BatchAssistant::setupBatchPrinter( BatchPrinter* batch, int m )
 	    m_data.group = item->text( 3 );
 	    
 	    dlist->append( m_data );
-	    item = item->nextSibling();
+            itemIndex = itemIndex + 1;
+	    item = sqlList->topLevelItem( itemIndex );
 	};
 
 	batch->setData( dlist );
@@ -919,12 +926,14 @@ void BatchAssistant::setupBatchPrinter( BatchPrinter* batch, int m )
     else if( radioAddressBook->isChecked() )
     {
         KABC::AddresseeList* list = new KABC::AddresseeList;
-        /*QTreeWidgetItem* item = listSelectedAddress->firstChild();*/// -!F: original, uncomment
-        Q3ListViewItem* item = listSelectedAddress->firstChild();
+        int itemIndex = 0;
+        QTreeWidgetItem* item = listSelectedAddress->topLevelItem( itemIndex );
+        /*Q3ListViewItem* item = listSelectedAddress->firstChild();*/// -!F: del
         while( item )
         {
             list->append( static_cast<AddressListViewItem*>(item)->address() );
-            item = item->nextSibling();
+            itemIndex = itemIndex + 1;
+            item = listSelectedAddress->topLevelItem( itemIndex );
         }
 
         batch->setData( list );
@@ -965,11 +974,12 @@ bool BatchAssistant::addItem( const QString & article, const QString & group, in
     }
 
     QString temp;
-    temp.sprintf("%0*i", 5, sqlList->childCount() + 1 );
+    temp.sprintf("%0*i", 5, sqlList->topLevelItemCount() + 1 );
 
-    Q3ListViewItem* item = new Q3ListViewItem( sqlList, temp, QString( "%1" ).arg( count ),
-                          article, group );
-    sqlList->insertItem( item );
+    QStringList itemLabels;
+    itemLabels << temp << QString( "%1" ).arg( count ) << article << group;
+    QTreeWidgetItem* item = new QTreeWidgetItem( itemLabels );
+    sqlList->addTopLevelItem( item );
 
     addGroupCompletion( group );
     enableControls();
@@ -1001,12 +1011,16 @@ bool BatchAssistant::existsArticle( const QString & article )
 
 void BatchAssistant::editItem()
 {
-    Q3ListViewItem* item = sqlList->selectedItem();
+    QList<QTreeWidgetItem *> itemsList = sqlList->selectedItems();
+    if( itemsList.isEmpty() ) {
+        return;
+    }
+    QTreeWidgetItem * item = itemsList.first();
     if( item )
-        changeItem( item, QPoint(0,0), 0 );
+        changeItem( item, 0 );
 }
 
-void BatchAssistant::changeItem( Q3ListViewItem* item, const QPoint &, int )
+void BatchAssistant::changeItem( QTreeWidgetItem* item, int column )
 {
     if(!item)
         return;
@@ -1027,12 +1041,14 @@ void BatchAssistant::changeItem( Q3ListViewItem* item, const QPoint &, int )
 
 void BatchAssistant::removeItem() 
 {
-    Q3ListViewItem* item = sqlList->firstChild();
+    int itemIndex = 0;
+    QTreeWidgetItem* item = sqlList->topLevelItem( itemIndex );
     while( item ) 
     {
         if( item->isSelected() ) 
 	{
-            Q3ListViewItem* it = item->nextSibling();
+            itemIndex = itemIndex + 1;
+            QTreeWidgetItem* it = sqlList->topLevelItem( itemIndex );
             delete item;
 
             while( it ) 
@@ -1041,12 +1057,15 @@ void BatchAssistant::removeItem()
                 QString temp;
                 temp.sprintf("%0*i", 5, a - 1 );
                 it->setText( 0, temp );
-                it = it->nextSibling();
+                itemIndex = itemIndex + 1;
+                it = sqlList->topLevelItem( itemIndex );
             }
 
             break;
-        } else
-            item = item->nextSibling();
+        } else {
+            itemIndex = itemIndex + 1;
+            item = sqlList->topLevelItem( itemIndex );
+        }
     }
 
     enableControls();
@@ -1076,8 +1095,10 @@ void BatchAssistant::addAllItems()
 	QSqlQuery query("SELECT article_no FROM " TABLE_BASIC );
 	while( query.next() ) 
 	{
-	    temp.sprintf("%0*i", 5, sqlList->childCount() + 1 );
-	    new Q3ListViewItem( sqlList, temp, num, query.value( 0 ).toString(), group );
+	    temp.sprintf("%0*i", 5, sqlList->topLevelItemCount() + 1 );
+            QStringList labelsList;
+            labelsList << temp << num << query.value( 0 ).toString() << group;
+	    new QTreeWidgetItem( sqlList, labelsList );
 	}
 
         enableControls();
@@ -1251,8 +1272,9 @@ void BatchAssistant::fillAddressList()
     
     KABC::AddressBook::Iterator it;
     listAddress->setUpdatesEnabled( false );
-    for ( it = ab->begin(); it != ab->end(); ++it ) 
+    for ( it = ab->begin(); it != ab->end(); ++it ) {
         new AddressListViewItem( listAddress, *it );
+    }
     listAddress->setUpdatesEnabled( true );
 }
 
@@ -1470,23 +1492,27 @@ void BatchAssistant::slotRemoveAllAddress()
     enableControls();
 }
 
-void BatchAssistant::moveAddress( Q3ListView* src, Q3ListView* dst, bool bAll )
+void BatchAssistant::moveAddress( QTreeWidget* src, QTreeWidget* dst, bool bAll )
 {
-    Q3ListViewItem* item = src->firstChild();
-    Q3ListViewItem* cur;
+    int itemIndex = 0;
+    QTreeWidgetItem* item = src->topLevelItem( itemIndex );
+    QTreeWidgetItem* cur;
 
     while( item ) 
     {
         if( bAll || item->isSelected() )
         {
             cur = item;
-            item = item->nextSibling();
+            itemIndex = itemIndex + 1;
+            item = src->topLevelItem( itemIndex );
 
-            src->takeItem( cur );
-            dst->insertItem( cur );
+            src->takeTopLevelItem( src->indexOfTopLevelItem( cur ) );
+            dst->addTopLevelItem( cur );
             cur->setSelected( false );
         }
-        else
-            item = item->nextSibling();
+        else {
+            itemIndex = itemIndex + 1;
+            item = src->topLevelItem( itemIndex );
+        }
     }
 }
