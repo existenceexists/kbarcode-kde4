@@ -34,21 +34,18 @@
 #include <qclipboard.h>
 #include <qcursor.h>
 #include <qdom.h>
-//#include <q3header.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qradiobutton.h>
 #include <q3sqlselectcursor.h>
 #include <QGroupBox>
 #include <QFrame>
-#include <Q3ListView>
-#include <Q3ListViewItem>
-#include <Q3TableSelection>
 #include <QDebug>
 #include <QTreeWidget>
 #include <QAbstractItemView>
 #include <QList>
 #include <QStringList>
+#include <QTableWidget>
 //Added by qt3to4:
 #include <QHBoxLayout>
 #include <QList>
@@ -81,9 +78,6 @@
 #include <kmenu.h>
 #include <kpushbutton.h>
 #include <kurlrequester.h>
-#include <k3listview.h>
-#include <q3table.h>
-#include <q3vbox.h>
 #include <kglobal.h>
 #include <KUrl>
 #include <kpagewidgetmodel.h>
@@ -235,12 +229,12 @@ void BatchAssistant::setupPage4()
     buttonTableRemove->setIcon( KIcon( "edit-delete") );
     hbox->setLayout(hbox_layout);
 
-    /*m_varTable = new QTableWidget;*/// -!F: original, uncomment
-    m_varTable = new Q3Table;
+    m_varTable = new QTableWidget;
+    /*m_varTable = new Q3Table;*/// -!F: delete
     page4_layout->addWidget(m_varTable);
-    m_varTable->setSelectionMode( Q3Table::SingleRow );
-    /*m_varTable->setSelectionBehavior(QTableWidget::SelectRows);
-    m_varTable->setSelectionMode(QTableWidget::SingleSelection);*/// -!F: original, uncomment
+    /*m_varTable->setSelectionMode( Q3Table::SingleRow );*/// -!F: delete
+    m_varTable->setSelectionBehavior(QTableWidget::SelectRows);
+    m_varTable->setSelectionMode(QTableWidget::SingleSelection);
     page4->setLayout(page4_layout);
 
     page4Item = addPage( page4, i18n("Import Variables") );
@@ -905,18 +899,18 @@ void BatchAssistant::setupBatchPrinter( BatchPrinter* batch, int m )
     else if( radioVarImport->isChecked() )
     {
 	TVariableList* tVariableList = new TVariableList;
-	/*for( int i=0; i<m_varTable->rowCount(); i++ )*/// -!F: original, uncomment
-        for( int i=0; i<m_varTable->numRows(); i++ )
+	for( int i=0; i<m_varTable->rowCount(); i++ )
+        /*for( int i=0; i<m_varTable->numRows(); i++ )*/// -!F: delete
 	{
 	    QMap<QString, QString> map;
-	    /*for( int z=0; z<m_varTable->columnCount(); z++ ) {*/// -!F: original, uncomment
-            for( int z=0; z<m_varTable->numCols(); z++ ) {
-		  /*QTableWidgetItem* item = m_varTable->item(i, z);
+	    for( int z=0; z<m_varTable->columnCount(); z++ ) {
+            /*for( int z=0; z<m_varTable->numCols(); z++ ) {*/// -!F: delete
+		  QTableWidgetItem* item = m_varTable->item(i, z);
 		  if(item)
-			map[ m_varTable->horizontalHeader()->label( z ) ] = item->text();
+			map[ m_varTable->horizontalHeaderItem( z )->text() ] = item->text();
 		  else
-			map[ m_varTable->horizontalHeader()->label( z ) ] = "";*/// -!F: original, uncomment
-                map[ m_varTable->horizontalHeader()->label( z ) ] = m_varTable->text( i, z );
+			map[ m_varTable->horizontalHeaderItem( z )->text() ] = "";
+                /*map[ m_varTable->horizontalHeader()->label( z ) ] = m_varTable->text( i, z );*/// -!F: delete
 		}
 	    tVariableList->append( map );
 	}
@@ -1255,11 +1249,13 @@ void BatchAssistant::fillVarList()
     QStringList vars = token.listUserVars();
     m_varList->clear();
     m_varList->insertStringList( vars );
-    m_varTable->setNumCols( vars.count() );
+    m_varTable->setColumnCount( vars.count() );
     for( int i = 0; i < vars.count(); i++ )
     {
 	vars[i] = vars[i].right( vars[i].length() - 1 );
-	m_varTable->horizontalHeader()->setLabel( i, vars[i] );
+	/*m_varTable->horizontalHeader()->setLabel( i, vars[i] );*/// -!F: delete
+	QTableWidgetItem * item = new QTableWidgetItem( vars[i] );
+        m_varTable->setHorizontalHeaderItem( i, item );
     }
 
     delete def;
@@ -1281,7 +1277,8 @@ void BatchAssistant::fillAddressList()
 bool BatchAssistant::fillVarTable()
 {
     // Clear the table
-    m_varTable->setNumRows( 0 );
+    m_varTable->clear();
+    m_varTable->setRowCount( 0 );
 
     if( radioImportSql->isChecked() )
     {
@@ -1300,13 +1297,17 @@ bool BatchAssistant::fillVarTable()
 	    return false;
 	}
 
-	if( m_varTable->numRows() < query.size() )
-	    m_varTable->setNumRows( query.size() );
+	if( m_varTable->rowCount() < query.size() )
+	    m_varTable->setRowCount( query.size() );
 
 	while( query.next() )
 	{
-	    for( x=0;x<m_varTable->numRows();x++ )
-		m_varTable->setText( y, x, query.value( m_varTable->horizontalHeader()->label( x ) ).toString() );
+	    for( x=0;x<m_varTable->rowCount();x++ ) {
+                QTableWidgetItem * item = m_varTable->item( y, x );
+                if( item ) {
+                    item->setText( query.value( m_varTable->horizontalHeaderItem( x )->text() ).toString() );
+                }
+            }
 
 	    y++;
 	}
@@ -1336,22 +1337,25 @@ bool BatchAssistant::fillVarTable()
 		data = file.readNextLine();
 
 		// add 100 rows to get a reasonable speed
-		if( m_varTable->numRows() <= i )
-		    m_varTable->setNumRows( i + 100 );	      
+		if( m_varTable->rowCount() <= i )
+		    m_varTable->setRowCount( i + 100 );	      
 
                 printf("datacount=%i\n", data.count() );
 		for( int z = 0; z < data.count(); z++ )
 		{
-                    printf("numRows=%i\n", m_varTable->numCols() );
-		    for( int x = 0; x < m_varTable->numCols(); x++ )
+                    printf("numRows=%i\n", m_varTable->columnCount() );
+		    for( int x = 0; x < m_varTable->columnCount(); x++ )
                     {
-                        printf("horizontal header=%s\n", qPrintable( m_varTable->horizontalHeader()->label( x ).toLower() ) );
+                        printf("horizontal header=%s\n", qPrintable( m_varTable->horizontalHeaderItem( x )->text().toLower() ) );
                         printf("heading=%s\n", qPrintable( heading[z].toLower() ) );
-			if( m_varTable->horizontalHeader()->label( x ).toLower() == heading[z].toLower() )
+			if( m_varTable->horizontalHeaderItem( x )->text().toLower() == heading[z].toLower() )
 			{
-                            printf("Reading: (%s)\n", qPrintable( data[z] ));
-			    m_varTable->setText( i, x, data[z] );
-			    break;
+                            QTableWidgetItem * item = m_varTable->item( i, x );
+                            if( item ) {
+                                printf("Reading: (%s)\n", qPrintable( data[z] ));
+                                item->setText( data[z] );
+                                break;
+                            }
 			}
                     }
 		}
@@ -1361,7 +1365,7 @@ bool BatchAssistant::fillVarTable()
             }
 	}
 
-	m_varTable->setNumRows( i );
+	m_varTable->setRowCount( i );
     }
 
     return true;
@@ -1369,13 +1373,15 @@ bool BatchAssistant::fillVarTable()
 
 void BatchAssistant::slotTableInsert()
 {
-    m_varTable->insertRows( m_varTable->numRows(), 1 );
+    m_varTable->insertRow( m_varTable->rowCount() );
 }
 
 void BatchAssistant::slotTableRemove()
 {
-    Q3TableSelection sel = m_varTable->selection( m_varTable->currentSelection() );
-    m_varTable->removeRow( sel.topRow() );
+    /*Q3TableSelection sel = m_varTable->selection( m_varTable->currentSelection() );
+    m_varTable->removeRow( sel.topRow() );*/// -!F: original, keep
+    m_varTable->removeRow( m_varTable->currentRow() );// -!F: Is this the right replacement?
+    
 }
 
 void BatchAssistant::setFilename( const QString & url )

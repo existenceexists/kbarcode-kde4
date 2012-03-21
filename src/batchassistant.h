@@ -39,10 +39,6 @@ class QTreeWidgetItem;
 class QRadioButton;
 class QTableWidget;
 class QStackedWidget;
-class K3ListView;
-class Q3ListView;
-class Q3ListViewItem;
-class Q3Table;
 class KPageWidgetItem;
 
 class BatchAssistant : public KAssistantDialog {
@@ -248,7 +244,7 @@ class BatchAssistant : public KAssistantDialog {
 	KIntNumInput* numLabels;
 
 	/*QTableWidget* m_varTable;*/// -!F: original, uncomment
-        Q3Table* m_varTable;
+        QTableWidget* m_varTable;
 	K3ListBox* m_varList;
 
         QTreeWidget* listAddress;
