@@ -27,7 +27,7 @@ class KComboBox;
 class KCompletion;
 class KIntNumInput;
 class KLineEdit;
-class K3ListBox;
+class KListWidget;
 class QTreeWidget;
 class KPushButton;
 class KUrlRequester;
@@ -245,7 +245,7 @@ class BatchAssistant : public KAssistantDialog {
 
 	/*QTableWidget* m_varTable;*/// -!F: original, uncomment
         QTableWidget* m_varTable;
-	K3ListBox* m_varList;
+	KListWidget* m_varList;
 
         QTreeWidget* listAddress;
         QTreeWidget* listSelectedAddress;

@@ -71,7 +71,6 @@
 #include <kiconloader.h>
 #include <kimageio.h>
 #include <klineedit.h>
-#include <k3listbox.h>
 #include <klistwidget.h>
 #include <kmessagebox.h>
 #include <knuminput.h>
@@ -504,7 +503,7 @@ void BatchAssistant::setupStackPage2()
     QLabel* label;
     label = new QLabel( i18n("Available Variables:") );
     box_layout->addWidget(label);
-    m_varList = new K3ListBox( box );
+    m_varList = new KListWidget( box );
     box_layout->addWidget( m_varList );
     stack2_layout->addWidget( box );
 
@@ -1248,7 +1247,7 @@ void BatchAssistant::fillVarList()
 
     QStringList vars = token.listUserVars();
     m_varList->clear();
-    m_varList->insertStringList( vars );
+    m_varList->addItems( vars );
     m_varTable->setColumnCount( vars.count() );
     for( int i = 0; i < vars.count(); i++ )
     {
