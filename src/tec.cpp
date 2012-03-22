@@ -70,14 +70,14 @@ QString tec452(const QString &url, int count, const QString &art, const QString 
 
     QFile f( filename );
     if ( !f.open( QIODevice::ReadOnly ) )
-        return false;
+        return QString();
 
     //clearLabel();
 
     QDomDocument doc( "KBarcodeLabel" );
     if ( !doc.setContent( &f ) ) {
         f.close();
-        return false;
+        return QString();
     }
     f.close();
 
@@ -116,7 +116,7 @@ QString tec452(const QString &url, int count, const QString &art, const QString 
     n = doc.documentElement().firstChild();
     while( !n.isNull() ) {
         QDomElement e = n.toElement(); // try to convert the node to an element.
-        if( !e.isNull() )
+        if( !e.isNull() ) {
             if( e.tagName() == "barcode" ) {
 
 	    	if ( e.attribute( "type" ) == "i25" or e.attribute( "type" ) == "i25 -c" or e.attribute( "type" ) == "code39" or e.attribute( "type" ) == "code39 -c" or e.attribute( "type" ) == "b7" or e.attribute( "type" ) == "b8" or e.attribute( "type" ) == "b9" or e.attribute( "type" ) == "pls" or e.attribute( "type" ) == "msi" or e.attribute( "type" ) == "b33") result += code39(e, countBar);
@@ -206,6 +206,7 @@ QString tec452(const QString &url, int count, const QString &art, const QString 
 	    		result += QString("|}\n"); // FIN
 	    }
         n = n.nextSibling();
+        }
     }
 
     result += QString("{U1;0130|}\n"); // ForwardFeed
@@ -225,7 +226,7 @@ return str;
 
 QString posConv( QString str, int zeros )
 {
-int point=str.find(".",0);
+int point=str.indexOf(".",0);
 QString dec= QString("%1").arg(str.mid(point+1,1));
 str = str.mid(0,point);
 str = QString("%1%2").arg(str).arg(dec);

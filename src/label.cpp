@@ -52,7 +52,7 @@ Label::Label( Definition* _def, QIODevice* device, QString labelname, QPaintDevi
     setCustomerNo( customer_id );
     setArticleNo( _article_no );
     setGroup( _group );
-    setLabelName( labelname.right( labelname.length() - labelname.findRev( "/" ) - 1 ) );
+    setLabelName( labelname.right( labelname.length() - labelname.lastIndexOf( "/" ) - 1 ) );
 
     d = _def;
 
@@ -65,7 +65,7 @@ Label::Label( Definition* _def, QIODevice* device, QString labelname, QPaintDevi
     m_sequence = false;
     m_printer = _printer;
    
-    setLabelName( labelname.right( labelname.length() - labelname.findRev( "/" ) - 1 ) );
+    setLabelName( labelname.right( labelname.length() - labelname.lastIndexOf( "/" ) - 1 ) );
 
     d = _def;
 

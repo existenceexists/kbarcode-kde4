@@ -38,12 +38,9 @@
 #include <qlayout.h>
 #include <qradiobutton.h>
 #include <q3sqlselectcursor.h>
-#include <QGroupBox>
-#include <QFrame>
 #include <QDebug>
 #include <QTreeWidget>
 #include <QAbstractItemView>
-#include <QList>
 #include <QStringList>
 #include <QTableWidget>
 //Added by qt3to4:
@@ -57,7 +54,6 @@
 #include <QVBoxLayout>
 #include <QGroupBox>
 #include <QStackedWidget>
-#include <QTableWidget>
 
 #include <kabc/addressee.h>
 #include <kabc/addresseelist.h>

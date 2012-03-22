@@ -43,12 +43,16 @@ AddAllDialog::AddAllDialog(QWidget *parent)
 	setButtons(KDialog::Ok | KDialog::Cancel);
 	QFrame *main_widget=new QFrame(this);
 	setMainWidget(main_widget);
-    QVBoxLayout* layout = new QVBoxLayout(main_widget, 6, 6 );
+    QVBoxLayout* layout = new QVBoxLayout( main_widget );
+    layout->setContentsMargins( 6, 6, 6, 6 );
+    layout->setSpacing( 6 );
+    main_widget->setLayout( layout );
 
     group = new KLineEdit( main_widget);
     number = new KIntNumInput( main_widget );
     number->setLabel( i18n( "Number of labels:" ) );
-    number->setRange( 1, 10000, 1, false );
+    number->setRange( 1, 10000, 1 );
+    number->setSliderEnabled( false );
 
     layout->addWidget( new QLabel( i18n("Group:"), main_widget) );
     layout->addWidget( group );
@@ -92,14 +96,18 @@ void AddItemsDialog::init()
 	main_widget->setFrameStyle( QFrame::StyledPanel | QFrame::Sunken );
     main_widget->setLineWidth( 2 );
 
-    QHBoxLayout* layout = new QHBoxLayout( main_widget, 6, 6 );
+    QHBoxLayout* layout = new QHBoxLayout( main_widget );
+    layout->setContentsMargins( 6, 6, 6, 6 );
+    layout->setSpacing( 6 );
+    main_widget->setLayout( layout );
 
     group = new KLineEdit( main_widget );
     article = new KLineEdit( main_widget );
 
     number = new KIntNumInput( main_widget );
     number->setLabel( i18n( "Number of labels:" ), Qt::AlignLeft | Qt::AlignVCenter );
-    number->setRange( 1, 10000, 1, false );
+    number->setRange( 1, 10000, 1 );
+    number->setSliderEnabled( false );
 
     layout->addWidget( number );
     layout->addWidget( new QLabel( i18n("Article:" ), main_widget ) );

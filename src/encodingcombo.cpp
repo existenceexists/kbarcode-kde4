@@ -28,7 +28,7 @@ EncodingCombo::EncodingCombo( QWidget* parent )
     QString sEncoding = QString( KGlobal::locale()->encoding() );
     QStringList encodings (KGlobal::charsets()->availableEncodingNames());
 
-    this->insertStringList( encodings );
+    this->addItems( encodings );
 
     for (int i=0; i < encodings.count(); i++)
     {

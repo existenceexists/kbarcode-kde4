@@ -34,7 +34,6 @@
 KBarcodeSettings* KBarcodeSettings::m_instance = 0;
 int KBarcodeSettings::gridsize = 30;
 bool KBarcodeSettings::newdlg = true;
-/*QColor KBarcodeSettings::gridcolor = Qt::black;*/
 QColor KBarcodeSettings::gridcolor = Qt::black;
 QString KBarcodeSettings::dateFormat = "";
 
@@ -73,9 +72,7 @@ void KBarcodeSettings::loadConfig()
     QColor tmpc( Qt::lightGray );
 
     gridsize = config.readEntry("grid", 5);
-    /*gridcolor = config.readEntry("gridcolor", &tmpc );*/
-    QColor gridcolor = config.readEntry("gridcolor", tmpc );
-    /**gridcolor = gridcolor1.rgb();*/
+    gridcolor = config.readEntry("gridcolor", tmpc );
     newdlg = config.readEntry("AskNewDlg", true );
     dateFormat = config.readEntry("DateFormat", "dd-MM-yyyy" );
 }

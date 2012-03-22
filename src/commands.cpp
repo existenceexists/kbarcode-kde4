@@ -79,7 +79,7 @@ bool CommandUtils::canvasHasItem()
     if( m_canvas_item && c )
     {
         Q3CanvasItemList list = c->allItems();
-        for( unsigned int i=0;i<list.count();i++)
+        for( int i=0;i<list.count();i++)
             if( m_canvas_item == list[i] )
                 return true;
     }

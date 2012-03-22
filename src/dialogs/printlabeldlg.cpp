@@ -40,11 +40,13 @@ PrintLabelDlg::PrintLabelDlg(QWidget *parent )
 
     numLabels  = new KIntNumInput();
     numLabels->setLabel( i18n("Number of labels:" ), Qt::AlignLeft | Qt::AlignVCenter );
-    numLabels->setRange( 1, 100000, 1, false );
+    numLabels->setRange( 1, 100000, 1 );
+    numLabels->setSliderEnabled( false );
     
     numPos = new KIntNumInput( 1 );
     numPos->setLabel( i18n("Start at label position:" ), Qt::AlignLeft | Qt::AlignVCenter );
-    numPos->setRange( 1, 100, 1, false );
+    numPos->setRange( 1, 100, 1 );
+    numPos->setSliderEnabled( false );
 
     checkBorder = new QCheckBox( i18n("&Print crop marks (borders)"), page );
     checkBorder->setChecked( PrinterSettings::getInstance()->getData()->border );

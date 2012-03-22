@@ -63,7 +63,7 @@ void DSTextEdit::fixParagraphs()
 
     while( pos != -1 ) 
     {
-        pos = reg.search( t, pos );
+        pos = reg.indexIn( t, pos );
         if( pos != -1 )
         {
             if( count && count == para )
@@ -87,7 +87,7 @@ void DSTextEdit::fixParagraphs()
 
     while( pos != -1 ) 
     {
-        pos = t.findRev( "</p>", pos );
+        pos = t.lastIndexOf( "</p>", pos );
         if( pos != -1 )
         {
             ++count;
