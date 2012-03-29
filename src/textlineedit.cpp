@@ -19,7 +19,7 @@
 #include <kcolordialog.h>
 #include <kfiledialog.h>
 #include <klocale.h>
-#include <kspell.h>
+#include <sonnet/speller.h>
 #if QT_VERSION >= 0x030100
     #include <klineedit.h>
 #else
@@ -29,6 +29,8 @@
 #endif
 #include <ktoolbar.h>
 #include <kcombobox.h>
+#include <kactioncollection.h>
+#include <kstandardaction.h>
 
 // Qt includes
 #include <q3dockarea.h>
@@ -51,7 +53,7 @@ TextLineEditor::TextLineEditor( TokenProvider* token, QWidget *parent )
 
     editor->setFocus();
 
-    QDockArea* area = new QDockArea( Qt::Horizontal, QDockArea::Normal, this );
+    Q3DockArea* area = new Q3DockArea( Qt::Horizontal, Q3DockArea::Normal, this );
     toolBar = new KToolBar( area );
     tool2Bar = new KToolBar( area );
     tool3Bar = new KToolBar( area );
@@ -97,14 +99,19 @@ void TextLineEditor::setupActions()
 
     KAction* action_paste = KStandardAction::paste( editor, SLOT( paste() ), ac );
 
-    KAction* textDataAct = new KAction( i18n("Insert &Data Field"), "contents", 0, this, SLOT( insertNewField() ), ac, "text_data_act");
-   
-    action_undo->plug( toolBar );
-    action_redo->plug( toolBar );
-    toolBar->insertSeparator();
-    action_cut->plug( toolBar );
-    action_copy->plug( toolBar );
-    action_paste->plug( toolBar );
+    /*KAction* textDataAct = new KAction( i18n("Insert &Data Field"), "contents", 0, this, SLOT( insertNewField() ), ac, "text_data_act");*/// -!F: original, delete
+    KAction* textDataAct = new KAction( this );
+    textDataAct->setText( i18n("Insert &Data Field") );
+    textDataAct->setIcon( KIcon( "contents" ) );
+    ac->addAction( "text_data_act", textDataAct );
+    connect( textDataAct, SIGNAL(triggered(bool)), this, SLOT(insertNewField()) );
+    
+    toolBar->addAction( action_undo );
+    toolBar->addAction( action_redo );
+    toolBar->addSeparator();
+    toolBar->addAction( action_cut );
+    toolBar->addAction( action_copy );
+    toolBar->addAction( action_paste );
  
 
     QStringList fuentes;
@@ -129,7 +136,7 @@ void TextLineEditor::setupActions()
     fuentes += "OCR-A 12 point";
     fuentes += "OCR-B 12 point";
 
-    textDataAct->plug( tool2Bar );
+    tool2Bar->addAction( textDataAct );
 
     action_font_type = new KComboBox(tool2Bar) ;
     connect( action_font_type, SIGNAL( activated(int) ), this, SLOT( setFontType(int) ) );
@@ -183,7 +190,7 @@ void TextLineEditor::insertNewField()
 
 void TextLineEditor::setFontType( int index )
 {    
-    action_font_type->setCurrentItem(index);
+    action_font_type->setCurrentIndex(index);
 }
 
 int TextLineEditor::getFontType()

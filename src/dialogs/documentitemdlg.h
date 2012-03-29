@@ -18,21 +18,22 @@
 #ifndef DOCUMENTITEMDLG_H
 #define DOCUMENTITEMDLG_H
 
-#include <kdialogbase.h>
 #include "documentitem.h"
 #include "propertywidget.h"
 #include <list> 
+#include <kpagedialog.h>
 
-class KCommandHistory;
+class K3CommandHistory;
+class KPageDialog;
 
-class DocumentItemDlg : public KDialogBase
+class DocumentItemDlg : public KPageDialog
 {
  Q_OBJECT
  public:
-    DocumentItemDlg( TokenProvider* token, DocumentItem* item, KCommandHistory* history, QWidget* parent );
+    DocumentItemDlg( TokenProvider* token, DocumentItem* item, K3CommandHistory* history, QWidget* parent );
     ~DocumentItemDlg();
     
-    void addPage( PropertyWidget* widget );
+    void addPagePropertyWidget( PropertyWidget* widget );
  
  protected slots:
     void accept();
@@ -41,7 +42,7 @@ class DocumentItemDlg : public KDialogBase
     DocumentItem* m_item;
     std::list<PropertyWidget*> m_list;
     
-    KCommandHistory* m_history;
+    K3CommandHistory* m_history;
 };
 
 #endif

@@ -81,8 +81,9 @@ void LabelPreview::paintEvent( QPaintEvent* )
 
 /*****************************************/
 DefinitionDialog::DefinitionDialog( QWidget* parent, bool modal, Qt::WFlags fl )
-    : QDialog( parent, modal, fl )
+    : QDialog( parent, fl )
 {
+    setModal( modal );
     resize( 465, 345 );
     setCaption( i18n( "Add Label Definition" ) );
     QHBoxLayout* layout = new QHBoxLayout( this, 6, 6 );
@@ -214,7 +215,7 @@ DefinitionDialog::DefinitionDialog( QWidget* parent, bool modal, Qt::WFlags fl )
 
     l = new QLabel( this );
     setExtension( l );
-    setOrientation( Vertical );
+    setOrientation( Qt::Vertical );
 
     connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
     connect( buttonAdd, SIGNAL( clicked() ), this, SLOT( add() ) );

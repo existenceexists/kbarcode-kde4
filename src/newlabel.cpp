@@ -40,8 +40,9 @@
 #endif // I2S
 
 NewLabel::NewLabel( QWidget* parent, bool change, Qt::WFlags fl )
-    : QDialog( parent, true, fl )
+    : QDialog( parent, fl )
 {
+    setModal( true );
     setCaption( i18n( "New Label" ) );
     curid = 0;
     types = 0;
@@ -58,9 +59,10 @@ NewLabel::NewLabel( QWidget* parent, bool change, Qt::WFlags fl )
 
     QGroupBox* group1 = new QGroupBox( this );
     group1->setTitle( i18n( "Label" ) );
-    group1->setColumnLayout(0, Qt::Vertical );
+    QVBoxLayout* group1MainLayout = new QVBoxLayout;
+    group1->setLayout( group1MainLayout );
     group1->layout()->setSpacing( 6 );
-    group1->layout()->setMargin( 11 );
+    group1->layout()->setContentsMargins( 11, 11, 11, 11 );
     QGridLayout* group1Layout = new QGridLayout( group1->layout() );
     group1Layout->setAlignment( Qt::AlignTop );
     
@@ -220,17 +222,17 @@ void NewLabel::setLabelId( int id )
         name = query.value( 0 ).toString();
 
     for( int i = 0; i < comboProducer->count(); i++ ) {
-        comboProducer->setCurrentItem( i );
+        comboProducer->setCurrentIndex( i );
         updateType();
         for( int z = 0; z < comboType->count(); z++ )
             if( comboType->text( z ) == name ) {
-                comboProducer->setCurrentItem( i );
-                comboType->setCurrentItem( z );
+                comboProducer->setCurrentIndex( i );
+                comboType->setCurrentIndex( z );
                 return;
             }
         }
 
-    comboProducer->setCurrentItem( 0 );
+    comboProducer->setCurrentIndex( 0 );
     updateType();
 }
 

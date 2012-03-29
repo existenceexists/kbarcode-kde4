@@ -18,13 +18,15 @@
 #ifndef RECTSETTINGSDLG_H
 #define RECTSETTINGSDLG_H
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 class KColorButton;
 class KComboBox;
 class KIntNumInput;
 class QCheckBox;
-class RectSettingsDlg : public KDialogBase  {
+class QColor;
+
+class RectSettingsDlg : public KDialog  {
     Q_OBJECT
     public: 
         RectSettingsDlg(QWidget *parent=0);
@@ -54,7 +56,7 @@ class RectSettingsDlg : public KDialogBase  {
 };
 
 class QPen;
-class LineSettingsDlg : public KDialogBase  {
+class LineSettingsDlg : public KDialog  {
     Q_OBJECT
     public:
         LineSettingsDlg(QWidget *parent=0);

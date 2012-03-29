@@ -41,7 +41,7 @@ class BatchPrinter;
 class KUrl;
 class KAction;
 class KActionMenu;
-class KActionSeparator;
+class QAction;
 class KToggleAction;
 class KRecentFilesAction;
 class KToolBarPopupAction;
@@ -50,7 +50,7 @@ class KMenuBar;
 class KMenu;
 class KRuler;
 class KToolBar;
-class KCommandHistory;
+class K3CommandHistory;
 class MyCanvasText;
 class MyCanvasRectangle;
 class MyCanvasView;
@@ -184,7 +184,7 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
     protected:
         void closeEvent( QCloseEvent* e );
 
-        KCommandHistory* history;
+        K3CommandHistory* history;
 
         KAction* saveAct;
         KAction* saveAsAct;
@@ -230,7 +230,7 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
         KComboBox* comboScale;
 
         KRecentFilesAction* recentAct;
-        KActionSeparator* sep;
+        QAction* sep;
         KToolBarPopupAction* listAct;
         MyCanvas* c;
         MyCanvasView* cv;

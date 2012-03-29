@@ -26,8 +26,8 @@ class KToggleAction;
 class KFontAction;
 class KFontSizeAction;
 class KToolBar;
-class KSpell;
-class KSpellConfig;
+/*class KSpell;
+class KSpellConfig;*/
 class DSTextEdit;
 class TokenProvider;
 
@@ -79,7 +79,7 @@ class MultiLineEditor : public QWidget {
         KToolBar* tool2Bar;
         KToolBar* tool3Bar;
 
-        KSpell* spell;
+        /*KSpell* spell;*/// -!F: original, replace
 };
 
 #endif

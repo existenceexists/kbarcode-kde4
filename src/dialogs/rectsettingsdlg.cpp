@@ -33,6 +33,7 @@
 #include <kcombobox.h>
 #include <klocale.h>
 #include <knuminput.h>
+#include <kdialog.h>
 
 void fillLineCombo( KComboBox* box )
 {
@@ -55,10 +56,15 @@ void fillLineCombo( KComboBox* box )
 }
 
 RectSettingsDlg::RectSettingsDlg(QWidget *parent )
-    : KDialogBase( KDialogBase::Plain, i18n("Settings"),
-      KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent)
+    : KDialog( parent )
 {
-    QFrame* frame = plainPage();
+    setCaption( i18n("Settings") );
+    /*setButtons( KDialog::Ok | KDialog::Cancel );*/// -!F: Is it needed? try to uncomment
+    /*setDefaultButton( KDialog::Ok );*/// -!F: Is it needed? try to uncomment
+    
+    /*QFrame* frame = plainPage();*/// -!F: original, delete
+    QWidget *frame = new QWidget( this );
+    setMainWidget( frame );
     QGridLayout* grid = new QGridLayout( frame, 6, 6 );
     QSpacerItem* spacer = new QSpacerItem( 0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum );
 
@@ -117,7 +123,7 @@ void RectSettingsDlg::setBorderWidth( int w )
 void RectSettingsDlg::setPenStyle( int s )
 {
     if( s ) {
-        comboLine->setCurrentItem( s - 1 );
+        comboLine->setCurrentIndex( s - 1 );
         checkBorder->setChecked( true );
     } else
         checkBorder->setChecked( false );
@@ -146,10 +152,15 @@ int RectSettingsDlg::penStyle() const
 }
 
 LineSettingsDlg::LineSettingsDlg(QWidget *parent )
-    : KDialogBase( KDialogBase::Plain, i18n("Settings"),
-      KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent)
+    : KDialog( parent )
 {
-    QFrame* frame = plainPage();
+    setCaption( i18n("Settings") );
+    /*setButtons( KDialog::Ok | KDialog::Cancel );*/// -!F: Is it needed? try to uncomment
+    /*setDefaultButton( KDialog::Ok );*/// -!F: Is it needed? try to uncomment
+    
+    /*QFrame* frame = plainPage();*/// -!F: original, delete
+    QWidget *frame = new QWidget( this );
+    setMainWidget( frame );
     QGridLayout* grid = new QGridLayout( frame, 6, 6 );
 
     buttonColor = new KColorButton( frame );
@@ -181,7 +192,7 @@ void LineSettingsDlg::setPen( const QPen p )
 {
     buttonColor->setColor( p.color() );
     spinWidth->setValue( p.width() );
-    comboLine->setCurrentItem( p.style() - 1 );
+    comboLine->setCurrentIndex( p.style() - 1 );
 }
 
 #include "rectsettingsdlg.moc"

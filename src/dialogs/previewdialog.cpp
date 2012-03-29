@@ -28,6 +28,7 @@
 #include <qpainter.h>
 #include <q3scrollview.h>
 #include <q3sqlcursor.h>
+#include <QPaintDevice>
 //Added by qt3to4:
 #include <QHBoxLayout>
 #include <QGridLayout>
@@ -53,8 +54,9 @@ QString PreviewDialog::group = "";
 QString PreviewDialog::article = "";
         
 PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename, QWidget *parent)
-    : QDialog( parent, true, Qt::WDestructiveClose )
+    : QDialog( parent, Qt::WDestructiveClose )
 {
+    setModal( true );
     file = device;
     def = d;
     m_filename = filename;
@@ -115,7 +117,7 @@ PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename
     grid->addWidget( new QLabel( i18n( "Addressbook entry:" ), this ), 6, 0 );
     grid->addWidget( lineAddr, 6, 1 );
     grid->addWidget( buttonAddr, 6, 2 );
-    QScrollView* sv = new QScrollView( this );
+    Q3ScrollView* sv = new Q3ScrollView( this );
 
     preview = new QLabel( sv->viewport() );
     sv->addChild( preview );
@@ -165,7 +167,7 @@ PreviewDialog::~PreviewDialog()
 
 void PreviewDialog::setupSql()
 {
-    QSqlCursor cur( "customer" );
+    Q3SqlCursor cur( "customer" );
     cur.select();
     customerId->clear();
     customerName->clear();
@@ -174,8 +176,8 @@ void PreviewDialog::setupSql()
         customerName->addItem( cur.value("customer_name" ).toString() );
     }
 
-    customerId->setCurrentItem( customer_index );
-    customerName->setCurrentItem( customer_index );
+    customerId->setCurrentIndex( customer_index );
+    customerName->setCurrentIndex( customer_index );
 }
 
 void PreviewDialog::selectAddress()
@@ -194,7 +196,7 @@ void PreviewDialog::updatechanges()
 
     QPainter painter( &pix );
     
-    Label* l = new Label( def, file, m_filename, KApplication::desktop(),
+    Label* l = new Label( def, file, m_filename, (QPaintDevice*) KApplication::desktop(),
         customerId->currentText(), articleId->text(), groupName->text() );
     l->setIndex( spinIndex->value() - 1 );
     l->setSerial( serialStart->text(), serialInc->value() );
@@ -215,12 +217,12 @@ void PreviewDialog::updatechanges()
 
 void PreviewDialog::customerIdChanged( int index )
 {
-    customerName->setCurrentItem( index );
+    customerName->setCurrentIndex( index );
 }
 
 void PreviewDialog::customerNameChanged( int index )
 {
-    customerId->setCurrentItem( index );
+    customerId->setCurrentIndex( index );
 }
 
 #include "previewdialog.moc"

@@ -31,7 +31,7 @@ set(kbarcode_SRCS
   kbarcode.cpp
   kbarcodesettings.cpp
   label.cpp
- # labeleditor.cpp
+  labeleditor.cpp
   labelutils.cpp
   lineitem.cpp
   main.cpp
@@ -41,10 +41,10 @@ set(kbarcode_SRCS
   mycanvasitem.cpp
   mycanvasview.cpp
   mydatatable.cpp
- # newlabel.cpp
+  newlabel.cpp
   pixmapbarcode.cpp
   printersettings.cpp
- # propertywidget.cpp
+  propertywidget.cpp
   purepostscript.cpp
   rectitem.cpp
   sqltables.cpp
@@ -52,7 +52,7 @@ set(kbarcode_SRCS
   tcanvasitem.cpp
   tec.cpp
   textitem.cpp
- # textlineedit.cpp
+  textlineedit.cpp
   textlineitem.cpp
   tokenprovider.cpp
   xmlutils.cpp
@@ -61,12 +61,12 @@ set(kbarcode_SRCS
   dialogs/barcodeprinterdlg.cpp
   dialogs/configdialog.cpp
   dialogs/csvimportdlg.cpp
- # dialogs/definitiondialog.cpp
- # dialogs/documentitemdlg.cpp
- # dialogs/multilineeditdlg.cpp
- # dialogs/previewdialog.cpp
+  dialogs/definitiondialog.cpp
+  dialogs/documentitemdlg.cpp
+  dialogs/multilineeditdlg.cpp
+  dialogs/previewdialog.cpp
   dialogs/printlabeldlg.cpp
- # dialogs/rectsettingsdlg.cpp
+  dialogs/rectsettingsdlg.cpp
   dialogs/smalldialogs.cpp
   dialogs/tokendialog.cpp  
   )

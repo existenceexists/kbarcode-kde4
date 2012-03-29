@@ -20,7 +20,7 @@
 #include "barcodegenerator.h"
 #include "batchassistant.h"
 #include "batchprinter.h"
-/*#include "labeleditor.h"*/// -!F: original, uncomment
+#include "labeleditor.h"
 #include "databasebrowser.h"
 #include "dialogs/csvimportdlg.h"
 #include "sqltables.h"
@@ -168,8 +168,8 @@ void KBarcode::startBarcode()
 
 void KBarcode::startLabelEditor()
 {
-    /*LabelEditor* ed = new LabelEditor( NULL, QString::null  );
-    ed->startupDlg( LabelEditor::eCreateNewLabel, QString::null );*/
+    LabelEditor* ed = new LabelEditor( NULL, QString::null  );
+    ed->startupDlg( LabelEditor::eCreateNewLabel, QString::null );
 }
 
 void KBarcode::startBatchPrint()
