@@ -326,8 +326,10 @@ bool PixmapBarcode::readFromPipe( const char* command, char** buffer, long* buff
 
 void PixmapBarcode::createBarcode( QPixmap* target, const QPaintDevice* device )
 {
-    int resx = device->logicalDpiX();
-    int resy = device->logicalDpiY();
+    /*int resx = device->logicalDpiX();
+    int resy = device->logicalDpiY();*/// -!F: original, keep
+    int resx = KApplication::desktop()->logicalDpiX();// -!F: keep
+    int resy = KApplication::desktop()->logicalDpiY();// -!F: keep
     
     pixmapBarcodeWidth = 0;
     pixmapBarcodeHeight = 0;

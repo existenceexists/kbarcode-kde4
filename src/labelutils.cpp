@@ -35,9 +35,10 @@
 // own includes
 #include "printersettings.h"
 
-// -!F:
-#include <QDesktopWidget>
-#include <Q3SimpleRichText>
+#include <QDesktopWidget>// -!F: delete or keep ?
+#include <Q3SimpleRichText>// -!F: port and delete
+
+#include <QDebug>// -!F: delete
 
 #define CONVERSION_FACTOR 25.4000508001016
 
@@ -52,14 +53,17 @@ double LabelUtils::pixelToMm( double pixel, const QPaintDevice* device, int mode
 {
     if (device == 0)
     {
-        QDesktopWidget * qDW = KApplication::desktop();
-        device = (QPaintDevice *) qDW;
+        device = (QPaintDevice *) KApplication::desktop();// -!F: keep
     }
     
-    if( mode == DpiX )
-	return (pixel * CONVERSION_FACTOR) / (double)device->logicalDpiX();
-    else
-	return (pixel * CONVERSION_FACTOR) / (double)device->logicalDpiY();
+    if( mode == DpiX ) {
+	/*return (pixel * CONVERSION_FACTOR) / (double)device->logicalDpiX();*/// -!F: original, keep
+        return (pixel * CONVERSION_FACTOR) / (double)KApplication::desktop()->logicalDpiX();
+    }
+    else {
+	/*return (pixel * CONVERSION_FACTOR) / (double)device->logicalDpiY();*/// -!F: original, keep
+	return (pixel * CONVERSION_FACTOR) / (double)KApplication::desktop()->logicalDpiY();
+    }
 }
 
 double LabelUtils::mmToPixel( double mm, const QPaintDevice* device, int mode )
@@ -72,15 +76,17 @@ double LabelUtils::mmToPixel( double mm, const QPaintDevice* device, int mode )
 
     if (device == 0)
     {
-        device = KApplication::desktop();
+        device = (QPaintDevice *) KApplication::desktop();
     }
     
 //    qDebug("DpiX=%i", pdm.logicalDpiX());
 //    qDebug("DpiY=%i", pdm.logicalDpiY());
     if( mode == DpiX )
-	return (mm / CONVERSION_FACTOR) * (double)device->logicalDpiX();
+	/*return (mm / CONVERSION_FACTOR) * (double)device->logicalDpiX();*/// -!F: original, keep
+	return (mm / CONVERSION_FACTOR) * (double)KApplication::desktop()->logicalDpiX();// -!F: keep
     else
-	return (mm / CONVERSION_FACTOR) * (double)device->logicalDpiY();
+	/*return (mm / CONVERSION_FACTOR) * (double)device->logicalDpiY();*/// -!F: original, keep
+	return (mm / CONVERSION_FACTOR) * (double)KApplication::desktop()->logicalDpiY();// -!F: keep
 }
 
 double LabelUtils::pixelToPixelX( double unit, const QPaintDevice* src, const QPaintDevice* dest )

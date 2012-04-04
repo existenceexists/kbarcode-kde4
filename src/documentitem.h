@@ -212,7 +212,7 @@ private:
 
      QString m_visibilityScript;
 
-     QPaintDevice* m_device;// -!F: original
+     QPaintDevice* m_device;// -!F: original, keep
      /*QDesktopWidget* m_device;*/// -!F: delete, 
      TCanvasItem* m_canvasitem;
      TokenProvider* m_token;

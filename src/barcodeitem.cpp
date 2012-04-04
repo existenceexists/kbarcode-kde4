@@ -22,6 +22,7 @@
 #include <qpainter.h>
 #include <QPaintDevice>
 #include <QTextStream>
+#include <QDebug>
 
 BarcodeItem::BarcodeItem()
     : Barkode(), DocumentItem()
