@@ -53,16 +53,15 @@ double LabelUtils::pixelToMm( double pixel, const QPaintDevice* device, int mode
 {
     if (device == 0)
     {
-        device = (QPaintDevice *) KApplication::desktop();// -!F: keep
+        /*device = (QPaintDevice *) KApplication::desktop();*/// -!F: keep
+        device = KApplication::desktop();
     }
     
     if( mode == DpiX ) {
-	/*return (pixel * CONVERSION_FACTOR) / (double)device->logicalDpiX();*/// -!F: original, keep
-        return (pixel * CONVERSION_FACTOR) / (double)KApplication::desktop()->logicalDpiX();
+	return (pixel * CONVERSION_FACTOR) / (double)device->logicalDpiX();
     }
     else {
-	/*return (pixel * CONVERSION_FACTOR) / (double)device->logicalDpiY();*/// -!F: original, keep
-	return (pixel * CONVERSION_FACTOR) / (double)KApplication::desktop()->logicalDpiY();
+	return (pixel * CONVERSION_FACTOR) / (double)device->logicalDpiY();
     }
 }
 
@@ -76,17 +75,16 @@ double LabelUtils::mmToPixel( double mm, const QPaintDevice* device, int mode )
 
     if (device == 0)
     {
-        device = (QPaintDevice *) KApplication::desktop();
+        /*device = (QPaintDevice *) KApplication::desktop();*/// -!F: keep
+        device = KApplication::desktop();
     }
     
 //    qDebug("DpiX=%i", pdm.logicalDpiX());
 //    qDebug("DpiY=%i", pdm.logicalDpiY());
     if( mode == DpiX )
-	/*return (mm / CONVERSION_FACTOR) * (double)device->logicalDpiX();*/// -!F: original, keep
-	return (mm / CONVERSION_FACTOR) * (double)KApplication::desktop()->logicalDpiX();// -!F: keep
+	return (mm / CONVERSION_FACTOR) * (double)device->logicalDpiX();
     else
-	/*return (mm / CONVERSION_FACTOR) * (double)device->logicalDpiY();*/// -!F: original, keep
-	return (mm / CONVERSION_FACTOR) * (double)KApplication::desktop()->logicalDpiY();// -!F: keep
+	return (mm / CONVERSION_FACTOR) * (double)device->logicalDpiY();
 }
 
 double LabelUtils::pixelToPixelX( double unit, const QPaintDevice* src, const QPaintDevice* dest )

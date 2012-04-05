@@ -26,6 +26,7 @@
 #include <qpainter.h>
 #include <qdom.h>
 #include <QPaintDevice>
+#include <QDesktopWidget>
 
 DocumentItem::DocumentItem()
     : QObject(), XMLUtils()
@@ -37,7 +38,8 @@ void DocumentItem::init()
 {
     m_canvasitem = NULL;
     m_token = NULL;
-    m_device = (QPaintDevice*) KApplication::desktop();
+    /*m_device = (QPaintDevice*) KApplication::desktop();*/// -!F: keep
+    m_device = KApplication::desktop();
     
     m_z = 0;    
     m_border = true;

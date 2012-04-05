@@ -80,6 +80,7 @@
 #include <QCloseEvent>
 #include <qprinter.h>
 #include <QPaintDevice>
+#include <QDesktopWidget>
 #include <Q3CanvasItemList>
 
 // KDE includes
@@ -144,7 +145,8 @@ LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WFlags f )
 
     description = QString::null;
     d = new Definition();
-    m_token = new TokenProvider( (QPaintDevice*) KApplication::desktop() );
+    /*m_token = new TokenProvider( (QPaintDevice*) KApplication::desktop() );*/// -!F: keep
+    m_token = new TokenProvider( KApplication::desktop() );
 
     statusBar()->insertPermanentItem( "", STATUS_ID_TEMPLATE, 0 );
     statusBar()->insertPermanentItem( "", STATUS_ID_SIZE, 0 );
