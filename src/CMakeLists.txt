@@ -1,6 +1,7 @@
 
 add_subdirectory( pics )
 add_subdirectory( xml )
+add_subdirectory( sql )
 
 include_directories( ${CMAKE_SOURCE_DIR} ${KDE4_INCLUDE_DIR} ${KDE4_INCLUDES}
   ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} dialogs )

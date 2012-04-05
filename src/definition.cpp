@@ -314,12 +314,14 @@ bool Definition::openFile()
         return true;        
     }
 
-    QString f = KStandardDirs::locateLocal( "data", "kbarcode/labeldefinitions.sql" );
+    /*QString f = KStandardDirs::locateLocal( "data", "kbarcode/labeldefinitions.sql" );*/// -!F: original, uncomment?
+    QString f = KStandardDirs::locateLocal( "appdata", "labeldefinitions.sql" );
     if( !QFile::exists( f ) ) {
         KConfigGroup config = KGlobal::config()->group( "Definitions" );
         
         // copy file to new location
-        QString fname = config.readEntry( "defpath", KStandardDirs::locate( "data", "kbarcode/labeldefinitions.sql" ) );
+        /*QString fname = config.readEntry( "defpath", KStandardDirs::locate( "data", "kbarcode/labeldefinitions.sql" ) );*/// -!F: original, uncomment?
+        QString fname = config.readEntry( "defpath", KStandardDirs::locate( "appdata", "labeldefinitions.sql" ) );
         if( !QFile::exists( fname ) || fname.isEmpty() ) 
             return ( showFileError() ? openFile() : false );
 
