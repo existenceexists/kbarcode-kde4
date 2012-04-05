@@ -265,9 +265,9 @@ void DefinitionDialog::add()
 void DefinitionDialog::updateType()
 {
     comboType->clear();
-    if( comboProducer->currentText() == comboProducer->text( comboProducer->currentItem() ) )
-        if( comboProducer->currentItem() < comboProducer->count())
-            comboType->insertStringList( types[ comboProducer->currentItem() ] );
+    if( comboProducer->currentText() == comboProducer->itemText( comboProducer->currentIndex() ) )
+        if( comboProducer->currentIndex() < comboProducer->count())
+            comboType->addItems( types[ comboProducer->currentIndex() ] );
     comboType->addItem( i18n( "Custom" ), 0 );
 }
 
