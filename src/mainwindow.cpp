@@ -46,9 +46,11 @@
 bool MainWindow::autoconnect = true;
 bool MainWindow::startassistant = true;
 
-MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags f)
+MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags f, Qt::WidgetAttribute waf)
     : KXmlGuiWindow(parent,f)
 {
+    setAttribute( waf );
+    
     connectAct = 0;
     first = false;
     loadConfig();

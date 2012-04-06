@@ -136,9 +136,11 @@
 
 using namespace KABC;
 
-LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WFlags f )
+LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f, Qt::WidgetAttribute waf )
     : MainWindow( parent, f )
 {
+    setAttribute( waf );
+    
     undoAct = 
 	redoAct = NULL; 
     history = NULL;
@@ -1076,7 +1078,7 @@ void LabelEditor::preview()
 
     save( &buffer );
 
-    // No need to delete pd as it has WDestructiveClose set!
+    // No need to delete pd as it has Qt::WA_DeleteOnClose (earlier known as Qt::WDestructiveClose) set!
     PreviewDialog* pd = new PreviewDialog( &buffer, d, fileName(), this );
     pd->exec();
 }
@@ -1169,7 +1171,9 @@ void LabelEditor::closeEvent( QCloseEvent* e )
     if( !isChanged() ) {
         saveConfig();
         e->accept();
-        delete this;
+        KMainWindow::closeEvent( e );// -!F: keep, see todo file
+        /*QWidget::closeEvent( e );*/// -!F: delete
+        /*delete this;*/// -!F: original, keep, causes a runtime error
         return;
     }
 
@@ -1181,12 +1185,14 @@ void LabelEditor::closeEvent( QCloseEvent* e )
     else if( m == KMessageBox::No ) {
         saveConfig();
         e->accept();
-        delete this;
+        KMainWindow::closeEvent( e );// -!F: keep
+        /*delete this;*/// -!F: original, keep, causes a runtime error
     } else if( m == KMessageBox::Yes ) {
         if( save() ) {
             saveConfig();
             e->accept();
-            delete this;
+            KMainWindow::closeEvent( e );// -!F: keep
+            /*delete this;*/// -!F: original, keep, causes a runtime error
         }
     }
 }

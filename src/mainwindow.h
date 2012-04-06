@@ -30,7 +30,8 @@ class KMenu;
 class MainWindow : public KXmlGuiWindow {
     Q_OBJECT
     public:
-        MainWindow(QWidget *parent=0, Qt::WFlags f = Qt::WType_TopLevel | Qt::WDestructiveClose );
+        /*MainWindow(QWidget *parent=0, Qt::WFlags f = Qt::WType_TopLevel | Qt::WDestructiveClose );*/// -!F: original, delete
+        MainWindow(QWidget *parent=0, Qt::WindowFlags f = Qt::Window, Qt::WidgetAttribute waf = Qt::WA_DeleteOnClose );
         ~MainWindow();
 
         /** Is this the first start of KBarcode ?

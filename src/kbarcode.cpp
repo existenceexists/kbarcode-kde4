@@ -47,10 +47,10 @@
 #include <kpushbutton.h>
 #include <kmessagebox.h>
 
-KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
+KBarcode::KBarcode( QWidget *parent, Qt::WindowFlags f, Qt::WidgetAttribute waf)
     : MainWindow( parent, f )
 {
-    /*kbarcodeDirectoryName = QString("kbarcode011");*/// -!F: delete in the end
+    setAttribute( waf );
     
     QGroupBox* w = new QGroupBox(this);
     /*QVBoxLayout* layout = new QVBoxLayout(this);*/

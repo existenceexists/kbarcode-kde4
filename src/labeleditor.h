@@ -91,8 +91,10 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
             eLoadLabel
         };
 
+        /*LabelEditor( QWidget *parent=0, QString _filename = QString::null,
+             Qt::WFlags f = Qt::WType_TopLevel | Qt::WDestructiveClose );*/// -!F: original, delete
         LabelEditor( QWidget *parent=0, QString _filename = QString::null,
-             Qt::WFlags f = Qt::WType_TopLevel | Qt::WDestructiveClose );
+             Qt::WindowFlags f = Qt::Window, Qt::WidgetAttribute waf = Qt::WA_DeleteOnClose );
         ~LabelEditor();
         bool startupDlg( ELabelEditorMode mode, QString f = QString::null );
 
