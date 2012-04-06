@@ -77,7 +77,7 @@
 #include <qregexp.h>
 #include <QList>
 #include <QByteArray>
-#include <QCloseEvent>
+//#include <QCloseEvent>// -!F: original, delete
 #include <qprinter.h>
 #include <QPaintDevice>
 #include <QDesktopWidget>
@@ -1166,35 +1166,35 @@ void LabelEditor::batchPrint()
     new BatchAssistant( NULL );
 }
 
-void LabelEditor::closeEvent( QCloseEvent* e )
+bool LabelEditor::queryClose()
 {
+    /* This method returns true if the label editor window should be closed false otherwise.
+     * It is called by KDE automatically if a user or the program wants to close the label editor window.
+     */
     if( !isChanged() ) {
         saveConfig();
-        e->accept();
-        KMainWindow::closeEvent( e );// -!F: keep, see todo file
-        /*QWidget::closeEvent( e );*/// -!F: delete
-        /*delete this;*/// -!F: original, keep, causes a runtime error
-        return;
+        return true;
     }
 
     int m = KMessageBox::warningYesNoCancel( this,
         i18n("<qt>The document has been modified.<br><br>Do you want to save it ?</qt>") );
 
-    if( m == KMessageBox::Cancel )
-        e->ignore();
-    else if( m == KMessageBox::No ) {
+    if( m == KMessageBox::Cancel ) {
+        return false;
+    } else if( m == KMessageBox::No ) {
         saveConfig();
-        e->accept();
-        KMainWindow::closeEvent( e );// -!F: keep
-        /*delete this;*/// -!F: original, keep, causes a runtime error
+        return true;
     } else if( m == KMessageBox::Yes ) {
         if( save() ) {
             saveConfig();
-            e->accept();
-            KMainWindow::closeEvent( e );// -!F: keep
-            /*delete this;*/// -!F: original, keep, causes a runtime error
+            return true;
+        } else {
+            return false;
         }
     }
+    
+    saveConfig();
+    return true;
 }
 
 bool LabelEditor::isChanged()

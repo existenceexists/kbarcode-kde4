@@ -33,7 +33,7 @@
 #include <qmap.h>
 //Added by qt3to4:
 #include <QHBoxLayout>
-#include <QCloseEvent>
+//#include <QCloseEvent>// -!F: original, delete
 #include <QLabel>
 #include <QVBoxLayout>
 
@@ -184,7 +184,7 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
         void lockItem();
         
     protected:
-        void closeEvent( QCloseEvent* e );
+        bool queryClose();
 
         K3CommandHistory* history;
 
