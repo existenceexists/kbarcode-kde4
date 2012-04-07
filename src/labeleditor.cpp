@@ -82,6 +82,7 @@
 #include <QPaintDevice>
 #include <QDesktopWidget>
 #include <Q3CanvasItemList>
+#include <QAction>
 
 // KDE includes
 #include <kabc/stdaddressbook.h>
@@ -128,7 +129,7 @@
 #define STATUS_ID_TEMPLATE 101
 #define STATUS_ID_MOUSE 102
 
-#define ID_LOCK_ITEM 8000
+/*#define ID_LOCK_ITEM 8000*/// -!F: original, delete
 
 #define CANVAS_UPDATE_PERIOD 50
 
@@ -321,7 +322,7 @@ bool LabelEditor::save( QString name )
 
     save( &f );
 
-    m_token->setLabelName( filename.right( filename.length() - filename.findRev( "/" ) - 1 ) );
+    m_token->setLabelName( filename.right( filename.length() - filename.lastIndexOf( "/" ) - 1 ) );
     // maybe we should redraw all items on the canvas now.
     // if there is a label with [filename], the filename might not
     // get updated if the label gets saved with another filename.
@@ -346,7 +347,7 @@ void LabelEditor::save( QIODevice* device )
     writeXMLHeader( &root, description, d );
 
     Q3CanvasItemList list = c->allItems();
-    for( unsigned int i = 0; i < list.count(); i++ )
+    for( int i = 0; i < list.count(); i++ )
     {
         TCanvasItem* item = static_cast<TCanvasItem*>(list[i]);
         DocumentItem* ditem = item->item();
@@ -375,7 +376,7 @@ bool LabelEditor::openUrl( const QString & url )
 
     filename = url;
     setCaption( filename, false );
-    m_token->setLabelName( filename.right( filename.length() - filename.findRev( "/" ) - 1 ) );
+    m_token->setLabelName( filename.right( filename.length() - filename.lastIndexOf( "/" ) - 1 ) );
 
     QFile f( filename );
     if ( !f.open( QIODevice::ReadOnly ) )
@@ -406,7 +407,7 @@ bool LabelEditor::openUrl( const QString & url )
 
     DocumentItemList list;
     readDocumentItems( &list, &doc, m_token, kbarcode18 );
-    for( unsigned int i=0;i<list.count();i++ )
+    for( int i=0;i<list.count();i++ )
     {
         TCanvasItem* citem = new TCanvasItem( cv );
         citem->setItem( list.at( i ) );
@@ -444,7 +445,7 @@ bool LabelEditor::newLabel()
     delete nl;
 
     filename = QString::null;
-    m_token->setLabelName( filename.right( filename.length() - filename.findRev( "/" ) - 1 ) );
+    m_token->setLabelName( filename.right( filename.length() - filename.lastIndexOf( "/" ) - 1 ) );
     setCaption( filename, false );
     enableActions();
 
@@ -703,25 +704,24 @@ void LabelEditor::setupActions()
 void LabelEditor::setupContextMenu()
 {
     m_mnuContext = new KMenu( this );
-    m_mnuContext->setCheckable( true );
     
-    KMenu* orderMenu = new KMenu( m_mnuContext );
-    orderMenu->insertItem( i18n("&On Top"), this, SLOT( onTopCurrent() ) );
-    orderMenu->insertItem( i18n("&Raise"), this, SLOT( raiseCurrent() ) );
-    orderMenu->insertItem( i18n("&Lower"), this, SLOT( lowerCurrent() ) );
-    orderMenu->insertItem( i18n("&To Background"), this, SLOT( backCurrent() ) );
+    QMenu* orderMenu = m_mnuContext->addMenu( i18n("&Order") );
+    orderMenu->addAction( i18n("&On Top"), this, SLOT( onTopCurrent() ) );
+    orderMenu->addAction( i18n("&Raise"), this, SLOT( raiseCurrent() ) );
+    orderMenu->addAction( i18n("&Lower"), this, SLOT( lowerCurrent() ) );
+    orderMenu->addAction( i18n("&To Background"), this, SLOT( backCurrent() ) );
 
-    KMenu* centerMenu = new KMenu( m_mnuContext );
-    centerMenu->insertItem( i18n("Center &Horizontally"), this, SLOT( centerHorizontal() ) );
-    centerMenu->insertItem( i18n("Center &Vertically"), this, SLOT( centerVertical() ) );
+    QMenu* centerMenu = m_mnuContext->addMenu( i18n("&Center") );
+    centerMenu->addAction( i18n("Center &Horizontally"), this, SLOT( centerHorizontal() ) );
+    centerMenu->addAction( i18n("Center &Vertically"), this, SLOT( centerVertical() ) );
 
-    m_mnuContext->insertItem( i18n("&Order"), orderMenu );
-    m_mnuContext->insertItem( i18n("&Center"), centerMenu );
-    m_mnuContext->insertSeparator();
-    m_mnuContext->insertItem( SmallIcon("editdelete"), i18n("&Delete"), cv, SLOT( deleteCurrent() ) );
-    m_mnuContext->insertItem( i18n("&Protect Position and Size"), this, SLOT( lockItem() ), 0, ID_LOCK_ITEM );
-    m_mnuContext->insertSeparator();
-    m_mnuContext->insertItem( i18n("&Properties"), this, SLOT( doubleClickedCurrent() ) );
+    m_mnuContext->addSeparator();
+    m_mnuContext->addAction( KIcon("editdelete"), i18n("&Delete"), cv, SLOT( deleteCurrent() ) );
+    /*m_mnuContext->insertItem( i18n("&Protect Position and Size"), this, SLOT( lockItem() ), 0, ID_LOCK_ITEM );*/// -!F: original, delete
+    QAction * protectAction = m_mnuContext->addAction( i18n("&Protect Position and Size"), this, SLOT( lockItem() ) );
+    protectAction->setCheckable( true );
+    m_mnuContext->addSeparator();
+    m_mnuContext->addAction( i18n("&Properties"), this, SLOT( doubleClickedCurrent() ) );
 }
 
 void LabelEditor::insertBarcode()
@@ -799,7 +799,9 @@ void LabelEditor::insertLine()
 
 void LabelEditor::changeDes()
 {
-    QString tmp = QInputDialog::getText( i18n("Label Description"),
+    /*QString tmp = QInputDialog::getText( i18n("Label Description"),
+            i18n("Please enter a description:"), QLineEdit::Normal, description );*/// -!F: original, delete
+    QString tmp = QInputDialog::getText( this, i18n("Label Description"),
             i18n("Please enter a description:"), QLineEdit::Normal, description );
     if( !tmp.isEmpty() )
         description = tmp;
@@ -855,9 +857,9 @@ void LabelEditor::doubleClickedCurrent()
 
 void LabelEditor::showContextMenu( QPoint pos )
 {
-    TCanvasItemList list = cv->getSelected();
+    /*TCanvasItemList list = cv->getSelected();
     
-    m_mnuContext->setItemChecked( ID_LOCK_ITEM, (list[0])->item()->locked() );
+    m_mnuContext->setItemChecked( ID_LOCK_ITEM, (list[0])->item()->locked() );*/// -!F: original, delete
     m_mnuContext->popup( pos );
 }
 
@@ -868,7 +870,7 @@ void LabelEditor::lockItem()
     
     DocumentItem* item = NULL;
     LockCommand* lc = NULL;
-    for( unsigned int i=0;i<list.count();i++)
+    for( int i=0;i<list.count();i++)
     {
         item = list[i]->item();
         lc = new LockCommand( !item->locked(), list[i] );
@@ -1040,7 +1042,7 @@ void LabelEditor::onTopCurrent()
     int z = 0;
 
     Q3CanvasItemList list = c->allItems();
-    for( unsigned int i = 0; i < list.count(); i++ )
+    for( int i = 0; i < list.count(); i++ )
         if( list[i]->z() > z )
             z = (int)list[i]->z();
 
@@ -1057,7 +1059,7 @@ void LabelEditor::backCurrent()
     int z = 0;
 
     Q3CanvasItemList list = c->allItems();
-    for( unsigned int i = 0; i < list.count(); i++ )
+    for( int i = 0; i < list.count(); i++ )
         if( list[i]->z() < z )
             z = (int)list[i]->z();
 
@@ -1067,7 +1069,7 @@ void LabelEditor::backCurrent()
 
 const QString LabelEditor::fileName() const
 {
-    return filename.right( filename.length() - filename.findRev( "/" ) - 1 );
+    return filename.right( filename.length() - filename.lastIndexOf( "/" ) - 1 );
 }
 
 void LabelEditor::preview()
@@ -1102,7 +1104,7 @@ void LabelEditor::copy()
         return;
 
     DocumentItemList items;
-    for( unsigned int i=0;i<list.count();i++)
+    for( int i=0;i<list.count();i++)
         items.append( (list[i])->item() );
 
     DocumentItemDrag* drag = new DocumentItemDrag();
@@ -1168,7 +1170,7 @@ void LabelEditor::batchPrint()
 
 bool LabelEditor::queryClose()
 {
-    /* This method returns true if the label editor window should be closed false otherwise.
+    /* This method returns true if the label editor window can be closed safely false otherwise.
      * It is called by KDE automatically if a user or the program wants to close the label editor window.
      */
     if( !isChanged() ) {
