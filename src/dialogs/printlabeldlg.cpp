@@ -34,17 +34,18 @@ PrintLabelDlg::PrintLabelDlg(QWidget *parent )
       KDialog ( parent )
 {
     QWidget *page = new QWidget( this );
+    setMainWidget( page );
     QVBoxLayout* box = new QVBoxLayout;
     page->setLayout( box );
 	
 
     numLabels  = new KIntNumInput();
-    numLabels->setLabel( i18n("Number of labels:" ), Qt::AlignLeft | Qt::AlignVCenter );
+    numLabels->setLabel( i18n("Number of labels:" ), Qt::AlignLeft | Qt::AlignTop );
     numLabels->setRange( 1, 100000, 1 );
     numLabels->setSliderEnabled( false );
     
     numPos = new KIntNumInput( 1 );
-    numPos->setLabel( i18n("Start at label position:" ), Qt::AlignLeft | Qt::AlignVCenter );
+    numPos->setLabel( i18n("Start at label position:" ), Qt::AlignLeft | Qt::AlignTop );
     numPos->setRange( 1, 100, 1 );
     numPos->setSliderEnabled( false );
 

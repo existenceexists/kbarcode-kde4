@@ -209,7 +209,7 @@ bool KBarcode::parseCmdLine()
     KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
 
     BatchPrinter::EOutputFormat eFormat = BatchPrinter::POSTSCRIPT;
-    /*LabelEditor* pEdit = NULL;*/// -!F: original, uncomment
+    LabelEditor* pEdit = NULL;
     QString serial;
     QString sqlquery   = QString::null;
     QString csvfile    = QString::null;
@@ -286,18 +286,18 @@ bool KBarcode::parseCmdLine()
 	}
 	else
         {
-	    /*pEdit = new LabelEditor( 0, args->url( i ).path() );
+	    pEdit = new LabelEditor( 0, args->url( i ).path() );
             if( bPrintNow )
                 // TODO: use the printer set by the printer commandline option
-                pEdit->print(); */
+                pEdit->print();
         }
 
     if( !args->count() && mode == LABEL )
     {
-        /*pEdit = new LabelEditor();
+        pEdit = new LabelEditor();
         if( bPrintNow )
             // TODO: use the printer set by the printer commandline option
-            pEdit->print(); */
+            pEdit->print();
 
     }
 
