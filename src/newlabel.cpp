@@ -43,13 +43,17 @@ NewLabel::NewLabel( QWidget* parent, bool change, Qt::WFlags fl )
     : QDialog( parent, fl )
 {
     setModal( true );
-    setCaption( i18n( "New Label" ) );
+    setWindowTitle( i18n( "New Label" ) );
     curid = 0;
     types = 0;
     
-    NewLabelLayout = new QVBoxLayout( this, 11, 6, "NewLabelLayout"); 
+    NewLabelLayout = new QVBoxLayout( this );
+    NewLabelLayout->setObjectName( "NewLabelLayout" );
+    NewLabelLayout->setContentsMargins( 11, 11, 11, 11 );
+    NewLabelLayout->setSpacing( 6 );
 
-    TextLabel1 = new QLabel( this, "TextLabel1" );
+    TextLabel1 = new QLabel( this );
+    TextLabel1->setObjectName( "TextLabel1" );
     if( !change )
         TextLabel1->setText( i18n( "<h1>Create a new Label</h1><br><br>" ) );
     else
@@ -63,13 +67,16 @@ NewLabel::NewLabel( QWidget* parent, bool change, Qt::WFlags fl )
     group1->setLayout( group1MainLayout );
     group1->layout()->setSpacing( 6 );
     group1->layout()->setContentsMargins( 11, 11, 11, 11 );
-    QGridLayout* group1Layout = new QGridLayout( group1->layout() );
+    QGridLayout* group1Layout = new QGridLayout();
     group1Layout->setAlignment( Qt::AlignTop );
+    group1MainLayout->addLayout( group1Layout );
     
-    TextLabel2 = new QLabel( group1, "TextLabel2" );
+    TextLabel2 = new QLabel( group1 );
+    TextLabel2->setObjectName( "TextLabel2" );
     TextLabel2->setText( i18n( "Producer:" ) );
 
-    TextLabel3 = new QLabel( group1, "TextLabel3" );
+    TextLabel3 = new QLabel( group1 );
+    TextLabel2->setObjectName( "TextLabel3" );
     TextLabel3->setText( i18n( "Type:" ) );
 
     comboProducer = new KComboBox( FALSE, group1 );
@@ -80,7 +87,7 @@ NewLabel::NewLabel( QWidget* parent, bool change, Qt::WFlags fl )
     checkEmpty = new QCheckBox( i18n("&Start with an empty label"), group1 );
     checkEmpty->setEnabled( !change );
     
-    group1Layout->addMultiCellWidget( checkEmpty, 0, 0, 0, 1 );
+    group1Layout->addWidget( checkEmpty, 0, 0, 1, 2 );
     group1Layout->addWidget( TextLabel2, 1, 0 );
     group1Layout->addWidget( TextLabel3, 2, 0 );
     group1Layout->addWidget( comboProducer, 1, 1 );
@@ -88,7 +95,10 @@ NewLabel::NewLabel( QWidget* parent, bool change, Qt::WFlags fl )
     
     NewLabelLayout->addWidget( group1 );
 
-    Layout2 = new QHBoxLayout( 0, 0, 6, "Layout2"); 
+    Layout2 = new QHBoxLayout();
+    Layout2->setObjectName( "Layout2" );
+    Layout2->setContentsMargins( 0, 0, 0, 0 );
+    Layout2->setSpacing( 6 );
 
     QSpacerItem* spacer_2 = new QSpacerItem( 0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum );
     Layout2->addItem( spacer_2 );
@@ -97,14 +107,19 @@ NewLabel::NewLabel( QWidget* parent, bool change, Qt::WFlags fl )
     TextLabel4 = new QLabel( this );
     preview = new LabelPreview( this );
 
-    QHBoxLayout* hlayout = new QHBoxLayout( 0, 6, 6 );    
+    QHBoxLayout* hlayout = new QHBoxLayout();
+    hlayout->setContentsMargins( 6, 6, 6, 6 );
+    hlayout->setSpacing( 6 );
     hlayout->addWidget( TextLabel4 );
     hlayout->addWidget( preview );
     NewLabelLayout->addLayout( hlayout );
     QSpacerItem* spacer_3 = new QSpacerItem( 0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding );
     NewLabelLayout->addItem( spacer_3 );
 
-    Layout1 = new QHBoxLayout( 0, 0, 6, "Layout1"); 
+    Layout1 = new QHBoxLayout();
+    Layout1->setObjectName( "Layout1" );
+    Layout1->setContentsMargins( 0, 0, 0, 0 );
+    Layout1->setSpacing( 6 );
 
     buttonOwnFormat = new KPushButton( this );
     buttonOwnFormat->setText( i18n( "&Add own Label Definition" ) );
@@ -146,12 +161,12 @@ void NewLabel::fillData()
 {
     comboProducer->clear();
     QStringList list = Definition::getProducers();
-    comboProducer->insertStringList( list );
+    comboProducer->addItems( list );
 
     if( comboProducer->count() ) {
         types = new QStringList[comboProducer->count()];
         for( int i = 0; i < comboProducer->count(); i++ )
-            types[i] = Definition::getTypes( comboProducer->text( i ) );
+            types[i] = Definition::getTypes( comboProducer->itemText( i ) );
     }
 }
 
@@ -159,7 +174,7 @@ void NewLabel::updateType()
 {
     comboType->clear();
     if( types )
-        comboType->insertStringList( types[ comboProducer->currentItem() ] );
+        comboType->addItems( types[ comboProducer->currentIndex() ] );
 }
 
 void NewLabel::updateText()
@@ -209,7 +224,7 @@ bool NewLabel::isInCombo( QComboBox* combo, QString text )
         return false;
 
     for( int i = 0; i < combo->count(); i++ )
-        if( combo->text( i ) == text )
+        if( combo->itemText( i ) == text )
             return true;
     return false;
 }
@@ -225,7 +240,7 @@ void NewLabel::setLabelId( int id )
         comboProducer->setCurrentIndex( i );
         updateType();
         for( int z = 0; z < comboType->count(); z++ )
-            if( comboType->text( z ) == name ) {
+            if( comboType->itemText( z ) == name ) {
                 comboProducer->setCurrentIndex( i );
                 comboType->setCurrentIndex( z );
                 return;
