@@ -3,4 +3,5 @@
 install(FILES 
     mainwindowui.rc 
     databasebrowserui.rc 
+    labeleditorui.rc 
     DESTINATION ${DATA_INSTALL_DIR}/${ProjectName})

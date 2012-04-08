@@ -84,6 +84,8 @@
 #include <Q3CanvasItemList>
 #include <QAction>
 
+#include <QDebug>// -!F: delete
+
 // KDE includes
 #include <kabc/stdaddressbook.h>
 #include <kaction.h>
@@ -142,8 +144,7 @@ LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f,
 {
     setAttribute( waf );
     
-    undoAct = 
-	redoAct = NULL; 
+    undoAct = redoAct = NULL;
     history = NULL;
 
     description = QString::null;
@@ -183,8 +184,8 @@ LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f,
     connect( KBarcodeSettings::getInstance(), SIGNAL( updateGrid( int ) ), cv, SLOT( updateGUI() ) );
     connect( kapp, SIGNAL( aboutToQuit() ), this, SLOT( saveConfig() ) );
  
-    connect( history, SIGNAL( commandExecuted() ), cv, SLOT( updateGUI() ) );
-    connect( history, SIGNAL( commandExecuted() ), this, SLOT( setEdited() ) );
+    connect( history, SIGNAL( commandExecuted( K3Command *) ), cv, SLOT( updateGUI() ) );
+    connect( history, SIGNAL( commandExecuted( K3Command *) ), this, SLOT( setEdited() ) );
 
     if( !_filename.isEmpty() )
         openUrl( _filename );
@@ -226,12 +227,16 @@ void LabelEditor::createCommandHistory()
 {
     if( undoAct && redoAct )
     {
-	editMenu->removeAction( undoAct );
+	/*editMenu->removeAction( undoAct );
 	toolBar()->removeAction( undoAct );
 	editMenu->removeAction( redoAct );
 	toolBar()->removeAction( redoAct );
 	actionCollection()->removeAction( undoAct );
-	actionCollection()->removeAction( redoAct );
+	actionCollection()->removeAction( redoAct );*/// -!F: original, delete
+        /*undoAct->setEnabled( false );
+        redoAct->setEnabled( false );*/// -!F: delete
+        /*actionCollection()->removeAction( undoAct );
+        actionCollection()->removeAction( redoAct );*/
     }
 
     history = new K3CommandHistory( actionCollection(), false );
@@ -239,18 +244,23 @@ void LabelEditor::createCommandHistory()
 
     history->setUndoLimit( KBARCODE_UNDO_LIMIT );
     history->setRedoLimit( KBARCODE_UNDO_LIMIT );
+    
+    connect( undoAct, SIGNAL(triggered(bool)), history, SLOT(undo()) );
+    connect( redoAct, SIGNAL(triggered(bool)), history, SLOT(redo()) );
+    
+    connect( history, SIGNAL(commandHistoryChanged()), this, SLOT(setEdited()) );
 }
 
 void LabelEditor::createCommandHistoryActions()
 {
-    undoAct = (KAction*)actionCollection()->action("edit_undo");
+    /*undoAct = (KAction*)actionCollection()->action("edit_undo");
     redoAct = (KAction*)actionCollection()->action("edit_redo");
 
     editMenu->insertAction( editMenu->actions()[0], undoAct );
     editMenu->insertAction( editMenu->actions()[1], redoAct );
 
     toolBar()->insertAction( toolBar()->actions()[5], undoAct );
-    toolBar()->insertAction( toolBar()->actions()[6], redoAct );
+    toolBar()->insertAction( toolBar()->actions()[6], redoAct );*/// -!F: original, delete
 }
 
 void LabelEditor::clearLabel()
@@ -261,11 +271,12 @@ void LabelEditor::clearLabel()
     description = QString::null;
 
     delete history;
+    history = NULL;
     createCommandHistory();
     createCommandHistoryActions();
 
-    connect( history, SIGNAL( commandExecuted() ), cv, SLOT( updateGUI() ) );
-    connect( history, SIGNAL( commandExecuted() ), this, SLOT( setEdited() ) );
+    connect( history, SIGNAL( commandExecuted( K3Command *) ), cv, SLOT( updateGUI() ) );
+    connect( history, SIGNAL( commandExecuted( K3Command *) ), this, SLOT( setEdited() ) );
 
     m_edited = false;
 
@@ -468,6 +479,7 @@ void LabelEditor::setupActions()
     /*recentAct = new KRecentFilesAction( i18n("&Recent Files"), 0, this, SLOT( loadRecentEditor( const KUrl& ) ) );*/// -!F: original, delete
     recentAct = new KRecentFilesAction( this );
     recentAct->setText( i18n("&Recent Files") );
+    actionCollection()->addAction( "recentAct", recentAct );
     connect( recentAct, SIGNAL(triggered(bool)), this, SLOT(loadRecentEditor( const KUrl& )) );
 
     /*KAction* importPrintFileAct = new KAction( i18n("&Import and Print Batch File..."), BarIconSet( "fileprint" ), 0, this, SLOT( batchPrint() ), actionCollection() );*/// -!F: original, delete
@@ -576,8 +588,8 @@ void LabelEditor::setupActions()
     actionCollection()->addAction( "previewAct", previewAct );
     connect( previewAct, SIGNAL(triggered(bool)), this, SLOT(preview()) );
     /*sep = new KActionSeparator( this );*/// -!F: original, delete
-    sep = new QAction( this );
-    sep->setSeparator( true );
+    /*sep = new QAction( this );
+    sep->setSeparator( true );*/// -!F: delete
     /*cutAct = KStandardAction::cut( this, SLOT( cut() ), actionCollection(), "cut" );*/// -!F: original, delete
     cutAct = KStandardAction::cut( this, SLOT( cut() ), actionCollection() );
     /*copyAct = KStandardAction::copy( this, SLOT( copy() ), actionCollection(), "copy" );*/// -!F: original, delete
@@ -602,24 +614,29 @@ void LabelEditor::setupActions()
     actionCollection()->addAction( "create", singleBarcodeAct );
     connect( singleBarcodeAct, SIGNAL(triggered(bool)), this, SLOT(startBarcodeGen()) );
     singleBarcodeAct->setEnabled( Barkode::haveBarcode() );
+    
+    undoAct = KStandardAction::undo( history, SLOT( undo() ), actionCollection() );
+    redoAct = KStandardAction::redo( history, SLOT( redo() ), actionCollection() );
+    undoAct->setEnabled( false );
+    redoAct->setEnabled( false );// -!F: delete
 
-    toolBar()->addAction( newAct );
+    /*toolBar()->addAction( newAct );
     toolBar()->addAction( loadAct );
     toolBar()->addAction( saveAct );
     toolBar()->addAction( printAct );
-    toolBar()->addAction( sep );
+    toolBar()->addSeparator();
     toolBar()->addAction( cutAct );
     toolBar()->addAction( copyAct );
-    toolBar()->addAction( pasteAct );
+    toolBar()->addAction( pasteAct );*/
 
     /*tools = new KToolBar( this, this->leftDock(), true);*/// -!F: original, delete
-    tools = toolBar();
-    /*tools->setAllowedAreas( Qt::LeftToolBarArea );*/// -!F: added, try this to learn if is needed
+    /*tools = toolBar();*/// -!F: delete
+    /*tools->setAllowedAreas( Qt::LeftToolBarArea );*/// -!F: added, try to uncomment this to find out if is needed
     
-    QAction * separatorTools1 = new QAction( this );
-    separatorTools1->setSeparator(true);
+    /*QAction * separatorTools1 = new QAction( this );
+    separatorTools1->setSeparator(true);*/// -!F: delete
 
-    tools->addAction( barcodeAct );
+    /*tools->addAction( barcodeAct );
     tools->addAction( pictureAct );
     tools->addAction( textAct );
     tools->addAction( textDataAct );
@@ -627,22 +644,22 @@ void LabelEditor::setupActions()
     tools->addAction( lineAct );
     tools->addAction( rectAct );
     tools->addAction( circleAct );
-    /*tools->addAction( (new KActionSeparator( this )) );*/// -!F: original, delete
-    tools->addAction( separatorTools1 );
+    tools->addSeparator();
 //    spellAct->plug( tools );  // KDE 3.2
-    tools->addAction( gridAct );
+    tools->addAction( gridAct );*/
 
-    MainWindow::setupActions();
+    /*MainWindow::setupActions();*/// -!F: original, delete
+    setupGUI( Default, KStandardDirs::locate( "appdata", QString("labeleditorui.rc") ) );
     connect( recentAct, SIGNAL( urlSelected( const KUrl& ) ), this, SLOT( startLoadRecentEditor( const KUrl& ) ) );
 
-    KMenu* fileMenu = new KMenu( this );
+    /*KMenu* fileMenu = new KMenu( this );
     editMenu = new KMenu( this );
     KMenu* viewMenu = new KMenu( this );
     KMenu* insMenu = new KMenu( this );
     KMenu* toolMenu = new KMenu( this );
-    KMenu* barMenu = new KMenu( this );
+    KMenu* barMenu = new KMenu( this );*/// -!F: original, delete
 
-    menuBar()->removeItemAt( 0 );
+    /*menuBar()->removeItemAt( 0 );
     menuBar()->insertItem( i18n("&File"), fileMenu, -1, 0 );
     menuBar()->insertItem( i18n("&Edit"), editMenu, -1, 1 );
     menuBar()->insertItem( i18n("&Insert"), insMenu, -1, 2 );
@@ -696,7 +713,7 @@ void LabelEditor::setupActions()
     viewMenu->addAction( previewAct );
 
     barMenu->addAction( singleBarcodeAct );
-    barMenu->addAction( importPrintFileAct );
+    barMenu->addAction( importPrintFileAct );*/// -!F: original, delete
 
     enableActions();
 }
@@ -1250,6 +1267,19 @@ void LabelEditor::setEdited()
 {
     setCaption( filename, true );
     m_edited = true;
+    
+    /*QAction * undoAct2 = actionCollection()->action("edit_undo");
+    QAction * redoAct2 = actionCollection()->action("edit_redo");*/// -!F: delete
+    if( history->isRedoAvailable() ) {
+        redoAct->setEnabled( true );
+    } else {
+        redoAct->setEnabled( false );
+    }
+    if( history->isUndoAvailable() ) {
+        undoAct->setEnabled( true );
+    } else {
+        undoAct->setEnabled( false );
+    }
 }
 
 void LabelEditor::enableActions()

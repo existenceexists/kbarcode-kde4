@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gui name="kbarcode"
+     version="1"
+     xmlns="http://www.kde.org/standards/kxmlgui/1.0"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.kde.org/standards/kxmlgui/1.0
+                         http://www.kde.org/standards/kxmlgui/1.0/kxmlgui.xsd" >
+  
+    <MenuBar>
+        <Menu name="file" >
+            <Action name="recentAct" />
+            <Separator />
+            <Action name="bcpAct" />
+            <Action name="imgAct" />
+            <Separator />
+            <Action name="closeLabelAct" />
+            <Separator />
+        </Menu>
+        <Menu name="edit" >
+            <Separator />
+            <Action name="descriptionAct" />
+            <Action name="changeSizeAct" />
+            <Separator />
+            <Action name="deleteAct" />
+            <Action name="editPropAct" />
+        </Menu>
+        <Menu name="my-insert" >
+            <text>&amp;Insert</text>
+            <Action name="barcodeAct" />
+            <Action name="pictureAct" />
+            <Action name="textAct" />
+            <Action name="textDataAct" />
+            <Action name="textLineAct" />
+            <Action name="lineAct" />
+            <Action name="rectAct" />
+            <Action name="circleAct" />
+        </Menu>
+        <Menu name="my-view" >
+            <text>&amp;View</text>
+            <Action name="gridAct" />
+            <Action name="previewAct" />
+        </Menu>
+        <Menu name="tools" >
+            <text>T&amp;ools</text>
+            <Separator />
+            <Action name="addressBookAct" />
+        </Menu>
+        <Menu name="barcode" >
+            <text>&amp;Barcode</text>
+            <Action name="create" />
+            <Action name="importPrintFileAct" />
+        </Menu>
+    </MenuBar>
+  
+    <ToolBar name="mainToolBar">
+    </ToolBar>
+    
+    <ToolBar name="leftToolBar" position="left">
+        <text>Left ToolBar</text>
+        <Action name="barcodeAct" />
+        <Action name="pictureAct" />
+        <Action name="textAct" />
+        <Action name="textDataAct" />
+        <Action name="textLineAct" />
+        <Action name="lineAct" />
+        <Action name="rectAct" />
+        <Action name="circleAct" />
+        <Separator />
+        <Action name="gridAct" />
+    </ToolBar>
+  
+</gui>
