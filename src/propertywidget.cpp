@@ -76,14 +76,14 @@ void FillLineCombo( KComboBox* box )
         p.drawLine( 5, 10, 55, 10 );
         p.end();
 
-        box->insertItem( pixmap );
+        box->addItem( QIcon( pixmap ), QString() );
     }
 }
 
 PropertyWidget::PropertyWidget(QWidget* parent )
- : QWidget( parent, 0 )
+ : QWidget( parent )
 {
-    grid = new QGridLayout( this, 2, 2 );
+    grid = new QGridLayout( this );
 }
 
 PropertyBorder::PropertyBorder( QWidget* parent )
@@ -95,12 +95,13 @@ PropertyBorder::PropertyBorder( QWidget* parent )
     buttonColor = new KColorButton( this );
 
     spinWidth = new KIntNumInput( this );
-    spinWidth->setRange( 1, 100, 1, false );
+    spinWidth->setRange( 1, 100, 1 );
+    spinWidth->setSliderEnabled( false );
 
     comboLine = new KComboBox( false, this );
     FillLineCombo( comboLine );    
 
-    grid->addMultiCellWidget( checkBorder, 0, 0, 0, 1 );
+    grid->addWidget( checkBorder, 0, 0, 1, 2 );
     grid->addWidget( new QLabel( i18n("Color:"), this ), 1, 0 );
     grid->addWidget( buttonColor, 1, 1 );
     grid->addWidget( new QLabel( i18n("Line Width:"), this ), 2, 0 );
@@ -114,7 +115,7 @@ PropertyBorder::PropertyBorder( QWidget* parent )
 
 void PropertyBorder::applySettings( DocumentItem* item, K3MacroCommand* command )
 {
-    BorderCommand* bc = new BorderCommand( checkBorder->isChecked(), QPen( buttonColor->color(), spinWidth->value(), (Qt::PenStyle)(comboLine->currentItem() + 1) ), item );
+    BorderCommand* bc = new BorderCommand( checkBorder->isChecked(), QPen( buttonColor->color(), spinWidth->value(), (Qt::PenStyle)(comboLine->currentIndex() + 1) ), item );
     bc->execute();
     command->addCommand( bc );
 }
@@ -159,11 +160,11 @@ void PropertyRotation::applySettings( DocumentItem* item, K3MacroCommand* comman
     TextItem* text = static_cast<TextItem*>(item);
     double rot = 0.0;
 
-    if( comboRotation->currentItem() == 1 )
+    if( comboRotation->currentIndex() == 1 )
         rot = 90.0;
-    else if( comboRotation->currentItem() == 2 )
+    else if( comboRotation->currentIndex() == 2 )
         rot = 180.0;
-    else if( comboRotation->currentItem() ==  3 )
+    else if( comboRotation->currentIndex() ==  3 )
         rot = 270.0;
 
     TextRotationCommand* rc = new TextRotationCommand( rot, text );
@@ -211,7 +212,8 @@ void PropertyFill::initSettings( DocumentItem* item )
 PropertyBarcode::PropertyBarcode( TokenProvider* token, QWidget* parent )
     : PropertyWidget( parent )
 {
-    QLabel* TextLabel1 = new QLabel( this, "TextLabel1" );
+    QLabel* TextLabel1 = new QLabel( this );
+    TextLabel1->setObjectName( "TextLabel1" );
     TextLabel1->setText( i18n( "Barcode Settings:" ) );
             
     comboComplex = new KComboBox( FALSE, this );
@@ -239,7 +241,7 @@ PropertyBarcode::PropertyBarcode( TokenProvider* token, QWidget* parent )
     
     grid->addWidget( TextLabel1, 0, 0 );
     grid->addWidget( comboComplex, 0, 1 );
-    grid->addMultiCellWidget( barcode, 1, 1, 0, 1 );
+    grid->addWidget( barcode, 1, 0, 1, 2 );
     
     changedCombo();
 }
@@ -253,7 +255,7 @@ PropertyBarcode::PropertyBarcode( TokenProvider* token, QWidget* parent )
 void PropertyBarcode::changedCombo()
 {
     bool v = false;
-    if( comboComplex->currentItem() == comboComplex->count() - 1 )
+    if( comboComplex->currentIndex() == comboComplex->count() - 1 )
         v = true;
 
     barcode->setDataEnabled( v );
@@ -267,7 +269,7 @@ void PropertyBarcode::applySettings( DocumentItem* item, K3MacroCommand* command
     Barkode* d = new Barkode();
     barcode->getData( *d );
             
-    if( comboComplex->currentItem() != comboComplex->count() - 1 ) {
+    if( comboComplex->currentIndex() != comboComplex->count() - 1 ) {
         d->setType( getTypeFromCaption( comboComplex->currentText() ) );
         d->setValue( SqlTables::getInstance()->getBarcodeMaxLength( d->type() ) );
     }
@@ -284,7 +286,7 @@ void PropertyBarcode::initSettings( DocumentItem* item )
     
     barcode->setData( *bcode );
     for( int i = 0; i < comboComplex->count(); i++ )
-        if( comboComplex->text( i ).toLower() == bcode->databaseMode().toLower() )
+        if( comboComplex->itemText( i ).toLower() == bcode->databaseMode().toLower() )
             comboComplex->setCurrentIndex( i );
 
     changedCombo();
@@ -352,11 +354,11 @@ PropertySize::PropertySize( QWidget* parent )
 	box_layout->addWidget(checkLock);
     numTop = new KDoubleNumInput( low, max, 0.0, box, 0.2, 3 );
     box_layout->addWidget(numTop);
-    numLeft = new KDoubleNumInput( numTop, low, max, 0.0, box, 0.2, 3 );
+    numLeft = new KDoubleNumInput( low, max, 0.0, box, 0.2, 3 );
     box_layout->addWidget(numLeft);
-    numHeight = new KDoubleNumInput( numLeft, low, max, 0.0, box, 0.2, 3 );
+    numHeight = new KDoubleNumInput( low, max, 0.0, box, 0.2, 3 );
     box_layout->addWidget(numHeight);
-    numWidth = new KDoubleNumInput( numHeight, low, max, 0.0, box, 0.2, 3 );
+    numWidth = new KDoubleNumInput( low, max, 0.0, box, 0.2, 3 );
     box_layout->addWidget(numWidth);
     
     numTop->setSuffix( Measurements::system() );
@@ -499,7 +501,7 @@ PropertyImage::PropertyImage( TokenProvider* token, QWidget* parent )
 	imgHBox_layout->addWidget(imgExpression);
     buttonToken = new KPushButton( i18n("&Insert Data Field..."));
 	imgHBox_layout->addWidget(buttonToken);
-    buttonToken->setIconSet( QIcon( SmallIcon("contents") ) );
+    buttonToken->setIcon( KIcon("contents") );
 
     comboRotation->addItem( i18n("0") );
     comboRotation->addItem( i18n("90") );
@@ -519,12 +521,12 @@ PropertyImage::PropertyImage( TokenProvider* token, QWidget* parent )
     checkMirrorH = new QCheckBox( i18n("Mirror &Horizontaly"), this );
     checkMirrorV = new QCheckBox( i18n("Mirror &Vertically"), this );
 
-    grid->addMultiCellWidget( groupFile, 0, 1, 0, 1 );    
-    grid->addMultiCellWidget( group, 2, 3, 0, 1 );
+    grid->addWidget( groupFile, 0, 0, 2, 2 );
+    grid->addWidget( group, 2, 0, 2, 2 );
     grid->addWidget( label, 4, 0 );
     grid->addWidget( comboRotation, 4, 1 );
-    grid->addMultiCellWidget( checkMirrorH, 5, 5, 0, 1 );
-    grid->addMultiCellWidget( checkMirrorV, 6, 6, 0, 1 );
+    grid->addWidget( checkMirrorH, 5, 0, 1, 2 );
+    grid->addWidget( checkMirrorV, 6, 0, 1, 2 );
 
     connect( radioImageExpression, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
     connect( radioImagePath, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
@@ -556,11 +558,11 @@ void PropertyImage::applySettings( DocumentItem* item, K3MacroCommand* command )
     else if( radioScaled->isChecked() )
         scaling = eImage_Scaled;
     
-    if( comboRotation->currentItem() == 1 )
+    if( comboRotation->currentIndex() == 1 )
         rot = 90.0;
-    else if( comboRotation->currentItem() == 2 )
+    else if( comboRotation->currentIndex() == 2 )
         rot = 180.0;
-    else if( comboRotation->currentItem() ==  3 )
+    else if( comboRotation->currentIndex() ==  3 )
         rot = 270.0;
         
     PictureCommand* pc = new PictureCommand( rot, checkMirrorH->isChecked(), checkMirrorV->isChecked(), scaling, img );
@@ -636,13 +638,13 @@ PropertyVisible::PropertyVisible( QWidget* parent )
     m_script = new KTextEdit( this );
 
     grid->addWidget( label, 0, 0 );
-    grid->addMultiCellWidget( m_script, 1, 8, 0, 2 );
+    grid->addWidget( m_script, 1, 0, 8, 3 );
 }
 
 void PropertyVisible::applySettings( DocumentItem* item, K3MacroCommand* command )
 {
     TCanvasItem* canvasItem = item->canvasItem();
-    ScriptCommand* sc = new ScriptCommand( m_script->text(), canvasItem );
+    ScriptCommand* sc = new ScriptCommand( m_script->toPlainText(), canvasItem );
     sc->execute();
     command->addCommand( sc);
 }
