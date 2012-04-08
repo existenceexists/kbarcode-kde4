@@ -465,22 +465,25 @@ bool LabelEditor::newLabel()
 
 void LabelEditor::setupActions()
 {
-    KAction* newAct = KStandardAction::openNew( this, SLOT(startEditor()), actionCollection() );
+    /*KAction* newAct = KStandardAction::openNew( this, SLOT(startEditor()), actionCollection() );
     KAction* loadAct = KStandardAction::open( this, SLOT(startLoadEditor()), actionCollection() );
-    KAction* quitAct = KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
+    KAction* quitAct = KStandardAction::quit(kapp, SLOT(quit()), actionCollection());*/// -!F: original, delete
+    KStandardAction::openNew( this, SLOT(startEditor()), actionCollection() );
+    KStandardAction::open( this, SLOT(startLoadEditor()), actionCollection() );
+    KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
     /*KAction* closeAct = KStandardAction::close( this, SLOT( close() ), actionCollection(), "close" );*/// -!F: original, delete
-    KAction* closeAct = KStandardAction::close( this, SLOT( close() ), actionCollection() );
+    KStandardAction::close( this, SLOT( close() ), actionCollection() );
     /*closeLabelAct = new KAction( i18n("Close &Label" ), 0, 0, this, SLOT( closeLabel() ), actionCollection() );*/// -!F: original, delete
     closeLabelAct = new KAction( this );
     closeLabelAct->setText( i18n("Close &Label") );
     actionCollection()->addAction( "closeLabelAct", closeLabelAct );
     connect( closeLabelAct, SIGNAL(triggered(bool)), this, SLOT(closeLabel()) );
 
-    /*recentAct = new KRecentFilesAction( i18n("&Recent Files"), 0, this, SLOT( loadRecentEditor( const KUrl& ) ) );*/// -!F: original, delete
+    /*recentAct = new KRecentFilesAction( i18n("&Recent Files"), 0, this, SLOT( loadRecentEditor( const KUrl& ) ) );*/// -!F: original, keep
     recentAct = new KRecentFilesAction( this );
     recentAct->setText( i18n("&Recent Files") );
     actionCollection()->addAction( "recentAct", recentAct );
-    connect( recentAct, SIGNAL(triggered(bool)), this, SLOT(loadRecentEditor( const KUrl& )) );
+    /*connect( recentAct, SIGNAL(triggered(bool)), this, SLOT(loadRecentEditor( const KUrl& )) );*/// -!F: There is no slot loadRecentEditor(). See the previous line that is commented out.
 
     /*KAction* importPrintFileAct = new KAction( i18n("&Import and Print Batch File..."), BarIconSet( "fileprint" ), 0, this, SLOT( batchPrint() ), actionCollection() );*/// -!F: original, delete
     KAction* importPrintFileAct = new KAction( this );
@@ -575,7 +578,7 @@ void LabelEditor::setupActions()
     circleAct->setText( i18n("Insert &Ellipse") );
     circleAct->setIcon( KIcon( "kbarcodeellipse" ) );
     actionCollection()->addAction( "circleAct", circleAct );
-    connect( circleAct, SIGNAL(triggered(bool)), this, SLOT(insertCircles()) );
+    connect( circleAct, SIGNAL(triggered(bool)), this, SLOT(insertCircle()) );
     /*spellAct = KStandardAction::spelling( this, SLOT(spellCheck()), actionCollection(), "spell" );*/// -!F: original, delete
     spellAct = KStandardAction::spelling( this, SLOT(spellCheck()), actionCollection() );
     /*gridAct = new KToggleAction( i18n("&Grid"), QIcon( BarIcon("kbarcodegrid") ), 0, this, SLOT( toggleGrid() ), actionCollection() );*/// -!F: original, delete
