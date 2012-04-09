@@ -63,10 +63,16 @@ PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename
     
     QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
 
-    QHBoxLayout* Layout = new QHBoxLayout( this, 6, 6 );
-    QVBoxLayout* vbox = new QVBoxLayout( 0, 6, 6 );
-    QVBoxLayout* buttons = new QVBoxLayout( 0, 6, 6 );
-    QGridLayout* grid = new QGridLayout( 0 );
+    QHBoxLayout* Layout = new QHBoxLayout( this );
+    Layout->setContentsMargins( 6, 6, 6, 6 );
+    Layout->setSpacing( 6 );
+    QVBoxLayout* vbox = new QVBoxLayout();
+    vbox->setContentsMargins( 6, 6, 6, 6 );
+    vbox->setSpacing( 6 );
+    QVBoxLayout* buttons = new QVBoxLayout();
+    buttons->setContentsMargins( 6, 6, 6, 6 );
+    buttons->setSpacing( 6 );
+    QGridLayout* grid = new QGridLayout();
 
     customerName = new KComboBox( false, this );
     customerId = new KComboBox( false, this );
@@ -84,13 +90,15 @@ PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename
     }
 
     spinIndex = new KIntNumInput( this );
-    spinIndex->setRange( 1, 100000, 1, false );
+    spinIndex->setRange( 1, 100000, 1 );
+    spinIndex->setSliderEnabled( false );
     spinIndex->setValue( m_index );
 
     serialStart = new KLineEdit( this );
 
     serialInc = new KIntNumInput( this );
-    serialInc->setRange( 1, 10000, 1, false );
+    serialInc->setRange( 1, 10000, 1 );
+    serialInc->setSliderEnabled( false );
 
     lineAddr = new KLineEdit( this );
     lineAddr->setReadOnly( true );
@@ -99,21 +107,21 @@ PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename
 
     buttonUpdate = new KPushButton( i18n("&Update"), this );
     buttonClose = new KPushButton( i18n("&Close"), this );
-    buttonClose->setIconSet( SmallIconSet("fileclose") );
+    buttonClose->setIcon( KIcon("fileclose") );
     
     grid->addWidget( new QLabel( i18n("Customer Name and No.:"), this ), 0, 0 );
     grid->addWidget( customerName, 0, 1 );
     grid->addWidget( customerId, 0, 2 );
     grid->addWidget( new QLabel( i18n("Article Number:"), this ), 1, 0 );
-    grid->addMultiCellWidget( articleId, 1, 1, 1, 2 );
+    grid->addWidget( articleId, 1, 1, 1, 2 );
     grid->addWidget( new QLabel( i18n("Group:"), this ), 2, 0 );
-    grid->addMultiCellWidget( groupName, 2, 2, 1, 2 );
+    grid->addWidget( groupName, 2, 1, 1, 2 );
     grid->addWidget( new QLabel( i18n("Index:"), this ), 3, 0 );
-    grid->addMultiCellWidget( spinIndex, 3, 3, 1, 2 );
+    grid->addWidget( spinIndex, 3, 1, 1, 2 );
     grid->addWidget( new QLabel( i18n("Serial start:"), this ), 4, 0 );
-    grid->addMultiCellWidget( serialStart, 4, 4, 1, 2 );
+    grid->addWidget( serialStart, 4, 1, 1, 2 );
     grid->addWidget( new QLabel( i18n( "Serial increment:" ), this ), 5, 0 );
-    grid->addMultiCellWidget( serialInc, 5, 5, 1, 2 );
+    grid->addWidget( serialInc, 5, 1, 1, 2 );
     grid->addWidget( new QLabel( i18n( "Addressbook entry:" ), this ), 6, 0 );
     grid->addWidget( lineAddr, 6, 1 );
     grid->addWidget( buttonAddr, 6, 2 );
@@ -211,7 +219,7 @@ void PreviewDialog::updatechanges()
     // next time the dialog is shown
     group = groupName->text();
     article = articleId->text();
-    customer_index = customerId->currentItem();
+    customer_index = customerId->currentIndex();
     m_index = spinIndex->value();
 }
 

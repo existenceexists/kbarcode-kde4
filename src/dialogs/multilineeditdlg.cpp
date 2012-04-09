@@ -46,7 +46,9 @@
 MultiLineEditor::MultiLineEditor( TokenProvider* token, QWidget *parent )
     : QWidget( parent ), m_token( token )
 {
-    QVBoxLayout* layout = new QVBoxLayout( this, 6, 6 );
+    QVBoxLayout* layout = new QVBoxLayout( this );
+    layout->setContentsMargins( 6, 6, 6, 6 );
+    layout->setSpacing( 6 );
 
 //    ksc = new KSpellConfig( this );
 
