@@ -51,7 +51,7 @@ void fillLineCombo( KComboBox* box )
         p.drawLine( 5, 10, 55, 10 );
         p.end();
 
-        box->insertItem( pixmap );
+        box->addItem( QIcon( pixmap ), QString() );
     }
 }
 
@@ -65,7 +65,7 @@ RectSettingsDlg::RectSettingsDlg(QWidget *parent )
     /*QFrame* frame = plainPage();*/// -!F: original, delete
     QWidget *frame = new QWidget( this );
     setMainWidget( frame );
-    QGridLayout* grid = new QGridLayout( frame, 6, 6 );
+    QGridLayout* grid = new QGridLayout( frame );
     QSpacerItem* spacer = new QSpacerItem( 0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum );
 
     
@@ -73,7 +73,8 @@ RectSettingsDlg::RectSettingsDlg(QWidget *parent )
     buttonFill = new KColorButton( frame );
 
     spinWidth = new KIntNumInput( frame );
-    spinWidth->setRange( 1, 100, 1, false );
+    spinWidth->setRange( 1, 100, 1 );
+    spinWidth->setSliderEnabled( false );
 
     comboLine = new KComboBox( false, frame );
     fillLineCombo( comboLine );
@@ -148,7 +149,7 @@ int RectSettingsDlg::borderWidth() const
 
 int RectSettingsDlg::penStyle() const
 {
-    return checkBorder->isChecked() ? comboLine->currentItem() + 1 : 0;
+    return checkBorder->isChecked() ? comboLine->currentIndex() + 1 : 0;
 }
 
 LineSettingsDlg::LineSettingsDlg(QWidget *parent )
@@ -161,12 +162,13 @@ LineSettingsDlg::LineSettingsDlg(QWidget *parent )
     /*QFrame* frame = plainPage();*/// -!F: original, delete
     QWidget *frame = new QWidget( this );
     setMainWidget( frame );
-    QGridLayout* grid = new QGridLayout( frame, 6, 6 );
+    QGridLayout* grid = new QGridLayout( frame );
 
     buttonColor = new KColorButton( frame );
 
     spinWidth = new KIntNumInput( frame );
-    spinWidth->setRange( 1, 100, 1, false );
+    spinWidth->setRange( 1, 100, 1 );
+    spinWidth->setSliderEnabled( false );
 
     comboLine = new KComboBox( false, frame );
     fillLineCombo( comboLine );    
@@ -185,7 +187,7 @@ LineSettingsDlg::~LineSettingsDlg()
 
 QPen LineSettingsDlg::pen() const
 {
-    return QPen( buttonColor->color(), spinWidth->value(), (Qt::PenStyle)(comboLine->currentItem() + 1) );
+    return QPen( buttonColor->color(), spinWidth->value(), (Qt::PenStyle)(comboLine->currentIndex() + 1) );
 }
 
 void LineSettingsDlg::setPen( const QPen p )
