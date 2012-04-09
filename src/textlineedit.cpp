@@ -41,9 +41,9 @@
 TextLineEditor::TextLineEditor( TokenProvider* token, QWidget *parent )
     : QWidget( parent ), m_token( token )
 {
-    QVBoxLayout* layout = new QVBoxLayout( this, 6, 6 );
-
-
+    QVBoxLayout* layout = new QVBoxLayout( this );
+    layout->setContentsMargins( 6, 6, 6, 6 );
+    layout->setSpacing( 6 );
 
 #if QT_VERSION >= 0x030100
     editor = new KLineEdit( this );
@@ -140,7 +140,7 @@ void TextLineEditor::setupActions()
 
     action_font_type = new KComboBox(tool2Bar) ;
     connect( action_font_type, SIGNAL( activated(int) ), this, SLOT( setFontType(int) ) );
-    action_font_type->insertStringList(fuentes) ;
+    action_font_type->addItems(fuentes) ;
     
     
     
@@ -150,8 +150,10 @@ void TextLineEditor::setupActions()
     mag_hor = new KIntNumInput( tool3Bar );
     connect( mag_vert, SIGNAL( activated(int) ), this, SLOT( setVerMag(int) ) );
     connect( mag_hor, SIGNAL( activated(int) ), this, SLOT( setHorMag(int) ) );  
-    mag_vert->setRange( 1, 9, 1, false );
-    mag_hor->setRange( 1, 9, 1, false );
+    mag_vert->setRange( 1, 9, 1 );
+    mag_vert->setSliderEnabled( false );
+    mag_hor->setRange( 1, 9, 1 );
+    mag_vert->setSliderEnabled( false );
         
        
     labelv->setBuddy( mag_vert );
@@ -195,7 +197,7 @@ void TextLineEditor::setFontType( int index )
 
 int TextLineEditor::getFontType()
 {    
-    return action_font_type->currentItem();
+    return action_font_type->currentIndex();
 }
 void TextLineEditor::setVertMag( int index )
 {    
