@@ -1288,6 +1288,8 @@ void LabelEditor::setEdited()
     } else {
         undoAct->setEnabled( false );
     }
+    
+    enableActions();
 }
 
 void LabelEditor::enableActions()
