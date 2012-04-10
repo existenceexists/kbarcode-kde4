@@ -24,6 +24,8 @@
 
 #include <QString>
 #include <QtDebug>
+#include <QImage>
+#include <QVariant>
 
 #include "kbarcode.h"
 /*#include "labeleditor.h"
@@ -56,7 +58,10 @@ void setupDirs()
 
 int main(int argc, char *argv[])
 {
-    KAboutData aboutData( "kbarcode016", "kbarcode", ki18n("KBarcode"), VERSION,
+    char charApplicationFileName[] = "kbarcode016";// The name of the final executable file.
+    QString applicationFileName( charApplicationFileName );
+    
+    KAboutData aboutData( charApplicationFileName, "kbarcode", ki18n("KBarcode"), VERSION,
             ki18n("KBarcode4 is a barcode and label printing application for KDE 4."),
             KAboutData::License_GPL, ki18n("(c) 2001-2008, Dominik Seichter"), KLocalizedString(),
         "http://www.kbarcode.net", "kbarcode-users@lists.sourceforge.net" );
@@ -86,6 +91,9 @@ int main(int argc, char *argv[])
     aboutData.addCredit(ki18n("John Volpe"), ki18n("Added lot's of useful data fields to kbarcode"), "jtvolpe@cape.com" );
     aboutData.addCredit(ki18n("Nyssa s.r.l."), ki18n("Added TEC barcode printer support"), "imorrison@nyssa.com.ar", "http://www.nyssa.com.ar" );
     aboutData.addCredit(ki18n("Brian Glass"), ki18n("Added EPCL barcode printer support"), "brian@glassbrian.com", "http://www.glassbrian.com" );
+    
+    aboutData.setProgramIconName( KStandardDirs::locate("data", applicationFileName + QString( "/hi16-app-kbarcode.png" ) ) );
+    aboutData.setProgramLogo( QImage( KStandardDirs::locate("data", applicationFileName + QString( "/logo.png" ) ), "PNG" ) );
 
     KCmdLineArgs::init( argc, argv, &aboutData );
     

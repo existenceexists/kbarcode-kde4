@@ -107,7 +107,7 @@ PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename
 
     buttonUpdate = new KPushButton( i18n("&Update"), this );
     buttonClose = new KPushButton( i18n("&Close"), this );
-    buttonClose->setIcon( KIcon("fileclose") );
+    buttonClose->setIcon( KIcon("dialog-close") );
     
     grid->addWidget( new QLabel( i18n("Customer Name and No.:"), this ), 0, 0 );
     grid->addWidget( customerName, 0, 1 );

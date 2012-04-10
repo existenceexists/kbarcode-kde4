@@ -143,6 +143,8 @@ LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f,
     : MainWindow( parent, f )
 {
     setAttribute( waf );
+    setWindowIcon( KIcon( KStandardDirs::locate( "appdata", QString( "hi16-app-kbarcode.png" ) ) ) );// -!F: 
+    
     
     undoAct = redoAct = NULL;
     history = NULL;
@@ -488,7 +490,7 @@ void LabelEditor::setupActions()
     /*KAction* importPrintFileAct = new KAction( i18n("&Import and Print Batch File..."), BarIconSet( "fileprint" ), 0, this, SLOT( batchPrint() ), actionCollection() );*/// -!F: original, delete
     KAction* importPrintFileAct = new KAction( this );
     importPrintFileAct->setText( i18n("&Import and Print Batch File...") );
-    importPrintFileAct->setIcon( KIcon( "fileprint" ) );
+    importPrintFileAct->setIcon( KIcon( "document-print" ) );
     actionCollection()->addAction( "importPrintFileAct", importPrintFileAct );
     connect( importPrintFileAct, SIGNAL(triggered(bool)), this, SLOT(batchPrint()) );
 
@@ -504,7 +506,7 @@ void LabelEditor::setupActions()
     /*deleteAct = new KAction( i18n("&Delete Object"), QIcon( BarIcon("editdelete") ), Qt::Key_Delete, cv, SLOT( deleteCurrent() ), actionCollection() );*/// -!F: original, delete
     deleteAct = new KAction( this );
     deleteAct->setText( i18n("&Delete Object") );
-    deleteAct->setIcon( KIcon( "editdelete" ) );
+    deleteAct->setIcon( KIcon( "edit-delete" ) );
     deleteAct->setShortcut( Qt::Key_Delete );
     actionCollection()->addAction( "deleteAct", deleteAct );
     connect( deleteAct, SIGNAL(triggered(bool)), cv, SLOT(deleteCurrent()) );
@@ -533,6 +535,7 @@ void LabelEditor::setupActions()
     /*barcodeAct = new KAction( i18n("Insert &Barcode"), QIcon( BarIcon("barcode") ), 0, this, SLOT( insertBarcode() ), actionCollection() );*/// -!F: original, delete
     barcodeAct = new KAction( this );
     barcodeAct->setText( i18n("Insert &Barcode") );
+    barcodeAct->setIcon( KIcon( "view-barcode-add" ) );
     actionCollection()->addAction( "barcodeAct", barcodeAct );
     connect( barcodeAct, SIGNAL(triggered(bool)), this, SLOT(insertBarcode()) );
     barcodeAct->setEnabled( Barkode::haveBarcode() );
@@ -540,49 +543,51 @@ void LabelEditor::setupActions()
     /*pictureAct = new KAction( i18n("Insert &Picture"), QIcon( BarIcon("inline_image") ), 0, this, SLOT( insertPicture() ), actionCollection() );*/// -!F: original, delete
     pictureAct = new KAction( this );
     pictureAct->setText( i18n("Insert &Picture") );
-    pictureAct->setIcon( KIcon( "inline_image" ) );
+    pictureAct->setIcon( KIcon( "insert-image" ) );
     actionCollection()->addAction( "pictureAct", pictureAct );
     connect( pictureAct, SIGNAL(triggered(bool)), this, SLOT(insertPicture()) );
     /*textAct = new KAction( i18n("Insert &Text"), QIcon( BarIcon("text") ), 0, this, SLOT( insertText() ), actionCollection() );*/// -!F: original, delete
     textAct = new KAction( this );
     textAct->setText( i18n("Insert &Text") );
-    textAct->setIcon( KIcon( "text" ) );
+    textAct->setIcon( KIcon( "text-field" ) );
     actionCollection()->addAction( "textAct", textAct );
     connect( textAct, SIGNAL(triggered(bool)), this, SLOT(insertText()) );
     /*textDataAct = new KAction( i18n("Insert &Data Field"), QIcon( BarIcon("contents") ), 0, this, SLOT( insertDataText() ), actionCollection() );*/// -!F: original, delete
     textDataAct = new KAction( this );
     textDataAct->setText( i18n("Insert &Data Field") );
-    textDataAct->setIcon( KIcon( "contents" ) );
+    textDataAct->setIcon( KIcon( "view-table-of-contents-ltr" ) );
+    /*textDataAct->setIcon( KIcon( "code-context" ) );*/// -!F: added, keep
     actionCollection()->addAction( "textDataAct", textDataAct );
     connect( textDataAct, SIGNAL(triggered(bool)), this, SLOT(insertDataText()) );
     /*textLineAct = new KAction( i18n("Insert &Text Line"), QIcon( BarIcon("text") ), 0, this, SLOT( insertTextLine() ), actionCollection() );*/// -!F: original, delete
     textLineAct = new KAction( this );
     textLineAct->setText( i18n("Insert &Text Line") );
-    textLineAct->setIcon( KIcon( "text" ) );
+    /*textLineAct->setIcon( KIcon( "text-plain" ) );*/// -!F: added, keep
+    textLineAct->setIcon( KIcon( "insert-text" ) );
     actionCollection()->addAction( "textLineAct", textLineAct );
     connect( textLineAct, SIGNAL(triggered(bool)), this, SLOT(insertTextLine()) );
     /*lineAct = new KAction( i18n("Insert &Line"), QIcon( BarIcon("kbarcodelinetool") ), 0, this, SLOT( insertLine() ), actionCollection() );*/// -!F: original, delete
     lineAct = new KAction( this );
     lineAct->setText( i18n("Insert &Line") );
-    lineAct->setIcon( KIcon( "kbarcodelinetool" ) );
+    lineAct->setIcon( KIcon( KStandardDirs::locate( "appdata", "hi16-action-kbarcodelinetool.png" ) ) );
     actionCollection()->addAction( "lineAct", lineAct );
     connect( lineAct, SIGNAL(triggered(bool)), this, SLOT(insertLine()) );
     /*rectAct = new KAction( i18n("Insert &Rectangle"), QIcon( BarIcon("kbarcoderect") ), 0, this, SLOT( insertRect() ), actionCollection() );*/// -!F: original, delete
     rectAct = new KAction( this );
     rectAct->setText( i18n("Insert &Rectangle") );
-    rectAct->setIcon( KIcon( "kbarcoderect" ) );
+    rectAct->setIcon( KIcon( KStandardDirs::locate( "appdata", "hi32-action-kbarcoderect.png" ) ) );
     actionCollection()->addAction( "rectAct", rectAct );
     connect( rectAct, SIGNAL(triggered(bool)), this, SLOT(insertRect()) );
     /*circleAct = new KAction( i18n("Insert &Ellipse"), QIcon( BarIcon("kbarcodeellipse") ), 0, this, SLOT( insertCircle() ), actionCollection() );*/// -!F: original, delete
     circleAct = new KAction( this );
     circleAct->setText( i18n("Insert &Ellipse") );
-    circleAct->setIcon( KIcon( "kbarcodeellipse" ) );
+    circleAct->setIcon( KIcon( KStandardDirs::locate( "appdata", "hi16-action-kbarcodeellipse.png" ) ) );
     actionCollection()->addAction( "circleAct", circleAct );
     connect( circleAct, SIGNAL(triggered(bool)), this, SLOT(insertCircle()) );
     /*spellAct = KStandardAction::spelling( this, SLOT(spellCheck()), actionCollection(), "spell" );*/// -!F: original, delete
     spellAct = KStandardAction::spelling( this, SLOT(spellCheck()), actionCollection() );
     /*gridAct = new KToggleAction( i18n("&Grid"), QIcon( BarIcon("kbarcodegrid") ), 0, this, SLOT( toggleGrid() ), actionCollection() );*/// -!F: original, delete
-    gridAct = new KToggleAction( KIcon("kbarcodegrid"), i18n("&Grid"), this );
+    gridAct = new KToggleAction( KIcon( KStandardDirs::locate( "appdata", "hi16-action-kbarcodegrid.png" ) ), i18n("&Grid"), this );
     actionCollection()->addAction( "gridAct", gridAct );
     connect( gridAct, SIGNAL(triggered(bool)), this, SLOT(toggleGrid()) );
     /*previewAct = new KAction( i18n("&Preview..."), 0, 0, this, SLOT( preview() ), actionCollection() );*/// -!F: original, delete
@@ -736,7 +741,7 @@ void LabelEditor::setupContextMenu()
     centerMenu->addAction( i18n("Center &Vertically"), this, SLOT( centerVertical() ) );
 
     m_mnuContext->addSeparator();
-    m_mnuContext->addAction( KIcon("editdelete"), i18n("&Delete"), cv, SLOT( deleteCurrent() ) );
+    m_mnuContext->addAction( KIcon("edit-delete"), i18n("&Delete"), cv, SLOT( deleteCurrent() ) );
     /*m_mnuContext->insertItem( i18n("&Protect Position and Size"), this, SLOT( lockItem() ), 0, ID_LOCK_ITEM );*/// -!F: original, delete
     QAction * protectAction = m_mnuContext->addAction( i18n("&Protect Position and Size"), this, SLOT( lockItem() ) );
     protectAction->setCheckable( true );
