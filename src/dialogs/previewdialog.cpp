@@ -29,6 +29,7 @@
 #include <q3scrollview.h>
 #include <q3sqlcursor.h>
 #include <QPaintDevice>
+#include <QDesktopWidget>
 //Added by qt3to4:
 #include <QHBoxLayout>
 #include <QGridLayout>
@@ -204,7 +205,7 @@ void PreviewDialog::updatechanges()
 
     QPainter painter( &pix );
     
-    Label* l = new Label( def, file, m_filename, (QPaintDevice*) KApplication::desktop(),
+    Label* l = new Label( def, file, m_filename, KApplication::desktop(),
         customerId->currentText(), articleId->text(), groupName->text() );
     l->setIndex( spinIndex->value() - 1 );
     l->setSerial( serialStart->text(), serialInc->value() );
