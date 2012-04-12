@@ -129,7 +129,7 @@ PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename
     Q3ScrollView* sv = new Q3ScrollView( this );
 
     preview = new QLabel( sv->viewport() );
-    sv->addChild( preview );
+    /*sv->addChild( preview );*/
     
     QPixmap pix( (int)d->getMeasurements().width( this ), (int)d->getMeasurements().height( this ) );
     pix.fill( Qt::white );
