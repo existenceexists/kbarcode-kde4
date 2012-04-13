@@ -129,7 +129,7 @@ PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename
     Q3ScrollView* sv = new Q3ScrollView( this );
 
     preview = new QLabel( sv->viewport() );
-    /*sv->addChild( preview );*/
+    /*sv->addChild( preview );*/// This line causes a badly displayed preview.
     
     QPixmap pix( (int)d->getMeasurements().width( this ), (int)d->getMeasurements().height( this ) );
     pix.fill( Qt::white );
@@ -147,11 +147,11 @@ PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename
 
     connect( buttonClose, SIGNAL( clicked() ), this, SLOT( reject() ) );
     connect( buttonAddr, SIGNAL( clicked() ), this, SLOT( selectAddress() ) );
-    // TODO:
+    // TODO: ... Done.
     // remove this ugly hack! The finished label is only shown when I call
-    // updateChanges() twice. I have no idea why!
+    // updateChanges() twice. I have no idea why! ... Fixed. No need to call it twice now.
     connect( buttonUpdate, SIGNAL( clicked() ), this, SLOT( updatechanges() ) );
-    connect( buttonUpdate, SIGNAL( clicked() ), this, SLOT( updatechanges() ) );
+    /*connect( buttonUpdate, SIGNAL( clicked() ), this, SLOT( updatechanges() ) );*/// -!F: original, delete
     // end ugly hack
     
     connect( customerName, SIGNAL( activated(int) ), this, SLOT( customerNameChanged(int) ) );
