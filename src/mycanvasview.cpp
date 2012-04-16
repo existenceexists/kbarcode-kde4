@@ -459,7 +459,7 @@ void MyCanvasView::reposition()
     int w = ( this->width() - 2 > def->getMeasurements().width( this ) ? this->width() - 2 : int(def->getMeasurements().width( this ) + 60) );
     int h = ( this->height() - 2 > def->getMeasurements().height( this ) ? this->height() - 2 : int(def->getMeasurements().height( this ) + 60) );
 
-    resize( w, h );
+    scene()->setSceneRect( 0, 0, w, h );
     
     
     translation = QPoint( x, y );

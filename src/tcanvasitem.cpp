@@ -201,7 +201,7 @@ void TCanvasItem::show()
     if (!isVisible())
     {
         this->addRef();
-        ((Q3CanvasItem*) this)->show();
+        ((QGraphicsItem*) this)->show();
     }
 }
 
@@ -218,7 +218,7 @@ void TCanvasItem::hide()
     {
         if (isVisible())
         {
-            ((Q3CanvasItem*) this)->hide(); 
+            ((QGraphicsItem*) this)->hide(); 
             this->remRef();
         }
     }
