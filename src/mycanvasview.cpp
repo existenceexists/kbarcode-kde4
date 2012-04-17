@@ -29,6 +29,8 @@
 #include <QBrush>
 #include <QRectF>
 
+#include <QDebug>// -!F: delete
+
 // KDE includes
 #include <kruler.h>
 #include <kstatusbar.h>
@@ -47,32 +49,32 @@ MyCanvas::~MyCanvas()
 {
 }
 
-void MyCanvas::drawBackground( QPainter & painter, const QRect & clip )
+void MyCanvas::drawBackground( QPainter * painter, const QRectF & rect )
 {
-    QGraphicsScene::drawBackground( & painter, clip );
+    QGraphicsScene::drawBackground( painter, rect );
 
     QRect shadow1( int(m_rect.x() + m_rect.width()), m_rect.y() + 5, 5, m_rect.height() );
     QRect shadow2( m_rect.x()+ 5, int(m_rect.y() + m_rect.height()), m_rect.width(), 5 );
 
     // draw background shadow
-    if( clip.intersects( shadow1 ) )
-        painter.fillRect( shadow1, Qt::black );
+    if( rect.intersects( shadow1 ) )
+        painter->fillRect( shadow1, Qt::black );
 
-    if( clip.intersects( shadow2 ) )
-        painter.fillRect( shadow2, Qt::black );
+    if( rect.intersects( shadow2 ) )
+        painter->fillRect( shadow2, Qt::black );
 
-    if( clip.intersects( m_rect ) ) {
-        painter.fillRect( m_rect, Qt::white );
+    if( rect.intersects( m_rect ) ) {
+        painter->fillRect( m_rect, Qt::white );
 
         if( m_grid ) {
-            painter.translate( m_rect.x(), m_rect.y() );
+            painter->translate( m_rect.x(), m_rect.y() );
 
-            painter.setPen( QPen( KBarcodeSettings::getInstance()->gridColor(), 0 ) );
+            painter->setPen( QPen( KBarcodeSettings::getInstance()->gridColor(), 0 ) );
 	    for( int y = 0; y <= m_rect.height(); y += KBarcodeSettings::getInstance()->gridSize() ) 
 		for( int x = 0; x <= m_rect.width(); x += KBarcodeSettings::getInstance()->gridSize() )
-		    painter.drawPoint( x, y );
+		    painter->drawPoint( x, y );
 
-            painter.translate( -m_rect.x(), -m_rect.y() );
+            painter->translate( -m_rect.x(), -m_rect.y() );
         }
     }
 }

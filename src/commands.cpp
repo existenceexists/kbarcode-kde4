@@ -138,7 +138,8 @@ void NewItemCommand::execute()
 
     if( m_item )
     {
-        /*m_item->setCanvas( cv->canvas() );*/// -!F: original, What is the QGraphicsItem equivalent of this?
+        /*m_item->setCanvas( cv->canvas() );*/// -!F: original, done: What is the QGraphicsItem equivalent of this?
+        cv->scene()->addItem( m_item );
         m_item->show();
         m_item->update();
         cv->setCurrent( m_item );
@@ -148,7 +149,8 @@ void NewItemCommand::execute()
 void NewItemCommand::unexecute()
 {
     if( m_item ) {
-        /*m_item->setCanvas( NULL );*/// -!F: original, What is the QGraphicsItem equivalent of this?
+        /*m_item->setCanvas( NULL );*/// -!F: original, done: What is the QGraphicsItem equivalent of this?
+        cv->scene()->removeItem( m_item );
         m_item->hide();
     }
 }
