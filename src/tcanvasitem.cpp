@@ -105,52 +105,52 @@ void TCanvasItem::moveMM( int x, int y )
     }
 }
 
-void TCanvasItem::drawShape (QPainter & painter) 
+void TCanvasItem::paint( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget )
 {   
-    painter.save();
+    painter->save();
     
     if( m_item )
     {
         if( zValue() != (int)m_item->z() )
             QGraphicsRectItem::setZValue( m_item->z() );
         
-        painter.save();
+        painter->save();
         /*painter.setClipRect( boundingRect(), QPainter::CoordPainter );*/
-	painter.setClipRect( boundingRect() );
-        painter.translate( m_view->getTranslation().x(), m_view->getTranslation().y() );
-        m_item->draw( &painter );
-        painter.restore();
+	painter->setClipRect( boundingRect() );
+        painter->translate( m_view->getTranslation().x(), m_view->getTranslation().y() );
+        m_item->draw( painter );
+        painter->restore();
     }
     
     // draw edges
     if( isSelected() ) {
         const QPixmap* spot = SpotProvider::getInstance()->spot();
-        painter.translate( x(), y() );
+        painter->translate( x(), y() );
 
         // top left
-        painter.drawPixmap( 0, 0, *spot );
+        painter->drawPixmap( 0, 0, *spot );
         // bottom left
-        painter.drawPixmap( 0, rect().height()-SPOTSIZE, *spot );
+        painter->drawPixmap( 0, rect().height()-SPOTSIZE, *spot );
         // top right
-        painter.drawPixmap( rect().width()-SPOTSIZE, 0, *spot );
+        painter->drawPixmap( rect().width()-SPOTSIZE, 0, *spot );
         // bottom left
-        painter.drawPixmap( rect().width()-SPOTSIZE, rect().height()-SPOTSIZE, *spot );
+        painter->drawPixmap( rect().width()-SPOTSIZE, rect().height()-SPOTSIZE, *spot );
 
         if( (rect().width() - 2 * SPOTSIZE ) / 2 > SPOTSIZE ) {
             // top middle
-            painter.drawPixmap( (rect().width()-SPOTSIZE)/2, 0, *spot );
+            painter->drawPixmap( (rect().width()-SPOTSIZE)/2, 0, *spot );
             // bottom middle
-            painter.drawPixmap( (rect().width()-SPOTSIZE)/2, rect().height()-SPOTSIZE, *spot );
+            painter->drawPixmap( (rect().width()-SPOTSIZE)/2, rect().height()-SPOTSIZE, *spot );
         }
 
         if( (rect().height() - 2 * SPOTSIZE ) / 2 > SPOTSIZE ) {
             // left middle
-            painter.drawPixmap( 0, (rect().height()-SPOTSIZE)/2, *spot );
+            painter->drawPixmap( 0, (rect().height()-SPOTSIZE)/2, *spot );
             // right middle
-            painter.drawPixmap( rect().width() - SPOTSIZE, (rect().height()-SPOTSIZE)/2, *spot );
+            painter->drawPixmap( rect().width() - SPOTSIZE, (rect().height()-SPOTSIZE)/2, *spot );
         }
     }
-    painter.restore();
+    painter->restore();
 }
 
 void TCanvasItem::setItem (DocumentItem* item) 

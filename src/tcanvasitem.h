@@ -50,7 +50,7 @@ protected:
      * 
      * @param painter 
      */
-    void drawShape ( QPainter & p );
+    void paint( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0 );
 
 private:
     DocumentItem* m_item;
