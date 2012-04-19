@@ -29,9 +29,10 @@ TCanvasItem::TCanvasItem( MyCanvasView* cv )
     : QGraphicsRectItem(),
       ReferenceCounted()
 {
+    setFlag ( QGraphicsItem::ItemIsSelectable, true );
     m_view = cv;
     m_item = NULL;
-    active = false;
+    active = true;
     show();
 }
 
@@ -201,7 +202,8 @@ void TCanvasItem::show()
     if (!isVisible())
     {
         this->addRef();
-        ((QGraphicsItem*) this)->show();
+        /*((QGraphicsItem*) this)->show();*/// -!F: original
+        QGraphicsRectItem::show();
     }
 }
 

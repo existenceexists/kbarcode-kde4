@@ -138,10 +138,10 @@ class MyCanvasView : public QGraphicsView
         }
 
     protected:
-        void contentsMousePressEvent(QMouseEvent*);
-        void contentsMouseMoveEvent(QMouseEvent*);
-        void contentsMouseReleaseEvent(QMouseEvent *);
-        void contentsMouseDoubleClickEvent(QMouseEvent*);
+        void mousePressEvent(QMouseEvent*);
+        void mouseMoveEvent(QMouseEvent*);
+        void mouseReleaseEvent(QMouseEvent *);
+        void mouseDoubleClickEvent(QMouseEvent*);
         void resizeEvent( QResizeEvent * r );
         
     signals:

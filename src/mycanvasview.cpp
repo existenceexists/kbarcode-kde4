@@ -147,7 +147,7 @@ void MyCanvasView::snapPoint(QPoint * point, TCanvasItem* item )
     }
 }
 
-void MyCanvasView::contentsMouseMoveEvent(QMouseEvent* e)
+void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
 {
     rulerh->slotNewValue( e->x() );
     rulerv->slotNewValue( e->y() );
@@ -249,7 +249,7 @@ void MyCanvasView::contentsMouseMoveEvent(QMouseEvent* e)
     }
 }
 
-void MyCanvasView::contentsMousePressEvent(QMouseEvent* e)
+void MyCanvasView::mousePressEvent(QMouseEvent* e)
 {
     setActive( 0, e->state() & Qt::ControlModifier  );
 
@@ -271,7 +271,7 @@ void MyCanvasView::contentsMousePressEvent(QMouseEvent* e)
         emit showContextMenu( e->globalPos() );
 }
 
-void MyCanvasView::contentsMouseReleaseEvent(QMouseEvent* e)
+void MyCanvasView::mouseReleaseEvent(QMouseEvent* e)
 {
     if( e->button() != Qt::LeftButton || getSelected().isEmpty() )
         return;
@@ -292,7 +292,7 @@ K3MacroCommand* MyCanvasView::getMoveCommand()
     return m_commov;
 }
 
-void MyCanvasView::contentsMouseDoubleClickEvent(QMouseEvent* e)
+void MyCanvasView::mouseDoubleClickEvent(QMouseEvent* e)
 {
     setActive( 0 );
     QList<QGraphicsItem *> list = scene()->items();
@@ -465,6 +465,7 @@ void MyCanvasView::reposition()
     
     
     translation = QPoint( x, y );
+    /*translation = QPoint( 0, 0 );*/// -!F: delete
 }
 
 void MyCanvasView::setDefinition( Definition* d )
