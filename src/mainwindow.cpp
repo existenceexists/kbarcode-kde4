@@ -42,6 +42,7 @@
 // -!F: added by Frank, keep it:
 #include <QList>
 #include <QDebug>
+#include <khelpmenu.h>
 
 bool MainWindow::autoconnect = true;
 bool MainWindow::startassistant = true;
@@ -216,7 +217,9 @@ void MainWindow::setupActions() // -!F:
     
     menuBar()->clear();
     
-    KMenu * hlpMenu = customHelpMenu();
+    /*KMenu * hlpMenu = customHelpMenu();*/// -!F: delete
+    KHelpMenu * helpMenuTmp = new KHelpMenu( this, "Help menu" );
+    KMenu * hlpMenu = helpMenuTmp->menu();
     hlpMenu->removeAction(hlpMenu->actions()[0]);
     //hlpMenu->insertAction(hlpMenu->actions()[0], actionMapAct);// Action Map was removed in the last published version
     //hlpMenu->insertSeparator(hlpMenu->actions()[0]);
