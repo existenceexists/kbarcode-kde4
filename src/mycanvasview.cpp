@@ -310,7 +310,8 @@ bool MyCanvasView::isInside( QPoint p, QGraphicsItem* item )
     if( !item->isVisible() )
         return false;
 
-    return item->boundingRect().contains( p );
+    /*return item->boundingRect().contains( p );*/// -!F: original, delete
+    return item->contains( item->mapFromScene( mapToScene( p ) ) );
 }
 
 int MyCanvasView::isEdge( QPoint p, QGraphicsItem* item )
