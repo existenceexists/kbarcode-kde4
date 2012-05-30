@@ -263,7 +263,8 @@ void MyCanvasView::mousePressEvent(QMouseEvent* e)
         /*moving_start = inverseWorldMatrix().map(e->pos());*/// -!F: original, delete
         moving_start = matrix().inverted().map(e->pos());
         m_mode = updateCursor( e->pos() );
-        old = getActive()->boundingRect().toRect();
+        /*old = getActive()->boundingRect().toRect();*/// -!F: keep, boundingRect() does not return absolute position, pos() does
+        old = getActive()->pos();
         delta_pt=QPoint(e->x() - old.x(),e->y() - old.y());
     }
 

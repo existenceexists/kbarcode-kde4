@@ -169,7 +169,7 @@ class MyCanvasView : public QGraphicsView
         QPoint moving_start;
         QPoint translation;
 
-        QRect old;
+        QPointF old;
 
         bool isInside( QPoint p, QGraphicsItem* item );
         int isEdge(  QPoint p, QGraphicsItem* item  );

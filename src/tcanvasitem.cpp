@@ -118,7 +118,7 @@ void TCanvasItem::paint( QPainter * painter, const QStyleOptionGraphicsItem * op
         painter->save();
         /*painter.setClipRect( boundingRect(), QPainter::CoordPainter );*/
 	painter->setClipRect( boundingRect() );
-        painter->translate( m_view->getTranslation().x(), m_view->getTranslation().y() );
+        /*painter->translate( m_view->getTranslation().x(), m_view->getTranslation().y() );*/// -!F: original
         m_item->draw( painter );
         painter->restore();
     }
@@ -126,7 +126,7 @@ void TCanvasItem::paint( QPainter * painter, const QStyleOptionGraphicsItem * op
     // draw edges
     if( isSelected() ) {
         const QPixmap* spot = SpotProvider::getInstance()->spot();
-        painter->translate( x(), y() );
+        /*painter->translate( x(), y() );*/// -!F: original
 
         // top left
         painter->drawPixmap( 0, 0, *spot );
