@@ -82,17 +82,20 @@ void TextItem::draw(QPainter* painter)
     {
         default:
         case 0:
-            painter->translate( rect().x(), rect().y() );
+            /*painter->translate( rect().x(), rect().y() );*/// -!F: original
             break;
         case 90:
-            painter->translate( rect().x() + w, rect().y() );
+            /*painter->translate( rect().x() + w, rect().y() );*/// -!F: original
+            painter->translate( w, 0 );
             qSwap( w, h );
             break;
         case 180:
-            painter->translate( rect().x() + w, rect().y() + h );
+            /*painter->translate( rect().x() + w, rect().y() + h );*/// -!F: original
+            painter->translate( w, h );
             break;
         case 270:
-            painter->translate( rect().x(), rect().y() + h );
+            /*painter->translate( rect().x(), rect().y() + h );*/// -!F: original
+            painter->translate( 0, h );
             qSwap( w, h );
             break;
     };
