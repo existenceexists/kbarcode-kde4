@@ -53,7 +53,8 @@ void RectItem::draw (QPainter* painter)
             painter->save();
             painter->setPen( QPen( Qt::NoPen ) );
             painter->setBrush( m_color );
-            painter->drawEllipse( rect() );
+            /*painter->drawEllipse( rect() );*/// -!F: original, delete
+            painter->drawEllipse( QRect( 0, 0, rect().width(), rect().height() ) );
             painter->restore();
         }
     
@@ -61,14 +62,17 @@ void RectItem::draw (QPainter* painter)
         {
             painter->save();
             painter->setPen( pen() );
-            painter->drawEllipse( rect() );
+            /*painter->drawEllipse( rect() );*/// -!F: original, delete
+            painter->drawEllipse( QRect( 0, 0, rect().width(), rect().height() ) );
             painter->restore();
         }
     }
     else
     {
-        if( m_filled )
-            painter->fillRect( rect(), m_color );
+        if( m_filled ) {
+            /*painter->fillRect( rect(), m_color );*/// -!F: original, delete
+            painter->fillRect( QRect( 0, 0, rect().width(), rect().height() ), m_color );
+        }
         
         DocumentItem::drawBorder( painter );
     }
