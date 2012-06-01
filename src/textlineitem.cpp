@@ -63,7 +63,8 @@ void TextLineItem::draw(QPainter* painter)
     int width = (rect().width() > 0) ? (int)((double)rect().width() / scalex) : srt.widthUsed();
     int height = (rect().height() > 0) ? (int)((double)rect().height() / scaley): srt.height();
 
-    QRect r( (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), width, height );
+    /*QRect r( (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), width, height );*/// -!F: original
+    QRect r( 0, 0, width, height );
 
     srt.setWidth( painter, width );
 
@@ -73,7 +74,8 @@ void TextLineItem::draw(QPainter* painter)
     {
         painter->scale( scalex, scaley );
         painter->setPen( Qt::black );
-        srt.draw( painter, (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), r, cg );
+        /*srt.draw( painter, (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), r, cg );*/// -!F: original
+        srt.draw( painter, 0, 0, r, cg );
     }
     else
     {
