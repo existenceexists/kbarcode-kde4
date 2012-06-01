@@ -55,7 +55,7 @@ void DocumentItem::drawBorder(QPainter* painter)
     {
         painter->save();
         painter->setPen( m_pen );
-        painter->drawRect( rect() );
+        painter->drawRect( QRect( 0, 0, rect().width(), rect().height() ) );
         painter->restore();
     }
 }
