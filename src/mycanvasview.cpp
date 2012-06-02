@@ -320,7 +320,8 @@ int MyCanvasView::isEdge( QPoint p, QGraphicsItem* item )
     if( !isInside( p, item ) )
         return Outside;
 
-    QRectF r = item->boundingRect();
+    /*QRectF r = item->boundingRect();*/// -!F: original
+    QRectF r = QRectF( item->pos().x(), item->pos().y(), item->boundingRect().width(), item->boundingRect().height() );
     
     int rh = r.y() + r.height();
     int rw = r.x() + r.width();
