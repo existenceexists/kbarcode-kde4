@@ -432,7 +432,7 @@ bool LabelEditor::openUrl( const QString & url )
     recentAct->addUrl( murl );
 
     enableActions();
-    cv->repaint( true );
+    cv->repaint();
 
     return true;
 }
