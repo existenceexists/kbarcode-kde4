@@ -42,8 +42,8 @@ public:
 
     MyCanvasView* canvasView() const;
     
-    bool isActive();
-    void setActive( bool makeActive );
+    bool isActiveItem();
+    void setActiveItem( bool makeActive );
 
 protected:
     /**
@@ -55,7 +55,7 @@ protected:
 private:
     DocumentItem* m_item;
     MyCanvasView* m_view;
-    bool active;
+    bool m_activeItem;
 };
 #endif //TCANVASITEM_H
 

@@ -515,7 +515,7 @@ TCanvasItem* MyCanvasView::getActive()
 {
     QList<QGraphicsItem *> list = scene()->items();
     for( unsigned int i = 0; i < list.count(); i++ )
-        if( list[i]->isActive() )
+        if( ((TCanvasItem*)list[i])->isActiveItem() )
             return (TCanvasItem*)list[i];
 
     return 0;
@@ -526,10 +526,10 @@ void MyCanvasView::setActive( QGraphicsItem* item, bool control )
     emit selectionChanged();
     QList<QGraphicsItem *> list = scene()->items();
     for( unsigned int i = 0; i < list.count(); i++ )
-        list[i]->setActive( false );
+        ((TCanvasItem*)list[i])->setActiveItem( false );
 
     if( item )
-        item->setActive( true );
+        ((TCanvasItem*)item)->setActiveItem( true );
 
     setSelected( item, control );
 }

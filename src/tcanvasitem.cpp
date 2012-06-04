@@ -32,7 +32,7 @@ TCanvasItem::TCanvasItem( MyCanvasView* cv )
     setFlag ( QGraphicsItem::ItemIsSelectable, true );
     m_view = cv;
     m_item = NULL;
-    active = true;
+    m_activeItem = false;
     show();
 }
 
@@ -226,12 +226,12 @@ void TCanvasItem::hide()
     }
 }
 
-bool TCanvasItem::isActive()
+bool TCanvasItem::isActiveItem()
 {
-    return active;
+    return m_activeItem;
 }
 
-void TCanvasItem::setActive( bool makeActive )
+void TCanvasItem::setActiveItem( bool makeActive )
 {
-    active = makeActive;
+    m_activeItem = makeActive;
 }
