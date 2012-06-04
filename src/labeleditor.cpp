@@ -1112,6 +1112,7 @@ void LabelEditor::preview()
 void LabelEditor::toggleGrid()
 {
     c->setGrid( gridAct->isChecked() );
+    c->update();
     cv->repaint();
 }
 
