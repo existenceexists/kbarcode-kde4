@@ -73,7 +73,8 @@ void TCanvasItem::setSizeMM( int w, int h )
     if( m_item )
     {
         m_item->setSizeMM( w, h );
-        QGraphicsRectItem::setRect( m_item->boundingRect().x(), m_item->boundingRect().y(), m_item->boundingRect().width(), m_item->boundingRect().height() );
+        /*QGraphicsRectItem::setRect( m_item->boundingRect().x(), m_item->boundingRect().y(), m_item->boundingRect().width(), m_item->boundingRect().height() );*/// -!F: original
+        QGraphicsRectItem::setRect( 0, 0, m_item->boundingRect().width(), m_item->boundingRect().height() );
     }
 }
 
