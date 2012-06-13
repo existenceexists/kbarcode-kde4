@@ -321,7 +321,8 @@ int MyCanvasView::isEdge( QPoint p, QGraphicsItem* item )
         return Outside;
 
     /*QRectF r = item->boundingRect();*/// -!F: original
-    QRectF r = QRectF( item->pos().x(), item->pos().y(), item->boundingRect().width(), item->boundingRect().height() );
+    /*QRectF r = QRectF( item->pos().x(), item->pos().y(), item->boundingRect().width(), item->boundingRect().height() );*/// -!F: keep
+    QRectF r = QRectF( item->pos().x() - horizontalScrollBar()->value(), item->pos().y() - verticalScrollBar()->value(), item->boundingRect().width(), item->boundingRect().height() );
     
     int rh = r.y() + r.height();
     int rw = r.x() + r.width();
