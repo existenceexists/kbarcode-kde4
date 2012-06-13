@@ -128,6 +128,7 @@ void NewItemCommand::execute()
             m_item = new TCanvasItem( cv );
             m_item->setItem( m_object );
             m_item->setPos( m_point.x(), m_point.y() );
+            m_object->move( m_point.x() - cv->getTranslation().x(), m_point.y() - cv->getTranslation().y() );
 	    m_item->addRef();
 
 	    /* NOT NEEDED:
