@@ -160,13 +160,15 @@ void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
                         QString( "%1%2 x %3%4" ).arg( x )
                         .arg( Measurements::system() ).arg( y ).arg( Measurements::system()), mouseid );
     }
+    
+    QPoint mappedEventPosition = mapToScene( e->pos() ).toPoint();
 
     /*updateCursor( e->pos() );*/// -!F: original, 
-    updateCursor( mapToScene( e->pos() ).toPoint() );
+    updateCursor( mappedEventPosition );
 
     // if no mouse button is pressed bail out now
     if( !(e->state() & Qt::LeftButton ) ) {
-        (void)updateCursor( e->pos(), true );
+        (void)updateCursor( mappedEventPosition, true );
         return;
     }
 
@@ -175,8 +177,7 @@ void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
     TCanvasItem* moving = getActive();
     if( moving && !moving->item()->locked() ) {
         /*QPoint p = inverseWorldMatrix().map(e->pos());*/// -!F: original, delete
-        QPoint p = matrix().inverted().map(e->pos());
-        p = mapToScene( p ).toPoint();
+        QPoint p = matrix().inverted().map(mappedEventPosition);
 
         if( m_mode == Barcode || m_mode == Inside ) {
             TCanvasItemList list = getSelected();
@@ -315,7 +316,7 @@ bool MyCanvasView::isInside( QPoint p, QGraphicsItem* item )
 
     /*return item->boundingRect().contains( p );*/// -!F: original, delete
     /*return item->contains( item->mapFromScene( mapToScene( p ) ) );*/// -!F: keep
-    return item->contains( item->mapFromScene( mapToScene( p ) ) );
+    return item->contains( item->mapFromScene( p ) );
 }
 
 int MyCanvasView::isEdge( QPoint p, QGraphicsItem* item )
@@ -326,9 +327,10 @@ int MyCanvasView::isEdge( QPoint p, QGraphicsItem* item )
     /*QRectF r = item->boundingRect();*/// -!F: original
     /*QRectF r = QRectF( item->pos().x(), item->pos().y(), item->boundingRect().width(), item->boundingRect().height() );*/// -!F: keep
     /*QRectF r = QRectF( item->pos().x() - horizontalScrollBar()->value(), item->pos().y() - verticalScrollBar()->value(), item->boundingRect().width(), item->boundingRect().height() );*/// -!F: keep
-    /*p = item->mapFromScene( p ).toPoint();*/// -!F: delete
-    QRectF r1 = QRectF( item->pos().x(), item->pos().y(), item->boundingRect().width(), item->boundingRect().height() );
-    QRect r = mapFromScene( r1 ).boundingRect();
+    QRectF rF = QRectF( item->pos().x(), item->pos().y(), item->boundingRect().width(), item->boundingRect().height() );
+    QRect r = mapFromScene( rF ).boundingRect();
+    
+    p = mapFromScene( p );
     
     int rh = r.y() + r.height();
     int rw = r.x() + r.width();
