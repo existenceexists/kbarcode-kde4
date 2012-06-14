@@ -255,20 +255,26 @@ void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
 void MyCanvasView::mousePressEvent(QMouseEvent* e)
 {
     setActive( 0, e->state() & Qt::ControlModifier  );
+    
+    QPoint mappedEventPosition = mapToScene( e->pos() ).toPoint();
 
     QList<QGraphicsItem *> list = scene()->items();
     for( int z = MyCanvasView::getLowestZ( list ); z <= MyCanvasView::getHighestZ( list ); z++ )
-        for( unsigned int i = 0; i < list.count(); i++ )
-            if( list[i]->zValue() == z && isInside( e->pos(), list[i] ) )
+        for( unsigned int i = 0; i < list.count(); i++ ) {
+            /*if( list[i]->zValue() == z && isInside( e->pos(), list[i] ) )*/// -!F: original
+            if( list[i]->zValue() == z && isInside( mappedEventPosition, list[i] ) )
                 setActive( list[i], (e->state() & Qt::ControlModifier) );
+        }
 
     if( getActive() ) {
         /*moving_start = inverseWorldMatrix().map(e->pos());*/// -!F: original, delete
-        moving_start = matrix().inverted().map(e->pos());
-        m_mode = updateCursor( e->pos() );
+        /*moving_start = matrix().inverted().map(e->pos());*/// -!F: keep 
+        moving_start = matrix().inverted().map( mappedEventPosition );
+        m_mode = updateCursor( mappedEventPosition );
         /*old = getActive()->boundingRect().toRect();*/// -!F: keep, boundingRect() does not return absolute position, pos() does
         old = getActive()->pos();
-        delta_pt=QPoint(e->x() - old.x(),e->y() - old.y());
+        /*delta_pt=QPoint(e->x() - old.x(),e->y() - old.y());*/// -!F: keep
+        delta_pt=QPoint(mappedEventPosition.x() - old.x(),mappedEventPosition.y() - old.y());
     }
 
     if( e->button() == Qt::RightButton && getActive() )
@@ -277,6 +283,8 @@ void MyCanvasView::mousePressEvent(QMouseEvent* e)
 
 void MyCanvasView::mouseReleaseEvent(QMouseEvent* e)
 {
+    QPoint mappedEventPosition = mapToScene( e->pos() ).toPoint();
+    
     if( e->button() != Qt::LeftButton || getSelected().isEmpty() )
         return;
 
@@ -285,7 +293,7 @@ void MyCanvasView::mouseReleaseEvent(QMouseEvent* e)
         m_commov = 0;
     }
 
-    updateCursor( e->pos() );
+    updateCursor( mappedEventPosition );
 }
 
 K3MacroCommand* MyCanvasView::getMoveCommand()
@@ -298,15 +306,19 @@ K3MacroCommand* MyCanvasView::getMoveCommand()
 
 void MyCanvasView::mouseDoubleClickEvent(QMouseEvent* e)
 {
+    QPoint mappedEventPosition = mapToScene( e->pos() ).toPoint();
+    
     setActive( 0 );
     QList<QGraphicsItem *> list = scene()->items();
     for( int z = MyCanvasView::getHighestZ( list ); z >= MyCanvasView::getLowestZ( list ); z-- )    
-        for( unsigned int i = 0; i < list.count(); i++ )
-            if( list[i]->zValue() == z && isInside( e->pos(), list[i] ) ) {
+        for( unsigned int i = 0; i < list.count(); i++ ) {
+            /*if( list[i]->zValue() == z && isInside( e->pos(), list[i] ) ) {*/// -!F: original
+            if( list[i]->zValue() == z && isInside( mappedEventPosition, list[i] ) ) {
                 setActive( list[i] );
                 emit doubleClickedItem( getActive() );
                 return;
             }
+        }
 }
 
 bool MyCanvasView::isInside( QPoint p, QGraphicsItem* item )
