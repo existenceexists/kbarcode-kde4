@@ -97,10 +97,10 @@ MyCanvasView::MyCanvasView( Definition* d, MyCanvas* c, QWidget* parent, Qt::WFl
         rulerv->setRulerMetricStyle( KRuler::Inch );
         rulerh->setRulerMetricStyle( KRuler::Inch );
     }
-    /*rulerv->setMaxValue( 0 );*/// -!F: original, done: setMaxValue() is deprecated, What is the correct replacement of this?
-    rulerv->setLength( 0 );
-    /*rulerh->setMaxValue( 0 );*/// -!F: original, done: setMaxValue() is deprecated, What is the correct replacement of this?
-    rulerh->setLength( 0 );
+    rulerv->setMaxValue( 0 );// -!F: original, setMaxValue() is deprecated in KDE 4.6 but not in KDE 4.8 doc!, so the note "deprecated" assigned to this method is probably a bug?
+    /*rulerv->setLength( 0 );*/// -!F: added, delete
+    rulerh->setMaxValue( 0 );// -!F: original, setMaxValue() is deprecated in KDE 4.6 but not in KDE 4.8 doc!, so the note "deprecated" assigned to this method is probably a bug?
+    /*rulerh->setLength( 0 );*/// -!F: added, delete
 
     viewport()->setMouseTracking( true );
     setDefinition( d );
@@ -436,10 +436,10 @@ void MyCanvasView::updateRuler()
     if( def ) {
         canv->setRect( QRect( translation.x(), translation.y(), (int)def->getMeasurements().width( this ), (int)def->getMeasurements().height( this )) );
 
-        /*rulerv->setMaxValue( height() );*/// -!F: original, done: setMaxValue() is deprecated, What is the correct replacement of this?
-        rulerv->setLength( height() );
-        /*rulerh->setMaxValue( width() );*/// -!F: original, done: setMaxValue() is deprecated, What is the correct replacement of this?
-        rulerh->setLength( width() );
+        rulerv->setMaxValue( height() );// -!F: original, setMaxValue() is deprecated in KDE 4.6 but not in KDE 4.8 doc!, so the note "deprecated" assigned to this method is probably a bug?
+        /*rulerv->setLength( height() );*/// -!F: added, delete
+        rulerh->setMaxValue( width() );// -!F: original, setMaxValue() is deprecated in KDE 4.6 but not in KDE 4.8 doc!, so the note "deprecated" assigned to this method is probably a bug?
+        /*rulerh->setLength( width() );*/// -!F: added, delete
 
         if( Measurements::measurementSystem() == Measurements::Metric ) {
             rulerh->setPixelPerMark( (1/ 25.4)* logicalDpiX() );
