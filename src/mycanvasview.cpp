@@ -97,8 +97,10 @@ MyCanvasView::MyCanvasView( Definition* d, MyCanvas* c, QWidget* parent, Qt::WFl
         rulerv->setRulerMetricStyle( KRuler::Inch );
         rulerh->setRulerMetricStyle( KRuler::Inch );
     }
-    rulerv->setMaxValue( 0 );
-    rulerh->setMaxValue( 0 );
+    /*rulerv->setMaxValue( 0 );*/// -!F: original, done: setMaxValue() is deprecated, What is the correct replacement of this?
+    rulerv->setLength( 0 );
+    /*rulerh->setMaxValue( 0 );*/// -!F: original, done: setMaxValue() is deprecated, What is the correct replacement of this?
+    rulerh->setLength( 0 );
 
     viewport()->setMouseTracking( true );
     setDefinition( d );
@@ -167,12 +169,12 @@ void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
     updateCursor( mappedEventPosition );
 
     // if no mouse button is pressed bail out now
-    if( !(e->state() & Qt::LeftButton ) ) {
+    if( !(e->buttons() & Qt::LeftButton ) ) {
         (void)updateCursor( mappedEventPosition, true );
         return;
     }
 
-    bool shift_pressed = e->state() & Qt::ShiftModifier;
+    bool shift_pressed = e->modifiers() & Qt::ShiftModifier;
 
     TCanvasItem* moving = getActive();
     if( moving && !moving->item()->locked() ) {
@@ -181,7 +183,7 @@ void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
 
         if( m_mode == Barcode || m_mode == Inside ) {
             TCanvasItemList list = getSelected();
-            for( unsigned int i = 0; i < list.count(); i++ ) {
+            for( int i = 0; i < list.count(); i++ ) {
                 TCanvasItem* moving = list[i];                    
                 QPoint new_pt = QPoint(p.x() - delta_pt.x(),p.y() - delta_pt.y());
                 if( canv->grid() ) {
@@ -254,16 +256,16 @@ void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
 
 void MyCanvasView::mousePressEvent(QMouseEvent* e)
 {
-    setActive( 0, e->state() & Qt::ControlModifier  );
+    setActive( 0, e->modifiers() & Qt::ControlModifier  );
     
     QPoint mappedEventPosition = mapToScene( e->pos() ).toPoint();
 
     QList<QGraphicsItem *> list = scene()->items();
     for( int z = MyCanvasView::getLowestZ( list ); z <= MyCanvasView::getHighestZ( list ); z++ )
-        for( unsigned int i = 0; i < list.count(); i++ ) {
+        for( int i = 0; i < list.count(); i++ ) {
             /*if( list[i]->zValue() == z && isInside( e->pos(), list[i] ) )*/// -!F: original
             if( list[i]->zValue() == z && isInside( mappedEventPosition, list[i] ) )
-                setActive( list[i], (e->state() & Qt::ControlModifier) );
+                setActive( list[i], (e->modifiers() & Qt::ControlModifier) );
         }
 
     if( getActive() ) {
@@ -311,7 +313,7 @@ void MyCanvasView::mouseDoubleClickEvent(QMouseEvent* e)
     setActive( 0 );
     QList<QGraphicsItem *> list = scene()->items();
     for( int z = MyCanvasView::getHighestZ( list ); z >= MyCanvasView::getLowestZ( list ); z-- )    
-        for( unsigned int i = 0; i < list.count(); i++ ) {
+        for( int i = 0; i < list.count(); i++ ) {
             /*if( list[i]->zValue() == z && isInside( e->pos(), list[i] ) ) {*/// -!F: original
             if( list[i]->zValue() == z && isInside( mappedEventPosition, list[i] ) ) {
                 setActive( list[i] );
@@ -408,7 +410,7 @@ void MyCanvasView::deleteCurrent()
     if( !list.isEmpty() ) {
         K3MacroCommand* mc = new K3MacroCommand( i18n("Delete") );
 
-        for( unsigned int i = 0; i < list.count(); i++ ) {
+        for( int i = 0; i < list.count(); i++ ) {
             DeleteCommand* dc = new DeleteCommand( list[i] );
             dc->execute();
             mc->addCommand( dc );
@@ -434,8 +436,10 @@ void MyCanvasView::updateRuler()
     if( def ) {
         canv->setRect( QRect( translation.x(), translation.y(), (int)def->getMeasurements().width( this ), (int)def->getMeasurements().height( this )) );
 
-        rulerv->setMaxValue( height() );
-        rulerh->setMaxValue( width() );
+        /*rulerv->setMaxValue( height() );*/// -!F: original, done: setMaxValue() is deprecated, What is the correct replacement of this?
+        rulerv->setLength( height() );
+        /*rulerh->setMaxValue( width() );*/// -!F: original, done: setMaxValue() is deprecated, What is the correct replacement of this?
+        rulerh->setLength( width() );
 
         if( Measurements::measurementSystem() == Measurements::Metric ) {
             rulerh->setPixelPerMark( (1/ 25.4)* logicalDpiX() );
@@ -459,7 +463,7 @@ void MyCanvasView::resizeEvent( QResizeEvent * r )
 
     old = translation - old;
     QList<QGraphicsItem *> list = scene()->items();
-    for( unsigned int i = 0; i < list.count(); i++ )
+    for( int i = 0; i < list.count(); i++ )
         list[i]->moveBy( old.x(), old.y() );
 
     setUpdatesEnabled( true );
@@ -503,7 +507,7 @@ void MyCanvasView::setDefinition( Definition* d )
 void MyCanvasView::selectAll()
 {
     QList<QGraphicsItem *> list = scene()->items();
-    for( unsigned int i = 0; i < list.count(); i++ )
+    for( int i = 0; i < list.count(); i++ )
         setSelected( list[i], true );
 }
 
@@ -515,7 +519,7 @@ void MyCanvasView::deSelectAll()
 int MyCanvasView::getLowestZ( QList<QGraphicsItem *> list )
 {
     int v = 0;
-    for( unsigned int i = 0; i < list.count(); i++ )
+    for( int i = 0; i < list.count(); i++ )
         if( list[i]->zValue() < v )
             v = (int)list[i]->zValue();
 
@@ -525,7 +529,7 @@ int MyCanvasView::getLowestZ( QList<QGraphicsItem *> list )
 int MyCanvasView::getHighestZ( QList<QGraphicsItem *> list )
 {
     int v = 0;
-    for( unsigned int i = 0; i < list.count(); i++ )
+    for( int i = 0; i < list.count(); i++ )
         if( list[i]->zValue() > v )
             v = (int)list[i]->zValue();
 
@@ -535,7 +539,7 @@ int MyCanvasView::getHighestZ( QList<QGraphicsItem *> list )
 TCanvasItem* MyCanvasView::getActive()
 {
     QList<QGraphicsItem *> list = scene()->items();
-    for( unsigned int i = 0; i < list.count(); i++ )
+    for( int i = 0; i < list.count(); i++ )
         if( ((TCanvasItem*)list[i])->isActiveItem() )
             return (TCanvasItem*)list[i];
 
@@ -546,7 +550,7 @@ void MyCanvasView::setActive( QGraphicsItem* item, bool control )
 {
     emit selectionChanged();
     QList<QGraphicsItem *> list = scene()->items();
-    for( unsigned int i = 0; i < list.count(); i++ )
+    for( int i = 0; i < list.count(); i++ )
         ((TCanvasItem*)list[i])->setActiveItem( false );
 
     if( item )
@@ -560,7 +564,7 @@ DocumentItemList MyCanvasView::getAllItems()
     DocumentItemList l;
 
     QList<QGraphicsItem *> list = scene()->items();
-    for( unsigned int i = 0; i < list.count(); i++ )
+    for( int i = 0; i < list.count(); i++ )
 	l.append( ((TCanvasItem*)list[i])->item() );
 
     return l;
@@ -570,7 +574,7 @@ TCanvasItemList MyCanvasView::getSelected()
 {
     TCanvasItemList l;
     QList<QGraphicsItem *> list = scene()->items();
-    for( unsigned int i = 0; i < list.count(); i++ )
+    for( int i = 0; i < list.count(); i++ )
         if( list[i]->isSelected() )
             l.append( (TCanvasItem*)list[i] );
 
@@ -581,7 +585,7 @@ void MyCanvasView::setSelected( QGraphicsItem* item, bool control )
 {
     if( !control ) {
         QList<QGraphicsItem *> list = scene()->items();
-        for( unsigned int i = 0; i < list.count(); i++ )
+        for( int i = 0; i < list.count(); i++ )
             list[i]->setSelected( false );
     }
 
