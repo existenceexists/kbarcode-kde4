@@ -153,17 +153,17 @@ void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
 {
     rulerh->slotNewValue( e->x() );
     rulerv->slotNewValue( e->y() );
+    
+    QPoint mappedEventPosition = mapToScene( e->pos() ).toPoint();
 
     if( statusbar ) {
         LabelUtils l;
-        int x = (int)l.pixelToMm( e->x(), this, LabelUtils::DpiX );
-        int y = (int)l.pixelToMm( e->y(), this, LabelUtils::DpiY );
+        int x = (int)l.pixelToMm( mappedEventPosition.x(), this, LabelUtils::DpiX );
+        int y = (int)l.pixelToMm( mappedEventPosition.y(), this, LabelUtils::DpiY );
         statusbar->changeItem( i18n("Position: ") +
                         QString( "%1%2 x %3%4" ).arg( x )
                         .arg( Measurements::system() ).arg( y ).arg( Measurements::system()), mouseid );
     }
-    
-    QPoint mappedEventPosition = mapToScene( e->pos() ).toPoint();
 
     /*updateCursor( e->pos() );*/// -!F: original, 
     updateCursor( mappedEventPosition );
