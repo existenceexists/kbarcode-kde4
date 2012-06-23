@@ -168,8 +168,9 @@ void TCanvasItem::setItem (DocumentItem* item)
         this->setZValue( m_item->z() );
 
         /*QGraphicsRectItem::setPos( m_item->boundingRect().x() + m_view->getTranslation().x(), m_item->boundingRect().y() + m_view->getTranslation().y() );
-        QGraphicsRectItem::setRect( m_item->boundingRect().x(), m_item->boundingRect().y(), m_item->boundingRect().width(), m_item->boundingRect().height() );*/// -!F: original, setPos() must be called after item is added to scene
+        QGraphicsRectItem::setRect( m_item->boundingRect().x(), m_item->boundingRect().y(), m_item->boundingRect().width(), m_item->boundingRect().height() );*/// -!F: original
         QGraphicsRectItem::setRect( 0, 0, m_item->boundingRect().width(), m_item->boundingRect().height() );
+        QGraphicsRectItem::setPos( m_item->boundingRect().x() + m_view->getTranslation().x(), m_item->boundingRect().y() + m_view->getTranslation().y() );
         update();
     }
 }
