@@ -238,5 +238,8 @@ void BarcodeItem::updateBarcode()
     Barkode::setTokenProvider( tokenProvider() );
     Barkode::update( DocumentItem::paintDevice() );
     setSize( Barkode::size().width(), Barkode::size().height() );
+    if( canvasItem() ) {
+        canvasItem()->setRect( 0, 0, Barkode::size().width(), Barkode::size().height() );
+    }
 }
 
