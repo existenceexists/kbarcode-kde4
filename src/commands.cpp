@@ -524,8 +524,8 @@ DeleteCommand::~DeleteCommand()
 void DeleteCommand::execute()
 {
     if( canvasHasItem() ) {
-        /*m_canvas_item->setCanvas( 0 );*/// -!F: original, What is the QGraphicsItem equivalent of this?
-        m_canvas_item->hide();
+        /*m_canvas_item->setCanvas( 0 );*/// -!F: original, done: What is the QGraphicsItem equivalent of this?
+        /*m_canvas_item->hide();*/// -!F: original, this causes a runtime error in some special situations
         c->removeItem( m_canvas_item );
     }
 }
@@ -534,7 +534,7 @@ void DeleteCommand::unexecute()
 {
     // canvasHasItem won't work here
     if( m_canvas_item ) {
-        /*m_canvas_item->setCanvas( c );*/// -!F: original, What is the QGraphicsItem equivalent of this?
+        /*m_canvas_item->setCanvas( c );*/// -!F: original, done: What is the QGraphicsItem equivalent of this?
         c->addItem( m_canvas_item );
         m_canvas_item->show();
     }
