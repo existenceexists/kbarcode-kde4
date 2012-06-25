@@ -152,8 +152,8 @@ void NewItemCommand::unexecute()
 {
     if( m_item ) {
         /*m_item->setCanvas( NULL );*/// -!F: original, done: What is the QGraphicsItem equivalent of this?
+        /*m_item->hide();*/// -!F: original, removing an item that is hidden causes a runtime error
         cv->scene()->removeItem( m_item );
-        m_item->hide();
     }
 }
 
