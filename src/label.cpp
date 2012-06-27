@@ -210,7 +210,8 @@ void Label::draw( QPainter* painter, int x, int y )
 	    painter->translate( x,y );
 	    /*painter->setClipRect( clip, QPainter::CoordPainter );*/// -!F: original, what is the correct replacement of this ?
 	    painter->setClipRect( clip );
-	    item->draw( painter );
+	    /*item->draw( painter );*/// -!F: original
+            item->drawPreview( painter );
 	    painter->restore();
 	}
     }

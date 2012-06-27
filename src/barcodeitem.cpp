@@ -174,6 +174,15 @@ void BarcodeItem::draw (QPainter* painter)
     DocumentItem::drawBorder( painter );
 }
 
+void BarcodeItem::drawPreview (QPainter* painter)// -!F: added
+{
+    painter->save();
+    drawBarcode( *painter, rect().x(), rect().y() );
+    painter->restore();
+
+    DocumentItem::drawBorder( painter );
+}
+
 void BarcodeItem::drawZpl( QTextStream* stream )
 {
     QString encoding = ZPLUtils::encoding( type() );
