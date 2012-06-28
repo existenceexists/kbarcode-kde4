@@ -61,7 +61,8 @@ void ImageItem::draw(QPainter* painter)
     createImage();
     
     painter->save();
-    painter->drawPixmap( rect().x(), rect().y(), m_tmp );
+    /*painter->drawPixmap( rect().x(), rect().y(), m_tmp );*/// -!F: original
+    painter->drawPixmap( 0, 0, m_tmp );
     painter->restore();
     DocumentItem::drawBorder(painter);
 }
