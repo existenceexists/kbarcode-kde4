@@ -52,6 +52,8 @@ void ImageItem::init()
     setBorder( false );
     
     setRect( QRect( 0, 0, 20, 20 ) );
+    
+    createNewImage = true;
 }
 
 void ImageItem::draw(QPainter* painter)
@@ -199,6 +201,7 @@ void ImageItem::setExpression( const QString & ex )
 void ImageItem::setPixmap( const QPixmap & pix )
 {
     m_pixmap = pix;
+    createNewImage = true;
     updateImage();
 }
 
@@ -226,13 +229,16 @@ void ImageItem::updateImage()
 
 void ImageItem::createImage()
 {
-    if( m_tmp.isNull() )
+    /*if( m_tmp.isNull() )*/// -!F: original
+    if( createNewImage )
     {
+        createNewImage = false;
+        
         QImage img( 100, 100, QImage::Format_RGB16 );
 
 	if( m_pixmap.isNull() )
 	    img.load( tokenProvider() ? tokenProvider()->parse( m_expression ) : m_expression );
-	else
+        else
 	    img = m_pixmap.toImage();
 
 	if( !img.isNull() )

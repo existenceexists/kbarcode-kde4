@@ -73,6 +73,8 @@ class ImageItem : public DocumentItem
     double m_rotation;
     bool m_mirror_v;
     bool m_mirror_h;
+    
+    bool createNewImage;
        
     EImageScaling m_scaling;
 };
