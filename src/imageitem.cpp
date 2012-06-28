@@ -28,6 +28,7 @@
 #include <qpainter.h>
 #include <QPixmap>
 #include <QImageWriter>
+#include <QDebug>
 
 #include <klocale.h>
 #include <kcodecs.h> 
@@ -227,7 +228,7 @@ void ImageItem::createImage()
 {
     if( m_tmp.isNull() )
     {
-        QImage img;
+        QImage img( 100, 100, QImage::Format_RGB16 );
 
 	if( m_pixmap.isNull() )
 	    img.load( tokenProvider() ? tokenProvider()->parse( m_expression ) : m_expression );
