@@ -290,8 +290,6 @@ void ImageItem::createImage()
 		img = img.mirrored( m_mirror_h, m_mirror_v );
 	    
 	    m_tmp.convertFromImage( img );
-            
-            canvasItem()->setRect( 0, 0, m_tmp.width(), m_tmp.height() );
 	}
 	else
 	{
@@ -312,6 +310,8 @@ void ImageItem::createImage()
 	    painter.drawText( 0, painter.fontMetrics().lineSpacing(), i18n("Expression: ") + m_expression );
 	    painter.end();
 	}
+        
+        canvasItem()->setRect( 0, 0, m_tmp.width(), m_tmp.height() );
     }
 }
 
