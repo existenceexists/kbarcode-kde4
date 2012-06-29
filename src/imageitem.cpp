@@ -17,6 +17,7 @@
 
 #include "imageitem.h"
 #include "tokenprovider.h"
+#include "tcanvasitem.h"
 
 #include <qbuffer.h>
 #include <qdom.h>
@@ -60,10 +61,10 @@ void ImageItem::draw(QPainter* painter)
 {
     createImage();
     
-    painter->save();
+    /*painter->save();*/// -!F: original
     /*painter->drawPixmap( rect().x(), rect().y(), m_tmp );*/// -!F: original
     painter->drawPixmap( 0, 0, m_tmp );
-    painter->restore();
+    /*painter->restore();*/// -!F: original
     DocumentItem::drawBorder(painter);
 }
 
@@ -224,8 +225,18 @@ EImageScaling ImageItem::scaling() const
 
 void ImageItem::updateImage()
 {
+    /*int width = m_tmp.width();
+    int height = m_tmp.height();*/// -!F: keep
     /*m_tmp.resize( QSize(0,0) );*/// -!F: original, delete
     m_tmp = m_tmp.copy(QRect(QPoint(0, 0), QSize(0,0)));
+    /*move( canvasItem()->x() , canvasItem()->y() );*/// -!F: delete
+    /*canvasItem()->update();*/// -!F: delete
+    /*canvasItem()->setPos( canvasItem()->x(), canvasItem()->y() );*/// -!F: delete
+    /*canvasItem()->setSizeMM( rectMM().width(), rectMM().height() );*/// -!F: works
+    /*canvasItem()->setRect( 0, 0, canvasItem()->rect().width(), canvasItem()->rect().height() );*/// -!F: works
+    /*canvasItem()->setRect( 0, 0, boundingRect().width(), boundingRect().height() );*/// -!F: works
+    /*canvasItem()->setRect( 0, 0, pixmap().width(), pixmap().height() );*/// -!F: delete
+    /*canvasItem()->setRect( 0, 0, width, height );*/// -!F: works
 }
 
 void ImageItem::createImage()
@@ -289,6 +300,9 @@ void ImageItem::createImage()
 		img = img.mirrored( m_mirror_h, m_mirror_v );
 	    
 	    m_tmp.convertFromImage( img );
+            
+            /*canvasItem()->setSize( m_tmp.width(), m_tmp.height() );*/// -!F: delete
+            canvasItem()->setRect( 0, 0, m_tmp.width(), m_tmp.height() );
 	}
 	else
 	{
