@@ -78,6 +78,37 @@ void RectItem::draw (QPainter* painter)
     }
 }
 
+void RectItem::drawPreview( QPainter* painter )
+{
+    if( m_circle )
+    {
+        if( m_filled )
+        {
+            painter->save();
+            painter->setPen( QPen( Qt::NoPen ) );
+            painter->setBrush( m_color );
+            painter->drawEllipse( rect() );
+            painter->restore();
+        }
+    
+        if( border() )
+        {
+            painter->save();
+            painter->setPen( pen() );
+            painter->drawEllipse( rect() );
+            painter->restore();
+        }
+    }
+    else
+    {
+        if( m_filled ) {
+            painter->fillRect( rect(), m_color );
+        }
+        
+        DocumentItem::drawBorder( painter );
+    }
+}
+
 void RectItem::drawZpl( QTextStream* stream )
 {
     // TODO: refactor later and respect millimeters
