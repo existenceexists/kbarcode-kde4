@@ -42,6 +42,14 @@ void LineItem::draw(QPainter* painter)
     painter->restore();
 }
 
+void LineItem::drawPreview( QPainter* painter )
+{
+    painter->save();
+    painter->setPen( pen() );
+    painter->drawLine( rect().x(), rect().y(), rect().x() + rect().width(), rect().y() + rect().height() );
+    painter->restore();
+}
+
 void LineItem::drawZpl( QTextStream* )
 {
     qDebug("LineItem not implemented for ZPL");
