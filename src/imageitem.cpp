@@ -29,7 +29,6 @@
 #include <qpainter.h>
 #include <QPixmap>
 #include <QImageWriter>
-#include <QDebug>
 
 #include <klocale.h>
 #include <kcodecs.h> 
@@ -61,10 +60,10 @@ void ImageItem::draw(QPainter* painter)
 {
     createImage();
     
-    /*painter->save();*/// -!F: original
+    painter->save();
     /*painter->drawPixmap( rect().x(), rect().y(), m_tmp );*/// -!F: original
     painter->drawPixmap( 0, 0, m_tmp );
-    /*painter->restore();*/// -!F: original
+    painter->restore();
     DocumentItem::drawBorder(painter);
 }
 
@@ -290,6 +289,8 @@ void ImageItem::createImage()
 		img = img.mirrored( m_mirror_h, m_mirror_v );
 	    
 	    m_tmp.convertFromImage( img );
+            
+            canvasItem()->setSize( m_tmp.width(), m_tmp.height() );// -!F: added
 	}
 	else
 	{
@@ -310,8 +311,6 @@ void ImageItem::createImage()
 	    painter.drawText( 0, painter.fontMetrics().lineSpacing(), i18n("Expression: ") + m_expression );
 	    painter.end();
 	}
-        
-        canvasItem()->setRect( 0, 0, m_tmp.width(), m_tmp.height() );
     }
 }
 

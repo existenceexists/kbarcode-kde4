@@ -52,7 +52,8 @@ void TCanvasItem::setZ( double z )
 
 void TCanvasItem::setSize( int width, int height )
 {
-    QGraphicsRectItem::setRect( x(), y(), width, height );
+    prepareGeometryChange();
+    QGraphicsRectItem::setRect( 0, 0, width, height );
     
     if( m_item )
     {
@@ -73,6 +74,7 @@ void TCanvasItem::setSizeMM( int w, int h )
     if( m_item )
     {
         m_item->setSizeMM( w, h );
+        prepareGeometryChange();
         /*QGraphicsRectItem::setRect( m_item->boundingRect().x(), m_item->boundingRect().y(), m_item->boundingRect().width(), m_item->boundingRect().height() );*/// -!F: original
         QGraphicsRectItem::setRect( 0, 0, m_item->boundingRect().width(), m_item->boundingRect().height() );
     }
@@ -167,6 +169,7 @@ void TCanvasItem::setItem (DocumentItem* item)
         m_item->setCanvasItem( this );
         this->setZValue( m_item->z() );
 
+        prepareGeometryChange();
         /*QGraphicsRectItem::setPos( m_item->boundingRect().x() + m_view->getTranslation().x(), m_item->boundingRect().y() + m_view->getTranslation().y() );
         QGraphicsRectItem::setRect( m_item->boundingRect().x(), m_item->boundingRect().y(), m_item->boundingRect().width(), m_item->boundingRect().height() );*/// -!F: original
         QGraphicsRectItem::setRect( 0, 0, m_item->boundingRect().width(), m_item->boundingRect().height() );
