@@ -180,7 +180,7 @@ void BarcodeItem::drawPreview (QPainter* painter)// -!F: added
     drawBarcode( *painter, rect().x(), rect().y() );
     painter->restore();
 
-    DocumentItem::drawBorder( painter );
+    DocumentItem::drawBorderPreview( painter );
 }
 
 void BarcodeItem::drawZpl( QTextStream* stream )

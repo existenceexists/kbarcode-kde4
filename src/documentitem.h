@@ -86,6 +86,12 @@ public:
      * Draw a border around the item, has to be reimplemented for round items or barcodes which do not allow borders.
      */
     virtual void drawBorder (QPainter* painter);
+    
+    /**
+     * Draw a border around the item on the label of the preview dialog, has to be reimplemented for round items or barcodes which do not allow borders.
+     * Added by Frank. 
+     */
+    virtual void drawBorderPreview( QPainter* painter );
         
     virtual int  rtti () const = 0;
 

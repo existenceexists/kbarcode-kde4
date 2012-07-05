@@ -60,6 +60,17 @@ void DocumentItem::drawBorder(QPainter* painter)
     }
 }
 
+void DocumentItem::drawBorderPreview( QPainter* painter )
+{
+    if( m_border )
+    {
+        painter->save();
+        painter->setPen( m_pen );
+        painter->drawRect( rect() );
+        painter->restore();
+    }
+}
+
 void DocumentItem::loadXML (QDomElement* element)
 {
     LabelUtils l;

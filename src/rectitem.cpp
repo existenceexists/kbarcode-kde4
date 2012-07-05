@@ -105,7 +105,7 @@ void RectItem::drawPreview( QPainter* painter )
             painter->fillRect( rect(), m_color );
         }
         
-        DocumentItem::drawBorder( painter );
+        DocumentItem::drawBorderPreview( painter );
     }
 }
 

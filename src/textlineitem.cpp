@@ -118,7 +118,7 @@ void TextLineItem::drawPreview(QPainter* painter)
 
     painter->restore();
 
-    DocumentItem::drawBorder( painter );
+    DocumentItem::drawBorderPreview( painter );
 }
 
 void TextLineItem::drawZpl( QTextStream* stream )

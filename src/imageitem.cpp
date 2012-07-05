@@ -74,7 +74,7 @@ void ImageItem::drawPreview(QPainter* painter)
     painter->save();
     painter->drawPixmap( rect().x(), rect().y(), m_tmp );
     painter->restore();
-    DocumentItem::drawBorder(painter);
+    DocumentItem::drawBorderPreview(painter);
 }
 
 void ImageItem::drawZpl( QTextStream* stream )
