@@ -300,7 +300,8 @@ void ImageItem::createImage()
 	    
 	    m_tmp.convertFromImage( img );
             
-            canvasItem()->setSize( m_tmp.width(), m_tmp.height() );// -!F: added
+            if( canvasItem() )
+                canvasItem()->setSize( m_tmp.width(), m_tmp.height() );// -!F: added
 	}
 	else
 	{
