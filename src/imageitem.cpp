@@ -67,6 +67,16 @@ void ImageItem::draw(QPainter* painter)
     DocumentItem::drawBorder(painter);
 }
 
+void ImageItem::drawPreview(QPainter* painter)
+{
+    createImage();
+    
+    painter->save();
+    painter->drawPixmap( rect().x(), rect().y(), m_tmp );
+    painter->restore();
+    DocumentItem::drawBorder(painter);
+}
+
 void ImageItem::drawZpl( QTextStream* stream )
 {
     createImage();
