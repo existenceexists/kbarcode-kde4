@@ -78,8 +78,8 @@ public:
     /**
      * Draws the item on the preview. Added by Frank. Differs from draw() by coordinates that are used to paint at.
      */
-    /*virtual void drawPreview (QPainter* painter) = 0;*/// -!F: pure virtual produces a compilation error
-    virtual void drawPreview (QPainter* painter) {};
+    virtual void drawPreview (QPainter* painter) = 0;
+    /*virtual void drawPreview (QPainter* painter) {};*/// -!F: an alternative to the pure virtual function
         
     
     /**
