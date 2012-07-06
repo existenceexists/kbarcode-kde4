@@ -183,6 +183,7 @@ LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f,
     connect( cv, SIGNAL( doubleClickedItem(TCanvasItem*) ), this, SLOT( doubleClickedItem(TCanvasItem*) ) );
     connect( cv, SIGNAL( showContextMenu(QPoint) ), this, SLOT( showContextMenu(QPoint) ) );
     connect( cv, SIGNAL( movedSomething() ), this, SLOT( setEdited() ) );
+    connect( cv, SIGNAL( movedSomething() ), c, SLOT( update() ) );
     connect( KBarcodeSettings::getInstance(), SIGNAL( updateGrid( int ) ), cv, SLOT( updateGUI() ) );
     connect( kapp, SIGNAL( aboutToQuit() ), this, SLOT( saveConfig() ) );
  

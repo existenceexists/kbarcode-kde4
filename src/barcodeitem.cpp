@@ -248,7 +248,8 @@ void BarcodeItem::updateBarcode()
     Barkode::update( DocumentItem::paintDevice() );
     setSize( Barkode::size().width(), Barkode::size().height() );
     if( canvasItem() ) {
-        canvasItem()->setRect( 0, 0, Barkode::size().width(), Barkode::size().height() );
+        /*canvasItem()->setRect( 0, 0, Barkode::size().width(), Barkode::size().height() );*/// -!F: added, keep
+        canvasItem()->setSize( Barkode::size().width(), Barkode::size().height() );
     }
 }
 
