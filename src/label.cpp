@@ -26,6 +26,7 @@
 #include "lineitem.h"
 #include "imageitem.h"
 #include "textitem.h"
+#include "tcanvasitem.h"
 
 // Qt includes
 #include <qimage.h>
@@ -42,6 +43,11 @@
 #include <kapplication.h>
 #include <klocale.h>
 #include <qprinter.h>
+
+bool sortDocumentItems( const DocumentItem* item1, const DocumentItem* item2 )
+{
+    return item1->z() < item2->z();
+}
 
 Label::Label( Definition* _def, QIODevice* device, QString labelname, QPaintDevice* _printer, QString customer_id, QString _article_no, QString _group )
     : TokenProvider( _printer )
@@ -270,7 +276,8 @@ void Label::load( QIODevice* device )
                 
     // sort the list by z index
     /*m_list.sort();*/// -!F: original, is qSort() the right replacement ?
-    qSort( m_list );
+    /*qSort( m_list );*/// -!F: delete
+    qSort( m_list.begin(), m_list.end(), sortDocumentItems );
     
     /*DocumentItem* item;
     for( item = m_list.first();item;item=m_list.next())*/// -!F: original, delete
