@@ -46,12 +46,14 @@
 
 bool sortDocumentItems( const DocumentItem* item1, const DocumentItem* item2 )
 {
-    if( item1->z() < item2->z() )
-        return true;
-    else if( item1->z() > item2->z() )
-        return false;
-    else // z values are equal so sort the items according to their horizontal position:
+    if( item1->z() != item2->z() )
+        return item1->z() < item2->z();
+    else if( item1->additionOrder() != item2->additionOrder() )
+        return item1->additionOrder() < item2->additionOrder();
+    else if( item1->rect().x() != item2->rect().x() )// z values are equal and so are additionOrder values so sort the items according to their horizontal position:
         return item1->rect().x() < item2->rect().x();
+    else
+        return item1->rect().y() < item2->rect().y();
 }
 
 Label::Label( Definition* _def, QIODevice* device, QString labelname, QPaintDevice* _printer, QString customer_id, QString _article_no, QString _group )

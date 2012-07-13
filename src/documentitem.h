@@ -190,6 +190,9 @@ public:
     
     int z() const;
     void setZ( int z );
+    
+    int additionOrder() const;
+    void setAdditionOrder( int additionOrder );
 
     /** Only the z index is compared
       */
@@ -215,6 +218,7 @@ private:
      QPen m_pen;
      QRect m_rect;
      int m_z;
+     int m_additionOrder;
      bool m_locked;
 
     /**

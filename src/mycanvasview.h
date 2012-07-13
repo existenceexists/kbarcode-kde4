@@ -126,6 +126,9 @@ class MyCanvasView : public QGraphicsView
         
         void snapPoint(QPoint* point, TCanvasItem* item) ;
         
+        int additionOrder();
+        void incrementAdditionOrder();
+        
     public slots:
         void selectAll();
         void deSelectAll();
@@ -143,6 +146,8 @@ class MyCanvasView : public QGraphicsView
         void mouseReleaseEvent(QMouseEvent *);
         void mouseDoubleClickEvent(QMouseEvent*);
         void resizeEvent( QResizeEvent * r );
+        
+        int m_additionOrder;
         
     signals:
         void selectionChanged();

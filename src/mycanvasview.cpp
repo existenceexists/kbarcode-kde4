@@ -86,6 +86,7 @@ MyCanvasView::MyCanvasView( Definition* d, MyCanvas* c, QWidget* parent, Qt::WFl
     
     statusbar = 0;
     m_commov = 0;
+    m_additionOrder = 1;
     canv = c;
 
     rulerv = new KRuler( Qt::Vertical, this );
@@ -557,6 +558,16 @@ void MyCanvasView::setActive( QGraphicsItem* item, bool control )
         ((TCanvasItem*)item)->setActiveItem( true );
 
     setSelected( item, control );
+}
+
+int MyCanvasView::additionOrder()
+{
+    return m_additionOrder;
+}
+
+void MyCanvasView::incrementAdditionOrder()
+{
+    ++m_additionOrder;
 }
 
 DocumentItemList MyCanvasView::getAllItems()
