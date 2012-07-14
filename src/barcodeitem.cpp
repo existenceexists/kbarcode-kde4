@@ -158,19 +158,29 @@ void BarcodeItem::saveXML (QDomElement* element)
 void BarcodeItem::draw (QPainter* painter)
 {
     painter->save();
-    drawBarcode( *painter, rect().x(), rect().y() );
+    /*drawBarcode( *painter, rect().x(), rect().y() );*/// -!F: original
+    drawBarcode( *painter, 0, 0 );// -!F: added
     painter->restore();
     
-    TCanvasItem* citem = canvasItem();
+    /*TCanvasItem* citem = canvasItem();
     if( citem ) 
     {
         citem->setSize( Barkode::size().width(), Barkode::size().height() );
-    }
+    }*/// -!F: original, why was setSize() called ? It couses bad positioning of an item as well as too much CPU usage.
     // TODO: do a bitBlt when device is screen
     //painter->drawPixmap( rect().x(), rect().y(), m_pixmap );
     //bitBlt( painter->device(), rect().x(), rect().y(), &m_pixmap, 0, 0, rect().width(), rect().height(), Qt::CopyROP );
 
     DocumentItem::drawBorder( painter );
+}
+
+void BarcodeItem::drawPreview (QPainter* painter)// -!F: added
+{
+    painter->save();
+    drawBarcode( *painter, rect().x(), rect().y() );
+    painter->restore();
+
+    DocumentItem::drawBorderPreview( painter );
 }
 
 void BarcodeItem::drawZpl( QTextStream* stream )
@@ -237,5 +247,9 @@ void BarcodeItem::updateBarcode()
     Barkode::setTokenProvider( tokenProvider() );
     Barkode::update( DocumentItem::paintDevice() );
     setSize( Barkode::size().width(), Barkode::size().height() );
+    if( canvasItem() ) {
+        /*canvasItem()->setRect( 0, 0, Barkode::size().width(), Barkode::size().height() );*/// -!F: added, keep
+        canvasItem()->setSize( Barkode::size().width(), Barkode::size().height() );
+    }
 }
 

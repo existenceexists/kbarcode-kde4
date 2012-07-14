@@ -82,17 +82,20 @@ void TextItem::draw(QPainter* painter)
     {
         default:
         case 0:
-            painter->translate( rect().x(), rect().y() );
+            /*painter->translate( rect().x(), rect().y() );*/// -!F: original
             break;
         case 90:
-            painter->translate( rect().x() + w, rect().y() );
+            /*painter->translate( rect().x() + w, rect().y() );*/// -!F: original
+            painter->translate( w, 0 );
             qSwap( w, h );
             break;
         case 180:
-            painter->translate( rect().x() + w, rect().y() + h );
+            /*painter->translate( rect().x() + w, rect().y() + h );*/// -!F: original
+            painter->translate( w, h );
             break;
         case 270:
-            painter->translate( rect().x(), rect().y() + h );
+            /*painter->translate( rect().x(), rect().y() + h );*/// -!F: original
+            painter->translate( 0, h );
             qSwap( w, h );
             break;
     };
@@ -118,6 +121,80 @@ void TextItem::draw(QPainter* painter)
     painter->restore();
     
     DocumentItem::drawBorder( painter );    
+}
+
+void TextItem::drawPreview(QPainter* painter)
+{
+    bool autosize = false;
+    const QString t = tokenProvider() ? tokenProvider()->parse( m_text ) : m_text;
+
+    if( t != m_text )    
+        autosize = true;
+    
+    QPaintDevice* device = DocumentItem::paintDevice();
+    
+    double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
+    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();
+
+    QColorGroup cg;
+    Q3SimpleRichText srt( t, painter->font() );
+
+    /*
+    int width = (rect().width() < (int)((double)srt.widthUsed()*scalex) && autosize) ? srt.widthUsed() : rect().width();
+    int height = (rect().height() < (int)((double)srt.height()*scaley) && autosize) ? srt.height() : rect().height();
+    */
+
+    int width = (int)((double)rect().width() / scalex);
+    int height = (int)((double)rect().height() / scaley);
+    
+    painter->save();
+
+    int w = rect().width();
+    int h = rect().height();
+
+    switch( (int)m_rotation ) 
+    {
+        default:
+        case 0:
+            /*painter->translate( rect().x(), rect().y() );*/// -!F: original
+            break;
+        case 90:
+            /*painter->translate( rect().x() + w, rect().y() );*/// -!F: original
+            painter->translate( w, 0 );
+            qSwap( w, h );
+            break;
+        case 180:
+            /*painter->translate( rect().x() + w, rect().y() + h );*/// -!F: original
+            painter->translate( w, h );
+            break;
+        case 270:
+            /*painter->translate( rect().x(), rect().y() + h );*/// -!F: original
+            painter->translate( 0, h );
+            qSwap( w, h );
+            break;
+    };
+
+    painter->rotate( m_rotation );
+
+    if( !TextItem::IsQtTextRenderingBroken() )
+    {
+        painter->setPen( Qt::black );
+        srt.setWidth( painter, w );
+        srt.draw( painter, rect().x(), rect().y(), QRect( rect().x(), rect().y(), w, h ), cg );
+    }
+    else
+    {
+        QRect r( 0, 0, width, height );
+        QPicture picture;
+        QPainter p( &picture );
+        LabelUtils::renderString( &p, t, r, scalex, scaley );
+        p.end();
+        painter->drawPicture( rect().x(), rect().y(), picture );
+    }
+    
+    painter->restore();
+    
+    DocumentItem::drawBorderPreview( painter );    
 }
 
 void TextItem::drawZpl( QTextStream* stream )

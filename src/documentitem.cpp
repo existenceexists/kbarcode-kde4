@@ -42,6 +42,7 @@ void DocumentItem::init()
     m_device = KApplication::desktop();
     
     m_z = 0;    
+    m_additionOrder = 0;
     m_border = true;
     m_locked = false;
     m_pen = QPen( Qt::black, 1, Qt::SolidLine );
@@ -50,6 +51,17 @@ void DocumentItem::init()
 }
 
 void DocumentItem::drawBorder(QPainter* painter)
+{
+    if( m_border )
+    {
+        painter->save();
+        painter->setPen( m_pen );
+        painter->drawRect( QRect( 0, 0, rect().width(), rect().height() ) );
+        painter->restore();
+    }
+}
+
+void DocumentItem::drawBorderPreview( QPainter* painter )
 {
     if( m_border )
     {
@@ -73,6 +85,7 @@ void DocumentItem::loadXML (QDomElement* element)
     m_pen.setWidth( element->attribute( "line-width", "1" ).toInt() );    
     m_border = (bool)element->attribute( "line-visible", "1" ).toInt();
     m_z = element->attribute( "z", "0" ).toInt();
+    m_additionOrder = element->attribute( "additionOrder", "0" ).toInt();
     m_locked = (bool)element->attribute( "locked", "0" ).toInt();
     m_visibilityScript = element->attribute( "visibilityScript", "true" );
 }
@@ -89,6 +102,7 @@ void DocumentItem::saveXML (QDomElement* element)
     element->setAttribute( "line-width", m_pen.width() );
     element->setAttribute( "line-visible", (int)m_border );
     element->setAttribute( "z", m_z );
+    element->setAttribute( "additionOrder", m_additionOrder );
     element->setAttribute( "locked", (int)m_locked );
     element->setAttribute( "visibilityScript", m_visibilityScript );
 }
@@ -213,6 +227,16 @@ int DocumentItem::z() const
 void DocumentItem::setZ( int z )
 {
     m_z = z;
+}
+
+int DocumentItem::additionOrder() const
+{
+    return m_additionOrder;
+}
+
+void DocumentItem::setAdditionOrder( int z )
+{
+    m_additionOrder = z;
 }
 
 void DocumentItem::setPaintDevice( QPaintDevice* device )// -!F: original,

@@ -37,6 +37,15 @@ void LineItem::draw(QPainter* painter)
 {
     painter->save();
     painter->setPen( pen() );
+    /*painter->drawLine( rect().x(), rect().y(), rect().x() + rect().width(), rect().y() + rect().height() );*/// -!F: original, delete
+    painter->drawLine( 0, 0, rect().width(), rect().height() );
+    painter->restore();
+}
+
+void LineItem::drawPreview( QPainter* painter )
+{
+    painter->save();
+    painter->setPen( pen() );
     painter->drawLine( rect().x(), rect().y(), rect().x() + rect().width(), rect().y() + rect().height() );
     painter->restore();
 }

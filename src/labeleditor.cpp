@@ -81,8 +81,8 @@
 #include <qprinter.h>
 #include <QPaintDevice>
 #include <QDesktopWidget>
-#include <Q3CanvasItemList>
 #include <QAction>
+#include <QGraphicsItem>
 
 #include <QDebug>// -!F: delete
 
@@ -161,8 +161,8 @@ LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f,
     statusBar()->show();
 
     c = new MyCanvas( this );
-    c->setDoubleBuffering( true );
-    c->setUpdatePeriod( CANVAS_UPDATE_PERIOD );
+    /*c->setDoubleBuffering( true );*/// -!F: original, Is it needed? What is the right replacement of this?
+    /*c->setUpdatePeriod( CANVAS_UPDATE_PERIOD );*/// -!F: original, Is it needed? What is the right replacement of this?
 
     cv = new MyCanvasView( d, c, this );
     cv->setPosLabel( statusBar(), STATUS_ID_MOUSE );
@@ -183,6 +183,7 @@ LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f,
     connect( cv, SIGNAL( doubleClickedItem(TCanvasItem*) ), this, SLOT( doubleClickedItem(TCanvasItem*) ) );
     connect( cv, SIGNAL( showContextMenu(QPoint) ), this, SLOT( showContextMenu(QPoint) ) );
     connect( cv, SIGNAL( movedSomething() ), this, SLOT( setEdited() ) );
+    connect( cv, SIGNAL( movedSomething() ), c, SLOT( update() ) );
     connect( KBarcodeSettings::getInstance(), SIGNAL( updateGrid( int ) ), cv, SLOT( updateGUI() ) );
     connect( kapp, SIGNAL( aboutToQuit() ), this, SLOT( saveConfig() ) );
  
@@ -268,7 +269,7 @@ void LabelEditor::createCommandHistoryActions()
 void LabelEditor::clearLabel()
 {
     TCanvasItem* citem;
-    Q3CanvasItemList::Iterator it;
+    QList<QGraphicsItem *>::iterator it;
 
     description = QString::null;
 
@@ -282,9 +283,8 @@ void LabelEditor::clearLabel()
 
     m_edited = false;
 
-    Q3CanvasItemList list = c->allItems();
-    it = list.begin();
-    for (; it != list.end(); ++it)
+    QList<QGraphicsItem *> list = c->items();
+    for (it = list.begin(); it != list.end(); ++it)
     {
 	citem = static_cast<TCanvasItem*>(*it);
 	citem->remRef();
@@ -292,7 +292,7 @@ void LabelEditor::clearLabel()
 
     updateInfo();
     c->update();
-    cv->repaintContents();
+    cv->repaint();
 }
 
 bool LabelEditor::save()
@@ -359,7 +359,7 @@ void LabelEditor::save( QIODevice* device )
 
     writeXMLHeader( &root, description, d );
 
-    Q3CanvasItemList list = c->allItems();
+    QList<QGraphicsItem *> list = c->items();
     for( int i = 0; i < list.count(); i++ )
     {
         TCanvasItem* item = static_cast<TCanvasItem*>(list[i]);
@@ -433,7 +433,7 @@ bool LabelEditor::openUrl( const QString & url )
     recentAct->addUrl( murl );
 
     enableActions();
-    cv->repaintContents( true );
+    cv->repaint();
 
     return true;
 }
@@ -870,7 +870,7 @@ void LabelEditor::doubleClickedItem( TCanvasItem* item )
     if( dlg.exec() == QDialog::Accepted )
     {
         c->update();
-        cv->repaintContents();
+        cv->repaint();
     }
 }
 
@@ -1046,7 +1046,7 @@ void LabelEditor::raiseCurrent()
     if( !cv->getActive() )
         return;
 
-    ChangeZCommand* czc = new ChangeZCommand( (int)cv->getActive()->z() + 1, cv->getActive() );
+    ChangeZCommand* czc = new ChangeZCommand( (int)cv->getActive()->zValue() + 1, cv->getActive() );
     history->addCommand( czc, true );
 }
 
@@ -1055,7 +1055,7 @@ void LabelEditor::lowerCurrent()
     if( !cv->getActive() )
         return;
 
-    ChangeZCommand* czc = new ChangeZCommand( (int)cv->getActive()->z() - 1, cv->getActive() );
+    ChangeZCommand* czc = new ChangeZCommand( (int)cv->getActive()->zValue() - 1, cv->getActive() );
     history->addCommand( czc, true );
 }
 
@@ -1066,10 +1066,10 @@ void LabelEditor::onTopCurrent()
 
     int z = 0;
 
-    Q3CanvasItemList list = c->allItems();
+    QList<QGraphicsItem *> list = c->items();
     for( int i = 0; i < list.count(); i++ )
-        if( list[i]->z() > z )
-            z = (int)list[i]->z();
+        if( list[i]->zValue() > z )
+            z = (int)list[i]->zValue();
 
 
     ChangeZCommand* czc = new ChangeZCommand( z + 1, cv->getActive() );
@@ -1083,10 +1083,10 @@ void LabelEditor::backCurrent()
 
     int z = 0;
 
-    Q3CanvasItemList list = c->allItems();
+    QList<QGraphicsItem *> list = c->items();
     for( int i = 0; i < list.count(); i++ )
-        if( list[i]->z() < z )
-            z = (int)list[i]->z();
+        if( list[i]->zValue() < z )
+            z = (int)list[i]->zValue();
 
     ChangeZCommand* czc = new ChangeZCommand( z - 1, cv->getActive() );
     history->addCommand( czc, true );
@@ -1113,7 +1113,8 @@ void LabelEditor::preview()
 void LabelEditor::toggleGrid()
 {
     c->setGrid( gridAct->isChecked() );
-    cv->repaintContents();
+    c->update();
+    cv->repaint();
 }
 
 void LabelEditor::cut()

@@ -18,7 +18,9 @@
 #ifndef MYCANVASVIEW_H
 #define MYCANVASVIEW_H
 
-#include <q3canvas.h>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QGraphicsItem>
 #include <QList>
 //Added by qt3to4:
 #include <QResizeEvent>
@@ -33,7 +35,7 @@ typedef QList<TCanvasItem*> TCanvasItemList;
 
 class QRect;
 class QPainter;
-class MyCanvas : public Q3Canvas {
+class MyCanvas : public QGraphicsScene {
     Q_OBJECT
 
     public:
@@ -55,7 +57,8 @@ class MyCanvas : public Q3Canvas {
         bool grid() const { return m_grid; }
 
     protected:
-        void drawBackground( QPainter & painter, const QRect & clip );
+        /*void drawBackground( QPainter & painter, const QRect & clip );*/// -!F: original, delete
+        void drawBackground( QPainter * painter, const QRectF & rect );
 
     private:
         QRect m_rect;
@@ -70,7 +73,8 @@ class K3CommandHistory;
 class K3MacroCommand;
 class KRuler;
 class KStatusBar;
-class MyCanvasView : public Q3CanvasView
+class QGraphicsItem;
+class MyCanvasView : public QGraphicsView
 {
     Q_OBJECT
 
@@ -99,9 +103,9 @@ class MyCanvasView : public Q3CanvasView
         TCanvasItemList getSelected();
 
         TCanvasItem* getActive();
-        void setActive( Q3CanvasItem* item = 0, bool control = false );
+        void setActive( QGraphicsItem* item = 0, bool control = false );
 
-        void setCurrent( Q3CanvasItem* item );
+        void setCurrent( QGraphicsItem* item );
 
         void setHistory( K3CommandHistory* hist ) {
             history = hist;
@@ -117,10 +121,13 @@ class MyCanvasView : public Q3CanvasView
             statusbar = s;
         }
 
-        static int getLowestZ( Q3CanvasItemList list );
-        static int getHighestZ( Q3CanvasItemList list );
+        static int getLowestZ( QList<QGraphicsItem *> list );
+        static int getHighestZ( QList<QGraphicsItem *> list );
         
         void snapPoint(QPoint* point, TCanvasItem* item) ;
+        
+        int additionOrder();
+        void incrementAdditionOrder();
         
     public slots:
         void selectAll();
@@ -129,16 +136,18 @@ class MyCanvasView : public Q3CanvasView
         void deleteCurrent();
 
         void updateGUI() {
-            canvas()->update();
-            repaintContents();
+            scene()->update();
+            repaint();
         }
 
     protected:
-        void contentsMousePressEvent(QMouseEvent*);
-        void contentsMouseMoveEvent(QMouseEvent*);
-        void contentsMouseReleaseEvent(QMouseEvent *);
-        void contentsMouseDoubleClickEvent(QMouseEvent*);
+        void mousePressEvent(QMouseEvent*);
+        void mouseMoveEvent(QMouseEvent*);
+        void mouseReleaseEvent(QMouseEvent *);
+        void mouseDoubleClickEvent(QMouseEvent*);
         void resizeEvent( QResizeEvent * r );
+        
+        int m_additionOrder;
         
     signals:
         void selectionChanged();
@@ -147,7 +156,7 @@ class MyCanvasView : public Q3CanvasView
         void showContextMenu( QPoint );
         
     private:
-        void setSelected( Q3CanvasItem* item = 0, bool control = false );
+        void setSelected( QGraphicsItem* item = 0, bool control = false );
         K3MacroCommand* getMoveCommand();
         
         Definition* def;
@@ -165,10 +174,10 @@ class MyCanvasView : public Q3CanvasView
         QPoint moving_start;
         QPoint translation;
 
-        QRect old;
+        QPointF old;
 
-        bool isInside( QPoint p, Q3CanvasItem* item );
-        int isEdge(  QPoint p, Q3CanvasItem* item  );
+        bool isInside( QPoint p, QGraphicsItem* item );
+        int isEdge(  QPoint p, QGraphicsItem* item  );
         void reposition();
         void updateRuler();
         int updateCursor( QPoint pos, bool pressed = false );

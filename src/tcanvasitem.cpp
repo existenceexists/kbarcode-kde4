@@ -26,11 +26,13 @@
 #include <labelutils.h>
 
 TCanvasItem::TCanvasItem( MyCanvasView* cv )
-    : Q3CanvasRectangle( cv->canvas() ),
+    : QGraphicsRectItem(),
       ReferenceCounted()
 {
+    setFlag ( QGraphicsItem::ItemIsSelectable, true );
     m_view = cv;
     m_item = NULL;
+    m_activeItem = false;
     show();
 }
 
@@ -42,7 +44,7 @@ TCanvasItem::~TCanvasItem()
 
 void TCanvasItem::setZ( double z )
 {
-    Q3CanvasRectangle::setZ( z );
+    QGraphicsRectItem::setZValue( z );
 
     if( m_item )
         m_item->setZ( (int)z );
@@ -50,7 +52,8 @@ void TCanvasItem::setZ( double z )
 
 void TCanvasItem::setSize( int width, int height )
 {
-    Q3CanvasRectangle::setSize( width, height );
+    prepareGeometryChange();
+    QGraphicsRectItem::setRect( 0, 0, width, height );
     
     if( m_item )
     {
@@ -71,13 +74,15 @@ void TCanvasItem::setSizeMM( int w, int h )
     if( m_item )
     {
         m_item->setSizeMM( w, h );
-        Q3CanvasRectangle::setSize( m_item->boundingRect().width(), m_item->boundingRect().height() );
+        prepareGeometryChange();
+        /*QGraphicsRectItem::setRect( m_item->boundingRect().x(), m_item->boundingRect().y(), m_item->boundingRect().width(), m_item->boundingRect().height() );*/// -!F: original
+        QGraphicsRectItem::setRect( 0, 0, m_item->boundingRect().width(), m_item->boundingRect().height() );
     }
 }
 
 void TCanvasItem::moveBy( double dx, double dy )
 {
-    Q3CanvasRectangle::moveBy( dx, dy );
+    QGraphicsRectItem::moveBy( dx, dy );
     
     if( m_item )
     {
@@ -98,58 +103,58 @@ void TCanvasItem::moveMM( int x, int y )
 	LabelUtils l;
 	// the QCanvasRectangle::move is done before the real move
         // as we get dancing TCanvasItems on the screen otherwise
-        Q3CanvasRectangle::move( l.mmToPixel( x / 1000.0, m_view, LabelUtils::DpiX ) + m_view->getTranslation().x(), 
+        QGraphicsRectItem::setPos( l.mmToPixel( x / 1000.0, m_view, LabelUtils::DpiX ) + m_view->getTranslation().x(), 
 				l.mmToPixel( y / 1000.0, m_view, LabelUtils::DpiY ) + m_view->getTranslation().y() );
         m_item->moveMM( x, y );
     }
 }
 
-void TCanvasItem::drawShape (QPainter & painter) 
+void TCanvasItem::paint( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget )
 {   
-    painter.save();
+    painter->save();
     
     if( m_item )
     {
-        if( z() != (int)m_item->z() )
-            Q3CanvasRectangle::setZ( m_item->z() );
+        if( zValue() != (int)m_item->z() )
+            QGraphicsRectItem::setZValue( m_item->z() );
         
-        painter.save();
+        painter->save();
         /*painter.setClipRect( boundingRect(), QPainter::CoordPainter );*/
-	painter.setClipRect( boundingRect() );
-        painter.translate( m_view->getTranslation().x(), m_view->getTranslation().y() );
-        m_item->draw( &painter );
-        painter.restore();
+	painter->setClipRect( boundingRect() );
+        /*painter->translate( m_view->getTranslation().x(), m_view->getTranslation().y() );*/// -!F: original
+        m_item->draw( painter );
+        painter->restore();
     }
     
     // draw edges
     if( isSelected() ) {
         const QPixmap* spot = SpotProvider::getInstance()->spot();
-        painter.translate( x(), y() );
+        /*painter->translate( x(), y() );*/// -!F: original
 
         // top left
-        painter.drawPixmap( 0, 0, *spot );
+        painter->drawPixmap( 0, 0, *spot );
         // bottom left
-        painter.drawPixmap( 0, height()-SPOTSIZE, *spot );
+        painter->drawPixmap( 0, rect().height()-SPOTSIZE, *spot );
         // top right
-        painter.drawPixmap( width()-SPOTSIZE, 0, *spot );
+        painter->drawPixmap( rect().width()-SPOTSIZE, 0, *spot );
         // bottom left
-        painter.drawPixmap( width()-SPOTSIZE, height()-SPOTSIZE, *spot );
+        painter->drawPixmap( rect().width()-SPOTSIZE, rect().height()-SPOTSIZE, *spot );
 
-        if( (width() - 2 * SPOTSIZE ) / 2 > SPOTSIZE ) {
+        if( (rect().width() - 2 * SPOTSIZE ) / 2 > SPOTSIZE ) {
             // top middle
-            painter.drawPixmap( (width()-SPOTSIZE)/2, 0, *spot );
+            painter->drawPixmap( (rect().width()-SPOTSIZE)/2, 0, *spot );
             // bottom middle
-            painter.drawPixmap( (width()-SPOTSIZE)/2, height()-SPOTSIZE, *spot );
+            painter->drawPixmap( (rect().width()-SPOTSIZE)/2, rect().height()-SPOTSIZE, *spot );
         }
 
-        if( (height() - 2 * SPOTSIZE ) / 2 > SPOTSIZE ) {
+        if( (rect().height() - 2 * SPOTSIZE ) / 2 > SPOTSIZE ) {
             // left middle
-            painter.drawPixmap( 0, (height()-SPOTSIZE)/2, *spot );
+            painter->drawPixmap( 0, (rect().height()-SPOTSIZE)/2, *spot );
             // right middle
-            painter.drawPixmap( width() - SPOTSIZE, (height()-SPOTSIZE)/2, *spot );
+            painter->drawPixmap( rect().width() - SPOTSIZE, (rect().height()-SPOTSIZE)/2, *spot );
         }
     }
-    painter.restore();
+    painter->restore();
 }
 
 void TCanvasItem::setItem (DocumentItem* item) 
@@ -162,10 +167,13 @@ void TCanvasItem::setItem (DocumentItem* item)
     if( m_item )
     {
         m_item->setCanvasItem( this );
-        this->setZ( m_item->z() );
+        this->setZValue( m_item->z() );
 
-        Q3CanvasRectangle::move( m_item->boundingRect().x() + m_view->getTranslation().x(), m_item->boundingRect().y() + m_view->getTranslation().y() );
-        Q3CanvasRectangle::setSize( m_item->boundingRect().width(), m_item->boundingRect().height() );
+        prepareGeometryChange();
+        /*QGraphicsRectItem::setPos( m_item->boundingRect().x() + m_view->getTranslation().x(), m_item->boundingRect().y() + m_view->getTranslation().y() );
+        QGraphicsRectItem::setRect( m_item->boundingRect().x(), m_item->boundingRect().y(), m_item->boundingRect().width(), m_item->boundingRect().height() );*/// -!F: original
+        QGraphicsRectItem::setRect( 0, 0, m_item->boundingRect().width(), m_item->boundingRect().height() );
+        QGraphicsRectItem::setPos( m_item->boundingRect().x() + m_view->getTranslation().x(), m_item->boundingRect().y() + m_view->getTranslation().y() );
         update();
     }
 }
@@ -177,7 +185,7 @@ DocumentItem* TCanvasItem::item () const
 
 void TCanvasItem::update()
 {
-    Q3CanvasRectangle::update();
+    QGraphicsRectItem::update();
 }
 
 int TCanvasItem::rtti() const
@@ -200,7 +208,8 @@ void TCanvasItem::show()
     if (!isVisible())
     {
         this->addRef();
-        ((Q3CanvasItem*) this)->show();
+        /*((QGraphicsItem*) this)->show();*/// -!F: original
+        QGraphicsRectItem::show();
     }
 }
 
@@ -217,8 +226,18 @@ void TCanvasItem::hide()
     {
         if (isVisible())
         {
-            ((Q3CanvasItem*) this)->hide(); 
+            ((QGraphicsItem*) this)->hide(); 
             this->remRef();
         }
     }
+}
+
+bool TCanvasItem::isActiveItem()
+{
+    return m_activeItem;
+}
+
+void TCanvasItem::setActiveItem( bool makeActive )
+{
+    m_activeItem = makeActive;
 }

@@ -53,6 +53,40 @@ void RectItem::draw (QPainter* painter)
             painter->save();
             painter->setPen( QPen( Qt::NoPen ) );
             painter->setBrush( m_color );
+            /*painter->drawEllipse( rect() );*/// -!F: original, delete
+            painter->drawEllipse( QRect( 0, 0, rect().width(), rect().height() ) );
+            painter->restore();
+        }
+    
+        if( border() )
+        {
+            painter->save();
+            painter->setPen( pen() );
+            /*painter->drawEllipse( rect() );*/// -!F: original, delete
+            painter->drawEllipse( QRect( 0, 0, rect().width(), rect().height() ) );
+            painter->restore();
+        }
+    }
+    else
+    {
+        if( m_filled ) {
+            /*painter->fillRect( rect(), m_color );*/// -!F: original, delete
+            painter->fillRect( QRect( 0, 0, rect().width(), rect().height() ), m_color );
+        }
+        
+        DocumentItem::drawBorder( painter );
+    }
+}
+
+void RectItem::drawPreview( QPainter* painter )
+{
+    if( m_circle )
+    {
+        if( m_filled )
+        {
+            painter->save();
+            painter->setPen( QPen( Qt::NoPen ) );
+            painter->setBrush( m_color );
             painter->drawEllipse( rect() );
             painter->restore();
         }
@@ -67,10 +101,11 @@ void RectItem::draw (QPainter* painter)
     }
     else
     {
-        if( m_filled )
+        if( m_filled ) {
             painter->fillRect( rect(), m_color );
+        }
         
-        DocumentItem::drawBorder( painter );
+        DocumentItem::drawBorderPreview( painter );
     }
 }
 

@@ -38,8 +38,8 @@ class MyCanvasRectangle;
 class MyCanvasView;
 class CanvasBarcode;
 class PictureRectangle;
-class Q3Canvas;
-class Q3CanvasItem;
+class QGraphicsScene;
+class QGraphicsItem;
 class QColor;
 class QFont;
 class QImage;
@@ -67,7 +67,7 @@ class CommandUtils : public QObject {
         void documentItemDeleted();
         
     protected:
-        Q3Canvas* c;
+        QGraphicsScene* c;
         TCanvasItem* m_canvas_item;
 };
 

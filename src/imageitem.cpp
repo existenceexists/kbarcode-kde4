@@ -17,6 +17,7 @@
 
 #include "imageitem.h"
 #include "tokenprovider.h"
+#include "tcanvasitem.h"
 
 #include <qbuffer.h>
 #include <qdom.h>
@@ -51,6 +52,8 @@ void ImageItem::init()
     setBorder( false );
     
     setRect( QRect( 0, 0, 20, 20 ) );
+    
+    createNewImage = true;
 }
 
 void ImageItem::draw(QPainter* painter)
@@ -58,9 +61,20 @@ void ImageItem::draw(QPainter* painter)
     createImage();
     
     painter->save();
-    painter->drawPixmap( rect().x(), rect().y(), m_tmp );
+    /*painter->drawPixmap( rect().x(), rect().y(), m_tmp );*/// -!F: original
+    painter->drawPixmap( 0, 0, m_tmp );
     painter->restore();
     DocumentItem::drawBorder(painter);
+}
+
+void ImageItem::drawPreview(QPainter* painter)
+{
+    createImage();
+    
+    painter->save();
+    painter->drawPixmap( rect().x(), rect().y(), m_tmp );
+    painter->restore();
+    DocumentItem::drawBorderPreview(painter);
 }
 
 void ImageItem::drawZpl( QTextStream* stream )
@@ -198,6 +212,7 @@ void ImageItem::setExpression( const QString & ex )
 void ImageItem::setPixmap( const QPixmap & pix )
 {
     m_pixmap = pix;
+    createNewImage = true;
     updateImage();
 }
 
@@ -225,13 +240,16 @@ void ImageItem::updateImage()
 
 void ImageItem::createImage()
 {
-    if( m_tmp.isNull() )
+    /*if( m_tmp.isNull() )*/// -!F: original
+    if( createNewImage )
     {
-        QImage img;
+        createNewImage = false;
+        
+        QImage img( 100, 100, QImage::Format_RGB16 );
 
 	if( m_pixmap.isNull() )
 	    img.load( tokenProvider() ? tokenProvider()->parse( m_expression ) : m_expression );
-	else
+        else
 	    img = m_pixmap.toImage();
 
 	if( !img.isNull() )
@@ -281,6 +299,9 @@ void ImageItem::createImage()
 		img = img.mirrored( m_mirror_h, m_mirror_v );
 	    
 	    m_tmp.convertFromImage( img );
+            
+            if( canvasItem() )
+                canvasItem()->setSize( m_tmp.width(), m_tmp.height() );// -!F: added
 	}
 	else
 	{

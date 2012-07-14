@@ -63,6 +63,42 @@ void TextLineItem::draw(QPainter* painter)
     int width = (rect().width() > 0) ? (int)((double)rect().width() / scalex) : srt.widthUsed();
     int height = (rect().height() > 0) ? (int)((double)rect().height() / scaley): srt.height();
 
+    /*QRect r( (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), width, height );*/// -!F: original
+    QRect r( 0, 0, width, height );
+
+    srt.setWidth( painter, width );
+
+    painter->save();
+
+    if( !TextLineItem::IsQtTextRenderingBroken() )
+    {
+        painter->scale( scalex, scaley );
+        painter->setPen( Qt::black );
+        /*srt.draw( painter, (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), r, cg );*/// -!F: original
+        srt.draw( painter, 0, 0, r, cg );
+    }
+    else
+    {
+        LabelUtils::renderString( painter, text, r, scalex, scaley );
+    }
+
+    painter->restore();
+
+    DocumentItem::drawBorder( painter );
+}
+
+void TextLineItem::drawPreview(QPainter* painter)
+{
+    QString text = tokenProvider() ? tokenProvider()->parse( m_text ) : m_text;
+    QColorGroup cg;
+    Q3SimpleRichText srt( text, painter->font() );
+    
+    QPaintDevice* device = DocumentItem::paintDevice();
+    double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
+    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();
+    int width = (rect().width() > 0) ? (int)((double)rect().width() / scalex) : srt.widthUsed();
+    int height = (rect().height() > 0) ? (int)((double)rect().height() / scaley): srt.height();
+
     QRect r( (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), width, height );
 
     srt.setWidth( painter, width );
@@ -82,7 +118,7 @@ void TextLineItem::draw(QPainter* painter)
 
     painter->restore();
 
-    DocumentItem::drawBorder( painter );
+    DocumentItem::drawBorderPreview( painter );
 }
 
 void TextLineItem::drawZpl( QTextStream* stream )

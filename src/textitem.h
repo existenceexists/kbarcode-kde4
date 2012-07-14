@@ -32,6 +32,7 @@ public:
     TextItem ();
         
     void draw (QPainter* painter);
+    void drawPreview( QPainter* painter );
     void drawZpl( QTextStream* stream );
     void drawIpl( QTextStream* stream, IPLUtils* utils );
     void drawEPcl( QTextStream* stream );

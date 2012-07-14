@@ -2,7 +2,7 @@
 #ifndef TCANVASITEM_H
 #define TCANVASITEM_H
 #include <qstring.h>
-#include <q3canvas.h>
+#include <QGraphicsRectItem>
 
 #include "documentitem.h"
 #include "referencecounted.h"
@@ -16,7 +16,7 @@ class MyCanvasView;
  *
  * The class is also ReferenceCounted!!!
  */
-class TCanvasItem : public Q3CanvasRectangle, public ReferenceCounted {
+class TCanvasItem : public QGraphicsRectItem, public ReferenceCounted {
 public:
 
     TCanvasItem ( MyCanvasView* cv );
@@ -41,17 +41,21 @@ public:
     DocumentItem* item () const;
 
     MyCanvasView* canvasView() const;
+    
+    bool isActiveItem();
+    void setActiveItem( bool makeActive );
 
 protected:
     /**
      * 
      * @param painter 
      */
-    void drawShape ( QPainter & p );
+    void paint( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0 );
 
 private:
     DocumentItem* m_item;
     MyCanvasView* m_view;
+    bool m_activeItem;
 };
 #endif //TCANVASITEM_H
 

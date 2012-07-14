@@ -37,6 +37,7 @@
 #include <qregexp.h>
 #include <qlabel.h>
 #include <qlayout.h>
+#include <QDebug>
 
 TextLineEditor::TextLineEditor( TokenProvider* token, QWidget *parent )
     : QWidget( parent ), m_token( token )
@@ -53,15 +54,22 @@ TextLineEditor::TextLineEditor( TokenProvider* token, QWidget *parent )
 
     editor->setFocus();
 
-    Q3DockArea* area = new Q3DockArea( Qt::Horizontal, Q3DockArea::Normal, this );
-    toolBar = new KToolBar( area );
-    tool2Bar = new KToolBar( area );
-    tool3Bar = new KToolBar( area );
+    /*Q3DockArea* area = new Q3DockArea( Qt::Horizontal, Q3DockArea::Normal, this );*/
+    toolBar = new KToolBar( this );
+    tool2Bar = new KToolBar( this );
+    tool3Bar = new KToolBar( this );
     
     setupActions();
 
-    layout->addWidget( area );
+    /*layout->addWidget( area );*/
+    layout->addWidget( toolBar );
+    layout->addWidget( tool2Bar );
+    layout->addWidget( tool3Bar );
+    /*layout->addWidget( mag_vert );
+    layout->addWidget( mag_hor );*/
     layout->addWidget( editor );
+    
+    setLayout( layout );
 
     
 
@@ -82,7 +90,8 @@ void TextLineEditor::setupActions()
    
     KAction *action_undo = KStandardAction::undo( editor, SLOT( undo() ), ac );
     action_undo->setEnabled( false );
-    connect( editor, SIGNAL( undoAvailable(bool) ), action_undo, SLOT( setEnabled(bool) ) );
+    /*connect( editor, SIGNAL( undoAvailable(bool) ), action_undo, SLOT( setEnabled(bool) ) );*/// -!F: original, runtime warning: no such signal
+    connect( editor, SIGNAL( textEdited( const QString & ) ), this, SLOT( setUndoEnabled(bool) ) );
 
     
     KAction *action_redo = KStandardAction::redo( editor, SLOT( redo() ), ac );
@@ -102,7 +111,7 @@ void TextLineEditor::setupActions()
     /*KAction* textDataAct = new KAction( i18n("Insert &Data Field"), "contents", 0, this, SLOT( insertNewField() ), ac, "text_data_act");*/// -!F: original, delete
     KAction* textDataAct = new KAction( this );
     textDataAct->setText( i18n("Insert &Data Field") );
-    textDataAct->setIcon( KIcon( "contents" ) );
+    textDataAct->setIcon( KIcon( "view-table-of-contents-ltr" ) );
     ac->addAction( "text_data_act", textDataAct );
     connect( textDataAct, SIGNAL(triggered(bool)), this, SLOT(insertNewField()) );
     
@@ -136,18 +145,29 @@ void TextLineEditor::setupActions()
     fuentes += "OCR-A 12 point";
     fuentes += "OCR-B 12 point";
 
-    tool2Bar->addAction( textDataAct );
 
-    action_font_type = new KComboBox(tool2Bar) ;
+    action_font_type = new KComboBox(this) ;
     connect( action_font_type, SIGNAL( activated(int) ), this, SLOT( setFontType(int) ) );
     action_font_type->addItems(fuentes) ;
+    tool2Bar->addWidget( action_font_type );
+    
+    tool2Bar->addAction( textDataAct );
+    
+    int minWidth = tool2Bar->widgetForAction( textDataAct )->width() + action_font_type->width() + 400;
+    qDebug() << minWidth;
+    tool2Bar->setMinimumWidth( minWidth );
+    setMinimumWidth( minWidth );
     
     
     
     QLabel* labelv = new QLabel( i18n("&Mag. Vert.:"), tool3Bar );
+    tool3Bar->addWidget( labelv );
     mag_vert = new KIntNumInput( tool3Bar);
+    tool3Bar->addWidget( mag_vert );
     QLabel* labelh = new QLabel( i18n("&Mag. Hor.:"), tool3Bar );
+    tool3Bar->addWidget( labelh );
     mag_hor = new KIntNumInput( tool3Bar );
+    tool3Bar->addWidget( mag_hor );
     connect( mag_vert, SIGNAL( activated(int) ), this, SLOT( setVerMag(int) ) );
     connect( mag_hor, SIGNAL( activated(int) ), this, SLOT( setHorMag(int) ) );  
     mag_vert->setRange( 1, 9, 1 );

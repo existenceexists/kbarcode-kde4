@@ -53,6 +53,7 @@ class ImageItem : public DocumentItem
     
     virtual int rtti() const { return eRtti_Image;}
     virtual void draw(QPainter* painter);
+    virtual void drawPreview(QPainter* painter);
     virtual void drawZpl( QTextStream* stream );
     virtual void drawIpl( QTextStream* stream, IPLUtils* utils );
     virtual void drawEPcl( QTextStream* stream );
@@ -73,6 +74,8 @@ class ImageItem : public DocumentItem
     double m_rotation;
     bool m_mirror_v;
     bool m_mirror_h;
+    
+    bool createNewImage;
        
     EImageScaling m_scaling;
 };

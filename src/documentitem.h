@@ -74,12 +74,24 @@ public:
      * Draws the item
      */
     virtual void  draw (QPainter* painter) = 0;
+    
+    /**
+     * Draws the item on the preview. Added by Frank. Differs from draw() by coordinates that are used to paint at.
+     */
+    virtual void drawPreview (QPainter* painter) = 0;
+    /*virtual void drawPreview (QPainter* painter) {};*/// -!F: an alternative to the pure virtual function
         
     
     /**
      * Draw a border around the item, has to be reimplemented for round items or barcodes which do not allow borders.
      */
     virtual void drawBorder (QPainter* painter);
+    
+    /**
+     * Draw a border around the item on the label of the preview dialog, has to be reimplemented for round items or barcodes which do not allow borders.
+     * Added by Frank. 
+     */
+    virtual void drawBorderPreview( QPainter* painter );
         
     virtual int  rtti () const = 0;
 
@@ -178,6 +190,9 @@ public:
     
     int z() const;
     void setZ( int z );
+    
+    int additionOrder() const;
+    void setAdditionOrder( int additionOrder );
 
     /** Only the z index is compared
       */
@@ -203,6 +218,7 @@ private:
      QPen m_pen;
      QRect m_rect;
      int m_z;
+     int m_additionOrder;
      bool m_locked;
 
     /**
