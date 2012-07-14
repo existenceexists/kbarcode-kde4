@@ -37,6 +37,7 @@
 #include <qregexp.h>
 #include <qlabel.h>
 #include <qlayout.h>
+#include <QDebug>
 
 TextLineEditor::TextLineEditor( TokenProvider* token, QWidget *parent )
     : QWidget( parent ), m_token( token )
@@ -152,9 +153,10 @@ void TextLineEditor::setupActions()
     
     tool2Bar->addAction( textDataAct );
     
-    tool2Bar->setMinimumWidth( 600 );
-    
-    setMinimumWidth( 600 );
+    int minWidth = tool2Bar->widgetForAction( textDataAct )->width() + action_font_type->width() + 400;
+    qDebug() << minWidth;
+    tool2Bar->setMinimumWidth( minWidth );
+    setMinimumWidth( minWidth );
     
     
     
