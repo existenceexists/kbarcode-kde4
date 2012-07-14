@@ -140,7 +140,8 @@ void MultiLineEditor::setupActions()
     /*action_font = new KFontAction( i18n("&Font"), 0, ac, "format_font" );*/// -!F: original, delete
     action_font = new KFontAction( i18n("&Font"), this );
     ac->addAction( "format_font", action_font );
-    connect( action_font, SIGNAL( activated( const QString & ) ), editor, SLOT( setFamily( const QString & ) ) );
+    /*connect( action_font, SIGNAL( activated( const QString & ) ), editor, SLOT( setFamily( const QString & ) ) );*/// -!F: original, is triggered() the right replacement of activated() - activated() gives a runtime warning: no such signal "activated"?
+    connect( action_font, SIGNAL( triggered( const QString & ) ), editor, SLOT( setFamily( const QString & ) ) );
 
     /*action_font_size = new KFontSizeAction( i18n("Font &Size"), 0, ac, "format_font_size" );*/// -!F: original, delete
     action_font_size = new KFontSizeAction( i18n("Font &Size"), this );
