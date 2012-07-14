@@ -257,17 +257,18 @@ void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
 
 void MyCanvasView::mousePressEvent(QMouseEvent* e)
 {
-    setActive( 0, e->modifiers() & Qt::ControlModifier  );
+    /*setActive( 0, e->modifiers() & Qt::ControlModifier  );*/// -!F: original
     
     QPoint mappedEventPosition = mapToScene( e->pos() ).toPoint();
 
-    QList<QGraphicsItem *> list = scene()->items();
+    /*QList<QGraphicsItem *> list = scene()->items();
     for( int z = MyCanvasView::getLowestZ( list ); z <= MyCanvasView::getHighestZ( list ); z++ )
         for( int i = 0; i < list.count(); i++ ) {
-            /*if( list[i]->zValue() == z && isInside( e->pos(), list[i] ) )*/// -!F: original
             if( list[i]->zValue() == z && isInside( mappedEventPosition, list[i] ) )
                 setActive( list[i], (e->modifiers() & Qt::ControlModifier) );
         }
+    */// -!F: original
+    setActive( scene()->itemAt( mappedEventPosition ), (e->modifiers() & Qt::ControlModifier) );
 
     if( getActive() ) {
         /*moving_start = inverseWorldMatrix().map(e->pos());*/// -!F: original, delete
