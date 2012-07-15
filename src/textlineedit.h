@@ -46,11 +46,11 @@ class TextLineEditor : public QWidget {
         /*void setFontType(int index);*/// -!F: original, needs to be a slot
 	int  getFontType();
 	int  getHorMag();
-	void setHorMag( int index );
 	int  getVertMag();
-	void setVertMag( int index );
     public slots:
         void setFontType(int index);
+        void setHorMag( int index );
+        void setVertMag( int index );
     private slots:
         void setupActions();
         void updateActions(const QString & text=QString());

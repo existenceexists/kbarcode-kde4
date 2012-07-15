@@ -166,8 +166,10 @@ void TextLineEditor::setupActions()
     tool3Bar->addWidget( labelh );
     mag_hor = new KIntNumInput( tool3Bar );
     tool3Bar->addWidget( mag_hor );
-    connect( mag_vert, SIGNAL( activated(int) ), this, SLOT( setVerMag(int) ) );
-    connect( mag_hor, SIGNAL( activated(int) ), this, SLOT( setHorMag(int) ) );  
+    /*connect( mag_vert, SIGNAL( activated(int) ), this, SLOT( setVerMag(int) ) );
+    connect( mag_hor, SIGNAL( activated(int) ), this, SLOT( setHorMag(int) ) );  */// -!F: original
+    connect( mag_vert, SIGNAL( valueChanged(int) ), this, SLOT( setVertMag(int) ) );
+    connect( mag_hor, SIGNAL( valueChanged(int) ), this, SLOT( setHorMag(int) ) );
     mag_vert->setRange( 1, 9, 1 );
     mag_vert->setSliderEnabled( false );
     mag_hor->setRange( 1, 9, 1 );
