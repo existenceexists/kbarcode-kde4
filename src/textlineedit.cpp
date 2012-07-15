@@ -37,7 +37,6 @@
 #include <qregexp.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <QDebug>
 
 TextLineEditor::TextLineEditor( TokenProvider* token, QWidget *parent )
     : QWidget( parent ), m_token( token )
@@ -86,27 +85,26 @@ TextLineEditor::~TextLineEditor()
 void TextLineEditor::setupActions()
 {
     ac = new KActionCollection( this );
-
    
-    KAction *action_undo = KStandardAction::undo( editor, SLOT( undo() ), ac );
+    action_undo = KStandardAction::undo( editor, SLOT( undo() ), ac );
     action_undo->setEnabled( false );
     /*connect( editor, SIGNAL( undoAvailable(bool) ), action_undo, SLOT( setEnabled(bool) ) );*/// -!F: original, runtime warning: no such signal
-    connect( editor, SIGNAL( textEdited( const QString & ) ), this, SLOT( setUndoEnabled(bool) ) );
 
-    
-    KAction *action_redo = KStandardAction::redo( editor, SLOT( redo() ), ac );
+    action_redo = KStandardAction::redo( editor, SLOT( redo() ), ac );
     action_redo->setEnabled( false );
-    connect( editor, SIGNAL( redoAvailable(bool) ), action_redo, SLOT( setEnabled(bool) ) );
+    /*connect( editor, SIGNAL( redoAvailable(bool) ), action_redo, SLOT( setEnabled(bool) ) );*/// -!F: original, runtime warning: no such signal
 
-    KAction *action_cut = KStandardAction::cut( editor, SLOT( cut() ), ac );
-    action_cut->setEnabled( false );
-    connect( editor, SIGNAL( copyAvailable(bool) ), action_cut, SLOT( setEnabled(bool) ) );
+    action_cut = KStandardAction::cut( editor, SLOT( cut() ), ac );
+    /*action_cut->setEnabled( false );
+    connect( editor, SIGNAL( copyAvailable(bool) ), action_cut, SLOT( setEnabled(bool) ) );*/// -!F: original
 
-    KAction *action_copy = KStandardAction::copy( editor, SLOT( copy() ), ac );
-    action_copy->setEnabled( false );
-    connect( editor, SIGNAL( copyAvailable(bool) ), action_copy, SLOT( setEnabled(bool) ) );
+    action_copy = KStandardAction::copy( editor, SLOT( copy() ), ac );
+    /*action_copy->setEnabled( false );
+    connect( editor, SIGNAL( copyAvailable(bool) ), action_copy, SLOT( setEnabled(bool) ) );*/// -!F: original
 
-    KAction* action_paste = KStandardAction::paste( editor, SLOT( paste() ), ac );
+    action_paste = KStandardAction::paste( editor, SLOT( paste() ), ac );
+    
+    connect( editor, SIGNAL( textChanged(const QString &) ), this, SLOT( updateActions(const QString &) ) );
 
     /*KAction* textDataAct = new KAction( i18n("Insert &Data Field"), "contents", 0, this, SLOT( insertNewField() ), ac, "text_data_act");*/// -!F: original, delete
     KAction* textDataAct = new KAction( this );
@@ -153,8 +151,8 @@ void TextLineEditor::setupActions()
     
     tool2Bar->addAction( textDataAct );
     
-    int minWidth = tool2Bar->widgetForAction( textDataAct )->width() + action_font_type->width() + 400;
-    qDebug() << minWidth;
+    /*int minWidth = tool2Bar->widgetForAction( textDataAct )->width() + action_font_type->width() + 400;*/
+    int minWidth = 600;
     tool2Bar->setMinimumWidth( minWidth );
     setMinimumWidth( minWidth );
     
@@ -197,9 +195,22 @@ void TextLineEditor::setText( const QString & t )
 }
 
 
-void TextLineEditor::updateActions()
+void TextLineEditor::updateActions(const QString & text)
 {
-  
+    if( !text.isEmpty() ) {
+        
+        if( editor->isUndoAvailable() ) {
+            action_undo->setEnabled( true );
+        } else {
+            action_undo->setEnabled( false );
+        }
+        
+        if( editor->isRedoAvailable() ) {
+            action_redo->setEnabled( true );
+        } else {
+            action_redo->setEnabled( false );
+        }
+    }
 }
 
 

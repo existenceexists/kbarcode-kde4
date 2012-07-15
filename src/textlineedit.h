@@ -25,6 +25,7 @@ class KSpell;
 class KSpellConfig;
 class KComboBox;
 class TokenProvider;
+class KAction;
 
 #if QT_VERSION >= 0x030100
     class KLineEdit;
@@ -52,13 +53,18 @@ class TextLineEditor : public QWidget {
         void setFontType(int index);
     private slots:
         void setupActions();
-        void updateActions();
+        void updateActions(const QString & text=QString());
            
         void insertNewField();
 	
         
     protected:
         TokenProvider* m_token;
+        KAction* action_undo;
+        KAction* action_redo;
+        KAction* action_copy;
+        KAction* action_cut;
+        KAction* action_paste;
 
 #if QT_VERSION >= 0x030100
         KLineEdit* editor;
@@ -72,8 +78,6 @@ class TextLineEditor : public QWidget {
         KToolBar* toolBar;
         KToolBar* tool2Bar;
 	KToolBar* tool3Bar;
-	
-	
   
 };
 
