@@ -160,7 +160,7 @@ bool SqlTables::newTables( const QString & username, const QString & password, c
 
     QSqlDatabase dbaseInstance = QSqlDatabase::addDatabase(driver, drivers[driver]->initdb( database ) );
     QSqlDatabase* dbase = & dbaseInstance;
-    dbase->setDatabaseName( drivers[driver]->initdb( database ) );
+    dbase->setDatabaseName( database );
     dbase->setUserName( username );
     dbase->setPassword( password );
     dbase->setHostName( hostname );
