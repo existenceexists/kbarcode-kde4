@@ -87,8 +87,8 @@ DatabaseBrowser::~DatabaseBrowser()
     Definition::updateProducer();
     KXmlGuiWindow::setAutoSaveSettings( QString("DatabaseBrowser") );
 
-    if( findDlg )
-        delete findDlg;// -!F: original, delete, now need to delete a pointer to findDlg
+    /*if( findDlg )
+        delete findDlg;*/// -!F: original, delete, now need to delete a pointer to findDlg
 }
 
 void DatabaseBrowser::setupActions()
