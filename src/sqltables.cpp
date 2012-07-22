@@ -339,12 +339,13 @@ void SqlTables::importData( const QString & filename, QSqlDatabase* db )
         QTextStream s( & data );
         QSqlQuery query( QString::null, * db );
 	QString line = s.readLine(1024);
-        while( !line.isNull() )
+        while( !line.isNull() ) {
             if( !line.isEmpty() ) {
                 dlg->setValue( dlg->value() + line.length() );
                 exec( &query, line );
             }
             line = s.readLine(1024);
+        }
     } else
         KMessageBox::sorry( 0, i18n("Can't open the data file containing the label definitions.") );
 
