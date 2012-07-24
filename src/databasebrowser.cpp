@@ -214,8 +214,9 @@ void DatabaseBrowser::find()
     }
     findDlg->setOptions( findOptions );
     
-    findObject = new KFind( m_find, findDlg->options(), table, findDlg );
-    connect( findObject, SIGNAL( findNext() ), this, SLOT( slotFindNext() ) );
+    /*findObject = new KFind( m_find, findDlg->options(), table, findDlg );
+    connect( findObject, SIGNAL( findNext() ), this, SLOT( slotFindNext() ) );*/
+    connect( findDlg, SIGNAL( okClicked() ), this, SLOT( slotFindNext() ) );
     
     findDlg->exec();
     findDialogExists = false;
