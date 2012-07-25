@@ -189,27 +189,21 @@ void DatabaseBrowser::setupSql()
 
 void DatabaseBrowser::find()
 {
-    /*if( !findDlg )
-        findDlg = new KEdFind( this, false );
-        
-    findDlg->setText( m_find );
-    findDlg->setDirection( m_direction );
-    findDlg->setCaseSensitive( m_case );
-    connect( findDlg, SIGNAL( search() ), this, SLOT( findNext() ) );
-    
-    findDlg->exec();*/// -!F: original, delete
-    if( !findDialogExists ) {
-        findDlg = new KFindDialog( this );
-        findDialogExists = true;
-    }
+    findDlg = new KFindDialog( this );
+    findDialogExists = true;
         
     findDlg->setPattern( m_find );
-    /*KFind::Options findOptions = findDlg->options();*/
     long findOptions = findDlg->options();
-    if ( m_direction && !( ( findOptions & KFind::FindBackwards ) == KFind::FindBackwards ) ) {
+    /*if ( m_direction && !( ( findOptions & KFind::FindBackwards ) == KFind::FindBackwards ) ) {
         findOptions = findOptions | KFind::FindBackwards;
     }
     if ( m_case && !( ( findOptions & KFind::CaseSensitive ) == KFind::CaseSensitive ) ) {
+        findOptions = findOptions | KFind::CaseSensitive;
+    }*/// -!F: delete
+    if ( m_direction ) {
+        findOptions = findOptions | KFind::FindBackwards;
+    }
+    if ( m_case ) {
         findOptions = findOptions | KFind::CaseSensitive;
     }
     findDlg->setOptions( findOptions );
@@ -218,8 +212,11 @@ void DatabaseBrowser::find()
     connect( findObject, SIGNAL( findNext() ), this, SLOT( slotFindNext() ) );*/
     connect( findDlg, SIGNAL( okClicked() ), this, SLOT( slotFindNext() ) );
     
-    findDlg->exec();
-    findDialogExists = false;
+    if( findDlg->exec() == QDialog::Accepted ) {
+        find();
+    } else {
+        findDialogExists = false;
+    }
 }
 
 void DatabaseBrowser::slotFindNext()
@@ -228,8 +225,8 @@ void DatabaseBrowser::slotFindNext()
         m_find = findDlg->pattern();
         m_direction = ( findDlg->options() & KFind::FindBackwards ) == KFind::FindBackwards;
         m_case = ( findDlg->options() & KFind::CaseSensitive ) == KFind::CaseSensitive;
-    } else
-        find();
+    }/* else
+        find();*/// -!F: delete
 
     table->find( m_find, m_case, m_direction );
 }
