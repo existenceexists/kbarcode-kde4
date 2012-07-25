@@ -67,8 +67,6 @@ class DatabaseBrowser : public KXmlGuiWindow{
 
         KFindDialog * findDlg;
         KFind * findObject;
-        
-        bool findDialogExists;
 
         QString m_find;
         bool m_direction;

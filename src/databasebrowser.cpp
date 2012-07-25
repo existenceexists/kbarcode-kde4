@@ -68,8 +68,7 @@ DatabaseBrowser::DatabaseBrowser( QString _database, QWidget *parent)
     /*connect( this, SIGNAL( connectedSQL() ), this, SLOT( setupSql() ) );*/// -!F: original, keep, this line gives the warning: Object::connect: No such signal DatabaseBrowser::connectedSQL()
     connect( SqlTables::getInstance(), SIGNAL( connectedSQL() ), this, SLOT( setupSql() ) );// -!F: is this the right correction of the previous line ?
 
-    /*findDlg = 0;*/// -!F: original, delete
-    findDialogExists = false;
+    findDlg = 0;
     
     setupActions();
     show();
@@ -87,8 +86,8 @@ DatabaseBrowser::~DatabaseBrowser()
     Definition::updateProducer();
     KXmlGuiWindow::setAutoSaveSettings( QString("DatabaseBrowser") );
 
-    /*if( findDlg )
-        delete findDlg;*/// -!F: original, delete, now need to delete a pointer to findDlg
+    if( findDlg )
+        delete findDlg;
 }
 
 void DatabaseBrowser::setupActions()
@@ -190,7 +189,6 @@ void DatabaseBrowser::setupSql()
 void DatabaseBrowser::find()
 {
     findDlg = new KFindDialog( this );
-    findDialogExists = true;
         
     findDlg->setPattern( m_find );
     long findOptions = findDlg->options();
@@ -212,21 +210,21 @@ void DatabaseBrowser::find()
     connect( findObject, SIGNAL( findNext() ), this, SLOT( slotFindNext() ) );*/
     connect( findDlg, SIGNAL( okClicked() ), this, SLOT( slotFindNext() ) );
     
-    if( findDlg->exec() == QDialog::Accepted ) {
+    QDialog::DialogCode res = (QDialog::DialogCode) findDlg->exec();
+    delete findDlg;
+    findDlg = 0;
+    if( res == QDialog::Accepted ) {
         find();
-    } else {
-        findDialogExists = false;
     }
 }
 
 void DatabaseBrowser::slotFindNext()
 {
-    if( findDialogExists ) {
+    if( findDlg ) {
         m_find = findDlg->pattern();
         m_direction = ( findDlg->options() & KFind::FindBackwards ) == KFind::FindBackwards;
         m_case = ( findDlg->options() & KFind::CaseSensitive ) == KFind::CaseSensitive;
-    }/* else
-        find();*/// -!F: delete
+    }
 
     table->find( m_find, m_case, m_direction );
 }
