@@ -44,6 +44,7 @@
 #include <kstandarddirs.h>
 #include <kxmlguiwindow.h>
 #include <ktoolbar.h>
+#include <kwindowsystem.h>
 
 #define CUR_TABLE_ID 6666
 
@@ -189,8 +190,14 @@ void DatabaseBrowser::setupSql()
 
 void DatabaseBrowser::find()
 {
-    findDlg = new KFindDialog( this );
-        
+    if( findDlg ) {
+        KWindowSystem::activateWindow( findDlg->winId() );
+        findDlg->show();
+        return;
+    }
+    
+    findDlg = new KFindDialog();
+    
     findDlg->setPattern( m_find );
     long findOptions = findDlg->options();
     /*if ( m_direction && !( ( findOptions & KFind::FindBackwards ) == KFind::FindBackwards ) ) {
@@ -210,13 +217,16 @@ void DatabaseBrowser::find()
     /*findObject = new KFind( m_find, findDlg->options(), table, findDlg );
     connect( findObject, SIGNAL( findNext() ), this, SLOT( slotFindNext() ) );*/
     connect( findDlg, SIGNAL( okClicked() ), this, SLOT( slotFindNext() ) );
+    connect( findDlg, SIGNAL( cancelClicked() ), this, SLOT( closeFindDialog() ) );
     
-    QDialog::DialogCode res = (QDialog::DialogCode) findDlg->exec();
+    /*QDialog::DialogCode res = (QDialog::DialogCode) findDlg->exec();
     delete findDlg;
     findDlg = 0;
     if( res == QDialog::Accepted ) {
         find();
-    }
+    }*/
+    findDlg->show();
+    
 }
 
 void DatabaseBrowser::slotFindNext()
@@ -228,6 +238,15 @@ void DatabaseBrowser::slotFindNext()
     }
 
     table->find( m_find, m_case, m_direction );
+    
+    findDlg->show();
+}
+
+void DatabaseBrowser::closeFindDialog()
+{
+    if( findDlg ) {
+        findDlg->deleteLater();
+    }
 }
 
 void DatabaseBrowser::cut()

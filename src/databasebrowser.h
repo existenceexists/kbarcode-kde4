@@ -54,6 +54,7 @@ class DatabaseBrowser : public KXmlGuiWindow{
 
         void find();
         void slotFindNext();
+        void closeFindDialog();
 
         void import();
 
