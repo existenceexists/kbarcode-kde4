@@ -149,6 +149,7 @@ void DatabaseBrowser::setupActions()
     toolBar()->addAction( apaste );
     toolBar()->addSeparator();
     toolBar()->addAction( afind );
+    toolBar()->addAction( actionFindNext );
 
     /*MainWindow::loadConfig();*/// -!F: original, how to load databasebrowser window settings ?
 }
