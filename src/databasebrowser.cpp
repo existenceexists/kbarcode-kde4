@@ -63,6 +63,7 @@ DatabaseBrowser::DatabaseBrowser( QString _database, QWidget *parent )
     
     model = new QSqlTableModel( this, *(SqlTables::getInstance()->database()) );
     model->setTable( _database );
+    model->setEditStrategy( QSqlTableModel::OnFieldChange );
     table->setModel( model );
     //model->setFilter("");// do not filter the SELECT statement
     
