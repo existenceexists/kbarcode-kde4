@@ -32,7 +32,10 @@ class KMenuBar;
 class KToolBar;
 class KPushButton;
 class KMenu;
-class MyDataTable;
+//class MyDataTable;// -!F: original, delete
+class QTableView;
+class QSqlTableModel;
+class QDataWidgetMapper;
 /** A database browser widget. Allows small changes to SQL tables
   * and is mostly used for having a quick look on the tables.
   */
@@ -59,7 +62,10 @@ class DatabaseBrowser : public KXmlGuiWindow{
 
     protected:
         QString database;
-        MyDataTable* table;
+        /*MyDataTable* table;*/// -!F: original
+        QTableView * table;
+        QSqlTableModel * model;
+        QDataWidgetMapper * mapper;
 
         KAction* undoAct;
         KAction* deleteAct;

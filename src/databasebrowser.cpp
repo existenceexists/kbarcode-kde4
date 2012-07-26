@@ -24,7 +24,11 @@
 // Qt includes
 #include <qclipboard.h>
 /*#include <QSqlQuery>*/// -!F: keep
-#include <Q3SqlCursor>
+//#include <Q3SqlCursor>// -!F: delete
+#include <QTableView>
+#include <QSqlTableModel>
+#include <QDataWidgetMapper>
+#include <QAbstractItemDelegate>
 //Added by qt3to4:
 //#include <QSqlCursor>// -!F: original, delete
 #include <QWidget>
@@ -47,14 +51,23 @@
 
 #define CUR_TABLE_ID 6666
 
-DatabaseBrowser::DatabaseBrowser( QString _database, QWidget *parent)
+DatabaseBrowser::DatabaseBrowser( QString _database, QWidget *parent )
     : KXmlGuiWindow ( parent ) 
 {
     m_direction = m_case = false;
 
-    table = new MyDataTable(this );
+    /*table = new MyDataTable(this );*/// -!F: original
+    table = new QTableView( this );
     //setCentralWidget( (QWidget*) table );
     setCentralWidget( table );
+    
+    model = new QSqlTableModel( this, *(SqlTables::getInstance()->database()) );
+    model->setTable( _database );
+    table->setModel( model );
+    //model->setFilter("");// do not filter the SELECT statement
+    
+    /*mapper = new QDataWidgetMapper;
+    mapper->setModel( model );*/
 
     statusBar()->insertPermanentItem( i18n("Current Table: <b>" ) + _database, CUR_TABLE_ID, 0 );
     statusBar()->setSizeGripEnabled( true );
@@ -71,9 +84,11 @@ DatabaseBrowser::DatabaseBrowser( QString _database, QWidget *parent)
     findDlg = 0;
     
     setupActions();
+    
+    setupSql();
+    
     show();
 
-    setupSql();
 }
 
 DatabaseBrowser::~DatabaseBrowser()
@@ -156,11 +171,11 @@ void DatabaseBrowser::setupActions()
 
 void DatabaseBrowser::setupSql()
 {
-    Q3SqlCursor* cur = new Q3SqlCursor( database, true );// -!F: original, delete
-    cur->select();
+    /*Q3SqlCursor* cur = new Q3SqlCursor( database, true );// -!F: original, delete
+    cur->select();*/
     /*QSqlQuery query( QString( "SELECT * FROM " ) + QString( database ) );*/// -!F: keep
     //pQuery = & query;// -!F: delete
-    int i = 0;
+    /*int i = 0;
     int c = 0;
     while ( cur->next() ) {
         for( c = 0; c < cur->count(); c++ ) {
@@ -168,23 +183,31 @@ void DatabaseBrowser::setupSql()
             table->horizontalHeader()->setLabel( c, cur->fieldName( c ) );
         }
         i++;
-    }
-    /*while ( query.next() ) {// -!F: keep
+    }*/// -!F: original, delete
+    /*while ( query.next() ) {// -!F: delete
         for( c = 0; c < query.record().count(); c++ ) {
             table->setText( i, c, query.value( c ).toString() );
             table->horizontalHeader()->setLabel( c, query.record().fieldName( c ) );
         }
         i++;
-    }*/
+    }*/// -!F: delete
 
-    table->setNumCols( c );
+    /*table->setNumCols( c );
     table->setNumRows( i );
 
     table->setSqlCursor( cur, true, true );
     table->setSorting( true );
     table->setConfirmDelete( true );
     table->setAutoEdit( true );
-    table->refresh( Q3DataTable::RefreshAll );
+    table->refresh( Q3DataTable::RefreshAll );*/// -!F: original, delete
+    
+    model->select();
+    
+    /*for( int c = 0; c < model->columnCount(); c++ ) {
+        //model->setHeaderData( c, Qt::Horizontal, ?);
+        //mapper->addMapping( table->itemDelegateForColumn( c ), c );
+        //model->setItemDelegate( itemDelegateForColumn( c ) );
+    }*/// -!F: delete
 }
 
 void DatabaseBrowser::find()
@@ -221,18 +244,18 @@ void DatabaseBrowser::find()
 
 void DatabaseBrowser::slotFindNext()
 {
-    if( findDlg ) {
+    /*if( findDlg ) {
         m_find = findDlg->pattern();
         m_direction = ( findDlg->options() & KFind::FindBackwards ) == KFind::FindBackwards;
         m_case = ( findDlg->options() & KFind::CaseSensitive ) == KFind::CaseSensitive;
     }
 
-    table->find( m_find, m_case, m_direction );
+    table->find( m_find, m_case, m_direction );*/
 }
 
 void DatabaseBrowser::cut()
 {
-    QString text = table->value( table->currentRow(), table->currentColumn() ).toString();
+    /*QString text = table->value( table->currentRow(), table->currentColumn() ).toString();
     if( !text.isEmpty() ) {
         kapp->clipboard()->setText( text );
 
@@ -243,19 +266,19 @@ void DatabaseBrowser::cut()
             table->refresh();
         }
 
-    }
+    }*/
 }
 
 void DatabaseBrowser::copy()
 {
-    QString text = table->value( table->currentRow(), table->currentColumn() ).toString();
+    /*QString text = table->value( table->currentRow(), table->currentColumn() ).toString();
     if( !text.isEmpty() )
-        kapp->clipboard()->setText( text );
+        kapp->clipboard()->setText( text );*/
 }
 
 void DatabaseBrowser::paste()
 {
-    QString text = kapp->clipboard()->text();
+    /*QString text = kapp->clipboard()->text();
     if( !text.isEmpty() ) {
         QSqlRecord* buffer = table->sqlCursor()->primeUpdate();
         if( buffer ) {
@@ -263,7 +286,7 @@ void DatabaseBrowser::paste()
             table->sqlCursor()->update();
             table->refresh();
         }
-    }
+    }*/
 
 }
 
