@@ -184,8 +184,6 @@ void DatabaseBrowser::setupSql()
 void DatabaseBrowser::find()
 {
     if( m_find ) {
-        /*m_findPattern = m_find->pattern();
-        m_findOptions = m_find->options();*/
         delete m_find;
         m_find = 0L;
     }
@@ -196,8 +194,6 @@ void DatabaseBrowser::find()
     findDlg->setOptions( m_findOptions );
     
     connect( findDlg, SIGNAL( okClicked() ), this, SLOT( slotFindNext() ) );
-    
-    m_findCurrentRow = 0;
     
     findDlg->exec();
     delete findDlg;
@@ -308,6 +304,17 @@ void DatabaseBrowser::createKFindInstance()
     // Connect findNext signal - called when pressing the button in the dialog
     connect( m_find, SIGNAL( findNext() ),
         this, SLOT( slotFindNext() ) );
+    
+    // Set a row that we will start searching from:
+    if( ( m_findOptions & KFind::FromCursor ) == KFind::FromCursor ) {
+        m_findCurrentRow = table->currentIndex().row();
+    } else {
+        if( ( m_findOptions & KFind::FindBackwards ) == KFind::FindBackwards ) {
+            m_findCurrentRow = model->rowCount() - 1;
+        } else {
+            m_findCurrentRow = 0;
+        }
+    }
     
     slotFindNext();// Begin the search
 }
