@@ -56,7 +56,6 @@ class DatabaseBrowser : public KXmlGuiWindow{
         void paste();
 
         void find();
-        void find2();
         void slotFindNext();
         void findNextBackwards();
         void findNextForwards();

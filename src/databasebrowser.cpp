@@ -121,7 +121,7 @@ void DatabaseBrowser::setupActions()
     KAction* acut = KStandardAction::cut( this, SLOT( cut() ), actionCollection() );
     KAction* acopy = KStandardAction::copy( this, SLOT( copy() ), actionCollection() );
     KAction* apaste = KStandardAction::paste( this, SLOT( paste() ), actionCollection() );
-    KAction* afind = KStandardAction::find( this, SLOT( find2() ), actionCollection() );
+    KAction* afind = KStandardAction::find( this, SLOT( find() ), actionCollection() );
     /*menuBar()->insertItem( i18n("&Edit"), editMenu, -1, 1 );*/// -!F: original, delete
 
     /*acut->plug( editMenu );
@@ -177,89 +177,11 @@ void DatabaseBrowser::setupActions()
 
 void DatabaseBrowser::setupSql()
 {
-    /*Q3SqlCursor* cur = new Q3SqlCursor( database, true );// -!F: original, delete
-    cur->select();*/
-    /*QSqlQuery query( QString( "SELECT * FROM " ) + QString( database ) );*/// -!F: keep
-    //pQuery = & query;// -!F: delete
-    /*int i = 0;
-    int c = 0;
-    while ( cur->next() ) {
-        for( c = 0; c < cur->count(); c++ ) {
-            table->setText( i, c, cur->value( c ).toString() );
-            table->horizontalHeader()->setLabel( c, cur->fieldName( c ) );
-        }
-        i++;
-    }*/// -!F: original, delete
-    /*while ( query.next() ) {// -!F: delete
-        for( c = 0; c < query.record().count(); c++ ) {
-            table->setText( i, c, query.value( c ).toString() );
-            table->horizontalHeader()->setLabel( c, query.record().fieldName( c ) );
-        }
-        i++;
-    }*/// -!F: delete
-
-    /*table->setNumCols( c );
-    table->setNumRows( i );
-
-    table->setSqlCursor( cur, true, true );
-    table->setSorting( true );
-    table->setConfirmDelete( true );
-    table->setAutoEdit( true );
-    table->refresh( Q3DataTable::RefreshAll );*/// -!F: original, delete
-    
     model->select();
     table->resizeColumnsToContents();
-    
-    /*for( int c = 0; c < model->columnCount(); c++ ) {
-        //model->setHeaderData( c, Qt::Horizontal, ?);
-        //mapper->addMapping( table->itemDelegateForColumn( c ), c );
-        //model->setItemDelegate( itemDelegateForColumn( c ) );
-    }*/// -!F: delete
 }
 
 void DatabaseBrowser::find()
-{
-    if( m_find ) {
-        /*m_findPattern = m_find->pattern();
-        m_findOptions = m_find->options();*/
-        delete m_find;
-        m_find = 0L;
-    }
-    
-    findDlg = new KFindDialog( this );
-        
-    findDlg->setPattern( m_findPattern );
-    findDlg->setOptions( m_findOptions );
-    /*long findOptions = findDlg->options();*/
-    /*if ( m_direction && !( ( findOptions & KFind::FindBackwards ) == KFind::FindBackwards ) ) {
-        findOptions = findOptions | KFind::FindBackwards;
-    }
-    if ( m_case && !( ( findOptions & KFind::CaseSensitive ) == KFind::CaseSensitive ) ) {
-        findOptions = findOptions | KFind::CaseSensitive;
-    }*/// -!F: delete
-    /*if ( m_direction ) {
-        findOptions = findOptions | KFind::FindBackwards;
-    }
-    if ( m_case ) {
-        findOptions = findOptions | KFind::CaseSensitive;
-    }
-    findDlg->setOptions( findOptions );*/
-    
-    /*findObject = new KFind( m_find, findDlg->options(), table, findDlg );
-    connect( findObject, SIGNAL( findNext() ), this, SLOT( slotFindNext() ) );*/
-    connect( findDlg, SIGNAL( okClicked() ), this, SLOT( slotFindNext() ) );
-    
-    m_findCurrentRow = 0;
-    
-    QDialog::DialogCode res = (QDialog::DialogCode) findDlg->exec();
-    delete findDlg;
-    findDlg = 0;
-    if( res == QDialog::Accepted ) {
-        find();
-    }
-}
-
-void DatabaseBrowser::find2()
 {
     if( m_find ) {
         /*m_findPattern = m_find->pattern();
@@ -281,62 +203,6 @@ void DatabaseBrowser::find2()
     delete findDlg;
     findDlg = 0;
 }
-
-#if 0
-void DatabaseBrowser::slotFindNext()
-{
-    if( m_find ) {
-        KFind::Result res = KFind::NoMatch;
-        
-        /*while ( res == KFind::NoMatch && ( table->rowAt( m_findCurrentRow ) != -1 ) ) {*/// -!F: delete
-        while ( ( res == KFind::NoMatch ) && ( m_findCurrentRow < model->rowCount() ) ) {
-            for( int column = 0; column < model->columnCount(); column++ ) {
-                if( m_find->needData() && model->hasIndex( m_findCurrentRow, column ) ) {
-                    m_find->setData( model->data( model->index( m_findCurrentRow, column ), Qt::DisplayRole ).toString() );
-                    //qDebug() << "if( m_find->needData() m_findCurrentRow == " << m_findCurrentRow;
-                }
-                
-
-                // Let KFind inspect the text fragment, and display a dialog if a match is found
-                res = m_find->find();
-            }
-
-            /*if ( res == KFind::NoMatch ) {*/
-            if( ( m_find->options() & KFind::FindBackwards ) == KFind::FindBackwards ) {// find backwards
-                m_findCurrentRow--;
-            } else {// find forwards
-                m_findCurrentRow++;
-            }
-        }
-
-        if ( res == KFind::NoMatch ) {// i.e. at end
-            /*<Call either  m_find->displayFinalDialog(); m_find->deleteLater(); m_find = 0L;
-           or           if ( m_find->shouldRestart() ) { reinit (w/o FromCursor) and call slotFindNext(); }
-                        else { m_find->closeFindNextDialog(); }>*/
-            m_findCurrentRow = 0;
-        }
-    } else {
-        
-        if( findDlg ) {
-            m_findOptions = findDlg->options();
-            m_findPattern = findDlg->pattern();
-        }
-        // This creates a find-next-prompt dialog if needed.
-        /*m_find = new KFind( m_findPattern, m_findOptions, this, findDlg );*/// -!F: Use this with non-modal dialog.
-        m_find = new KFind( m_findPattern, m_findOptions, this );
-
-        // Connect highlight signal to code which handles highlighting
-        // of found text.
-        connect( m_find, SIGNAL( highlight( const QString &, int, int ) ),
-            this, SLOT( slotHighlight( const QString &, int, int ) ) );
-        // Connect findNext signal - called when pressing the button in the dialog
-        connect( m_find, SIGNAL( findNext() ),
-            this, SLOT( slotFindNext() ) );
-        
-        slotFindNext();
-    }
-}
-#endif
 
 void DatabaseBrowser::slotFindNext()
 {
