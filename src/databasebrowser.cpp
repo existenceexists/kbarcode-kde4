@@ -339,6 +339,11 @@ void DatabaseBrowser::cut()
         }
 
     }*/
+    QString text = table->currentIndex().data().toString();
+    if( !text.isEmpty() ) {
+        kapp->clipboard()->setText( text );
+        model->setData( table->currentIndex(), "" );
+    }
 }
 
 void DatabaseBrowser::copy()
@@ -346,6 +351,10 @@ void DatabaseBrowser::copy()
     /*QString text = table->value( table->currentRow(), table->currentColumn() ).toString();
     if( !text.isEmpty() )
         kapp->clipboard()->setText( text );*/
+    QString text = table->currentIndex().data().toString();
+    if( !text.isEmpty() ) {
+        kapp->clipboard()->setText( text );
+    }
 }
 
 void DatabaseBrowser::paste()
@@ -359,7 +368,10 @@ void DatabaseBrowser::paste()
             table->refresh();
         }
     }*/
-
+    QString text = kapp->clipboard()->text();
+    if( !text.isEmpty() ) {
+        model->setData( table->currentIndex(), text );
+    }
 }
 
 void DatabaseBrowser::import()
