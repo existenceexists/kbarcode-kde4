@@ -340,6 +340,15 @@ void DatabaseBrowser::slotFindNext()
 
 void DatabaseBrowser::slotFindNext()
 {
+    if( ( m_findOptions & KFind::FindBackwards ) == KFind::FindBackwards ) {
+        findNextBackwards();
+    } else {
+        findNextForwards();
+    }
+}
+
+void DatabaseBrowser::findNextForwards()
+{
     if( m_find ) {
         KFind::Result res = KFind::NoMatch;
         int column = 0;
@@ -359,54 +368,82 @@ void DatabaseBrowser::slotFindNext()
                     column++;
                 } else {
                     column = 0;
-                    if( ( m_find->options() & KFind::FindBackwards ) == KFind::FindBackwards ) {// find backwards
-                        m_findCurrentRow--;
-                        if( m_findCurrentRow < 0 ) {
-                            m_findCurrentRow = model->rowCount() - 1;
-                        }
-                    } else {// find forwards
-                        m_findCurrentRow++;
-                    }
+                    m_findCurrentRow++;
                 }
             }
         }
 
         if ( res == KFind::NoMatch ) {// i.e. at end and there was no match
             /*<Call either  m_find->displayFinalDialog(); m_find->deleteLater(); m_find = 0L;
-           or           if ( m_find->shouldRestart() ) { reinit (w/o FromCursor) and call slotFindNext(); }
-                        else { m_find->closeFindNextDialog(); }>*/
-            if( ( m_find->options() & KFind::FindBackwards ) == KFind::FindBackwards ) {
-                m_findCurrentRow = model->columnCount() - 1;
-            } else {
-                m_findCurrentRow = 0;
-            }
+            or           if ( m_find->shouldRestart() ) { reinit (w/o FromCursor) and call slotFindNext(); }
+                         else { m_find->closeFindNextDialog(); }>*/
+            m_findCurrentRow = 0;
         } else {// There was a match so the matching row is selected and a dialog "Find next" is displayed.
-            if( ( m_find->options() & KFind::FindBackwards ) == KFind::FindBackwards ) {
-                m_findCurrentRow--;// continue the find in the next row.
-            } else {
-                m_findCurrentRow++;// continue the find in the next row.
+            m_findCurrentRow++;// continue the find in the next row if a user clicks on the "Find next" button.
+        }
+    } else {// Create the KFind instance:
+        createKFindInstance();
+    }
+}
+
+void DatabaseBrowser::findNextBackwards()
+{
+    if( m_find ) {
+        KFind::Result res = KFind::NoMatch;
+        int column = 0;
+        
+        while ( ( res == KFind::NoMatch ) && ( m_findCurrentRow >= 0 ) ) {
+            if( m_find->needData() ) {
+                m_find->setData( model->data( model->index( m_findCurrentRow, column ), Qt::DisplayRole ).toString() );
+                //qDebug() << "if( m_find->needData() m_findCurrentRow == " << m_findCurrentRow;// -!F: delete
+            }
+            
+
+            // Let KFind inspect the text fragment, and display a dialog if a match is found
+            res = m_find->find();
+
+            if ( res == KFind::NoMatch ) {//Move to the next text fragment, honoring the FindBackwards setting for the direction
+                if( column < (model->columnCount() - 1) ) {
+                    column++;
+                } else {
+                    column = 0;
+                    m_findCurrentRow--;// find backwards
+                }
             }
         }
-    } else {
-        
-        if( findDlg ) {
-            m_findOptions = findDlg->options();
-            m_findPattern = findDlg->pattern();
-        }
-        // This creates a find-next-prompt dialog if needed.
-        /*m_find = new KFind( m_findPattern, m_findOptions, this, findDlg );*/// -!F: Use this with non-modal dialog.
-        m_find = new KFind( m_findPattern, m_findOptions, this );
 
-        // Connect highlight signal to code which handles highlighting
-        // of found text.
-        connect( m_find, SIGNAL( highlight( const QString &, int, int ) ),
-            this, SLOT( slotHighlight( const QString &, int, int ) ) );
-        // Connect findNext signal - called when pressing the button in the dialog
-        connect( m_find, SIGNAL( findNext() ),
-            this, SLOT( slotFindNext() ) );
-        
-        slotFindNext();
+        if ( res == KFind::NoMatch ) {// i.e. at end and there was no match
+            /*<Call either  m_find->displayFinalDialog(); m_find->deleteLater(); m_find = 0L;
+            or           if ( m_find->shouldRestart() ) { reinit (w/o FromCursor) and call slotFindNext(); }
+                        else { m_find->closeFindNextDialog(); }>*/
+            m_findCurrentRow = model->rowCount() - 1;
+        } else {// There was a match so the matching row is selected and a dialog "Find next" is displayed.
+            m_findCurrentRow--;// continue the find in the next row if a user clicks on the "Find next" button.
+        }
+    } else {// Create the KFind instance:
+        createKFindInstance();
     }
+}
+
+void DatabaseBrowser::createKFindInstance()
+{
+    if( findDlg ) {
+        m_findOptions = findDlg->options();
+        m_findPattern = findDlg->pattern();
+    }
+    // This creates a find-next-prompt dialog if needed.
+    /*m_find = new KFind( m_findPattern, m_findOptions, this, findDlg );*/// -!F: Use this with non-modal dialog.
+    m_find = new KFind( m_findPattern, m_findOptions, this );
+
+    // Connect highlight signal to code which handles highlighting
+    // of found text.
+    connect( m_find, SIGNAL( highlight( const QString &, int, int ) ),
+        this, SLOT( slotHighlight( const QString &, int, int ) ) );
+    // Connect findNext signal - called when pressing the button in the dialog
+    connect( m_find, SIGNAL( findNext() ),
+        this, SLOT( slotFindNext() ) );
+    
+    slotFindNext();// Begin the search
 }
 
 void DatabaseBrowser::slotHighlight( const QString & text, int matchingIndex, int matchedLength )

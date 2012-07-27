@@ -58,7 +58,10 @@ class DatabaseBrowser : public KXmlGuiWindow{
         void find();
         void find2();
         void slotFindNext();
+        void findNextBackwards();
+        void findNextForwards();
         void slotHighlight( const QString &, int, int );
+        void createKFindInstance();
 
         void import();
 
