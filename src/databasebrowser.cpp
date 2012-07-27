@@ -16,29 +16,22 @@
  ***************************************************************************/
 
 #include "databasebrowser.h"
-#include "mydatatable.h"
+//#include "mydatatable.h"// currently not used by Kbarcode
 #include "definition.h"
 #include "sqltables.h"
 #include "csvimportdlg.h"
 
 // Qt includes
 #include <qclipboard.h>
-/*#include <QSqlQuery>*/// -!F: keep
-//#include <Q3SqlCursor>// -!F: delete
 #include <QTableView>
 #include <QSqlTableModel>
-#include <QDataWidgetMapper>
-#include <QAbstractItemDelegate>
-#include <QDebug>
 //Added by qt3to4:
-//#include <QSqlCursor>// -!F: original, delete
 #include <QWidget>
 
 // KDE includes
 #include <kaction.h>
 #include <kapplication.h>
-//#include <keditcl.h>// -!F: original, delete
-#include <kfinddialog.h>// -!F: keep, replacement of keditcl.h
+#include <kfinddialog.h>
 #include <kfind.h>
 #include <klocale.h>
 #include <kmenubar.h>
@@ -55,22 +48,15 @@
 DatabaseBrowser::DatabaseBrowser( QString _database, QWidget *parent )
     : KXmlGuiWindow ( parent ) 
 {
-    /*m_direction = m_case = false;*/// -!F: original, delete
     m_findOptions = 0;
 
-    /*table = new MyDataTable(this );*/// -!F: original
     table = new QTableView( this );
-    //setCentralWidget( (QWidget*) table );
     setCentralWidget( table );
     
     model = new QSqlTableModel( this, *(SqlTables::getInstance()->database()) );
     model->setTable( _database );
     model->setEditStrategy( QSqlTableModel::OnFieldChange );
     table->setModel( model );
-    //model->setFilter("");// do not filter the SELECT statement
-    
-    /*mapper = new QDataWidgetMapper;
-    mapper->setModel( model );*/
 
     statusBar()->insertPermanentItem( i18n("Current Table: <b>" ) + _database, CUR_TABLE_ID, 0 );
     statusBar()->setSizeGripEnabled( true );
@@ -84,7 +70,7 @@ DatabaseBrowser::DatabaseBrowser( QString _database, QWidget *parent )
              SqlTables::getInstance(), SIGNAL( tablesChanged() ) );
 
     /*connect( this, SIGNAL( connectedSQL() ), this, SLOT( setupSql() ) );*/// -!F: original, keep, this line gives the warning: Object::connect: No such signal DatabaseBrowser::connectedSQL()
-    connect( SqlTables::getInstance(), SIGNAL( connectedSQL() ), this, SLOT( setupSql() ) );// -!F: is this the right correction of the previous line ?
+    connect( SqlTables::getInstance(), SIGNAL( connectedSQL() ), this, SLOT( setupSql() ) );// -!F: is this the right replacement of the previous line ?
 
     findDlg = 0;
     m_find = 0;
@@ -122,22 +108,11 @@ void DatabaseBrowser::setupActions()
     KAction* acopy = KStandardAction::copy( this, SLOT( copy() ), actionCollection() );
     KAction* apaste = KStandardAction::paste( this, SLOT( paste() ), actionCollection() );
     KAction* afind = KStandardAction::find( this, SLOT( find() ), actionCollection() );
-    /*menuBar()->insertItem( i18n("&Edit"), editMenu, -1, 1 );*/// -!F: original, delete
-
-    /*acut->plug( editMenu );
-    acopy->plug( editMenu );
-    apaste->plug( editMenu );*/// -!F: original, delete
+    
     editMenu->addAction( acut );
     editMenu->addAction( acopy );
     editMenu->addAction( apaste );
     
-    /*editMenu->insertSeparator(  );
-    afind->plug( editMenu );
-    KStandardAction::findNext( this, SLOT( slotFindNext() ), actionCollection() )->plug( editMenu );
-    editMenu->insertSeparator();
-    KAction* aimport = new KAction( i18n("&Import CSV File..."), "",
-                                0, this, SLOT(import()), actionCollection(), "import" );
-    aimport->plug( editMenu );*/// -!F: modified original, delete
     editMenu->addSeparator();
     editMenu->addAction( afind );
     KAction* actionFindNext = KStandardAction::findNext( this, SLOT( slotFindNext() ), actionCollection() );
@@ -151,20 +126,10 @@ void DatabaseBrowser::setupActions()
     
     menuBar()->insertMenu( menuBar()->actions()[1], editMenu );
     
-    /*menuBar()->actions()[ -1 ]->actions()[ 8 ]->setIcon( KIcon ( KStandardDirs::locate(
-            "appdata", QString( "hi16-app-kbarcode.png" ) ) ) );*/// -!F: delete
-    /*helpMenu()->actions()[ 4 ]->setIcon( KIcon ( KStandardDirs::locate(
-            "appdata", QString( "hi16-app-kbarcode.png" ) ) ) );*/// -!F: delete
     actionCollection()->action( "help_about_app" )->setIcon( KIcon ( KStandardDirs::locate(
         "appdata", QString( "hi16-app-kbarcode.png" ) ) ) );;
     setWindowIcon( KIcon( KStandardDirs::locate( "appdata", QString("hi16-app-kbarcode.png") ) ) );
-        
-    /*acut->plug( toolBar() );
-    acopy->plug( toolBar() );
-    apaste->plug( toolBar() );
-
-    toolBar()->insertSeparator();
-    afind->plug( toolBar() );*/// -!F: original, delete
+    
     toolBar()->addAction( acut );
     toolBar()->addAction( acopy );
     toolBar()->addAction( apaste );
@@ -327,18 +292,6 @@ void DatabaseBrowser::slotHighlight( const QString & text, int matchingIndex, in
 
 void DatabaseBrowser::cut()
 {
-    /*QString text = table->value( table->currentRow(), table->currentColumn() ).toString();
-    if( !text.isEmpty() ) {
-        kapp->clipboard()->setText( text );
-
-        QSqlRecord* buffer = table->sqlCursor()->primeUpdate();
-        if( buffer ) {
-            buffer->setValue( table->horizontalHeader()->label( table->currentColumn() ), "" );
-            table->sqlCursor()->update();
-            table->refresh();
-        }
-
-    }*/
     QString text = table->currentIndex().data().toString();
     if( !text.isEmpty() ) {
         kapp->clipboard()->setText( text );
@@ -348,9 +301,6 @@ void DatabaseBrowser::cut()
 
 void DatabaseBrowser::copy()
 {
-    /*QString text = table->value( table->currentRow(), table->currentColumn() ).toString();
-    if( !text.isEmpty() )
-        kapp->clipboard()->setText( text );*/
     QString text = table->currentIndex().data().toString();
     if( !text.isEmpty() ) {
         kapp->clipboard()->setText( text );
@@ -359,15 +309,6 @@ void DatabaseBrowser::copy()
 
 void DatabaseBrowser::paste()
 {
-    /*QString text = kapp->clipboard()->text();
-    if( !text.isEmpty() ) {
-        QSqlRecord* buffer = table->sqlCursor()->primeUpdate();
-        if( buffer ) {
-            buffer->setValue( table->horizontalHeader()->label( table->currentColumn() ), text );
-            table->sqlCursor()->update();
-            table->refresh();
-        }
-    }*/
     QString text = kapp->clipboard()->text();
     if( !text.isEmpty() ) {
         model->setData( table->currentIndex(), text );

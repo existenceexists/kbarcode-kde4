@@ -20,19 +20,14 @@
 
 #include "mainwindow.h"
 
-/*#include <kfinddialog.h>// -!F: keep, 
-#include <kfind.h>*/
-
 class KAction;
-//class KEdFind;// -!F: original, delete
-class KFindDialog;// -!F: keep
-class KFind;// -!F: keep
+class KFindDialog;
+class KFind;
 class KXmlGuiWindow;
 class KMenuBar;
 class KToolBar;
 class KPushButton;
 class KMenu;
-//class MyDataTable;// -!F: original, delete
 class QTableView;
 class QSqlTableModel;
 class QDataWidgetMapper;
@@ -69,7 +64,6 @@ class DatabaseBrowser : public KXmlGuiWindow{
         /*MyDataTable* table;*/// -!F: original
         QTableView * table;
         QSqlTableModel * model;
-        /*QDataWidgetMapper * mapper;*/// -!F: delete
 
         KAction* undoAct;
         KAction* deleteAct;
