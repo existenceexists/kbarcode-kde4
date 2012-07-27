@@ -56,7 +56,9 @@ class DatabaseBrowser : public KXmlGuiWindow{
         void paste();
 
         void find();
+        void find2();
         void slotFindNext();
+        void slotHighlight( const QString &, int, int );
 
         void import();
 
@@ -65,18 +67,18 @@ class DatabaseBrowser : public KXmlGuiWindow{
         /*MyDataTable* table;*/// -!F: original
         QTableView * table;
         QSqlTableModel * model;
-        QDataWidgetMapper * mapper;
+        /*QDataWidgetMapper * mapper;*/// -!F: delete
 
         KAction* undoAct;
         KAction* deleteAct;
         KAction* newAct;
 
         KFindDialog * findDlg;
-        KFind * findObject;
+        KFind * m_find;
 
-        QString m_find;
-        bool m_direction;
-        bool m_case;
+        QString m_findPattern;
+        long m_findOptions;
+        int m_findCurrentRow;
 };
 
 #endif
