@@ -450,46 +450,60 @@ void SqlTables::updateTables()
 
 bool SqlTables::testSettings( const QString & username, const QString & password, const QString & hostname, const QString & database, const QString & driver )
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase( driver );
-    if( !drivers[driver] )
-      return false;
+    QString connectionName( "test-connection" );
+    bool connectedSuccessfully = false;
+    {// the beginning of the scope of QSqlDatabase db variable
+        QSqlDatabase db = QSqlDatabase::addDatabase( driver, connectionName );
+        if( !drivers[driver] )
+          return false;
 
-    db.setDatabaseName( database );
-    db.setUserName( username );
-    db.setPassword( password );
-    db.setHostName( hostname );
+        db.setDatabaseName( database );
+        db.setUserName( username );
+        db.setPassword( password );
+        db.setHostName( hostname );
 
-    if( !db.open() ) 
-    {
-        QSqlDatabase::removeDatabase( database );
-    }
-    else 
-    {
-        KMessageBox::information( 0, i18n("Connected successfully to your database") );
+        
+        if( db.open() ) 
+        {
+            connectedSuccessfully = true;
+            KMessageBox::information( 0, i18n("Connected successfully to your database") );
+        }
         db.close();
-        QSqlDatabase::removeDatabase( database );
-        return true;
-    }
-
-    db = QSqlDatabase::addDatabase( driver );
+    }// the end of the scope of QSqlDatabase db variable
+    QSqlDatabase::removeDatabase( connectionName );
     
-    db.setDatabaseName( drivers[driver]->initdb( database ) );
-
-    db.setUserName( username );
-    db.setPassword( password );
-    db.setHostName( hostname );
-
-    if( !db.open() ) {
-        KMessageBox::error( 0, i18n("<qt>Connection failed:<br>") + database + "<br>" +
-              db.lastError().databaseText() + "</qt>" );
-        QSqlDatabase::removeDatabase(drivers[driver]->initdb( database ));
-        return false;
-    } else {
-        KMessageBox::information( 0, i18n("Connected successfully to your database") );
-        db.close();
-        QSqlDatabase::removeDatabase(drivers[driver]->initdb( database ));
+    if( connectedSuccessfully ) {
         return true;
     }
+
+    /* May be the specified database set by db.setDatabaseName(database) doesn't exist yet
+     * so try to connect to the database that should be present by default 
+     * e.g. a database named "mysql" is almost always present if MySQL is installed.*/
+    
+    {// the beginning of the scope of QSqlDatabase db variable
+        QSqlDatabase db = QSqlDatabase::addDatabase( driver, connectionName );
+        
+        db.setDatabaseName( drivers[driver]->initdb( database ) );
+
+        db.setUserName( username );
+        db.setPassword( password );
+        db.setHostName( hostname );
+
+        if( !db.open() ) {
+            KMessageBox::error( 0, i18n("<qt>Connection failed:<br>") + database + "<br>" +
+                  db.lastError().databaseText() + "</qt>" );
+        } else {
+            connectedSuccessfully = true;
+            KMessageBox::information( 0, i18n("Connected successfully to your database") );
+        }
+        db.close();
+    }// the end of the scope of QSqlDatabase db variable
+    QSqlDatabase::removeDatabase( connectionName );
+    
+    if( connectedSuccessfully ) {
+        return true;
+    }
+    return false;
 
 }
 
