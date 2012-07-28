@@ -92,7 +92,7 @@ SqlTables::SqlTables( QObject* parent )
     drivers.insert( "QSQLITE", new SQLiteDescription() );
     drivers.insert( "QODBC3", new SQLiteDescription() );
 
-    db = NULL;
+    db = QSqlDatabase();
     connected = false;
     loadConfig();
 
@@ -119,19 +119,18 @@ const SqlDescription* SqlTables::driver() const
 }
 bool SqlTables::connectMySQL()
 {
-    dbInstance = QSqlDatabase::addDatabase( sqldata.driver );
-    db = & dbInstance;
+    db = QSqlDatabase::addDatabase( sqldata.driver );
 
-    db->setDatabaseName( sqldata.database );
-    db->setUserName( sqldata.username );
-    db->setPassword( sqldata.password );
-    db->setHostName( sqldata.hostname );
+    db.setDatabaseName( sqldata.database );
+    db.setUserName( sqldata.username );
+    db.setPassword( sqldata.password );
+    db.setHostName( sqldata.hostname );
 
-    if( !db->open() )
+    if( !db.open() )
         KMessageBox::error( 0, i18n("<qt>Unable to open database: ") + sqldata.database + "<br>" +
-              db->lastError().databaseText() + "</qt>");
+              db.lastError().databaseText() + "</qt>");
 
-    connected = db->open();
+    connected = db.open();
     if( connected ) {
         updateTables();
         emit connectedSQL();
@@ -158,14 +157,13 @@ bool SqlTables::newTables( const QString & username, const QString & password, c
     if( !drivers[driver] )
         return false;
 
-    QSqlDatabase dbaseInstance = QSqlDatabase::addDatabase(driver, drivers[driver]->initdb( database ) );
-    QSqlDatabase* dbase = & dbaseInstance;
-    dbase->setDatabaseName( database );
-    dbase->setUserName( username );
-    dbase->setPassword( password );
-    dbase->setHostName( hostname );
+    QSqlDatabase dbase = QSqlDatabase::addDatabase(driver, drivers[driver]->initdb( database ) );
+    dbase.setDatabaseName( database );
+    dbase.setUserName( username );
+    dbase.setPassword( password );
+    dbase.setHostName( hostname );
 
-    if(dbase->open()) {
+    if(dbase.open()) {
 
         if (driver != "QSQLITE")
         {
@@ -174,34 +172,33 @@ bool SqlTables::newTables( const QString & username, const QString & password, c
             while( existing.next() )
                 found = true;
 
-            QSqlQuery firstquery( NULL, *dbase );
+            QSqlQuery firstquery( NULL, dbase );
             if( !found && !firstquery.exec("CREATE DATABASE " + database + ";")) {
                 if( KMessageBox::warningContinueCancel( 0, i18n("<qt>Can't create database ")+ database + i18n("<br>You can continue if the database exists already.</qt>")
                     + firstquery.lastError().databaseText() ) == KMessageBox::Cancel ) {
-                    dbase->close();
+                    dbase.close();
                     QSqlDatabase::removeDatabase(drivers[driver]->initdb( database ));
                     return false;
                 }
             }
         }
-        dbase->close();
+        dbase.close();
         QSqlDatabase::removeDatabase(drivers[driver]->initdb( database ));
 
         // The database is created, now connect to the one specified by the user
-        dbaseInstance = QSqlDatabase::addDatabase(driver, database );
-        dbase = & dbaseInstance;
-        dbase->setDatabaseName( database );
-        dbase->setUserName( username );
-        dbase->setPassword( password );
-        dbase->setHostName( hostname );
-        if(!dbase->open() || !dbase->isOpen()) {
-            KMessageBox::error( 0, i18n("KBarcode could not create the required database. Please create it manually.") + dbase->lastError().databaseText() );
+        dbase = QSqlDatabase::addDatabase(driver, database );
+        dbase.setDatabaseName( database );
+        dbase.setUserName( username );
+        dbase.setPassword( password );
+        dbase.setHostName( hostname );
+        if(!dbase.open() || !dbase.isOpen()) {
+            KMessageBox::error( 0, i18n("KBarcode could not create the required database. Please create it manually.") + dbase.lastError().databaseText() );
             QSqlDatabase::removeDatabase( database );
             return false;
         }
 
 
-        QSqlQuery query( NULL, *dbase );
+        QSqlQuery query( NULL, dbase );
 
         // barcode_basic
         query.exec("DROP TABLE " TABLE_BASIC );
@@ -275,11 +272,11 @@ bool SqlTables::newTables( const QString & username, const QString & password, c
                    "    PRIMARY KEY  (label_no)"
                    ");" );
 
-        dbase->close();
+        dbase.close();
         QSqlDatabase::removeDatabase( database );
         KMessageBox::information( 0, i18n("Created table ")+database+i18n(" successfully!") );
     } else {
-        dbase->close();
+        dbase.close();
         QSqlDatabase::removeDatabase(drivers[driver]->initdb( database ));
         KMessageBox::sorry( 0, i18n("Can't connect to database.") );
         return false;
@@ -294,7 +291,7 @@ void SqlTables::importLabelDef()
         KMessageBox::Cancel )
         return;
 
-    QSqlQuery query( QString::null, dbInstance );
+    QSqlQuery query( QString::null, db );
     exec( &query, "delete from " TABLE_LABEL_DEF );
 
     QString f = KStandardDirs::locateLocal( "data", "kbarcode/labeldefinitions.sql" );
@@ -318,14 +315,14 @@ void SqlTables::importExampleData()
     importData( KStandardDirs::locate("appdata", "exampledata.sql"), db );
 }
 
-void SqlTables::importData( const QString & filename, QSqlDatabase* db )
+void SqlTables::importData( const QString & filename, QSqlDatabase db )
 {
-    if( !db ) {
-        qDebug("Can't import data, dabase not open!");
+    if( !db.isValid() ) {
+        qDebug("Can't import data, database not open!");
         return;
     }
 
-    if( filename.isEmpty() || !db->isOpen() ) // quick escape
+    if( filename.isEmpty() || !db.isOpen() ) // quick escape
     {
         KMessageBox::error( NULL, i18n("Data file for import not found. Continuing without importing data. Please check your KBarcode installation.") );
         return;
@@ -337,7 +334,7 @@ void SqlTables::importData( const QString & filename, QSqlDatabase* db )
 
     if( data.open( QIODevice::ReadOnly ) ) {
         QTextStream s( & data );
-        QSqlQuery query( QString::null, * db );
+        QSqlQuery query( QString::null, db );
 	QString line = s.readLine(1024);
         while( !line.isNull() ) {
             if( !line.isEmpty() ) {
@@ -453,45 +450,43 @@ void SqlTables::updateTables()
 
 bool SqlTables::testSettings( const QString & username, const QString & password, const QString & hostname, const QString & database, const QString & driver )
 {
-    QSqlDatabase dbInstance = QSqlDatabase::addDatabase( driver );
-    QSqlDatabase* db = & dbInstance;
+    QSqlDatabase db = QSqlDatabase::addDatabase( driver );
     if( !drivers[driver] )
       return false;
 
-    db->setDatabaseName( database );
-    db->setUserName( username );
-    db->setPassword( password );
-    db->setHostName( hostname );
+    db.setDatabaseName( database );
+    db.setUserName( username );
+    db.setPassword( password );
+    db.setHostName( hostname );
 
-    if( !db->open() ) 
+    if( !db.open() ) 
     {
         QSqlDatabase::removeDatabase( database );
     }
     else 
     {
         KMessageBox::information( 0, i18n("Connected successfully to your database") );
-        db->close();
+        db.close();
         QSqlDatabase::removeDatabase( database );
         return true;
     }
 
-    dbInstance = QSqlDatabase::addDatabase( driver );
-    db = & dbInstance;
+    db = QSqlDatabase::addDatabase( driver );
     
-    db->setDatabaseName( drivers[driver]->initdb( database ) );
+    db.setDatabaseName( drivers[driver]->initdb( database ) );
 
-    db->setUserName( username );
-    db->setPassword( password );
-    db->setHostName( hostname );
+    db.setUserName( username );
+    db.setPassword( password );
+    db.setHostName( hostname );
 
-    if( !db->open() ) {
+    if( !db.open() ) {
         KMessageBox::error( 0, i18n("<qt>Connection failed:<br>") + database + "<br>" +
-              db->lastError().databaseText() + "</qt>" );
+              db.lastError().databaseText() + "</qt>" );
         QSqlDatabase::removeDatabase(drivers[driver]->initdb( database ));
         return false;
     } else {
         KMessageBox::information( 0, i18n("Connected successfully to your database") );
-        db->close();
+        db.close();
         QSqlDatabase::removeDatabase(drivers[driver]->initdb( database ));
         return true;
     }

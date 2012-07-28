@@ -1279,12 +1279,12 @@ bool BatchAssistant::fillVarTable()
     {
 	int y = 0;
 	int x;
-        if( !SqlTables::getInstance()->database() )
+        if( !SqlTables::getInstance()->database().isValid() )
         {
             KMessageBox::error( this, i18n("<qt>Can't connect to a database.</qt>") );
             return false;
         }
-	Q3SqlSelectCursor query( importSqlQuery->text(), * SqlTables::getInstance()->database() );
+	Q3SqlSelectCursor query( importSqlQuery->text(), SqlTables::getInstance()->database() );
 	query.select();
 	if( query.lastError().type() != QSqlError::None )
 	{

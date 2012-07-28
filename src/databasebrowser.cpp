@@ -53,7 +53,7 @@ DatabaseBrowser::DatabaseBrowser( QString _database, QWidget *parent )
     table = new QTableView( this );
     setCentralWidget( table );
     
-    model = new QSqlTableModel( this, *(SqlTables::getInstance()->database()) );
+    model = new QSqlTableModel( this, SqlTables::getInstance()->database() );
     model->setTable( _database );
     model->setEditStrategy( QSqlTableModel::OnFieldChange );
     table->setModel( model );

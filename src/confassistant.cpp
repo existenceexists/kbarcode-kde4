@@ -264,18 +264,17 @@ void ConfAssistant::create()
     else
         KApplication::restoreOverrideCursor();
 
-    QSqlDatabase dbInstance = QSqlDatabase::addDatabase( sqlwidget->driver() );
-    QSqlDatabase* db = & dbInstance;
-    db->setDatabaseName( sqlwidget->database() );
-    db->setUserName( sqlwidget->username() );
-    db->setPassword( sqlwidget->password() );
-    db->setHostName( sqlwidget->hostname() );
+    QSqlDatabase db = QSqlDatabase::addDatabase( sqlwidget->driver() );
+    db.setDatabaseName( sqlwidget->database() );
+    db.setUserName( sqlwidget->username() );
+    db.setPassword( sqlwidget->password() );
+    db.setHostName( sqlwidget->hostname() );
 
-    if( !db->open() )
+    if( !db.open() )
         KMessageBox::error( this, i18n("<qt>Connection failed:<br>") + sqlwidget->database(),
-              db->lastError().databaseText() + "</qt>" );
+              db.lastError().databaseText() + "</qt>" );
 
-    if( db->open() ) {
+    if( db.open() ) {
         KApplication::setOverrideCursor( Qt::WaitCursor );
         SqlTables::getInstance()->importData(
             KStandardDirs::locate("appdata", "labeldefinitions.sql"), db );
@@ -283,28 +282,27 @@ void ConfAssistant::create()
         KApplication::restoreOverrideCursor();
     }
 
-    db->close();
+    db.close();
 }
 
 void ConfAssistant::example()
 {
-    QSqlDatabase dbInstance = QSqlDatabase::addDatabase( sqlwidget->driver() );
-    QSqlDatabase* db = & dbInstance;
-    db->setDatabaseName( sqlwidget->database() );
-    db->setUserName( sqlwidget->username() );
-    db->setPassword( sqlwidget->password() );
-    db->setHostName( sqlwidget->hostname() );
+    QSqlDatabase db = QSqlDatabase::addDatabase( sqlwidget->driver() );
+    db.setDatabaseName( sqlwidget->database() );
+    db.setUserName( sqlwidget->username() );
+    db.setPassword( sqlwidget->password() );
+    db.setHostName( sqlwidget->hostname() );
 
-    if( !db->open() )
+    if( !db.open() )
         KMessageBox::error( this, i18n("<qt>Connection failed:<br>") + sqlwidget->database(),
-              db->lastError().databaseText() + "</qt>" );
+              db.lastError().databaseText() + "</qt>" );
 
 
     SqlTables::getInstance()->importData(
         KStandardDirs::locate("appdata", "exampledata.sql"), db );
     KMessageBox::information( this, i18n("Example data has been imported.") );
 
-    db->close();
+    db.close();
 }
 
 /* configureCurrentPage() is called by the slots next() and back() */

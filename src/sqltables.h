@@ -148,10 +148,10 @@ class SqlTables : public QObject {
         bool newTables( const QString & username, const QString & password, const QString & hostname, const QString & database, const QString & driver );
         void importLabelDef();
         void importExampleData();
-        void importData( const QString & filename, QSqlDatabase* db );
+        void importData( const QString & filename, QSqlDatabase db );
         bool testSettings( const QString & username, const QString & password, const QString & hostname, const QString & database, const QString & driver );
 
-	inline QSqlDatabase* database() const;
+	inline QSqlDatabase database() const;
 
     signals:
         void tablesChanged();
@@ -166,14 +166,13 @@ class SqlTables : public QObject {
         
         bool connected;
 
-        QSqlDatabase dbInstance;
-        QSqlDatabase* db;
+        QSqlDatabase db;
         mysqldata sqldata;
 
         static SqlTables* instance;
 };
 
-inline QSqlDatabase* SqlTables::database() const
+inline QSqlDatabase SqlTables::database() const
 {
     return db;
 }
