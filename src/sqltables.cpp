@@ -467,6 +467,11 @@ bool SqlTables::testSettings( const QString & username, const QString & password
         {
             connectedSuccessfully = true;
             KMessageBox::information( 0, i18n("Connected successfully to your database") );
+        } else {
+            KMessageBox::error( 0, i18n("<qt>Connection failed:<br>")
+                + db.lastError().databaseText() + "<br>"
+                + i18n("So now we will try to connect to the default database:<br>") 
+                + drivers[driver]->initdb( database ) + "</qt>");
         }
         db.close();
     }// the end of the scope of QSqlDatabase db variable
@@ -490,11 +495,12 @@ bool SqlTables::testSettings( const QString & username, const QString & password
         db.setHostName( hostname );
 
         if( !db.open() ) {
-            KMessageBox::error( 0, i18n("<qt>Connection failed:<br>") + database + "<br>" +
-                  db.lastError().databaseText() + "</qt>" );
+            KMessageBox::error( 0, i18n("<qt>Connection failed to the default database:<br>") 
+                + db.lastError().databaseText() + "</qt>" );
         } else {
             connectedSuccessfully = true;
-            KMessageBox::information( 0, i18n("Connected successfully to your database") );
+            KMessageBox::information( 0, i18n("<qt>Connected successfully to the default database:<br>")
+                + drivers[driver]->initdb( database ) + "</qt>");
         }
         db.close();
     }// the end of the scope of QSqlDatabase db variable
