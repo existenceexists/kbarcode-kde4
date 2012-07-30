@@ -278,8 +278,11 @@ void ConfAssistant::create()
 
         if( db.open() ) {
             KApplication::setOverrideCursor( Qt::WaitCursor );
+            QString progressDialogText( i18n("Importing label definitions from the file ") 
+                + "<br>" + KStandardDirs::locate("appdata", "labeldefinitions.sql") 
+                + "<br>" + i18n(" into your database.") );
             SqlTables::getInstance()->importData(
-                KStandardDirs::locate("appdata", "labeldefinitions.sql"), db );
+                KStandardDirs::locate("appdata", "labeldefinitions.sql"), db, progressDialogText );
             buttonExample->setEnabled( true );
             KApplication::restoreOverrideCursor();
         }
@@ -304,8 +307,11 @@ void ConfAssistant::example()
                   db.lastError().databaseText() + "</qt>" );
 
 
+        QString progressDialogText( i18n("Importing example data from the file ") 
+            + "<br>" + KStandardDirs::locate("appdata", "exampledata.sql") 
+            + "<br>" + i18n(" into your database.") );
         SqlTables::getInstance()->importData(
-            KStandardDirs::locate("appdata", "exampledata.sql"), db );
+            KStandardDirs::locate("appdata", "exampledata.sql"), db, progressDialogText );
         KMessageBox::information( this, i18n("Example data has been imported.") );
 
         db.close();

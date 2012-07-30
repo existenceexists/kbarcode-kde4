@@ -314,7 +314,8 @@ void SqlTables::importLabelDef()
         f = config.readEntry( "defpath", KStandardDirs::locate( "data", "kbarcode/labeldefinitions.sql" ) );
     }
 
-    importData( f, db );
+    QString progressDialogText( i18n("Importing label definitions from the file ") + "<br>" + f + "<br>" + i18n(" into your database.") );
+    importData( f, db, progressDialogText );
 
     Definition::updateProducer();
 }
@@ -326,10 +327,11 @@ void SqlTables::importExampleData()
         KMessageBox::Cancel )
         return;
 
-    importData( KStandardDirs::locate("appdata", "exampledata.sql"), db );
+    QString progressDialogText( i18n("Importing example data from the file ") + "<br>" + KStandardDirs::locate("appdata", "exampledata.sql") + "<br>" + i18n(" into your database.") );
+    importData( KStandardDirs::locate("appdata", "exampledata.sql"), db, progressDialogText );
 }
 
-void SqlTables::importData( const QString & filename, QSqlDatabase db )
+void SqlTables::importData( const QString & filename, QSqlDatabase db, const QString & progressDialogText )
 {
     if( !db.isValid() ) {
         qDebug("Can't import data, database not open!");
@@ -344,7 +346,7 @@ void SqlTables::importData( const QString & filename, QSqlDatabase db )
 
     QFile data( filename);
     //QProgressDialog* dlg = new QProgressDialog( i18n("SQL import progress:"),  QString::null, data.size(), 0, "dlg", true );// -!F:
-    QProgressDialog* dlg = new QProgressDialog( i18n("SQL import progress:"),  QString::null, 0, data.size());
+    QProgressDialog* dlg = new QProgressDialog( "<qt>" + progressDialogText + "<br><br>" + i18n("SQL import progress:") + "</qt>",  QString::null, 0, data.size());
 
     if( data.open( QIODevice::ReadOnly ) ) {
         QTextStream s( & data );
