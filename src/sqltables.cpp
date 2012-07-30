@@ -331,14 +331,14 @@ void SqlTables::importExampleData()
     importData( KStandardDirs::locate("appdata", "exampledata.sql"), db, progressDialogText );
 }
 
-void SqlTables::importData( const QString & filename, QSqlDatabase db, const QString & progressDialogText )
+void SqlTables::importData( const QString & filename, QSqlDatabase dbase, const QString & progressDialogText )
 {
-    if( !db.isValid() ) {
+    if( !dbase.isValid() ) {
         qDebug("Can't import data, database not open!");
         return;
     }
 
-    if( filename.isEmpty() || !db.isOpen() ) // quick escape
+    if( filename.isEmpty() || !dbase.isOpen() ) // quick escape
     {
         KMessageBox::error( NULL, i18n("Data file for import not found. Continuing without importing data. Please check your KBarcode installation.") );
         return;
@@ -350,7 +350,7 @@ void SqlTables::importData( const QString & filename, QSqlDatabase db, const QSt
 
     if( data.open( QIODevice::ReadOnly ) ) {
         QTextStream s( & data );
-        QSqlQuery query( QString::null, db );
+        QSqlQuery query( QString::null, dbase );
 	QString line = s.readLine(1024);
         while( !line.isNull() ) {
             if( !line.isEmpty() ) {
@@ -470,55 +470,55 @@ bool SqlTables::testSettings( const QString & username, const QString & password
         return false;
     QString connectionName( "test-connection" );
     bool connectedSuccessfully = false;
-    {// the beginning of the scope of QSqlDatabase db variable
-        QSqlDatabase db = QSqlDatabase::addDatabase( driver, connectionName );
-        db.setDatabaseName( database );
-        db.setUserName( username );
-        db.setPassword( password );
-        db.setHostName( hostname );
+    {// the beginning of the scope of QSqlDatabase dbase variable
+        QSqlDatabase dbase = QSqlDatabase::addDatabase( driver, connectionName );
+        dbase.setDatabaseName( database );
+        dbase.setUserName( username );
+        dbase.setPassword( password );
+        dbase.setHostName( hostname );
 
         
-        if( db.open() ) 
+        if( dbase.open() ) 
         {
             connectedSuccessfully = true;
             KMessageBox::information( 0, i18n("Connected successfully to your database") );
         } else {
             KMessageBox::error( 0, i18n("<qt>Connection failed:<br>")
-                + db.lastError().databaseText() + "<br>"
+                + dbase.lastError().databaseText() + "<br>"
                 + i18n("So now we will try to connect to the default database:<br>") 
                 + drivers[driver]->initdb( database ) + "</qt>");
         }
-        db.close();
-    }// the end of the scope of QSqlDatabase db variable
+        dbase.close();
+    }// the end of the scope of QSqlDatabase dbase variable
     QSqlDatabase::removeDatabase( connectionName );
     
     if( connectedSuccessfully ) {
         return true;
     }
 
-    /* May be the specified database set by db.setDatabaseName(database) doesn't exist yet
+    /* May be the specified database set by dbase.setDatabaseName(database) doesn't exist yet
      * so try to connect to the database that should be present by default 
      * e.g. a database named "mysql" is almost always present if MySQL is installed.*/
     
-    {// the beginning of the scope of QSqlDatabase db variable
-        QSqlDatabase db = QSqlDatabase::addDatabase( driver, connectionName );
+    {// the beginning of the scope of QSqlDatabase dbase variable
+        QSqlDatabase dbase = QSqlDatabase::addDatabase( driver, connectionName );
         
-        db.setDatabaseName( drivers[driver]->initdb( database ) );
+        dbase.setDatabaseName( drivers[driver]->initdb( database ) );
 
-        db.setUserName( username );
-        db.setPassword( password );
-        db.setHostName( hostname );
+        dbase.setUserName( username );
+        dbase.setPassword( password );
+        dbase.setHostName( hostname );
 
-        if( !db.open() ) {
+        if( !dbase.open() ) {
             KMessageBox::error( 0, i18n("<qt>Connection failed to the default database:<br>") 
-                + db.lastError().databaseText() + "</qt>" );
+                + dbase.lastError().databaseText() + "</qt>" );
         } else {
             connectedSuccessfully = true;
             KMessageBox::information( 0, i18n("<qt>Connected successfully to the default database:<br>")
                 + drivers[driver]->initdb( database ) + "</qt>");
         }
-        db.close();
-    }// the end of the scope of QSqlDatabase db variable
+        dbase.close();
+    }// the end of the scope of QSqlDatabase dbase variable
     QSqlDatabase::removeDatabase( connectionName );
     
     if( connectedSuccessfully ) {

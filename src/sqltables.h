@@ -148,7 +148,7 @@ class SqlTables : public QObject {
         bool newTables( const QString & username, const QString & password, const QString & hostname, const QString & database, const QString & driver );
         void importLabelDef();
         void importExampleData();
-        void importData( const QString & filename, QSqlDatabase db, const QString & progressDialogText = QString() );
+        void importData( const QString & filename, QSqlDatabase dbase, const QString & progressDialogText = QString() );
         bool testSettings( const QString & username, const QString & password, const QString & hostname, const QString & database, const QString & driver );
 
 	inline QSqlDatabase database() const;
