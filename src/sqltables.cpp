@@ -157,128 +157,142 @@ bool SqlTables::newTables( const QString & username, const QString & password, c
     if( !drivers[driver] )
         return false;
 
-    QSqlDatabase dbase = QSqlDatabase::addDatabase(driver, drivers[driver]->initdb( database ) );
-    dbase.setDatabaseName( database );
-    dbase.setUserName( username );
-    dbase.setPassword( password );
-    dbase.setHostName( hostname );
+    bool databaseOpened = false;
+    bool continueCreateTables = true;
+    {// the beginning of the scope of QSqlDatabase dbase variable
+        QSqlDatabase dbase = QSqlDatabase::addDatabase(driver, drivers[driver]->initdb( database ) );
+        dbase.setDatabaseName( database );
+        dbase.setUserName( username );
+        dbase.setPassword( password );
+        dbase.setHostName( hostname );
 
-    if(dbase.open()) {
+        if(dbase.open()) {
+            databaseOpened = true;
 
-        if (driver != "QSQLITE")
-        {
-            bool found = false;
-            QSqlQuery existing("SHOW DATABASES LIKE '" + database + "';");
-            while( existing.next() )
-                found = true;
+            if (driver != "QSQLITE")
+            {
+                bool found = false;
+                QSqlQuery existing("SHOW DATABASES LIKE '" + database + "';", dbase);
+                while( existing.next() )
+                    found = true;
 
-            QSqlQuery firstquery( NULL, dbase );
-            if( !found && !firstquery.exec("CREATE DATABASE " + database + ";")) {
-                if( KMessageBox::warningContinueCancel( 0, i18n("<qt>Can't create database ")+ database + i18n("<br>You can continue if the database exists already.</qt>")
-                    + firstquery.lastError().databaseText() ) == KMessageBox::Cancel ) {
-                    dbase.close();
-                    QSqlDatabase::removeDatabase(drivers[driver]->initdb( database ));
-                    return false;
+                QSqlQuery firstquery( NULL, dbase );
+                if( !found && !firstquery.exec("CREATE DATABASE " + database + ";")) {
+                    if( KMessageBox::warningContinueCancel( 0, i18n("<qt>Can't create database ")+ database + i18n("<br>You can continue if the database exists already.</qt>")
+                        + firstquery.lastError().databaseText() ) == KMessageBox::Cancel ) {
+                        continueCreateTables = false;
+                    }
                 }
             }
+        } else {
+            databaseOpened = false;
+            KMessageBox::sorry( 0, i18n("Can't connect to database.") );
         }
         dbase.close();
-        QSqlDatabase::removeDatabase(drivers[driver]->initdb( database ));
+    }// the end of the scope of QSqlDatabase dbase variable
+    QSqlDatabase::removeDatabase(drivers[driver]->initdb( database ));
+    
+    if( !databaseOpened ) {
+        return false;
+    }
+    if( !continueCreateTables ) {
+        return false;
+    }
 
+    databaseOpened = true;
+    {// the beginning of the scope of QSqlDatabase dbase variable
         // The database is created, now connect to the one specified by the user
-        dbase = QSqlDatabase::addDatabase(driver, database );
+        QSqlDatabase dbase = QSqlDatabase::addDatabase(driver, database );
         dbase.setDatabaseName( database );
         dbase.setUserName( username );
         dbase.setPassword( password );
         dbase.setHostName( hostname );
         if(!dbase.open() || !dbase.isOpen()) {
+            databaseOpened = false;
             KMessageBox::error( 0, i18n("KBarcode could not create the required database. Please create it manually.") + dbase.lastError().databaseText() );
-            QSqlDatabase::removeDatabase( database );
-            return false;
+        } else {// Create tables
+
+            QSqlQuery query( NULL, dbase );
+
+            // barcode_basic
+            query.exec("DROP TABLE " TABLE_BASIC );
+            exec( &query, "CREATE TABLE " TABLE_BASIC " ("
+                       "    uid " + drivers[driver]->autoIncrement() + ","
+                       "    article_no varchar(50) DEFAULT NULL,"
+                       "    article_desc varchar(50) DEFAULT NULL,"
+                       "    barcode_no TEXT DEFAULT NULL,"
+                       "    encoding_type varchar(50) DEFAULT NULL,"
+                       "    field0 varchar(50) DEFAULT NULL,"
+                       "    field1 varchar(50) DEFAULT NULL,"
+                       "    field2 varchar(50) DEFAULT NULL,"
+                       "    field3 varchar(50) DEFAULT NULL,"
+                       "    field4 varchar(50) DEFAULT NULL,"
+                       "    field5 varchar(50) DEFAULT NULL,"
+                       "    field6 varchar(50) DEFAULT NULL,"
+                       "    field7 varchar(50) DEFAULT NULL,"
+                       "    field8 varchar(50) DEFAULT NULL,"
+                       "    field9 varchar(50) DEFAULT NULL,"
+                       "    PRIMARY KEY  (uid)"
+                       ");" );
+
+            // customer
+            query.exec("DROP TABLE " TABLE_CUSTOMER );
+            exec( &query, "CREATE TABLE " TABLE_CUSTOMER " ("
+                       "    uid " + drivers[driver]->autoIncrement() + " ,"
+                       "    customer_no varchar(20) DEFAULT NULL,"
+                       "    customer_name varchar(20) DEFAULT NULL,"
+                       "    PRIMARY KEY  (uid)"
+                       ");" );
+
+            // customer_text
+            query.exec("DROP TABLE " TABLE_CUSTOMER_TEXT );
+            exec( &query, "CREATE TABLE " TABLE_CUSTOMER_TEXT " ("
+                       "    uid " + drivers[driver]->autoIncrement() + ","
+                       "    customer_no varchar(20) DEFAULT NULL,"
+                       "    encoding_type varchar(50) DEFAULT NULL,"
+                       "    article_no varchar(50) DEFAULT NULL,"
+                       "    article_no_customer varchar(50) NULL,"
+                       "    barcode_no TEXT DEFAULT NULL,"
+                       "    line0 varchar(50) DEFAULT NULL,"
+                       "    line1 varchar(50) DEFAULT NULL,"
+                       "    line2 varchar(50) DEFAULT NULL,"
+                       "    line3 varchar(50) DEFAULT NULL,"
+                       "    line4 varchar(50) DEFAULT NULL,"
+                       "    line5 varchar(50) DEFAULT NULL,"
+                       "    line6 varchar(50) DEFAULT NULL,"
+                       "    line7 varchar(50) DEFAULT NULL,"
+                       "    line8 varchar(50) DEFAULT NULL,"
+                       "    line9 varchar(50) DEFAULT NULL,"
+                       "    PRIMARY KEY  (uid)"
+                       ");" );
+
+            // label_def
+            query.exec("DROP TABLE " TABLE_LABEL_DEF );
+            exec( &query, "CREATE TABLE " TABLE_LABEL_DEF " ("
+                       "    label_no " + drivers[driver]->autoIncrement() + ","
+                       "    manufacture varchar(255) DEFAULT NULL,"
+                       "    type varchar(255) DEFAULT NULL,"
+                       "    paper char(1) DEFAULT NULL,"
+                       "    gap_top NUMERIC(10,4) NULL,"
+                       "    gap_left NUMERIC(10,4) NULL,"
+                       "    height NUMERIC(10,4) NULL,"
+                       "    width NUMERIC(10,4) NULL,"
+                       "    gap_v NUMERIC(10,4) NULL,"
+                       "    gap_h NUMERIC(10,4) NULL,"
+                       "    number_h int DEFAULT NULL," //smalint(6)
+                       "    number_v int DEFAULT NULL," //smalint(6)
+                       "    paper_type varchar(30) DEFAULT NULL,"
+                       "    compatibility varchar(10) DEFAULT NULL," // keep compatibility with older versions, was "remark text"
+                       "    PRIMARY KEY  (label_no)"
+                       ");" );
+
+            KMessageBox::information( 0, i18n("Created tables in the database ")+database+i18n(" successfully!") );
         }
-
-
-        QSqlQuery query( NULL, dbase );
-
-        // barcode_basic
-        query.exec("DROP TABLE " TABLE_BASIC );
-        exec( &query, "CREATE TABLE " TABLE_BASIC " ("
-                   "    uid " + drivers[driver]->autoIncrement() + ","
-                   "    article_no varchar(50) DEFAULT NULL,"
-                   "    article_desc varchar(50) DEFAULT NULL,"
-                   "    barcode_no TEXT DEFAULT NULL,"
-                   "    encoding_type varchar(50) DEFAULT NULL,"
-                   "    field0 varchar(50) DEFAULT NULL,"
-                   "    field1 varchar(50) DEFAULT NULL,"
-                   "    field2 varchar(50) DEFAULT NULL,"
-                   "    field3 varchar(50) DEFAULT NULL,"
-                   "    field4 varchar(50) DEFAULT NULL,"
-                   "    field5 varchar(50) DEFAULT NULL,"
-                   "    field6 varchar(50) DEFAULT NULL,"
-                   "    field7 varchar(50) DEFAULT NULL,"
-                   "    field8 varchar(50) DEFAULT NULL,"
-                   "    field9 varchar(50) DEFAULT NULL,"
-                   "    PRIMARY KEY  (uid)"
-                   ");" );
-
-        // customer
-        query.exec("DROP TABLE " TABLE_CUSTOMER );
-        exec( &query, "CREATE TABLE " TABLE_CUSTOMER " ("
-                   "    uid " + drivers[driver]->autoIncrement() + " ,"
-                   "    customer_no varchar(20) DEFAULT NULL,"
-                   "    customer_name varchar(20) DEFAULT NULL,"
-                   "    PRIMARY KEY  (uid)"
-                   ");" );
-
-        // customer_text
-        query.exec("DROP TABLE " TABLE_CUSTOMER_TEXT );
-        exec( &query, "CREATE TABLE " TABLE_CUSTOMER_TEXT " ("
-                   "    uid " + drivers[driver]->autoIncrement() + ","
-                   "    customer_no varchar(20) DEFAULT NULL,"
-                   "    encoding_type varchar(50) DEFAULT NULL,"
-                   "    article_no varchar(50) DEFAULT NULL,"
-                   "    article_no_customer varchar(50) NULL,"
-                   "    barcode_no TEXT DEFAULT NULL,"
-                   "    line0 varchar(50) DEFAULT NULL,"
-                   "    line1 varchar(50) DEFAULT NULL,"
-                   "    line2 varchar(50) DEFAULT NULL,"
-                   "    line3 varchar(50) DEFAULT NULL,"
-                   "    line4 varchar(50) DEFAULT NULL,"
-                   "    line5 varchar(50) DEFAULT NULL,"
-                   "    line6 varchar(50) DEFAULT NULL,"
-                   "    line7 varchar(50) DEFAULT NULL,"
-                   "    line8 varchar(50) DEFAULT NULL,"
-                   "    line9 varchar(50) DEFAULT NULL,"
-                   "    PRIMARY KEY  (uid)"
-                   ");" );
-
-        // label_def
-        query.exec("DROP TABLE " TABLE_LABEL_DEF );
-        exec( &query, "CREATE TABLE " TABLE_LABEL_DEF " ("
-                   "    label_no " + drivers[driver]->autoIncrement() + ","
-                   "    manufacture varchar(255) DEFAULT NULL,"
-                   "    type varchar(255) DEFAULT NULL,"
-                   "    paper char(1) DEFAULT NULL,"
-                   "    gap_top NUMERIC(10,4) NULL,"
-                   "    gap_left NUMERIC(10,4) NULL,"
-                   "    height NUMERIC(10,4) NULL,"
-                   "    width NUMERIC(10,4) NULL,"
-                   "    gap_v NUMERIC(10,4) NULL,"
-                   "    gap_h NUMERIC(10,4) NULL,"
-                   "    number_h int DEFAULT NULL," //smalint(6)
-                   "    number_v int DEFAULT NULL," //smalint(6)
-                   "    paper_type varchar(30) DEFAULT NULL,"
-                   "    compatibility varchar(10) DEFAULT NULL," // keep compatibility with older versions, was "remark text"
-                   "    PRIMARY KEY  (label_no)"
-                   ");" );
-
         dbase.close();
-        QSqlDatabase::removeDatabase( database );
-        KMessageBox::information( 0, i18n("Created table ")+database+i18n(" successfully!") );
-    } else {
-        dbase.close();
-        QSqlDatabase::removeDatabase(drivers[driver]->initdb( database ));
-        KMessageBox::sorry( 0, i18n("Can't connect to database.") );
+    }// the end of the scope of QSqlDatabase dbase variable
+    QSqlDatabase::removeDatabase( database );
+    
+    if( !databaseOpened ) {
         return false;
     }
 
@@ -450,13 +464,12 @@ void SqlTables::updateTables()
 
 bool SqlTables::testSettings( const QString & username, const QString & password, const QString & hostname, const QString & database, const QString & driver )
 {
+    if( !drivers[driver] )
+        return false;
     QString connectionName( "test-connection" );
     bool connectedSuccessfully = false;
     {// the beginning of the scope of QSqlDatabase db variable
         QSqlDatabase db = QSqlDatabase::addDatabase( driver, connectionName );
-        if( !drivers[driver] )
-          return false;
-
         db.setDatabaseName( database );
         db.setUserName( username );
         db.setPassword( password );
