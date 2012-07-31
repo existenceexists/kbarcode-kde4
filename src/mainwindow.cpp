@@ -109,14 +109,14 @@ void MainWindow::setupActions() // -!F:
 
     /*importLabelDefAct = new KAction( i18n("&Import Label Definitions"), "", 0, SqlTables::getInstance(),
                                 SLOT(importLabelDef()), actionCollection(), "import" );*/
-    KAction * importLabelDefAct = new KAction(this);
+    importLabelDefAct = new KAction(this);
     importLabelDefAct->setText(i18n("&Import Label Definitions"));
     actionCollection()->addAction("importLabelDef", importLabelDefAct);
     connect(importLabelDefAct, SIGNAL(triggered(bool)), SqlTables::getInstance(), SLOT(importLabelDef()));
 
     /*importExampleAct = new KAction( i18n("&Import Example Data"), "", 0, SqlTables::getInstance(),
                                 SLOT(importExampleData()), actionCollection(), "import" );*/
-    KAction * importExampleAct = new KAction(this);
+    importExampleAct = new KAction(this);
     importExampleAct->setText(i18n("&Import Example Data"));
     actionCollection()->addAction("importExample", importExampleAct);
     connect(importExampleAct, SIGNAL(triggered(bool)), SqlTables::getInstance(), SLOT(importExampleData()));
@@ -274,8 +274,11 @@ void MainWindow::assistant()
 {
     // FIXME: create an assistant
     ConfAssistant* wiz = new ConfAssistant( 0, QString("wiz"), true );
-    if( wiz->exec() == QDialog::Accepted && wiz->checkDatabase->isChecked() )
-        SqlTables::getInstance()->connectMySQL();
+    if( wiz->exec() == QDialog::Accepted && wiz->checkDatabase->isChecked() ) {
+        connectAct->setEnabled( !SqlTables::getInstance()->connectMySQL() );
+        importLabelDefAct->setEnabled( !connectAct->isEnabled() );
+        importExampleAct->setEnabled( !connectAct->isEnabled() );
+    }
 
     delete wiz;
 }
