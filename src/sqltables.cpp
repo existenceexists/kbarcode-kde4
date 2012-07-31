@@ -676,7 +676,7 @@ void SqlWidget::save( bool usedb )
     mysqldata sqldata = SqlTables::getInstance()->getData();
     sqldata.username = m_username->text();
     sqldata.password = m_password->text();
-    sqldata.hostname = m_hostname ->text();
+    sqldata.hostname = m_hostname->text();
     sqldata.database = m_database->text();
     sqldata.driver = m_driver->currentText();
     sqldata.autoconnect = ( usedb ? m_autoconnect->isChecked() : false );

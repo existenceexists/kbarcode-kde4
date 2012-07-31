@@ -285,39 +285,12 @@ void MainWindow::assistant()
 
 void MainWindow::connectMySQL()
 {
-    /*connectAct->setEnabled( !SqlTables::getInstance()->connectMySQL() );// -!F: original, delete
+    connectAct->setEnabled( !SqlTables::getInstance()->connectMySQL() );
     importLabelDefAct->setEnabled( !connectAct->isEnabled() );
     importExampleAct->setEnabled( !connectAct->isEnabled() );
 
     if( !connectAct->isEnabled() )
-        emit connectedSQL();*/
-    // -!F: the original code (the code above) in this member function gives a runtime error. Why?
-    
-    connectAct->setEnabled( !SqlTables::getInstance()->connectMySQL() );
-    //cout << "connectAct->setEnabled" << endl;
-    QAction * importLabelDefAct = actionCollection()->action("importLabelDef");// -!F: Why importLabelDefAct->setEnabled(false/true) doesn't work (gives a runtime error)?
-    if (!(importLabelDefAct == 0)) {
-        importLabelDefAct->setEnabled( !connectAct->isEnabled() );
-    };
-    /*QAction * importLabelDefActQ = (QAction *) importLabelDefAct;// -!F: delete
-    if (!(importLabelDefActQ == 0)) {
-        importLabelDefActQ->setEnabled( !connectAct->isEnabled() );
-    };*/
-    //this->importLabelDefAct->setEnabled( false );// -!F: delete
-    /*try { importLabelDefAct->setEnabled( true ); }
-    catch (exception& ex) { cout << ex.what() << endl; }*/
-    /*importLabelDefAct->setEnabled( !connectAct->isEnabled() );// -!F: delete
-    //cout << "importLabelDefAct->setEnabled" << endl;
-    importExampleAct->setEnabled( !connectAct->isEnabled() );
-    //cout << "importExampleAct->setEnabled" << endl;*/
-    QAction * importExampleAct = actionCollection()->action("importExample");// -!F: Why importExampleAct->setEnabled(false/true) doesn't work (gives a runtime error)?
-    if (!(importExampleAct == 0)) {
-        importExampleAct->setEnabled( !connectAct->isEnabled() );
-    };
-
-    if( !connectAct->isEnabled() )
         emit connectedSQL();
-    //cout << "if( !connectAct->isEnabled" << endl;// -!F: delete
 }
 
 void MainWindow::appHelpActivated()
