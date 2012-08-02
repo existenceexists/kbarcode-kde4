@@ -1296,10 +1296,11 @@ bool BatchAssistant::fillVarTable()
 
 	while( query.next() )
 	{
-	    for( x=0;x<m_varTable->rowCount();x++ ) {
-                QTableWidgetItem * item = m_varTable->item( y, x );
+	    for( x=0;x<m_varTable->columnCount();x++ ) {
+                QTableWidgetItem * item = new QTableWidgetItem();
                 if( item ) {
                     item->setText( query.value( m_varTable->horizontalHeaderItem( x )->text() ).toString() );
+                    m_varTable->setItem( y, x, item );
                 }
             }
 
