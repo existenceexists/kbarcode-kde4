@@ -425,6 +425,10 @@ bool LabelEditor::openUrl( const QString & url )
         TCanvasItem* citem = new TCanvasItem( cv );
         citem->setItem( list.at( i ) );
 	citem->addRef();
+        c->addItem( citem );
+        citem->show();
+        citem->update();
+        // -!F: is the code in this for loop all the code necessary to load an item?
     }
     list.clear();
 
