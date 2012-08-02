@@ -1247,8 +1247,7 @@ void BatchAssistant::fillVarList()
     m_varTable->setColumnCount( vars.count() );
     for( int i = 0; i < vars.count(); i++ )
     {
-	vars[i] = vars[i].right( vars[i].length() - 1 );
-	/*m_varTable->horizontalHeader()->setLabel( i, vars[i] );*/// -!F: delete
+	/*vars[i] = vars[i].right( vars[i].length() - 1 );*/// -!F: why? this line strips the first character which results in "rticle_desc" for QString "article_desc" etc. 
 	QTableWidgetItem * item = new QTableWidgetItem( vars[i] );
         m_varTable->setHorizontalHeaderItem( i, item );
     }
@@ -1272,7 +1271,7 @@ void BatchAssistant::fillAddressList()
 bool BatchAssistant::fillVarTable()
 {
     // Clear the table
-    m_varTable->clear();
+    m_varTable->clearContents();
     m_varTable->setRowCount( 0 );
 
     if( radioImportSql->isChecked() )
