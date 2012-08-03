@@ -819,7 +819,6 @@ void BatchAssistant::printNow( const QString & printer, bool bUserInteraction )
     }
 
     if( !checkKeepOpen->isChecked() )
-        /*KAssistant::accept();*/// -!F: original, del
         KAssistantDialog::accept();
 
     KApplication::changeOverrideCursor( QCursor( Qt::ArrowCursor ) );
