@@ -350,6 +350,8 @@ void SqlTables::importData( const QString & filename, QSqlDatabase dbase, const 
 
     if( data.open( QIODevice::ReadOnly ) ) {
         QTextStream s( & data );
+        QSqlQuery queryPrepare( QString::null, dbase );
+        exec( &queryPrepare, "SET autocommit=0;" );
         QSqlQuery query( QString::null, dbase );
 	QString line = s.readLine(1024);
         while( !line.isNull() ) {
@@ -359,6 +361,8 @@ void SqlTables::importData( const QString & filename, QSqlDatabase dbase, const 
             }
             line = s.readLine(1024);
         }
+        QSqlQuery queryEnd( QString::null, dbase );
+        exec( &queryEnd, "COMMIT;" );
     } else
         KMessageBox::sorry( 0, i18n("Can't open the data file containing the label definitions.") );
 
