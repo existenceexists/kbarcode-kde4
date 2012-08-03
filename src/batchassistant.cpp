@@ -37,7 +37,7 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qradiobutton.h>
-#include <q3sqlselectcursor.h>
+#include <QSqlQueryModel>
 #include <QDebug>
 #include <QTreeWidget>
 #include <QAbstractItemView>
@@ -1276,35 +1276,31 @@ bool BatchAssistant::fillVarTable()
 
     if( radioImportSql->isChecked() )
     {
-	int y = 0;
-	int x;
         if( !SqlTables::getInstance()->database().isValid() )
         {
             KMessageBox::error( this, i18n("<qt>Can't connect to a database.</qt>") );
             return false;
         }
-	Q3SqlSelectCursor query( importSqlQuery->text(), SqlTables::getInstance()->database() );
-	query.select();
-	if( query.lastError().type() != QSqlError::None )
+	QSqlQueryModel queryModel;
+        queryModel.setQuery( importSqlQuery->text(), SqlTables::getInstance()->database() );
+	if( queryModel.lastError().type() != QSqlError::None )
 	{
-	    KMessageBox::error( this, i18n("<qt>Can't execute SQL query:<br>") + query.lastError().text() + "</qt>" );
+	    KMessageBox::error( this, i18n("<qt>Can't execute SQL query:<br>") + queryModel.lastError().text() + "</qt>" );
 	    return false;
 	}
 
-	if( m_varTable->rowCount() < query.size() )
-	    m_varTable->setRowCount( query.size() );
+	if( m_varTable->rowCount() < queryModel.rowCount() )// TODO: use != instead of < ?
+	    m_varTable->setRowCount( queryModel.rowCount() );
 
-	while( query.next() )
+	for( int y = 0; y < m_varTable->rowCount(); y++ )
 	{
-	    for( x=0;x<m_varTable->columnCount();x++ ) {
+	    for( int x=0;x<m_varTable->columnCount();x++ ) {
                 QTableWidgetItem * item = new QTableWidgetItem();
                 if( item ) {
-                    item->setText( query.value( m_varTable->horizontalHeaderItem( x )->text() ).toString() );
+                    item->setText( queryModel.record( y ).value( m_varTable->horizontalHeaderItem( x )->text() ).toString() );
                     m_varTable->setItem( y, x, item );
                 }
             }
-
-	    y++;
 	}
     }
     else if( radioImportCSV->isChecked() )
