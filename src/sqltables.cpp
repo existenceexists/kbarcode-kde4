@@ -308,10 +308,10 @@ void SqlTables::importLabelDef()
     QSqlQuery query( QString::null, db );
     exec( &query, "delete from " TABLE_LABEL_DEF );
 
-    QString f = KStandardDirs::locateLocal( "data", "kbarcode/labeldefinitions.sql" );
+    QString f = KStandardDirs::locateLocal( "appdata", "labeldefinitions.sql" );
     if( !QFile::exists( f ) ) {
         KConfigGroup config = KGlobal::config()->group( "Definitions" );
-        f = config.readEntry( "defpath", KStandardDirs::locate( "data", "kbarcode/labeldefinitions.sql" ) );
+        f = config.readEntry( "defpath", KStandardDirs::locate( "appdata", "labeldefinitions.sql" ) );
     }
 
     QString progressDialogText( i18n("Importing label definitions from the file ") + "<br>" + f + "<br>" + i18n(" into your database.") );
