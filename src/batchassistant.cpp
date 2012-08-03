@@ -470,6 +470,8 @@ void BatchAssistant::setupStackPage2()
     group_layout->addWidget(radioImportManual);
     radioImportSql = new QRadioButton( i18n("Import variables from a &SQL table") );
     group_layout->addWidget(radioImportSql);
+    labelWarningSqlQuery = new QLabel( i18n("<qt>The query you enter can damage data in the database <br>so only SQL statements that don't modify the database <br>(i.e. SELECT statements) should be used.</qt>") );
+    group_layout->addWidget(labelWarningSqlQuery);
     labelSqlQuery = new QLabel( i18n("Please enter a sql &query:") );
     group_layout->addWidget(labelSqlQuery);
     importSqlQuery = new KLineEdit;
@@ -650,6 +652,7 @@ void BatchAssistant::enableControls()
     labelCsvFile->setEnabled( radioImportCSV->isChecked() );
     importSqlQuery->setEnabled( radioImportSql->isChecked() );
     labelSqlQuery->setEnabled( radioImportSql->isChecked() );
+    labelWarningSqlQuery->setEnabled( radioImportSql->isChecked() );
     labelEncoding->setEnabled( radioImportCSV->isChecked() );
     comboEncoding->setEnabled( radioImportCSV->isChecked() );
 
@@ -1289,7 +1292,7 @@ bool BatchAssistant::fillVarTable()
 	    return false;
 	}
 
-	if( m_varTable->rowCount() < queryModel.rowCount() )// TODO: use != instead of < ?
+	if( m_varTable->rowCount() != queryModel.rowCount() )
 	    m_varTable->setRowCount( queryModel.rowCount() );
 
 	for( int y = 0; y < m_varTable->rowCount(); y++ )
@@ -1358,6 +1361,7 @@ bool BatchAssistant::fillVarTable()
 
 	m_varTable->setRowCount( i );
     }
+    m_varTable->resizeColumnsToContents();
 
     return true;
 }
