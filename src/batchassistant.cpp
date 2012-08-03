@@ -37,7 +37,7 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qradiobutton.h>
-#include <q3sqlselectcursor.h>
+#include <QSqlQueryModel>
 #include <QDebug>
 #include <QTreeWidget>
 #include <QAbstractItemView>
@@ -470,6 +470,8 @@ void BatchAssistant::setupStackPage2()
     group_layout->addWidget(radioImportManual);
     radioImportSql = new QRadioButton( i18n("Import variables from a &SQL table") );
     group_layout->addWidget(radioImportSql);
+    labelWarningSqlQuery = new QLabel( i18n("<qt>The query you enter can damage data in the database <br>so only SQL statements that don't modify the database <br>(i.e. SELECT statements) should be used.</qt>") );
+    group_layout->addWidget(labelWarningSqlQuery);
     labelSqlQuery = new QLabel( i18n("Please enter a sql &query:") );
     group_layout->addWidget(labelSqlQuery);
     importSqlQuery = new KLineEdit;
@@ -650,6 +652,7 @@ void BatchAssistant::enableControls()
     labelCsvFile->setEnabled( radioImportCSV->isChecked() );
     importSqlQuery->setEnabled( radioImportSql->isChecked() );
     labelSqlQuery->setEnabled( radioImportSql->isChecked() );
+    labelWarningSqlQuery->setEnabled( radioImportSql->isChecked() );
     labelEncoding->setEnabled( radioImportCSV->isChecked() );
     comboEncoding->setEnabled( radioImportCSV->isChecked() );
 
@@ -1247,8 +1250,7 @@ void BatchAssistant::fillVarList()
     m_varTable->setColumnCount( vars.count() );
     for( int i = 0; i < vars.count(); i++ )
     {
-	vars[i] = vars[i].right( vars[i].length() - 1 );
-	/*m_varTable->horizontalHeader()->setLabel( i, vars[i] );*/// -!F: delete
+	/*vars[i] = vars[i].right( vars[i].length() - 1 );*/// -!F: why? this line strips the first character which results in "rticle_desc" for QString "article_desc" etc. 
 	QTableWidgetItem * item = new QTableWidgetItem( vars[i] );
         m_varTable->setHorizontalHeaderItem( i, item );
     }
@@ -1272,39 +1274,36 @@ void BatchAssistant::fillAddressList()
 bool BatchAssistant::fillVarTable()
 {
     // Clear the table
-    m_varTable->clear();
+    m_varTable->clearContents();
     m_varTable->setRowCount( 0 );
 
     if( radioImportSql->isChecked() )
     {
-	int y = 0;
-	int x;
-        if( !SqlTables::getInstance()->database() )
+        if( !SqlTables::getInstance()->database().isValid() )
         {
             KMessageBox::error( this, i18n("<qt>Can't connect to a database.</qt>") );
             return false;
         }
-	Q3SqlSelectCursor query( importSqlQuery->text(), * SqlTables::getInstance()->database() );
-	query.select();
-	if( query.lastError().type() != QSqlError::None )
+	QSqlQueryModel queryModel;
+        queryModel.setQuery( importSqlQuery->text(), SqlTables::getInstance()->database() );
+	if( queryModel.lastError().type() != QSqlError::None )
 	{
-	    KMessageBox::error( this, i18n("<qt>Can't execute SQL query:<br>") + query.lastError().text() + "</qt>" );
+	    KMessageBox::error( this, i18n("<qt>Can't execute SQL query:<br>") + queryModel.lastError().text() + "</qt>" );
 	    return false;
 	}
 
-	if( m_varTable->rowCount() < query.size() )
-	    m_varTable->setRowCount( query.size() );
+	if( m_varTable->rowCount() != queryModel.rowCount() )
+	    m_varTable->setRowCount( queryModel.rowCount() );
 
-	while( query.next() )
+	for( int y = 0; y < m_varTable->rowCount(); y++ )
 	{
-	    for( x=0;x<m_varTable->rowCount();x++ ) {
-                QTableWidgetItem * item = m_varTable->item( y, x );
+	    for( int x=0;x<m_varTable->columnCount();x++ ) {
+                QTableWidgetItem * item = new QTableWidgetItem();
                 if( item ) {
-                    item->setText( query.value( m_varTable->horizontalHeaderItem( x )->text() ).toString() );
+                    item->setText( queryModel.record( y ).value( m_varTable->horizontalHeaderItem( x )->text() ).toString() );
+                    m_varTable->setItem( y, x, item );
                 }
             }
-
-	    y++;
 	}
     }
     else if( radioImportCSV->isChecked() )
@@ -1362,6 +1361,7 @@ bool BatchAssistant::fillVarTable()
 
 	m_varTable->setRowCount( i );
     }
+    m_varTable->resizeColumnsToContents();
 
     return true;
 }

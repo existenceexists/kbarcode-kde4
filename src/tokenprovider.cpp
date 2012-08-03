@@ -424,6 +424,7 @@ QStringList TokenProvider::listUserVars()
 
 	if( !t.isNull() )
 	    findBrackets( t, &TokenProvider::processUserVars );
+            lst.append( t );
     }
 
     m_findUserVarsList = NULL;

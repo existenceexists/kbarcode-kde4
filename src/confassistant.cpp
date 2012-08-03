@@ -264,47 +264,59 @@ void ConfAssistant::create()
     else
         KApplication::restoreOverrideCursor();
 
-    QSqlDatabase dbInstance = QSqlDatabase::addDatabase( sqlwidget->driver() );
-    QSqlDatabase* db = & dbInstance;
-    db->setDatabaseName( sqlwidget->database() );
-    db->setUserName( sqlwidget->username() );
-    db->setPassword( sqlwidget->password() );
-    db->setHostName( sqlwidget->hostname() );
+    QString connectionName("import-labels-connection");
+    {// the beginning of the scope of QSqlDatabase db variable
+        QSqlDatabase db = QSqlDatabase::addDatabase( sqlwidget->driver(), connectionName );
+        db.setDatabaseName( sqlwidget->database() );
+        db.setUserName( sqlwidget->username() );
+        db.setPassword( sqlwidget->password() );
+        db.setHostName( sqlwidget->hostname() );
 
-    if( !db->open() )
-        KMessageBox::error( this, i18n("<qt>Connection failed:<br>") + sqlwidget->database(),
-              db->lastError().databaseText() + "</qt>" );
+        if( !db.open() )
+            KMessageBox::error( this, i18n("<qt>Connection failed:<br>") + sqlwidget->database(),
+                  db.lastError().databaseText() + "</qt>" );
 
-    if( db->open() ) {
-        KApplication::setOverrideCursor( Qt::WaitCursor );
-        SqlTables::getInstance()->importData(
-            KStandardDirs::locate("appdata", "labeldefinitions.sql"), db );
-        buttonExample->setEnabled( true );
-        KApplication::restoreOverrideCursor();
-    }
+        if( db.open() ) {
+            KApplication::setOverrideCursor( Qt::WaitCursor );
+            QString progressDialogText( i18n("Importing label definitions from the file ") 
+                + "<br>" + KStandardDirs::locate("appdata", "labeldefinitions.sql") 
+                + "<br>" + i18n(" into your database.") );
+            SqlTables::getInstance()->importData(
+                KStandardDirs::locate("appdata", "labeldefinitions.sql"), db, progressDialogText );
+            buttonExample->setEnabled( true );
+            KApplication::restoreOverrideCursor();
+        }
 
-    db->close();
+        db.close();
+    }// the end of the scope of QSqlDatabase db variable
+    QSqlDatabase::removeDatabase( connectionName );
 }
 
 void ConfAssistant::example()
 {
-    QSqlDatabase dbInstance = QSqlDatabase::addDatabase( sqlwidget->driver() );
-    QSqlDatabase* db = & dbInstance;
-    db->setDatabaseName( sqlwidget->database() );
-    db->setUserName( sqlwidget->username() );
-    db->setPassword( sqlwidget->password() );
-    db->setHostName( sqlwidget->hostname() );
+    QString connectionName("import-example-data-connection");
+    {// the beginning of the scope of QSqlDatabase db variable
+        QSqlDatabase db = QSqlDatabase::addDatabase( sqlwidget->driver(), connectionName );
+        db.setDatabaseName( sqlwidget->database() );
+        db.setUserName( sqlwidget->username() );
+        db.setPassword( sqlwidget->password() );
+        db.setHostName( sqlwidget->hostname() );
 
-    if( !db->open() )
-        KMessageBox::error( this, i18n("<qt>Connection failed:<br>") + sqlwidget->database(),
-              db->lastError().databaseText() + "</qt>" );
+        if( !db.open() )
+            KMessageBox::error( this, i18n("<qt>Connection failed:<br>") + sqlwidget->database(),
+                  db.lastError().databaseText() + "</qt>" );
 
 
-    SqlTables::getInstance()->importData(
-        KStandardDirs::locate("appdata", "exampledata.sql"), db );
-    KMessageBox::information( this, i18n("Example data has been imported.") );
+        QString progressDialogText( i18n("Importing example data from the file ") 
+            + "<br>" + KStandardDirs::locate("appdata", "exampledata.sql") 
+            + "<br>" + i18n(" into your database.") );
+        SqlTables::getInstance()->importData(
+            KStandardDirs::locate("appdata", "exampledata.sql"), db, progressDialogText );
+        KMessageBox::information( this, i18n("Example data has been imported.") );
 
-    db->close();
+        db.close();
+    }// the end of the scope of QSqlDatabase db variable
+    QSqlDatabase::removeDatabase( connectionName );
 }
 
 /* configureCurrentPage() is called by the slots next() and back() */

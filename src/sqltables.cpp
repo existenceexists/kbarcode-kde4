@@ -48,6 +48,7 @@
 #include <QSqlError>
 #include <QProgressDialog>
 #include <QTextStream>
+#include <QDebug>
 
 QMap<QString,SqlDescription*> drivers;
 
@@ -91,7 +92,7 @@ SqlTables::SqlTables( QObject* parent )
     drivers.insert( "QSQLITE", new SQLiteDescription() );
     drivers.insert( "QODBC3", new SQLiteDescription() );
 
-    db = NULL;
+    db = QSqlDatabase();
     connected = false;
     loadConfig();
 
@@ -118,19 +119,18 @@ const SqlDescription* SqlTables::driver() const
 }
 bool SqlTables::connectMySQL()
 {
-    dbInstance = QSqlDatabase::addDatabase( sqldata.driver );
-    db = & dbInstance;
+    db = QSqlDatabase::addDatabase( sqldata.driver );
 
-    db->setDatabaseName( sqldata.database );
-    db->setUserName( sqldata.username );
-    db->setPassword( sqldata.password );
-    db->setHostName( sqldata.hostname );
+    db.setDatabaseName( sqldata.database );
+    db.setUserName( sqldata.username );
+    db.setPassword( sqldata.password );
+    db.setHostName( sqldata.hostname );
 
-    if( !db->open() )
+    if( !db.open() )
         KMessageBox::error( 0, i18n("<qt>Unable to open database: ") + sqldata.database + "<br>" +
-              db->lastError().databaseText() + "</qt>");
+              db.lastError().databaseText() + "</qt>");
 
-    connected = db->open();
+    connected = db.open();
     if( connected ) {
         updateTables();
         emit connectedSQL();
@@ -138,9 +138,7 @@ bool SqlTables::connectMySQL()
         Definition::updateProducer();
     }
 
-    /*return connected;*/// -!F: original, uncomment this 
-    //emit connectedSQL();// -!F: delete
-    return true;// -!F: delete
+    return connected;
 }
 
 bool SqlTables::newTables()
@@ -159,130 +157,142 @@ bool SqlTables::newTables( const QString & username, const QString & password, c
     if( !drivers[driver] )
         return false;
 
-    QSqlDatabase dbaseInstance = QSqlDatabase::addDatabase(driver, drivers[driver]->initdb( database ) );
-    QSqlDatabase* dbase = & dbaseInstance;
-    dbase->setDatabaseName( drivers[driver]->initdb( database ) );
-    dbase->setUserName( username );
-    dbase->setPassword( password );
-    dbase->setHostName( hostname );
+    bool databaseOpened = false;
+    bool continueCreateTables = true;
+    {// the beginning of the scope of QSqlDatabase dbase variable
+        QSqlDatabase dbase = QSqlDatabase::addDatabase(driver, drivers[driver]->initdb( database ) );
+        dbase.setDatabaseName( database );
+        dbase.setUserName( username );
+        dbase.setPassword( password );
+        dbase.setHostName( hostname );
 
-    if(dbase->open()) {
+        if(dbase.open()) {
+            databaseOpened = true;
 
-        if (driver != "QSQLITE")
-        {
-            bool found = false;
-            QSqlQuery existing("SHOW DATABASES LIKE '" + database + "';");
-            while( existing.next() )
-                found = true;
+            if (driver != "QSQLITE")
+            {
+                bool found = false;
+                QSqlQuery existing("SHOW DATABASES LIKE '" + database + "';", dbase);
+                while( existing.next() )
+                    found = true;
 
-            QSqlQuery firstquery( NULL, *dbase );
-            if( !found && !firstquery.exec("CREATE DATABASE " + database + ";")) {
-                if( KMessageBox::warningContinueCancel( 0, i18n("<qt>Can't create database ")+ database + i18n("<br>You can continue if the database exists already.</qt>")
-                    + firstquery.lastError().databaseText() ) == KMessageBox::Cancel ) {
-                    dbase->close();
-                    QSqlDatabase::removeDatabase(drivers[driver]->initdb( database ));
-                    return false;
+                QSqlQuery firstquery( NULL, dbase );
+                if( !found && !firstquery.exec("CREATE DATABASE " + database + ";")) {
+                    if( KMessageBox::warningContinueCancel( 0, i18n("<qt>Can't create database ")+ database + i18n("<br>You can continue if the database exists already.</qt>")
+                        + firstquery.lastError().databaseText() ) == KMessageBox::Cancel ) {
+                        continueCreateTables = false;
+                    }
                 }
             }
+        } else {
+            databaseOpened = false;
+            KMessageBox::sorry( 0, i18n("Can't connect to database.") );
         }
-        dbase->close();
-        QSqlDatabase::removeDatabase(drivers[driver]->initdb( database ));
+        dbase.close();
+    }// the end of the scope of QSqlDatabase dbase variable
+    QSqlDatabase::removeDatabase(drivers[driver]->initdb( database ));
+    
+    if( !databaseOpened ) {
+        return false;
+    }
+    if( !continueCreateTables ) {
+        return false;
+    }
 
+    databaseOpened = true;
+    {// the beginning of the scope of QSqlDatabase dbase variable
         // The database is created, now connect to the one specified by the user
-        dbaseInstance = QSqlDatabase::addDatabase(driver, database );
-        dbase = & dbaseInstance;
-        dbase->setDatabaseName( database );
-        dbase->setUserName( username );
-        dbase->setPassword( password );
-        dbase->setHostName( hostname );
-        if(!dbase->open() || !dbase->isOpen()) {
-            KMessageBox::error( 0, i18n("KBarcode could not create the required database. Please create it manually.") + dbase->lastError().databaseText() );
-            QSqlDatabase::removeDatabase( database );
-            return false;
+        QSqlDatabase dbase = QSqlDatabase::addDatabase(driver, database );
+        dbase.setDatabaseName( database );
+        dbase.setUserName( username );
+        dbase.setPassword( password );
+        dbase.setHostName( hostname );
+        if(!dbase.open() || !dbase.isOpen()) {
+            databaseOpened = false;
+            KMessageBox::error( 0, i18n("KBarcode could not create the required database. Please create it manually.") + dbase.lastError().databaseText() );
+        } else {// Create tables
+
+            QSqlQuery query( NULL, dbase );
+
+            // barcode_basic
+            query.exec("DROP TABLE " TABLE_BASIC );
+            exec( &query, "CREATE TABLE " TABLE_BASIC " ("
+                       "    uid " + drivers[driver]->autoIncrement() + ","
+                       "    article_no varchar(50) DEFAULT NULL,"
+                       "    article_desc varchar(50) DEFAULT NULL,"
+                       "    barcode_no TEXT DEFAULT NULL,"
+                       "    encoding_type varchar(50) DEFAULT NULL,"
+                       "    field0 varchar(50) DEFAULT NULL,"
+                       "    field1 varchar(50) DEFAULT NULL,"
+                       "    field2 varchar(50) DEFAULT NULL,"
+                       "    field3 varchar(50) DEFAULT NULL,"
+                       "    field4 varchar(50) DEFAULT NULL,"
+                       "    field5 varchar(50) DEFAULT NULL,"
+                       "    field6 varchar(50) DEFAULT NULL,"
+                       "    field7 varchar(50) DEFAULT NULL,"
+                       "    field8 varchar(50) DEFAULT NULL,"
+                       "    field9 varchar(50) DEFAULT NULL,"
+                       "    PRIMARY KEY  (uid)"
+                       ");" );
+
+            // customer
+            query.exec("DROP TABLE " TABLE_CUSTOMER );
+            exec( &query, "CREATE TABLE " TABLE_CUSTOMER " ("
+                       "    uid " + drivers[driver]->autoIncrement() + " ,"
+                       "    customer_no varchar(20) DEFAULT NULL,"
+                       "    customer_name varchar(20) DEFAULT NULL,"
+                       "    PRIMARY KEY  (uid)"
+                       ");" );
+
+            // customer_text
+            query.exec("DROP TABLE " TABLE_CUSTOMER_TEXT );
+            exec( &query, "CREATE TABLE " TABLE_CUSTOMER_TEXT " ("
+                       "    uid " + drivers[driver]->autoIncrement() + ","
+                       "    customer_no varchar(20) DEFAULT NULL,"
+                       "    encoding_type varchar(50) DEFAULT NULL,"
+                       "    article_no varchar(50) DEFAULT NULL,"
+                       "    article_no_customer varchar(50) NULL,"
+                       "    barcode_no TEXT DEFAULT NULL,"
+                       "    line0 varchar(50) DEFAULT NULL,"
+                       "    line1 varchar(50) DEFAULT NULL,"
+                       "    line2 varchar(50) DEFAULT NULL,"
+                       "    line3 varchar(50) DEFAULT NULL,"
+                       "    line4 varchar(50) DEFAULT NULL,"
+                       "    line5 varchar(50) DEFAULT NULL,"
+                       "    line6 varchar(50) DEFAULT NULL,"
+                       "    line7 varchar(50) DEFAULT NULL,"
+                       "    line8 varchar(50) DEFAULT NULL,"
+                       "    line9 varchar(50) DEFAULT NULL,"
+                       "    PRIMARY KEY  (uid)"
+                       ");" );
+
+            // label_def
+            query.exec("DROP TABLE " TABLE_LABEL_DEF );
+            exec( &query, "CREATE TABLE " TABLE_LABEL_DEF " ("
+                       "    label_no " + drivers[driver]->autoIncrement() + ","
+                       "    manufacture varchar(255) DEFAULT NULL,"
+                       "    type varchar(255) DEFAULT NULL,"
+                       "    paper char(1) DEFAULT NULL,"
+                       "    gap_top NUMERIC(10,4) NULL,"
+                       "    gap_left NUMERIC(10,4) NULL,"
+                       "    height NUMERIC(10,4) NULL,"
+                       "    width NUMERIC(10,4) NULL,"
+                       "    gap_v NUMERIC(10,4) NULL,"
+                       "    gap_h NUMERIC(10,4) NULL,"
+                       "    number_h int DEFAULT NULL," //smalint(6)
+                       "    number_v int DEFAULT NULL," //smalint(6)
+                       "    paper_type varchar(30) DEFAULT NULL,"
+                       "    compatibility varchar(10) DEFAULT NULL," // keep compatibility with older versions, was "remark text"
+                       "    PRIMARY KEY  (label_no)"
+                       ");" );
+
+            KMessageBox::information( 0, i18n("Created tables in the database ")+database+i18n(" successfully!") );
         }
-
-
-        QSqlQuery query( NULL, *dbase );
-
-        // barcode_basic
-        query.exec("DROP TABLE " TABLE_BASIC );
-        exec( &query, "CREATE TABLE " TABLE_BASIC " ("
-                   "    uid " + drivers[driver]->autoIncrement() + ","
-                   "    article_no varchar(50) DEFAULT NULL,"
-                   "    article_desc varchar(50) DEFAULT NULL,"
-                   "    barcode_no TEXT DEFAULT NULL,"
-                   "    encoding_type varchar(50) DEFAULT NULL,"
-                   "    field0 varchar(50) DEFAULT NULL,"
-                   "    field1 varchar(50) DEFAULT NULL,"
-                   "    field2 varchar(50) DEFAULT NULL,"
-                   "    field3 varchar(50) DEFAULT NULL,"
-                   "    field4 varchar(50) DEFAULT NULL,"
-                   "    field5 varchar(50) DEFAULT NULL,"
-                   "    field6 varchar(50) DEFAULT NULL,"
-                   "    field7 varchar(50) DEFAULT NULL,"
-                   "    field8 varchar(50) DEFAULT NULL,"
-                   "    field9 varchar(50) DEFAULT NULL,"
-                   "    PRIMARY KEY  (uid)"
-                   ");" );
-
-        // customer
-        query.exec("DROP TABLE " TABLE_CUSTOMER );
-        exec( &query, "CREATE TABLE " TABLE_CUSTOMER " ("
-                   "    uid " + drivers[driver]->autoIncrement() + " ,"
-                   "    customer_no varchar(20) DEFAULT NULL,"
-                   "    customer_name varchar(20) DEFAULT NULL,"
-                   "    PRIMARY KEY  (uid)"
-                   ");" );
-
-        // customer_text
-        query.exec("DROP TABLE " TABLE_CUSTOMER_TEXT );
-        exec( &query, "CREATE TABLE " TABLE_CUSTOMER_TEXT " ("
-                   "    uid " + drivers[driver]->autoIncrement() + ","
-                   "    customer_no varchar(20) DEFAULT NULL,"
-                   "    encoding_type varchar(50) DEFAULT NULL,"
-                   "    article_no varchar(50) DEFAULT NULL,"
-                   "    article_no_customer varchar(50) NULL,"
-                   "    barcode_no TEXT DEFAULT NULL,"
-                   "    line0 varchar(50) DEFAULT NULL,"
-                   "    line1 varchar(50) DEFAULT NULL,"
-                   "    line2 varchar(50) DEFAULT NULL,"
-                   "    line3 varchar(50) DEFAULT NULL,"
-                   "    line4 varchar(50) DEFAULT NULL,"
-                   "    line5 varchar(50) DEFAULT NULL,"
-                   "    line6 varchar(50) DEFAULT NULL,"
-                   "    line7 varchar(50) DEFAULT NULL,"
-                   "    line8 varchar(50) DEFAULT NULL,"
-                   "    line9 varchar(50) DEFAULT NULL,"
-                   "    PRIMARY KEY  (uid)"
-                   ");" );
-
-        // label_def
-        query.exec("DROP TABLE " TABLE_LABEL_DEF );
-        exec( &query, "CREATE TABLE " TABLE_LABEL_DEF " ("
-                   "    label_no " + drivers[driver]->autoIncrement() + ","
-                   "    manufacture varchar(255) DEFAULT NULL,"
-                   "    type varchar(255) DEFAULT NULL,"
-                   "    paper char(1) DEFAULT NULL,"
-                   "    gap_top NUMERIC(10,4) NULL,"
-                   "    gap_left NUMERIC(10,4) NULL,"
-                   "    height NUMERIC(10,4) NULL,"
-                   "    width NUMERIC(10,4) NULL,"
-                   "    gap_v NUMERIC(10,4) NULL,"
-                   "    gap_h NUMERIC(10,4) NULL,"
-                   "    number_h int DEFAULT NULL," //smalint(6)
-                   "    number_v int DEFAULT NULL," //smalint(6)
-                   "    paper_type varchar(30) DEFAULT NULL,"
-                   "    compatibility varchar(10) DEFAULT NULL," // keep compatibility with older versions, was "remark text"
-                   "    PRIMARY KEY  (label_no)"
-                   ");" );
-
-        dbase->close();
-        QSqlDatabase::removeDatabase( database );
-        KMessageBox::information( 0, i18n("Created table ")+database+i18n(" successfully!") );
-    } else {
-        dbase->close();
-        QSqlDatabase::removeDatabase(drivers[driver]->initdb( database ));
-        KMessageBox::sorry( 0, i18n("Can't connect to database.") );
+        dbase.close();
+    }// the end of the scope of QSqlDatabase dbase variable
+    QSqlDatabase::removeDatabase( database );
+    
+    if( !databaseOpened ) {
         return false;
     }
 
@@ -295,16 +305,17 @@ void SqlTables::importLabelDef()
         KMessageBox::Cancel )
         return;
 
-    QSqlQuery query( QString::null, dbInstance );
+    QSqlQuery query( QString::null, db );
     exec( &query, "delete from " TABLE_LABEL_DEF );
 
-    QString f = KStandardDirs::locateLocal( "data", "kbarcode/labeldefinitions.sql" );
+    QString f = KStandardDirs::locateLocal( "appdata", "labeldefinitions.sql" );
     if( !QFile::exists( f ) ) {
         KConfigGroup config = KGlobal::config()->group( "Definitions" );
-        f = config.readEntry( "defpath", KStandardDirs::locate( "data", "kbarcode/labeldefinitions.sql" ) );
+        f = config.readEntry( "defpath", KStandardDirs::locate( "appdata", "labeldefinitions.sql" ) );
     }
 
-    importData( f, db );
+    QString progressDialogText( i18n("Importing label definitions from the file ") + "<br>" + f + "<br>" + i18n(" into your database.") );
+    importData( f, db, progressDialogText );
 
     Definition::updateProducer();
 }
@@ -316,17 +327,18 @@ void SqlTables::importExampleData()
         KMessageBox::Cancel )
         return;
 
-    importData( KStandardDirs::locate("appdata", "exampledata.sql"), db );
+    QString progressDialogText( i18n("Importing example data from the file ") + "<br>" + KStandardDirs::locate("appdata", "exampledata.sql") + "<br>" + i18n(" into your database.") );
+    importData( KStandardDirs::locate("appdata", "exampledata.sql"), db, progressDialogText );
 }
 
-void SqlTables::importData( const QString & filename, QSqlDatabase* db )
+void SqlTables::importData( const QString & filename, QSqlDatabase dbase, const QString & progressDialogText )
 {
-    if( !db ) {
-        qDebug("Can't import data, dabase not open!");
+    if( !dbase.isValid() ) {
+        qDebug("Can't import data, database not open!");
         return;
     }
 
-    if( filename.isEmpty() || !db->isOpen() ) // quick escape
+    if( filename.isEmpty() || !dbase.isOpen() ) // quick escape
     {
         KMessageBox::error( NULL, i18n("Data file for import not found. Continuing without importing data. Please check your KBarcode installation.") );
         return;
@@ -334,18 +346,23 @@ void SqlTables::importData( const QString & filename, QSqlDatabase* db )
 
     QFile data( filename);
     //QProgressDialog* dlg = new QProgressDialog( i18n("SQL import progress:"),  QString::null, data.size(), 0, "dlg", true );// -!F:
-    QProgressDialog* dlg = new QProgressDialog( i18n("SQL import progress:"),  QString::null, 0, data.size());
+    QProgressDialog* dlg = new QProgressDialog( "<qt>" + progressDialogText + "<br><br>" + i18n("SQL import progress:") + "</qt>",  QString::null, 0, data.size());
 
     if( data.open( QIODevice::ReadOnly ) ) {
         QTextStream s( & data );
-        QSqlQuery query( QString::null, * db );
+        QSqlQuery queryPrepare( QString::null, dbase );
+        exec( &queryPrepare, "SET autocommit=0;" );
+        QSqlQuery query( QString::null, dbase );
 	QString line = s.readLine(1024);
-        while( !line.isNull() )
+        while( !line.isNull() ) {
             if( !line.isEmpty() ) {
                 dlg->setValue( dlg->value() + line.length() );
                 exec( &query, line );
             }
             line = s.readLine(1024);
+        }
+        QSqlQuery queryEnd( QString::null, dbase );
+        exec( &queryEnd, "COMMIT;" );
     } else
         KMessageBox::sorry( 0, i18n("Can't open the data file containing the label definitions.") );
 
@@ -453,48 +470,65 @@ void SqlTables::updateTables()
 
 bool SqlTables::testSettings( const QString & username, const QString & password, const QString & hostname, const QString & database, const QString & driver )
 {
-    QSqlDatabase dbInstance = QSqlDatabase::addDatabase( driver );
-    QSqlDatabase* db = & dbInstance;
     if( !drivers[driver] )
-      return false;
-
-    db->setDatabaseName( database );
-    db->setUserName( username );
-    db->setPassword( password );
-    db->setHostName( hostname );
-
-    if( !db->open() ) 
-    {
-        QSqlDatabase::removeDatabase( database );
-    }
-    else 
-    {
-        KMessageBox::information( 0, i18n("Connected successfully to your database") );
-        db->close();
-        QSqlDatabase::removeDatabase( database );
-        return true;
-    }
-
-    dbInstance = QSqlDatabase::addDatabase( driver );
-    db = & dbInstance;
-    
-    db->setDatabaseName( drivers[driver]->initdb( database ) );
-
-    db->setUserName( username );
-    db->setPassword( password );
-    db->setHostName( hostname );
-
-    if( !db->open() ) {
-        KMessageBox::error( 0, i18n("<qt>Connection failed:<br>") + database + "<br>" +
-              db->lastError().databaseText() + "</qt>" );
-        QSqlDatabase::removeDatabase(drivers[driver]->initdb( database ));
         return false;
-    } else {
-        KMessageBox::information( 0, i18n("Connected successfully to your database") );
-        db->close();
-        QSqlDatabase::removeDatabase(drivers[driver]->initdb( database ));
+    QString connectionName( "test-connection" );
+    bool connectedSuccessfully = false;
+    {// the beginning of the scope of QSqlDatabase dbase variable
+        QSqlDatabase dbase = QSqlDatabase::addDatabase( driver, connectionName );
+        dbase.setDatabaseName( database );
+        dbase.setUserName( username );
+        dbase.setPassword( password );
+        dbase.setHostName( hostname );
+
+        
+        if( dbase.open() ) 
+        {
+            connectedSuccessfully = true;
+            KMessageBox::information( 0, i18n("Connected successfully to your database") );
+        } else {
+            KMessageBox::error( 0, i18n("<qt>Connection failed:<br>")
+                + dbase.lastError().databaseText() + "<br>"
+                + i18n("So now we will try to connect to the default database:<br>") 
+                + drivers[driver]->initdb( database ) + "</qt>");
+        }
+        dbase.close();
+    }// the end of the scope of QSqlDatabase dbase variable
+    QSqlDatabase::removeDatabase( connectionName );
+    
+    if( connectedSuccessfully ) {
         return true;
     }
+
+    /* May be the specified database set by dbase.setDatabaseName(database) doesn't exist yet
+     * so try to connect to the database that should be present by default 
+     * e.g. a database named "mysql" is almost always present if MySQL is installed.*/
+    
+    {// the beginning of the scope of QSqlDatabase dbase variable
+        QSqlDatabase dbase = QSqlDatabase::addDatabase( driver, connectionName );
+        
+        dbase.setDatabaseName( drivers[driver]->initdb( database ) );
+
+        dbase.setUserName( username );
+        dbase.setPassword( password );
+        dbase.setHostName( hostname );
+
+        if( !dbase.open() ) {
+            KMessageBox::error( 0, i18n("<qt>Connection failed to the default database:<br>") 
+                + dbase.lastError().databaseText() + "</qt>" );
+        } else {
+            connectedSuccessfully = true;
+            KMessageBox::information( 0, i18n("<qt>Connected successfully to the default database:<br>")
+                + drivers[driver]->initdb( database ) + "</qt>");
+        }
+        dbase.close();
+    }// the end of the scope of QSqlDatabase dbase variable
+    QSqlDatabase::removeDatabase( connectionName );
+    
+    if( connectedSuccessfully ) {
+        return true;
+    }
+    return false;
 
 }
 
@@ -646,7 +680,7 @@ void SqlWidget::save( bool usedb )
     mysqldata sqldata = SqlTables::getInstance()->getData();
     sqldata.username = m_username->text();
     sqldata.password = m_password->text();
-    sqldata.hostname = m_hostname ->text();
+    sqldata.hostname = m_hostname->text();
     sqldata.database = m_database->text();
     sqldata.driver = m_driver->currentText();
     sqldata.autoconnect = ( usedb ? m_autoconnect->isChecked() : false );
@@ -655,11 +689,10 @@ void SqlWidget::save( bool usedb )
 
 void SqlWidget::testSettings()
 {
-    /*emit databaseWorking(
+    emit databaseWorking(
     SqlTables::getInstance()->testSettings( m_username->text(), m_password->text(),
                                             m_hostname->text(), m_database->text(),
-                                            m_driver->currentText() ) );*/// -!F: original, uncomment
-    emit databaseWorking(true);// -!F: delete
+                                            m_driver->currentText() ) );
 }
 
 const QString SqlWidget::username() const

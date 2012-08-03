@@ -207,6 +207,7 @@ class BatchAssistant : public KAssistantDialog {
 	QWidget* imageBox;
 
 	QLabel* labelInfo;
+        QLabel* labelWarningSqlQuery;
 	QLabel* labelSqlQuery;
 	QLabel* labelCsvFile;
         QLabel* labelEncoding;

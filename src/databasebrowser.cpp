@@ -16,24 +16,22 @@
  ***************************************************************************/
 
 #include "databasebrowser.h"
-#include "mydatatable.h"
+//#include "mydatatable.h"// currently not used by Kbarcode
 #include "definition.h"
 #include "sqltables.h"
 #include "csvimportdlg.h"
 
 // Qt includes
 #include <qclipboard.h>
-/*#include <QSqlQuery>*/// -!F: keep
-#include <Q3SqlCursor>
+#include <QTableView>
+#include <QSqlTableModel>
 //Added by qt3to4:
-//#include <QSqlCursor>// -!F: original, delete
 #include <QWidget>
 
 // KDE includes
 #include <kaction.h>
 #include <kapplication.h>
-//#include <keditcl.h>// -!F: original, delete
-#include <kfinddialog.h>// -!F: keep, replacement of keditcl.h
+#include <kfinddialog.h>
 #include <kfind.h>
 #include <klocale.h>
 #include <kmenubar.h>
@@ -47,14 +45,18 @@
 
 #define CUR_TABLE_ID 6666
 
-DatabaseBrowser::DatabaseBrowser( QString _database, QWidget *parent)
+DatabaseBrowser::DatabaseBrowser( QString _database, QWidget *parent )
     : KXmlGuiWindow ( parent ) 
 {
-    m_direction = m_case = false;
+    m_findOptions = 0;
 
-    table = new MyDataTable(this );
-    //setCentralWidget( (QWidget*) table );
+    table = new QTableView( this );
     setCentralWidget( table );
+    
+    model = new QSqlTableModel( this, SqlTables::getInstance()->database() );
+    model->setTable( _database );
+    model->setEditStrategy( QSqlTableModel::OnFieldChange );
+    table->setModel( model );
 
     statusBar()->insertPermanentItem( i18n("Current Table: <b>" ) + _database, CUR_TABLE_ID, 0 );
     statusBar()->setSizeGripEnabled( true );
@@ -62,19 +64,23 @@ DatabaseBrowser::DatabaseBrowser( QString _database, QWidget *parent)
 
     database = _database;
 
-    connect( (QObject*) table, SIGNAL( cursorChanged( QSql::Op ) ),
+    /*connect( (QObject*) table, SIGNAL( cursorChanged( QSql::Op ) ),
+             SqlTables::getInstance(), SIGNAL( tablesChanged() ) );*/// -!F: original, what is the correct replacement?
+    connect( model, SIGNAL( dataChanged(const QModelIndex &, const QModelIndex & ) ),
              SqlTables::getInstance(), SIGNAL( tablesChanged() ) );
 
     /*connect( this, SIGNAL( connectedSQL() ), this, SLOT( setupSql() ) );*/// -!F: original, keep, this line gives the warning: Object::connect: No such signal DatabaseBrowser::connectedSQL()
-    connect( SqlTables::getInstance(), SIGNAL( connectedSQL() ), this, SLOT( setupSql() ) );// -!F: is this the right correction of the previous line ?
+    connect( SqlTables::getInstance(), SIGNAL( connectedSQL() ), this, SLOT( setupSql() ) );// -!F: is this the right replacement of the previous line ?
 
-    /*findDlg = 0;*/// -!F: original, delete
-    findDialogExists = false;
+    findDlg = 0;
+    m_find = 0;
     
     setupActions();
+    
+    setupSql();
+    
     show();
 
-    setupSql();
 }
 
 DatabaseBrowser::~DatabaseBrowser()
@@ -88,7 +94,7 @@ DatabaseBrowser::~DatabaseBrowser()
     KXmlGuiWindow::setAutoSaveSettings( QString("DatabaseBrowser") );
 
     if( findDlg )
-        delete findDlg;// -!F: original, delete, now need to delete a pointer to findDlg
+        delete findDlg;
 }
 
 void DatabaseBrowser::setupActions()
@@ -102,22 +108,11 @@ void DatabaseBrowser::setupActions()
     KAction* acopy = KStandardAction::copy( this, SLOT( copy() ), actionCollection() );
     KAction* apaste = KStandardAction::paste( this, SLOT( paste() ), actionCollection() );
     KAction* afind = KStandardAction::find( this, SLOT( find() ), actionCollection() );
-    /*menuBar()->insertItem( i18n("&Edit"), editMenu, -1, 1 );*/// -!F: original, delete
-
-    /*acut->plug( editMenu );
-    acopy->plug( editMenu );
-    apaste->plug( editMenu );*/// -!F: original, delete
+    
     editMenu->addAction( acut );
     editMenu->addAction( acopy );
     editMenu->addAction( apaste );
     
-    /*editMenu->insertSeparator(  );
-    afind->plug( editMenu );
-    KStandardAction::findNext( this, SLOT( slotFindNext() ), actionCollection() )->plug( editMenu );
-    editMenu->insertSeparator();
-    KAction* aimport = new KAction( i18n("&Import CSV File..."), "",
-                                0, this, SLOT(import()), actionCollection(), "import" );
-    aimport->plug( editMenu );*/// -!F: modified original, delete
     editMenu->addSeparator();
     editMenu->addAction( afind );
     KAction* actionFindNext = KStandardAction::findNext( this, SLOT( slotFindNext() ), actionCollection() );
@@ -131,143 +126,193 @@ void DatabaseBrowser::setupActions()
     
     menuBar()->insertMenu( menuBar()->actions()[1], editMenu );
     
-    /*menuBar()->actions()[ -1 ]->actions()[ 8 ]->setIcon( KIcon ( KStandardDirs::locate(
-            "appdata", QString( "hi16-app-kbarcode.png" ) ) ) );*/// -!F: delete
-    /*helpMenu()->actions()[ 4 ]->setIcon( KIcon ( KStandardDirs::locate(
-            "appdata", QString( "hi16-app-kbarcode.png" ) ) ) );*/// -!F: delete
     actionCollection()->action( "help_about_app" )->setIcon( KIcon ( KStandardDirs::locate(
         "appdata", QString( "hi16-app-kbarcode.png" ) ) ) );;
     setWindowIcon( KIcon( KStandardDirs::locate( "appdata", QString("hi16-app-kbarcode.png") ) ) );
-        
-    /*acut->plug( toolBar() );
-    acopy->plug( toolBar() );
-    apaste->plug( toolBar() );
-
-    toolBar()->insertSeparator();
-    afind->plug( toolBar() );*/// -!F: original, delete
+    
     toolBar()->addAction( acut );
     toolBar()->addAction( acopy );
     toolBar()->addAction( apaste );
     toolBar()->addSeparator();
     toolBar()->addAction( afind );
+    toolBar()->addAction( actionFindNext );
 
     /*MainWindow::loadConfig();*/// -!F: original, how to load databasebrowser window settings ?
 }
 
 void DatabaseBrowser::setupSql()
 {
-    Q3SqlCursor* cur = new Q3SqlCursor( database, true );// -!F: original, delete
-    cur->select();
-    /*QSqlQuery query( QString( "SELECT * FROM " ) + QString( database ) );*/// -!F: keep
-    //pQuery = & query;// -!F: delete
-    int i = 0;
-    int c = 0;
-    while ( cur->next() ) {
-        for( c = 0; c < cur->count(); c++ ) {
-            table->setText( i, c, cur->value( c ).toString() );
-            table->horizontalHeader()->setLabel( c, cur->fieldName( c ) );
-        }
-        i++;
-    }
-    /*while ( query.next() ) {// -!F: keep
-        for( c = 0; c < query.record().count(); c++ ) {
-            table->setText( i, c, query.value( c ).toString() );
-            table->horizontalHeader()->setLabel( c, query.record().fieldName( c ) );
-        }
-        i++;
-    }*/
-
-    table->setNumCols( c );
-    table->setNumRows( i );
-
-    table->setSqlCursor( cur, true, true );
-    table->setSorting( true );
-    table->setConfirmDelete( true );
-    table->setAutoEdit( true );
-    table->refresh( Q3DataTable::RefreshAll );
+    model->select();
+    table->resizeColumnsToContents();
 }
 
 void DatabaseBrowser::find()
 {
-    /*if( !findDlg )
-        findDlg = new KEdFind( this, false );
-        
-    findDlg->setText( m_find );
-    findDlg->setDirection( m_direction );
-    findDlg->setCaseSensitive( m_case );
-    connect( findDlg, SIGNAL( search() ), this, SLOT( findNext() ) );
+    if( m_find ) {
+        delete m_find;
+        m_find = 0L;
+    }
     
-    findDlg->exec();*/// -!F: original, delete
-    if( !findDialogExists ) {
-        findDlg = new KFindDialog( this );
-        findDialogExists = true;
-    }
+    findDlg = new KFindDialog( this );
         
-    findDlg->setPattern( m_find );
-    /*KFind::Options findOptions = findDlg->options();*/
-    long findOptions = findDlg->options();
-    if ( m_direction && !( ( findOptions & KFind::FindBackwards ) == KFind::FindBackwards ) ) {
-        findOptions = findOptions | KFind::FindBackwards;
-    }
-    if ( m_case && !( ( findOptions & KFind::CaseSensitive ) == KFind::CaseSensitive ) ) {
-        findOptions = findOptions | KFind::CaseSensitive;
-    }
-    findDlg->setOptions( findOptions );
+    findDlg->setPattern( m_findPattern );
+    findDlg->setOptions( m_findOptions );
     
-    findObject = new KFind( m_find, findDlg->options(), table, findDlg );
-    connect( findObject, SIGNAL( findNext() ), this, SLOT( slotFindNext() ) );
+    connect( findDlg, SIGNAL( okClicked() ), this, SLOT( slotFindNext() ) );
     
     findDlg->exec();
-    findDialogExists = false;
+    delete findDlg;
+    findDlg = 0;
 }
 
 void DatabaseBrowser::slotFindNext()
 {
-    if( findDialogExists ) {
-        m_find = findDlg->pattern();
-        m_direction = ( findDlg->options() & KFind::FindBackwards ) == KFind::FindBackwards;
-        m_case = ( findDlg->options() & KFind::CaseSensitive ) == KFind::CaseSensitive;
-    } else
-        find();
+    if( ( m_findOptions & KFind::FindBackwards ) == KFind::FindBackwards ) {
+        findNextBackwards();
+    } else {
+        findNextForwards();
+    }
+}
 
-    table->find( m_find, m_case, m_direction );
+void DatabaseBrowser::findNextForwards()
+{
+    if( m_find ) {
+        KFind::Result res = KFind::NoMatch;
+        int column = 0;
+        
+        while ( ( res == KFind::NoMatch ) && ( m_findCurrentRow < model->rowCount() ) ) {
+            if( m_find->needData() ) {
+                m_find->setData( model->data( model->index( m_findCurrentRow, column ), Qt::DisplayRole ).toString() );
+                //qDebug() << "if( m_find->needData() m_findCurrentRow == " << m_findCurrentRow;// -!F: delete
+            }
+            
+
+            // Let KFind inspect the text fragment, and display a dialog if a match is found
+            res = m_find->find();
+
+            if ( res == KFind::NoMatch ) {//Move to the next text fragment, honoring the FindBackwards setting for the direction
+                if( column < (model->columnCount() - 1) ) {
+                    column++;
+                } else {
+                    column = 0;
+                    m_findCurrentRow++;
+                }
+            }
+        }
+
+        if ( res == KFind::NoMatch ) {// i.e. at end and there was no match
+            /*<Call either  m_find->displayFinalDialog(); m_find->deleteLater(); m_find = 0L;
+            or           if ( m_find->shouldRestart() ) { reinit (w/o FromCursor) and call slotFindNext(); }
+                         else { m_find->closeFindNextDialog(); }>*/
+            m_findCurrentRow = 0;
+        } else {// There was a match so the matching row is selected and a dialog "Find next" is displayed.
+            m_findCurrentRow++;// continue the find in the next row if a user clicks on the "Find next" button.
+        }
+    } else {// Create the KFind instance:
+        createKFindInstance();
+    }
+}
+
+void DatabaseBrowser::findNextBackwards()
+{
+    if( m_find ) {
+        KFind::Result res = KFind::NoMatch;
+        int column = 0;
+        
+        while ( ( res == KFind::NoMatch ) && ( m_findCurrentRow >= 0 ) ) {
+            if( m_find->needData() ) {
+                m_find->setData( model->data( model->index( m_findCurrentRow, column ), Qt::DisplayRole ).toString() );
+                //qDebug() << "if( m_find->needData() m_findCurrentRow == " << m_findCurrentRow;// -!F: delete
+            }
+            
+
+            // Let KFind inspect the text fragment, and display a dialog if a match is found
+            res = m_find->find();
+
+            if ( res == KFind::NoMatch ) {//Move to the next text fragment, honoring the FindBackwards setting for the direction
+                if( column < (model->columnCount() - 1) ) {
+                    column++;
+                } else {
+                    column = 0;
+                    m_findCurrentRow--;// find backwards
+                }
+            }
+        }
+
+        if ( res == KFind::NoMatch ) {// i.e. at end and there was no match
+            /*<Call either  m_find->displayFinalDialog(); m_find->deleteLater(); m_find = 0L;
+            or           if ( m_find->shouldRestart() ) { reinit (w/o FromCursor) and call slotFindNext(); }
+                        else { m_find->closeFindNextDialog(); }>*/
+            m_findCurrentRow = model->rowCount() - 1;
+        } else {// There was a match so the matching row is selected and a dialog "Find next" is displayed.
+            m_findCurrentRow--;// continue the find in the next row if a user clicks on the "Find next" button.
+        }
+    } else {// Create the KFind instance:
+        createKFindInstance();
+    }
+}
+
+void DatabaseBrowser::createKFindInstance()
+{
+    if( findDlg ) {
+        m_findOptions = findDlg->options();
+        m_findPattern = findDlg->pattern();
+    }
+    // This creates a find-next-prompt dialog if needed.
+    /*m_find = new KFind( m_findPattern, m_findOptions, this, findDlg );*/// -!F: Use this with non-modal dialog.
+    m_find = new KFind( m_findPattern, m_findOptions, this );
+
+    // Connect highlight signal to code which handles highlighting
+    // of found text.
+    connect( m_find, SIGNAL( highlight( const QString &, int, int ) ),
+        this, SLOT( slotHighlight( const QString &, int, int ) ) );
+    // Connect findNext signal - called when pressing the button in the dialog
+    connect( m_find, SIGNAL( findNext() ),
+        this, SLOT( slotFindNext() ) );
+    
+    // Set a row that we will start searching from:
+    if( ( m_findOptions & KFind::FromCursor ) == KFind::FromCursor ) {
+        m_findCurrentRow = table->currentIndex().row();
+    } else {
+        if( ( m_findOptions & KFind::FindBackwards ) == KFind::FindBackwards ) {
+            m_findCurrentRow = model->rowCount() - 1;
+        } else {
+            m_findCurrentRow = 0;
+        }
+    }
+    
+    slotFindNext();// Begin the search
+}
+
+void DatabaseBrowser::slotHighlight( const QString & text, int matchingIndex, int matchedLength )
+{
+    table->selectRow( m_findCurrentRow );
+    //table->scrollTo( model->index( m_findCurrentRow, m_findCurrentColumn ) );
 }
 
 void DatabaseBrowser::cut()
 {
-    QString text = table->value( table->currentRow(), table->currentColumn() ).toString();
+    QString text = table->currentIndex().data().toString();
     if( !text.isEmpty() ) {
         kapp->clipboard()->setText( text );
-
-        QSqlRecord* buffer = table->sqlCursor()->primeUpdate();
-        if( buffer ) {
-            buffer->setValue( table->horizontalHeader()->label( table->currentColumn() ), "" );
-            table->sqlCursor()->update();
-            table->refresh();
-        }
-
+        model->setData( table->currentIndex(), "" );
     }
 }
 
 void DatabaseBrowser::copy()
 {
-    QString text = table->value( table->currentRow(), table->currentColumn() ).toString();
-    if( !text.isEmpty() )
+    QString text = table->currentIndex().data().toString();
+    if( !text.isEmpty() ) {
         kapp->clipboard()->setText( text );
+    }
 }
 
 void DatabaseBrowser::paste()
 {
     QString text = kapp->clipboard()->text();
     if( !text.isEmpty() ) {
-        QSqlRecord* buffer = table->sqlCursor()->primeUpdate();
-        if( buffer ) {
-            buffer->setValue( table->horizontalHeader()->label( table->currentColumn() ), text );
-            table->sqlCursor()->update();
-            table->refresh();
-        }
+        model->setData( table->currentIndex(), text );
     }
-
 }
 
 void DatabaseBrowser::import()
