@@ -30,6 +30,7 @@
 #include <qpainter.h>
 #include <QPicture>
 #include <QTextDocument>
+#include <QAbstractTextDocumentLayout>
 
 #include <kapplication.h>
 #include <qmatrix.h>
@@ -67,6 +68,7 @@ void TextItem::draw(QPainter* painter)
     QTextDocument srt;
     srt.setHtml( t );
     srt.setDefaultFont( painter->font() );
+    srt.documentLayout()->setPaintDevice( device );// -!F: ?
 
     /*
     int width = (rect().width() < (int)((double)srt.widthUsed()*scalex) && autosize) ? srt.widthUsed() : rect().width();
@@ -146,6 +148,7 @@ void TextItem::drawPreview(QPainter* painter)
     QTextDocument srt;
     srt.setHtml( t );
     srt.setDefaultFont( painter->font() );
+    srt.documentLayout()->setPaintDevice( device );// -!F: ?
 
     /*
     int width = (rect().width() < (int)((double)srt.widthUsed()*scalex) && autosize) ? srt.widthUsed() : rect().width();

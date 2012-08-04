@@ -25,6 +25,7 @@
 #include <QX11Info>
 #include <qpainter.h>
 #include <QTextDocument>
+#include <QAbstractTextDocumentLayout>
 
 #include <kapplication.h>
 
@@ -70,7 +71,7 @@ void TextLineItem::draw(QPainter* painter)
     QRect r( 0, 0, width, height );
 
     /*srt.setWidth( painter, width );*/// -!F: original
-    //srt.documentLayout()->setPaintDevice( painter );// -!F: delete
+    srt.documentLayout()->setPaintDevice( device );// -!F: ?
     srt.setTextWidth( width );
 
     painter->save();
@@ -112,6 +113,7 @@ void TextLineItem::drawPreview(QPainter* painter)
     QRect r( 0, 0, width, height );
 
     /*srt.setWidth( painter, width );*/// -!F: original
+    srt.documentLayout()->setPaintDevice( device );// -!F: ?
     srt.setTextWidth( width );
 
     painter->save();
