@@ -58,7 +58,7 @@ void TextLineItem::draw(QPainter* painter)
     /*QColorGroup cg;*/// -!F: original, not needed any more?
     /*Q3SimpleRichText srt( text, painter->font() );*/// -!F: original
     QTextDocument srt;
-    srt.setPlainText( text );// -!F: or srt.setHtml(text) ?
+    srt.setHtml( text );// -!F: or srt.setPlainText(text) ?
     srt.setDefaultFont( painter->font() );
     
     QPaintDevice* device = DocumentItem::paintDevice();
@@ -100,7 +100,7 @@ void TextLineItem::drawPreview(QPainter* painter)
     /*QColorGroup cg;*/// -!F: original, not needed any more?
     /*Q3SimpleRichText srt( text, painter->font() );*/// -!F: original
     QTextDocument srt;
-    srt.setPlainText( text );// -!F: or srt.setHtml(text) ?
+    srt.setHtml( text );// -!F: or srt.setPlainText(text) ?
     srt.setDefaultFont( painter->font() );
     
     QPaintDevice* device = DocumentItem::paintDevice();
