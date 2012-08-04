@@ -24,7 +24,7 @@
 #include <QPaintDevice>
 #include <QX11Info>
 #include <qpainter.h>
-#include <q3simplerichtext.h>
+#include <QTextDocument>
 
 #include <kapplication.h>
 
@@ -54,19 +54,24 @@ void TextLineItem::init()
 void TextLineItem::draw(QPainter* painter)
 {
     QString text = tokenProvider() ? tokenProvider()->parse( m_text ) : m_text;
-    QColorGroup cg;
-    Q3SimpleRichText srt( text, painter->font() );
+    /*QColorGroup cg;*/// -!F: original, not needed any more?
+    /*Q3SimpleRichText srt( text, painter->font() );*/// -!F: original
+    QTextDocument srt;
+    srt.setPlainText( text );// -!F: or srt.setHtml(text) ?
+    srt.setDefaultFont( painter->font() );
     
     QPaintDevice* device = DocumentItem::paintDevice();
     double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
     double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();
-    int width = (rect().width() > 0) ? (int)((double)rect().width() / scalex) : srt.widthUsed();
-    int height = (rect().height() > 0) ? (int)((double)rect().height() / scaley): srt.height();
+    int width = (rect().width() > 0) ? (int)((double)rect().width() / scalex) : srt.idealWidth();
+    int height = (rect().height() > 0) ? (int)((double)rect().height() / scaley): srt.size().height();
 
     /*QRect r( (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), width, height );*/// -!F: original
     QRect r( 0, 0, width, height );
 
-    srt.setWidth( painter, width );
+    /*srt.setWidth( painter, width );*/// -!F: original
+    //srt.documentLayout()->setPaintDevice( painter );// -!F: delete
+    srt.setTextWidth( width );
 
     painter->save();
 
@@ -75,7 +80,8 @@ void TextLineItem::draw(QPainter* painter)
         painter->scale( scalex, scaley );
         painter->setPen( Qt::black );
         /*srt.draw( painter, (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), r, cg );*/// -!F: original
-        srt.draw( painter, 0, 0, r, cg );
+        /*srt.draw( painter, 0, 0, r, cg );*/// -!F: keep
+        srt.drawContents( painter, r );
     }
     else
     {
@@ -90,18 +96,23 @@ void TextLineItem::draw(QPainter* painter)
 void TextLineItem::drawPreview(QPainter* painter)
 {
     QString text = tokenProvider() ? tokenProvider()->parse( m_text ) : m_text;
-    QColorGroup cg;
-    Q3SimpleRichText srt( text, painter->font() );
+    /*QColorGroup cg;*/// -!F: original, not needed any more?
+    /*Q3SimpleRichText srt( text, painter->font() );*/// -!F: original
+    QTextDocument srt;
+    srt.setPlainText( text );// -!F: or srt.setHtml(text) ?
+    srt.setDefaultFont( painter->font() );
     
     QPaintDevice* device = DocumentItem::paintDevice();
     double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
     double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();
-    int width = (rect().width() > 0) ? (int)((double)rect().width() / scalex) : srt.widthUsed();
-    int height = (rect().height() > 0) ? (int)((double)rect().height() / scaley): srt.height();
+    int width = (rect().width() > 0) ? (int)((double)rect().width() / scalex) : srt.idealWidth();
+    int height = (rect().height() > 0) ? (int)((double)rect().height() / scaley): srt.size().height();
 
-    QRect r( (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), width, height );
+    /*QRect r( (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), width, height );*/// -!F: original, keep
+    QRect r( 0, 0, width, height );
 
-    srt.setWidth( painter, width );
+    /*srt.setWidth( painter, width );*/// -!F: original
+    srt.setTextWidth( width );
 
     painter->save();
 
@@ -109,7 +120,9 @@ void TextLineItem::drawPreview(QPainter* painter)
     {
         painter->scale( scalex, scaley );
         painter->setPen( Qt::black );
-        srt.draw( painter, (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), r, cg );
+        /*srt.draw( painter, (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), r, cg );*/// -!F: original, keep
+        painter->translate( (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley) );
+        srt.drawContents( painter, r );
     }
     else
     {
