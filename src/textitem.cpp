@@ -28,8 +28,8 @@
 #include <QPaintDevice>
 #include <QX11Info>
 #include <qpainter.h>
-#include <q3picture.h>
-#include <q3simplerichtext.h>
+#include <QPicture>
+#include <QTextDocument>
 
 #include <kapplication.h>
 #include <qmatrix.h>
@@ -62,8 +62,11 @@ void TextItem::draw(QPainter* painter)
     double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
     double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();
 
-    QColorGroup cg;
-    Q3SimpleRichText srt( t, painter->font() );
+    /*QColorGroup cg;*/// -!F: original, delete
+    /*Q3SimpleRichText srt( t, painter->font() );*/// -!F: original
+    QTextDocument srt;
+    srt.setHtml( t );
+    srt.setDefaultFont( painter->font() );
 
     /*
     int width = (rect().width() < (int)((double)srt.widthUsed()*scalex) && autosize) ? srt.widthUsed() : rect().width();
@@ -105,8 +108,10 @@ void TextItem::draw(QPainter* painter)
     if( !TextItem::IsQtTextRenderingBroken() )
     {
         painter->setPen( Qt::black );
-        srt.setWidth( painter, w );
-        srt.draw( painter, 0, 0, QRect( 0, 0, w, h ), cg );
+        /*srt.setWidth( painter, w );
+        srt.draw( painter, 0, 0, QRect( 0, 0, w, h ), cg );*/// -!F: keep
+        srt.setTextWidth( w );
+        srt.drawContents( painter, QRect( 0, 0, w, h ) );
     }
     else
     {
@@ -136,8 +141,11 @@ void TextItem::drawPreview(QPainter* painter)
     double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
     double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();
 
-    QColorGroup cg;
-    Q3SimpleRichText srt( t, painter->font() );
+    /*QColorGroup cg;*/// -!F: original, delete
+    /*Q3SimpleRichText srt( t, painter->font() );*/// -!F: original
+    QTextDocument srt;
+    srt.setHtml( t );
+    srt.setDefaultFont( painter->font() );
 
     /*
     int width = (rect().width() < (int)((double)srt.widthUsed()*scalex) && autosize) ? srt.widthUsed() : rect().width();
@@ -179,8 +187,11 @@ void TextItem::drawPreview(QPainter* painter)
     if( !TextItem::IsQtTextRenderingBroken() )
     {
         painter->setPen( Qt::black );
-        srt.setWidth( painter, w );
-        srt.draw( painter, rect().x(), rect().y(), QRect( rect().x(), rect().y(), w, h ), cg );
+        /*srt.setWidth( painter, w );
+        srt.draw( painter, rect().x(), rect().y(), QRect( rect().x(), rect().y(), w, h ), cg );*/// -!F: original, keep
+        srt.setTextWidth( w );
+        painter->translate( rect().x(), rect().y() );
+        srt.drawContents( painter, QRect( 0, 0, w, h ));
     }
     else
     {
