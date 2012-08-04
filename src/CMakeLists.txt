@@ -41,7 +41,7 @@ set(kbarcode_SRCS
   mimesources.cpp
   mycanvasitem.cpp
   mycanvasview.cpp
-  mydatatable.cpp
+ # mydatatable.cpp
   newlabel.cpp
   pixmapbarcode.cpp
   printersettings.cpp
