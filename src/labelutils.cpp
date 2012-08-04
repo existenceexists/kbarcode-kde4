@@ -23,7 +23,7 @@
 #include <qimage.h>
 #include <QPaintDevice>
 #include <qpainter.h>
-#include <q3simplerichtext.h>// -!F:
+#include <QTextDocument>
 //Added by qt3to4:
 #include <QPixmap>
 
@@ -36,9 +36,6 @@
 #include "printersettings.h"
 
 #include <QDesktopWidget>// -!F: delete or keep ?
-#include <Q3SimpleRichText>// -!F: port and delete
-
-#include <QDebug>// -!F: delete
 
 #define CONVERSION_FACTOR 25.4000508001016
 
@@ -112,10 +109,17 @@ const QString LabelUtils::getModeFromCaption( const QString & cap )
 
 QSize LabelUtils::stringSize( const QString & t )
 {
-    Q3SimpleRichText srt( t, KApplication::font() );
+    /*Q3SimpleRichText srt( t, KApplication::font() );
     QSize s;
     s.setWidth( srt.widthUsed() );
-    s.setHeight( srt.height() );
+    s.setHeight( srt.height() );*/
+    QTextDocument srt;
+    srt.setHtml( t );
+    srt.setDefaultFont( KApplication::font() );
+    
+    QSize s;
+    s.setWidth( srt.idealWidth() );
+    s.setHeight( srt.size().height() );
 
     return s;
 }
@@ -123,9 +127,14 @@ QSize LabelUtils::stringSize( const QString & t )
 void LabelUtils::renderString( QPainter* painter, const QString & t, const QRect & rect, double scalex, double scaley )
 {
     // DSRichText cannot calculate the width on its own
-    Q3SimpleRichText srt( t, KApplication::font() );
+    /*Q3SimpleRichText srt( t, KApplication::font() );
     int width = (rect.width() > 0) ? rect.width() : srt.widthUsed();
-    int height = (rect.height() > 0) ? rect.height() : srt.height();
+    int height = (rect.height() > 0) ? rect.height() : srt.height();*/
+    QTextDocument srt;
+    srt.setHtml( t );
+    srt.setDefaultFont( KApplication::font() );
+    int width = (rect.width() > 0) ? rect.width() : srt.idealWidth();
+    int height = (rect.height() > 0) ? rect.height() : srt.size().height();
     
     DSRichText r( t );
     r.setX( rect.x() );
@@ -138,11 +147,18 @@ void LabelUtils::renderString( QPainter* painter, const QString & t, const QRect
 
 QPixmap* LabelUtils::drawString( const QString & t, int w, int h, double rot )
 {
-    Q3SimpleRichText srt( t, KApplication::font() );
+    /*Q3SimpleRichText srt( t, KApplication::font() );
 
     int width = (w > 0) ? w : srt.widthUsed();
     int height = (h > 0) ? h : srt.height();
-    srt.setWidth( width );
+    srt.setWidth( width );*/
+    QTextDocument srt;
+    srt.setHtml( t );
+    srt.setDefaultFont( KApplication::font() );
+    
+    int width = (w > 0) ? w : srt.idealWidth();
+    int height = (h > 0) ? h : srt.size().height();
+    srt.setTextWidth( width );
     
     QPixmap* pix;
     QPainter painter;
@@ -153,12 +169,13 @@ QPixmap* LabelUtils::drawString( const QString & t, int w, int h, double rot )
     
           painter.save();
             painter.setPen( Qt::color1 );
-            QColorGroup cg;
+            /*QColorGroup cg;
             cg.setColor( QColorGroup::Foreground, Qt::color1 );
               cg.setColor( QColorGroup::Text, Qt::color1 );
-              cg.setColor( QColorGroup::Base, Qt::color0 );
+              cg.setColor( QColorGroup::Base, Qt::color0 );*/// -!F: if the setting of colors turns out to be necessary then use a palette as shown at qt's porting4.html in Q3SimpleRichText's porting example.
     
-            srt.draw( &painter, 0, 0, bm.rect(), cg );
+            /*srt.draw( &painter, 0, 0, bm.rect(), cg );*/
+            srt.drawContents( &painter, bm.rect() );
           painter.restore();
         painter.end();
         
@@ -170,12 +187,15 @@ QPixmap* LabelUtils::drawString( const QString & t, int w, int h, double rot )
             painter.begin( pix );
             painter.setPen( Qt::black );
             QColorGroup cg;
-            srt.draw( &painter, 0, 0, pix->rect(), cg );
+            /*srt.draw( &painter, 0, 0, pix->rect(), cg );*/
+            srt.drawContents( &painter, pix->rect() );
             painter.end();
         } 
     } else {
-        int w2 = (w > 0) ? w : srt.widthUsed();
-        int h2 = (h > 0) ? h : srt.height();
+        /*int w2 = (w > 0) ? w : srt.widthUsed();
+        int h2 = (h > 0) ? h : srt.height();*/
+        int w2 = (w > 0) ? w : srt.idealWidth();
+        int h2 = (h > 0) ? h : srt.size().height();
 
         QMatrix wm;
         wm.rotate( rot );
