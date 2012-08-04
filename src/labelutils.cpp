@@ -186,7 +186,6 @@ QPixmap* LabelUtils::drawString( const QString & t, int w, int h, double rot )
         if( !pix->isNull() ) {
             painter.begin( pix );
             painter.setPen( Qt::black );
-            QColorGroup cg;
             /*srt.draw( &painter, 0, 0, pix->rect(), cg );*/
             srt.drawContents( &painter, pix->rect() );
             painter.end();
