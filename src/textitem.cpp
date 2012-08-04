@@ -164,20 +164,17 @@ void TextItem::drawPreview(QPainter* painter)
     {
         default:
         case 0:
-            /*painter->translate( rect().x(), rect().y() );*/// -!F: original
+            painter->translate( rect().x(), rect().y() );
             break;
         case 90:
-            /*painter->translate( rect().x() + w, rect().y() );*/// -!F: original
-            painter->translate( w, 0 );
+            painter->translate( rect().x() + w, rect().y() );
             qSwap( w, h );
             break;
         case 180:
-            /*painter->translate( rect().x() + w, rect().y() + h );*/// -!F: original
-            painter->translate( w, h );
+            painter->translate( rect().x() + w, rect().y() + h );
             break;
         case 270:
-            /*painter->translate( rect().x(), rect().y() + h );*/// -!F: original
-            painter->translate( 0, h );
+            painter->translate( rect().x(), rect().y() + h );
             qSwap( w, h );
             break;
     };
@@ -188,9 +185,8 @@ void TextItem::drawPreview(QPainter* painter)
     {
         painter->setPen( Qt::black );
         /*srt.setWidth( painter, w );
-        srt.draw( painter, rect().x(), rect().y(), QRect( rect().x(), rect().y(), w, h ), cg );*/// -!F: original, keep
+        srt.draw( painter, rect().x(), rect().y(), QRect( rect().x(), rect().y(), w, h ), cg );*/// -!F: keep
         srt.setTextWidth( w );
-        painter->translate( rect().x(), rect().y() );
         srt.drawContents( painter, QRect( 0, 0, w, h ));
     }
     else
