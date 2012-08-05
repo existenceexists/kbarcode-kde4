@@ -340,7 +340,7 @@ void TokenDialog::accept()
         else if( radioSQLQuery->isChecked() )
             m_result = QString( "sqlquery:%2").arg( editQuery->text() );
         else if( radioJavaScript->isChecked() )
-            m_result = QString( "js:%2").arg( editJavaScript->text() );
+            m_result = QString( "js:%2").arg( editJavaScript->toPlainText() );
 
         m_result = "[" + m_result + "]";
     }
@@ -564,7 +564,7 @@ void TokenDialog::enableControls()
         enableFinishButtonStack2Page4 = true;
     }
 
-    if( radioJavaScript->isChecked() && !editJavaScript->text().isEmpty() ) {
+    if( radioJavaScript->isChecked() && !editJavaScript->toPlainText().isEmpty() ) {
         enableFinishButtonStack2Page5 = true;
     }
 

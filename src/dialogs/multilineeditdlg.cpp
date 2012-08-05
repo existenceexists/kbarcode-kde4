@@ -53,7 +53,6 @@ MultiLineEditor::MultiLineEditor( TokenProvider* token, QWidget *parent )
 //    ksc = new KSpellConfig( this );
 
     editor = new DSTextEdit( this );
-    editor->setTextFormat( Qt::RichText );
     //editor->setText( text, "" );
     editor->setFocus();
 
@@ -230,7 +229,7 @@ void MultiLineEditor::setupActions()
 
 QString MultiLineEditor::text()
 {
-    return editor->text();
+    return editor->toHtml();
 }
 
 void MultiLineEditor::setText( const QString & t )
@@ -240,9 +239,9 @@ void MultiLineEditor::setText( const QString & t )
 
 void MultiLineEditor::updateCharFmt()
 {
-    action_bold->setChecked( editor->bold() );
-    action_italic->setChecked( editor->italic() );
-    action_underline->setChecked( editor->underline() );
+    action_bold->setChecked( editor->fontWeight() >= QFont::Bold );
+    action_italic->setChecked( editor->fontItalic() );
+    action_underline->setChecked( editor->fontUnderline() );
 }
 
 void MultiLineEditor::updateAligment()
@@ -269,9 +268,9 @@ void MultiLineEditor::updateAligment()
 
 void MultiLineEditor::updateFont()
 {
-    if ( editor->pointSize() > 0 )
-        action_font_size->setFontSize( editor->pointSize() );
-    action_font->setFont( editor->family() );
+    if ( int(editor->fontPointSize() + 0.5) > 0 )
+        action_font_size->setFontSize( int(editor->fontPointSize() + 0.5) );
+    action_font->setFont( editor->fontFamily() );
 }
 
 void MultiLineEditor::updateActions()
@@ -285,11 +284,11 @@ void MultiLineEditor::formatColor()
 {
     QColor col;
 
-    int s = KColorDialog::getColor( col, editor->color(), editor );
+    int s = KColorDialog::getColor( col, editor->textColor(), editor );
     if ( s != QDialog::Accepted )
         return;
 
-    editor->setColor( col );
+    editor->setTextColor( col );
 }
 
 void MultiLineEditor::setAlignLeft( bool yes )
@@ -320,7 +319,7 @@ void MultiLineEditor::insertNewField()
 {
     TokenDialog dlg( m_token, this );
     if( dlg.exec() == QDialog::Accepted )
-        editor->insert( dlg.token() );
+        editor->insertHtml( dlg.token() );
 }
 
 void MultiLineEditor::checkSpelling()
@@ -358,7 +357,7 @@ void MultiLineEditor::save()
     QFile file( name );
     if ( file.open( QIODevice::WriteOnly ) ) {
         QTextStream ts( &file );
-        ts << editor->text();
+        ts << editor->toHtml();
     }
 }
 
