@@ -21,16 +21,16 @@
 #include <qnamespace.h> 
 
 #if QT_VERSION >= 0x030100
-    #include <k3textedit.h>
+    #include <ktextedit.h>
 #else
-    #include <q3textedit.h>
+    #include <QTextEdit>
 #endif
 
 // Otherwise moc will complain
 #if QT_VERSION >= 0x030100
-  #define TextEditBase K3TextEdit
+  #define TextEditBase KTextEdit
 #else
-  #define TextEditBase Q3TextEdit
+  #define TextEditBase QTextEdit
 #endif 
 
 class DSTextEdit : public TextEditBase {
