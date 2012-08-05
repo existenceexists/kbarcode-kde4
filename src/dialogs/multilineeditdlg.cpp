@@ -112,19 +112,19 @@ void MultiLineEditor::setupActions()
     action_bold = new KToggleAction( KIcon("text_bold"), i18n("&Grid"), this );
     action_bold->setShortcut( KShortcut( Qt::CTRL + Qt::Key_B ) );
     ac->addAction( "format_bold", action_bold );
-    connect( action_bold, SIGNAL( toggled(bool) ), editor, SLOT( setBold(bool) ) );
+    connect( action_bold, SIGNAL( toggled(bool) ), this, SLOT( setBold(bool) ) );
 
     /*action_italic = new KToggleAction( i18n("&Italic"), "text_italic", Qt::CTRL+Qt::Key_I, ac, "format_italic" );*/// -!F: original, delete
     action_italic = new KToggleAction( KIcon("text_italic"), i18n("&Italic"), this );
     action_italic->setShortcut( KShortcut( Qt::CTRL+Qt::Key_I ) );
     ac->addAction( "format_italic", action_italic );
-    connect( action_italic, SIGNAL( toggled(bool) ), editor, SLOT( setItalic(bool) ) );
+    connect( action_italic, SIGNAL( toggled(bool) ), editor, SLOT( setFontItalic(bool) ) );
 
     /*action_underline = new KToggleAction( i18n("&Underline"), "text_under", Qt::CTRL+Qt::Key_U, ac, "format_underline" );*/// -!F: original, delete
     action_underline = new KToggleAction( KIcon("text_under"), i18n("&Underline"), this );
     action_underline->setShortcut( KShortcut( Qt::CTRL+Qt::Key_U ) );
     ac->addAction( "format_underline", action_underline );
-    connect( action_underline, SIGNAL( toggled(bool) ), editor, SLOT( setUnderline(bool) ) );
+    connect( action_underline, SIGNAL( toggled(bool) ), editor, SLOT( setFontUnderline(bool) ) );
 
     /*KAction* action_color = new KAction( i18n("Text &Color..."), "colorpicker", 0, this, SLOT( formatColor() ), ac, "format_color" );*/// -!F: original, delete
     KAction* action_color = new KAction( this );
@@ -140,12 +140,12 @@ void MultiLineEditor::setupActions()
     action_font = new KFontAction( i18n("&Font"), this );
     ac->addAction( "format_font", action_font );
     /*connect( action_font, SIGNAL( activated( const QString & ) ), editor, SLOT( setFamily( const QString & ) ) );*/// -!F: original, is triggered() the right replacement of activated() - activated() gives a runtime warning: no such signal "activated"?
-    connect( action_font, SIGNAL( triggered( const QString & ) ), editor, SLOT( setFamily( const QString & ) ) );
+    connect( action_font, SIGNAL( triggered( const QString & ) ), editor, SLOT( setFontFamily( const QString & ) ) );
 
     /*action_font_size = new KFontSizeAction( i18n("Font &Size"), 0, ac, "format_font_size" );*/// -!F: original, delete
     action_font_size = new KFontSizeAction( i18n("Font &Size"), this );
     ac->addAction( "format_font_size", action_font_size );
-    connect( action_font_size, SIGNAL( fontSizeChanged(int) ), editor, SLOT( setPointSize(int) ) );
+    connect( action_font_size, SIGNAL( fontSizeChanged(int) ), this, SLOT( setFontSize(int) ) );
 
     //
     // Alignment
@@ -224,7 +224,7 @@ void MultiLineEditor::setupActions()
 
     connect( editor, SIGNAL( currentFontChanged( const QFont & ) ), this, SLOT( updateFont() ) );
     connect( editor, SIGNAL( currentFontChanged( const QFont & ) ), this, SLOT( updateCharFmt() ) );
-    connect( editor, SIGNAL( cursorPositionChanged( int,int ) ), this, SLOT( updateAligment() ) );
+    connect( editor, SIGNAL( cursorPositionChanged() ), this, SLOT( updateAligment() ) );
 }
 
 QString MultiLineEditor::text()
@@ -361,5 +361,20 @@ void MultiLineEditor::save()
     }
 }
 
+void MultiLineEditor::setBold( bool bold )
+{
+    QFont::Weight fontWeight;
+    if( bold ) {
+        fontWeight = QFont::Bold;
+    } else {
+        fontWeight = QFont::Normal;
+    }
+    editor->setFontWeight( fontWeight );
+}
+
+void MultiLineEditor::setFontSize( int size )
+{
+    editor->setFontPointSize( (qreal) size );
+}
 
 #include "multilineeditdlg.moc"

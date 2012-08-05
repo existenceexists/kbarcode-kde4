@@ -55,6 +55,8 @@ class MultiLineEditor : public QWidget {
         void setAlignCenter( bool yes );
         void setAlignJustify( bool yes );               
         void insertNewField();
+        void setBold( bool bold );
+        void setFontSize( int size );
         
     protected:
         TokenProvider* m_token;
