@@ -37,7 +37,6 @@
 #include <kshortcut.h>
 
 // Qt includes
-#include <q3dockarea.h>
 #include <qregexp.h>
 #include <QActionGroup>
 //Added by qt3to4:
@@ -56,14 +55,15 @@ MultiLineEditor::MultiLineEditor( TokenProvider* token, QWidget *parent )
     //editor->setText( text, "" );
     editor->setFocus();
 
-    Q3DockArea* area = new Q3DockArea( Qt::Horizontal, Q3DockArea::Normal, this );
-    toolBar = new KToolBar( area );
-    tool2Bar = new KToolBar( area );
-    tool3Bar = new KToolBar( area );
+    toolBar = new KToolBar( this );
+    tool2Bar = new KToolBar( this );
+    tool3Bar = new KToolBar( this );
     
     setupActions();
 
-    layout->addWidget( area );
+    layout->addWidget( toolBar );
+    layout->addWidget( tool2Bar );
+    layout->addWidget( tool3Bar );
     layout->addWidget( editor );
 
 }
