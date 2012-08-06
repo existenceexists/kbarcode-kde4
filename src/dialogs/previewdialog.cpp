@@ -27,7 +27,7 @@
 #include <qlayout.h>
 #include <qpainter.h>
 #include <q3scrollview.h>
-#include <q3sqlcursor.h>
+#include <QSqlQueryModel>
 #include <QPaintDevice>
 #include <QDesktopWidget>
 //Added by qt3to4:
@@ -176,13 +176,13 @@ PreviewDialog::~PreviewDialog()
 
 void PreviewDialog::setupSql()
 {
-    Q3SqlCursor cur( "customer" );
-    cur.select();
+    QSqlQueryModel model;
+    model.setQuery( "SELECT * FROM customer" );
     customerId->clear();
     customerName->clear();
-    while ( cur.next() ) {
-        customerId->addItem( cur.value("customer_no" ).toString() );
-        customerName->addItem( cur.value("customer_name" ).toString() );
+    for ( int rowNumber = 0; rowNumber < model.rowCount(); rowNumber++ ) {
+        customerId->addItem( model.record( rowNumber ).value( "customer_no" ).toString() );
+        customerName->addItem( model.record( rowNumber ).value( "customer_name" ).toString() );
     }
 
     customerId->setCurrentIndex( customer_index );
