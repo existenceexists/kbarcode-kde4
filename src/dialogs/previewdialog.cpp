@@ -163,6 +163,8 @@ PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename
     
     if( SqlTables::isConnected() )
         setupSql();
+    
+    updatechanges();
 }
 
 PreviewDialog::~PreviewDialog()
