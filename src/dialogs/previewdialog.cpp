@@ -26,7 +26,7 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qpainter.h>
-#include <q3scrollview.h>
+#include <QScrollArea>
 #include <QSqlQueryModel>
 #include <QPaintDevice>
 #include <QDesktopWidget>
@@ -126,14 +126,14 @@ PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename
     grid->addWidget( new QLabel( i18n( "Addressbook entry:" ), this ), 6, 0 );
     grid->addWidget( lineAddr, 6, 1 );
     grid->addWidget( buttonAddr, 6, 2 );
-    Q3ScrollView* sv = new Q3ScrollView( this );
+    QScrollArea* sv = new QScrollArea( this );
 
-    preview = new QLabel( sv->viewport() );
-    /*sv->addChild( preview );*/// This line causes a badly displayed preview.
+    preview = new QLabel();
     
     QPixmap pix( (int)d->getMeasurements().width( this ), (int)d->getMeasurements().height( this ) );
     pix.fill( Qt::white );
     preview->setPixmap( pix );
+    sv->setWidget( preview );// This line must be placed after "preview->setPixmap(...)"
         
     vbox->addLayout( grid );
     vbox->addWidget( sv );
