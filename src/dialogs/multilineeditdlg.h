@@ -80,6 +80,8 @@ class MultiLineEditor : public QWidget {
         KToolBar* toolBar;
         KToolBar* tool2Bar;
         KToolBar* tool3Bar;
+        KToolBar* tool4Bar;
+        KToolBar* tool5Bar;
 
         /*KSpell* spell;*/// -!F: original, replace
 };

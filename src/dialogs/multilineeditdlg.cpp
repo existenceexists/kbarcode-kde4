@@ -58,13 +58,19 @@ MultiLineEditor::MultiLineEditor( TokenProvider* token, QWidget *parent )
     toolBar = new KToolBar( this );
     tool2Bar = new KToolBar( this );
     tool3Bar = new KToolBar( this );
+    tool4Bar = new KToolBar( this );
+    tool5Bar = new KToolBar( this );
     
     setupActions();
 
     layout->addWidget( toolBar );
     layout->addWidget( tool2Bar );
     layout->addWidget( tool3Bar );
+    layout->addWidget( tool4Bar );
+    layout->addWidget( tool5Bar );
     layout->addWidget( editor );
+    
+    setMinimumWidth( 550 );
 
 }
 
@@ -191,31 +197,30 @@ void MultiLineEditor::setupActions()
     
     toolBar->addAction( action_export );
     toolBar->addSeparator();
-    toolBar->addAction( action_undo );
-    toolBar->addAction( action_redo );
-    toolBar->addSeparator();
-    toolBar->addAction( action_cut );
-    toolBar->addAction( action_copy );
-    toolBar->addAction( action_paste );
-    toolBar->addSeparator();    
-    toolBar->addAction( action_bold );
-    toolBar->addAction( action_italic );
-    toolBar->addAction( action_underline );
-    toolBar->addSeparator();
+    toolBar->addAction( textDataAct );
+    
+    tool2Bar->addAction( action_undo );
+    tool2Bar->addAction( action_redo );
+    tool2Bar->addSeparator();
+    tool2Bar->addAction( action_cut );
+    tool2Bar->addAction( action_copy );
+    tool2Bar->addAction( action_paste );
+    
+    tool3Bar->addAction( action_bold );
+    tool3Bar->addAction( action_italic );
+    tool3Bar->addAction( action_underline );
 //#if KDE_IS_VERSION( 3, 1, 90 )
 //    action_spell->plug( toolBar );
 //#endif
            
-    tool2Bar->addAction( action_font );
-    tool2Bar->addAction( action_font_size );
-    tool2Bar->addAction( action_color );
-    tool2Bar->addSeparator();    
-    tool2Bar->addAction( action_align_left );
-    tool2Bar->addAction( action_align_center );
-    tool2Bar->addAction( action_align_right );
-    tool2Bar->addAction( action_align_justify );
-
-    tool3Bar->addAction( textDataAct );
+    tool4Bar->addAction( action_font );
+    tool4Bar->addAction( action_font_size );
+    tool4Bar->addAction( action_color );
+    
+    tool5Bar->addAction( action_align_left );
+    tool5Bar->addAction( action_align_center );
+    tool5Bar->addAction( action_align_right );
+    tool5Bar->addAction( action_align_justify );
     
     //
     // Setup enable/disable

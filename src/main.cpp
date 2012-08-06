@@ -58,7 +58,7 @@ void setupDirs()
 
 int main(int argc, char *argv[])
 {
-    char charApplicationFileName[] = "kbarcode030";// The name of the final executable file.
+    char charApplicationFileName[] = "kbarcode031";// The name of the final executable file.
     QString applicationFileName( charApplicationFileName );
     
     KAboutData aboutData( charApplicationFileName, "kbarcode", ki18n("KBarcode"), VERSION,
