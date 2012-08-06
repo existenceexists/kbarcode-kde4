@@ -30,7 +30,6 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kstandarddirs.h>
-#include <q3progressdialog.h>
 #include <kglobal.h>
 
 // a simple helper function

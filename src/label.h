@@ -19,7 +19,6 @@
 #define LABEL_H
 
 #include <qfont.h>
-#include <q3picture.h>
 #include <QTextStream>
 
 #include "labelutils.h"

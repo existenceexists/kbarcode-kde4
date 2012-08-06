@@ -21,7 +21,7 @@
 
 // Qt includes
 #include <qcheckbox.h>
-#include <q3groupbox.h>
+#include <QGroupBox>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qsqlquery.h>

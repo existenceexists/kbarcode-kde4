@@ -33,7 +33,6 @@
 #include <kstandardaction.h>
 
 // Qt includes
-#include <q3dockarea.h>
 #include <qregexp.h>
 #include <qlabel.h>
 #include <qlayout.h>
@@ -53,14 +52,12 @@ TextLineEditor::TextLineEditor( TokenProvider* token, QWidget *parent )
 
     editor->setFocus();
 
-    /*Q3DockArea* area = new Q3DockArea( Qt::Horizontal, Q3DockArea::Normal, this );*/
     toolBar = new KToolBar( this );
     tool2Bar = new KToolBar( this );
     tool3Bar = new KToolBar( this );
     
     setupActions();
 
-    /*layout->addWidget( area );*/
     layout->addWidget( toolBar );
     layout->addWidget( tool2Bar );
     layout->addWidget( tool3Bar );

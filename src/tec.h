@@ -23,12 +23,8 @@
 // QT includes
 #include <qclipboard.h>
 #include <qcursor.h>
-#include <q3groupbox.h>
-#include <q3hbox.h>
 #include <qlayout.h>
 #include <qpainter.h>
-#include <q3progressdialog.h>
-#include <q3sqlcursor.h>
 #include <qvalidator.h>
 
 // KDE includes
@@ -36,7 +32,6 @@
 #include <kcombobox.h>
 #include <kfiledialog.h>
 #include <kiconloader.h>
-#include <k3listview.h>
 #include <klineedit.h>
 #include <klocale.h>
 #include <kmenubar.h>

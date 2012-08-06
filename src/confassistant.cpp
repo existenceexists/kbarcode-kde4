@@ -21,14 +21,12 @@
 #include "mainwindow.h"
 
 // Qt includes
-#include <q3buttongroup.h>
 #include <qcheckbox.h>
 #include <qcursor.h>
 #include <qlayout.h>
 #include <qsqldatabase.h>
 #include <qradiobutton.h>
 #include <qprinter.h>
-//#include <q3textbrowser.h>
 #include <QTextBrowser>
 #include <QSqlError>
 //Added by qt3to4:

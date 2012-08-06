@@ -20,7 +20,6 @@
 
 #include <xmlutils.h>
 #include <qobject.h>
-#include <q3sortedlist.h> 
 #include <qstring.h>
 #include <QTextStream>
 //#include <QDesktopWidget>// -!F: ?

@@ -52,13 +52,9 @@
 
 // QT includes
 #include <qbuffer.h>
-#include <q3canvas.h>
 #include <qcheckbox.h>
 #include <qclipboard.h>
-#include <q3dockarea.h>
 #include <qdom.h>
-#include <q3dragobject.h>
-#include <q3groupbox.h>
 #include <qimage.h>
 #include <qinputdialog.h>
 #include <qlabel.h>
@@ -66,11 +62,8 @@
 #include <qmap.h>
 #include <qmime.h>
 #include <qpainter.h>
-#include <q3picture.h>
 #include <qpoint.h>
-#include <q3progressdialog.h>
 #include <qsqlquery.h>
-#include <q3textbrowser.h>
 #include <qtooltip.h>
 #include <qvalidator.h>
 #include <QtXml>

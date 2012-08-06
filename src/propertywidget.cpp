@@ -49,8 +49,6 @@
 #include <qpainter.h>
 #include <qradiobutton.h>
 #include <qsqlquery.h>
-#include <q3vbox.h>
-//#include <qvbuttongroup.h>
 //Added by qt3to4:
 #include <QGridLayout>
 #include <QPixmap>

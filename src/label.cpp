@@ -33,7 +33,6 @@
 #include <qiodevice.h>
 #include <qpainter.h>
 #include <qpen.h>
-#include <q3sqlcursor.h>
 #include <qxml.h>
 #include <QDomDocument>
 //Added by qt3to4:

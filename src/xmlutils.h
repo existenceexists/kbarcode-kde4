@@ -19,7 +19,6 @@
 #define XMLUTILS_H
 
 #include <qmap.h>
-#include <q3sortedlist.h>
 
 class DocumentItem;
 class BarcodeItem;

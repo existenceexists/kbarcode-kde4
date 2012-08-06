@@ -18,7 +18,6 @@
 #include "documentitemdlg.h"
 #include "tokenprovider.h"
 
-#include <q3vbox.h>
 //Added by qt3to4:
 #include <QPixmap>
 #include <QWidget>

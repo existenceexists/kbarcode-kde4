@@ -18,7 +18,6 @@
 
 // Qt includes
 #include <qcheckbox.h>
-//#include <q3textbrowser.h>// -!F: delete
 #include <QTextBrowser>
 #include <qsqldatabase.h>
 #include <QString>

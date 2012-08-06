@@ -21,12 +21,10 @@
 // Qt includes
 #include <qcheckbox.h>
 #include <qfile.h>
-//#include <q3groupbox.h>// -!F:
 #include <QGroupBox>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qmap.h>
-#include <q3progressdialog.h>
 #include <qsqldatabase.h>
 //Added by qt3to4:
 #include <QGridLayout>
