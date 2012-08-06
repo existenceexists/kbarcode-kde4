@@ -33,7 +33,7 @@
 #if QT_VERSION >= 0x030100
     #include <ktextedit.h>
 #else
-    #include <q3textedit.h>
+    #include <QTextEdit>
 #endif
 
 // KDE includes
@@ -237,7 +237,7 @@ void BarcodeWidget::setData( const Barkode & b )
     if( !m_multi )
         data->setText( b.value() );
     else
-        multi->setText( b.value() );
+        multi->setPlainText( b.value() );
 
     checkText->setChecked( b.textVisible() );
 
