@@ -28,6 +28,11 @@ DSTextEdit::DSTextEdit( QWidget* parent )
     connect( this, SIGNAL( textChanged() ), this, SLOT( fixParagraphs() ) );
 }
 
+/* fixParagraphs() removes all but the first occurence of the opening paragraph tag <p ...>
+   and also removes all but the last occurence of the closing paragraph tag </p>
+   so when fixParagraphs() finishes all the editor's text is enclosed 
+   between just one html tag <p ...> and just one html tag </p>
+ */
 void DSTextEdit::fixParagraphs()
 {
     struct { 
@@ -96,7 +101,7 @@ void DSTextEdit::fixParagraphs()
         }
     }
 
-    pos = t.length();
+    pos = t.length() - 1;
     count = 0;
 
     while( pos != -1 ) 
@@ -106,14 +111,16 @@ void DSTextEdit::fixParagraphs()
         {
             ++count;
 
-            if( count > 1 ) //&& pos != -1 ) 
-                t = t.replace( pos, 4, "<br />" );
-            else
+            if( count > 1 ) {//&& pos != -1 ) 
+                //t = t.replace( pos, 4, "<br />" ); // no need to replace with <br />" as it is inserted by the QTextEditor automatically
+                t = t.replace( pos, 4, "" );
+            } else
                 pos -= 4;
         }
     }
 
-    this->setText( t );
+    //qDebug() << t;
+    this->setHtml( t );
     this->setCurrentFont( tFormattings.font );
     this->setTextColor( tFormattings.color );
     this->setAlignment( tFormattings.alignment );

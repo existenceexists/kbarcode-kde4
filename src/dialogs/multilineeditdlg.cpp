@@ -234,7 +234,7 @@ QString MultiLineEditor::text()
 
 void MultiLineEditor::setText( const QString & t )
 {
-    editor->setText( t );
+    editor->setHtml( t );
 }
 
 void MultiLineEditor::updateCharFmt()
