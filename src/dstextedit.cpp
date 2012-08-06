@@ -38,42 +38,20 @@ void DSTextEdit::fixParagraphs()
     struct { 
         QFont  font;
         QColor color;
-        //int    alignment;
         Qt::Alignment alignment;
     } tFormattings;
 
     QString t;
     int pos = 0;
     int count = 0;
-    //int i;
-    //int para, index;                          // needed to save the cursor position
-    //int paraFrom, indexFrom, paraTo, indexTo; // needed to save the selection
     int indexSelectionFrom, indexSelectionTo; // needed to save the selection
-    //QList<int> chars = paragraphsLengths();
     QRegExp reg("<p[^>]*>");
-
-    /*for( i = 0; i < paragraphs(); i++ )
-        chars.append( paragraphLength( i ) );*/
 
     // disconnect us first as we change the text here
     disconnect( this, SIGNAL( textChanged() ), this, SLOT( fixParagraphs() ) );
 
-    /*getCursorPosition( &para, &index );
-    getSelection( &paraFrom, &indexFrom, &paraTo, &indexTo );*/
-    //para = textCursor().blockNumber();
-    //index = textCursor().positionInBlock();
-    //index = textCursor().position();
     indexSelectionFrom = textCursor().selectionStart();
     indexSelectionTo = textCursor().selectionEnd();
-
-    /*if( !para && !index ) 
-        setCursorPosition( 0, index+1 );*/
-    /*if( !para && !index ) {
-        //QTextCursor tCursor = textCursor();
-        //tCursor.setPosition( 1 );
-        setTextCursor( textCursor().setPosition( 1 ) );// Set the cursor position at the beginning.
-    }*/
-        
 
     t                      = this->toHtml();
     tFormattings.font      = this->currentFont();
@@ -85,12 +63,6 @@ void DSTextEdit::fixParagraphs()
         pos = reg.indexIn( t, pos );
         if( pos != -1 )
         {
-            /*if( count && count == para )
-            {
-                for( i = 0; i < count; i++ )
-                    index += chars[i];
-                ++index; // count the new <br> that is inserted later
-            }*/
 
             ++count;
 
@@ -119,13 +91,10 @@ void DSTextEdit::fixParagraphs()
         }
     }
 
-    //qDebug() << t;
     this->setHtml( t );
     this->setCurrentFont( tFormattings.font );
     this->setTextColor( tFormattings.color );
     this->setAlignment( tFormattings.alignment );
-    /*this->setSelection( paraFrom, indexFrom, paraTo, indexTo );*/
-    /*this->setTextCursor( textCursor().setPosition( index ) );*/// Set the cursor position
     QTextCursor cursor = textCursor();
     cursor.setPosition( indexSelectionFrom );// Set the cursor position and a selection if any
     cursor.setPosition( indexSelectionTo, QTextCursor::KeepAnchor );// Set the cursor position and a selection if any
@@ -134,7 +103,6 @@ void DSTextEdit::fixParagraphs()
 
 
     connect( this, SIGNAL( textChanged() ), this, SLOT( fixParagraphs() ) );
-    //qDebug() << toHtml();
 }
 
 /*
