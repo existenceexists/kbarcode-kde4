@@ -222,7 +222,8 @@ void PreviewDialog::updatechanges()
     // next time the dialog is shown
     group = groupName->text();
     article = articleId->text();
-    customer_index = customerId->currentIndex();
+    if( customerId->currentIndex() != -1 )// If an item was selected save the item's index for the next time
+        customer_index = customerId->currentIndex();
     m_index = spinIndex->value();
 }
 
