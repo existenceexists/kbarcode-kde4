@@ -90,7 +90,6 @@
 #include <kiconloader.h>
 #include <kimageio.h>
 #include <klineedit.h>
-#include <k3listbox.h>
 #include <klocale.h>
 #include <kmenubar.h>
 #include <kmessagebox.h>
@@ -102,6 +101,7 @@
 //#include <backgroundchecker.h>// -!F: delete
 //#include <speller.h>// -!F: delete
 #include <sonnet/speller.h>
+#include <sonnet/backgroundchecker.h>
 #include <kstatusbar.h>
 #include <kstandarddirs.h>
 #include <ktemporaryfile.h>
@@ -989,10 +989,10 @@ void LabelEditor::batchPrint( BatchPrinter* batch, int copies, int mode )
 
 void LabelEditor::spellCheck()
 {
-    /*K3MacroCommand* sc = new K3MacroCommand( i18n("Spellchecking") );
-    QCanvasItemList list = c->allItems();
-    for( unsigned int i = 0; i < list.count(); i++ )
-        if( list[i]->rtti() == eRtti_Text ) {
+    K3MacroCommand* sc = new K3MacroCommand( i18n("Spellchecking") );
+    QList<QGraphicsItem *> list = c->items();
+    for( int i = 0; i < list.count(); i++ )
+        if( ((TCanvasItem*)list[i])->rtti() == eRtti_Text ) {
             TCanvasItem* item = (TCanvasItem*)list[i];
             TextItem* mytext = (TextItem*)item->item();
             QString text = mytext->text();
@@ -1005,8 +1005,11 @@ void LabelEditor::spellCheck()
 
             if( !nocheck ) {
                 QString textbefore = text;
-                KSpell::modalCheck( text );
-                if( text != textbefore ) {
+                Sonnet::Speller speller( "en_US" );
+                Sonnet::BackgroundChecker spellChecker( speller, this );
+                spellChecker.setText( text );
+                //spellChecker.start();
+                if( spellChecker.text() != textbefore ) {
                     TextChangeCommand* tc = new TextChangeCommand( mytext, text );
                     tc->execute();
                     sc->addCommand( tc );
@@ -1014,7 +1017,7 @@ void LabelEditor::spellCheck()
             }
         }
 
-    history->addCommand( sc, false );*/// -!F: original, uncomment
+    history->addCommand( sc, false );// -!F: original, uncomment
 }
 
 void LabelEditor::centerHorizontal()
