@@ -740,7 +740,7 @@ void LabelEditor::setupContextMenu()
     m_mnuContext->addSeparator();
     m_mnuContext->addAction( KIcon("edit-delete"), i18n("&Delete"), cv, SLOT( deleteCurrent() ) );
     /*m_mnuContext->insertItem( i18n("&Protect Position and Size"), this, SLOT( lockItem() ), 0, ID_LOCK_ITEM );*/// -!F: original, delete
-    QAction * protectAction = m_mnuContext->addAction( i18n("&Protect Position and Size"), this, SLOT( lockItem() ) );
+    protectAction = m_mnuContext->addAction( i18n("&Protect Position and Size"), this, SLOT( lockItem() ) );
     protectAction->setCheckable( true );
     m_mnuContext->addSeparator();
     m_mnuContext->addAction( i18n("&Properties"), this, SLOT( doubleClickedCurrent() ) );
@@ -879,9 +879,10 @@ void LabelEditor::doubleClickedCurrent()
 
 void LabelEditor::showContextMenu( QPoint pos )
 {
-    /*TCanvasItemList list = cv->getSelected();
+    TCanvasItemList list = cv->getSelected();
     
-    m_mnuContext->setItemChecked( ID_LOCK_ITEM, (list[0])->item()->locked() );*/// -!F: original, delete
+    /*m_mnuContext->setItemChecked( ID_LOCK_ITEM, (list[0])->item()->locked() );*/// -!F: original, delete
+    protectAction->setChecked( (list[0])->item()->locked() );
     m_mnuContext->popup( pos );
 }
 

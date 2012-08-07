@@ -224,6 +224,7 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
 	KMenu* editMenu;        
         KMenu* exportMenu;        
         KMenu* m_mnuContext;
+        QAction * protectAction;
         
         KToolBar* tools;
         
@@ -232,7 +233,6 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
         KComboBox* comboScale;
 
         KRecentFilesAction* recentAct;
-        QAction* sep;
         KToolBarPopupAction* listAct;
         MyCanvas* c;
         MyCanvasView* cv;
