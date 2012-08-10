@@ -269,6 +269,8 @@ void LabelEditor::createCommandHistoryActions()
         menuBar()->actions()[1]->menu()->removeAction( redoAct );
         actionCollection()->removeAction( undoAct );
         actionCollection()->removeAction( redoAct );
+        undoAct = 0;
+        redoAct = 0;
     }
     
     undoAct = history->createUndoAction( actionCollection() );
