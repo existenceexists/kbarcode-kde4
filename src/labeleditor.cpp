@@ -162,13 +162,13 @@ LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f,
     cv->setPosLabel( statusBar(), STATUS_ID_MOUSE );
     setCentralWidget( cv );
 
-    clearLabel();
+    //clearLabel();
 
     setupActions();
     setupContextMenu();
     setAutoSaveSettings( QString("Window") + QString(objectName()), true );
 
-    //clearLabel();
+    clearLabel();
 
     loadConfig();
     show();
@@ -261,8 +261,18 @@ void LabelEditor::createCommandHistoryActions()
     toolBar()->insertAction( toolBar()->actions()[5], undoAct );
     toolBar()->insertAction( toolBar()->actions()[6], redoAct );*/// -!F: original, delete
     
+    if( undoAct && redoAct ) {
+        toolBar()->removeAction(undoAct);
+        toolBar()->removeAction(redoAct);
+        delete undoAct;
+        delete redoAct;
+    }
+    
     undoAct = history->createUndoAction( actionCollection() );
     redoAct = history->createRedoAction( actionCollection() );
+    
+    toolBar()->addAction( undoAct );
+    toolBar()->addAction( redoAct );
 }
 
 void LabelEditor::clearLabel()
