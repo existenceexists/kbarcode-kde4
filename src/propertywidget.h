@@ -29,7 +29,7 @@ class KColorButton;
 class KComboBox;
 class KIntNumInput;
 class KDoubleNumInput;
-class K3MacroCommand;
+class QUndoCommand;
 class KTextEdit;
 class MultiLineEditor;
 class QCheckBox;
@@ -54,7 +54,7 @@ class PropertyWidget : public QWidget
     public:
         PropertyWidget( QWidget* parent );
 
-        virtual void applySettings( DocumentItem* item, K3MacroCommand* command ) = 0;
+        virtual void applySettings( DocumentItem* item, QUndoCommand* command ) = 0;
         virtual void initSettings( DocumentItem* item ) = 0;
     
     protected:
@@ -66,7 +66,7 @@ class PropertyBorder : public PropertyWidget {
     public:
         PropertyBorder( QWidget* parent );
 
-        virtual void applySettings( DocumentItem* item, K3MacroCommand* command );
+        virtual void applySettings( DocumentItem* item, QUndoCommand* command );
         virtual void initSettings( DocumentItem* item );
 
     private slots:
@@ -84,7 +84,7 @@ class PropertyRotation : public PropertyWidget {
     public:
         PropertyRotation( QWidget* parent );
 
-        virtual void applySettings( DocumentItem* item, K3MacroCommand* command );
+        virtual void applySettings( DocumentItem* item, QUndoCommand* command );
         virtual void initSettings( DocumentItem* item );
 
     private:        
@@ -96,7 +96,7 @@ class PropertyFill : public PropertyWidget {
     public:
         PropertyFill( QWidget* parent );
 
-        virtual void applySettings( DocumentItem* item, K3MacroCommand* command );
+        virtual void applySettings( DocumentItem* item, QUndoCommand* command );
         virtual void initSettings( DocumentItem* item );
         
     private:
@@ -108,7 +108,7 @@ class PropertyBarcode : public PropertyWidget, private LabelUtils {
     public:
         PropertyBarcode( TokenProvider* token, QWidget* parent );
 
-        virtual void applySettings( DocumentItem* item, K3MacroCommand* command );
+        virtual void applySettings( DocumentItem* item, QUndoCommand* command );
         virtual void initSettings( DocumentItem* item );
 
     private slots:
@@ -124,7 +124,7 @@ class PropertyText : public PropertyWidget, private LabelUtils {
     public:
         PropertyText( TokenProvider* token, QWidget* parent );
 
-        virtual void applySettings( DocumentItem* item, K3MacroCommand* command );
+        virtual void applySettings( DocumentItem* item, QUndoCommand* command );
         virtual void initSettings( DocumentItem* item );
 
     private:
@@ -137,7 +137,7 @@ class PropertyTextLine : public PropertyWidget, private LabelUtils {
     public:
         PropertyTextLine( TokenProvider* token, QWidget* parent );
 
-        virtual void applySettings( DocumentItem* item, K3MacroCommand* command );
+        virtual void applySettings( DocumentItem* item, QUndoCommand* command );
         virtual void initSettings( DocumentItem* item );
 
     private:
@@ -150,7 +150,7 @@ class PropertySize : public PropertyWidget, private LabelUtils {
     public:
         PropertySize( QWidget* parent );
         
-        virtual void applySettings( DocumentItem* item, K3MacroCommand* command );
+        virtual void applySettings( DocumentItem* item, QUndoCommand* command );
         virtual void initSettings( DocumentItem* item );
     
     private slots:
@@ -169,7 +169,7 @@ class PropertyImage : public PropertyWidget {
     public:
         PropertyImage( TokenProvider* token, QWidget* parent );
         
-        virtual void applySettings( DocumentItem* item, K3MacroCommand* command );
+        virtual void applySettings( DocumentItem* item, QUndoCommand* command );
         virtual void initSettings( DocumentItem* item );
 
     private slots:
@@ -202,7 +202,7 @@ class PropertyVisible : public PropertyWidget {
     public:
         PropertyVisible( QWidget* parent );
         
-        virtual void applySettings( DocumentItem* item, K3MacroCommand* command );
+        virtual void applySettings( DocumentItem* item, QUndoCommand* command );
         virtual void initSettings( DocumentItem* item );
 
     private:

@@ -76,6 +76,7 @@
 #include <QDesktopWidget>
 #include <QAction>
 #include <QGraphicsItem>
+#include <QUndoCommand>
 
 #include <QDebug>// -!F: delete
 
@@ -84,7 +85,7 @@
 #include <kaction.h>
 #include <kapplication.h>
 #include <kcolordialog.h>
-#include <k3command.h>
+#include <kundostack.h>
 #include <kcombobox.h>
 #include <kfiledialog.h>
 #include <kiconloader.h>
@@ -161,11 +162,13 @@ LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f,
     cv->setPosLabel( statusBar(), STATUS_ID_MOUSE );
     setCentralWidget( cv );
 
+    clearLabel();
+
     setupActions();
     setupContextMenu();
     setAutoSaveSettings( QString("Window") + QString(objectName()), true );
 
-    clearLabel();
+    //clearLabel();
 
     loadConfig();
     show();
@@ -180,8 +183,8 @@ LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f,
     connect( KBarcodeSettings::getInstance(), SIGNAL( updateGrid( int ) ), cv, SLOT( updateGUI() ) );
     connect( kapp, SIGNAL( aboutToQuit() ), this, SLOT( saveConfig() ) );
  
-    connect( history, SIGNAL( commandExecuted( K3Command *) ), cv, SLOT( updateGUI() ) );
-    connect( history, SIGNAL( commandExecuted( K3Command *) ), this, SLOT( setEdited() ) );
+    /*connect( history, SIGNAL( commandExecuted( K3Command *) ), cv, SLOT( updateGUI() ) );
+    connect( history, SIGNAL( commandExecuted( K3Command *) ), this, SLOT( setEdited() ) );*/
 
     if( !_filename.isEmpty() )
         openUrl( _filename );
@@ -235,16 +238,16 @@ void LabelEditor::createCommandHistory()
         actionCollection()->removeAction( redoAct );*/
     }
 
-    history = new K3CommandHistory( actionCollection(), false );
+    history = new KUndoStack( this );
     cv->setHistory( history );
 
     history->setUndoLimit( KBARCODE_UNDO_LIMIT );
-    history->setRedoLimit( KBARCODE_UNDO_LIMIT );
     
-    connect( undoAct, SIGNAL(triggered(bool)), history, SLOT(undo()) );
+    /*connect( undoAct, SIGNAL(triggered(bool)), history, SLOT(undo()) );
     connect( redoAct, SIGNAL(triggered(bool)), history, SLOT(redo()) );
     
-    connect( history, SIGNAL(commandHistoryChanged()), this, SLOT(setEdited()) );
+    connect( history, SIGNAL(commandHistoryChanged()), this, SLOT(setEdited()) );*/// -!F: original
+    connect( history, SIGNAL(cleanChanged(bool)), this, SLOT(setEdited(bool)) );
 }
 
 void LabelEditor::createCommandHistoryActions()
@@ -257,6 +260,9 @@ void LabelEditor::createCommandHistoryActions()
 
     toolBar()->insertAction( toolBar()->actions()[5], undoAct );
     toolBar()->insertAction( toolBar()->actions()[6], redoAct );*/// -!F: original, delete
+    
+    undoAct = history->createUndoAction( actionCollection() );
+    redoAct = history->createRedoAction( actionCollection() );
 }
 
 void LabelEditor::clearLabel()
@@ -266,13 +272,17 @@ void LabelEditor::clearLabel()
 
     description = QString::null;
 
-    delete history;
-    history = NULL;
+    if( history ) {
+        history->clear();
+        delete history;
+        history = NULL;
+    }
     createCommandHistory();
     createCommandHistoryActions();
 
-    connect( history, SIGNAL( commandExecuted( K3Command *) ), cv, SLOT( updateGUI() ) );
-    connect( history, SIGNAL( commandExecuted( K3Command *) ), this, SLOT( setEdited() ) );
+    /*connect( history, SIGNAL( commandExecuted( K3Command *) ), cv, SLOT( updateGUI() ) );
+    connect( history, SIGNAL( commandExecuted( K3Command *) ), this, SLOT( setEdited() ) );*/
+    connect( history, SIGNAL( indexChanged( int ) ), cv, SLOT( updateGUI() ) );
 
     m_edited = false;
 
@@ -334,7 +344,8 @@ bool LabelEditor::save( QString name )
     // get updated if the label gets saved with another filename.
 
     filename = name;
-    history->documentSaved();
+    /*history->documentSaved();*/
+    history->setClean();
     m_edited = false;
 
     enableActions();
@@ -620,10 +631,10 @@ void LabelEditor::setupActions()
     connect( singleBarcodeAct, SIGNAL(triggered(bool)), this, SLOT(startBarcodeGen()) );
     singleBarcodeAct->setEnabled( Barkode::haveBarcode() );
     
-    undoAct = KStandardAction::undo( history, SLOT( undo() ), actionCollection() );
+    /*undoAct = KStandardAction::undo( history, SLOT( undo() ), actionCollection() );
     redoAct = KStandardAction::redo( history, SLOT( redo() ), actionCollection() );
     undoAct->setEnabled( false );
-    redoAct->setEnabled( false );// -!F: delete
+    redoAct->setEnabled( false );*/// -!F: delete
 
     /*toolBar()->addAction( newAct );
     toolBar()->addAction( loadAct );
@@ -749,19 +760,25 @@ void LabelEditor::setupContextMenu()
 void LabelEditor::insertBarcode()
 {
     NewBarcodeCommand* bc = new NewBarcodeCommand( cv, m_token );
-    bc->execute();
+    /*bc->execute();
 
     BarcodeItem* bcode = static_cast<BarcodeItem*>((static_cast<TCanvasItem*>(bc->createdItem()))->item());
     if( !bcode )
         return;
 
-    history->addCommand( bc, false );
+    history->push( bc, false );*/// -!F how to solve this?
+    
+    history->push( bc );
+
+    /*BarcodeItem* bcode = static_cast<BarcodeItem*>((static_cast<TCanvasItem*>(bc->createdItem()))->item());
+    if( !bcode )
+        history->undo();*/// -!F how to solve this?
 }
 
 void LabelEditor::insertPicture()
 {
     NewPictureCommand* pc = new NewPictureCommand( cv );
-    history->addCommand( pc, true );
+    history->push( pc );
 
     TCanvasItem* item = pc->createdItem();
     doubleClickedItem( item );
@@ -785,7 +802,7 @@ void LabelEditor::insertDataText()
 void LabelEditor::insertText( QString caption )
 {
     NewTextCommand* tc = new NewTextCommand( caption, cv, m_token );
-    history->addCommand( tc, true );
+    history->push( tc );
 }
 
 //NY30
@@ -797,26 +814,26 @@ void LabelEditor::insertTextLine()
 void LabelEditor::insertTextLine( QString caption )
 {
     NewTextLineCommand* tc = new NewTextLineCommand( caption, cv, m_token );
-    history->addCommand( tc, true );
+    history->push( tc );
 }
 //NY30
 
 void LabelEditor::insertRect()
 {
     NewRectCommand* rc = new NewRectCommand( cv );
-    history->addCommand( rc, true );
+    history->push( rc );
 }
 
 void LabelEditor::insertCircle()
 {
     NewRectCommand* rc = new NewRectCommand( cv, true );
-    history->addCommand( rc, true );
+    history->push( rc );
 }
 
 void LabelEditor::insertLine()
 {
     NewLineCommand* lc = new NewLineCommand( cv );
-    history->addCommand( lc, true );
+    history->push( lc );
 }
 
 void LabelEditor::changeDes()
@@ -889,19 +906,17 @@ void LabelEditor::showContextMenu( QPoint pos )
 void LabelEditor::lockItem()
 {
     TCanvasItemList list = cv->getSelected();
-    K3MacroCommand* mc = new K3MacroCommand( i18n("Protected Item") );
+    QUndoCommand* mc = new QUndoCommand( i18n("Protected Item") );
     
     DocumentItem* item = NULL;
     LockCommand* lc = NULL;
     for( int i=0;i<list.count();i++)
     {
         item = list[i]->item();
-        lc = new LockCommand( !item->locked(), list[i] );
-        lc->execute();
-        mc->addCommand( lc );
+        lc = new LockCommand( !item->locked(), list[i], mc );
     }
     
-    history->addCommand( mc );
+    history->push( mc );
 }
 
 void LabelEditor::print()
@@ -989,9 +1004,10 @@ void LabelEditor::batchPrint( BatchPrinter* batch, int copies, int mode )
 
 void LabelEditor::spellCheck()
 {
-    K3MacroCommand* sc = new K3MacroCommand( i18n("Spellchecking") );
+    QUndoCommand* sc = new QUndoCommand( i18n("Spellchecking") );
+    bool executeTextChangeCommand = false;
     QList<QGraphicsItem *> list = c->items();
-    for( int i = 0; i < list.count(); i++ )
+    for( int i = 0; i < list.count(); i++ ) {
         if( ((TCanvasItem*)list[i])->rtti() == eRtti_Text ) {
             TCanvasItem* item = (TCanvasItem*)list[i];
             TextItem* mytext = (TextItem*)item->item();
@@ -1010,14 +1026,18 @@ void LabelEditor::spellCheck()
                 spellChecker.setText( text );
                 //spellChecker.start();
                 if( spellChecker.text() != textbefore ) {
-                    TextChangeCommand* tc = new TextChangeCommand( mytext, text );
-                    tc->execute();
-                    sc->addCommand( tc );
+                    TextChangeCommand* tc = new TextChangeCommand( mytext, text, sc );
+                    executeTextChangeCommand = true;
                 }
             }
         }
+    }
 
-    history->addCommand( sc, false );// -!F: original, uncomment
+    if( executeTextChangeCommand ) {
+        history->push( sc );
+    } else {
+        delete sc;
+    }
 }
 
 void LabelEditor::centerHorizontal()
@@ -1028,7 +1048,7 @@ void LabelEditor::centerHorizontal()
     TCanvasItem* item = cv->getActive();
     
     MoveCommand* mv = new MoveCommand( int( ((d->getMeasurements().widthMM() * 1000.0 - item->item()->rectMM().width())/2 )) - item->item()->rectMM().x(), 0, item );
-    history->addCommand( mv, true );
+    history->push( mv );
 }
 
 void LabelEditor::centerVertical()
@@ -1039,7 +1059,7 @@ void LabelEditor::centerVertical()
     TCanvasItem* item = cv->getActive();
 
     MoveCommand* mv = new MoveCommand( 0, int( ((d->getMeasurements().heightMM() * 1000.0 - item->item()->rectMM().height())/2 ) - item->item()->rectMM().y() ), item );
-    history->addCommand( mv, true );
+    history->push( mv );
 }
 
 void LabelEditor::raiseCurrent()
@@ -1048,7 +1068,7 @@ void LabelEditor::raiseCurrent()
         return;
 
     ChangeZCommand* czc = new ChangeZCommand( (int)cv->getActive()->zValue() + 1, cv->getActive() );
-    history->addCommand( czc, true );
+    history->push( czc );
 }
 
 void LabelEditor::lowerCurrent()
@@ -1057,7 +1077,7 @@ void LabelEditor::lowerCurrent()
         return;
 
     ChangeZCommand* czc = new ChangeZCommand( (int)cv->getActive()->zValue() - 1, cv->getActive() );
-    history->addCommand( czc, true );
+    history->push( czc );
 }
 
 void LabelEditor::onTopCurrent()
@@ -1074,7 +1094,7 @@ void LabelEditor::onTopCurrent()
 
 
     ChangeZCommand* czc = new ChangeZCommand( z + 1, cv->getActive() );
-    history->addCommand( czc, true );
+    history->push( czc );
 }
 
 void LabelEditor::backCurrent()
@@ -1090,7 +1110,7 @@ void LabelEditor::backCurrent()
             z = (int)list[i]->zValue();
 
     ChangeZCommand* czc = new ChangeZCommand( z - 1, cv->getActive() );
-    history->addCommand( czc, true );
+    history->push( czc );
 }
 
 const QString LabelEditor::fileName() const
@@ -1273,14 +1293,16 @@ void LabelEditor::closeLabel()
     setCaption( filename, false );
 }
 
-void LabelEditor::setEdited()
+void LabelEditor::setEdited( bool isInCleanState )
 {
-    setCaption( filename, true );
-    m_edited = true;
+    /*setCaption( filename, true );
+    m_edited = true;*/
+    setCaption( filename, !isInCleanState );
+    m_edited = !isInCleanState;
     
     /*QAction * undoAct2 = actionCollection()->action("edit_undo");
     QAction * redoAct2 = actionCollection()->action("edit_redo");*/// -!F: delete
-    if( history->isRedoAvailable() ) {
+    /*if( history->isRedoAvailable() ) {
         redoAct->setEnabled( true );
     } else {
         redoAct->setEnabled( false );
@@ -1289,7 +1311,7 @@ void LabelEditor::setEdited()
         undoAct->setEnabled( true );
     } else {
         undoAct->setEnabled( false );
-    }
+    }*/
     
     enableActions();
 }

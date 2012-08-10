@@ -69,8 +69,8 @@ class Definition;
 class QColor;
 class QLabel;
 class QPoint;
-class K3CommandHistory;
-class K3MacroCommand;
+class KUndoStack;
+class QUndoCommand;
 class KRuler;
 class KStatusBar;
 class QGraphicsItem;
@@ -107,7 +107,7 @@ class MyCanvasView : public QGraphicsView
 
         void setCurrent( QGraphicsItem* item );
 
-        void setHistory( K3CommandHistory* hist ) {
+        void setHistory( KUndoStack* hist ) {
             history = hist;
         }
 
@@ -157,15 +157,14 @@ class MyCanvasView : public QGraphicsView
         
     private:
         void setSelected( QGraphicsItem* item = 0, bool control = false );
-        K3MacroCommand* getMoveCommand();
+        QUndoCommand* getMoveCommand();
         
         Definition* def;
 
         KRuler* rulerv;
         KRuler* rulerh;
 
-        K3CommandHistory* history;
-        K3MacroCommand* m_commov;
+        KUndoStack* history;
         MyCanvas* canv;
 
         int mouseid;
@@ -183,6 +182,11 @@ class MyCanvasView : public QGraphicsView
         int updateCursor( QPoint pos, bool pressed = false );
         int m_mode;
         QPoint delta_pt ;
+        int getCommandId();
+        int incrementCommandId();
+        
+        bool compressedCommandIsInProgress;
+        int m_commandId;
 };
 
 #endif

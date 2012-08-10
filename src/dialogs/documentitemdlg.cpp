@@ -18,17 +18,18 @@
 #include "documentitemdlg.h"
 #include "tokenprovider.h"
 
+#include <QUndoCommand>
 //Added by qt3to4:
 #include <QPixmap>
 #include <QWidget>
 
-#include <k3command.h>
+#include <kundostack.h>
 #include <klocale.h>
 #include <kpagedialog.h>
 #include <kpagewidgetmodel.h>
 #include <kvbox.h>
 
-DocumentItemDlg::DocumentItemDlg( TokenProvider* token, DocumentItem* item, K3CommandHistory* history, QWidget* parent )
+DocumentItemDlg::DocumentItemDlg( TokenProvider* token, DocumentItem* item, KUndoStack* history, QWidget* parent )
     : KPageDialog( parent )
 {
     setFaceType( KPageDialog::Tabbed );
@@ -148,14 +149,14 @@ void DocumentItemDlg::addPagePropertyWidget( PropertyWidget* widget )
 
 void DocumentItemDlg::accept()
 {
-    K3MacroCommand* mc = new K3MacroCommand( i18n("Property changed") );
+    QUndoCommand* mc = new QUndoCommand( i18n("Property changed") );
     std::list<PropertyWidget*>::iterator it;
     for( it=m_list.begin();it!=m_list.end();it++)
     {
        (*it)->applySettings( m_item, mc );
     }
     
-    m_history->addCommand( mc, false );
+    m_history->push( mc );
     
     KPageDialog::accept();
 }

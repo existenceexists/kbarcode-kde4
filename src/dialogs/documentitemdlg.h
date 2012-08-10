@@ -23,14 +23,14 @@
 #include <list> 
 #include <kpagedialog.h>
 
-class K3CommandHistory;
+class KUndoStack;
 class KPageDialog;
 
 class DocumentItemDlg : public KPageDialog
 {
  Q_OBJECT
  public:
-    DocumentItemDlg( TokenProvider* token, DocumentItem* item, K3CommandHistory* history, QWidget* parent );
+    DocumentItemDlg( TokenProvider* token, DocumentItem* item, KUndoStack* history, QWidget* parent );
     ~DocumentItemDlg();
     
     void addPagePropertyWidget( PropertyWidget* widget );
@@ -42,7 +42,7 @@ class DocumentItemDlg : public KPageDialog
     DocumentItem* m_item;
     std::list<PropertyWidget*> m_list;
     
-    K3CommandHistory* m_history;
+    KUndoStack* m_history;
 };
 
 #endif

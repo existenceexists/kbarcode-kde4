@@ -21,17 +21,18 @@
 #include "commands.h"
 #include "xmlutils.h"
 
-#include <k3command.h>
+#include <kundostack.h>
 
 #include <qbuffer.h>
 #include <qdom.h>
 #include <QString>
 #include <QMimeData>
+#include <QUndoCommand>
 
 class DragCommand : public NewItemCommand {
     public:
-        DragCommand( MyCanvasView* view, DocumentItem* doc_item )
-            : NewItemCommand( view, i18n("Pasted Object") )
+        DragCommand( MyCanvasView* view, DocumentItem* doc_item, QUndoCommand* parent = 0 )
+            : NewItemCommand( view, i18n("Pasted Object"), parent )
         {
             m_doc_item = doc_item;
         }
@@ -87,7 +88,7 @@ bool DocumentItemDrag::canDecode( QMimeData* e )
     return e->hasFormat( DocumentItemDrag::mimeType() );// -!F: Is QMimeData::hasFormat the right replacement of QMimeSource::provides ?
 }
 
-bool DocumentItemDrag::decode( QMimeData* mime, MyCanvasView* cv, TokenProvider* token, K3CommandHistory* history )
+bool DocumentItemDrag::decode( QMimeData* mime, MyCanvasView* cv, TokenProvider* token, KUndoStack* history )
 {
     QByteArray data = mime->data( DocumentItemDrag::mimeType() );
     QDomDocument doc( "KBarcodeClipboard" );
@@ -96,7 +97,7 @@ bool DocumentItemDrag::decode( QMimeData* mime, MyCanvasView* cv, TokenProvider*
     
     QDomNode n = doc.documentElement();
     QDomNodeList list = n.childNodes();
-    K3MacroCommand* commands = new K3MacroCommand( i18n("Paste") );
+    QUndoCommand* commands = new QUndoCommand( i18n("Paste") );
     
     for( unsigned int i=0;i<list.length();i++)
     {
@@ -109,9 +110,7 @@ bool DocumentItemDrag::decode( QMimeData* mime, MyCanvasView* cv, TokenProvider*
             DocumentItem* item = NULL;
             if( xml.readXMLDocumentItem( &e, &item, token ) )
             {            
-                DragCommand* dc = new DragCommand( cv, item );
-                dc->execute();
-                commands->addCommand( dc );
+                DragCommand* dc = new DragCommand( cv, item, commands );
             }
             else
             {
@@ -121,7 +120,7 @@ bool DocumentItemDrag::decode( QMimeData* mime, MyCanvasView* cv, TokenProvider*
         }
     }
     
-    history->addCommand( commands, false );
+    history->push( commands );
         
     return true;
 }

@@ -21,10 +21,10 @@
 #include "mycanvasitem.h"
 
 #include <qobject.h>
+#include <QUndoCommand>
 //Added by qt3to4:
 #include <QPixmap>
 
-#include <k3command.h>
 #include <klocale.h>
 
 #include "barcodeitem.h"
@@ -82,14 +82,14 @@ class CommandUtils : public QObject {
   *
   * @author Dominik Seichter
   */
-class NewItemCommand : public QObject, public K3Command {
+class NewItemCommand : public QObject, public QUndoCommand {
     Q_OBJECT
     public:
-        NewItemCommand( MyCanvasView* view, const QString & name );
+        NewItemCommand( MyCanvasView* view, const QString & name, QUndoCommand* parent = 0 );
         virtual ~NewItemCommand();
 
-        void execute();
-        void unexecute();
+        void redo();
+        void undo();
         QString name() const {
             return m_name;
         };
@@ -125,63 +125,73 @@ class NewItemCommand : public QObject, public K3Command {
         QString m_name;    
 };
 
-class ResizeCommand : public K3Command, CommandUtils {
+class ResizeCommand : public QUndoCommand, CommandUtils {
     public:
-        ResizeCommand( TCanvasItem* it, bool shift = false ) 
-            : CommandUtils( it )
+        ResizeCommand( TCanvasItem* it, bool shift = false, int id = -1, QUndoCommand* parent = 0 ) 
+            : QUndoCommand( parent ), CommandUtils( it )
         {
 	    orect = rect = m_canvas_item->item()->rectMM();
 	    m_shift = shift;
+            m_id = id;
         }
         ~ResizeCommand() {}
 
         void setRect( int cx, int cy, int cw, int ch );
         
-        void execute();
-        void unexecute();
+        void redo();
+        void undo();
         QString name() const {
             return i18n("Resized Item");
+        }
+        int id() const {
+            return m_id;
         }
 
     protected:
         QRect orect;
         QRect rect;
         bool m_shift;
+        int m_id;
 };
 
 /** Move a TCanvasItem on the canvas
  */
-class MoveCommand : public K3Command, CommandUtils {
+class MoveCommand : public QUndoCommand, CommandUtils {
     public:
         /**
          * @param cx move in x direction cx mm
          * @param cy move in y direction cy mm
          */
-        MoveCommand( int cx, int cy, TCanvasItem* it )
-            : CommandUtils( it )
+        MoveCommand( int cx, int cy, TCanvasItem* it, int id = -1, QUndoCommand* parent = 0 )
+            : QUndoCommand( parent ), CommandUtils( it )
         {
             x = cx;
             y = cy;
+            m_id = id;
         }
         ~MoveCommand() {}
 
-        void execute();
-        void unexecute();
+        void redo();
+        void undo();
         QString name() const {
             return i18n("Moved Item");
+        }
+        int id() const {
+            return m_id;
         }
 
     protected:
         int x;
         int y;
+        int m_id;
 };
 
-class ChangeZCommand : public K3Command, CommandUtils {
+class ChangeZCommand : public QUndoCommand, CommandUtils {
     public:
         ChangeZCommand( int z, TCanvasItem* it );
         
-        void execute();
-        void unexecute();
+        void redo();
+        void undo();
         QString name() const {
             return i18n("Raised or lowered an item");
         }
@@ -190,16 +200,16 @@ class ChangeZCommand : public K3Command, CommandUtils {
         int m_z, m_oldz;
 };
 
-class LockCommand : public K3Command, CommandUtils {
+class LockCommand : public QUndoCommand, CommandUtils {
     public:
-        LockCommand( bool lock, TCanvasItem* it )
-            : CommandUtils( it )
+        LockCommand( bool lock, TCanvasItem* it, QUndoCommand* parent = 0 )
+            : QUndoCommand( parent ), CommandUtils( it )
         {
             m_locked = lock;
         }
         
-        void execute();
-        void unexecute();
+        void redo();
+        void undo();
         QString name() const {
             return i18n("Protected Item");
         }
@@ -208,16 +218,16 @@ class LockCommand : public K3Command, CommandUtils {
         bool m_locked;
 };
 
-class PictureCommand : public K3Command, CommandUtils {
+class PictureCommand : public QUndoCommand, CommandUtils {
     public:
-        PictureCommand( double r, bool mirrorh, bool mirrorv, EImageScaling s, ImageItem* it );
+        PictureCommand( double r, bool mirrorh, bool mirrorv, EImageScaling s, ImageItem* it, QUndoCommand* parent = 0 );
         ~PictureCommand() {}
 
 	void setExpression( const QString & expr );
 	void setPixmap( const QPixmap & pix );
 
-        void execute();
-        void unexecute();
+        void redo();
+        void undo();
         QString name() const {
             return i18n("Changed Settings");
         }
@@ -234,13 +244,13 @@ class PictureCommand : public K3Command, CommandUtils {
         ImageItem* m_item;
 };
 
-class TextChangeCommand : public K3Command, CommandUtils {
+class TextChangeCommand : public QUndoCommand, CommandUtils {
     public:
-        TextChangeCommand( TextItem* it, QString t );
+        TextChangeCommand( TextItem* it, QString t, QUndoCommand* parent = 0 );
         ~TextChangeCommand() { }
 
-        void execute();
-        void unexecute();
+        void redo();
+        void undo();
         QString name() const {
             return i18n("Changed Text");
         }
@@ -249,12 +259,12 @@ class TextChangeCommand : public K3Command, CommandUtils {
         TextItem* m_item;
 };
 
-class TextRotationCommand : public K3Command, protected CommandUtils {
+class TextRotationCommand : public QUndoCommand, protected CommandUtils {
     public:
-        TextRotationCommand( double rot, TextItem* t  );
+        TextRotationCommand( double rot, TextItem* t, QUndoCommand* parent = 0 );
 
-        void execute();
-        void unexecute();
+        void redo();
+        void undo();
         QString name() const {
             return i18n("Rotated Text");
         }
@@ -266,13 +276,13 @@ class TextRotationCommand : public K3Command, protected CommandUtils {
 
 
 //NY28
-class TextLineChangeCommand : public K3Command, CommandUtils {
+class TextLineChangeCommand : public QUndoCommand, CommandUtils {
     public:
-        TextLineChangeCommand( TextLineItem* it, QString t, int font, int magvert, int maghor );
+        TextLineChangeCommand( TextLineItem* it, QString t, int font, int magvert, int maghor, QUndoCommand* parent = 0 );
         ~TextLineChangeCommand() { }
 
-        void execute();
-        void unexecute();
+        void redo();
+        void undo();
         QString name() const {
             return i18n("Changed Text");
         }
@@ -285,15 +295,15 @@ class TextLineChangeCommand : public K3Command, CommandUtils {
 };
 //NY28
 
-class BarcodeCommand : public K3Command, CommandUtils {
+class BarcodeCommand : public QUndoCommand, CommandUtils {
     public:
-        BarcodeCommand( BarcodeItem* bcode, Barkode* d );
+        BarcodeCommand( BarcodeItem* bcode, Barkode* d, QUndoCommand* parent = 0 );
         ~BarcodeCommand() {
             delete data;
         }
 
-        void execute();
-        void unexecute();
+        void redo();
+        void undo();
         QString name() const {
             return i18n("Changed Barcode");
         }
@@ -364,27 +374,27 @@ class NewBarcodeCommand : public NewItemCommand {
 	TokenProvider* m_token;
 };
 
-class DeleteCommand : public K3Command, CommandUtils {
+class DeleteCommand : public QUndoCommand, CommandUtils {
     public:
-        DeleteCommand( TCanvasItem* it ) 
-            : CommandUtils( it )
+        DeleteCommand( TCanvasItem* it, QUndoCommand* parent = 0 ) 
+            : QUndoCommand( parent ), CommandUtils( it )
         {
         }
         ~DeleteCommand();
         
-        void execute();
-        void unexecute();
+        void redo();
+        void undo();
         QString name() const {
             return i18n("Delete Item");
         }
 };
 
-class BorderCommand : public K3Command, protected CommandUtils {
+class BorderCommand : public QUndoCommand, protected CommandUtils {
     public:
-        BorderCommand( bool border, const QPen & pen, DocumentItem* item );
+        BorderCommand( bool border, const QPen & pen, DocumentItem* item, QUndoCommand* parent = 0 );
         
-        void execute();
-        void unexecute();
+        void redo();
+        void undo();
         QString name() const {
             return i18n("Modified Border");
         }
@@ -398,12 +408,12 @@ class BorderCommand : public K3Command, protected CommandUtils {
         DocumentItem* m_item;
 };
 
-class FillCommand : public K3Command, protected CommandUtils {
+class FillCommand : public QUndoCommand, protected CommandUtils {
     public:
-        FillCommand(  QColor c, RectItem* r  );
+        FillCommand(  QColor c, RectItem* r, QUndoCommand* parent = 0  );
 
-        void execute();
-        void unexecute();
+        void redo();
+        void undo();
         QString name() const {
             return i18n("Modified Rectangle or Ellipse");
         }
@@ -413,17 +423,17 @@ class FillCommand : public K3Command, protected CommandUtils {
         RectItem* m_item;
 };
 
-class ScriptCommand : public K3Command, CommandUtils {
+class ScriptCommand : public QUndoCommand, CommandUtils {
     public:
-        ScriptCommand( const QString & script, TCanvasItem* it )
-            : CommandUtils( it )
+        ScriptCommand( const QString & script, TCanvasItem* it, QUndoCommand* parent = 0 )
+            : QUndoCommand( parent ), CommandUtils( it )
         {
             m_script = script;
         }
         ~ScriptCommand() {}
         
-        void execute();
-        void unexecute();
+        void redo();
+        void undo();
         QString name() const {
             return i18n("Changed visibility JavaScript");
         }

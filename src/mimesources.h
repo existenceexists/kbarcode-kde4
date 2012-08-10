@@ -21,7 +21,7 @@
 #include <QMimeData>
 #include "documentitem.h"
 
-class K3CommandHistory;
+class KUndoStack;
 class TokenProvider;
 class MyCanvasView;
 
@@ -35,7 +35,7 @@ class DocumentItemDrag : public QMimeData {
         void setDocumentItem( DocumentItemList* list );
 
         static bool canDecode( QMimeData * );
-        static bool decode( QMimeData *, MyCanvasView* cv, TokenProvider* token, K3CommandHistory* history );
+        static bool decode( QMimeData *, MyCanvasView* cv, TokenProvider* token, KUndoStack* history );
 };
 
 #endif

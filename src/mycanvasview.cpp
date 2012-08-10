@@ -28,12 +28,14 @@
 #include <QMouseEvent>
 #include <QBrush>
 #include <QRectF>
+#include <QUndoCommand>
 
 #include <QDebug>// -!F: delete
 
 // KDE includes
 #include <kruler.h>
 #include <kstatusbar.h>
+#include <kundostack.h>
 
 MyCanvas::MyCanvas( QObject* parent )
     : QGraphicsScene( parent )
@@ -85,9 +87,10 @@ MyCanvasView::MyCanvasView( Definition* d, MyCanvas* c, QWidget* parent, Qt::WFl
     setWindowFlags( f );
     
     statusbar = 0;
-    m_commov = 0;
     m_additionOrder = 1;
     canv = c;
+    compressedCommandIsInProgress = false;
+    m_commandId = 0;
 
     rulerv = new KRuler( Qt::Vertical, this );
     rulerh = new KRuler( Qt::Horizontal, this );
@@ -181,6 +184,10 @@ void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
     if( moving && !moving->item()->locked() ) {
         /*QPoint p = inverseWorldMatrix().map(e->pos());*/// -!F: original, delete
         QPoint p = matrix().inverted().map(mappedEventPosition);
+        
+        if( !compressedCommandIsInProgress ) {
+            compressedCommandIsInProgress = true;
+        }
 
         if( m_mode == Barcode || m_mode == Inside ) {
             TCanvasItemList list = getSelected();
@@ -198,9 +205,9 @@ void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
 
                 // Move the item
                 MoveCommand* mv = new MoveCommand( pmm.x() - moving->item()->rectMM().x(),
-                                                   pmm.y() - moving->item()->rectMM().y(), moving );
-                mv->execute();
-                getMoveCommand()->addCommand( mv );
+                                                   pmm.y() - moving->item()->rectMM().y(), 
+                                                   moving, getCommandId() );
+                history->push( mv );
             }
         } else {
             
@@ -215,7 +222,7 @@ void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
 	    pmm.setY( (int)l.pixelToMm( p.y() - getTranslation().y(), this, LabelUtils::DpiY ) * 1000 );
 
 	    QRect rmm = moving->item()->rectMM();
-            ResizeCommand* mv = new ResizeCommand( moving, shift_pressed );
+            ResizeCommand* mv = new ResizeCommand( moving, shift_pressed, getCommandId() );
 
             switch( m_mode ) {
                 case RightMiddle:
@@ -245,8 +252,7 @@ void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
                 default:
                     break;
             }
-            mv->execute();
-            getMoveCommand()->addCommand( mv );
+            history->push( mv );
         }
         
         moving_start = p;
@@ -292,20 +298,22 @@ void MyCanvasView::mouseReleaseEvent(QMouseEvent* e)
     if( e->button() != Qt::LeftButton || getSelected().isEmpty() )
         return;
 
-    if( m_commov ) {
-        history->addCommand( getMoveCommand(), false );
-        m_commov = 0;
+    if( compressedCommandIsInProgress ) {
+        compressedCommandIsInProgress = false;
+        incrementCommandId();
     }
 
     updateCursor( mappedEventPosition );
 }
 
-K3MacroCommand* MyCanvasView::getMoveCommand()
+int MyCanvasView::getCommandId()
 {
-    if( !m_commov )
-        m_commov = new K3MacroCommand( i18n("Item Moved") );
+    return m_commandId;
+}
 
-    return m_commov;
+int MyCanvasView::incrementCommandId()
+{
+    m_commandId++;
 }
 
 void MyCanvasView::mouseDoubleClickEvent(QMouseEvent* e)
@@ -410,15 +418,13 @@ void MyCanvasView::deleteCurrent()
 {
     TCanvasItemList list = getSelected();
     if( !list.isEmpty() ) {
-        K3MacroCommand* mc = new K3MacroCommand( i18n("Delete") );
+        QUndoCommand* mc = new QUndoCommand( i18n("Delete") );
 
         for( int i = 0; i < list.count(); i++ ) {
-            DeleteCommand* dc = new DeleteCommand( list[i] );
-            dc->execute();
-            mc->addCommand( dc );
+            DeleteCommand* dc = new DeleteCommand( list[i], mc );
         }
         
-        history->addCommand( mc, false );
+        history->push( mc );
         setActive( 0 );
         scene()->update();
     }

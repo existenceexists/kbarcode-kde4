@@ -50,7 +50,7 @@ class KMenuBar;
 class KMenu;
 class KRuler;
 class KToolBar;
-class K3CommandHistory;
+class KUndoStack;
 class MyCanvasText;
 class MyCanvasRectangle;
 class MyCanvasView;
@@ -179,14 +179,14 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
         void startLoadEditor();
         void batchPrint();
         void closeLabel();
-        void setEdited();
+        void setEdited( bool isInCleanState = false );
         void launchAddressBook();
         void lockItem();
         
     protected:
         bool queryClose();
 
-        K3CommandHistory* history;
+        KUndoStack* history;
 
         KAction* saveAct;
         KAction* saveAsAct;
@@ -211,8 +211,8 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
         KAction* cutAct;
         KAction* copyAct;
         KAction* pasteAct;
-        KAction* undoAct;
-        KAction* redoAct;
+        QAction* undoAct;
+        QAction* redoAct;
         KAction* closeLabelAct;
         KAction* addressBookAct;
         KAction* selectAllAct;

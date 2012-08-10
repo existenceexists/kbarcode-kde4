@@ -34,7 +34,7 @@
 
 #include <kcolorbutton.h>
 #include <kcombobox.h>
-#include <k3command.h>
+#include <QUndoCommand>
 #include <kiconloader.h>
 #include <kimageio.h>
 #include <klineedit.h>
@@ -111,11 +111,9 @@ PropertyBorder::PropertyBorder( QWidget* parent )
     connect( checkBorder, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
 }
 
-void PropertyBorder::applySettings( DocumentItem* item, K3MacroCommand* command )
+void PropertyBorder::applySettings( DocumentItem* item, QUndoCommand* command )
 {
-    BorderCommand* bc = new BorderCommand( checkBorder->isChecked(), QPen( buttonColor->color(), spinWidth->value(), (Qt::PenStyle)(comboLine->currentIndex() + 1) ), item );
-    bc->execute();
-    command->addCommand( bc );
+    BorderCommand* bc = new BorderCommand( checkBorder->isChecked(), QPen( buttonColor->color(), spinWidth->value(), (Qt::PenStyle)(comboLine->currentIndex() + 1) ), item, command );
 }
 
 void PropertyBorder::initSettings( DocumentItem* item )
@@ -153,7 +151,7 @@ PropertyRotation::PropertyRotation( QWidget* parent )
 
 }
 
-void PropertyRotation::applySettings( DocumentItem* item, K3MacroCommand* command )
+void PropertyRotation::applySettings( DocumentItem* item, QUndoCommand* command )
 {
     TextItem* text = static_cast<TextItem*>(item);
     double rot = 0.0;
@@ -165,9 +163,7 @@ void PropertyRotation::applySettings( DocumentItem* item, K3MacroCommand* comman
     else if( comboRotation->currentIndex() ==  3 )
         rot = 270.0;
 
-    TextRotationCommand* rc = new TextRotationCommand( rot, text );
-    rc->execute();
-    command->addCommand( rc );
+    TextRotationCommand* rc = new TextRotationCommand( rot, text, command );
 }
 
 void PropertyRotation::initSettings( DocumentItem* item )
@@ -193,12 +189,10 @@ PropertyFill::PropertyFill( QWidget* parent )
     grid->addWidget( buttonColor, 0, 1 );
 }
 
-void PropertyFill::applySettings( DocumentItem* item, K3MacroCommand* command )
+void PropertyFill::applySettings( DocumentItem* item, QUndoCommand* command )
 {
     RectItem* rect = static_cast<RectItem*>(item);
-    FillCommand* fc = new FillCommand( buttonColor->color(), rect );
-    fc->execute();
-    command->addCommand( fc );
+    FillCommand* fc = new FillCommand( buttonColor->color(), rect, command );
 }
 
 void PropertyFill::initSettings( DocumentItem* item )
@@ -260,7 +254,7 @@ void PropertyBarcode::changedCombo()
     barcode->setStandardEnabled( v );
 }
 
-void PropertyBarcode::applySettings( DocumentItem* item, K3MacroCommand* command )
+void PropertyBarcode::applySettings( DocumentItem* item, QUndoCommand* command )
 {
     BarcodeItem* bcode = static_cast<BarcodeItem*>(item);
 
@@ -273,9 +267,7 @@ void PropertyBarcode::applySettings( DocumentItem* item, K3MacroCommand* command
     }
     d->setDatabaseMode( comboComplex->currentText() );
     
-    BarcodeCommand* bc = new BarcodeCommand( bcode, d );
-    bc->execute();
-    command->addCommand( bc );
+    BarcodeCommand* bc = new BarcodeCommand( bcode, d, command );
 }
 
 void PropertyBarcode::initSettings( DocumentItem* item )
@@ -297,13 +289,11 @@ PropertyText::PropertyText( TokenProvider* token, QWidget* parent )
     grid->addWidget( m_editor, 0, 0 );
 }
 
-void PropertyText::applySettings( DocumentItem* item, K3MacroCommand* command )
+void PropertyText::applySettings( DocumentItem* item, QUndoCommand* command )
 {
     TextItem* text = static_cast<TextItem*>(item);
     
-    TextChangeCommand* tc = new TextChangeCommand( text, m_editor->text() );
-    tc->execute();
-    command->addCommand( tc );
+    TextChangeCommand* tc = new TextChangeCommand( text, m_editor->text(), command );
 }
 
 void PropertyText::initSettings( DocumentItem* item )
@@ -320,13 +310,11 @@ PropertyTextLine::PropertyTextLine( TokenProvider* token, QWidget* parent )
     grid->addWidget( m_editor, 0, 0 );
 }
 
-void PropertyTextLine::applySettings( DocumentItem* item, K3MacroCommand* command )
+void PropertyTextLine::applySettings( DocumentItem* item, QUndoCommand* command )
 {
     TextLineItem* text = static_cast<TextLineItem*>(item);
     
-    TextLineChangeCommand* tc = new TextLineChangeCommand( text, m_editor->text(), m_editor->getFontType(),m_editor->getVertMag(),m_editor->getHorMag() );
-    tc->execute();
-    command->addCommand( tc );
+    TextLineChangeCommand* tc = new TextLineChangeCommand( text, m_editor->text(), m_editor->getFontType(),m_editor->getVertMag(),m_editor->getHorMag(), command );
 }
 
 void PropertyTextLine::initSettings( DocumentItem* item )
@@ -386,7 +374,7 @@ void PropertySize::enableControls()
     numWidth->setEnabled( !checkLock->isChecked() );
 }
         
-void PropertySize::applySettings( DocumentItem* item, K3MacroCommand* command )
+void PropertySize::applySettings( DocumentItem* item, QUndoCommand* command )
 {
     QRect r = item->rect();
     QPoint translation( 0, 0 );
@@ -421,24 +409,18 @@ void PropertySize::applySettings( DocumentItem* item, K3MacroCommand* command )
     {   
         if( item->rectMM().x() != r.x() || item->rectMM().y() != r.y() )
         {
-            MoveCommand* mc = new MoveCommand( r.x(), r.y(), canvasItem );
-            mc->execute();
-            command->addCommand( mc );    
+            MoveCommand* mc = new MoveCommand( r.x(), r.y(), canvasItem, -1, command );
         }
 
         if( item->rectMM() != r )
         {
-            ResizeCommand* rc = new ResizeCommand( canvasItem, false );
+            ResizeCommand* rc = new ResizeCommand( canvasItem, false, -1, command );
             rc->setRect( r.x(), r.y(), r.width(), r.height() );
-            rc->execute();
-            command->addCommand( rc );
         }
                 
         if( checkLock->isChecked() != item->locked() )
         {
-            LockCommand* lc = new LockCommand( checkLock->isChecked(), canvasItem );
-            lc->execute();
-            command->addCommand( lc );
+            LockCommand* lc = new LockCommand( checkLock->isChecked(), canvasItem, command );
         }
     }
 }
@@ -535,7 +517,7 @@ PropertyImage::PropertyImage( TokenProvider* token, QWidget* parent )
     connect( buttonToken, SIGNAL( clicked() ), this, SLOT( slotTokens() ) );
 }
 
-void PropertyImage::applySettings( DocumentItem* item, K3MacroCommand* command )
+void PropertyImage::applySettings( DocumentItem* item, QUndoCommand* command )
 {
     ImageItem* img = static_cast<ImageItem*>(item);
     EImageScaling scaling = eImage_Original;
@@ -567,11 +549,9 @@ void PropertyImage::applySettings( DocumentItem* item, K3MacroCommand* command )
     else if( comboRotation->currentIndex() ==  3 )
         rot = 270.0;
         
-    PictureCommand* pc = new PictureCommand( rot, checkMirrorH->isChecked(), checkMirrorV->isChecked(), scaling, img );
+    PictureCommand* pc = new PictureCommand( rot, checkMirrorH->isChecked(), checkMirrorV->isChecked(), scaling, img, command );
     pc->setExpression( radioImageExpression->isChecked() ? imgExpression->text() : QString::null );
     pc->setPixmap( pix );
-    pc->execute();
-    command->addCommand( pc );
 }
 
 void PropertyImage::initSettings( DocumentItem* item )
@@ -643,12 +623,10 @@ PropertyVisible::PropertyVisible( QWidget* parent )
     grid->addWidget( m_script, 1, 0, 8, 3 );
 }
 
-void PropertyVisible::applySettings( DocumentItem* item, K3MacroCommand* command )
+void PropertyVisible::applySettings( DocumentItem* item, QUndoCommand* command )
 {
     TCanvasItem* canvasItem = item->canvasItem();
-    ScriptCommand* sc = new ScriptCommand( m_script->toPlainText(), canvasItem );
-    sc->execute();
-    command->addCommand( sc);
+    ScriptCommand* sc = new ScriptCommand( m_script->toPlainText(), canvasItem, command );
 }
 
 void PropertyVisible::initSettings( DocumentItem* item )

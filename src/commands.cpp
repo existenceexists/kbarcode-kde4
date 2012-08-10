@@ -102,8 +102,8 @@ void CommandUtils::documentItemDeleted()
     */
 }
 
-NewItemCommand::NewItemCommand( MyCanvasView* view, const QString & name )
-    : QObject(), K3Command()
+NewItemCommand::NewItemCommand( MyCanvasView* view, const QString & name, QUndoCommand* parent )
+    : QObject(), QUndoCommand( parent )
 {
     cv = view;
     m_name = name;
@@ -117,7 +117,7 @@ NewItemCommand::~NewItemCommand()
     m_item->remRef();
 }
 
-void NewItemCommand::execute()
+void NewItemCommand::redo()
 {
     if( !m_item )
     {
@@ -150,7 +150,7 @@ void NewItemCommand::execute()
     }
 }
 
-void NewItemCommand::unexecute()
+void NewItemCommand::undo()
 {
     if( m_item ) {
         /*m_item->setCanvas( NULL );*/// -!F: original, done: What is the QGraphicsItem equivalent of this?
@@ -188,7 +188,7 @@ void ResizeCommand::setRect( int cx, int cy, int cw, int ch )
     rect = QRect( cx, cy, cw, ch );
 }
 
-void ResizeCommand::execute()
+void ResizeCommand::redo()
 {
     if( canvasHasItem() ) {
         if( m_shift && rect.width() ) {
@@ -208,7 +208,7 @@ void ResizeCommand::execute()
     }
 }
 
-void ResizeCommand::unexecute()
+void ResizeCommand::undo()
 {
     if( canvasHasItem() ) {
 	m_canvas_item->moveMM( orect.x(), orect.y() );
@@ -223,7 +223,7 @@ void ResizeCommand::unexecute()
     }
 }
 
-void MoveCommand::execute()
+void MoveCommand::redo()
 {
     if( canvasHasItem() )
     {
@@ -232,7 +232,7 @@ void MoveCommand::execute()
     }
 }
 
-void MoveCommand::unexecute()
+void MoveCommand::undo()
 {
     if( canvasHasItem() ) 
     {
@@ -248,7 +248,7 @@ ChangeZCommand::ChangeZCommand( int z, TCanvasItem* it )
     m_oldz = (int)m_canvas_item->zValue();
 }
 
-void ChangeZCommand::execute()
+void ChangeZCommand::redo()
 {
    if( canvasHasItem() )
     {
@@ -257,7 +257,7 @@ void ChangeZCommand::execute()
     }
 }
 
-void ChangeZCommand::unexecute()
+void ChangeZCommand::undo()
 {
    if( canvasHasItem() )
     {
@@ -266,7 +266,7 @@ void ChangeZCommand::unexecute()
     }
 }
 
-void LockCommand::execute()
+void LockCommand::redo()
 {
     if( canvasHasItem() )
     {
@@ -275,7 +275,7 @@ void LockCommand::execute()
     }
 }
 
-void LockCommand::unexecute()
+void LockCommand::undo()
 {
     if( canvasHasItem() )
     {
@@ -284,8 +284,8 @@ void LockCommand::unexecute()
     }
 }
 
-PictureCommand::PictureCommand( double r, bool mh, bool mv, EImageScaling s, ImageItem* it ) 
-    : CommandUtils( it->canvasItem() )
+PictureCommand::PictureCommand( double r, bool mh, bool mv, EImageScaling s, ImageItem* it, QUndoCommand* parent ) 
+    : QUndoCommand( parent ), CommandUtils( it->canvasItem() )
 {
     rotate = r;
     mirrorv = mv;
@@ -318,7 +318,7 @@ void PictureCommand::setPixmap( const QPixmap & pix )
     pixserial = pixmap.serialNumber();
 }
 
-void PictureCommand::execute()
+void PictureCommand::redo()
 {
     if( canvasHasItem() ) {
         m_item->setRotation( rotate );
@@ -333,7 +333,7 @@ void PictureCommand::execute()
     }
 }
 
-void PictureCommand::unexecute()
+void PictureCommand::undo()
 {
     if( canvasHasItem() ) {
         m_item->setRotation( orotate );
@@ -346,46 +346,46 @@ void PictureCommand::unexecute()
     }
 }
 
-TextChangeCommand::TextChangeCommand( TextItem* it, QString t )
-    : CommandUtils( it->canvasItem() )
+TextChangeCommand::TextChangeCommand( TextItem* it, QString t, QUndoCommand* parent )
+    : QUndoCommand( parent ), CommandUtils( it->canvasItem() )
 {
     m_item = it;
     text = t;
     oldtext = m_item->text();
 }
 
-void TextChangeCommand::execute()
+void TextChangeCommand::redo()
 {
     if( canvasHasItem() )
         m_item->setText( text );
 }
 
-void TextChangeCommand::unexecute()
+void TextChangeCommand::undo()
 {
     if( canvasHasItem() )
         m_item->setText( oldtext );
 }
 
-TextRotationCommand::TextRotationCommand( double rot, TextItem* t  )
-    : CommandUtils( t->canvasItem() ), m_item( t )
+TextRotationCommand::TextRotationCommand( double rot, TextItem* t, QUndoCommand* parent )
+    : QUndoCommand( parent ), CommandUtils( t->canvasItem() ), m_item( t )
 {
     rot1 = rot;
     rot2 = t->rotation();
 }
 
-void TextRotationCommand::execute()
+void TextRotationCommand::redo()
 {
     m_item->setRotation( rot1 );
 }
 
-void TextRotationCommand::unexecute()
+void TextRotationCommand::undo()
 {
     m_item->setRotation( rot2 );
 }
 
 //NY24
-TextLineChangeCommand::TextLineChangeCommand( TextLineItem* it, QString t, int font , int magvert, int maghor)
-    : CommandUtils( it->canvasItem() )
+TextLineChangeCommand::TextLineChangeCommand( TextLineItem* it, QString t, int font , int magvert, int maghor, QUndoCommand* parent )
+    : QUndoCommand( parent ), CommandUtils( it->canvasItem() )
 {
     m_item = it;
     text = t;
@@ -395,7 +395,7 @@ TextLineChangeCommand::TextLineChangeCommand( TextLineItem* it, QString t, int f
     m_mag_hor = maghor;
 }
 
-void TextLineChangeCommand::execute()
+void TextLineChangeCommand::redo()
 {
     if( canvasHasItem() ){
         m_item->setText( text );
@@ -405,22 +405,22 @@ void TextLineChangeCommand::execute()
     }
 }
 
-void TextLineChangeCommand::unexecute()
+void TextLineChangeCommand::undo()
 {
     if( canvasHasItem() )
         m_item->setText( oldtext );
 }
 //NY24
 
-BarcodeCommand::BarcodeCommand( BarcodeItem* bcode, Barkode* d )
-    : CommandUtils( bcode->canvasItem() )
+BarcodeCommand::BarcodeCommand( BarcodeItem* bcode, Barkode* d, QUndoCommand* parent )
+    : QUndoCommand( parent ), CommandUtils( bcode->canvasItem() )
 {
     m_item = bcode;
     olddata = *bcode;
     data = d;
 }
 
-void BarcodeCommand::execute()
+void BarcodeCommand::redo()
 {
     if( canvasHasItem() ) {
         m_item->setData( *data );
@@ -428,7 +428,7 @@ void BarcodeCommand::execute()
     }
 }
 
-void BarcodeCommand::unexecute()
+void BarcodeCommand::undo()
 {
     if( canvasHasItem() ) {
         m_item->setData( olddata );
@@ -523,7 +523,7 @@ DeleteCommand::~DeleteCommand()
     }
 }
 
-void DeleteCommand::execute()
+void DeleteCommand::redo()
 {
     if( canvasHasItem() ) {
         /*m_canvas_item->setCanvas( 0 );*/// -!F: original, done: What is the QGraphicsItem equivalent of this?
@@ -532,7 +532,7 @@ void DeleteCommand::execute()
     }
 }
 
-void DeleteCommand::unexecute()
+void DeleteCommand::undo()
 {
     // canvasHasItem won't work here
     if( m_canvas_item ) {
@@ -542,15 +542,15 @@ void DeleteCommand::unexecute()
     }
 }
 
-BorderCommand::BorderCommand( bool border, const QPen & pen, DocumentItem* item )
-    : CommandUtils( item->canvasItem() )
+BorderCommand::BorderCommand( bool border, const QPen & pen, DocumentItem* item, QUndoCommand* parent )
+    : QUndoCommand( parent ), CommandUtils( item->canvasItem() )
 {
     m_new_border = border;
     m_new_pen = pen;
     m_item = item;
 }
 
-void BorderCommand::execute()
+void BorderCommand::redo()
 {
     if( canvasHasItem() )
     {
@@ -563,7 +563,7 @@ void BorderCommand::execute()
     }
 }
 
-void BorderCommand::unexecute()
+void BorderCommand::undo()
 {
     if( canvasHasItem() )
     {
@@ -574,14 +574,14 @@ void BorderCommand::unexecute()
     }
 }
 
-FillCommand::FillCommand( QColor c, RectItem* r )
-    : CommandUtils( r->canvasItem() )
+FillCommand::FillCommand( QColor c, RectItem* r, QUndoCommand* parent )
+    : QUndoCommand( parent ), CommandUtils( r->canvasItem() )
 {
     fill = c;
     m_item = r;
 }
 
-void FillCommand::execute()
+void FillCommand::redo()
 {
     if( canvasHasItem() ) {
         fill2 = m_item->color();
@@ -589,14 +589,14 @@ void FillCommand::execute()
     }
 }
 
-void FillCommand::unexecute()
+void FillCommand::undo()
 {
     if( canvasHasItem() ) {
         m_item->setColor( fill2 );
     }
 }
 
-void ScriptCommand::execute()
+void ScriptCommand::redo()
 {
     if( canvasHasItem() )
     {
@@ -606,7 +606,7 @@ void ScriptCommand::execute()
     }
 }
 
-void ScriptCommand::unexecute()
+void ScriptCommand::undo()
 {
     if( canvasHasItem() )
     {
