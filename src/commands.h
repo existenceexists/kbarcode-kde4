@@ -146,6 +146,7 @@ class ResizeCommand : public QUndoCommand, CommandUtils {
         int id() const {
             return m_id;
         }
+        bool mergeWith( const QUndoCommand* other );
 
     protected:
         QRect orect;
@@ -179,6 +180,7 @@ class MoveCommand : public QUndoCommand, CommandUtils {
         int id() const {
             return m_id;
         }
+        bool mergeWith( const QUndoCommand* other );
 
     protected:
         int x;

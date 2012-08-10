@@ -223,6 +223,15 @@ void ResizeCommand::undo()
     }
 }
 
+bool ResizeCommand::mergeWith( const QUndoCommand* other )
+{
+    if( other->id() != id() ) {
+        return false;
+    }
+    rect = static_cast<const ResizeCommand*>(other)->rect;
+    return true;
+}
+
 void MoveCommand::redo()
 {
     if( canvasHasItem() )
@@ -239,6 +248,16 @@ void MoveCommand::undo()
 	m_canvas_item->moveByMM( -x, -y );
 	m_canvas_item->update();        
     }
+}
+
+bool MoveCommand::mergeWith( const QUndoCommand* other )
+{
+    if( other->id() != id() ) {
+        return false;
+    }
+    x += static_cast<const MoveCommand*>(other)->x;
+    y += static_cast<const MoveCommand*>(other)->y;
+    return true;
 }
 
 ChangeZCommand::ChangeZCommand( int z, TCanvasItem* it )
