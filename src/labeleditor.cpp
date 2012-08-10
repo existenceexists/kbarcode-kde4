@@ -267,8 +267,8 @@ void LabelEditor::createCommandHistoryActions()
         // Remove the actions from the "Edit" menu:
         menuBar()->actions()[1]->menu()->removeAction( undoAct );
         menuBar()->actions()[1]->menu()->removeAction( redoAct );
-        delete undoAct;
-        delete redoAct;
+        actionCollection()->removeAction( undoAct );
+        actionCollection()->removeAction( redoAct );
     }
     
     undoAct = history->createUndoAction( actionCollection() );
@@ -278,7 +278,7 @@ void LabelEditor::createCommandHistoryActions()
     toolBar()->addAction( redoAct );
     // Insert the actions into the "Edit" menu:
     menuBar()->actions()[1]->menu()->insertAction( menuBar()->actions()[1]->menu()->actions()[0], undoAct );
-    menuBar()->actions()[1]->menu()->insertAction( menuBar()->actions()[1]->menu()->actions()[0], redoAct );
+    menuBar()->actions()[1]->menu()->insertAction( menuBar()->actions()[1]->menu()->actions()[1], redoAct );
 }
 
 void LabelEditor::clearLabel()
