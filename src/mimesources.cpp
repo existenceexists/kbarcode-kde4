@@ -110,7 +110,7 @@ bool DocumentItemDrag::decode( QMimeData* mime, MyCanvasView* cv, TokenProvider*
             DocumentItem* item = NULL;
             if( xml.readXMLDocumentItem( &e, &item, token ) )
             {            
-                DragCommand* dc = new DragCommand( cv, item, commands );
+                new DragCommand( cv, item, commands );
             }
             else
             {

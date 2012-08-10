@@ -113,7 +113,7 @@ PropertyBorder::PropertyBorder( QWidget* parent )
 
 void PropertyBorder::applySettings( DocumentItem* item, QUndoCommand* command )
 {
-    BorderCommand* bc = new BorderCommand( checkBorder->isChecked(), QPen( buttonColor->color(), spinWidth->value(), (Qt::PenStyle)(comboLine->currentIndex() + 1) ), item, command );
+    new BorderCommand( checkBorder->isChecked(), QPen( buttonColor->color(), spinWidth->value(), (Qt::PenStyle)(comboLine->currentIndex() + 1) ), item, command );
 }
 
 void PropertyBorder::initSettings( DocumentItem* item )
@@ -163,7 +163,7 @@ void PropertyRotation::applySettings( DocumentItem* item, QUndoCommand* command 
     else if( comboRotation->currentIndex() ==  3 )
         rot = 270.0;
 
-    TextRotationCommand* rc = new TextRotationCommand( rot, text, command );
+    new TextRotationCommand( rot, text, command );
 }
 
 void PropertyRotation::initSettings( DocumentItem* item )
@@ -192,7 +192,7 @@ PropertyFill::PropertyFill( QWidget* parent )
 void PropertyFill::applySettings( DocumentItem* item, QUndoCommand* command )
 {
     RectItem* rect = static_cast<RectItem*>(item);
-    FillCommand* fc = new FillCommand( buttonColor->color(), rect, command );
+    new FillCommand( buttonColor->color(), rect, command );
 }
 
 void PropertyFill::initSettings( DocumentItem* item )
@@ -267,7 +267,7 @@ void PropertyBarcode::applySettings( DocumentItem* item, QUndoCommand* command )
     }
     d->setDatabaseMode( comboComplex->currentText() );
     
-    BarcodeCommand* bc = new BarcodeCommand( bcode, d, command );
+    new BarcodeCommand( bcode, d, command );
 }
 
 void PropertyBarcode::initSettings( DocumentItem* item )
@@ -293,7 +293,7 @@ void PropertyText::applySettings( DocumentItem* item, QUndoCommand* command )
 {
     TextItem* text = static_cast<TextItem*>(item);
     
-    TextChangeCommand* tc = new TextChangeCommand( text, m_editor->text(), command );
+    new TextChangeCommand( text, m_editor->text(), command );
 }
 
 void PropertyText::initSettings( DocumentItem* item )
@@ -314,7 +314,7 @@ void PropertyTextLine::applySettings( DocumentItem* item, QUndoCommand* command 
 {
     TextLineItem* text = static_cast<TextLineItem*>(item);
     
-    TextLineChangeCommand* tc = new TextLineChangeCommand( text, m_editor->text(), m_editor->getFontType(),m_editor->getVertMag(),m_editor->getHorMag(), command );
+    new TextLineChangeCommand( text, m_editor->text(), m_editor->getFontType(),m_editor->getVertMag(),m_editor->getHorMag(), command );
 }
 
 void PropertyTextLine::initSettings( DocumentItem* item )
@@ -409,7 +409,7 @@ void PropertySize::applySettings( DocumentItem* item, QUndoCommand* command )
     {   
         if( item->rectMM().x() != r.x() || item->rectMM().y() != r.y() )
         {
-            MoveCommand* mc = new MoveCommand( r.x(), r.y(), canvasItem, -1, command );
+            new MoveCommand( r.x(), r.y(), canvasItem, -1, command );
         }
 
         if( item->rectMM() != r )
@@ -420,7 +420,7 @@ void PropertySize::applySettings( DocumentItem* item, QUndoCommand* command )
                 
         if( checkLock->isChecked() != item->locked() )
         {
-            LockCommand* lc = new LockCommand( checkLock->isChecked(), canvasItem, command );
+            new LockCommand( checkLock->isChecked(), canvasItem, command );
         }
     }
 }
@@ -626,7 +626,7 @@ PropertyVisible::PropertyVisible( QWidget* parent )
 void PropertyVisible::applySettings( DocumentItem* item, QUndoCommand* command )
 {
     TCanvasItem* canvasItem = item->canvasItem();
-    ScriptCommand* sc = new ScriptCommand( m_script->toPlainText(), canvasItem, command );
+    new ScriptCommand( m_script->toPlainText(), canvasItem, command );
 }
 
 void PropertyVisible::initSettings( DocumentItem* item )

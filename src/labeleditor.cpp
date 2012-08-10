@@ -927,11 +927,10 @@ void LabelEditor::lockItem()
     QUndoCommand* mc = new QUndoCommand( i18n("Protected Item") );
     
     DocumentItem* item = NULL;
-    LockCommand* lc = NULL;
     for( int i=0;i<list.count();i++)
     {
         item = list[i]->item();
-        lc = new LockCommand( !item->locked(), list[i], mc );
+        new LockCommand( !item->locked(), list[i], mc );
     }
     
     history->push( mc );
@@ -1044,7 +1043,7 @@ void LabelEditor::spellCheck()
                 spellChecker.setText( text );
                 //spellChecker.start();
                 if( spellChecker.text() != textbefore ) {
-                    TextChangeCommand* tc = new TextChangeCommand( mytext, text, sc );
+                    new TextChangeCommand( mytext, text, sc );
                     executeTextChangeCommand = true;
                 }
             }

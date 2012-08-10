@@ -183,7 +183,7 @@ class MyCanvasView : public QGraphicsView
         int m_mode;
         QPoint delta_pt ;
         int getCommandId();
-        int incrementCommandId();
+        void incrementCommandId();
         
         bool compressedCommandIsInProgress;
         int m_commandId;

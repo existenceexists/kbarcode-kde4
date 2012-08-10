@@ -311,7 +311,7 @@ int MyCanvasView::getCommandId()
     return m_commandId;
 }
 
-int MyCanvasView::incrementCommandId()
+void MyCanvasView::incrementCommandId()
 {
     m_commandId++;
 }
@@ -421,7 +421,7 @@ void MyCanvasView::deleteCurrent()
         QUndoCommand* mc = new QUndoCommand( i18n("Delete") );
 
         for( int i = 0; i < list.count(); i++ ) {
-            DeleteCommand* dc = new DeleteCommand( list[i], mc );
+            new DeleteCommand( list[i], mc );
         }
         
         history->push( mc );
