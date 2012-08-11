@@ -112,7 +112,7 @@ void TextItem::draw(QPainter* painter)
         painter->setPen( Qt::black );
         /*srt.setWidth( painter, w );
         srt.draw( painter, 0, 0, QRect( 0, 0, w, h ), cg );*/// -!F: keep
-        //srt.setTextWidth( w );
+        srt.setTextWidth( srt.size().width() );
         srt.drawContents( painter, QRect( 0, 0, w, h ) );
     }
     else
