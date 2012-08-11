@@ -241,7 +241,8 @@ void LabelEditor::createCommandHistory()
     history = new KUndoStack( this );
     cv->setHistory( history );
 
-    history->setUndoLimit( KBARCODE_UNDO_LIMIT );
+    // Don't set the undo limit anymore becouse in KDE4 it causes deletion ot items if the limit is reached:
+    //history->setUndoLimit( KBARCODE_UNDO_LIMIT );
     
     /*connect( undoAct, SIGNAL(triggered(bool)), history, SLOT(undo()) );
     connect( redoAct, SIGNAL(triggered(bool)), history, SLOT(redo()) );
