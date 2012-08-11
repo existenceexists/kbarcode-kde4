@@ -231,21 +231,23 @@ bool NewLabel::isInCombo( QComboBox* combo, QString text )
 
 void NewLabel::setLabelId( int id )
 {
-    QString name;
-    QSqlQuery query("SELECT type FROM " TABLE_LABEL_DEF " WHERE label_no='" + QString::number( id ) + "'" );
-    while( query.next() )
-        name = query.value( 0 ).toString();
+    if( SqlTables::isConnected() ) {
+        QString name;
+        QSqlQuery query("SELECT type FROM " TABLE_LABEL_DEF " WHERE label_no='" + QString::number( id ) + "'" );
+        while( query.next() )
+            name = query.value( 0 ).toString();
 
-    for( int i = 0; i < comboProducer->count(); i++ ) {
-        comboProducer->setCurrentIndex( i );
-        updateType();
-        for( int z = 0; z < comboType->count(); z++ )
-            if( comboType->itemText( z ) == name ) {
-                comboProducer->setCurrentIndex( i );
-                comboType->setCurrentIndex( z );
-                return;
-            }
+        for( int i = 0; i < comboProducer->count(); i++ ) {
+            comboProducer->setCurrentIndex( i );
+            updateType();
+            for( int z = 0; z < comboType->count(); z++ )
+                if( comboType->itemText( z ) == name ) {
+                    comboProducer->setCurrentIndex( i );
+                    comboType->setCurrentIndex( z );
+                    return;
+                }
         }
+    }
 
     comboProducer->setCurrentIndex( 0 );
     updateType();
