@@ -112,7 +112,11 @@ void TextItem::draw(QPainter* painter)
         painter->setPen( Qt::black );
         /*srt.setWidth( painter, w );
         srt.draw( painter, 0, 0, QRect( 0, 0, w, h ), cg );*/// -!F: keep
-        srt.setTextWidth( srt.size().width() );
+        if( srt.size().width() > w ) {// Make alignment "center" and "right" work
+            srt.setTextWidth( srt.size().width() );
+        } else {
+            srt.setTextWidth( w );
+        }
         srt.drawContents( painter, QRect( 0, 0, w, h ) );
     }
     else
