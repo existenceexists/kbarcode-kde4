@@ -98,11 +98,6 @@
 #include <kmenu.h>
 #include <kpushbutton.h>
 #include <krun.h>
-//#include <kspell.h>// -!F: original, delete
-//#include <backgroundchecker.h>// -!F: delete
-//#include <speller.h>// -!F: delete
-#include <sonnet/speller.h>
-#include <sonnet/backgroundchecker.h>
 #include <kstatusbar.h>
 #include <kstandarddirs.h>
 #include <ktemporaryfile.h>
@@ -142,6 +137,7 @@ LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f,
     
     undoAct = redoAct = NULL;
     history = NULL;
+    m_sonnetDialog = NULL;
 
     description = QString::null;
     d = new Definition();
@@ -1022,7 +1018,7 @@ void LabelEditor::batchPrint( BatchPrinter* batch, int copies, int mode )
 
 void LabelEditor::spellCheck()
 {
-    QUndoCommand* sc = new QUndoCommand( i18n("Spellchecking") );
+    /*QUndoCommand* sc = new QUndoCommand( i18n("Spellchecking") );
     bool executeTextChangeCommand = false;
     QList<QGraphicsItem *> list = c->items();
     for( int i = 0; i < list.count(); i++ ) {
@@ -1055,6 +1051,31 @@ void LabelEditor::spellCheck()
         history->push( sc );
     } else {
         delete sc;
+    }*/
+    
+    QUndoCommand* sc = new QUndoCommand( i18n("Spellchecking") );
+    QList<QGraphicsItem *> list = c->items();
+    for( int i = 0; i < list.count(); i++ ) {
+        if( ((TCanvasItem*)list[i])->rtti() == eRtti_Text ) {
+            TCanvasItem* item = (TCanvasItem*)list[i];
+            TextItem* myTextItem = (TextItem*)item->item();
+            //QString text = mytext->text();
+        
+            if (!m_sonnetDialog)
+            {
+                m_sonnetDialog = new Sonnet::Dialog( new Sonnet::BackgroundChecker( this ), this );
+                //connect signals to slots:
+                //connect( m_sonnetDialog, SIGNAL(misspelling(const QString&,int)), 
+                //    this, SLOT(spellcheckShow(const QString&,int)) );
+                //and so on: ...
+                m_sonnetDialog->setSpellCheckContinuedAfterReplacement( true );
+            }
+         
+            if (!myTextItem->text().isEmpty())
+                m_sonnetDialog->setBuffer( myTextItem->text() );
+            
+            m_sonnetDialog->show();
+        }
     }
 }
 

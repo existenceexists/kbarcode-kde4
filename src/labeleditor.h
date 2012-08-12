@@ -37,6 +37,10 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
+#include <sonnet/speller.h>
+#include <sonnet/backgroundchecker.h>
+#include <sonnet/dialog.h>
+
 class BatchPrinter;
 class KUrl;
 class KAction;
@@ -252,6 +256,8 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
         QMap<QString,QString> fields;
 
         bool m_edited;
+        
+        Sonnet::Dialog* m_sonnetDialog;
 };
 
 #endif
