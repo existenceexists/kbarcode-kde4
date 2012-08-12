@@ -1085,7 +1085,6 @@ void LabelEditor::spellcheckDone( const QString & newText )
         qDebug() << "m_sonnetDialog->originalBuffer() != newText";
     }*/
     if( spellCheckedItems ) {
-        //if( spellCheckedItemNumber < spellCheckedItems->count() ) {
         for( ; spellCheckedItemNumber < spellCheckedItems->count(); spellCheckedItemNumber++ ) {
             if( ((*spellCheckedItems)[spellCheckedItemNumber])->rtti() == eRtti_Text ) {
                 setSpellCheckBuffer( (*spellCheckedItems)[spellCheckedItemNumber] );
@@ -1102,7 +1101,7 @@ void LabelEditor::spellcheckDone( const QString & newText )
 
 void LabelEditor::setSpellCheckBuffer( const TCanvasItem* item )
 {
-    if( m_sonnetDialog ) {
+    if( sonnetDialogExists ) {
         spellCheckedItemNumber++;
         TextItem* myTextItem = (TextItem*)item->item();
         QTextDocument textDocument;
