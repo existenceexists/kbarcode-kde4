@@ -1084,28 +1084,20 @@ void LabelEditor::spellcheckDone( const QString & newText )
     if( m_sonnetDialog->originalBuffer() != newText ) {
         qDebug() << "m_sonnetDialog->originalBuffer() != newText";
     }*/
-    bool textItemsFound = false;
-    if( spellCheckedItems && !spellCheckedItems->isEmpty() ) {
+    if( spellCheckedItems ) {
         //if( spellCheckedItemNumber < spellCheckedItems->count() ) {
         for( ; spellCheckedItemNumber < spellCheckedItems->count(); spellCheckedItemNumber++ ) {
             if( ((*spellCheckedItems)[spellCheckedItemNumber])->rtti() == eRtti_Text ) {
-                //setSpellCheckBuffer( (*spellCheckedItems)[spellCheckedItemNumber] );
-                textItemsFound = true;
-                break;
+                setSpellCheckBuffer( (*spellCheckedItems)[spellCheckedItemNumber] );
+                return;
             }
         }
+        spellCheckedItems->clear();
+        delete spellCheckedItems;
+        spellCheckedItems = NULL;
     }
-    if( textItemsFound ) {
-        setSpellCheckBuffer( (*spellCheckedItems)[spellCheckedItemNumber] );
-    } else {
-        sonnetDialogExists = false;
-        spellCheckedItemNumber = 0;
-        if( spellCheckedItems ) {
-            spellCheckedItems->clear();
-            delete spellCheckedItems;
-            spellCheckedItems = NULL;
-        }
-    }
+    sonnetDialogExists = false;
+    spellCheckedItemNumber = 0;
 }
 
 void LabelEditor::setSpellCheckBuffer( const TCanvasItem* item )
