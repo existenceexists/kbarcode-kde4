@@ -27,6 +27,7 @@
 #include "definition.h"
 #include "mainwindow.h"
 #include "xmlutils.h"
+#include "mycanvasview.h"
 
 /*#include <kdialogbase.h>*/// -!F: uncomment
 #include <qdialog.h>
@@ -186,9 +187,11 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
         void setEdited( bool isInCleanState = false );
         void launchAddressBook();
         void lockItem();
+        void spellcheckDone( const QString & newText );
         
     protected:
         bool queryClose();
+        void setSpellCheckBuffer( const TCanvasItem* item );
 
         KUndoStack* history;
 
@@ -258,6 +261,9 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
         bool m_edited;
         
         Sonnet::Dialog* m_sonnetDialog;
+        TCanvasItemList* spellCheckedItems;
+        int spellCheckedItemNumber;
+        bool sonnetDialogExists;
 };
 
 #endif

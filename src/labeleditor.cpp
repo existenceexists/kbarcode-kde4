@@ -77,6 +77,7 @@
 #include <QAction>
 #include <QGraphicsItem>
 #include <QUndoCommand>
+#include <QTextDocument>
 
 #include <QDebug>// -!F: delete
 
@@ -138,6 +139,7 @@ LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f,
     undoAct = redoAct = NULL;
     history = NULL;
     m_sonnetDialog = NULL;
+    sonnetDialogExists = false;
 
     description = QString::null;
     d = new Definition();
@@ -1053,29 +1055,67 @@ void LabelEditor::spellCheck()
         delete sc;
     }*/
     
-    QUndoCommand* sc = new QUndoCommand( i18n("Spellchecking") );
-    QList<QGraphicsItem *> list = c->items();
-    for( int i = 0; i < list.count(); i++ ) {
-        if( ((TCanvasItem*)list[i])->rtti() == eRtti_Text ) {
-            TCanvasItem* item = (TCanvasItem*)list[i];
-            TextItem* myTextItem = (TextItem*)item->item();
-            //QString text = mytext->text();
-        
-            if (!m_sonnetDialog)
-            {
-                m_sonnetDialog = new Sonnet::Dialog( new Sonnet::BackgroundChecker( this ), this );
-                //connect signals to slots:
-                //connect( m_sonnetDialog, SIGNAL(misspelling(const QString&,int)), 
-                //    this, SLOT(spellcheckShow(const QString&,int)) );
-                //and so on: ...
-                m_sonnetDialog->setSpellCheckContinuedAfterReplacement( true );
+    //QUndoCommand* sc = new QUndoCommand( i18n("Spellchecking") );
+    //QList<QGraphicsItem *> list = c->items();
+    if ( !sonnetDialogExists )
+    {
+        sonnetDialogExists = true;
+        m_sonnetDialog = new Sonnet::Dialog( new Sonnet::BackgroundChecker( this ), this );
+        //connect signals to slots:
+        //connect( m_sonnetDialog, SIGNAL(misspelling(const QString&,int)), this, SLOT(replaceWord(const QString&,int)) );
+        connect( m_sonnetDialog, SIGNAL(done(const QString&)), this, SLOT(spellcheckDone(const QString&)) );
+        m_sonnetDialog->setSpellCheckContinuedAfterReplacement( true );
+    }
+    
+    if( !spellCheckedItems ) {
+        spellCheckedItems = new TCanvasItemList( cv->getSelected() );
+        spellCheckedItemNumber = 0;
+    }
+    
+    spellcheckDone( QString() );
+    
+    if (sonnetDialogExists)
+        m_sonnetDialog->show();
+}
+
+void LabelEditor::spellcheckDone( const QString & newText )
+{
+    /*qDebug() << newText;
+    if( m_sonnetDialog->originalBuffer() != newText ) {
+        qDebug() << "m_sonnetDialog->originalBuffer() != newText";
+    }*/
+    bool textItemsFound = false;
+    if( spellCheckedItems && !spellCheckedItems->isEmpty() ) {
+        //if( spellCheckedItemNumber < spellCheckedItems->count() ) {
+        for( ; spellCheckedItemNumber < spellCheckedItems->count(); spellCheckedItemNumber++ ) {
+            if( ((*spellCheckedItems)[spellCheckedItemNumber])->rtti() == eRtti_Text ) {
+                //setSpellCheckBuffer( (*spellCheckedItems)[spellCheckedItemNumber] );
+                textItemsFound = true;
+                break;
             }
-         
-            if (!myTextItem->text().isEmpty())
-                m_sonnetDialog->setBuffer( myTextItem->text() );
-            
-            m_sonnetDialog->show();
         }
+    }
+    if( textItemsFound ) {
+        setSpellCheckBuffer( (*spellCheckedItems)[spellCheckedItemNumber] );
+    } else {
+        sonnetDialogExists = false;
+        spellCheckedItemNumber = 0;
+        if( spellCheckedItems ) {
+            spellCheckedItems->clear();
+            delete spellCheckedItems;
+            spellCheckedItems = NULL;
+        }
+    }
+}
+
+void LabelEditor::setSpellCheckBuffer( const TCanvasItem* item )
+{
+    if( m_sonnetDialog ) {
+        spellCheckedItemNumber++;
+        TextItem* myTextItem = (TextItem*)item->item();
+        QTextDocument textDocument;
+        textDocument.setHtml( myTextItem->text() );
+        m_sonnetDialog->setBuffer( textDocument.toPlainText() );
     }
 }
 
