@@ -188,10 +188,12 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
         void launchAddressBook();
         void lockItem();
         void spellcheckDone( const QString & newText );
+        void replaceWord(const QString & oldWord, int start, const QString & newWord);
         
     protected:
         bool queryClose();
-        void setSpellCheckBuffer( const TCanvasItem* item );
+        void setupSpellCheckedText( const TCanvasItem* item );
+        QString findNextWord();
 
         KUndoStack* history;
 
@@ -262,8 +264,15 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
         
         Sonnet::Dialog* m_sonnetDialog;
         TCanvasItemList* spellCheckedItems;
+        QString spellCheckedText;
+        QString correctedText;
         int spellCheckedItemNumber;
         bool sonnetDialogExists;
+        int positionInSpellCheckedText;
+        int positionInCorrectedText;
+        bool wordWasReplaced;
+        int currentTextFragmentEndIndex;
+        bool findNextTextFragment;
 };
 
 #endif
