@@ -273,6 +273,7 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
         bool wordWasReplaced;
         int currentTextFragmentEndIndex;
         bool findNextTextFragment;
+        int spellCheckedWordLength;
 };
 
 #endif
