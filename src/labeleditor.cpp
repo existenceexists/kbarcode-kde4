@@ -1155,6 +1155,14 @@ void LabelEditor::setupSpellCheckedText( const TCanvasItem* item )
         positionInCorrectedText = 0;
         currentTextFragmentEndIndex = 0;
         findNextTextFragment = true;
+        
+        QRegExp regBody("<body[^>]*>");
+        int indexBody = regBody.indexIn( spellCheckedText );
+        if( indexBody != -1 ) {
+            positionInSpellCheckedText = indexBody + regBody.matchedLength();
+            positionInCorrectedText = indexBody + regBody.matchedLength();
+            currentTextFragmentEndIndex = indexBody + regBody.matchedLength();
+        }
         qDebug() << myTextItem->text();
         spellcheckDone( QString() );
         //QTextDocument textDocument;
