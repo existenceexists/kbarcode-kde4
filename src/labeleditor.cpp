@@ -1078,66 +1078,43 @@ void LabelEditor::spellCheck()
     if( !spellCheckedItems ) {
         spellCheckedItems = new TCanvasItemList( cv->getSelected() );
         spellCheckedItemNumber = 0;
-        qDebug() << "LabelEditor::spellCheck 4 spellCheckedItems->count()" << spellCheckedItems->count();
     }
     
-    qDebug() << "LabelEditor::spellCheck 5";
     spellcheckDone( QString() );
-    qDebug() << "LabelEditor::spellCheck 6";
     
     if (sonnetDialogExists) {
-        qDebug() << "LabelEditor::spellCheck 7";
         m_sonnetDialog->show();
-        qDebug() << "LabelEditor::spellCheck 8";
     }
 }
 
 void LabelEditor::spellcheckDone( const QString & newText )
 {
-    /*qDebug() << newText;
-    if( m_sonnetDialog->originalBuffer() != newText ) {
-        qDebug() << "m_sonnetDialog->originalBuffer() != newText";
-    }*/
-    qDebug() << "LabelEditor::spellcheckDone 1 newText == " << newText;
     if( positionInSpellCheckedText != -1 ) {
-        qDebug() << "LabelEditor::spellcheckDone 2";
-        //positionInCorrectedText += newText.length();
         QString word = findNextWord();
-        //if( positionInSpellCheckedText < spellCheckedText.length() ) {
-        //if( positionInSpellCheckedText != -1 ) {
         if( !word.isEmpty() ) {
             m_sonnetDialog->setBuffer( word );
-            qDebug() << "LabelEditor::spellcheckDone 3 word == " << word;
             return;
         }
     }
     
     if( spellCheckedItems ) {
-        qDebug() << "LabelEditor::spellcheckDone 4";
         if( wordWasReplaced ) {
             wordWasReplaced = false;
             ((TextItem*)(*spellCheckedItems)[spellCheckedItemNumber - 1]->item())->setText( correctedText );
             positionInSpellCheckedText = -1;
             positionInCorrectedText = -1;
             currentTextFragmentEndIndex = 0;
-            qDebug() << "LabelEditor::spellcheckDone 5";
         }
-        qDebug() << "LabelEditor::spellcheckDone 5a spellCheckedItems->count()" << spellCheckedItems->count();
-        qDebug() << "LabelEditor::spellcheckDone 5b spellCheckedItemNumber == " << spellCheckedItemNumber;
         for( ; spellCheckedItemNumber < spellCheckedItems->count(); spellCheckedItemNumber++ ) {
-            qDebug() << "LabelEditor::spellcheckDone spellCheckedItemNumber ==" << spellCheckedItemNumber;
             if( ((*spellCheckedItems)[spellCheckedItemNumber])->rtti() == eRtti_Text ) {
-                qDebug() << "LabelEditor::spellcheckDone 6";
                 setupSpellCheckedText( (*spellCheckedItems)[spellCheckedItemNumber] );
                 return;
             }
         }
-        qDebug() << "LabelEditor::spellcheckDone 7";
         spellCheckedItems->clear();
         delete spellCheckedItems;
         spellCheckedItems = NULL;
     }
-    qDebug() << "LabelEditor::spellcheckDone 8";
     sonnetDialogExists = false;
     spellCheckedItemNumber = 0;
     positionInSpellCheckedText = -1;
@@ -1146,7 +1123,6 @@ void LabelEditor::spellcheckDone( const QString & newText )
 void LabelEditor::setupSpellCheckedText( const TCanvasItem* item )
 {
     if( sonnetDialogExists ) {
-        qDebug() << "LabelEditor::setupSpellCheckedText 1";
         spellCheckedItemNumber++;
         TextItem* myTextItem = (TextItem*)item->item();
         spellCheckedText = myTextItem->text();
@@ -1163,87 +1139,47 @@ void LabelEditor::setupSpellCheckedText( const TCanvasItem* item )
             positionInCorrectedText = indexBody + regBody.matchedLength();
             currentTextFragmentEndIndex = indexBody + regBody.matchedLength();
         }
-        qDebug() << myTextItem->text();
         spellcheckDone( QString() );
-        //QTextDocument textDocument;
-        //textDocument.setHtml( myTextItem->text() );
     }
 }
 
 void LabelEditor::replaceWord(const QString & oldWord, int start, const QString & newWord)
 {
-    qDebug() << "LabelEditor::replaceWord " << oldWord << newWord << start;
-    qDebug() << "LabelEditor::replaceWord " << correctedText.indexOf( oldWord );
-    qDebug() << "LabelEditor::replaceWord " << positionInCorrectedText << positionInCorrectedText - spellCheckedWordLength;
     correctedText = correctedText.replace( positionInCorrectedText - spellCheckedWordLength, oldWord.length(), newWord );
-    //correctedText = correctedText.replace( positionInCorrectedText, oldWord.length(), newWord );
     positionInCorrectedText += newWord.length() - oldWord.length();
     wordWasReplaced = true;
 }
 
 QString LabelEditor::findNextWord()
 {
-    //QRegExp reg("<[^>]*>");
-    //QRegExp reg(">[^<]+<");
-    qDebug() << "LabelEditor::findNextWord 1";
     int positionInSpellCheckedTextTmp = -2;
-    //if( ( positionInSpellCheckedText == 0 ) || ( positionInSpellCheckedText > currentTextFragmentEndIndex ) ) {
     if( findNextTextFragment ) {
         findNextTextFragment = false;
-        qDebug() << "LabelEditor::findNextWord 2" << positionInSpellCheckedText << positionInCorrectedText;
-        qDebug() << "LabelEditor::findNextWord 2 -(+)" << currentTextFragmentEndIndex - ( positionInSpellCheckedText + spellCheckedWordLength );
-        //QRegExp reg(">[^<]+<");
-        //QRegExp reg(">[^<>]+<");
-        //positionInCorrectedText += currentTextFragmentEndIndex - ( positionInSpellCheckedText + spellCheckedWordLength );
         QRegExp reg(">[^<]+<");
         reg.setMinimal( true );
         positionInSpellCheckedTextTmp = reg.indexIn( spellCheckedText, positionInSpellCheckedText );
         positionInSpellCheckedText = positionInSpellCheckedTextTmp + 1;
         positionInCorrectedText += positionInSpellCheckedText - currentTextFragmentEndIndex;
         currentTextFragmentEndIndex = positionInSpellCheckedText + reg.matchedLength() - 2;
-        //qDebug() << "LabelEditor::findNextWord 2 b " << spellCheckedText.mid(positionInSpellCheckedText, reg.matchedLength());
-        qDebug() << "LabelEditor::findNextWord 2 b " << positionInSpellCheckedTextTmp << positionInSpellCheckedText << reg.matchedLength();
-        qDebug() << spellCheckedText.mid(positionInSpellCheckedText, currentTextFragmentEndIndex - positionInSpellCheckedText);
     }
     if( positionInSpellCheckedTextTmp == -1 ) {
-        qDebug() << "LabelEditor::findNextWord 3";
         return QString();
     }
     QRegExp regText("\\w+");
-    //regText.setMinimal( true );
-    //int indexText = regText.indexIn( spellCheckedText, positionInSpellCheckedText );
     int indexText = regText.indexIn( spellCheckedText.mid( positionInSpellCheckedText, currentTextFragmentEndIndex - positionInSpellCheckedText ) );
     QString word;
     if( indexText == -1 ) {
-        qDebug() << "LabelEditor::findNextWord 6 positionInSpellCheckedText, currentTextFragmentEndIndex " << positionInSpellCheckedText << currentTextFragmentEndIndex;
-        //if( positionInSpellCheckedTextTmp != -2 ) {
         positionInCorrectedText += currentTextFragmentEndIndex - positionInSpellCheckedText;
         findNextTextFragment = true;
         word = findNextWord();
     } else {
         positionInCorrectedText += indexText;
         positionInSpellCheckedText += indexText;
-        qDebug() << "LabelEditor::findNextWord 4" << positionInSpellCheckedText << currentTextFragmentEndIndex;
-        //qDebug() << "LabelEditor::findNextWord 4" << spellCheckedText.mid(positionInSpellCheckedText, regText.matchedLength());
-        //qDebug() << "LabelEditor::findNextWord 4 b " << spellCheckedText.mid(positionInSpellCheckedText, regText.matchedLength());
-        /*if( indexText == -1 ) {
-            qDebug() << "LabelEditor::findNextWord 5";
-            return QString();
-        } else if( positionInSpellCheckedText > currentTextFragmentEndIndex ) {
-            qDebug() << "LabelEditor::findNextWord 6 positionInSpellCheckedText, currentTextFragmentEndIndex " << positionInSpellCheckedText << currentTextFragmentEndIndex;
-            word = findNextWord();
-        }*/
-        /*if( positionInSpellCheckedText > currentTextFragmentEndIndex ) {
-            qDebug() << "LabelEditor::findNextWord 6 positionInSpellCheckedText, currentTextFragmentEndIndex " << positionInSpellCheckedText << currentTextFragmentEndIndex;
-            word = findNextWord();
-        }*/
         word = spellCheckedText.mid( positionInSpellCheckedText, regText.matchedLength() );
         positionInSpellCheckedText += regText.matchedLength();
         positionInCorrectedText += regText.matchedLength();
         spellCheckedWordLength = regText.matchedLength();
     }
-    qDebug() << "LabelEditor::findNextWord 7 word == " << word << regText.matchedLength();
-    qDebug() << "LabelEditor::findNextWord 7" << spellCheckedText.indexOf( word, positionInSpellCheckedText - indexText - regText.matchedLength() ) << positionInCorrectedText << positionInSpellCheckedText;
     return word;
 }
 
