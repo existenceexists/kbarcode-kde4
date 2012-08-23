@@ -140,7 +140,9 @@ LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f,
     history = NULL;
     
     m_sonnetDialog = NULL;
+    spellCheckedItems = NULL;
     sonnetDialogExists = false;
+    spellCheckedItemNumber = 0;
     positionInSpellCheckedText = -1;
     positionInCorrectedText = 0;
     wordWasReplaced = false;
@@ -200,6 +202,7 @@ LabelEditor::~LabelEditor()
     delete m_token;
     delete d;
     delete history;
+    delete spellCheckedItems;
 }
 
 void LabelEditor::loadConfig()
@@ -1075,10 +1078,12 @@ void LabelEditor::spellCheck()
         m_sonnetDialog->setSpellCheckContinuedAfterReplacement( true );
     }
     
-    if( !spellCheckedItems ) {
-        spellCheckedItems = new TCanvasItemList( cv->getSelected() );
-        spellCheckedItemNumber = 0;
+    if( spellCheckedItems ) {
+        delete spellCheckedItems;
+        spellCheckedItems = NULL;
     }
+    spellCheckedItems = new TCanvasItemList( cv->getSelected() );
+    spellCheckedItemNumber = 0;
     
     spellcheckDone( QString() );
     
