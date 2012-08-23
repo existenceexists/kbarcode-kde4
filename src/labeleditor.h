@@ -81,6 +81,7 @@ class QCanvasItem;
 class TCanvasItem;
 class RectItem;
 class LineItem;
+class QUndoCommand;
 
 class TokenProvider;
 /** The LabelEditor is a graphical, easy to use label designer.
@@ -274,6 +275,7 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
         int currentTextFragmentEndIndex;
         bool findNextTextFragment;
         int spellCheckedWordLength;
+        QUndoCommand* sc;
 };
 
 #endif

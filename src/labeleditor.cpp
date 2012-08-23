@@ -149,6 +149,7 @@ LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f,
     currentTextFragmentEndIndex = 0;
     findNextTextFragment = false;
     spellCheckedWordLength = 0;
+    sc = NULL;
 
     description = QString::null;
     d = new Definition();
@@ -1065,8 +1066,8 @@ void LabelEditor::spellCheck()
         delete sc;
     }*/
     
-    //QUndoCommand* sc = new QUndoCommand( i18n("Spellchecking") );
-    //QList<QGraphicsItem *> list = c->items();
+    sc = new QUndoCommand( i18n("Spellchecking") );
+    
     if ( !sonnetDialogExists )
     {
         sonnetDialogExists = true;
@@ -1082,6 +1083,7 @@ void LabelEditor::spellCheck()
         delete spellCheckedItems;
         spellCheckedItems = NULL;
     }
+    //QList<QGraphicsItem *> list = c->items();
     spellCheckedItems = new TCanvasItemList( cv->getSelected() );
     spellCheckedItemNumber = 0;
     
@@ -1105,7 +1107,9 @@ void LabelEditor::spellcheckDone( const QString & newText )
     if( spellCheckedItems ) {
         if( wordWasReplaced ) {
             wordWasReplaced = false;
-            ((TextItem*)(*spellCheckedItems)[spellCheckedItemNumber - 1]->item())->setText( correctedText );
+            new TextChangeCommand( 
+                (TextItem*)(*spellCheckedItems)[spellCheckedItemNumber - 1]->item(), 
+                correctedText, sc );
             positionInSpellCheckedText = -1;
             positionInCorrectedText = -1;
             currentTextFragmentEndIndex = 0;
@@ -1123,6 +1127,12 @@ void LabelEditor::spellcheckDone( const QString & newText )
     sonnetDialogExists = false;
     spellCheckedItemNumber = 0;
     positionInSpellCheckedText = -1;
+    if( sc->childCount() > 0 ) {// Push the macro command only if there are child TextChangeCommand commands
+        history->push( sc );
+    } else {
+        delete sc;
+        sc = NULL;
+    }
 }
 
 void LabelEditor::setupSpellCheckedText( const TCanvasItem* item )
