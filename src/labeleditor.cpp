@@ -205,6 +205,7 @@ LabelEditor::~LabelEditor()
     delete d;
     delete history;
     delete spellCheckedItems;
+    delete sc;
 }
 
 void LabelEditor::loadConfig()
@@ -1066,8 +1067,9 @@ void LabelEditor::spellCheck()
     } else {
         delete sc;
     }*/
-    
-    sc = new QUndoCommand( i18n("Spellchecking") );
+    if( !sc ) {
+        sc = new QUndoCommand( i18n("Spellchecking") );
+    }
     
     qDebug() << "LabelEditor::spellCheck 1";
     //if ( !sonnetDialogExists )
@@ -1177,8 +1179,8 @@ void LabelEditor::spellcheckDone( const QString & newText )
         history->push( sc );
     } else {
         delete sc;
-        sc = NULL;
     }
+    sc = NULL;
 }
 
 void LabelEditor::setupSpellCheckedText( const TCanvasItem* item )
