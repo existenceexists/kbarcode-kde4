@@ -190,6 +190,7 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
         void lockItem();
         void spellcheckDone( const QString & newText );
         void replaceWord(const QString & oldWord, int start, const QString & newWord);
+        /*void spellCheckShow(const QString & oldWord, int start);*/
         
     protected:
         bool queryClose();
@@ -269,6 +270,7 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
         QString correctedText;
         int spellCheckedItemNumber;
         bool sonnetDialogExists;
+        bool showSonnetDialog;
         int positionInSpellCheckedText;
         int positionInCorrectedText;
         bool wordWasReplaced;
