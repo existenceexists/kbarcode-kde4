@@ -788,19 +788,7 @@ void LabelEditor::setupContextMenu()
 void LabelEditor::insertBarcode()
 {
     NewBarcodeCommand* bc = new NewBarcodeCommand( cv, m_token );
-    /*bc->execute();
-
-    BarcodeItem* bcode = static_cast<BarcodeItem*>((static_cast<TCanvasItem*>(bc->createdItem()))->item());
-    if( !bcode )
-        return;
-
-    history->push( bc, false );*/// -!F how to solve this?
-    
     history->push( bc );
-
-    /*BarcodeItem* bcode = static_cast<BarcodeItem*>((static_cast<TCanvasItem*>(bc->createdItem()))->item());
-    if( !bcode )
-        history->undo();*/// -!F how to solve this?
 }
 
 void LabelEditor::insertPicture()
