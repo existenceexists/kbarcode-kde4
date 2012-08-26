@@ -141,8 +141,7 @@ LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f,
     
     m_sonnetDialog = NULL;
     spellCheckedItems = NULL;
-    sonnetDialogExists = false;
-    showSonnetDialog = false;
+    correctedTexts = NULL;
     spellCheckedItemNumber = 0;
     positionInSpellCheckedText = -1;
     positionInCorrectedText = 0;
@@ -150,7 +149,6 @@ LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f,
     currentTextFragmentEndIndex = 0;
     findNextTextFragment = false;
     spellCheckedWordLength = 0;
-    sc = NULL;
 
     description = QString::null;
     d = new Definition();
@@ -205,7 +203,7 @@ LabelEditor::~LabelEditor()
     delete d;
     delete history;
     delete spellCheckedItems;
-    delete sc;
+    delete correctedTexts;
 }
 
 void LabelEditor::loadConfig()
@@ -1067,9 +1065,6 @@ void LabelEditor::spellCheck()
     } else {
         delete sc;
     }*/
-    if( !sc ) {
-        sc = new QUndoCommand( i18n("Spellchecking") );
-    }
     
     qDebug() << "LabelEditor::spellCheck 1";
     //if ( !sonnetDialogExists )
@@ -1092,14 +1087,15 @@ void LabelEditor::spellCheck()
         m_sonnetDialog = NULL;
     }
     qDebug() << "LabelEditor::spellCheck 1 b";
-    sonnetDialogExists = true;
-    showSonnetDialog = true;
+    //sonnetDialogExists = true;
+    //showSonnetDialog = true;
     wordWasReplaced = false;
     m_sonnetDialog = new Sonnet::Dialog( new Sonnet::BackgroundChecker( this ), this );
     //connect signals to slots:
     //connect( m_sonnetDialog, SIGNAL(misspelling(const QString&,int)), this, SLOT(spellCheckShow(const QString&,int)) );
     connect( m_sonnetDialog, SIGNAL(done(const QString&)), this, SLOT(spellcheckDone(const QString&)) );
-    connect( m_sonnetDialog, SIGNAL(replace(const QString&,int,const QString &)), this, SLOT(replaceWord(const QString&,int,const QString&)) );;
+    connect( m_sonnetDialog, SIGNAL(replace(const QString&,int,const QString &)), this, SLOT(replaceWord(const QString&,int,const QString&)) );
+    connect( m_sonnetDialog, SIGNAL(buttonClicked(KDialog::ButtonCode)), this, SLOT(spellCheckButtonPressed(KDialog::ButtonCode)) );
     m_sonnetDialog->setSpellCheckContinuedAfterReplacement( true );
     qDebug() << "LabelEditor::spellCheck 2";
     
@@ -1110,10 +1106,23 @@ void LabelEditor::spellCheck()
     }
     qDebug() << "LabelEditor::spellCheck 3";
     //QList<QGraphicsItem *> list = c->items();
-    spellCheckedItems = new TCanvasItemList( cv->getSelected() );
+    TCanvasItemList list = cv->getSelected();
+    spellCheckedItems = new TCanvasItemList;
+    for( int i = 0; i < list.count(); i++ ) {
+        if( list[i]->rtti() == eRtti_Text ) {
+            spellCheckedItems->append( list[i] );
+        }
+    }
+    qDebug() << "LabelEditor::spellCheck 3 b";
     spellCheckedItemNumber = 0;
     positionInSpellCheckedText = -1;
     //doFindNextWord = false;
+    if( correctedTexts ) {
+        qDebug() << "LabelEditor::spellCheck if( correctedTexts )";
+        delete correctedTexts;
+        correctedTexts = NULL;
+    }
+    correctedTexts = new QList<QString>;
     qDebug() << "LabelEditor::spellCheck 4";
     
     m_sonnetDialog->setBuffer( QString() );
@@ -1138,7 +1147,7 @@ void LabelEditor::spellcheckDone( const QString & newText )
     if( positionInSpellCheckedText != -1 ) {
         QString word = findNextWord();
         if( !word.isEmpty() ) {
-            showSonnetDialog = true;
+            //showSonnetDialog = true;
             m_sonnetDialog->setBuffer( word );
             return;
         }
@@ -1146,41 +1155,14 @@ void LabelEditor::spellcheckDone( const QString & newText )
     qDebug() << "LabelEditor::spellcheckDone 2";
     
     if( spellCheckedItems ) {
-        qDebug() << "LabelEditor::spellcheckDone 3";
-        if( wordWasReplaced ) {
-            qDebug() << "LabelEditor::spellcheckDone if( wordWasReplaced )" << spellCheckedItemNumber - 1;
-            wordWasReplaced = false;
-            new TextChangeCommand( 
-                (TextItem*)(*spellCheckedItems)[spellCheckedItemNumber - 1]->item(), 
-                correctedText, sc );
-            positionInSpellCheckedText = -1;
-            positionInCorrectedText = -1;
-            currentTextFragmentEndIndex = 0;
-        }
         qDebug() << "LabelEditor::spellcheckDone 4";
         for( ; spellCheckedItemNumber < spellCheckedItems->count(); spellCheckedItemNumber++ ) {
-            if( ((*spellCheckedItems)[spellCheckedItemNumber])->rtti() == eRtti_Text ) {
-                setupSpellCheckedText( (*spellCheckedItems)[spellCheckedItemNumber] );
-                return;
-            }
+            setupSpellCheckedText( (*spellCheckedItems)[spellCheckedItemNumber] );
+            return;
         }
-        qDebug() << "LabelEditor::spellcheckDone 5";
-        spellCheckedItems->clear();
-        delete spellCheckedItems;
-        spellCheckedItems = NULL;
     }
-    qDebug() << "LabelEditor::spellcheckDone 6";
-    sonnetDialogExists = false;
-    showSonnetDialog = false;
-    spellCheckedItemNumber = 0;
-    positionInSpellCheckedText = -1;
-    qDebug() << "LabelEditor::spellcheckDone 7";
-    if( sc->childCount() > 0 ) {// Push the macro command only if there are child TextChangeCommand commands
-        history->push( sc );
-    } else {
-        delete sc;
-    }
-    sc = NULL;
+    applySpellCheckCorrection();
+    spellCheckFinished();
 }
 
 void LabelEditor::setupSpellCheckedText( const TCanvasItem* item )
@@ -1189,7 +1171,7 @@ void LabelEditor::setupSpellCheckedText( const TCanvasItem* item )
     spellCheckedItemNumber++;
     TextItem* myTextItem = (TextItem*)item->item();
     spellCheckedText = myTextItem->text();
-    correctedText = QString( spellCheckedText );
+    correctedTexts->append( spellCheckedText );
     positionInSpellCheckedText = 0;
     positionInCorrectedText = 0;
     currentTextFragmentEndIndex = 0;
@@ -1207,14 +1189,15 @@ void LabelEditor::setupSpellCheckedText( const TCanvasItem* item )
 
 void LabelEditor::replaceWord(const QString & oldWord, int start, const QString & newWord)
 {
-    correctedText = correctedText.replace( positionInCorrectedText - spellCheckedWordLength, oldWord.length(), newWord );
+    (*correctedTexts)[correctedTexts->count() - 1].replace( 
+        positionInCorrectedText - spellCheckedWordLength, oldWord.length(), newWord );
     positionInCorrectedText += newWord.length() - oldWord.length();
     wordWasReplaced = true;
 }
 
 QString LabelEditor::findNextWord()
 {
-    int positionInSpellCheckedTextTmp = -2;
+    int positionInSpellCheckedTextTmp = 0;
     if( findNextTextFragment ) {
         findNextTextFragment = false;
         QRegExp reg(">[^<]+<");
@@ -1245,10 +1228,66 @@ QString LabelEditor::findNextWord()
     return word;
 }
 
-/*void LabelEditor::spellCheckShow( const QString & oldWord, int start )
+void LabelEditor::applySpellCheckCorrection()
 {
-    m_sonnetDialog->show();
-}*/
+    qDebug() << "LabelEditor::applySpellCheckCorrection 1";
+    QUndoCommand* sc = new QUndoCommand( i18n("Spellchecking") );
+    bool executeTextChangeCommand = false;
+    if( wordWasReplaced ) {
+        qDebug() << "LabelEditor::applySpellCheckCorrection if( wordWasReplaced )";
+        wordWasReplaced = false;
+        for( int i = 0; i < spellCheckedItems->count(); i++ ) {
+            if( ((TextItem*)(*spellCheckedItems)[i]->item())->text() != (*correctedTexts)[i] ) {
+                new TextChangeCommand( 
+                    (TextItem*)(*spellCheckedItems)[i]->item(), 
+                    (*correctedTexts)[i], sc );
+                executeTextChangeCommand = true;
+            }
+        }
+    }
+    //if( sc->childCount() > 0 ) {
+    if( executeTextChangeCommand ) {// Push the macro command only if there are child TextChangeCommand commands
+        history->push( sc );
+    } else {
+        delete sc;
+    }
+}
+
+void LabelEditor::spellCheckFinished()
+{
+    qDebug() << "LabelEditor::spellCheckFinished 1";
+    if( spellCheckedItems ) {
+        qDebug() << "LabelEditor::spellCheckFinished 2";
+        //spellCheckedItems->clear();
+        delete spellCheckedItems;
+        spellCheckedItems = NULL;
+    }
+    if( correctedTexts ) {
+        qDebug() << "LabelEditor::spellCheckFinished 2 b";
+        //correctedTexts->clear();
+        delete correctedTexts;
+        correctedTexts = NULL;
+    }
+    qDebug() << "LabelEditor::spellCheckFinished 3";
+    //sonnetDialogExists = false;
+    //showSonnetDialog = false;
+    spellCheckedItemNumber = 0;
+    positionInSpellCheckedText = -1;
+    qDebug() << "LabelEditor::spellCheckFinished 4";
+}
+
+void LabelEditor::spellCheckButtonPressed( KDialog::ButtonCode buttonNumber )
+{
+    qDebug() << "LabelEditor::spellCheckButtonPressed 1";
+    if( buttonNumber == KDialog::User1 ) {
+        qDebug() << "LabelEditor::spellCheckButtonPressed 2";
+        applySpellCheckCorrection();
+        spellCheckFinished();
+    } else if( buttonNumber == KDialog::Cancel ) {
+        qDebug() << "LabelEditor::spellCheckButtonPressed 3";
+        spellCheckFinished();
+    }
+}
 
 void LabelEditor::centerHorizontal()
 {

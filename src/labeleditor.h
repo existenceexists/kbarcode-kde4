@@ -81,7 +81,6 @@ class QCanvasItem;
 class TCanvasItem;
 class RectItem;
 class LineItem;
-class QUndoCommand;
 
 class TokenProvider;
 /** The LabelEditor is a graphical, easy to use label designer.
@@ -140,6 +139,9 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
         void batchPrint( BatchPrinter* batch, int copies, int mode );
         void setupContextMenu();
         
+        void spellCheckFinished();
+        void applySpellCheckCorrection();
+        
     private slots:
         void startEditor();
         bool open();
@@ -190,7 +192,7 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
         void lockItem();
         void spellcheckDone( const QString & newText );
         void replaceWord(const QString & oldWord, int start, const QString & newWord);
-        /*void spellCheckShow(const QString & oldWord, int start);*/
+        void spellCheckButtonPressed( KDialog::ButtonCode buttonNumber );
         
     protected:
         bool queryClose();
@@ -266,18 +268,15 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
         
         Sonnet::Dialog* m_sonnetDialog;
         TCanvasItemList* spellCheckedItems;
+        QList<QString>* correctedTexts;
         QString spellCheckedText;
-        QString correctedText;
         int spellCheckedItemNumber;
-        bool sonnetDialogExists;
-        bool showSonnetDialog;
         int positionInSpellCheckedText;
         int positionInCorrectedText;
         bool wordWasReplaced;
         int currentTextFragmentEndIndex;
         bool findNextTextFragment;
         int spellCheckedWordLength;
-        QUndoCommand* sc;
 };
 
 #endif
