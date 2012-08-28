@@ -418,7 +418,7 @@ QStringList TokenProvider::listUserVars()
 	if( item->rtti() == eRtti_Barcode )
 	    t = ((BarcodeItem*)item)->value();
 	else if( item->rtti() == eRtti_Text )
-	    t = ((TextItem*)item)->text();
+	    t = ((TextItem*)item)->plainText();
 	else if( item->rtti() == eRtti_TextLine )
 	    t = ((TextLineItem*)item)->text();
 

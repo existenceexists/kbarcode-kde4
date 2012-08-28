@@ -44,6 +44,7 @@ public:
     
     void  setText (const QString & text);
     QString  text () const;
+    QString  plainText () const;
 
     inline void setRotation( double rot ) { m_rotation = rot; }
     inline double rotation() const { return m_rotation; }

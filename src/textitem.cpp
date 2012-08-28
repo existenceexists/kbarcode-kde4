@@ -302,6 +302,13 @@ QString TextItem::text () const
     return m_text;    
 }
 
+QString TextItem::plainText () const 
+{
+    QTextDocument textDocument;
+    textDocument.setHtml( m_text );
+    return textDocument.toPlainText();    
+}
+
 void TextItem::setText (const QString & text) 
 {
     m_text = text;    
