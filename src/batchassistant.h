@@ -40,6 +40,7 @@ class QRadioButton;
 class QTableWidget;
 class QStackedWidget;
 class KPageWidgetItem;
+class KJob;
 
 class BatchAssistant : public KAssistantDialog {
     Q_OBJECT
@@ -147,6 +148,8 @@ class BatchAssistant : public KAssistantDialog {
         
         void next();
         void back();
+        
+        void contactSearchJobResult( KJob *job );
 
     private:
         void moveAddress( QTreeWidget* src, QTreeWidget* dst, bool bAll = false );
