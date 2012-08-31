@@ -82,7 +82,6 @@
 #include <QDebug>// -!F: delete
 
 // KDE includes
-#include <kabc/stdaddressbook.h>
 #include <kaction.h>
 #include <kapplication.h>
 #include <kcolordialog.h>
@@ -126,8 +125,6 @@
 #define CANVAS_UPDATE_PERIOD 50
 
 #define KBARCODE_UNDO_LIMIT 25
-
-using namespace KABC;
 
 LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f, Qt::WidgetAttribute waf )
     : MainWindow( parent, f )

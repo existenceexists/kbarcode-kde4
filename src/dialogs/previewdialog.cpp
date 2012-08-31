@@ -38,7 +38,7 @@
 #include <QVBoxLayout>
 
 // KDE includes
-#include <kabc/addresseedialog.h>
+#include <akonadi/contact/emailaddressselectiondialog.h>
 #include <kapplication.h>
 #include <kcombobox.h>
 #include <kconfiggroup.h>
@@ -193,11 +193,23 @@ void PreviewDialog::setupSql()
 
 void PreviewDialog::selectAddress()
 {
-    m_address = KABC::AddresseeDialog::getAddressee( this );
+    Akonadi::EmailAddressSelectionDialog dlg( this );
+    if ( dlg.exec() ) {
+        Akonadi::EmailAddressSelection::List selections = dlg.selectedAddresses();
+        foreach( Akonadi::EmailAddressSelection selection, selections ) {
+            if( selection.item().hasPayload<KABC::Addressee>() ) {
+                m_address = selection.item().payload<KABC::Addressee>();
+                break;
+            }
+        }
+    }
+    
     if( !m_address.isEmpty() ) 
         lineAddr->setText( m_address.realName() );
     else
         lineAddr->setText( QString::null );
+    
+    updatechanges();
 }
 
 void PreviewDialog::updatechanges()
