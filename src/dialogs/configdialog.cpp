@@ -33,7 +33,6 @@
 #include <QVBoxLayout>
 
 // KDE includes
-#include <kabc/addressee.h>
 #include <kapplication.h>
 #include <kconfiggroup.h>
 #include <kcolorbutton.h>
@@ -52,8 +51,6 @@
 #include <kstandarddirs.h>
 
 const QString cached = I18N_NOOP( "There are currently %1 cached barcodes." );
-
-using namespace KABC;
 
 ConfigDialog::ConfigDialog( QWidget* parent )
         : KPageDialog( parent )
