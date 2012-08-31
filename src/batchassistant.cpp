@@ -57,6 +57,7 @@
 
 #include <kabc/addressee.h>
 #include <kabc/addresseelist.h>
+#include <Akonadi/Contact/ContactSearchJob>
 #include <kapplication.h>
 #include <kcombobox.h>
 #include <kcompletion.h>
@@ -75,7 +76,6 @@
 #include <KUrl>
 #include <kpagewidgetmodel.h>
 #include <KAction>
-#include <Akonadi/Contact/ContactSearchJob>
 
 #define PNG_FORMAT "PNG"
 
@@ -1258,20 +1258,10 @@ void BatchAssistant::fillVarList()
 
 void BatchAssistant::fillAddressList()
 {
-    /*KABC::AddressBook* ab = KABC::StdAddressBook::self();
-    listAddress->clear();
-    
-    KABC::AddressBook::Iterator it;
-    listAddress->setUpdatesEnabled( false );
-    for ( it = ab->begin(); it != ab->end(); ++it ) {
-        new AddressListViewItem( listAddress, *it );
-    }
-    listAddress->setUpdatesEnabled( true );*/// -!F: original
-    
     Akonadi::ContactSearchJob *job = new Akonadi::ContactSearchJob( this );
     connect( job, SIGNAL( result( KJob* ) ), this, SLOT( contactSearchJobResult( KJob* ) ) );
-    listAddress->clear();
     
+    listAddress->clear();
 }
 
 void BatchAssistant::contactSearchJobResult( KJob *job )
@@ -1279,7 +1269,6 @@ void BatchAssistant::contactSearchJobResult( KJob *job )
     Akonadi::ContactSearchJob *searchJob = qobject_cast<Akonadi::ContactSearchJob*>( job );
     KABC::Addressee::List contacts = searchJob->contacts();
     
-    //KABC::AddresseeList addresseeList = KABC::AddresseeList( contacts );
     KABC::Addressee::List::Iterator it;
     listAddress->setUpdatesEnabled( false );
     for ( it = contacts.begin(); it != contacts.end(); ++it ) {
