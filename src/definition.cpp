@@ -574,10 +574,8 @@ int Definition::writeSQL( const Measurements & c, QString type, QString producer
             " WHERE manufacture = '" + producer + "' AND"
             " type = '" + type + "'" );
 
-        QByteArray baLQ = query.lastQuery().toLatin1();
-        char * lastQuery = baLQ.data();
         if(!query.isValid())
-            qDebug("Query to update values not valid!\n%s\n", lastQuery );
+            qDebug("Query to update values not valid!\n%s\n", qPrintable( query.lastQuery() ));
     }
 
     QSqlQuery qi("SELECT label_no FROM " TABLE_LABEL_DEF " WHERE manufacture='" + producer + "' AND type='" + type + "'" );

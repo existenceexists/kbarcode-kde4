@@ -55,8 +55,10 @@ QString PreviewDialog::group = "";
 QString PreviewDialog::article = "";
         
 PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename, QWidget *parent)
-    : QDialog( parent, Qt::WDestructiveClose )
+    : QDialog( parent )
 {
+    setAttribute( Qt::WA_DeleteOnClose );
+    
     setModal( true );
     file = device;
     def = d;
