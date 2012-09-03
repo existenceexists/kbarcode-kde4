@@ -240,9 +240,10 @@ DefinitionDialog::DefinitionDialog( QWidget* parent, bool modal, Qt::WFlags fl )
     layout->addLayout( DefinitionDialogLayout );
     layout->addWidget( preview );
 
+    DefinitionDialogLayout->addStretch( 1 );
     l = new QLabel( this );
-    setExtension( l );
-    setOrientation( Qt::Vertical );
+    DefinitionDialogLayout->addWidget( l );
+    l->hide();
 
     connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
     connect( buttonAdd, SIGNAL( clicked() ), this, SLOT( add() ) );
@@ -493,9 +494,10 @@ void DefinitionDialog::drawGraphic()
 void DefinitionDialog::toggleExtension()
 {
     if( l->isVisible() ) {
-        showExtension( false );
+        l->hide();
     } else
-        showExtension( true );
+        l->show();
+    adjustSize();
 }
 
 
