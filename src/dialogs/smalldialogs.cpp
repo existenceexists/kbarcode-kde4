@@ -104,7 +104,7 @@ void AddItemsDialog::init()
     article = new KLineEdit( main_widget );
 
     number = new KIntNumInput( main_widget );
-    number->setLabel( i18n( "Number of labels:" ), Qt::AlignLeft | Qt::AlignVCenter );
+    number->setLabel( i18n( "Number of labels:" ), Qt::AlignLeft | Qt::AlignTop );
     number->setRange( 1, 10000, 1 );
     number->setSliderEnabled( false );
 

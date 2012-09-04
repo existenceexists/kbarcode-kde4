@@ -224,7 +224,7 @@ void ConfigDialog::setupTab4()
     connect( date, SIGNAL( textChanged( const QString & ) ), this, SLOT( updateDatePreview() ) );
 
     spinGrid = new KIntNumInput( 0, page );
-    spinGrid->setLabel( i18n( "Grid:" ), Qt::AlignLeft | Qt::AlignVCenter );
+    spinGrid->setLabel( i18n( "Grid:" ), Qt::AlignLeft | Qt::AlignTop );
     spinGrid->setRange( 2, 100, 1 );
     spinGrid->setSliderEnabled( false );
 

@@ -119,11 +119,11 @@ TBarcodeDlg::TBarcodeDlg( QWidget *parent )
     setEnabled( Barkode::haveTBarcode() || Barkode::haveTBarcode2() );
 
     spinModule = new KDoubleNumInput( this );
-    spinModule->setLabel( i18n( "Module width (mm):" ), Qt::AlignLeft | Qt::AlignVCenter );
+    spinModule->setLabel( i18n( "Module width (mm):" ), Qt::AlignLeft | Qt::AlignTop );
     spinModule->setRange( 0.190, 1.500, 0.001, true );
 
     spinHeight = new KIntNumInput( this );
-    spinHeight->setLabel( i18n( "Barcode Height (mm):" ), Qt::AlignLeft | Qt::AlignVCenter );
+    spinHeight->setLabel( i18n( "Barcode Height (mm):" ), Qt::AlignLeft | Qt::AlignTop );
     spinHeight->setRange( 1, 1000, 10 );
     spinHeight->setSliderEnabled( false );
 
@@ -265,17 +265,17 @@ PDF417BarcodeDlg::PDF417BarcodeDlg( QWidget *parent )
     setEnabled( Barkode::haveTBarcode() || Barkode::havePDFBarcode() );
 
     spinRow = new KIntNumInput( this );
-    spinRow->setLabel( i18n( "Rows:" ),  Qt::AlignLeft | Qt::AlignVCenter );
+    spinRow->setLabel( i18n( "Rows:" ),  Qt::AlignLeft | Qt::AlignTop );
     spinRow->setRange( 0, 90, 1 );
     spinRow->setSliderEnabled( true );
     
     spinCol = new KIntNumInput( this );
-    spinCol->setLabel( i18n( "Columns:" ),  Qt::AlignLeft | Qt::AlignVCenter );
+    spinCol->setLabel( i18n( "Columns:" ),  Qt::AlignLeft | Qt::AlignTop );
     spinCol->setRange( 0, 30, 1 );
     spinCol->setSliderEnabled( true );
     
     spinErr = new KIntNumInput( this );
-    spinErr->setLabel( i18n( "Error correction level:" ),  Qt::AlignLeft | Qt::AlignVCenter );
+    spinErr->setLabel( i18n( "Error correction level:" ),  Qt::AlignLeft | Qt::AlignTop );
     spinErr->setRange( 1, 8, 1 );
     spinCol->setSliderEnabled( true );
     
