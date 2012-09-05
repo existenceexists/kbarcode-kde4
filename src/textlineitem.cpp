@@ -104,8 +104,10 @@ void TextLineItem::drawPreview(QPainter* painter)
     srt.setDefaultFont( painter->font() );
     
     QPaintDevice* device = DocumentItem::paintDevice();
-    double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
-    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();
+    /*double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
+    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();*/// -!F: original, keep
+    double scalex = 1.0;
+    double scaley = 1.0;// -!F: added, temporary fix, don't scale anything otherwise the font of printed text will be too large
     int width = (rect().width() > 0) ? (int)((double)rect().width() / scalex) : srt.idealWidth();
     int height = (rect().height() > 0) ? (int)((double)rect().height() / scaley): srt.size().height();
 
