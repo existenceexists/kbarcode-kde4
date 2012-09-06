@@ -202,6 +202,11 @@ void TextItem::drawPreview(QPainter* painter)
         /*srt.setWidth( painter, w );
         srt.draw( painter, rect().x(), rect().y(), QRect( rect().x(), rect().y(), w, h ), cg );*/// -!F: keep
         //srt.setTextWidth( w );
+        if( srt.size().width() > w ) {// Make alignment "center" and "right" work
+            srt.setTextWidth( srt.size().width() );
+        } else {
+            srt.setTextWidth( w );
+        }
         srt.drawContents( painter, QRect( 0, 0, w, h ));
     }
     else
