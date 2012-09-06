@@ -60,8 +60,10 @@ void TextItem::draw(QPainter* painter)
     
     QPaintDevice* device = DocumentItem::paintDevice();
     
-    double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
-    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();
+    /*double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
+    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();*/// -!F: original, keep
+    double scalex = 1.0;
+    double scaley = 1.0;// -!F: added
 
     /*QColorGroup cg;*/// -!F: original, delete
     /*Q3SimpleRichText srt( t, painter->font() );*/// -!F: original
@@ -75,8 +77,10 @@ void TextItem::draw(QPainter* painter)
     int height = (rect().height() < (int)((double)srt.height()*scaley) && autosize) ? srt.height() : rect().height();
     */
 
-    int width = (int)((double)rect().width() / scalex);
-    int height = (int)((double)rect().height() / scaley);
+    /*int width = (int)((double)rect().width() / scalex);
+    int height = (int)((double)rect().height() / scaley);*/// -!F: original, keep
+    int width = (int)rect().width();
+    int height = (int)rect().height();
     
     painter->save();
 
@@ -144,8 +148,10 @@ void TextItem::drawPreview(QPainter* painter)
     
     QPaintDevice* device = DocumentItem::paintDevice();
     
-    double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
-    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();
+    /*double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
+    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();*/// -!F: original, keep
+    double scalex = 1.0;
+    double scaley = 1.0;// -!F: added
 
     /*QColorGroup cg;*/// -!F: original, delete
     /*Q3SimpleRichText srt( t, painter->font() );*/// -!F: original
@@ -159,8 +165,10 @@ void TextItem::drawPreview(QPainter* painter)
     int height = (rect().height() < (int)((double)srt.height()*scaley) && autosize) ? srt.height() : rect().height();
     */
 
-    int width = (int)((double)rect().width() / scalex);
-    int height = (int)((double)rect().height() / scaley);
+    /*int width = (int)((double)rect().width() / scalex);
+    int height = (int)((double)rect().height() / scaley);*/// -!F: original, keep
+    int width = rect().width();
+    int height = rect().height();
     
     painter->save();
 

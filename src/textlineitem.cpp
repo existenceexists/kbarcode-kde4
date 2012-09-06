@@ -62,10 +62,14 @@ void TextLineItem::draw(QPainter* painter)
     srt.setDefaultFont( painter->font() );
     
     QPaintDevice* device = DocumentItem::paintDevice();
-    double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
-    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();
-    int width = (rect().width() > 0) ? (int)((double)rect().width() / scalex) : srt.idealWidth();
-    int height = (rect().height() > 0) ? (int)((double)rect().height() / scaley): srt.size().height();
+    /*double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
+    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();*/// -!F: original, keep
+    double scalex = 1.0;
+    double scaley = 1.0;
+    /*int width = (rect().width() > 0) ? (int)((double)rect().width() / scalex) : srt.idealWidth();
+    int height = (rect().height() > 0) ? (int)((double)rect().height() / scaley): srt.size().height();*/// -!F: original, keep
+    int width = (rect().width() > 0) ? rect().width() : srt.idealWidth();
+    int height = (rect().height() > 0) ? rect().height() : srt.size().height();
 
     /*QRect r( (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), width, height );*/// -!F: original
     QRect r( 0, 0, width, height );
@@ -78,7 +82,7 @@ void TextLineItem::draw(QPainter* painter)
 
     if( !TextLineItem::IsQtTextRenderingBroken() )
     {
-        painter->scale( scalex, scaley );
+        /*painter->scale( scalex, scaley );*/// -!F: original, keep
         painter->setPen( Qt::black );
         /*srt.draw( painter, (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), r, cg );*/// -!F: original
         /*srt.draw( painter, 0, 0, r, cg );*/// -!F: keep
@@ -107,9 +111,11 @@ void TextLineItem::drawPreview(QPainter* painter)
     /*double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
     double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();*/// -!F: original, keep
     double scalex = 1.0;
-    double scaley = 1.0;// -!F: added, temporary fix, don't scale anything otherwise the font of printed text will be too large
-    int width = (rect().width() > 0) ? (int)((double)rect().width() / scalex) : srt.idealWidth();
-    int height = (rect().height() > 0) ? (int)((double)rect().height() / scaley): srt.size().height();
+    double scaley = 1.0;// -!F: added, don't scale anything otherwise the font of printed text will be too large
+    /*int width = (rect().width() > 0) ? (int)((double)rect().width() / scalex) : srt.idealWidth();
+    int height = (rect().height() > 0) ? (int)((double)rect().height() / scaley): srt.size().height();*/// -!F: original, keep
+    int width = (rect().width() > 0) ? rect().width() : srt.idealWidth();
+    int height = (rect().height() > 0) ? rect().height() : srt.size().height();
 
     /*QRect r( (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), width, height );*/// -!F: original, keep
     QRect r( 0, 0, width, height );
@@ -122,10 +128,11 @@ void TextLineItem::drawPreview(QPainter* painter)
 
     if( !TextLineItem::IsQtTextRenderingBroken() )
     {
-        painter->scale( scalex, scaley );
+        /*painter->scale( scalex, scaley );*/// -!F: original, keep
         painter->setPen( Qt::black );
         /*srt.draw( painter, (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), r, cg );*/// -!F: original, keep
-        painter->translate( (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley) );
+        /*painter->translate( (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley) );*/// -!F: original, keep
+        painter->translate( rect().x(), rect().y() );
         srt.drawContents( painter, r );
     }
     else
