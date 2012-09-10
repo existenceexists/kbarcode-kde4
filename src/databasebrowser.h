@@ -34,7 +34,7 @@ class QDataWidgetMapper;
 /** A database browser widget. Allows small changes to SQL tables
   * and is mostly used for having a quick look on the tables.
   */
-class DatabaseBrowser : public KXmlGuiWindow{
+class DatabaseBrowser : public MainWindow {
     Q_OBJECT
     public:
         DatabaseBrowser( QString _database, QWidget *parent=0);

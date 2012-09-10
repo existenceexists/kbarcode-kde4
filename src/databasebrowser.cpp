@@ -46,7 +46,7 @@
 #define CUR_TABLE_ID 6666
 
 DatabaseBrowser::DatabaseBrowser( QString _database, QWidget *parent )
-    : KXmlGuiWindow ( parent ) 
+    : MainWindow ( parent ) 
 {
     m_findOptions = 0;
 
@@ -137,7 +137,7 @@ void DatabaseBrowser::setupActions()
     toolBar()->addAction( afind );
     toolBar()->addAction( actionFindNext );
 
-    /*MainWindow::loadConfig();*/// -!F: original, how to load databasebrowser window settings ?
+    MainWindow::loadConfig();
 }
 
 void DatabaseBrowser::setupSql()
@@ -155,6 +155,7 @@ void DatabaseBrowser::find()
     
     findDlg = new KFindDialog( this );
         
+    findDlg->setWindowModality( Qt::WindowModal );
     findDlg->setPattern( m_findPattern );
     findDlg->setOptions( m_findOptions );
     
