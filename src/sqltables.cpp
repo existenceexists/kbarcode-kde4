@@ -345,6 +345,7 @@ void SqlTables::importData( const QString & filename, QSqlDatabase dbase, const 
     QFile data( filename);
     //QProgressDialog* dlg = new QProgressDialog( i18n("SQL import progress:"),  QString::null, data.size(), 0, "dlg", true );// -!F:
     QProgressDialog* dlg = new QProgressDialog( "<qt>" + progressDialogText + "<br><br>" + i18n("SQL import progress:") + "</qt>",  QString::null, 0, data.size());
+    dlg->setWindowModality( Qt::WindowModal );
 
     if( data.open( QIODevice::ReadOnly ) ) {
         QTextStream s( & data );
