@@ -179,20 +179,6 @@ void MainWindow::setupActions() // -!F:
 void MainWindow::createCustomHelpMenu()
 {
     /* Adjust the help menu of the window's menu bar created automatically by setupGUI():*/
-    // First remove the "Kbarcode Handbook F1" action:
-    QAction *helpContentsAction = actionCollection()->action("help_contents");
-    if ( helpContentsAction ) {
-        helpContentsAction->setEnabled(false);
-        delete helpContentsAction;
-    }
-    
-    // Remove the "What's this" action. Otherwise we would have 2 "What's this" actions and the associated shortcuts would collide:
-    QAction *helpWhatsThisAction = actionCollection()->action("help_whats_this");
-    if ( helpWhatsThisAction ) {
-        helpWhatsThisAction->setEnabled(false);
-        delete helpWhatsThisAction;
-    }
-    
     
     KAction* helpAct = new KAction(this);
     helpAct->setText(i18n("&Help"));
@@ -228,7 +214,13 @@ void MainWindow::createCustomHelpMenu()
     
     QList<QAction *> menuBarActionsList = menuBar()->actions();
     
-    menuBarActionsList.removeAt( menuBarActionsList.size() - 1 );// Remove help menu.
+    QAction * oldHelpMenu = menuBarActionsList.takeAt( menuBarActionsList.size() - 1 );// Remove help menu.
+    QList<QAction *> oldHelpMenuActionsList = oldHelpMenu->menu()->actions();
+    for( int i = 0; i < oldHelpMenuActionsList.size(); i++ ) {// Avoid memory leaks and ambiguous shortcuts.
+        oldHelpMenuActionsList[i]->setEnabled( false );
+        delete oldHelpMenuActionsList[i];
+    }
+    delete oldHelpMenu->menu();
     
     menuBar()->clear();
     
