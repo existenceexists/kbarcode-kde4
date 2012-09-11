@@ -25,6 +25,7 @@
 // KDE includes
 #include <kaction.h>
 #include <kapplication.h>
+#include <kcmdlineargs.h>
 #include <kconfiggroup.h>
 #include <kiconloader.h>
 #include <klocale.h>
@@ -224,7 +225,7 @@ void MainWindow::createCustomHelpMenu()
     
     menuBar()->clear();
     
-    KHelpMenu * helpMenuTmp = new KHelpMenu( this, "Help menu" );
+    KHelpMenu * helpMenuTmp = new KHelpMenu( this, KCmdLineArgs::aboutData() );
     KMenu * hlpMenu = helpMenuTmp->menu();
     hlpMenu->removeAction(hlpMenu->actions()[0]);
     //hlpMenu->insertAction(hlpMenu->actions()[0], actionMapAct);// Action Map was removed in the last published version
