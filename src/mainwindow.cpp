@@ -186,6 +186,13 @@ void MainWindow::createCustomHelpMenu()
         delete helpContentsAction;
     }
     
+    // Remove the "What's this" action. Otherwise we would have 2 "What's this" actions and the associated shortcuts would collide:
+    QAction *helpWhatsThisAction = actionCollection()->action("help_whats_this");
+    if ( helpWhatsThisAction ) {
+        helpWhatsThisAction->setEnabled(false);
+        delete helpWhatsThisAction;
+    }
+    
     
     KAction* helpAct = new KAction(this);
     helpAct->setText(i18n("&Help"));
