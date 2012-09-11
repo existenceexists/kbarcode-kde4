@@ -755,6 +755,8 @@ void LabelEditor::setupActions()
 
     barMenu->addAction( singleBarcodeAct );
     barMenu->addAction( importPrintFileAct );*/// -!F: original, delete
+    
+    createCustomHelpMenu();
 
     enableActions();
 }

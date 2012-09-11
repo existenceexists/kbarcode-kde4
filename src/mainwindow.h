@@ -72,6 +72,7 @@ class MainWindow : public KXmlGuiWindow {
 
     protected:
         void setupActions();
+        void createCustomHelpMenu();
 
         static bool autoconnect;
         static bool startassistant;

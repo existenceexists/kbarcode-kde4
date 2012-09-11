@@ -136,6 +136,8 @@ void DatabaseBrowser::setupActions()
     toolBar()->addSeparator();
     toolBar()->addAction( afind );
     toolBar()->addAction( actionFindNext );
+    
+    createCustomHelpMenu();
 
     MainWindow::loadConfig();
 }

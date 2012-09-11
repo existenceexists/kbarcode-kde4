@@ -120,37 +120,6 @@ void MainWindow::setupActions() // -!F:
     actionCollection()->addAction("importExample", importExampleAct);
     connect(importExampleAct, SIGNAL(triggered(bool)), SqlTables::getInstance(), SLOT(importExampleData()));
     
-    KAction* helpAct = new KAction(this);
-    helpAct->setText(i18n("&Help"));
-    helpAct->setIcon(KIcon("help-contents"));
-    helpAct->setShortcut(Qt::Key_F1);
-    actionCollection()->addAction("helpAct", helpAct);
-    connect(helpAct, SIGNAL(triggered(bool)), this, SLOT(appHelpActivated()));
-    
-    /*// actionMapAct made by Frank:
-    KAction* actionMapAct = new KAction(this);
-    actionMapAct->setText(i18n("&Action Map..."));
-    actionCollection()->addAction("actionMapAct", actionMapAct);
-    connect(actionMapAct, SIGNAL(triggered(bool)), this, SLOT(slotFunctionMap()));*/
-    
-    KAction* systemCheckAct = new KAction(this);
-    systemCheckAct->setText(i18n("&System Check..."));
-    /*systemCheckAct->setIcon(KIcon("/usr/share/icons/crystalsvg/16x16/devices/system.png"));*/// -!F:
-    systemCheckAct->setIcon(KIcon("computer"));// -!F: keep
-    actionCollection()->addAction("systemCheckAct", systemCheckAct);
-    connect(systemCheckAct, SIGNAL(triggered(bool)), this, SLOT(showCheck()));
-    
-    KAction* barcodeHelpAct = new KAction(this);
-    barcodeHelpAct->setText(i18n("&Barcode Help..."));
-    barcodeHelpAct->setIcon(KIcon("view-barcode"));// -!F: keep
-    actionCollection()->addAction("barcodeHelpAct", barcodeHelpAct);
-    connect(barcodeHelpAct, SIGNAL(triggered(bool)), this, SLOT(startInfo()));
-    
-    KAction* donateAct = new KAction(this);
-    donateAct->setText(i18n("&Donate..."));
-    actionCollection()->addAction("donateAct", donateAct);
-    connect(donateAct, SIGNAL(triggered(bool)), this, SLOT(donations()));
-    
     /*KMenu* file = new KMenu( this );
     KMenu* settings = new KMenu( this );
     KMenu* hlpMenu = helpMenu();
@@ -204,38 +173,75 @@ void MainWindow::setupActions() // -!F:
     /*setupGUI(Default, this->kbarcodeDirectoryName + QString("/mainwindowui.rc"));*/// -!F: delete
     setupGUI(Default, KStandardDirs::locate( "appdata", QString("mainwindowui.rc")));
     
-    // Adjust the help menu of the main window automatically created by setupGUI():
+    createCustomHelpMenu();
+}
+
+void MainWindow::createCustomHelpMenu()
+{
+    /* Adjust the help menu of the window's menu bar created automatically by setupGUI():*/
     // First remove the "Kbarcode Handbook F1" action:
     QAction *helpContentsAction = actionCollection()->action("help_contents");
-    if (!(helpContentsAction == 0)) {
+    if ( helpContentsAction ) {
         helpContentsAction->setEnabled(false);
         delete helpContentsAction;
-    };
+    }
+    
+    
+    KAction* helpAct = new KAction(this);
+    helpAct->setText(i18n("&Help"));
+    helpAct->setIcon(KIcon("help-contents"));
+    helpAct->setShortcut(Qt::Key_F1);
+    actionCollection()->addAction("helpAct", helpAct);
+    connect(helpAct, SIGNAL(triggered(bool)), this, SLOT(appHelpActivated()));
+    
+    /*// actionMapAct made by Frank:
+    KAction* actionMapAct = new KAction(this);
+    actionMapAct->setText(i18n("&Action Map..."));
+    actionCollection()->addAction("actionMapAct", actionMapAct);
+    connect(actionMapAct, SIGNAL(triggered(bool)), this, SLOT(slotFunctionMap()));*/
+    
+    KAction* systemCheckAct = new KAction(this);
+    systemCheckAct->setText(i18n("&System Check..."));
+    /*systemCheckAct->setIcon(KIcon("/usr/share/icons/crystalsvg/16x16/devices/system.png"));*/// -!F:
+    systemCheckAct->setIcon(KIcon("computer"));// -!F: keep
+    actionCollection()->addAction("systemCheckAct", systemCheckAct);
+    connect(systemCheckAct, SIGNAL(triggered(bool)), this, SLOT(showCheck()));
+    
+    KAction* barcodeHelpAct = new KAction(this);
+    barcodeHelpAct->setText(i18n("&Barcode Help..."));
+    barcodeHelpAct->setIcon(KIcon("view-barcode"));// -!F: keep
+    actionCollection()->addAction("barcodeHelpAct", barcodeHelpAct);
+    connect(barcodeHelpAct, SIGNAL(triggered(bool)), this, SLOT(startInfo()));
+    
+    KAction* donateAct = new KAction(this);
+    donateAct->setText(i18n("&Donate..."));
+    actionCollection()->addAction("donateAct", donateAct);
+    connect(donateAct, SIGNAL(triggered(bool)), this, SLOT(donations()));
+    
     
     QList<QAction *> menuBarActionsList = menuBar()->actions();
     
+    menuBarActionsList.removeAt( menuBarActionsList.size() - 1 );// Remove help menu.
+    
     menuBar()->clear();
     
-    /*KMenu * hlpMenu = customHelpMenu();*/// -!F: delete
     KHelpMenu * helpMenuTmp = new KHelpMenu( this, "Help menu" );
     KMenu * hlpMenu = helpMenuTmp->menu();
     hlpMenu->removeAction(hlpMenu->actions()[0]);
     //hlpMenu->insertAction(hlpMenu->actions()[0], actionMapAct);// Action Map was removed in the last published version
-    //hlpMenu->insertSeparator(hlpMenu->actions()[0]);
     hlpMenu->insertAction(hlpMenu->actions()[1], systemCheckAct);
     hlpMenu->insertSeparator(hlpMenu->actions()[1]);
     hlpMenu->insertAction(hlpMenu->actions()[1], donateAct);
     hlpMenu->insertSeparator(hlpMenu->actions()[1]);
     hlpMenu->insertAction(hlpMenu->actions()[0], barcodeHelpAct);
     hlpMenu->insertAction(hlpMenu->actions()[0], helpAct);
-    hlpMenu->actions()[ 12 ]->setIcon( KIcon ( KStandardDirs::locate(
+    hlpMenu->actions()[12]->setIcon( KIcon ( KStandardDirs::locate(
             "appdata", QString( "hi16-app-kbarcode.png" ) ) ) );
     
-    menuBar()->addAction(menuBarActionsList[0]);
-    menuBar()->addAction(menuBarActionsList[1]);
-    menuBar()->addAction(menuBarActionsList[2]);
-    //menuBar()->addAction(menuBarActionsList[3]);// -!F: delete, the fourth action is the old help menu
-    menuBar()->addMenu(hlpMenu);
+    for( int i = 0; i < menuBarActionsList.size(); i++ ) {
+        menuBar()->addAction( menuBarActionsList[i] );
+    }
+    menuBar()->addMenu( hlpMenu );
 }
 
 void MainWindow::loadConfig()
