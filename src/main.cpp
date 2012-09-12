@@ -91,6 +91,7 @@ int main(int argc, char *argv[])
     aboutData.addCredit(ki18n("John Volpe"), ki18n("Added lot's of useful data fields to kbarcode"), "jtvolpe@cape.com" );
     aboutData.addCredit(ki18n("Nyssa s.r.l."), ki18n("Added TEC barcode printer support"), "imorrison@nyssa.com.ar", "http://www.nyssa.com.ar" );
     aboutData.addCredit(ki18n("Brian Glass"), ki18n("Added EPCL barcode printer support"), "brian@glassbrian.com", "http://www.glassbrian.com" );
+    aboutData.addCredit(ki18n("František (Fanda) Brožka"), ki18n("Ported Kbarcode from KDE3 to KDE4.") );
     
     aboutData.setProgramIconName( KStandardDirs::locate("data", applicationFileName + QString( "/hi16-app-kbarcode.png" ) ) );
     aboutData.setProgramLogo( QImage( KStandardDirs::locate("data", applicationFileName + QString( "/logo.png" ) ), "PNG" ) );
