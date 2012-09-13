@@ -336,6 +336,13 @@ void SqlTables::importExampleData()
         KMessageBox::Cancel )
         return;
 
+    QSqlQuery query1( QString::null, database() );
+    exec( &query1, "DELETE FROM " TABLE_BASIC );
+    QSqlQuery query2( QString::null, database() );
+    exec( &query2, "DELETE FROM " TABLE_CUSTOMER );
+    QSqlQuery query3( QString::null, database() );
+    exec( &query3, "DELETE FROM " TABLE_CUSTOMER_TEXT );
+
     QString progressDialogText( i18n("Importing example data from the file ") + "<br>" + KStandardDirs::locate("appdata", "exampledata.sql") + "<br>" + i18n(" into your database.") );
     importData( KStandardDirs::locate("appdata", "exampledata.sql"), database(), progressDialogText );
 }
