@@ -60,7 +60,6 @@ ConfigDialog::ConfigDialog( QWidget* parent )
     setButtons( KDialog::Ok | KDialog::Cancel );
     setDefaultButton( KDialog::Ok );
     setModal( true );
-    setWindowIcon( KIcon( KStandardDirs::locate( "appdata", QString( "hi16-app-kbarcode.png" ) ) ) );
 
     setupTab2(); // Printer
     setupTab1(); // SQL

@@ -168,7 +168,6 @@ void MainWindow::setupActions() // -!F:
         qDebug() << QString("The addition of the following folder as a resource dir failed: ") 
             + QString("/home/fanda/programovani/c++/frank_scripts/kbarcode/executables/share/apps/");
     }*/// -!F: delete
-    setWindowIcon( KIcon( KStandardDirs::locate( "appdata", QString("hi16-app-kbarcode.png") ) ) );
     
     // Let KDE4 create the main window.
     /*setupGUI(Default, this->kbarcodeDirectoryName + QString("/mainwindowui.rc"));*/// -!F: delete

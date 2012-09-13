@@ -126,10 +126,6 @@ void DatabaseBrowser::setupActions()
     
     menuBar()->insertMenu( menuBar()->actions()[1], editMenu );
     
-    actionCollection()->action( "help_about_app" )->setIcon( KIcon ( KStandardDirs::locate(
-        "appdata", QString( "hi16-app-kbarcode.png" ) ) ) );;
-    setWindowIcon( KIcon( KStandardDirs::locate( "appdata", QString("hi16-app-kbarcode.png") ) ) );
-    
     toolBar()->addAction( acut );
     toolBar()->addAction( acopy );
     toolBar()->addAction( apaste );

@@ -52,7 +52,6 @@ BarcodeGenerator::BarcodeGenerator( QWidget* parent )
     : QDialog( parent )
 {
     setWindowTitle( i18n( "Barcode Generator" ) );
-    setWindowIcon( KIcon( KStandardDirs::locate( "appdata", QString("hi16-app-kbarcode.png") ) ) );
 
     /*BarcodeGeneratorLayout = new QHBoxLayout( this, 11, 6, "BarcodeGeneratorLayout");*/// -!F: original, del
     BarcodeGeneratorLayout = new QHBoxLayout( this );

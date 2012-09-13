@@ -64,7 +64,6 @@ ConfAssistant::ConfAssistant( QWidget* parent, QString name, bool modal )
     setObjectName(name);
     setModal(modal);
     setCaption( i18n( "Configure KBarcode" ) );
-    setWindowIcon( KIcon( KStandardDirs::locate( "appdata", QString( "hi16-app-kbarcode.png" ) ) ) );// -!F: 
 
     //qDebug() << "point 1";
     setupPage1();

@@ -130,7 +130,6 @@ LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f,
     : MainWindow( parent, f )
 {
     setAttribute( waf );
-    setWindowIcon( KIcon( KStandardDirs::locate( "appdata", QString( "hi16-app-kbarcode.png" ) ) ) );// -!F: 
     
     
     undoAct = redoAct = NULL;
