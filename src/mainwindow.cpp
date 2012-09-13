@@ -280,6 +280,9 @@ void MainWindow::assistant()
     // FIXME: create an assistant
     ConfAssistant* wiz = new ConfAssistant( 0, QString("wiz"), true );
     if( wiz->exec() == QDialog::Accepted && wiz->checkDatabase->isChecked() ) {
+        if( SqlTables::getInstance()->isConnected() ) {
+            SqlTables::getInstance()->closeDatabaseConnection();
+        }
         connectAct->setEnabled( !SqlTables::getInstance()->connectMySQL() );
         importLabelDefAct->setEnabled( !connectAct->isEnabled() );
         importExampleAct->setEnabled( !connectAct->isEnabled() );

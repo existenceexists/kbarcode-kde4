@@ -144,6 +144,11 @@ class SqlTables : public QObject {
           */
         bool connectMySQL();
         
+        /**
+         * Close an SQL database connection.
+         */
+        void closeDatabaseConnection();
+        
         bool newTables();
         bool newTables( const QString & username, const QString & password, const QString & hostname, const QString & database, const QString & driver );
         void importLabelDef();

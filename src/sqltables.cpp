@@ -139,6 +139,17 @@ bool SqlTables::connectMySQL()
     return connected;
 }
 
+void SqlTables::closeDatabaseConnection() 
+{
+    QString defaultConnectionName;
+    {// the beginning of the scope of QSqlDatabase db variable
+        QSqlDatabase db = database();
+        defaultConnectionName = db.connectionName();
+        db.close();
+    }// the end of the scope of QSqlDatabase db variable
+    QSqlDatabase::removeDatabase( defaultConnectionName );
+}
+
 bool SqlTables::newTables()
 {
     return newTables( sqldata.username, sqldata.password, sqldata.hostname, sqldata.database, sqldata.driver );
