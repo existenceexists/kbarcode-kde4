@@ -166,7 +166,7 @@ class SqlTables : public QObject {
         
         bool connected;
 
-        QSqlDatabase db;
+        //QSqlDatabase db;
         mysqldata sqldata;
 
         static SqlTables* instance;
@@ -174,7 +174,7 @@ class SqlTables : public QObject {
 
 inline QSqlDatabase SqlTables::database() const
 {
-    return db;
+    return QSqlDatabase::database();
 }
 
 class KComboBox;

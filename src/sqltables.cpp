@@ -90,7 +90,7 @@ SqlTables::SqlTables( QObject* parent )
     drivers.insert( "QSQLITE", new SQLiteDescription() );
     drivers.insert( "QODBC3", new SQLiteDescription() );
 
-    db = QSqlDatabase();
+    //db = QSqlDatabase();
     connected = false;
     loadConfig();
 
@@ -117,7 +117,7 @@ const SqlDescription* SqlTables::driver() const
 }
 bool SqlTables::connectMySQL()
 {
-    db = QSqlDatabase::addDatabase( sqldata.driver );
+    QSqlDatabase db = QSqlDatabase::addDatabase( sqldata.driver );
 
     db.setDatabaseName( sqldata.database );
     db.setUserName( sqldata.username );
@@ -303,7 +303,7 @@ void SqlTables::importLabelDef()
         KMessageBox::Cancel )
         return;
 
-    QSqlQuery query( QString::null, db );
+    QSqlQuery query( QString::null, database() );
     exec( &query, "delete from " TABLE_LABEL_DEF );
 
     QString f = KStandardDirs::locateLocal( "appdata", "labeldefinitions.sql" );
@@ -313,7 +313,7 @@ void SqlTables::importLabelDef()
     }
 
     QString progressDialogText( i18n("Importing label definitions from the file ") + "<br>" + f + "<br>" + i18n(" into your database.") );
-    importData( f, db, progressDialogText );
+    importData( f, database(), progressDialogText );
 
     Definition::updateProducer();
 }
@@ -326,7 +326,7 @@ void SqlTables::importExampleData()
         return;
 
     QString progressDialogText( i18n("Importing example data from the file ") + "<br>" + KStandardDirs::locate("appdata", "exampledata.sql") + "<br>" + i18n(" into your database.") );
-    importData( KStandardDirs::locate("appdata", "exampledata.sql"), db, progressDialogText );
+    importData( KStandardDirs::locate("appdata", "exampledata.sql"), database(), progressDialogText );
 }
 
 void SqlTables::importData( const QString & filename, QSqlDatabase dbase, const QString & progressDialogText )
