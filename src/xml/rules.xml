@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+
+<encoders>
+
+<encoder id="ean13">
+<pattern sense="false" exception="Accepts only numeric data"><![CDATA[
+[^0-9]
+]]></pattern>
+<pattern sense="true" exception="Data must be 12 or 13 digits"><![CDATA[
+^.{12,13}$
+]]></pattern>
+</encoder>
+
+<encoder id="ean8">
+<pattern sense="false" exception="Accepts only numeric data"><![CDATA[
+[^0-9]
+]]></pattern>
+<pattern sense="true" exception="Data must be precisely 8 digits"><![CDATA[
+^.{8}$
+]]></pattern>
+</encoder>
+
+<encoder id="ean5">
+<pattern sense="false" exception="Accepts only numeric data"><![CDATA[
+[^0-9]
+]]></pattern>
+<pattern sense="true" exception="Data must be precisely 5 digits"><![CDATA[
+^.{5}$
+]]></pattern>
+</encoder>
+
+<encoder id="ean2">
+<pattern sense="false" exception="Accepts only numeric data"><![CDATA[
+[^0-9]
+]]></pattern>
+<pattern sense="true" exception="Data must be precisely 2 digits"><![CDATA[
+^.{2}$
+]]></pattern>
+</encoder>
+
+<encoder id="upca">
+<pattern sense="false" exception="Accepts only numeric data"><![CDATA[
+[^0-9]
+]]></pattern>
+<pattern sense="true" exception="Data must be 11 or 12 digits"><![CDATA[
+^.{11,12}$
+]]></pattern>
+</encoder>
+
+<encoder id="upce">
+<pattern sense="false" exception="Accepts only numeric data"><![CDATA[
+[^0-9]
+]]></pattern>
+<pattern sense="true" exception="Data must be 7 or 8 digits"><![CDATA[
+^.{7,8}$
+]]></pattern>
+</encoder>
+
+<encoder id="isbn">
+<pattern sense="false" exception="Accepts digits and the dash (-) character"><![CDATA[
+[^0-9\-]
+]]></pattern>
+</encoder>
+
+<encoder id="code128">
+<pattern sense="false" exception="Accepts mixed-case letters, digits, symbols !&quot;#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_`{|}~ and space"><![CDATA[
+[^\ \!\"\#\$\%\&\'\(\)\*\+\,\-\.\/0123456789\:\;\<\=\>\?\@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\]\^\_\`abcdefghijklmnopqrstuvwxyz\{\|\}\~]
+]]></pattern>
+
+<pattern sense="true" exception="Must begin either ^103, ^104 or ^105"><![CDATA[
+^(\^103|\^104|\^105)
+]]></pattern>
+<pattern sense="false" exception="After ^105 or ^099 digits must be paired"><![CDATA[
+(\^105|\^099)[0-9]([0-9][0-9])*(\^|$)
+]]></pattern>
+<pattern sense="false" exception="The carat (^) character must be followed by a three digit ordinal value"><![CDATA[
+\^[0-9]{0,2}([^0-9]|$)
+]]></pattern>
+</encoder>
+
+<encoder id="code39">
+<pattern sense="false" exception="Valid characters are the capital letters A-Z, digits 0-9, and symbols -.$/+%* and space"><![CDATA[
+[^A-Z0-9\-\.\$\/+%\*\ ]
+]]></pattern>
+</encoder>
+
+<encoder id="code93">
+<pattern sense="false" exception="Valid characters are the capital letters A-Z, digits 0-9, and symbols -.$/+%* space and ordinals"><![CDATA[
+[^A-Z0-9\-\.\$\/+%\*\ \^]
+]]></pattern>
+<pattern sense="false" exception="The carat (^) character must be followed by a three digit ordinal value"><![CDATA[
+\^[0-9]{0,2}([^0-9]|$)
+]]></pattern>
+</encoder>
+
+<encoder id="interleaved2of5">
+<pattern sense="false" exception="Accepts numeric data only"><![CDATA[
+[^0-9]
+]]></pattern>
+</encoder>
+
+<encoder id="code2of5">
+<pattern sense="false" exception="Accepts numeric data only"><![CDATA[
+[^0-9]
+]]></pattern>
+</encoder>
+
+<encoder id="code11">
+<pattern sense="false" exception="Accepts digits and the dash (-) character"><![CDATA[
+[^0-9\-]
+]]></pattern>
+</encoder>
+
+<encoder id="rationalizedCodabar">
+<pattern sense="false" exception="Valid characters are digits 0-9, letters A-D and the symbols -$:/.+"><![CDATA[
+[^0-9A-D\-\$\:\/\.+]
+]]></pattern>
+</encoder>
+
+<encoder id="postnet">
+<pattern sense="false" exception="Valid characters are digits from the ZIP code without dashes"><![CDATA[
+[^0-9]
+]]></pattern>
+</encoder>
+
+<encoder id="royalmail">
+<pattern sense="false" exception="Valid characters are digits 0-9 and capital letters A-Z"><![CDATA[
+[^0-9A-Z]
+]]></pattern>
+</encoder>
+
+<encoder id="auspost">
+<pattern sense="true" exception="Valid characters are digits 0-9, mixed-case letters A-Z, space and the hash (#) character"><![CDATA[
+[^0-9A-Za-z\ \#]
+]]></pattern>
+</encoder>
+
+<encoder id="kix">
+<pattern sense="true" exception="Valid characters are digits 0-9, letters A-D and the symbols -$:/.+"><![CDATA[
+[^0-9A-D\-\$\:\/\.+]
+]]></pattern>
+</encoder>
+
+<encoder id="msi">
+<pattern sense="true" exception="Valid characters are digits 0-9, letters A-D and the symbols -$:/.+"><![CDATA[
+[^0-9A-D\-\$\:\/\.+]
+]]></pattern>
+</encoder>
+
+<encoder id="plessey">
+<pattern sense="true" exception="Valid characters are digits 0-9, letters A-D and the symbols -$:/.+"><![CDATA[
+[^0-9A-D\-\$\:\/\.+]
+]]></pattern>
+</encoder>
+
+<encoder id="symbol">
+</encoder>
+
+</encoders>
