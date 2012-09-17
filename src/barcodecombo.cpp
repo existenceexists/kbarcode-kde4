@@ -167,7 +167,6 @@ BarcodeWidget::BarcodeWidget(QWidget *parent)
     grid->addWidget( buttonAdvanced, 4, 2 );
 
     buttonToken = new KPushButton( i18n("&Insert Data Field..."), this );
-    /*buttonToken->setIcon( QIcon( SmallIcon("contents") ) );*/// -!F: original, del
     buttonToken->setIcon( KIcon( SmallIcon("view-table-of-contents-ltr") ) );
     grid->addWidget( buttonToken, 4, 3 );
     
@@ -178,7 +177,6 @@ BarcodeWidget::BarcodeWidget(QWidget *parent)
     spinMargin->setSliderEnabled( false );
     spinMargin->setValue( 10 );
     connect( spinMargin, SIGNAL( valueChanged(int) ), this, SLOT( changed() ) );
-    /*grid->addMultiCellWidget( spinMargin, 5, 5, 0, 1 );*/// -!F: original, del
     grid->addWidget( spinMargin, 5, 0, 1, 2 );
 
     spinRotation = new KIntNumInput( this );
@@ -188,10 +186,8 @@ BarcodeWidget::BarcodeWidget(QWidget *parent)
     spinRotation->setSliderEnabled( false );
     spinRotation->setValue( 0 );
     connect( spinRotation, SIGNAL( valueChanged(int) ), this, SLOT( changed() ) );
-    /*grid->addMultiCellWidget( spinRotation, 5, 5, 2, 3 );*/// -!F: original, del
     grid->addWidget( spinRotation, 5, 2, 1, 2 );
 
-    /*spinScale = new KIntNumInput( spinMargin, 1000, this );*/// -!F: original, del
     spinScale = new KIntNumInput( this );
     /*spinScale->setLabel( i18n("&Scale (in permille):"), Qt::AlignLeft | Qt::AlignVCenter );*/// -!F: original, del
     spinScale->setLabel( i18n("&Scale (in permille):"), Qt::AlignLeft | Qt::AlignTop );
@@ -199,10 +195,8 @@ BarcodeWidget::BarcodeWidget(QWidget *parent)
     spinScale->setSliderEnabled( false );
     spinScale->setValue( 1000 );
     connect( spinScale, SIGNAL( valueChanged(int) ), this, SLOT( changed() ) );
-    /*grid->addMultiCellWidget( spinScale, 6, 6, 0, 1 );*/// -!F: original, del
     grid->addWidget( spinScale, 6, 0, 1, 2 );
 
-    /*spinCut = new KIntNumInput( spinRotation, 100, this );*/// -!F: original, del
     spinCut = new KIntNumInput( this );
     /*spinCut->setLabel( i18n("&Crop:"), Qt::AlignLeft | Qt::AlignVCenter );*/// -!F: original, del
     spinCut->setLabel( i18n("&Crop:"), Qt::AlignLeft | Qt::AlignTop );
@@ -210,7 +204,6 @@ BarcodeWidget::BarcodeWidget(QWidget *parent)
     spinCut->setSliderEnabled( false );
     spinCut->setValue( 100 );
     connect( spinCut, SIGNAL( valueChanged(int) ), this, SLOT( changed() ) );
-    /*grid->addMultiCellWidget( spinCut, 6, 6, 2, 3 );*/// -!F: original, del
     grid->addWidget( spinCut, 6, 2, 1, 2 );
 
     connect( buttonAdvanced, SIGNAL( clicked() ), this, SLOT( advanced() ) );
@@ -335,10 +328,8 @@ void BarcodeWidget::tokens()
 void BarcodeWidget::slotValidateValue()
 {
     QPalette palette;
-    /*QColor c = data->hasAcceptableInput() ? this->foregroundColor() : Qt::red;*/// -!F: original, del
     QColor c = data->hasAcceptableInput() ? palette.color( this->foregroundRole() ) : Qt::red;
 
-    /*QPalette palette;*/// -!F: original, del
     palette.setColor(data->foregroundRole(), c);
     data->setPalette(palette);    
 }

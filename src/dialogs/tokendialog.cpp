@@ -421,7 +421,6 @@ void TokenDialog::configureCurrentPage( KPageWidgetItem* w )
             {
                 initStackPage2();
                 page3->setCurrentWidget( stack2Page2 );
-                /*enableButton( KDialog::User1, enableFinishButtonStack2Page2 );*/// -!F: added, delete
                 enableButton( KDialog::User1, false );
             }
         }

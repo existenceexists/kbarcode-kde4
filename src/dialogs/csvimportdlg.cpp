@@ -123,7 +123,7 @@ void CSVImportDlg::createPage1()
     databaseName = new KLineEdit( box );
     checkLoadAll = new QCheckBox( i18n("&Load complete file into preview"), box );
     spinLoadOnly = new KIntNumInput( box );
-    /*spinLoadOnly->setLabel( i18n("Load only a number of datasets:"), Qt::AlignLeft | Qt::AlignVCenter );*/// -!F: original, the label is not displayed, delete?
+    /*spinLoadOnly->setLabel( i18n("Load only a number of datasets:"), Qt::AlignLeft | Qt::AlignVCenter );*/// when using Qt::AlignVCenter the label is not displayed
     spinLoadOnly->setLabel( i18n("Load only a number of datasets:"), Qt::AlignLeft | Qt::AlignTop );
     spinLoadOnly->setRange( 0, 10000, 1 );
     spinLoadOnly->setSliderEnabled( false );
@@ -137,7 +137,7 @@ void CSVImportDlg::createPage1()
     layout2->setSpacing( 6 );
     
     spinCol = new KIntNumInput( frame );
-    /*spinCol->setLabel( i18n("Column:"), Qt::AlignLeft | Qt::AlignVCenter );*/// -!F: original, the label is not displayed, delete?
+    /*spinCol->setLabel( i18n("Column:"), Qt::AlignLeft | Qt::AlignVCenter );*/// when using Qt::AlignVCenter the label is not displayed
     spinCol->setLabel( i18n("Column:"), Qt::AlignLeft | Qt::AlignTop );
     spinCol->setRange( 0, 0, 1 );
     spinCol->setSliderEnabled( false );
@@ -279,7 +279,7 @@ void CSVImportDlg::settingsChanged()
 
     initCsvFile( &file );
 
-    table->clear();// -!F: keep, does this prevent a memory leak of new QTableWidgetItem( list[z] ) ?
+    table->clear();
     table->setColumnCount( 0 );
     table->setRowCount( 0 );
 
@@ -313,12 +313,12 @@ void CSVImportDlg::settingsChanged()
 
         for( z = 0; z < table->columnCount(); z++ ) {
             if ( z < list.count() ) {// There should be a text in the table cell.
-                QTableWidgetItem * item = new QTableWidgetItem( list[z] );// -!F: memory leak? or does table->clear() delete it
+                QTableWidgetItem * item = new QTableWidgetItem( list[z] );
                 Qt::ItemFlags itemFlags = item->flags() & ~Qt::ItemIsEditable;// Set the item as noneditable
                 item->setFlags( itemFlags );
                 table->setItem( i, z, item );
             } else {// There should be no text in the table cell.
-                QTableWidgetItem * item = new QTableWidgetItem();// -!F: memory leak? or does table->clear() delete it
+                QTableWidgetItem * item = new QTableWidgetItem();
                 Qt::ItemFlags itemFlags = item->flags() & ~Qt::ItemIsEditable;
                 item->setFlags( itemFlags );
                 table->setItem( i, z, item );

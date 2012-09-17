@@ -133,7 +133,6 @@ class BatchAssistant : public KAssistantDialog {
 	void addItem();
         bool slotAddItem( const QString & article, const QString & group, int count );
 	void changeItem( QTreeWidgetItem* item, int column );
-        /*void changeItem( Q3ListViewItem* item, const QPoint &, int );*/// -!F: del
 	void editItem();
 	void removeItem();
 
@@ -153,7 +152,6 @@ class BatchAssistant : public KAssistantDialog {
 
     private:
         void moveAddress( QTreeWidget* src, QTreeWidget* dst, bool bAll = false );
-        /*void moveAddress( Q3ListView* src, Q3ListView* dst, bool bAll = false );*/// -!F: delete
 
 	void fillByteArray();
 	void fillVarList();
@@ -247,14 +245,11 @@ class BatchAssistant : public KAssistantDialog {
 	KIntNumInput* serialInc;
 	KIntNumInput* numLabels;
 
-	/*QTableWidget* m_varTable;*/// -!F: original, uncomment
         QTableWidget* m_varTable;
 	KListWidget* m_varList;
 
         QTreeWidget* listAddress;
         QTreeWidget* listSelectedAddress;
-        /*K3ListView* listAddress;
-        K3ListView* listSelectedAddress;*/// -!F: delete
 
 	QTreeWidget* sqlList;
 	KLineEdit* serialStart;

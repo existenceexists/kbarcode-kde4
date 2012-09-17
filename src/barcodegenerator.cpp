@@ -53,17 +53,14 @@ BarcodeGenerator::BarcodeGenerator( QWidget* parent )
 {
     setWindowTitle( i18n( "Barcode Generator" ) );
 
-    /*BarcodeGeneratorLayout = new QHBoxLayout( this, 11, 6, "BarcodeGeneratorLayout");*/// -!F: original, del
     BarcodeGeneratorLayout = new QHBoxLayout( this );
     BarcodeGeneratorLayout->setObjectName( "BarcodeGeneratorLayout" );
     BarcodeGeneratorLayout->setContentsMargins( 11, 11, 11, 11 );
     BarcodeGeneratorLayout->setSpacing( 6 );
-    /*Layout5 = new QVBoxLayout( 0, 0, 6, "Layout5");*/// -!F: original, del
     Layout5 = new QVBoxLayout();
     Layout5->setObjectName( "Layout5" );
     Layout5->setContentsMargins( 0, 0, 0, 0 );
     Layout5->setSpacing( 6 );
-    /*Layout6 = new QVBoxLayout( 0, 0, 6, "Layout2");*/// -!F: original, del
     Layout6 = new QVBoxLayout();
     Layout6->setObjectName( "Layout2" );
     Layout6->setContentsMargins( 0, 0, 0, 0 );
@@ -98,11 +95,9 @@ BarcodeGenerator::BarcodeGenerator( QWidget* parent )
     buttonClose->setIcon( KIcon("dialog-close") );
     
 
-    /*QScrollArea* sv = new QScrollArea( this );*/// -!F: original, del
     sv = new QScrollArea( this );
     
     barcode = new QLabel( NULL );
-    /*sv->setWidget( barcode );*/// -!F: original, del
     connect( buttonGenerate, SIGNAL( clicked() ), this, SLOT( generate() ) );
     connect( buttonSave, SIGNAL( clicked() ), this, SLOT( save() ) );
     connect( buttonPrint, SIGNAL( clicked() ), this, SLOT( print() ) );
@@ -232,7 +227,6 @@ void BarcodeGenerator::copy()
     DocumentItemDrag* drag = new DocumentItemDrag();
     drag->setDocumentItem( &list );
 
-    /*kapp->clipboard()->setData( drag, QClipboard::Clipboard );*/// -!F: original, delete
     kapp->clipboard()->setMimeData( drag );
 }
 

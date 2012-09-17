@@ -29,16 +29,13 @@
 #include "xmlutils.h"
 #include "mycanvasview.h"
 
-/*#include <kdialogbase.h>*/// -!F: uncomment
 #include <qdialog.h>
 #include <qmap.h>
 //Added by qt3to4:
 #include <QHBoxLayout>
-//#include <QCloseEvent>// -!F: original, delete
 #include <QLabel>
 #include <QVBoxLayout>
 
-#include <sonnet/speller.h>
 #include <sonnet/backgroundchecker.h>
 #include <sonnet/dialog.h>
 
@@ -96,8 +93,6 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
             eLoadLabel
         };
 
-        /*LabelEditor( QWidget *parent=0, QString _filename = QString::null,
-             Qt::WFlags f = Qt::WType_TopLevel | Qt::WDestructiveClose );*/// -!F: original, delete
         LabelEditor( QWidget *parent=0, QString _filename = QString::null,
              Qt::WindowFlags f = Qt::Window, Qt::WidgetAttribute waf = Qt::WA_DeleteOnClose );
         ~LabelEditor();

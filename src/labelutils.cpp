@@ -24,6 +24,7 @@
 #include <QPaintDevice>
 #include <qpainter.h>
 #include <QTextDocument>
+#include <QDesktopWidget>
 //Added by qt3to4:
 #include <QPixmap>
 
@@ -34,8 +35,6 @@
 
 // own includes
 #include "printersettings.h"
-
-#include <QDesktopWidget>// -!F: delete or keep ?
 
 #define CONVERSION_FACTOR 25.4000508001016
 
@@ -50,7 +49,6 @@ double LabelUtils::pixelToMm( double pixel, const QPaintDevice* device, int mode
 {
     if (device == 0)
     {
-        /*device = (QPaintDevice *) KApplication::desktop();*/// -!F: keep
         device = KApplication::desktop();
     }
     
@@ -72,7 +70,6 @@ double LabelUtils::mmToPixel( double mm, const QPaintDevice* device, int mode )
 
     if (device == 0)
     {
-        /*device = (QPaintDevice *) KApplication::desktop();*/// -!F: keep
         device = KApplication::desktop();
     }
     
@@ -109,10 +106,6 @@ const QString LabelUtils::getModeFromCaption( const QString & cap )
 
 QSize LabelUtils::stringSize( const QString & t )
 {
-    /*Q3SimpleRichText srt( t, KApplication::font() );
-    QSize s;
-    s.setWidth( srt.widthUsed() );
-    s.setHeight( srt.height() );*/
     QTextDocument srt;
     srt.setHtml( t );
     srt.setDefaultFont( KApplication::font() );
@@ -127,9 +120,6 @@ QSize LabelUtils::stringSize( const QString & t )
 void LabelUtils::renderString( QPainter* painter, const QString & t, const QRect & rect, double scalex, double scaley )
 {
     // DSRichText cannot calculate the width on its own
-    /*Q3SimpleRichText srt( t, KApplication::font() );
-    int width = (rect.width() > 0) ? rect.width() : srt.widthUsed();
-    int height = (rect.height() > 0) ? rect.height() : srt.height();*/
     QTextDocument srt;
     srt.setHtml( t );
     srt.setDefaultFont( KApplication::font() );
@@ -147,11 +137,6 @@ void LabelUtils::renderString( QPainter* painter, const QString & t, const QRect
 
 QPixmap* LabelUtils::drawString( const QString & t, int w, int h, double rot )
 {
-    /*Q3SimpleRichText srt( t, KApplication::font() );
-
-    int width = (w > 0) ? w : srt.widthUsed();
-    int height = (h > 0) ? h : srt.height();
-    srt.setWidth( width );*/
     QTextDocument srt;
     srt.setHtml( t );
     srt.setDefaultFont( KApplication::font() );
@@ -186,13 +171,10 @@ QPixmap* LabelUtils::drawString( const QString & t, int w, int h, double rot )
         if( !pix->isNull() ) {
             painter.begin( pix );
             painter.setPen( Qt::black );
-            /*srt.draw( &painter, 0, 0, pix->rect(), cg );*/
             srt.drawContents( &painter, pix->rect() );
             painter.end();
         } 
     } else {
-        /*int w2 = (w > 0) ? w : srt.widthUsed();
-        int h2 = (h > 0) ? h : srt.height();*/
         int w2 = (w > 0) ? w : srt.idealWidth();
         int h2 = (h > 0) ? h : srt.size().height();
 

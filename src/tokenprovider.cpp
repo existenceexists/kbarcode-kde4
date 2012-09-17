@@ -37,8 +37,6 @@
 #ifdef NO_KJS_EMBED
 //#include <kjs/interpreter.h>
 #include <kjs/kjsinterpreter.h>
-//#include <kjs/completion.h>// -!F:
-//#include <kjs/value.h>// -!F:
 #else
 #include <kjsembed/kjsembedpart.h>
 #endif // NO_KJS_EMBED
@@ -168,7 +166,6 @@ TokenProvider::TokenProvider( QPaintDevice* paintdevice )
 
 #ifdef USE_JAVASCRIPT
 #ifdef NO_KJS_EMBED
-    /*s_interpreter = new KJS::Interpreter();*/
     s_interpreter = new KJSInterpreter();
 #else
     s_interpreter = new KJSEmbed::KJSEmbedPart();
@@ -183,7 +180,6 @@ TokenProvider::~TokenProvider()
 QList<tCategories> TokenProvider::s_categories;
 QMap<TokenProvider::ECategories,QString> TokenProvider::s_captions;
 #ifdef NO_KJS_EMBED
-/*KJS::Interpreter* TokenProvider::s_interpreter = NULL;*/
 KJSInterpreter* TokenProvider::s_interpreter = NULL;
 #else
 KJSEmbed::KJSEmbedPart* TokenProvider::s_interpreter = NULL;
@@ -347,20 +343,14 @@ void TokenProvider::findBrackets( QString & text, QString (TokenProvider::*parse
     int num, pos = -1, a;
     QString token;
 
-    /*if( text.contains("]", FALSE) <= 0 || text.isEmpty() )*/
-    /*if( text.contains("]", Qt::CaseInsensitive) <= 0 || text.isEmpty() )*/// -!F: delete
     if( text.count("]", Qt::CaseInsensitive) <= 0 || text.isEmpty() )
         return;
 
-    /*num = text.contains("[", FALSE);*/
-    /*num = (int) text.contains("[", Qt::CaseInsensitive);*/// -!F: delete
     num = text.count("[", Qt::CaseInsensitive);
     if(num <= 0 )
         return;
 
-    /*pos = text.findRev("[", pos);*/// -!F: original, delete
     pos = text.lastIndexOf("[", pos);
-    /*a = text.find("]", pos );*/// -!F: original, delete
     a = text.indexOf("]", pos );
     if( a < 0 && pos >= 0 )
         return;
@@ -529,7 +519,6 @@ QString TokenProvider::process( const QString & t )
     if( t == TOK_DATE )
         ret = QDateTime::currentDateTime().toString( KBarcodeSettings::getDateFormat() );
     
-    /*if( date_reg_exp.search(t,0) != -1 ) */// -!F: original, delete
     if( date_reg_exp.indexIn(t,0) != -1 )
     {
 	time_t label_time;
@@ -539,7 +528,6 @@ QString TokenProvider::process( const QString & t )
 	label_time = time(&label_time) ;
 	localtime_r(&label_time,&label_time_struct) ;
 
-        /*strftime(temp_time_str,sizeof temp_time_str - 1, date_reg_exp.cap(1).ascii(),&label_time_struct);*/// -!F: original, delete
 	QByteArray dateRExpByteArray = date_reg_exp.cap(1).toAscii();
 	const char * date_reg_exp_1_chars = dateRExpByteArray.constData();
 	strftime(temp_time_str,sizeof temp_time_str - 1, date_reg_exp_1_chars, &label_time_struct);
@@ -874,12 +862,8 @@ QString TokenProvider::jsParse( const QString & script )
 
 #else
     // Maybe we need no Completion object for KJSEmbed
-    /*KJS::Completion comp = s_interpreter->evaluate( KJS::UString( script.toLatin1() ) );
-    KJS::Value val = comp.value();*/
     KJSResult comp = s_interpreter->evaluate( script );
     KJSObject val = comp.value();
-    /*if( val.isValid() )
-	ret = val.toString( s_interpreter->globalExec() ).cstring().c_str();*/
     if (!val.isUndefined() && !val.isNull())
     {
         ret = val.toString( s_interpreter->globalContext() );
@@ -895,14 +879,8 @@ bool TokenProvider::jsParseToBool( const QString & script )
 {
 #ifdef USE_JAVASCRIPT
     // Maybe we need no Completion object for KJSEmbed
-    /*KJS::Completion comp = s_interpreter->evaluate( KJS::UString( script.toLatin1() ) );
-    KJS::Value val = comp.value();*/
     KJSResult comp = s_interpreter->evaluate( script );
     KJSObject val = comp.value();
-    /*if( val.isValid() )
-    {
-	return val.toBoolean( s_interpreter->globalExec() );
-    }*/
     if (!val.isUndefined() && !val.isNull())
     {
         return val.toBoolean( s_interpreter->globalContext() );
@@ -931,7 +909,6 @@ const QString TokenProvider::createSerial()
         tmpstr.setNum(splitit.cap(2).length());
         QString formatstring = "%0" + tmpstr + "lu";
 
-        /*s = prenum + tmpstr.sprintf(formatstring, tmp) + postnum;*/
         QByteArray formatstringByteArray = formatstring.toUtf8();
         const char* formatstringChar = formatstringByteArray.constData();
 	s = prenum + tmpstr.sprintf(formatstringChar, tmp) + postnum;

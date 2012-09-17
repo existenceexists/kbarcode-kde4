@@ -80,12 +80,9 @@
 #define PNG_FORMAT "PNG"
 
 class AddressListViewItem : public QTreeWidgetItem {
-/*class AddressListViewItem : public Q3ListViewItem {*/// -!F: del
 public:
     AddressListViewItem(QTreeWidget *parent, KABC::Addressee & addr )
         : QTreeWidgetItem( parent ), m_address( addr )
-    /*AddressListViewItem(Q3ListView *parent, KABC::Addressee & addr )
-        : Q3ListViewItem( parent ), m_address( addr )*/// -!F: del
         {
             this->setText( 0, m_address.givenName() );
             this->setText( 1, m_address.familyName() );
@@ -113,7 +110,6 @@ BatchAssistant::BatchAssistant( QWidget* parent )
 
     compGroup = new KCompletion();
 
-    /*enableControls();*/// -!F: original, del
     setupSql();
 
     show();
@@ -224,9 +220,7 @@ void BatchAssistant::setupPage4()
     hbox->setLayout(hbox_layout);
 
     m_varTable = new QTableWidget;
-    /*m_varTable = new Q3Table;*/// -!F: delete
     page4_layout->addWidget(m_varTable);
-    /*m_varTable->setSelectionMode( Q3Table::SingleRow );*/// -!F: delete
     m_varTable->setSelectionBehavior(QTableWidget::SelectRows);
     m_varTable->setSelectionMode(QTableWidget::SingleSelection);
     page4->setLayout(page4_layout);
@@ -298,7 +292,7 @@ void BatchAssistant::setupPage10()
     radioBarcode = new QRadioButton( i18n("Print to a special &barcode printer"));
     button_layout->addWidget(radioBarcode);
     button_layout->addWidget(radioImage);
-    /*button_layout->addWidget(imageBox);*/// -!F: if imageBox is put into QGroupBox group, radio buttons don't behave as desired
+    /*button_layout->addWidget(imageBox);*/// if imageBox is put into QGroupBox group, radio buttons don't behave as desired
     group->setLayout(button_layout);
 
     QWidget* directoryBox = new QWidget;
@@ -325,7 +319,7 @@ void BatchAssistant::setupPage10()
 	formatBox_layout->addWidget(comboFormat);
     comboFormat->insertItems( 0, formats );
     if( formats.contains( PNG_FORMAT ) )
-	  comboFormat->setCurrentIndex( formats.indexOf( PNG_FORMAT ) );// -!F: Does this work as expected ? originally setCurrentItem(...)
+	  comboFormat->setCurrentIndex( formats.indexOf( PNG_FORMAT ) );
     label->setBuddy( comboFormat );
 
     QGroupBox* imageNameGroup = new QGroupBox( i18n("&Filename:") );
@@ -421,9 +415,6 @@ void BatchAssistant::setupStackPage1()
     connect( importBarcode_basicAct, SIGNAL( triggered( bool ) ), this, SLOT( addAllItems() ) );
     
     KMenu* mnuImport = new KMenu( this );
-    /*mnuImport->insertItem( i18n("Import from File ..."), this, SLOT( loadFromFile() ) );
-    mnuImport->insertItem( i18n("Import from Clipboard ..."), this, SLOT( loadFromClipboard() ) );
-    mnuImport->insertItem( i18n("Import barcode_basic"), this, SLOT( addAllItems() ) );*/// -!F: original, delete
     mnuImport->addAction( importFromFileAct );
     mnuImport->addAction( importFromClipboardAct );
     mnuImport->addAction( importBarcode_basicAct );
@@ -440,8 +431,6 @@ void BatchAssistant::setupStackPage1()
     stack1_layout->addWidget( sqlList );
     connect( sqlList, SIGNAL( itemDoubleClicked( QTreeWidgetItem *, int ) ),
              this, SLOT( changeItem( QTreeWidgetItem *, int ) ) );
-    /*connect( sqlList, SIGNAL(doubleClicked(Q3ListViewItem*,const QPoint &,int)),
-             this, SLOT(changeItem(Q3ListViewItem*, const QPoint &,int)));*/// -!F: del
 
     connect( customerName, SIGNAL( activated(int) ), this, SLOT( customerNameChanged(int) ) );
     connect( customerId, SIGNAL( activated(int) ), this, SLOT( customerIdChanged(int) ) );
@@ -586,9 +575,6 @@ void BatchAssistant::setupStackPage4()
 
     listAddress = new QTreeWidget;
     list1_layout->addWidget(listAddress);
-    /*listAddress->addColumn( i18n("Given Name"), 0 );
-    listAddress->addColumn( i18n("Family Name"), 1 );
-    listAddress->addColumn( i18n("Email Address"), 2 );*/// -!F: delete
     QTreeWidgetItem* header = new QTreeWidgetItem;
     header->setText(0, i18n("Given Name"));
     header->setText(1, i18n("Family Name") );
@@ -603,9 +589,6 @@ void BatchAssistant::setupStackPage4()
 
     listSelectedAddress = new QTreeWidget;
     list2_layout->addWidget(listSelectedAddress);
-    /*listSelectedAddress->addColumn( i18n("Given Name"), 0 );
-    listSelectedAddress->addColumn( i18n("Family Name"), 1 );
-    listSelectedAddress->addColumn( i18n("Email Address"), 2 );*/// -!F: delete
     QTreeWidgetItem* header2 = new QTreeWidgetItem;
     header2->setText( 0, i18n("Given Name") );
     header2->setText( 1, i18n("Family Name") );
@@ -662,32 +645,25 @@ void BatchAssistant::enableControls()
     imageBox->setEnabled( radioImage->isChecked() );
 
     if( radioImportSql->isChecked() ) {
-	/*setNextEnabled( page3, !importSqlQuery->text().isEmpty() );*/// -!F: original, del
 	page3NextButtonEnable = !importSqlQuery->text().isEmpty();
     } else if( radioImportCSV->isChecked() ) {
-	/*setNextEnabled( page3, !importCsvFile->url().isEmpty() );*/// -!F: original, del
 	page3NextButtonEnable = !importCsvFile->url().isEmpty();
     } else if( radioImportManual->isChecked() ) {
-	/*setNextEnabled( page3, true );*/// -!F: original, del
 	page3NextButtonEnable = true;
     }
 
     editImageFilename->setEnabled( radioImageFilenameCustom->isChecked() );
     radioImageFilenameArticle->setEnabled( radioSqlArticles->isChecked() );
 
-    /*setNextEnabled( page1, !m_url->url().isEmpty() );*/// -!F: original, del
     page1NextButtonEnable = !m_url->url().path().isEmpty();
     
     if( radioAddressBook->isChecked() ) {
-        /*setNextEnabled( page3, listSelectedAddress->childCount() );*/// -!F: original, del
         page3NextButtonEnable = listSelectedAddress->topLevelItemCount();
     }
 
     if( radioImage->isChecked() ) {
-	/*setFinishEnabled( page10, !imageDirPath->url().isEmpty() );*/// -!F: original, del
 	page10FinishButtonEnable = !imageDirPath->url().isEmpty();
     } else {
-	/*setFinishEnabled( page10, true );*/// -!F: original, del
 	page10FinishButtonEnable = true;
     }
     
@@ -729,9 +705,6 @@ void BatchAssistant::configureCurrentPage( KPageWidgetItem* page )
     else if( page->objectName() == QString( "page10" ) ) {
         enableButton( KDialog::User1, page10FinishButtonEnable );
     }
-
-
-    /*KAssistant::showPage( p );*/// -!F: original, del
 }
 
 /* This slot is called when a user clicks the next button.*/
@@ -896,17 +869,14 @@ void BatchAssistant::setupBatchPrinter( BatchPrinter* batch, int m )
     {
 	TVariableList* tVariableList = new TVariableList;
 	for( int i=0; i<m_varTable->rowCount(); i++ )
-        /*for( int i=0; i<m_varTable->numRows(); i++ )*/// -!F: delete
 	{
 	    QMap<QString, QString> map;
 	    for( int z=0; z<m_varTable->columnCount(); z++ ) {
-            /*for( int z=0; z<m_varTable->numCols(); z++ ) {*/// -!F: delete
 		  QTableWidgetItem* item = m_varTable->item(i, z);
 		  if(item)
 			map[ m_varTable->horizontalHeaderItem( z )->text() ] = item->text();
 		  else
 			map[ m_varTable->horizontalHeaderItem( z )->text() ] = "";
-                /*map[ m_varTable->horizontalHeader()->label( z ) ] = m_varTable->text( i, z );*/// -!F: delete
 		}
 	    tVariableList->append( map );
 	}
@@ -918,7 +888,6 @@ void BatchAssistant::setupBatchPrinter( BatchPrinter* batch, int m )
         KABC::AddresseeList* list = new KABC::AddresseeList;
         int itemIndex = 0;
         QTreeWidgetItem* item = listSelectedAddress->topLevelItem( itemIndex );
-        /*Q3ListViewItem* item = listSelectedAddress->firstChild();*/// -!F: del
         while( item )
         {
             list->append( static_cast<AddressListViewItem*>(item)->address() );
@@ -1097,8 +1066,7 @@ void BatchAssistant::addAllItems()
 
 void BatchAssistant::loadFromFile() 
 {
-    /*QString f = KFileDialog::getOpenFileName( 0, 0, this );*/// -!F: original
-    QString f = KFileDialog::getOpenFileName( KUrl(), QString(), this );// -!F: is this the right replacement ?
+    QString f = KFileDialog::getOpenFileName( KUrl(), QString(), this );
     if( !f.isEmpty() )
         loadFromFile( f );
 }
@@ -1230,7 +1198,6 @@ void BatchAssistant::fillVarList()
     
     XMLUtils util;
     DocumentItemList list;
-    /*list.setAutoDelete( true );*/// -!F: DocumentItemList has no member named setAutoDelete, what is the correct replacement of this?
 
     TokenProvider token( this );
     Definition* def = NULL;
@@ -1379,10 +1346,7 @@ void BatchAssistant::slotTableInsert()
 
 void BatchAssistant::slotTableRemove()
 {
-    /*Q3TableSelection sel = m_varTable->selection( m_varTable->currentSelection() );
-    m_varTable->removeRow( sel.topRow() );*/// -!F: original, keep
-    m_varTable->removeRow( m_varTable->currentRow() );// -!F: Is this the right replacement?
-    
+    m_varTable->removeRow( m_varTable->currentRow() );
 }
 
 void BatchAssistant::setFilename( const QString & url )
@@ -1405,8 +1369,6 @@ void BatchAssistant::setImportSqlQuery( const QString & query )
 
     enableControls();
 
-    /*showPage( page3 );
-    showPage( page4 );*/// -!F: original, are the following lines the right replacement ?
     configureCurrentPage( page3Item );
     setCurrentPage( page3Item );
     configureCurrentPage( page4Item );
@@ -1427,8 +1389,6 @@ void BatchAssistant::setImportCsvFile( const QString & filename )
 
     enableControls();
 
-    /*showPage( page3 );
-    showPage( page4 );*/// -!F: original, are the following lines the right replacement ?
     configureCurrentPage( page3Item );
     setCurrentPage( page3Item );
     configureCurrentPage( page4Item );

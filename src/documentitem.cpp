@@ -38,7 +38,6 @@ void DocumentItem::init()
 {
     m_canvasitem = NULL;
     m_token = NULL;
-    /*m_device = (QPaintDevice*) KApplication::desktop();*/// -!F: keep
     m_device = KApplication::desktop();
     
     m_z = 0;    
@@ -239,14 +238,12 @@ void DocumentItem::setAdditionOrder( int z )
     m_additionOrder = z;
 }
 
-void DocumentItem::setPaintDevice( QPaintDevice* device )// -!F: original,
-/*void DocumentItem::setPaintDevice( QDesktopWidget* device )*/// -!F: delete, 
+void DocumentItem::setPaintDevice( QPaintDevice* device )
 {
     m_device = device;
 }
 
-QPaintDevice* DocumentItem::paintDevice() const// -!F: original, 
-/*QDesktopWidget* DocumentItem::paintDevice() const*/// -!F: delete, 
+QPaintDevice* DocumentItem::paintDevice() const
 {
     return m_device;
 }

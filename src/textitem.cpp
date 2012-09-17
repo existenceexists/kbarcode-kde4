@@ -61,16 +61,14 @@ void TextItem::draw(QPainter* painter)
     QPaintDevice* device = DocumentItem::paintDevice();
     
     /*double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
-    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();*/// -!F: original, keep
+    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();*/
     double scalex = 1.0;
-    double scaley = 1.0;// -!F: added
+    double scaley = 1.0;// don't scale anything
 
-    /*QColorGroup cg;*/// -!F: original, delete
-    /*Q3SimpleRichText srt( t, painter->font() );*/// -!F: original
     QTextDocument srt;
     srt.setHtml( t );
     srt.setDefaultFont( painter->font() );
-    srt.documentLayout()->setPaintDevice( device );// -!F: ?
+    srt.documentLayout()->setPaintDevice( device );
 
     /*
     int width = (rect().width() < (int)((double)srt.widthUsed()*scalex) && autosize) ? srt.widthUsed() : rect().width();
@@ -78,7 +76,7 @@ void TextItem::draw(QPainter* painter)
     */
 
     /*int width = (int)((double)rect().width() / scalex);
-    int height = (int)((double)rect().height() / scaley);*/// -!F: original, keep
+    int height = (int)((double)rect().height() / scaley);*/
     int width = (int)rect().width();
     int height = (int)rect().height();
     
@@ -91,19 +89,15 @@ void TextItem::draw(QPainter* painter)
     {
         default:
         case 0:
-            /*painter->translate( rect().x(), rect().y() );*/// -!F: original
             break;
         case 90:
-            /*painter->translate( rect().x() + w, rect().y() );*/// -!F: original
             painter->translate( w, 0 );
             qSwap( w, h );
             break;
         case 180:
-            /*painter->translate( rect().x() + w, rect().y() + h );*/// -!F: original
             painter->translate( w, h );
             break;
         case 270:
-            /*painter->translate( rect().x(), rect().y() + h );*/// -!F: original
             painter->translate( 0, h );
             qSwap( w, h );
             break;
@@ -114,8 +108,6 @@ void TextItem::draw(QPainter* painter)
     if( !TextItem::IsQtTextRenderingBroken() )
     {
         painter->setPen( Qt::black );
-        /*srt.setWidth( painter, w );
-        srt.draw( painter, 0, 0, QRect( 0, 0, w, h ), cg );*/// -!F: keep
         if( srt.size().width() > w ) {// Make alignment "center" and "right" work
             srt.setTextWidth( srt.size().width() );
         } else {
@@ -149,16 +141,14 @@ void TextItem::drawPreview(QPainter* painter)
     QPaintDevice* device = DocumentItem::paintDevice();
     
     /*double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
-    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();*/// -!F: original, keep
+    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();*/
     double scalex = 1.0;
-    double scaley = 1.0;// -!F: added
+    double scaley = 1.0;// don't scale anything
 
-    /*QColorGroup cg;*/// -!F: original, delete
-    /*Q3SimpleRichText srt( t, painter->font() );*/// -!F: original
     QTextDocument srt;
     srt.setHtml( t );
     srt.setDefaultFont( painter->font() );
-    srt.documentLayout()->setPaintDevice( device );// -!F: ?
+    srt.documentLayout()->setPaintDevice( device );
 
     /*
     int width = (rect().width() < (int)((double)srt.widthUsed()*scalex) && autosize) ? srt.widthUsed() : rect().width();
@@ -166,7 +156,7 @@ void TextItem::drawPreview(QPainter* painter)
     */
 
     /*int width = (int)((double)rect().width() / scalex);
-    int height = (int)((double)rect().height() / scaley);*/// -!F: original, keep
+    int height = (int)((double)rect().height() / scaley);*/
     int width = rect().width();
     int height = rect().height();
     
@@ -199,9 +189,6 @@ void TextItem::drawPreview(QPainter* painter)
     if( !TextItem::IsQtTextRenderingBroken() )
     {
         painter->setPen( Qt::black );
-        /*srt.setWidth( painter, w );
-        srt.draw( painter, rect().x(), rect().y(), QRect( rect().x(), rect().y(), w, h ), cg );*/// -!F: keep
-        //srt.setTextWidth( w );
         if( srt.size().width() > w ) {// Make alignment "center" and "right" work
             srt.setTextWidth( srt.size().width() );
         } else {
@@ -269,7 +256,6 @@ void TextItem::drawEPcl( QTextStream* stream )
     // provide an API which simplifies wordwrapping for
     // barcode printers
 	
-    /*QStringList lines = QStringList::split( "\n", t );*/// -!F: original, delete
     QStringList lines = t.split("\n");
     
     QStringList::Iterator line = lines.begin();

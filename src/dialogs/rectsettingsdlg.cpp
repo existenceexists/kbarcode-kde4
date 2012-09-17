@@ -59,10 +59,7 @@ RectSettingsDlg::RectSettingsDlg(QWidget *parent )
     : KDialog( parent )
 {
     setCaption( i18n("Settings") );
-    /*setButtons( KDialog::Ok | KDialog::Cancel );*/// -!F: Is it needed? try to uncomment
-    /*setDefaultButton( KDialog::Ok );*/// -!F: Is it needed? try to uncomment
     
-    /*QFrame* frame = plainPage();*/// -!F: original, delete
     QWidget *frame = new QWidget( this );
     setMainWidget( frame );
     QGridLayout* grid = new QGridLayout( frame );
@@ -156,10 +153,7 @@ LineSettingsDlg::LineSettingsDlg(QWidget *parent )
     : KDialog( parent )
 {
     setCaption( i18n("Settings") );
-    /*setButtons( KDialog::Ok | KDialog::Cancel );*/// -!F: Is it needed? try to uncomment
-    /*setDefaultButton( KDialog::Ok );*/// -!F: Is it needed? try to uncomment
     
-    /*QFrame* frame = plainPage();*/// -!F: original, delete
     QWidget *frame = new QWidget( this );
     setMainWidget( frame );
     QGridLayout* grid = new QGridLayout( frame );

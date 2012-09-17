@@ -48,7 +48,6 @@ class ConfAssistant : public KAssistantDialog
         ConfAssistant( QWidget* parent = 0, QString name = QString("wiz"), bool modal = true );
         ~ConfAssistant();
 
-        /*void showPage( QWidget* page );*/
 	void configureCurrentPage( KPageWidgetItem * page );
 
         // used in mainwindow.cpp

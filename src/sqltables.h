@@ -126,8 +126,7 @@ class SqlTables : public QObject {
           * @return bool
           */
         static bool isConnected() {
-            return getInstance()->connected;// -!F: original, uncomment
-            /*return true;*/// -!F: delete
+            return getInstance()->connected;
         }
 
         const SqlDescription* driver() const;
@@ -210,8 +209,6 @@ class SqlWidget : public QWidget {
         int driverCount() const;
 
         void save( bool usedb = true );
-	
-	int test1();// -!F: delete this line
 
     signals:
         void databaseWorking( bool b );

@@ -22,7 +22,6 @@
 #include <qobject.h>
 #include <qstring.h>
 #include <QTextStream>
-//#include <QDesktopWidget>// -!F: ?
 
 #include <qcolor.h>
 #include <qpen.h>
@@ -77,8 +76,8 @@ public:
     /**
      * Draws the item on the preview. Added by Frank. Differs from draw() by coordinates that are used to paint at.
      */
-    virtual void drawPreview (QPainter* painter) = 0;
-    /*virtual void drawPreview (QPainter* painter) {};*/// -!F: an alternative to the pure virtual function
+    virtual void drawPreview (QPainter* painter) = 0;// make drawPreview() pure virtual function
+    /*virtual void drawPreview (QPainter* painter) {};*/
         
     
     /**
@@ -112,10 +111,8 @@ public:
     void setCanvasItem( TCanvasItem* item );
     TCanvasItem* canvasItem() const;
     
-    void setPaintDevice( QPaintDevice* device );// -!F: original
-    /*void setPaintDevice( QDesktopWidget* device );*/// -!F: delete, 
-    QPaintDevice* paintDevice() const;// -!F: original
-    /*QDesktopWidget* paintDevice() const;*/// -!F: delete, 
+    void setPaintDevice( QPaintDevice* device );
+    QPaintDevice* paintDevice() const;
     
     void setTokenProvider( TokenProvider* token );
     TokenProvider* tokenProvider() const;
@@ -227,8 +224,7 @@ private:
 
      QString m_visibilityScript;
 
-     QPaintDevice* m_device;// -!F: original, keep
-     /*QDesktopWidget* m_device;*/// -!F: delete, 
+     QPaintDevice* m_device;
      TCanvasItem* m_canvasitem;
      TokenProvider* m_token;
 };

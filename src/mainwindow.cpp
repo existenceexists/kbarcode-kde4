@@ -21,28 +21,25 @@
 #include <QTextBrowser>
 #include <qsqldatabase.h>
 #include <QString>
+#include <QList>
 
 // KDE includes
 #include <kaction.h>
+#include <KActionCollection>
 #include <kapplication.h>
 #include <kcmdlineargs.h>
 #include <kconfiggroup.h>
+#include <kglobal.h>
+#include <khelpmenu.h>
 #include <kiconloader.h>
 #include <klocale.h>
 #include <kmenubar.h>
 #include <kmessagebox.h>
 #include <kmenu.h>
-#include <kstandarddirs.h>
 #include <krun.h>
-#include <kglobal.h>
-#include <ktoolinvocation.h>
-#include <KActionCollection>
 #include <KStandardAction>
-
-// -!F: added by Frank, keep it:
-#include <QList>
-#include <QDebug>
-#include <khelpmenu.h>
+#include <kstandarddirs.h>
+#include <ktoolinvocation.h>
 
 bool MainWindow::autoconnect = true;
 bool MainWindow::startassistant = true;
@@ -70,86 +67,38 @@ MainWindow::~MainWindow()
 {
 }
 
-void MainWindow::setupActions() // -!F:
+void MainWindow::setupActions()
 {
-    /*kbarcodeDirectoryName = directoryName;*/// -!F: delete
-    
-    /*KAction* quitAct = KStandardAction::quit(kapp, SLOT(quit()), actionCollection());*/
     KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
-    /*KAction* closeAct = KStandardAction::close( this, SLOT( close() ), actionCollection());*/
     KStandardAction::close( this, SLOT( close() ), actionCollection());
-    /*KAction* configureAct = KStandardAction::preferences( KBarcodeSettings::getInstance(), SLOT(configure()), actionCollection() );*/
     KStandardAction::preferences( KBarcodeSettings::getInstance(), SLOT(configure()), actionCollection() );
-    /*KAction* assistantAct = new KAction( i18n("&Start Configuration Assistant..."), BarIcon("assistant"), 0, this,
-                                SLOT(assistant()), actionCollection());*/
     KAction* assistantAct = new KAction(this);
     assistantAct->setText(i18n("&Start Configuration Assistant..."));
-    //assistantAct->setIcon(BarIcon("/usr/share/app-install/icons/assistant.png"));// -!F: delete
-    //assistantAct->setIcon(BarIcon("/usr/share/icons/crystalsvg/16x16/actions/wizard.png"));// -!F: delete
-    /*assistantAct->setIcon(BarIcon("/usr/share/icons/crystalsvg/16x16/actions/wizard.png"));*/// -!F: delete
-    assistantAct->setIcon(BarIcon("tools-wizard"));// -!F: keep
+    assistantAct->setIcon(BarIcon("tools-wizard"));
     actionCollection()->addAction("assistant", assistantAct);
     connect(assistantAct, SIGNAL(triggered(bool)), this, SLOT(assistant()));
     
-    /*connectAct = new KAction(i18n("&Connect to Database"), BarIcon("connect_no"), 0, this, SLOT(connectMySQL()),
-                                actionCollection(),"connect" );*/
     connectAct = new KAction(this);
     connectAct->setText(i18n("&Connect to Database"));
-    /*connectAct->setIcon(BarIcon("/usr/share/icons/crystalsvg/16x16/actions/connect_no.png"));*/// -!F: delete
-    connectAct->setIcon(BarIcon("network-connect"));// -!F: keep
+    connectAct->setIcon(BarIcon("network-connect"));
     actionCollection()->addAction("connect", connectAct);
     connect(connectAct, SIGNAL(triggered(bool)), this, SLOT(connectMySQL()));
 
-    /*KAction* newTablesAct = new KAction( i18n("&Create Tables"), "", 0, this,
-                                SLOT(newTables()), actionCollection(), "tables" );*/
     KAction* newTablesAct = new KAction(this);
     newTablesAct->setText(i18n("&Create Tables"));
     actionCollection()->addAction("tables", newTablesAct);
     connect(newTablesAct, SIGNAL(triggered(bool)), this, SLOT(newTables()));
 
-    /*importLabelDefAct = new KAction( i18n("&Import Label Definitions"), "", 0, SqlTables::getInstance(),
-                                SLOT(importLabelDef()), actionCollection(), "import" );*/
     importLabelDefAct = new KAction(this);
     importLabelDefAct->setText(i18n("&Import Label Definitions"));
     actionCollection()->addAction("importLabelDef", importLabelDefAct);
     connect(importLabelDefAct, SIGNAL(triggered(bool)), SqlTables::getInstance(), SLOT(importLabelDef()));
 
-    /*importExampleAct = new KAction( i18n("&Import Example Data"), "", 0, SqlTables::getInstance(),
-                                SLOT(importExampleData()), actionCollection(), "import" );*/
     importExampleAct = new KAction(this);
     importExampleAct->setText(i18n("&Import Example Data"));
     actionCollection()->addAction("importExample", importExampleAct);
     connect(importExampleAct, SIGNAL(triggered(bool)), SqlTables::getInstance(), SLOT(importExampleData()));
     
-    /*KMenu* file = new KMenu( this );
-    KMenu* settings = new KMenu( this );
-    KMenu* hlpMenu = helpMenu();
-    int helpid = hlpMenu->idAt( 0 );
-    hlpMenu->removeItem( helpid );
-    hlpMenu->insertItem( SmallIconSet("contents"), i18n("&Help"),
-        this, SLOT(appHelpActivated()), Qt::Key_F1, -1, 0 );
-    hlpMenu->insertSeparator(-1);
-    hlpMenu->insertItem( i18n("&Action Map..."), this, SLOT( slotFunctionMap() ), 0, -1, 0 );
-    hlpMenu->insertSeparator(-2);
-    hlpMenu->insertItem( SmallIconSet("system"), i18n("&System Check..."), this, SLOT(showCheck() ), 0, -1, 0 );
-    hlpMenu->insertItem( SmallIconSet("barcode"), i18n("&Barcode Help..."), this, SLOT( startInfo() ), 0, -1, 0 );
-    hlpMenu->insertItem( i18n("&Donate..."), this, SLOT( donations() ), 0, -1, 0 );*/
-    
-    /*menuBar()->insertItem( i18n("&File"), file );
-    menuBar()->insertItem( i18n("&Settings"), settings );
-    menuBar()->insertItem( i18n("&Help"), hlpMenu );*/
-
-    /*closeAct->plug( file );
-    quitAct->plug( file );*/
-
-    /*configureAct->plug( settings );
-    assistantAct->plug( settings );
-    connectAct->plug( settings );*/
-    /*(new KActionSeparator( this ))->plug( settings );
-    newTablesAct->plug( settings );
-    importLabelDefAct->plug( settings );
-    importExampleAct->plug( settings );*/
-
     SqlTables* tables = SqlTables::getInstance();
     if( tables->getData().autoconnect && autoconnect && !first ) {
         tables->connectMySQL();
@@ -160,17 +109,7 @@ void MainWindow::setupActions() // -!F:
     importLabelDefAct->setEnabled( !connectAct->isEnabled() );
     importExampleAct->setEnabled( !connectAct->isEnabled() );
     
-    // Set window icon.
-    //setWindowIcon(KIcon(this->kbarcodeDirectoryName + QString("/hi16-app-kbarcode.png")));
-    /*if (!KGlobal::dirs()->addResourceDir(
-            "appdata", QString("/home/fanda/programovani/c++/frank_scripts/kbarcode/executables/share/apps/") + // -!F:
-            this->kbarcodeDirectoryName)) {
-        qDebug() << QString("The addition of the following folder as a resource dir failed: ") 
-            + QString("/home/fanda/programovani/c++/frank_scripts/kbarcode/executables/share/apps/");
-    }*/// -!F: delete
-    
     // Let KDE4 create the main window.
-    /*setupGUI(Default, this->kbarcodeDirectoryName + QString("/mainwindowui.rc"));*/// -!F: delete
     setupGUI(Default, KStandardDirs::locate( "appdata", QString("mainwindowui.rc")));
     
     createCustomHelpMenu();
@@ -187,22 +126,15 @@ void MainWindow::createCustomHelpMenu()
     actionCollection()->addAction("helpAct", helpAct);
     connect(helpAct, SIGNAL(triggered(bool)), this, SLOT(appHelpActivated()));
     
-    /*// actionMapAct made by Frank:
-    KAction* actionMapAct = new KAction(this);
-    actionMapAct->setText(i18n("&Action Map..."));
-    actionCollection()->addAction("actionMapAct", actionMapAct);
-    connect(actionMapAct, SIGNAL(triggered(bool)), this, SLOT(slotFunctionMap()));*/
-    
     KAction* systemCheckAct = new KAction(this);
     systemCheckAct->setText(i18n("&System Check..."));
-    /*systemCheckAct->setIcon(KIcon("/usr/share/icons/crystalsvg/16x16/devices/system.png"));*/// -!F:
-    systemCheckAct->setIcon(KIcon("computer"));// -!F: keep
+    systemCheckAct->setIcon(KIcon("computer"));
     actionCollection()->addAction("systemCheckAct", systemCheckAct);
     connect(systemCheckAct, SIGNAL(triggered(bool)), this, SLOT(showCheck()));
     
     KAction* barcodeHelpAct = new KAction(this);
     barcodeHelpAct->setText(i18n("&Barcode Help..."));
-    barcodeHelpAct->setIcon(KIcon("view-barcode"));// -!F: keep
+    barcodeHelpAct->setIcon(KIcon("view-barcode"));
     actionCollection()->addAction("barcodeHelpAct", barcodeHelpAct);
     connect(barcodeHelpAct, SIGNAL(triggered(bool)), this, SLOT(startInfo()));
     
@@ -214,7 +146,7 @@ void MainWindow::createCustomHelpMenu()
     
     QList<QAction *> menuBarActionsList = menuBar()->actions();
     
-    QAction * oldHelpMenu = menuBarActionsList.takeAt( menuBarActionsList.size() - 1 );// Remove help menu.
+    QAction * oldHelpMenu = menuBarActionsList.takeAt( menuBarActionsList.size() - 1 );// Remove the old help menu.
     QList<QAction *> oldHelpMenuActionsList = oldHelpMenu->menu()->actions();
     for( int i = 0; i < oldHelpMenuActionsList.size(); i++ ) {// Avoid memory leaks and ambiguous shortcuts.
         oldHelpMenuActionsList[i]->setEnabled( false );

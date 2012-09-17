@@ -43,7 +43,6 @@ class TextLineEditor : public QWidget {
 	KIntNumInput* mag_hor;
 	
         void setText( const QString & t );
-        /*void setFontType(int index);*/// -!F: original, needs to be a slot
 	int  getFontType();
 	int  getHorMag();
 	int  getVertMag();

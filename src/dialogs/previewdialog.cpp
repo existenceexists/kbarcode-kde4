@@ -149,12 +149,7 @@ PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename
 
     connect( buttonClose, SIGNAL( clicked() ), this, SLOT( reject() ) );
     connect( buttonAddr, SIGNAL( clicked() ), this, SLOT( selectAddress() ) );
-    // TODO: ... Done.
-    // remove this ugly hack! The finished label is only shown when I call
-    // updateChanges() twice. I have no idea why! ... Fixed. No need to call it twice now. The problem has been fixed by QT/KDE, not by me.
     connect( buttonUpdate, SIGNAL( clicked() ), this, SLOT( updatechanges() ) );
-    /*connect( buttonUpdate, SIGNAL( clicked() ), this, SLOT( updatechanges() ) );*/// -!F: original, delete
-    // end ugly hack
     
     connect( customerName, SIGNAL( activated(int) ), this, SLOT( customerNameChanged(int) ) );
     connect( customerId, SIGNAL( activated(int) ), this, SLOT( customerIdChanged(int) ) );

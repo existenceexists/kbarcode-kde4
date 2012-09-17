@@ -53,7 +53,7 @@ DocumentItemDrag::DocumentItemDrag()
 {
 }
 
-const char * DocumentItemDrag::mimeType()// -!F: Replace const char* with QString.
+const char * DocumentItemDrag::mimeType()
 {
     return "application/x-kbarcode-document-item";
 }
@@ -85,7 +85,7 @@ void DocumentItemDrag::setDocumentItem( DocumentItemList* list )
 
 bool DocumentItemDrag::canDecode( QMimeData* e )
 {
-    return e->hasFormat( DocumentItemDrag::mimeType() );// -!F: Is QMimeData::hasFormat the right replacement of QMimeSource::provides ?
+    return e->hasFormat( DocumentItemDrag::mimeType() );
 }
 
 bool DocumentItemDrag::decode( QMimeData* mime, MyCanvasView* cv, TokenProvider* token, KUndoStack* history )

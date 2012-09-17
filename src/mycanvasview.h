@@ -57,7 +57,6 @@ class MyCanvas : public QGraphicsScene {
         bool grid() const { return m_grid; }
 
     protected:
-        /*void drawBackground( QPainter & painter, const QRect & clip );*/// -!F: original, delete
         void drawBackground( QPainter * painter, const QRectF & rect );
 
     private:

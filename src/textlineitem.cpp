@@ -55,37 +55,31 @@ void TextLineItem::init()
 void TextLineItem::draw(QPainter* painter)
 {
     QString text = tokenProvider() ? tokenProvider()->parse( m_text ) : m_text;
-    /*QColorGroup cg;*/// -!F: original, not needed any more?
-    /*Q3SimpleRichText srt( text, painter->font() );*/// -!F: original
     QTextDocument srt;
-    srt.setHtml( text );// -!F: or srt.setPlainText(text) ?
+    srt.setHtml( text );
     srt.setDefaultFont( painter->font() );
     
     QPaintDevice* device = DocumentItem::paintDevice();
     /*double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
-    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();*/// -!F: original, keep
+    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();*/
     double scalex = 1.0;
-    double scaley = 1.0;
+    double scaley = 1.0;// don't scale anything
     /*int width = (rect().width() > 0) ? (int)((double)rect().width() / scalex) : srt.idealWidth();
-    int height = (rect().height() > 0) ? (int)((double)rect().height() / scaley): srt.size().height();*/// -!F: original, keep
+    int height = (rect().height() > 0) ? (int)((double)rect().height() / scaley): srt.size().height();*/
     int width = (rect().width() > 0) ? rect().width() : srt.idealWidth();
     int height = (rect().height() > 0) ? rect().height() : srt.size().height();
 
-    /*QRect r( (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), width, height );*/// -!F: original
+    /*QRect r( (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), width, height );*/
     QRect r( 0, 0, width, height );
 
-    /*srt.setWidth( painter, width );*/// -!F: original
-    srt.documentLayout()->setPaintDevice( device );// -!F: ?
+    srt.documentLayout()->setPaintDevice( device );
     srt.setTextWidth( width );
 
     painter->save();
 
     if( !TextLineItem::IsQtTextRenderingBroken() )
     {
-        /*painter->scale( scalex, scaley );*/// -!F: original, keep
         painter->setPen( Qt::black );
-        /*srt.draw( painter, (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), r, cg );*/// -!F: original
-        /*srt.draw( painter, 0, 0, r, cg );*/// -!F: keep
         srt.drawContents( painter, r );
     }
     else
@@ -101,37 +95,31 @@ void TextLineItem::draw(QPainter* painter)
 void TextLineItem::drawPreview(QPainter* painter)
 {
     QString text = tokenProvider() ? tokenProvider()->parse( m_text ) : m_text;
-    /*QColorGroup cg;*/// -!F: original, not needed any more?
-    /*Q3SimpleRichText srt( text, painter->font() );*/// -!F: original
     QTextDocument srt;
-    srt.setHtml( text );// -!F: or srt.setPlainText(text) ?
+    srt.setHtml( text );
     srt.setDefaultFont( painter->font() );
     
     QPaintDevice* device = DocumentItem::paintDevice();
     /*double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
-    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();*/// -!F: original, keep
+    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();*/
     double scalex = 1.0;
-    double scaley = 1.0;// -!F: added, don't scale anything otherwise the font of printed text will be too large
+    double scaley = 1.0;// don't scale anything otherwise the font of printed text will be too large
     /*int width = (rect().width() > 0) ? (int)((double)rect().width() / scalex) : srt.idealWidth();
-    int height = (rect().height() > 0) ? (int)((double)rect().height() / scaley): srt.size().height();*/// -!F: original, keep
+    int height = (rect().height() > 0) ? (int)((double)rect().height() / scaley): srt.size().height();*/
     int width = (rect().width() > 0) ? rect().width() : srt.idealWidth();
     int height = (rect().height() > 0) ? rect().height() : srt.size().height();
 
-    /*QRect r( (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), width, height );*/// -!F: original, keep
+    /*QRect r( (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), width, height );*/
     QRect r( 0, 0, width, height );
 
-    /*srt.setWidth( painter, width );*/// -!F: original
-    srt.documentLayout()->setPaintDevice( device );// -!F: ?
+    srt.documentLayout()->setPaintDevice( device );
     srt.setTextWidth( width );
 
     painter->save();
 
     if( !TextLineItem::IsQtTextRenderingBroken() )
     {
-        /*painter->scale( scalex, scaley );*/// -!F: original, keep
         painter->setPen( Qt::black );
-        /*srt.draw( painter, (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley), r, cg );*/// -!F: original, keep
-        /*painter->translate( (int)((double)rect().x() / scalex ), (int)((double)rect().y() / scaley) );*/// -!F: original, keep
         painter->translate( rect().x(), rect().y() );
         srt.drawContents( painter, r );
     }
@@ -190,7 +178,6 @@ void TextLineItem::drawEPcl( QTextStream* stream )
     // TODO:
     // provide an API which simplifies wordwrapping for
     // barcode printers
-	/*QStringList lines = QStringList::split( "\n", t );*/// -!F: original, delete
 	QStringList lines = t.split("\n");
 
 	QStringList::Iterator line = lines.begin();

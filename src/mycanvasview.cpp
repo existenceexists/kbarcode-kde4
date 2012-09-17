@@ -30,8 +30,6 @@
 #include <QRectF>
 #include <QUndoCommand>
 
-#include <QDebug>// -!F: delete
-
 // KDE includes
 #include <kruler.h>
 #include <kstatusbar.h>
@@ -101,10 +99,8 @@ MyCanvasView::MyCanvasView( Definition* d, MyCanvas* c, QWidget* parent, Qt::WFl
         rulerv->setRulerMetricStyle( KRuler::Inch );
         rulerh->setRulerMetricStyle( KRuler::Inch );
     }
-    rulerv->setMaxValue( 0 );// -!F: original, setMaxValue() is deprecated in KDE 4.6 but not in KDE 4.8 doc!, so the note "deprecated" assigned to this method is probably a bug?
-    /*rulerv->setLength( 0 );*/// -!F: added, delete
-    rulerh->setMaxValue( 0 );// -!F: original, setMaxValue() is deprecated in KDE 4.6 but not in KDE 4.8 doc!, so the note "deprecated" assigned to this method is probably a bug?
-    /*rulerh->setLength( 0 );*/// -!F: added, delete
+    rulerv->setMaxValue( 0 );// KRuler::setMaxValue() is deprecated in KDE 4.6 but not in KDE 4.9 doc!, so the note "deprecated" assigned to this method is probably a bug?
+    rulerh->setMaxValue( 0 );// KRuler::setMaxValue() is deprecated in KDE 4.6 but not in KDE 4.9 doc!, so the note "deprecated" assigned to this method is probably a bug?
 
     viewport()->setMouseTracking( true );
     setDefinition( d );
@@ -169,7 +165,6 @@ void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
                         .arg( Measurements::system() ).arg( y ).arg( Measurements::system()), mouseid );
     }
 
-    /*updateCursor( e->pos() );*/// -!F: original, 
     updateCursor( mappedEventPosition );
 
     // if no mouse button is pressed bail out now
@@ -182,7 +177,6 @@ void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
 
     TCanvasItem* moving = getActive();
     if( moving && !moving->item()->locked() ) {
-        /*QPoint p = inverseWorldMatrix().map(e->pos());*/// -!F: original, delete
         QPoint p = matrix().inverted().map(mappedEventPosition);
         
         if( !compressedCommandIsInProgress ) {
@@ -263,27 +257,14 @@ void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
 
 void MyCanvasView::mousePressEvent(QMouseEvent* e)
 {
-    /*setActive( 0, e->modifiers() & Qt::ControlModifier  );*/// -!F: original
-    
     QPoint mappedEventPosition = mapToScene( e->pos() ).toPoint();
 
-    /*QList<QGraphicsItem *> list = scene()->items();
-    for( int z = MyCanvasView::getLowestZ( list ); z <= MyCanvasView::getHighestZ( list ); z++ )
-        for( int i = 0; i < list.count(); i++ ) {
-            if( list[i]->zValue() == z && isInside( mappedEventPosition, list[i] ) )
-                setActive( list[i], (e->modifiers() & Qt::ControlModifier) );
-        }
-    */// -!F: original
     setActive( scene()->itemAt( mappedEventPosition ), (e->modifiers() & Qt::ControlModifier) );
 
     if( getActive() ) {
-        /*moving_start = inverseWorldMatrix().map(e->pos());*/// -!F: original, delete
-        /*moving_start = matrix().inverted().map(e->pos());*/// -!F: keep 
         moving_start = matrix().inverted().map( mappedEventPosition );
         m_mode = updateCursor( mappedEventPosition );
-        /*old = getActive()->boundingRect().toRect();*/// -!F: keep, boundingRect() does not return absolute position, pos() does
         old = getActive()->pos();
-        /*delta_pt=QPoint(e->x() - old.x(),e->y() - old.y());*/// -!F: keep
         delta_pt=QPoint(mappedEventPosition.x() - old.x(),mappedEventPosition.y() - old.y());
     }
 
@@ -324,7 +305,6 @@ void MyCanvasView::mouseDoubleClickEvent(QMouseEvent* e)
     QList<QGraphicsItem *> list = scene()->items();
     for( int z = MyCanvasView::getHighestZ( list ); z >= MyCanvasView::getLowestZ( list ); z-- )    
         for( int i = 0; i < list.count(); i++ ) {
-            /*if( list[i]->zValue() == z && isInside( e->pos(), list[i] ) ) {*/// -!F: original
             if( list[i]->zValue() == z && isInside( mappedEventPosition, list[i] ) ) {
                 setActive( list[i] );
                 emit doubleClickedItem( getActive() );
@@ -338,8 +318,6 @@ bool MyCanvasView::isInside( QPoint p, QGraphicsItem* item )
     if( !item->isVisible() )
         return false;
 
-    /*return item->boundingRect().contains( p );*/// -!F: original, delete
-    /*return item->contains( item->mapFromScene( mapToScene( p ) ) );*/// -!F: keep
     return item->contains( item->mapFromScene( p ) );
 }
 
@@ -348,9 +326,6 @@ int MyCanvasView::isEdge( QPoint p, QGraphicsItem* item )
     if( !isInside( p, item ) )
         return Outside;
 
-    /*QRectF r = item->boundingRect();*/// -!F: original
-    /*QRectF r = QRectF( item->pos().x(), item->pos().y(), item->boundingRect().width(), item->boundingRect().height() );*/// -!F: keep
-    /*QRectF r = QRectF( item->pos().x() - horizontalScrollBar()->value(), item->pos().y() - verticalScrollBar()->value(), item->boundingRect().width(), item->boundingRect().height() );*/// -!F: keep
     QRectF rF = QRectF( item->pos().x(), item->pos().y(), item->boundingRect().width(), item->boundingRect().height() );
     QRect r = mapFromScene( rF ).boundingRect();
     
@@ -444,10 +419,8 @@ void MyCanvasView::updateRuler()
     if( def ) {
         canv->setRect( QRect( translation.x(), translation.y(), (int)def->getMeasurements().width( this ), (int)def->getMeasurements().height( this )) );
 
-        rulerv->setMaxValue( height() );// -!F: original, setMaxValue() is deprecated in KDE 4.6 but not in KDE 4.8 doc!, so the note "deprecated" assigned to this method is probably a bug?
-        /*rulerv->setLength( height() );*/// -!F: added, delete
-        rulerh->setMaxValue( width() );// -!F: original, setMaxValue() is deprecated in KDE 4.6 but not in KDE 4.8 doc!, so the note "deprecated" assigned to this method is probably a bug?
-        /*rulerh->setLength( width() );*/// -!F: added, delete
+        rulerv->setMaxValue( height() );// KRuler::setMaxValue() is deprecated in KDE 4.6 but not in KDE 4.9 doc!, so the note "deprecated" assigned to this method is probably a bug?
+        rulerh->setMaxValue( width() );// KRuler::setMaxValue() is deprecated in KDE 4.6 but not in KDE 4.9 doc!, so the note "deprecated" assigned to this method is probably a bug?
 
         if( Measurements::measurementSystem() == Measurements::Metric ) {
             rulerh->setPixelPerMark( (1/ 25.4)* logicalDpiX() );
@@ -501,7 +474,6 @@ void MyCanvasView::reposition()
     
     
     translation = QPoint( x, y );
-    /*translation = QPoint( 0, 0 );*/// -!F: delete
 }
 
 void MyCanvasView::setDefinition( Definition* d )

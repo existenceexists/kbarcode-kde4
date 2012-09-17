@@ -49,7 +49,6 @@ KBarcode::KBarcode( QWidget *parent, Qt::WindowFlags f, Qt::WidgetAttribute waf)
     setAttribute( waf );
     
     QGroupBox* w = new QGroupBox(this);
-    /*QVBoxLayout* layout = new QVBoxLayout(this);*/
     QVBoxLayout* vLayout = new QVBoxLayout();
     setCentralWidget( w );
 
@@ -60,14 +59,6 @@ KBarcode::KBarcode( QWidget *parent, Qt::WindowFlags f, Qt::WidgetAttribute waf)
     buttonData = new KPushButton( i18n("Edit SQL &Tables..."), w );
     buttonData->setEnabled( false );
     
-    /*buttonSingle->setIconSet( BarIconSet( "barcode" ) );// -!F: original, delete
-    buttonEditor->setIconSet( BarIconSet( "edit" ) );
-    buttonBatch->setIconSet( BarIconSet( "fileprint" ) );*/
-    /*KIconLoader *iconLoader = new KIconLoader;// -!F: delete
-    iconLoader->addExtraDesktopThemes();
-    buttonSingle->setIcon( KIcon( "view-barcode", iconLoader ) );
-    buttonEditor->setIcon( KIcon( "document-edit", iconLoader ) );
-    buttonBatch->setIcon( KIcon( "document-print", iconLoader ) );*/
     buttonSingle->setIcon( KIcon( "view-barcode" ) );
     buttonEditor->setIcon( KIcon( "document-edit" ) );
     buttonBatch->setIcon( KIcon( "document-print" ) );
@@ -93,49 +84,32 @@ KBarcode::KBarcode( QWidget *parent, Qt::WindowFlags f, Qt::WidgetAttribute waf)
     setupActions();
     show();
 
-    /*KAction* editLabelDefAct = new KAction(i18n("&Edit Label Definitions"), "",// -!F: original, delete
-                                0, this, SLOT(editLabelDef()), actionCollection(), "design" );*/
     KAction* editLabelDefAct = new KAction(this);
     editLabelDefAct->setText(i18n("&Edit Label Definitions"));
     actionCollection()->addAction("editLabelDefAct", editLabelDefAct);
     connect(editLabelDefAct, SIGNAL(triggered(bool)), this, SLOT(editLabelDef()));
 
-    /*KAction* editArticleAct = new KAction(i18n("&Edit Articles"), "",// -!F: original, delete
-                                0, this, SLOT(editArticles()), actionCollection(), "design" );*/
     KAction* editArticleAct = new KAction(this);
     editArticleAct->setText(i18n("&Edit Articles"));
     actionCollection()->addAction("editArticleAct", editArticleAct);
     connect(editArticleAct, SIGNAL(triggered(bool)), this, SLOT(editArticles()));
 
-    /*KAction* editCustomerAct = new KAction(i18n("&Edit Customers"), "",// -!F: original, delete
-                                0, this, SLOT(editCustomers()), actionCollection(), "design" );*/
     KAction* editCustomerAct = new KAction(this);
     editCustomerAct->setText(i18n("&Edit Customers"));
     actionCollection()->addAction("editCustomerAct", editCustomerAct);
     connect(editCustomerAct, SIGNAL(triggered(bool)), this, SLOT(editCustomers()));
 
-    /*KAction* editCustomerTextAct = new KAction(i18n("&Edit Customer Text"), "",// -!F: original, delete
-                                0, this, SLOT(editCustomerText()), actionCollection() );*/
     KAction* editCustomerTextAct = new KAction(this);
     editCustomerTextAct->setText(i18n("&Edit Customer Text"));
     actionCollection()->addAction("editCustomerTextAct", editCustomerTextAct);
     connect(editCustomerTextAct, SIGNAL(triggered(bool)), this, SLOT(editCustomerText()));
 
-    /*KAction* importCSVAct = new KAction(i18n("&Import CSV File..."), "",// -!F: original, delete
-                                0, this, SLOT(importCSV()), actionCollection() );*/
     KAction* importCSVAct = new KAction(this);
     importCSVAct->setText(i18n("&Import CSV File..."));
     actionCollection()->addAction("importCSVAct", importCSVAct);
     connect(importCSVAct, SIGNAL(triggered(bool)), this, SLOT(importCSV()));
     
     KMenu* data = new KMenu( buttonData );
-    /*editLabelDefAct->plug( data );// -!F: original, delete
-    editArticleAct->plug( data );
-    editCustomerAct->plug( data );
-    editCustomerTextAct->plug( data );
-    buttonData->setPopup( data );
-    data->insertSeparator();
-    importCSVAct->plug( data );*/
     data->addAction(editLabelDefAct);
     data->addAction(editArticleAct);
     data->addAction(editCustomerAct);
@@ -324,7 +298,6 @@ bool KBarcode::isSQLConnected() const
 bool KBarcode::connectSQL()
 {
     return SqlTables::getInstance()->connectMySQL();
-    /*return true;*/// -!F: delete
 }
 
 void KBarcode::showAssistant()

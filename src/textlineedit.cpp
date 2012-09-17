@@ -85,25 +85,20 @@ void TextLineEditor::setupActions()
    
     action_undo = KStandardAction::undo( editor, SLOT( undo() ), ac );
     action_undo->setEnabled( false );
-    /*connect( editor, SIGNAL( undoAvailable(bool) ), action_undo, SLOT( setEnabled(bool) ) );*/// -!F: original, runtime warning: no such signal
 
     action_redo = KStandardAction::redo( editor, SLOT( redo() ), ac );
     action_redo->setEnabled( false );
-    /*connect( editor, SIGNAL( redoAvailable(bool) ), action_redo, SLOT( setEnabled(bool) ) );*/// -!F: original, runtime warning: no such signal
 
     action_cut = KStandardAction::cut( editor, SLOT( cut() ), ac );
-    /*action_cut->setEnabled( false );
-    connect( editor, SIGNAL( copyAvailable(bool) ), action_cut, SLOT( setEnabled(bool) ) );*/// -!F: original
+    /*action_cut->setEnabled( false );*/
 
     action_copy = KStandardAction::copy( editor, SLOT( copy() ), ac );
-    /*action_copy->setEnabled( false );
-    connect( editor, SIGNAL( copyAvailable(bool) ), action_copy, SLOT( setEnabled(bool) ) );*/// -!F: original
+    /*action_copy->setEnabled( false );*/
 
     action_paste = KStandardAction::paste( editor, SLOT( paste() ), ac );
     
     connect( editor, SIGNAL( textChanged(const QString &) ), this, SLOT( updateActions(const QString &) ) );
 
-    /*KAction* textDataAct = new KAction( i18n("Insert &Data Field"), "contents", 0, this, SLOT( insertNewField() ), ac, "text_data_act");*/// -!F: original, delete
     KAction* textDataAct = new KAction( this );
     textDataAct->setText( i18n("Insert &Data Field") );
     textDataAct->setIcon( KIcon( "view-table-of-contents-ltr" ) );
@@ -149,7 +144,7 @@ void TextLineEditor::setupActions()
     tool2Bar->addAction( textDataAct );
     
     /*int minWidth = tool2Bar->widgetForAction( textDataAct )->width() + action_font_type->width() + 400;*/
-    int minWidth = 600;
+    int minWidth = 600;// Make all the toolbar actions visible.
     tool2Bar->setMinimumWidth( minWidth );
     setMinimumWidth( minWidth );
     
@@ -163,8 +158,6 @@ void TextLineEditor::setupActions()
     tool3Bar->addWidget( labelh );
     mag_hor = new KIntNumInput( tool3Bar );
     tool3Bar->addWidget( mag_hor );
-    /*connect( mag_vert, SIGNAL( activated(int) ), this, SLOT( setVerMag(int) ) );
-    connect( mag_hor, SIGNAL( activated(int) ), this, SLOT( setHorMag(int) ) );  */// -!F: original
     connect( mag_vert, SIGNAL( valueChanged(int) ), this, SLOT( setVertMag(int) ) );
     connect( mag_hor, SIGNAL( valueChanged(int) ), this, SLOT( setHorMag(int) ) );
     mag_vert->setRange( 1, 9, 1 );

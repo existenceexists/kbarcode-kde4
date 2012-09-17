@@ -83,7 +83,6 @@ void MultiLineEditor::setupActions()
 {
     ac = new KActionCollection( this );
 
-    /*KAction* action_export = new KAction( i18n("Export"), 0, this, SLOT( save() ), ac );*/// -!F: original, delete
     KAction* action_export = new KAction( this );
     action_export->setText( i18n("Export") );
     ac->addAction( "action_export", action_export );
@@ -114,25 +113,21 @@ void MultiLineEditor::setupActions()
     //
     // Character Formatting
     //
-    /*action_bold = new KToggleAction( i18n("&Bold"), "text_bold", Qt::CTRL+Qt::Key_B, ac, "format_bold" );*/// -!F: original, delete
     action_bold = new KToggleAction( KIcon("format-text-bold"), i18n("&Bold"), this );
     action_bold->setShortcut( KShortcut( Qt::CTRL + Qt::Key_B ) );
     ac->addAction( "format_bold", action_bold );
     connect( action_bold, SIGNAL( toggled(bool) ), this, SLOT( setBold(bool) ) );
 
-    /*action_italic = new KToggleAction( i18n("&Italic"), "text_italic", Qt::CTRL+Qt::Key_I, ac, "format_italic" );*/// -!F: original, delete
     action_italic = new KToggleAction( KIcon("format-text-italic"), i18n("&Italic"), this );
     action_italic->setShortcut( KShortcut( Qt::CTRL+Qt::Key_I ) );
     ac->addAction( "format_italic", action_italic );
     connect( action_italic, SIGNAL( toggled(bool) ), editor, SLOT( setFontItalic(bool) ) );
 
-    /*action_underline = new KToggleAction( i18n("&Underline"), "text_under", Qt::CTRL+Qt::Key_U, ac, "format_underline" );*/// -!F: original, delete
     action_underline = new KToggleAction( KIcon("format-text-underline"), i18n("&Underline"), this );
     action_underline->setShortcut( KShortcut( Qt::CTRL+Qt::Key_U ) );
     ac->addAction( "format_underline", action_underline );
     connect( action_underline, SIGNAL( toggled(bool) ), editor, SLOT( setFontUnderline(bool) ) );
 
-    /*KAction* action_color = new KAction( i18n("Text &Color..."), "colorpicker", 0, this, SLOT( formatColor() ), ac, "format_color" );*/// -!F: original, delete
     KAction* action_color = new KAction( this );
     action_color->setText( i18n("Text &Color...") );
     action_color->setIcon( KIcon( "format-text-color" ) );
@@ -142,13 +137,10 @@ void MultiLineEditor::setupActions()
     //
     // Font
     //
-    /*action_font = new KFontAction( i18n("&Font"), 0, ac, "format_font" );*/// -!F: original, delete
     action_font = new KFontAction( i18n("&Font"), this );
     ac->addAction( "format_font", action_font );
-    /*connect( action_font, SIGNAL( activated( const QString & ) ), editor, SLOT( setFamily( const QString & ) ) );*/// -!F: original, is triggered() the right replacement of activated() - activated() gives a runtime warning: no such signal "activated"?
     connect( action_font, SIGNAL( triggered( const QString & ) ), editor, SLOT( setFontFamily( const QString & ) ) );
 
-    /*action_font_size = new KFontSizeAction( i18n("Font &Size"), 0, ac, "format_font_size" );*/// -!F: original, delete
     action_font_size = new KFontSizeAction( i18n("Font &Size"), this );
     ac->addAction( "format_font_size", action_font_size );
     connect( action_font_size, SIGNAL( fontSizeChanged(int) ), this, SLOT( setFontSize(int) ) );
@@ -156,31 +148,22 @@ void MultiLineEditor::setupActions()
     //
     // Alignment
     //
-    /*action_align_left = new KToggleAction( i18n("Align &Left"), "text_left", 0, ac, "format_align_left" );*/// -!F: original, delete
     action_align_left = new KToggleAction( KIcon("align-horizontal-left"), i18n("Align &Left"), this );
     ac->addAction( "format_align_left", action_align_left );
     connect( action_align_left, SIGNAL( toggled(bool) ), this, SLOT( setAlignLeft(bool) ) );
 
-    /*action_align_center = new KToggleAction( i18n("Align &Center"), "text_center", 0, ac, "format_align_center" );*/// -!F: original, delete
     action_align_center = new KToggleAction( KIcon("align-horizontal-center"), i18n("Align &Center"), this );
     ac->addAction( "format_align_center", action_align_center );
     connect( action_align_center, SIGNAL( toggled(bool) ), this, SLOT( setAlignCenter(bool) ) );
 
-    /*action_align_right = new KToggleAction( i18n("Align &Right"), "text_right", 0, ac, "format_align_right" );*/// -!F: original, delete
     action_align_right = new KToggleAction( KIcon("align-horizontal-right"), i18n("Align &Right"), this );
     ac->addAction( "format_align_right", action_align_right );
     connect( action_align_right, SIGNAL( toggled(bool) ), this, SLOT( setAlignRight(bool) ) );
 
-    /*action_align_justify = new KToggleAction( i18n("&Justify"), "text_block", 0, ac, "format_align_justify" );*/// -!F: original, delete
-    /*action_align_justify = new KToggleAction( KIcon("text_block"), i18n("&Justify"), this );*/// There is no icon for align justify in oxygen
     action_align_justify = new KToggleAction( i18n("&Justify"), this );
     ac->addAction( "format_align_justify", action_align_justify );
     connect( action_align_justify, SIGNAL( toggled(bool) ), this, SLOT( setAlignJustify(bool) ) );
 
-    /*action_align_left->setExclusiveGroup( "alignment" );
-    action_align_center->setExclusiveGroup( "alignment" );
-    action_align_right->setExclusiveGroup( "alignment" );
-    action_align_justify->setExclusiveGroup( "alignment" );*/// -!F: original, delete
     QActionGroup* alignmentGroup = new QActionGroup(this);
     action_align_left->setActionGroup( alignmentGroup );
     action_align_center->setActionGroup( alignmentGroup );
@@ -189,7 +172,6 @@ void MultiLineEditor::setupActions()
 
     //KAction* action_spell = KStandardAction::spelling( this, SLOT( checkSpelling() ), ac );
 
-    /*KAction* textDataAct = new KAction( i18n("Insert &Data Field"), "contents", 0, this, SLOT( insertNewField() ), ac, "text_data_act");*/// -!F: original, delete
     KAction* textDataAct = new KAction( this );
     textDataAct->setText( i18n("Insert &Data Field") );
     textDataAct->setIcon( KIcon( "view-table-of-contents-ltr" ) );
@@ -351,7 +333,7 @@ void MultiLineEditor::checkSpelling()
 void MultiLineEditor::spellCheckDone(const QString & buffer)
 {
     editor->setText( buffer );
-    /*spell->cleanUp();*/// -!F: original, replace
+    /*spell->cleanUp();*/
 }
 
 void MultiLineEditor::save()

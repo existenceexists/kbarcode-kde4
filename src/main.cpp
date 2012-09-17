@@ -37,7 +37,7 @@
 
 void setupDirs()
 {
-    if( KStandardDirs::locate("appdata", "logo.png").isEmpty() ) {// -!F: see my todo file
+    if( KStandardDirs::locate("appdata", "logo.png").isEmpty() ) {
         // Maybe KBarcode was not installed into $KDEDIR
         KStandardDirs* dirs = KGlobal::dirs();
         QString kdedir = dirs->kfsstnd_prefixes();
@@ -131,6 +131,4 @@ int main(int argc, char *argv[])
         return 0;
     else
         return a.exec();
-    
-    /*return 0;*/
 }

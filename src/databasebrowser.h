@@ -61,7 +61,6 @@ class DatabaseBrowser : public MainWindow {
 
     protected:
         QString database;
-        /*MyDataTable* table;*/// -!F: original
         QTableView * table;
         QSqlTableModel * model;
 

@@ -70,7 +70,6 @@
 #include <qregexp.h>
 #include <QList>
 #include <QByteArray>
-//#include <QCloseEvent>// -!F: original, delete
 #include <qprinter.h>
 #include <QPaintDevice>
 #include <QDesktopWidget>
@@ -78,8 +77,6 @@
 #include <QGraphicsItem>
 #include <QUndoCommand>
 #include <QTextDocument>
-
-#include <QDebug>// -!F: delete
 
 // KDE includes
 #include <kaction.h>
@@ -120,8 +117,6 @@
 #define STATUS_ID_TEMPLATE 101
 #define STATUS_ID_MOUSE 102
 
-/*#define ID_LOCK_ITEM 8000*/// -!F: original, delete
-
 #define CANVAS_UPDATE_PERIOD 50
 
 #define KBARCODE_UNDO_LIMIT 25
@@ -148,7 +143,6 @@ LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f,
 
     description = QString::null;
     d = new Definition();
-    /*m_token = new TokenProvider( (QPaintDevice*) KApplication::desktop() );*/// -!F: keep
     m_token = new TokenProvider( KApplication::desktop() );
 
     statusBar()->insertPermanentItem( "", STATUS_ID_TEMPLATE, 0 );
@@ -158,14 +152,10 @@ LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f,
     statusBar()->show();
 
     c = new MyCanvas( this );
-    /*c->setDoubleBuffering( true );*/// -!F: original, Is it needed? What is the right replacement of this?
-    /*c->setUpdatePeriod( CANVAS_UPDATE_PERIOD );*/// -!F: original, Is it needed? What is the right replacement of this?
 
     cv = new MyCanvasView( d, c, this );
     cv->setPosLabel( statusBar(), STATUS_ID_MOUSE );
     setCentralWidget( cv );
-
-    //clearLabel();
 
     setupActions();
     setupContextMenu();
@@ -185,9 +175,6 @@ LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f,
     connect( cv, SIGNAL( movedSomething() ), c, SLOT( update() ) );
     connect( KBarcodeSettings::getInstance(), SIGNAL( updateGrid( int ) ), cv, SLOT( updateGUI() ) );
     connect( kapp, SIGNAL( aboutToQuit() ), this, SLOT( saveConfig() ) );
- 
-    /*connect( history, SIGNAL( commandExecuted( K3Command *) ), cv, SLOT( updateGUI() ) );
-    connect( history, SIGNAL( commandExecuted( K3Command *) ), this, SLOT( setEdited() ) );*/
 
     if( !_filename.isEmpty() )
         openUrl( _filename );
@@ -229,44 +216,17 @@ void LabelEditor::saveConfig()
 
 void LabelEditor::createCommandHistory()
 {
-    if( undoAct && redoAct )
-    {
-	/*editMenu->removeAction( undoAct );
-	toolBar()->removeAction( undoAct );
-	editMenu->removeAction( redoAct );
-	toolBar()->removeAction( redoAct );
-	actionCollection()->removeAction( undoAct );
-	actionCollection()->removeAction( redoAct );*/// -!F: original, delete
-        /*undoAct->setEnabled( false );
-        redoAct->setEnabled( false );*/// -!F: delete
-        /*actionCollection()->removeAction( undoAct );
-        actionCollection()->removeAction( redoAct );*/
-    }
-
     history = new KUndoStack( this );
     cv->setHistory( history );
 
     // Don't set the undo limit anymore becouse in KDE4 it causes deletion ot items if the limit is reached:
     //history->setUndoLimit( KBARCODE_UNDO_LIMIT );
     
-    /*connect( undoAct, SIGNAL(triggered(bool)), history, SLOT(undo()) );
-    connect( redoAct, SIGNAL(triggered(bool)), history, SLOT(redo()) );
-    
-    connect( history, SIGNAL(commandHistoryChanged()), this, SLOT(setEdited()) );*/// -!F: original
     connect( history, SIGNAL(cleanChanged(bool)), this, SLOT(setEdited(bool)) );
 }
 
 void LabelEditor::createCommandHistoryActions()
 {
-    /*undoAct = (KAction*)actionCollection()->action("edit_undo");
-    redoAct = (KAction*)actionCollection()->action("edit_redo");
-
-    editMenu->insertAction( editMenu->actions()[0], undoAct );
-    editMenu->insertAction( editMenu->actions()[1], redoAct );
-
-    toolBar()->insertAction( toolBar()->actions()[5], undoAct );
-    toolBar()->insertAction( toolBar()->actions()[6], redoAct );*/// -!F: original, delete
-    
     if( undoAct && redoAct ) {
         toolBar()->removeAction(undoAct);
         toolBar()->removeAction(redoAct);
@@ -304,8 +264,6 @@ void LabelEditor::clearLabel()
     createCommandHistory();
     createCommandHistoryActions();
 
-    /*connect( history, SIGNAL( commandExecuted( K3Command *) ), cv, SLOT( updateGUI() ) );
-    connect( history, SIGNAL( commandExecuted( K3Command *) ), this, SLOT( setEdited() ) );*/
     connect( history, SIGNAL( indexChanged( int ) ), cv, SLOT( updateGUI() ) );
 
     m_edited = false;
@@ -368,7 +326,6 @@ bool LabelEditor::save( QString name )
     // get updated if the label gets saved with another filename.
 
     filename = name;
-    /*history->documentSaved();*/
     history->setClean();
     m_edited = false;
 
@@ -456,7 +413,6 @@ bool LabelEditor::openUrl( const QString & url )
         c->addItem( citem );
         citem->show();
         citem->update();
-        // -!F: is the code in this for loop all the code necessary to load an item?
     }
     list.clear();
 
@@ -499,72 +455,55 @@ bool LabelEditor::newLabel()
 
 void LabelEditor::setupActions()
 {
-    /*KAction* newAct = KStandardAction::openNew( this, SLOT(startEditor()), actionCollection() );
-    KAction* loadAct = KStandardAction::open( this, SLOT(startLoadEditor()), actionCollection() );
-    KAction* quitAct = KStandardAction::quit(kapp, SLOT(quit()), actionCollection());*/// -!F: original, delete
     KStandardAction::openNew( this, SLOT(startEditor()), actionCollection() );
     KStandardAction::open( this, SLOT(startLoadEditor()), actionCollection() );
     KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
-    /*KAction* closeAct = KStandardAction::close( this, SLOT( close() ), actionCollection(), "close" );*/// -!F: original, delete
     KStandardAction::close( this, SLOT( close() ), actionCollection() );
-    /*closeLabelAct = new KAction( i18n("Close &Label" ), 0, 0, this, SLOT( closeLabel() ), actionCollection() );*/// -!F: original, delete
     closeLabelAct = new KAction( this );
     closeLabelAct->setText( i18n("Close &Label") );
     actionCollection()->addAction( "closeLabelAct", closeLabelAct );
     connect( closeLabelAct, SIGNAL(triggered(bool)), this, SLOT(closeLabel()) );
 
-    /*recentAct = new KRecentFilesAction( i18n("&Recent Files"), 0, this, SLOT( loadRecentEditor( const KUrl& ) ) );*/// -!F: original, keep
     recentAct = new KRecentFilesAction( this );
     recentAct->setText( i18n("&Recent Files") );
     actionCollection()->addAction( "recentAct", recentAct );
-    /*connect( recentAct, SIGNAL(triggered(bool)), this, SLOT(loadRecentEditor( const KUrl& )) );*/// -!F: There is no slot loadRecentEditor(). See the previous line that is commented out.
+    connect( recentAct, SIGNAL( urlSelected( const KUrl& ) ), this, SLOT( startLoadRecentEditor( const KUrl& ) ) );
 
-    /*KAction* importPrintFileAct = new KAction( i18n("&Import and Print Batch File..."), BarIconSet( "fileprint" ), 0, this, SLOT( batchPrint() ), actionCollection() );*/// -!F: original, delete
     KAction* importPrintFileAct = new KAction( this );
     importPrintFileAct->setText( i18n("&Import and Print Batch File...") );
     importPrintFileAct->setIcon( KIcon( "document-print" ) );
     actionCollection()->addAction( "importPrintFileAct", importPrintFileAct );
     connect( importPrintFileAct, SIGNAL(triggered(bool)), this, SLOT(batchPrint()) );
 
-    /*saveAct = KStandardAction::save( this, SLOT( save() ), actionCollection(), "save" );*/// -!F: original, delete
     saveAct = KStandardAction::save( this, SLOT( save() ), actionCollection() );
-    /*saveAsAct = KStandardAction::saveAs( this, SLOT( saveas() ), actionCollection(), "saveas" );*/// -!F: original, delete
     saveAsAct = KStandardAction::saveAs( this, SLOT( saveas() ), actionCollection() );
-    /*descriptionAct = new KAction( i18n("&Change description..."), 0, 0, this, SLOT(changeDes()), actionCollection() );*/// -!F: original, delete
     descriptionAct = new KAction( this );
     descriptionAct->setText( i18n("&Change description...") );
     actionCollection()->addAction( "descriptionAct", descriptionAct );
     connect( descriptionAct, SIGNAL(triggered(bool)), this, SLOT(changeDes()) );
-    /*deleteAct = new KAction( i18n("&Delete Object"), QIcon( BarIcon("editdelete") ), Qt::Key_Delete, cv, SLOT( deleteCurrent() ), actionCollection() );*/// -!F: original, delete
     deleteAct = new KAction( this );
     deleteAct->setText( i18n("&Delete Object") );
     deleteAct->setIcon( KIcon( "edit-delete" ) );
     deleteAct->setShortcut( Qt::Key_Delete );
     actionCollection()->addAction( "deleteAct", deleteAct );
     connect( deleteAct, SIGNAL(triggered(bool)), cv, SLOT(deleteCurrent()) );
-    /*editPropAct = new KAction( i18n("&Properties..."), 0, 0, this, SLOT( doubleClickedCurrent() ), actionCollection() );*/// -!F: original, delete
     editPropAct = new KAction( this );
     editPropAct->setText( i18n("&Properties...") );
     actionCollection()->addAction( "editPropAct", editPropAct );
     connect( editPropAct, SIGNAL(triggered(bool)), this, SLOT(doubleClickedCurrent()) );
-    /*printAct = KStandardAction::print( this, SLOT( print() ), actionCollection(), "print" );*/// -!F: original, delete
     printAct = KStandardAction::print( this, SLOT( print() ), actionCollection() );
-    /*bcpAct = new KAction( i18n("Print to &Barcode Printer..."), 0, 0, this, SLOT( printBCP() ), actionCollection() );*/// -!F: original, delete
     bcpAct = new KAction( this );
     bcpAct->setText( i18n("Print to &Barcode Printer...") );
     actionCollection()->addAction( "bcpAct", bcpAct );
     connect( bcpAct, SIGNAL(triggered(bool)), this, SLOT(printBCP()) );
-    /*imgAct = new KAction( i18n("Print to &Image..."), 0, 0, this, SLOT(printImage() ), actionCollection() );*/// -!F: original, delete
     imgAct = new KAction( this );
     imgAct->setText( i18n("Print to &Image...") );
     actionCollection()->addAction( "imgAct", imgAct );
     connect( imgAct, SIGNAL(triggered(bool)), this, SLOT(printImage()) );
-    /*changeSizeAct = new KAction( i18n("&Change Label..."), 0, 0, this, SLOT( changeSize() ), actionCollection() );*/// -!F: original, delete
     changeSizeAct = new KAction( this );
     changeSizeAct->setText( i18n("&Change Label...") );
     actionCollection()->addAction( "changeSizeAct", changeSizeAct );
     connect( changeSizeAct, SIGNAL(triggered(bool)), this, SLOT(changeSize()) );
-    /*barcodeAct = new KAction( i18n("Insert &Barcode"), QIcon( BarIcon("barcode") ), 0, this, SLOT( insertBarcode() ), actionCollection() );*/// -!F: original, delete
     barcodeAct = new KAction( this );
     barcodeAct->setText( i18n("Insert &Barcode") );
     barcodeAct->setIcon( KIcon( "view-barcode-add" ) );
@@ -572,188 +511,66 @@ void LabelEditor::setupActions()
     connect( barcodeAct, SIGNAL(triggered(bool)), this, SLOT(insertBarcode()) );
     barcodeAct->setEnabled( Barkode::haveBarcode() );
 
-    /*pictureAct = new KAction( i18n("Insert &Picture"), QIcon( BarIcon("inline_image") ), 0, this, SLOT( insertPicture() ), actionCollection() );*/// -!F: original, delete
     pictureAct = new KAction( this );
     pictureAct->setText( i18n("Insert &Picture") );
     pictureAct->setIcon( KIcon( "insert-image" ) );
     actionCollection()->addAction( "pictureAct", pictureAct );
     connect( pictureAct, SIGNAL(triggered(bool)), this, SLOT(insertPicture()) );
-    /*textAct = new KAction( i18n("Insert &Text"), QIcon( BarIcon("text") ), 0, this, SLOT( insertText() ), actionCollection() );*/// -!F: original, delete
     textAct = new KAction( this );
     textAct->setText( i18n("Insert &Text") );
     textAct->setIcon( KIcon( "text-field" ) );
     actionCollection()->addAction( "textAct", textAct );
     connect( textAct, SIGNAL(triggered(bool)), this, SLOT(insertText()) );
-    /*textDataAct = new KAction( i18n("Insert &Data Field"), QIcon( BarIcon("contents") ), 0, this, SLOT( insertDataText() ), actionCollection() );*/// -!F: original, delete
     textDataAct = new KAction( this );
     textDataAct->setText( i18n("Insert &Data Field") );
     textDataAct->setIcon( KIcon( "view-table-of-contents-ltr" ) );
-    /*textDataAct->setIcon( KIcon( "code-context" ) );*/// -!F: added, keep
     actionCollection()->addAction( "textDataAct", textDataAct );
     connect( textDataAct, SIGNAL(triggered(bool)), this, SLOT(insertDataText()) );
-    /*textLineAct = new KAction( i18n("Insert &Text Line"), QIcon( BarIcon("text") ), 0, this, SLOT( insertTextLine() ), actionCollection() );*/// -!F: original, delete
     textLineAct = new KAction( this );
     textLineAct->setText( i18n("Insert &Text Line") );
-    /*textLineAct->setIcon( KIcon( "text-plain" ) );*/// -!F: added, keep
     textLineAct->setIcon( KIcon( "insert-text" ) );
     actionCollection()->addAction( "textLineAct", textLineAct );
     connect( textLineAct, SIGNAL(triggered(bool)), this, SLOT(insertTextLine()) );
-    /*lineAct = new KAction( i18n("Insert &Line"), QIcon( BarIcon("kbarcodelinetool") ), 0, this, SLOT( insertLine() ), actionCollection() );*/// -!F: original, delete
     lineAct = new KAction( this );
     lineAct->setText( i18n("Insert &Line") );
     lineAct->setIcon( KIcon( KStandardDirs::locate( "appdata", "hi16-action-kbarcodelinetool.png" ) ) );
     actionCollection()->addAction( "lineAct", lineAct );
     connect( lineAct, SIGNAL(triggered(bool)), this, SLOT(insertLine()) );
-    /*rectAct = new KAction( i18n("Insert &Rectangle"), QIcon( BarIcon("kbarcoderect") ), 0, this, SLOT( insertRect() ), actionCollection() );*/// -!F: original, delete
     rectAct = new KAction( this );
     rectAct->setText( i18n("Insert &Rectangle") );
     rectAct->setIcon( KIcon( KStandardDirs::locate( "appdata", "hi32-action-kbarcoderect.png" ) ) );
     actionCollection()->addAction( "rectAct", rectAct );
     connect( rectAct, SIGNAL(triggered(bool)), this, SLOT(insertRect()) );
-    /*circleAct = new KAction( i18n("Insert &Ellipse"), QIcon( BarIcon("kbarcodeellipse") ), 0, this, SLOT( insertCircle() ), actionCollection() );*/// -!F: original, delete
     circleAct = new KAction( this );
     circleAct->setText( i18n("Insert &Ellipse") );
     circleAct->setIcon( KIcon( KStandardDirs::locate( "appdata", "hi16-action-kbarcodeellipse.png" ) ) );
     actionCollection()->addAction( "circleAct", circleAct );
     connect( circleAct, SIGNAL(triggered(bool)), this, SLOT(insertCircle()) );
-    /*spellAct = KStandardAction::spelling( this, SLOT(spellCheck()), actionCollection(), "spell" );*/// -!F: original, delete
     spellAct = KStandardAction::spelling( this, SLOT(spellCheck()), actionCollection() );
-    /*gridAct = new KToggleAction( i18n("&Grid"), QIcon( BarIcon("kbarcodegrid") ), 0, this, SLOT( toggleGrid() ), actionCollection() );*/// -!F: original, delete
     gridAct = new KToggleAction( KIcon( KStandardDirs::locate( "appdata", "hi16-action-kbarcodegrid.png" ) ), i18n("&Grid"), this );
     actionCollection()->addAction( "gridAct", gridAct );
     connect( gridAct, SIGNAL(triggered(bool)), this, SLOT(toggleGrid()) );
-    /*previewAct = new KAction( i18n("&Preview..."), 0, 0, this, SLOT( preview() ), actionCollection() );*/// -!F: original, delete
     previewAct = new KAction( this );
     previewAct->setText( i18n("&Preview...") );
     actionCollection()->addAction( "previewAct", previewAct );
     connect( previewAct, SIGNAL(triggered(bool)), this, SLOT(preview()) );
-    /*sep = new KActionSeparator( this );*/// -!F: original, delete
-    /*sep = new QAction( this );
-    sep->setSeparator( true );*/// -!F: delete
-    /*cutAct = KStandardAction::cut( this, SLOT( cut() ), actionCollection(), "cut" );*/// -!F: original, delete
     cutAct = KStandardAction::cut( this, SLOT( cut() ), actionCollection() );
-    /*copyAct = KStandardAction::copy( this, SLOT( copy() ), actionCollection(), "copy" );*/// -!F: original, delete
     copyAct = KStandardAction::copy( this, SLOT( copy() ), actionCollection() );
-    /*pasteAct = KStandardAction::paste( this, SLOT( paste() ), actionCollection(), "paste" );*/// -!F: original, delete
     pasteAct = KStandardAction::paste( this, SLOT( paste() ), actionCollection() );
-    /*selectAllAct = KStandardAction::selectAll( cv, SLOT( selectAll() ), actionCollection(), "select_all" );*/// -!F: original, delete
     selectAllAct = KStandardAction::selectAll( cv, SLOT( selectAll() ), actionCollection() );
-    /*deSelectAllAct = KStandardAction::deselect( cv, SLOT( deSelectAll() ), actionCollection(), "de_select_all" );*/// -!F: original, delete
     deSelectAllAct = KStandardAction::deselect( cv, SLOT( deSelectAll() ), actionCollection() );
-    /*addressBookAct = new KAction( i18n("Address&book"), QIcon( BarIcon("kaddressbook") ), 0, this, SLOT( launchAddressBook() ), actionCollection() );*/// -!F: original, delete
     addressBookAct = new KAction( this );
     addressBookAct->setText( i18n("Address&book") );
     addressBookAct->setIcon( KIcon( "kaddressbook" ) );
     actionCollection()->addAction( "addressBookAct", addressBookAct );
     connect( addressBookAct, SIGNAL(triggered(bool)), this, SLOT(launchAddressBook()) );
-    /*KAction* singleBarcodeAct = new KAction(i18n("&Create Single Barcode..."), "",
-                                0, this, SLOT(startBarcodeGen()),
-                                actionCollection(), "create" );*/// -!F: original, delete
     KAction* singleBarcodeAct = new KAction( this );
     singleBarcodeAct->setText( i18n("&Create Single Barcode...") );
     actionCollection()->addAction( "create", singleBarcodeAct );
     connect( singleBarcodeAct, SIGNAL(triggered(bool)), this, SLOT(startBarcodeGen()) );
     singleBarcodeAct->setEnabled( Barkode::haveBarcode() );
     
-    /*undoAct = KStandardAction::undo( history, SLOT( undo() ), actionCollection() );
-    redoAct = KStandardAction::redo( history, SLOT( redo() ), actionCollection() );
-    undoAct->setEnabled( false );
-    redoAct->setEnabled( false );*/// -!F: delete
-
-    /*toolBar()->addAction( newAct );
-    toolBar()->addAction( loadAct );
-    toolBar()->addAction( saveAct );
-    toolBar()->addAction( printAct );
-    toolBar()->addSeparator();
-    toolBar()->addAction( cutAct );
-    toolBar()->addAction( copyAct );
-    toolBar()->addAction( pasteAct );*/
-
-    /*tools = new KToolBar( this, this->leftDock(), true);*/// -!F: original, delete
-    /*tools = toolBar();*/// -!F: delete
-    /*tools->setAllowedAreas( Qt::LeftToolBarArea );*/// -!F: added, try to uncomment this to find out if is needed
-    
-    /*QAction * separatorTools1 = new QAction( this );
-    separatorTools1->setSeparator(true);*/// -!F: delete
-
-    /*tools->addAction( barcodeAct );
-    tools->addAction( pictureAct );
-    tools->addAction( textAct );
-    tools->addAction( textDataAct );
-    tools->addAction( textLineAct );
-    tools->addAction( lineAct );
-    tools->addAction( rectAct );
-    tools->addAction( circleAct );
-    tools->addSeparator();
-//    spellAct->plug( tools );  // KDE 3.2
-    tools->addAction( gridAct );*/
-
-    /*MainWindow::setupActions();*/// -!F: original, delete
     setupGUI( Default, KStandardDirs::locate( "appdata", QString("labeleditorui.rc") ) );
-    connect( recentAct, SIGNAL( urlSelected( const KUrl& ) ), this, SLOT( startLoadRecentEditor( const KUrl& ) ) );
-
-    /*KMenu* fileMenu = new KMenu( this );
-    editMenu = new KMenu( this );
-    KMenu* viewMenu = new KMenu( this );
-    KMenu* insMenu = new KMenu( this );
-    KMenu* toolMenu = new KMenu( this );
-    KMenu* barMenu = new KMenu( this );*/// -!F: original, delete
-
-    /*menuBar()->removeItemAt( 0 );
-    menuBar()->insertItem( i18n("&File"), fileMenu, -1, 0 );
-    menuBar()->insertItem( i18n("&Edit"), editMenu, -1, 1 );
-    menuBar()->insertItem( i18n("&Insert"), insMenu, -1, 2 );
-    menuBar()->insertItem( i18n("&View"), viewMenu, -1, 3 );
-    menuBar()->insertItem( i18n("T&ools"), toolMenu, -1, 4 );
-    menuBar()->insertItem( i18n("&Barcode"), barMenu, -1, 5 );
-
-    // Menubar
-    fileMenu->addAction( newAct );
-    fileMenu->addAction( loadAct );
-    fileMenu->addAction( recentAct );
-    fileMenu->addAction( saveAct );
-    fileMenu->addAction( saveAsAct );
-    fileMenu->addAction( sep );
-    fileMenu->addAction( printAct );
-    fileMenu->addAction( bcpAct );
-    fileMenu->addAction( imgAct );
-    fileMenu->addAction( sep );
-    fileMenu->addAction( closeLabelAct );
-    fileMenu->addAction( closeAct );
-    fileMenu->addAction( quitAct );
-
-    editMenu->addAction( sep );
-    editMenu->addAction( cutAct );
-    editMenu->addAction( copyAct );
-    editMenu->addAction( pasteAct );
-    editMenu->addAction( sep );
-    editMenu->addAction( selectAllAct );
-    editMenu->addAction( deSelectAllAct );
-    editMenu->addAction( sep );
-    editMenu->addAction( descriptionAct );
-    editMenu->addAction( changeSizeAct );
-    editMenu->addAction( sep );
-    editMenu->addAction( deleteAct );
-    editMenu->addAction( editPropAct );
-
-    insMenu->addAction( barcodeAct );
-    insMenu->addAction( pictureAct );
-    insMenu->addAction( textAct );
-    insMenu->addAction( textDataAct );
-    insMenu->addAction( textLineAct );
-    insMenu->addAction( lineAct );
-    insMenu->addAction( rectAct );
-    insMenu->addAction( circleAct );
-
-//    spellAct->plug( toolMenu ); // KDE 3.2
-    toolMenu->insertSeparator();
-    toolMenu->addAction( addressBookAct );
-
-    viewMenu->addAction( gridAct );
-    viewMenu->addAction( previewAct );
-
-    barMenu->addAction( singleBarcodeAct );
-    barMenu->addAction( importPrintFileAct );*/// -!F: original, delete
     
     createCustomHelpMenu();
 
@@ -776,7 +593,6 @@ void LabelEditor::setupContextMenu()
 
     m_mnuContext->addSeparator();
     m_mnuContext->addAction( KIcon("edit-delete"), i18n("&Delete"), cv, SLOT( deleteCurrent() ) );
-    /*m_mnuContext->insertItem( i18n("&Protect Position and Size"), this, SLOT( lockItem() ), 0, ID_LOCK_ITEM );*/// -!F: original, delete
     protectAction = m_mnuContext->addAction( i18n("&Protect Position and Size"), this, SLOT( lockItem() ) );
     protectAction->setCheckable( true );
     m_mnuContext->addSeparator();
@@ -852,8 +668,6 @@ void LabelEditor::insertLine()
 
 void LabelEditor::changeDes()
 {
-    /*QString tmp = QInputDialog::getText( i18n("Label Description"),
-            i18n("Please enter a description:"), QLineEdit::Normal, description );*/// -!F: original, delete
     QString tmp = QInputDialog::getText( this, i18n("Label Description"),
             i18n("Please enter a description:"), QLineEdit::Normal, description );
     if( !tmp.isEmpty() )
@@ -862,8 +676,7 @@ void LabelEditor::changeDes()
 
 void LabelEditor::changeSize()
 {
-    /*NewLabel* nl = new NewLabel( this, true, true );*/// -!F: original, delete
-    NewLabel* nl = new NewLabel( this, true, Qt::Window );// -!F: Is this the right replacement?
+    NewLabel* nl = new NewLabel( this, true, Qt::Window );
     nl->setLabelId( d->getId() );
     if( nl->exec() == QDialog::Rejected )
     {
@@ -912,7 +725,6 @@ void LabelEditor::showContextMenu( QPoint pos )
 {
     TCanvasItemList list = cv->getSelected();
     
-    /*m_mnuContext->setItemChecked( ID_LOCK_ITEM, (list[0])->item()->locked() );*/// -!F: original, delete
     protectAction->setChecked( (list[0])->item()->locked() );
     m_mnuContext->popup( pos );
 }
@@ -1440,23 +1252,8 @@ void LabelEditor::closeLabel()
 
 void LabelEditor::setEdited( bool isInCleanState )
 {
-    /*setCaption( filename, true );
-    m_edited = true;*/
     setCaption( filename, !isInCleanState );
     m_edited = !isInCleanState;
-    
-    /*QAction * undoAct2 = actionCollection()->action("edit_undo");
-    QAction * redoAct2 = actionCollection()->action("edit_redo");*/// -!F: delete
-    /*if( history->isRedoAvailable() ) {
-        redoAct->setEnabled( true );
-    } else {
-        redoAct->setEnabled( false );
-    }
-    if( history->isUndoAvailable() ) {
-        undoAct->setEnabled( true );
-    } else {
-        undoAct->setEnabled( false );
-    }*/
     
     enableActions();
 }

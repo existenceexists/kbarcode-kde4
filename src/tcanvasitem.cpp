@@ -75,7 +75,6 @@ void TCanvasItem::setSizeMM( int w, int h )
     {
         m_item->setSizeMM( w, h );
         prepareGeometryChange();
-        /*QGraphicsRectItem::setRect( m_item->boundingRect().x(), m_item->boundingRect().y(), m_item->boundingRect().width(), m_item->boundingRect().height() );*/// -!F: original
         QGraphicsRectItem::setRect( 0, 0, m_item->boundingRect().width(), m_item->boundingRect().height() );
     }
 }
@@ -119,9 +118,7 @@ void TCanvasItem::paint( QPainter * painter, const QStyleOptionGraphicsItem * op
             QGraphicsRectItem::setZValue( m_item->z() );
         
         painter->save();
-        /*painter.setClipRect( boundingRect(), QPainter::CoordPainter );*/
 	painter->setClipRect( boundingRect() );
-        /*painter->translate( m_view->getTranslation().x(), m_view->getTranslation().y() );*/// -!F: original
         m_item->draw( painter );
         painter->restore();
     }
@@ -129,7 +126,6 @@ void TCanvasItem::paint( QPainter * painter, const QStyleOptionGraphicsItem * op
     // draw edges
     if( isSelected() ) {
         const QPixmap* spot = SpotProvider::getInstance()->spot();
-        /*painter->translate( x(), y() );*/// -!F: original
 
         // top left
         painter->drawPixmap( 0, 0, *spot );
@@ -170,8 +166,6 @@ void TCanvasItem::setItem (DocumentItem* item)
         this->setZValue( m_item->z() );
 
         prepareGeometryChange();
-        /*QGraphicsRectItem::setPos( m_item->boundingRect().x() + m_view->getTranslation().x(), m_item->boundingRect().y() + m_view->getTranslation().y() );
-        QGraphicsRectItem::setRect( m_item->boundingRect().x(), m_item->boundingRect().y(), m_item->boundingRect().width(), m_item->boundingRect().height() );*/// -!F: original
         QGraphicsRectItem::setRect( 0, 0, m_item->boundingRect().width(), m_item->boundingRect().height() );
         QGraphicsRectItem::setPos( m_item->boundingRect().x() + m_view->getTranslation().x(), m_item->boundingRect().y() + m_view->getTranslation().y() );
         update();
@@ -208,7 +202,6 @@ void TCanvasItem::show()
     if (!isVisible())
     {
         this->addRef();
-        /*((QGraphicsItem*) this)->show();*/// -!F: original
         QGraphicsRectItem::show();
     }
 }

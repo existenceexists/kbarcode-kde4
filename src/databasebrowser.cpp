@@ -64,13 +64,10 @@ DatabaseBrowser::DatabaseBrowser( QString _database, QWidget *parent )
 
     database = _database;
 
-    /*connect( (QObject*) table, SIGNAL( cursorChanged( QSql::Op ) ),
-             SqlTables::getInstance(), SIGNAL( tablesChanged() ) );*/// -!F: original, what is the correct replacement?
     connect( model, SIGNAL( dataChanged(const QModelIndex &, const QModelIndex & ) ),
              SqlTables::getInstance(), SIGNAL( tablesChanged() ) );
 
-    /*connect( this, SIGNAL( connectedSQL() ), this, SLOT( setupSql() ) );*/// -!F: original, keep, this line gives the warning: Object::connect: No such signal DatabaseBrowser::connectedSQL()
-    connect( SqlTables::getInstance(), SIGNAL( connectedSQL() ), this, SLOT( setupSql() ) );// -!F: is this the right replacement of the previous line ?
+    connect( SqlTables::getInstance(), SIGNAL( connectedSQL() ), this, SLOT( setupSql() ) );// Probably useless.
 
     findDlg = 0;
     m_find = 0;
@@ -182,7 +179,6 @@ void DatabaseBrowser::findNextForwards()
         while ( ( res == KFind::NoMatch ) && ( m_findCurrentRow < model->rowCount() ) ) {
             if( m_find->needData() ) {
                 m_find->setData( model->data( model->index( m_findCurrentRow, column ), Qt::DisplayRole ).toString() );
-                //qDebug() << "if( m_find->needData() m_findCurrentRow == " << m_findCurrentRow;// -!F: delete
             }
             
 
@@ -200,9 +196,6 @@ void DatabaseBrowser::findNextForwards()
         }
 
         if ( res == KFind::NoMatch ) {// i.e. at end and there was no match
-            /*<Call either  m_find->displayFinalDialog(); m_find->deleteLater(); m_find = 0L;
-            or           if ( m_find->shouldRestart() ) { reinit (w/o FromCursor) and call slotFindNext(); }
-                         else { m_find->closeFindNextDialog(); }>*/
             m_findCurrentRow = 0;
         } else {// There was a match so the matching row is selected and a dialog "Find next" is displayed.
             m_findCurrentRow++;// continue the find in the next row if a user clicks on the "Find next" button.
@@ -221,7 +214,6 @@ void DatabaseBrowser::findNextBackwards()
         while ( ( res == KFind::NoMatch ) && ( m_findCurrentRow >= 0 ) ) {
             if( m_find->needData() ) {
                 m_find->setData( model->data( model->index( m_findCurrentRow, column ), Qt::DisplayRole ).toString() );
-                //qDebug() << "if( m_find->needData() m_findCurrentRow == " << m_findCurrentRow;// -!F: delete
             }
             
 
@@ -239,9 +231,6 @@ void DatabaseBrowser::findNextBackwards()
         }
 
         if ( res == KFind::NoMatch ) {// i.e. at end and there was no match
-            /*<Call either  m_find->displayFinalDialog(); m_find->deleteLater(); m_find = 0L;
-            or           if ( m_find->shouldRestart() ) { reinit (w/o FromCursor) and call slotFindNext(); }
-                        else { m_find->closeFindNextDialog(); }>*/
             m_findCurrentRow = model->rowCount() - 1;
         } else {// There was a match so the matching row is selected and a dialog "Find next" is displayed.
             m_findCurrentRow--;// continue the find in the next row if a user clicks on the "Find next" button.
@@ -258,7 +247,6 @@ void DatabaseBrowser::createKFindInstance()
         m_findPattern = findDlg->pattern();
     }
     // This creates a find-next-prompt dialog if needed.
-    /*m_find = new KFind( m_findPattern, m_findOptions, this, findDlg );*/// -!F: Use this with non-modal dialog.
     m_find = new KFind( m_findPattern, m_findOptions, this );
 
     // Connect highlight signal to code which handles highlighting

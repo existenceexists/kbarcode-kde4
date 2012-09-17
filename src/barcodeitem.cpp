@@ -158,8 +158,7 @@ void BarcodeItem::saveXML (QDomElement* element)
 void BarcodeItem::draw (QPainter* painter)
 {
     painter->save();
-    /*drawBarcode( *painter, rect().x(), rect().y() );*/// -!F: original
-    drawBarcode( *painter, 0, 0 );// -!F: added
+    drawBarcode( *painter, 0, 0 );
     painter->restore();
     
     /*TCanvasItem* citem = canvasItem();
@@ -248,7 +247,7 @@ void BarcodeItem::updateBarcode()
     Barkode::update( DocumentItem::paintDevice() );
     setSize( Barkode::size().width(), Barkode::size().height() );
     if( canvasItem() ) {
-        /*canvasItem()->setRect( 0, 0, Barkode::size().width(), Barkode::size().height() );*/// -!F: added, keep
+        /*canvasItem()->setRect( 0, 0, Barkode::size().width(), Barkode::size().height() );*/
         canvasItem()->setSize( Barkode::size().width(), Barkode::size().height() );
     }
 }

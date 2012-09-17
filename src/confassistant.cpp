@@ -44,8 +44,6 @@
 #include <kurllabel.h>
 #include <kstandarddirs.h>
 
-#include <QDebug>// -!F: delete
-
 const char* description = I18N_NOOP(
         "KBarcode is a barcode and label printing application for KDE 3. It can "
         "be used to print every thing from simple business cards up to complex "
@@ -65,31 +63,17 @@ ConfAssistant::ConfAssistant( QWidget* parent, QString name, bool modal )
     setModal(modal);
     setCaption( i18n( "Configure KBarcode" ) );
 
-    //qDebug() << "point 1";
     setupPage1();
-    //qDebug() << "point 2";
     setupPage0();
-    //qDebug() << "point 3";
     setupPage2();
-    //qDebug() << "point 4";
     setupPage3();
-    //qDebug() << "point 5";
 
-    /*setNextEnabled( page_2, false );*/
-    //page_2->enableButtonOk(false);// -!F: done: What is the right replacement of setNextEnabled( page_2, false ) ?
+    showButton(KDialog::Help, false);
     
-    /*helpButton()->hide();*/
-    //enableLinkedHelp(false);// -!F: Is this the right replacement of helpButton()->hide() ?
-    showButton(KDialog::Help, false);// -!F: Is this the right replacement of helpButton()->hide() ?
-    
-    //qDebug() << "point 6";
     connect( buttonCreate, SIGNAL( clicked() ), this, SLOT( create() ) );
     connect( buttonExample, SIGNAL( clicked() ), this, SLOT( example() ) );
     connect( checkDatabase, SIGNAL( clicked() ), this, SLOT( useDatabase() ) );
-    //qDebug() << "point 7";
     page2FinishButtonEnable = false;
-    //page2FinishButtonEnable = true;
-    //page2NextButtonEnable = true;
     page2NextButtonEnable = false;
     page3FinishButtonEnable = true;
 }
@@ -107,35 +91,30 @@ void ConfAssistant::accept()
 void ConfAssistant::setupPage1()
 {
     page = new QWidget( this );
-    //pageLayout = new QVBoxLayout( page, 11, 6, "pageLayout");
     pageLayout = new QVBoxLayout(page);
     pageLayout->setContentsMargins(11, 11, 11, 11);
     pageLayout->setSpacing(6);
     pageLayout->setObjectName("pageLayout_1");
 
-    //Layout8 = new QHBoxLayout( 0, 0, 6, "Layout8");
     Layout8 = new QHBoxLayout();
     Layout8->setContentsMargins(0, 0, 0, 0);
     Layout8->setSpacing(6);
     Layout8->setObjectName("Layout8");
 
-    //Layout7 = new QVBoxLayout( 0, 0, 6, "Layout7");
     Layout7 = new QVBoxLayout();
     Layout7->setContentsMargins(0, 0, 0, 0);
     Layout7->setSpacing(6);
     Layout7->setObjectName("Layout7");
 
     logo = new QLabel( page );
-    /*logo->setPixmap( KStandardDirs::locate("data", "kbarcode/logo.png") );*/// -!F: 
-    logo->setPixmap( KStandardDirs::locate( "appdata", "logo.png" ) );// -!F: 
+    logo->setPixmap( KStandardDirs::locate( "appdata", "logo.png" ) );
     QSpacerItem* spacer = new QSpacerItem( 0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding );
     pageLayout->addWidget( logo );
     Layout7->addItem( spacer );
     Layout8->addLayout( Layout7 );
 
     TextLabel2_2 = new QLabel( page );
-    //TextLabel2_2->setMaximumWidth(700);// -!F: delete
-    TextLabel2_2->setMinimumHeight(350);// -!F: keep
+    TextLabel2_2->setMinimumHeight(350);// Make the whole label TextLabel2_2 visible.
     TextLabel2_2->setWordWrap(true);
     TextLabel2_2->setText( i18n( "<qt><h1>Welcome to KBarcode</h1><br><br>") +
         i18n( description ) + "</qt>" );
@@ -154,13 +133,11 @@ void ConfAssistant::setupPage1()
 void ConfAssistant::setupPage0()
 {
     QWidget* page_0 = new QWidget( this );
-    //QVBoxLayout* pageLayout = new QVBoxLayout( page_0, 11, 6, "pageLayout");
     pageLayout = new QVBoxLayout(page_0);
     pageLayout->setContentsMargins(11, 11, 11, 11);
     pageLayout->setSpacing(6);
     pageLayout->setObjectName("pageLayout_0");
 
-    //QTextBrowser* b = new QTextBrowser( page_0, "b" );
     QTextBrowser* b = new QTextBrowser(page_0);
     b->setObjectName("b");
     b->setText( MainWindow::systemCheck() );
@@ -173,31 +150,23 @@ void ConfAssistant::setupPage0()
 
 void ConfAssistant::setupPage2()
 {
-    /*page_2 = new QWidget( this );*/
     page_2 = new QWidget( this );
-    /*pageLayout_2 = new QVBoxLayout( page_2, 11, 6, "pageLayout_2");*/
     pageLayout_2 = new QVBoxLayout(page_2);
     pageLayout_2->setContentsMargins(11, 11, 11, 11);
     pageLayout_2->setSpacing(6);
     pageLayout_2->setObjectName("pageLayout_2");
 
-    //qDebug() << "point b 1";
     checkDatabase = new QCheckBox( page_2 );
     checkDatabase->setText( i18n("&Use database with KBarcode") );
-    checkDatabase->setChecked( true );/**/
+    checkDatabase->setChecked( true );
 
-    //qDebug() << "point b 2";
     sqlwidget = new SqlWidget( true, page_2, "sqlwidget" );
     connect( sqlwidget, SIGNAL( databaseWorking( bool ) ), this, SLOT( testSettings( bool ) ) );
     
-    //qDebug() << "point b 3";
     QSpacerItem* spacer_5 = new QSpacerItem( 0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding );
     pageLayout_2->addWidget( checkDatabase );
     pageLayout_2->addWidget( sqlwidget );
-    /*qDebug() << "point b 3 1";*/
-    //qDebug() << "point b 3 2";
     pageLayout_2->addItem( spacer_5 );
-    //qDebug() << "point b 3 3";
     
     page_2->setLayout(pageLayout_2);
 
@@ -207,9 +176,7 @@ void ConfAssistant::setupPage2()
 
 void ConfAssistant::setupPage3()
 {
-    //qDebug() << "point setupPage3 1";
     page_3 = new QWidget( this );
-    //pageLayout_3 = new QVBoxLayout( page_3, 11, 6, "pageLayout_3");
     pageLayout_3 = new QVBoxLayout(page_3);
     pageLayout_3->setContentsMargins(11, 11, 11, 11);
     pageLayout_3->setSpacing(6);
@@ -222,7 +189,6 @@ void ConfAssistant::setupPage3()
     TextLabel1_2->setWordWrap(true);
     pageLayout_3->addWidget( TextLabel1_2 );
 
-    //Layout5_2 = new QVBoxLayout( 0, 0, 6, "Layout5_2");
     Layout5_2 = new QVBoxLayout();
     Layout5_2->setContentsMargins(0, 0, 0, 0);
     Layout5_2->setSpacing(6);
@@ -245,7 +211,6 @@ void ConfAssistant::setupPage3()
 
 void ConfAssistant::testSettings( bool b )
 {
-    /*setNextEnabled( page_2, b );*/// -!F: done: What is the right replacement of setNextEnabled( page_2, b ) ?
     page2NextButtonEnable = b;
     enableButton(KDialog::User2, page2NextButtonEnable);
 }
@@ -319,7 +284,6 @@ void ConfAssistant::example()
 /* configureCurrentPage() is called by the slots next() and back() */
 void ConfAssistant::configureCurrentPage( KPageWidgetItem * page )
 {
-    //qDebug() << page->objectName();
     if( page->objectName() == QString("page_2") && !sqlwidget->driverCount() ) {
         KMessageBox::information( this, i18n(
             "There are no Qt SQL drivers installed. "
@@ -331,15 +295,10 @@ void ConfAssistant::configureCurrentPage( KPageWidgetItem * page )
     if( page->objectName() == QString("page_2") ) {
         enableButton(KDialog::User1, page2FinishButtonEnable);
         enableButton(KDialog::User2, page2NextButtonEnable);
-        //qDebug() << "page == page_2";
     }
     
     if ( page->objectName() == QString("page_3") ) {
-        /*finishButton()->setEnabled( true );*/
-	//showButton(KDialog::User1, true);
-        //enableButton(KDialog::User1, true);
 	enableButton(KDialog::User1, page3FinishButtonEnable);
-	//qDebug() << "page == page_3";
     }
 }
 
@@ -361,18 +320,11 @@ void ConfAssistant::back()
 
 void ConfAssistant::useDatabase()
 {
-    /*setFinishEnabled( page_2, !checkDatabase->isChecked() );// -!F: done: I must probably modify the structure of this class and it's use to achieve the same result?
-    setNextEnabled( page_2, false );
-    setFinishEnabled( page_3, checkDatabase->isChecked() );// -!F: done: In the original code this IMHO conflicts with showPage().
-    sqlwidget->setEnabled( checkDatabase->isChecked() );*/
     page2FinishButtonEnable = (!checkDatabase->isChecked());
     page2NextButtonEnable = false;
-    //page2NextButtonEnable = !page2NextButtonEnable;
     enableButton(KDialog::User1, page2FinishButtonEnable);
     enableButton(KDialog::User2, page2NextButtonEnable);
-    page3FinishButtonEnable = (checkDatabase->isChecked());// -!F: done: In the original code this IMHO conflicts with showPage().
-    //enableButton(KDialog::User1, !checkDatabase->isChecked());
-    //enableButton(KDialog::User2, false);
+    page3FinishButtonEnable = (checkDatabase->isChecked());
     sqlwidget->setEnabled( checkDatabase->isChecked() );
 }
 

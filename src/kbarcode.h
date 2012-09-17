@@ -45,7 +45,6 @@ class KPushButton;
 class KBarcode: public MainWindow {
     Q_OBJECT
     public:
-        /*KBarcode( QWidget *parent=0, Qt::WFlags f = Qt::WType_TopLevel | Qt::WDestructiveClose );*/// -!F: original, delete
         KBarcode( QWidget *parent=0, Qt::WindowFlags f = Qt::Window, Qt::WidgetAttribute waf = Qt::WA_DeleteOnClose );
         ~KBarcode();
 

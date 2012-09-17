@@ -235,7 +235,6 @@ class TokenProvider {
         static QMap<ECategories, QString> s_captions;
 
 #ifdef NO_KJS_EMBED
-	/*static KJS::Interpreter* s_interpreter;*/// -!F: original, delete, 
 	static KJSInterpreter* s_interpreter;
 #else	
 	static KJSEmbed::KJSEmbedPart* s_interpreter;

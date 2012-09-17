@@ -277,7 +277,7 @@ QFont DSRichText::parseStyle( const QString & s, QColor* color )
     QFont f = m_base;
     *color = m_color;
     
-    for ( int i = 0; i < style.count(';')+1; i++ ) {// -!F: Is +1 enough? Yes, probably.
+    for ( int i = 0; i < style.count(';')+1; i++ ) {
         QString s = style.section( ';', i, i );
         if( s.isEmpty() )
             continue;

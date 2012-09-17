@@ -92,10 +92,6 @@ void Label::epcl( QTextStream* stream )
 {
     *stream << EPCLUtils::header();
     
-    /*DocumentItem* item;
-    for( item = m_list.first();item;item=m_list.next())
-	if( drawThisItem( item ) )
-	    item->drawEPcl( stream );*/// -!F: original, delete
     QList<DocumentItem*>::iterator i;
     for( i = m_list.begin(); i != m_list.end(); ++i ) {
         if( drawThisItem( *i ) ) {
@@ -113,10 +109,6 @@ void Label::ipl( QTextStream* stream )
     IPLUtils utils;
     *stream << utils.header();
     
-    /*DocumentItem* item;
-    for( item = m_list.first();item;item=m_list.next())
-	if( drawThisItem( item ) )
-	    item->drawIpl( stream, &utils );*/// -!F: original, delete
     QList<DocumentItem*>::iterator i;
     for( i = m_list.begin(); i != m_list.end(); ++i ) {
         if( drawThisItem( *i ) ) {
@@ -134,10 +126,6 @@ void Label::zpl( QTextStream* stream )
 {
     *stream << ZPLUtils::header();
     
-    /*DocumentItem* item;
-    for( item = m_list.first();item;item=m_list.next())
-	if( drawThisItem( item ) )
-	    item->drawZpl( stream );*/// -!F: original, delete
     QList<DocumentItem*>::iterator i;
     for( i = m_list.begin(); i != m_list.end(); ++i ) {
         if( drawThisItem( *i ) ) {
@@ -154,8 +142,6 @@ void Label::InitBarcodes()
 {
     bool firstbarcode = true;
     
-    /*DocumentItem* item;
-    for( item = m_list.first();item;item=m_list.next())*/// -!F: original, delete
     QList<DocumentItem*>::iterator i;
     for( i = m_list.begin(); i != m_list.end(); ++i ) 
     {
@@ -195,8 +181,6 @@ void Label::draw( QPainter* painter, int x, int y )
 
     InitBarcodes();
 
-    /*DocumentItem* item;
-    for( item = m_list.first();item;item=m_list.next())*/// -!F: original, delete
     QList<DocumentItem*>::iterator i;
     for( i = m_list.begin(); i != m_list.end(); ++i ) {
         DocumentItem* item = *i;
@@ -220,9 +204,7 @@ void Label::draw( QPainter* painter, int x, int y )
 	    
 	    painter->save();
 	    painter->translate( x,y );
-	    /*painter->setClipRect( clip, QPainter::CoordPainter );*/// -!F: original, what is the correct replacement of this ?
 	    painter->setClipRect( clip );
-	    /*item->draw( painter );*/// -!F: original
             item->drawPreview( painter );
 	    painter->restore();
 	}
@@ -278,15 +260,10 @@ void Label::load( QIODevice* device )
     delete definition;
     
     readDocumentItems( &m_list, &doc, NULL, kbarcode18 );
-    /*m_list.setAutoDelete( true );*/// -!F: DocumentItemList has no member named setAutoDelete, what is the correct replacement of this?
                 
     // sort the list by z index
-    /*m_list.sort();*/// -!F: original, is qSort() the right replacement ?
-    /*qSort( m_list );*/// -!F: delete
     qSort( m_list.begin(), m_list.end(), sortDocumentItems );
     
-    /*DocumentItem* item;
-    for( item = m_list.first();item;item=m_list.next())*/// -!F: original, delete
     QList<DocumentItem*>::iterator i;
     for( i = m_list.begin(); i != m_list.end(); ++i ) {
         DocumentItem* item = *i;
@@ -345,10 +322,6 @@ bool Label::drawThisItem( const DocumentItem* item )
 
 bool Label::update() 
 {
-    /*DocumentItem* item;
-    for( item = m_list.first();item;item=m_list.next())
-	if( !item->visibilityScript().isEmpty() && item->visibilityScript() != "true" )
-	    return true;*/// -!F: original, delete
     QList<DocumentItem*>::iterator i;
     for( i = m_list.begin(); i != m_list.end(); ++i ) {
         if( !(*i)->visibilityScript().isEmpty() && (*i)->visibilityScript() != "true" ) {

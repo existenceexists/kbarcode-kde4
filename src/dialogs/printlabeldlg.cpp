@@ -29,9 +29,7 @@
 #include <klocale.h>
 
 PrintLabelDlg::PrintLabelDlg(QWidget *parent )
-    : /*KDialogBase( KDialogBase::Plain, i18n("Print"),
-      KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent)*/
-      KDialog ( parent )
+    : KDialog ( parent )
 {
     QWidget *page = new QWidget( this );
     setMainWidget( page );

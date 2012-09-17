@@ -100,16 +100,6 @@ void PrinterSettings::loadConfig()
 {
     KConfigGroup config = KGlobal::config()->group( "Printer" );
 
-    /*lpdata->articleEvent1 = (enum linebreak)config.readEntry("articleEvent1", NO_BREAK );// -!F: delete these lines that are commented out
-    lpdata->articleEvent2 = (enum linebreak)config.readEntry("articleEvent2", NO_BREAK );
-    lpdata->articleEvent3 = (enum linebreak)config.readEntry("articleEvent3", NO_BREAK );
-    lpdata->articleEvent4 = (enum linebreak)config.readEntry("articleEvent4", NO_BREAK );
-    lpdata->groupEvent1 = (enum linebreak)config.readEntry("groupEvent1", NO_BREAK );
-    lpdata->groupEvent2 = (enum linebreak)config.readEntry("groupEvent2", NO_BREAK );
-    lpdata->groupEvent3 = (enum linebreak)config.readEntry("groupEvent3", NO_BREAK );
-    lpdata->groupEvent4 = (enum linebreak)config.readEntry("groupEvent4", NO_BREAK );
-    lpdata->useCustomNo = config.readEntry("UseArticleCustomerNo", false );
-    lpdata->quality = config.readEntry( "quality", Middle );*/
     lpdata->articleEvent1 = (enum linebreak)config.readEntry("articleEvent1", int(NO_BREAK) );
     lpdata->articleEvent2 = (enum linebreak)config.readEntry("articleEvent2", int(NO_BREAK) );
     lpdata->articleEvent3 = (enum linebreak)config.readEntry("articleEvent3", int(NO_BREAK) );
@@ -187,10 +177,8 @@ QPrinter* PrinterSettings::setupPrinter( const KUrl & url, QWidget* parent, bool
     if( !immediately && !printDialog.exec() )
         return 0;
 
-    /*if( immediately && !prn.isEmpty() )
-        printer->autoConfigure( prn );*/
     if( immediately && !prn.isEmpty() )
-        printer->setPrinterName( prn );// -!F: Is this the right replacement of autoConfigure() ?
+        printer->setPrinterName( prn );
 
     if( !url.isValid() )
         printer->setOutputFileName( url.fileName() );

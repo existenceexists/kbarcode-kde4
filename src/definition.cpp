@@ -328,7 +328,6 @@ bool Definition::openFile()
 	const char *cFname = baFname.constData();
 	QByteArray baF = f.toUtf8();
 	const char *cF = baF.constData();
-	/*if(!filecopy( (const char*)fname, (const char*)f ))//F-delete*/
 	if(!filecopy( cFname, cF )) {
             return ( showFileError() ? openFile() : false );
 	}
@@ -477,25 +476,6 @@ int Definition::writeFile( const Measurements & c, QString type, QString produce
                   I2S(c.gapVMM()) + ", " + I2S(c.gapHMM()) + ", " +
                   I2S(c.numH()) + ", " + I2S(c.numV()) + ", NULL, NULL )";
         
-    /*QString s;
-    while( file->readLine( s, 1000 ) != -1 ) {
-        if( s.isEmpty() || s.left( 1 ) == "#" ) {
-            data.append( s );
-            continue;
-        }
-            
-        PrivateParser p( s );
-        if( p.getId().toInt() > index )
-            index = p.getId().toInt();
-
-        if( p.getType() == type && p.getProducer() == producer ) {
-            // update an item already present in the list
-            entry = entry.prepend( "INSERT INTO " TABLE_LABEL_DEF " VALUES (" + I2S(p.getId().toInt()) );
-            data.append( entry );
-            datawritten = true;
-        } else
-            data.append( s );
-    }*/
     QTextStream s( file );
     QString line = s.readLine();
     while( !line.isNull() ) {
@@ -597,7 +577,6 @@ bool Definition::showFileError()
                  "You will be prompted now to select the file containing the labeldefinitions."),
                  "", "NoDefinitionsFound" );
 
-        /*QString f = KFileDialog::getOpenFileName( QString::null, QString::null, 0 );*/
 	QString f = KFileDialog::getOpenFileName();
         if( !f.isEmpty() && QFile::exists( f ) ) {
             KConfigGroup config = KGlobal::config()->group( "Definitions" );

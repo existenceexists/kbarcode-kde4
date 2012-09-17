@@ -61,7 +61,6 @@ void ImageItem::draw(QPainter* painter)
     createImage();
     
     painter->save();
-    /*painter->drawPixmap( rect().x(), rect().y(), m_tmp );*/// -!F: original
     painter->drawPixmap( 0, 0, m_tmp );
     painter->restore();
     DocumentItem::drawBorder(painter);
@@ -82,22 +81,6 @@ void ImageItem::drawZpl( QTextStream* stream )
     createImage();
     
     QBuffer buffer;
-    /*if( buffer.open( QIODevice::WriteOnly ) ) // -!F: original, delete
-    {
-        // TODO: bmp????-
-        QImageIO io( &buffer, "PNG" ); 
-        QImage image = m_tmp.convertToImage();
-        // create a black and white image
-        io.setImage( image.convertDepth( 1 ) );
-        io.write();
-        buffer.close();
-
-        QByteArray data = buffer.buffer();
-        *stream << ZPLUtils::fieldOrigin( rect().x(), rect().y() );
-        *stream << "~DYD,p,P," << QString::number( data.size() ) + ",0,";
-        for( unsigned int i=0;i<data.size();i++)
-            *stream << data[i];
-    }*/
     if( buffer.open( QIODevice::WriteOnly ) )
     {
         // TODO: bmp????-
@@ -234,13 +217,11 @@ EImageScaling ImageItem::scaling() const
 
 void ImageItem::updateImage()
 {
-    /*m_tmp.resize( QSize(0,0) );*/// -!F: original, delete
     m_tmp = m_tmp.copy(QRect(QPoint(0, 0), QSize(0,0)));
 }
 
 void ImageItem::createImage()
 {
-    /*if( m_tmp.isNull() )*/// -!F: original
     if( createNewImage )
     {
         createNewImage = false;
@@ -265,12 +246,6 @@ void ImageItem::createImage()
 	    // but use faster scaling for onscreen operations
 	    if( m_scaling != eImage_Original )
 	    {
-		/*if( DocumentItem::paintDevice()->isExtDev() )// -!F: original, delete, What is the right replacement of isExtDev() ? They say no replacement is available.
-		    img = img.smoothScale( rect().width(), rect().height(), 
-					   (m_scaling == eImage_Scaled ? Qt::ScaleMin : QImage::ScaleFree) );
-		else
-		    img = img.scale( rect().width(), rect().height(), 
-				     (m_scaling == eImage_Scaled ? Qt::ScaleMin : QImage::ScaleFree) );*/
 		img = img.scaled( rect().width(), rect().height(), 
 			(m_scaling == eImage_Scaled ? Qt::KeepAspectRatio : Qt::IgnoreAspectRatio),
 			Qt::SmoothTransformation );
@@ -278,15 +253,6 @@ void ImageItem::createImage()
 	    else
 	    {
 		// we have to scale because of the bigger printer resolution
-		/*if( DocumentItem::paintDevice()->isExtDev() )// -!F: original, delete,  What is the right replacement of isExtDev() ? They say no replacement is available.
-		{
-		    QPaintDevice* device = DocumentItem::paintDevice();
-		    
-		    img = img.smoothScale(
-                                          (int)(img.width() * ((double)device->logicalDpiX()/QX11Info::appDpiX())),
-                                          (int)(img.height() * ((double)device->logicalDpiY()/QX11Info::appDpiY())),
-                                          Qt::ScaleMin );
-		}*/
 		QPaintDevice* device = DocumentItem::paintDevice();
 		
 		img = img.scaled(
@@ -301,7 +267,7 @@ void ImageItem::createImage()
 	    m_tmp.convertFromImage( img );
             
             if( canvasItem() )
-                canvasItem()->setSize( m_tmp.width(), m_tmp.height() );// -!F: added
+                canvasItem()->setSize( m_tmp.width(), m_tmp.height() );
 	}
 	else
 	{

@@ -129,7 +129,7 @@ void NewItemCommand::redo()
             m_item->setItem( m_object );
             m_object->setAdditionOrder( cv->additionOrder() );
             cv->incrementAdditionOrder();
-            /*m_item->setPos( m_point.x(), m_point.y() );*/// -!F: original, setPos() must be called after item is added to scene
+            /*m_item->setPos( m_point.x(), m_point.y() );*/// setPos() must be called after item is added to scene
             m_object->move( m_point.x() - cv->getTranslation().x(), m_point.y() - cv->getTranslation().y() );
 	    m_item->addRef();
 
@@ -141,7 +141,6 @@ void NewItemCommand::redo()
 
     if( m_item )
     {
-        /*m_item->setCanvas( cv->canvas() );*/// -!F: original, done: What is the QGraphicsItem equivalent of this?
         cv->scene()->addItem( m_item );
         m_item->setPos( m_point.x(), m_point.y() );// setPos() must be called after item is added to scene
         m_item->show();
@@ -153,8 +152,7 @@ void NewItemCommand::redo()
 void NewItemCommand::undo()
 {
     if( m_item ) {
-        /*m_item->setCanvas( NULL );*/// -!F: original, done: What is the QGraphicsItem equivalent of this?
-        /*m_item->hide();*/// -!F: original, removing an item that is hidden causes a runtime error
+        /*m_item->hide();*/// removing an item that is hidden causes a runtime error
         cv->scene()->removeItem( m_item );
     }
 }
@@ -545,8 +543,7 @@ DeleteCommand::~DeleteCommand()
 void DeleteCommand::redo()
 {
     if( canvasHasItem() ) {
-        /*m_canvas_item->setCanvas( 0 );*/// -!F: original, done: What is the QGraphicsItem equivalent of this?
-        /*m_canvas_item->hide();*/// -!F: original, this causes a runtime error in some special situations
+        /*m_canvas_item->hide();*/// hide() causes a runtime error in some special situations
         c->removeItem( m_canvas_item );
     }
 }
@@ -555,7 +552,6 @@ void DeleteCommand::undo()
 {
     // canvasHasItem won't work here
     if( m_canvas_item ) {
-        /*m_canvas_item->setCanvas( c );*/// -!F: original, done: What is the QGraphicsItem equivalent of this?
         c->addItem( m_canvas_item );
         m_canvas_item->show();
     }
