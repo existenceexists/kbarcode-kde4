@@ -320,6 +320,9 @@ void BatchAssistant::setupPage10()
     comboFormat->insertItems( 0, formats );
     if( formats.contains( PNG_FORMAT ) )
 	  comboFormat->setCurrentIndex( formats.indexOf( PNG_FORMAT ) );
+    else if( formats.contains( QString( PNG_FORMAT ).toLower() ) ) {
+        comboFormat->setCurrentIndex( formats.indexOf( QString( PNG_FORMAT ).toLower() ) );
+    }
     label->setBuddy( comboFormat );
 
     QGroupBox* imageNameGroup = new QGroupBox( i18n("&Filename:") );

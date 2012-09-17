@@ -69,12 +69,7 @@ KBarcode::KBarcode( QWidget *parent, Qt::WindowFlags f, Qt::WidgetAttribute waf)
     vLayout->addWidget( buttonBatch );
     vLayout->addWidget( buttonData );
     
-    QLayout * wLayout = w->layout();
-    if (wLayout == 0) {
-        w->setLayout(vLayout);
-    } else {
-        wLayout->addItem(vLayout);
-    }
+    w->setLayout( vLayout );
 
     connect( buttonSingle, SIGNAL( clicked() ), this, SLOT( startBarcode() ) );
     connect( buttonEditor, SIGNAL( clicked() ), this, SLOT( startLabelEditor() ) );

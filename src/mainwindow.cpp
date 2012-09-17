@@ -253,9 +253,7 @@ void MainWindow::showCheck()
 
 void MainWindow::startInfo()
 {
-    /*QString info = KStandardDirs::locate("appdata", "barcodes.html");// -!F: uncomment this and comment out the following locate():*/
-    QString info = KStandardDirs::locate("appdata", 
-        "/home/fanda/programovani/c++/frank_scripts/kbarcode/downloads/kbarcode-2.0.7/kbarcode/barcodes.html");// -!F:
+    QString info = KStandardDirs::locate("appdata", "barcodes.html");
     if( !info.isEmpty() )
         KToolInvocation::invokeBrowser( info );
 }
