@@ -1,0 +1,868 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>kbarcode</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body>
+<a name="top"></a>
+<p><a href="http://www.kbarcode.net" target="_blank">
+    <font face="Verdana, Arial, Helvetica, sans-serif"> <b>kbarcode </b> - The Barcode Solution for  KDE </font>
+   </a></p>
+  
+<p><strong>kbarcode</strong> has right now support following barcodes. Please check 
+  the requirements and limitations:</p>
+  
+<ul>
+  <li> <a href="#EAN">ean (EAN 8 or EAN 13)</a></li>
+  <li> <a href="#upc">upc (UPC-A or UPC-E)</a></li>
+  <li> <a href="#isbn">isbn</a></li>
+  <li> <a href="#code39">code39</a></li>
+  <li><a href="#code128"> code128</a></li>
+  <li> <a href="#code128c">code128c</a></li>
+  <li><a href="#code128b"> code128b</a></li>
+  <li> <a href="#codei25">Interleave 2 of 5</a></li>
+  <li> <a href="#code128raw">code 128 raw</a></li>
+  <li> <a href="#cbr">Codabar</a></li>
+  <li> <a href="#msi">msi</a></li>
+  <li> <a href="#pls">Plessey</a></li>
+  <li> <a href="#code93">code93</a></li>
+</ul>
+<p><strong><a name="EAN" id="EAN"></a>EAN 8</strong>:</p>
+
+
+<table width = "100%" border="1" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td nowrap>kbarcode Setting</td>
+    <td>ean</td>
+  </tr>
+  <tr> 
+    <td nowrap>valid character set</td>
+    <td>numbers (0....9)</td>
+  </tr>
+  <tr> 
+    <td nowrap>lenght</td>
+    <td>7 + 1 Checkum Digit = 8</td>
+  </tr>
+  <tr> 
+    <td nowrap>Checksum</td>
+    <td><ul>
+        <li>when the number is 7 digits long, kbarcode will create a checksum 
+          (the 8. digits)</li>
+        <li>when the number is 8 digits long, kbarcode will check the checksum 
+          and deny printing if wrong</li>
+      </ul></td>
+  </tr>
+  <tr> 
+    <td nowrap>Size</td>
+    <td><p>fixed, but scalable<br>
+        Standard: 26.73mm x 21.64mm</p></td>
+  </tr>
+  <tr> 
+    <td nowrap>Remark</td>
+    <td><p>possible scaling:</p>
+      <table width="80%" border="1" align="center" cellpadding="0" cellspacing="0">
+        <tr> 
+          <td width="20%"><div align="center">Size</div></td>
+          <td width="20%"><div align="center">Factor</div></td>
+          <td width="20%"><p align="center">width<br>
+            <p align="center">[mm]</p></td>
+          <td width="20%"><p align="center">height</p>
+            <p align="center">[mm]</p></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC0</div></td>
+          <td><div align="center">0.818</div></td>
+          <td><div align="center">21.87</div></td>
+          <td><div align="center">17.70</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC1</div></td>
+          <td><div align="center">0.90</div></td>
+          <td><div align="center">24.06</div></td>
+          <td><div align="center">19.48</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center"><strong>SC2</strong></div></td>
+          <td><div align="center"><strong>1.00</strong></div></td>
+          <td><div align="center"><strong>26.73</strong></div></td>
+          <td><div align="center"><strong>21.64</strong></div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC3</div></td>
+          <td><div align="center">1.10</div></td>
+          <td><div align="center">29.40</div></td>
+          <td><div align="center">23.80</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC4</div></td>
+          <td><div align="center">1.20</div></td>
+          <td><div align="center">32.08</div></td>
+          <td><div align="center">25.97</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC5</div></td>
+          <td><div align="center">1.35</div></td>
+          <td><div align="center">36.09</div></td>
+          <td><div align="center">29.21</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC6</div></td>
+          <td><div align="center">1.50</div></td>
+          <td><div align="center">40.10</div></td>
+          <td><div align="center">32.46</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC7</div></td>
+          <td><div align="center">1.65</div></td>
+          <td><div align="center">44.10</div></td>
+          <td><div align="center">35.71</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC8</div></td>
+          <td><div align="center">1.85</div></td>
+          <td><div align="center">49.45</div></td>
+          <td><div align="center">40.03</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC9</div></td>
+          <td><div align="center">2.00</div></td>
+          <td><div align="center">53.46</div></td>
+          <td><div align="center">43.28</div></td>
+        </tr>
+      </table><p>&nbsp;</p></td>
+  </tr>
+</table>
+
+
+<p> 
+ <a href="#top"> TOP </a>
+</p>
+
+
+<p><strong>EAN 13</strong>:</p>
+<table width = "100%" border="1" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td nowrap>kbarcode Setting</td>
+    <td>ean</td>
+  </tr>
+  <tr> 
+    <td nowrap>valid character set</td>
+    <td>numbers (0.....9)</td>
+  </tr>
+  <tr> 
+    <td nowrap>lenght</td>
+    <td>12 + 1 checksum digitt = 13</td>
+  </tr>
+  <tr> 
+    <td nowrap>Checksum</td>
+    <td><ul>
+        <li>when the number is 12 digits long, kbarcode will create a checksum 
+          (the 13. digits)</li>
+        <li>when the number is 13 digits long, kbarcode will check the checksum 
+          and deny printing if wrong</li>
+      </ul></td>
+  </tr>
+  <tr> 
+    <td nowrap>Size</td>
+    <td><p>fixed, but scalable<br>
+        Standard: 37.29 x 26.26mm</p></td>
+  </tr>
+  <tr> 
+    <td nowrap>Remark</td>
+    <td><p>possible scaling:</p>
+      <table width="80%" border="1" align="center" cellpadding="0" cellspacing="0">
+       
+        <tr> 
+          <td width="20%"><div align="center">Size</div></td>
+          <td width="20%"><div align="center">Factor</div></td>
+          <td width="20%"><p align="center">width<br>
+            <p align="center">[mm]</p></td>
+          <td width="20%"><p align="center">height</p>
+            <p align="center">[mm]</p></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC0</div></td>
+          <td><div align="center">0.818</div></td>
+          <td><div align="center">30.50</div></td>
+          <td><div align="center">21.48</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC1</div></td>
+          <td><div align="center">0.90</div></td>
+          <td><div align="center">33.56</div></td>
+          <td><div align="center">23.63</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center"><strong>SC2</strong></div></td>
+          <td><div align="center"><strong>1.00</strong></div></td>
+          <td><div align="center">37.29</div></td>
+          <td><div align="center">26.26</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC3</div></td>
+          <td><div align="center">1.10</div></td>
+          <td><div align="center">41.02</div></td>
+          <td><div align="center">28.89</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC4</div></td>
+          <td><div align="center">1.20</div></td>
+          <td><div align="center">44.75</div></td>
+          <td><div align="center">31.51</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC5</div></td>
+          <td><div align="center">1.35</div></td>
+          <td><div align="center">50.34</div></td>
+          <td><div align="center">35.45</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC6</div></td>
+          <td><div align="center">1.50</div></td>
+          <td><div align="center">55.94</div></td>
+          <td><div align="center">39.39</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC7</div></td>
+          <td><div align="center">1.65</div></td>
+          <td><div align="center">61.35</div></td>
+          <td><div align="center">43.33</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC8</div></td>
+          <td><div align="center">1.85</div></td>
+          <td><div align="center">68.99</div></td>
+          <td><div align="center">48.58</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC9</div></td>
+          <td><div align="center">2.00</div></td>
+          <td><div align="center">74.58</div></td>
+          <td><div align="center">52.52</div></td>
+        </tr>
+      </table><p>&nbsp;</p></td>
+  </tr>
+</table>
+
+
+<p> 
+ <a href="#top"> TOP </a>
+</p>
+
+
+
+<p><strong><a name="upc"></a>UPC-A</strong></p>
+<table width = "100%" border="1" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td nowrap>kbarcode Setting</td>
+    <td>UPC</td>
+  </tr>
+  <tr> 
+    <td nowrap>valid character set</td>
+    <td>numbers (0....9)</td>
+  </tr>
+  <tr> 
+    <td nowrap>lenght</td>
+    <td>11 + 1 checksum digit = 12</td>
+  </tr>
+  <tr> 
+    <td nowrap>Checksum</td>
+    <td><ul>
+        <li>when the number is 11 digits long, kbarcode will create a checksum 
+          (the 12. digits)</li>
+        <li>when the number is 12 digits long, kbarcode will check the checksum 
+          and deny printing if wrong</li>
+      </ul></td>
+  </tr>
+  <tr> 
+    <td nowrap>Size</td>
+    <td><p>fixed, but scalable<br>
+        Standard: 37.29 x 26.26mm</p></td>
+  </tr>
+  <tr> 
+    <td nowrap>Remark</td>
+    <td><p>&nbsp;</p>
+      <table width="80%" border="1" align="center" cellpadding="0" cellspacing="0">
+        
+        <tr> 
+          <td width="20%"><div align="center">Size</div></td>
+          <td width="20%"><div align="center">Factor</div></td>
+          <td width="20%"><p align="center">width<br>
+            <p align="center">[mm]</p></td>
+          <td width="20%"><p align="center">height</p>
+            <p align="center">[mm]</p></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC0</div></td>
+          <td><div align="center">0.818</div></td>
+          <td><div align="center">30.50</div></td>
+          <td><div align="center">21.48</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC1</div></td>
+          <td><div align="center">0.90</div></td>
+          <td><div align="center">33.56</div></td>
+          <td><div align="center">23.63</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center"><strong>SC2</strong></div></td>
+          <td><div align="center"><strong>1.00</strong></div></td>
+          <td><div align="center">37.29</div></td>
+          <td><div align="center">26.26</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC3</div></td>
+          <td><div align="center">1.10</div></td>
+          <td><div align="center">41.02</div></td>
+          <td><div align="center">28.89</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC4</div></td>
+          <td><div align="center">1.20</div></td>
+          <td><div align="center">44.75</div></td>
+          <td><div align="center">31.51</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC5</div></td>
+          <td><div align="center">1.35</div></td>
+          <td><div align="center">50.34</div></td>
+          <td><div align="center">35.45</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC6</div></td>
+          <td><div align="center">1.50</div></td>
+          <td><div align="center">55.94</div></td>
+          <td><div align="center">39.39</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC7</div></td>
+          <td><div align="center">1.65</div></td>
+          <td><div align="center">61.35</div></td>
+          <td><div align="center">43.33</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC8</div></td>
+          <td><div align="center">1.85</div></td>
+          <td><div align="center">68.99</div></td>
+          <td><div align="center">48.58</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">SC9</div></td>
+          <td><div align="center">2.00</div></td>
+          <td><div align="center">74.58</div></td>
+          <td><div align="center">52.52</div></td>
+        </tr>
+      </table>
+      <p>&nbsp;</p></td>
+  </tr>
+</table>
+
+<p> 
+ <a href="#top"> TOP </a>
+</p>
+
+
+<p><strong>UPC-E</strong></p>
+<table width = "100%" border="1" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td nowrap>kbarcode Setting</td>
+    <td>upc</td>
+  </tr>
+  <tr> 
+    <td nowrap>valid character set</td>
+    <td>numbers (0....9)</td>
+  </tr>
+  <tr> 
+    <td nowrap>lenght</td>
+    <td>Systemcode 0 + 6 + 1 Checkum Digit = 8</td>
+  </tr>
+  <tr> 
+    <td nowrap>Checksum</td>
+    <td><ul>
+        <li>when the number is 7 digits long, kbarcode will create a checksum 
+          (the 8. digits)</li>
+        <li>when the number is 8 digits long, kbarcode will check the checksum 
+          and deny printing if wrong</li>
+      </ul></td>
+  </tr>
+  <tr> 
+    <td nowrap>Size</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Remark</td>
+    <td>
+<p>&nbsp;</p></td>
+  </tr>
+</table>
+
+
+
+<p> 
+ <a href="#top"> TOP </a>
+</p>
+
+
+
+<p><strong><a name="isbn"></a>ISBN</strong></p>
+<table width = "100%" border="1" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td nowrap>kbarcode Setting</td>
+    <td>ISBN</td>
+  </tr>
+  <tr> 
+    <td nowrap>valid character set</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>lenght</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Checksum</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Size</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Remark</td>
+    <td> ISBN numbers are encoded as EAN-13 symbols, with an optional add-5 
+        trailer. The ISBN frontend of the library accepts real ISBN 
+        numbers and deals with any hyphen and, if present, the ISBN checksum character 
+        before encoding data. Valid representations for ISBN strings are for example: 
+        &quot;1-56592-292-1&quot;, &quot;3-89721-122-X&quot; and &quot;3-89721-122-X 
+        06900&quot;.</p></td>
+  </tr>
+</table>
+
+
+<p> 
+ <a href="#top"> TOP </a>
+</p>
+
+
+
+<p><strong><a name="code128b"></a>code 128-B</strong></p>
+<table width = "100%" border="1" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td nowrap>kbarcode Setting</td>
+    <td>code 128-B</td>
+  </tr>
+  <tr> 
+    <td nowrap>valid character set</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>lenght</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Checksum</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Size</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Remark</td>
+    <td> This encoding can represent all of the printing ASCII characters, from 
+      the space (32) to DEL (127). The checksum digit is mandatory i
+	  n this encoding.</td>
+  </tr>
+</table>
+
+
+<p> 
+ <a href="#top"> TOP </a>
+</p>
+
+
+<p><strong><a name="code128c"></a>code 128-C</strong></p>
+<table width = "100%" border="1" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td nowrap>kbarcode Setting</td>
+    <td>code 128-C</td>
+  </tr>
+  <tr> 
+    <td nowrap>valid character set</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>lenght</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Checksum</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Size</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Remark</td>
+    <td> 
+        The &quot;C&quot; variation of Code-128 uses Code-128 symbols to represent 
+        two digits at a time (Code-128 is made up of 104 symbols whose<br>
+        interpretation is controlled by the start symbol being used). Code 128-C 
+        is thus the most compact way to represent any even number of digits. The 
+        encoder refuses to deal with an odd number of digits because the caller 
+        is expected to provide proper padding to an even number of digits. (Since 
+        Code-128 includes control symbols to switch charset, it is theoretically 
+        possible to represent the odd digit as a Code 128-A or 128-B symbol, but 
+        this tool doesn't currently implement this option).</p></td>
+  </tr>
+</table>
+
+
+<p> 
+ <a href="#top"> TOP </a>
+</p>
+
+
+<p><strong><a name="code128raw"></a>code 128 raw</strong></p>
+<table width = "100%" border="1" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td nowrap>kbarcode Setting</td>
+    <td>code 128 raw</td>
+  </tr>
+  <tr> 
+    <td nowrap>valid character set</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>lenght</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Checksum</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Size</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Remark</td>
+    <td> Code-128 output represented symbol-by-symbol in the input string. 
+        To override part of the problems outlined below in specifying<br>
+        code128 symbols, this pseudo-encoding allows the used to specify a list 
+        of code128 symbols separated by spaces. Each symbol is represented by 
+        a number in the range 0-105. The list should include the leading character.The 
+        checksum and the stop character are automatically added by the library. 
+        Most likely this pseudo-encoding will be used with BARCODE_NO_ASCII and 
+        some external program to supply the printed text.</p></td>
+  </tr>
+</table>
+
+
+<p> 
+ <a href="#top"> TOP </a>
+</p>
+
+
+<p><strong><a name="code39"></a>code 39</strong></p>
+<table width = "100%" border="1" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td nowrap>kbarcode Setting</td>
+    <td>code 39</td>
+  </tr>
+  <tr> 
+    <td nowrap>valid character set</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>lenght</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Checksum</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Size</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Remark</td>
+    <td> The code-39 standard can encode uppercase letters, digits, the blank 
+      space, plus, minus, dot, star, dollar, slash, percent. Any<br>
+      string that is only composed of such characters is accepted by the code-39 
+      encoder. To avoid loosing information, the encoder refuses to encode mixed-case 
+      strings (a lowercase string is nonetheless accepted as a shortcut, but is 
+      encoded as uppercase).</td>
+  </tr>
+</table>
+
+
+<p> 
+ <a href="#top"> TOP </a>
+</p>
+
+
+<p><strong><a name="codei25"></a>interleaved 2 of 5</strong></p>
+<table width = "100%" border="1" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td nowrap>kbarcode Setting</td>
+    <td>interleaved 2 of 5</td>
+  </tr>
+  <tr> 
+    <td nowrap>valid character set</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>lenght</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Checksum</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Size</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Remark</td>
+    <td> 
+        This encoding can only represent an even number of digits (odd digits 
+        are represented by bars, and even digits by the interleaving<br>
+        spaces). The name stresses the fact that two of the five items (bars or 
+        spaces) allocated to each symbol are wide, while the rest are narrow. 
+        The checksum digit is optional (can be disabled via BARCODE_NO_CHECKSUM). 
+        Since the number of digits, including the checksum, must be even, a leading 
+        zero is inserted in the string being encoded if needed (this is specifically 
+        stated in the specs I have access to).</p></td>
+  </tr>
+</table>
+
+
+<p> 
+ <a href="#top"> TOP </a>
+</p>
+
+
+<p><strong><a name="code128"></a>code 128</strong></p>
+<table width = "100%" border="1" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td nowrap>kbarcode Setting</td>
+    <td>code 128</td>
+  </tr>
+  <tr> 
+    <td nowrap>valid character set</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>lenght</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Checksum</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Size</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Remark</td>
+    <td>         Automatic selection between alphabet A, B and C of the Code-128 standard. 
+        This encoding can represent all ASCII symbols, from 0<br>
+        (NUL) to 127 (DEL), as well as four special symbols, named F1, F2, F3, 
+        F4. The set of symbols available in this encoding is not easily represented 
+        as input to the barcode library, so the following convention is used. 
+        In the input string, which is a C-language null- terminated string, the 
+        NUL char is represented by the value 128 (0x80, 0200) and the F1-F4 characters 
+        are represented by the values 193-196 (0xc1-0xc4, 0301-0304). The values 
+        have been chosen to ease their representation as escape sequences.</p>
+      <p>Since the shell doesn't seem to interpret escape sequences on the command 
+        line, the &quot;-b&quot; option cannot be easily used to designate the 
+        strings to be encoded. As a workaround you can resort to the command echo, 
+        either within back-ticks or used separately to create a file that is then 
+        fed to the standard-input of barcode - assuming your echo command processes 
+        escape sequences. The newline character is especially though to encode 
+        (but not impossible unless you use a csh variant. </p>
+      <p>These problems only apply to the command-line tool; the use of library 
+        functions doesn't give any problem. In needed, you can use the &quot;code 
+        128 raw&quot; pseudo-encoding to represent code128 symbols by their numerical 
+        value. This encoding is used late in the auto- selection mechanism because 
+        (almost) any input string can be represented using code128.</p>
+</td>
+</tr>
+</table>
+
+
+<p> 
+ <a href="#top"> TOP </a>
+</p>
+
+
+<p><strong><a name="cbr"></a>Codabar</strong></p>
+<table width = "100%" border="1" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td nowrap>kbarcode Setting</td>
+    <td>Codabar</td>
+  </tr>
+  <tr> 
+    <td nowrap>valid character set</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>lenght</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Checksum</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Size</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Remark</td>
+    <td> 
+        Codabar can encode the ten digits and a few special symbols (minus, plus, 
+        dollar, colon, bar, dot). The characters &quot;A&quot;, &quot;B&quot;, 
+        &quot;C&quot; and<br>
+        &quot;D&quot; are used to represent four different start/stop characters. 
+        The input string to the barcode library can include the start and stop 
+        characters or not include them (in which case &quot;A&quot; is used as 
+        start and &quot;B&quot; as stop). Start and stop characters in the input 
+        string can be either all lowercase or all uppercase and are always printed 
+        as uppercase.</p></td>
+  </tr>
+</table>
+
+
+<p> 
+ <a href="#top"> TOP </a>
+</p>
+
+
+<p><strong><a name="pls"></a>Plessey</strong></p>
+<table width = "100%" border="1" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td nowrap>kbarcode Setting</td>
+    <td>Plessey</td>
+  </tr>
+  <tr> 
+    <td nowrap>valid character set</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>lenght</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Checksum</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Size</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Remark</td>
+    <td> Plessey barcodes can encode all the hexadecimal digits. Alphabetic 
+        digits in the input string must either be all lowercase or all<br>
+        uppercase. The output text is always uppercase.</p></td>
+  </tr>
+</table>
+
+
+<p> 
+ <a href="#top"> TOP </a>
+</p>
+
+
+<p><strong><a name="msi"></a>MSI</strong></p>
+<table width = "100%" border="1" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td nowrap>kbarcode Setting</td>
+    <td>MSI</td>
+  </tr>
+  <tr> 
+    <td nowrap>valid character set</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>lenght</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Checksum</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Size</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Remark</td>
+    <td> 
+        MSI can only encode the decimal digits. While the standard specifies either 
+        one or two check digits, the current implementation in<br>
+        this library only generates one check digit.</p></td>
+  </tr>
+</table>
+
+<p> 
+ <a href="#top"> TOP </a>
+</p>
+
+
+<p><strong><a name="code93"></a>code 93</strong></p>
+<table width = "100%" border="1" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td nowrap>kbarcode Setting</td>
+    <td>code 93</td>
+  </tr>
+  <tr> 
+    <td nowrap>valid character set</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>lenght</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Checksum</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Size</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td nowrap>Remark</td>
+    <td>The code-93 standard can natively encode 48 different characters, including 
+        uppercase letters, digits, the blank space, plus, minus,<br>
+        dot, star, dollar, slash, percent, as well as five special characters: 
+        a start/stop delimiter and four &quot;shift characters&quot; used for 
+        extended encoding. Using this &quot;extended encoding&quot; method, any 
+        standard 7-bit ASCII character can be encoded, but it takes up two symbol 
+        lengths in barcode if the character is not natively supported (one of 
+        the 48). The encoder here fully implements the code 93 encoding standard. 
+        Any characters natively supported (A-Z, 0-9, &quot;.+-/$&amp;%&quot;) 
+        will be encoded as such - for any other characters (such as lower case 
+        letters, brackets, parentheses, etc.), the encoder will revert to extended 
+        encoding. As a note, the option to exclude the checksum will eliminate 
+        the two modulo-47 checksums (called C and K) from the barcode, but this 
+        probably will make it unreadable by 99% of all scanning systems. These 
+        checksums are specified to be used at the firmware level, and their absence 
+        will be interpreted as an invalid barcode.</p></td>
+  </tr>
+</table>
+
+
+<p> 
+ <a href="#top"> TOP </a>
+</p>
+</body>
+</html>
