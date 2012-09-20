@@ -133,6 +133,7 @@ class ResizeCommand : public QUndoCommand, CommandUtils {
 	    orect = rect = m_canvas_item->item()->rectMM();
 	    m_shift = shift;
             m_id = id;
+            setText( name() + "\n" + name() );
         }
         ~ResizeCommand() {}
 
@@ -169,6 +170,7 @@ class MoveCommand : public QUndoCommand, CommandUtils {
             x = cx;
             y = cy;
             m_id = id;
+            setText( name() + "\n" + name() );
         }
         ~MoveCommand() {}
 
@@ -208,6 +210,7 @@ class LockCommand : public QUndoCommand, CommandUtils {
             : QUndoCommand( parent ), CommandUtils( it )
         {
             m_locked = lock;
+            setText( name() + "\n" + name() );
         }
         
         void redo();
@@ -318,7 +321,7 @@ class BarcodeCommand : public QUndoCommand, CommandUtils {
 class NewPictureCommand : public NewItemCommand {
     public:
         NewPictureCommand( MyCanvasView* v )
-	    : NewItemCommand( v, i18n("New Picture") )
+	    : NewItemCommand( v, i18n("New Picture") + "\n" + i18n("New Picture") )
 	    {
 	    }
 
@@ -381,6 +384,7 @@ class DeleteCommand : public QUndoCommand, CommandUtils {
         DeleteCommand( TCanvasItem* it, QUndoCommand* parent = 0 ) 
             : QUndoCommand( parent ), CommandUtils( it )
         {
+            setText( name() + "\n" + name() );
         }
         ~DeleteCommand();
         
@@ -431,6 +435,7 @@ class ScriptCommand : public QUndoCommand, CommandUtils {
             : QUndoCommand( parent ), CommandUtils( it )
         {
             m_script = script;
+            setText( name() + "\n" + name() );
         }
         ~ScriptCommand() {}
         

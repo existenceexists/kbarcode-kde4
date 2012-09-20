@@ -103,7 +103,7 @@ void CommandUtils::documentItemDeleted()
 }
 
 NewItemCommand::NewItemCommand( MyCanvasView* view, const QString & name, QUndoCommand* parent )
-    : QObject(), QUndoCommand( parent )
+    : QObject(), QUndoCommand( name + "\n" + name, parent )
 {
     cv = view;
     m_name = name;
@@ -263,6 +263,7 @@ ChangeZCommand::ChangeZCommand( int z, TCanvasItem* it )
 {
     m_z = z;
     m_oldz = (int)m_canvas_item->zValue();
+    setText( name() + "\n" + name() );
 }
 
 void ChangeZCommand::redo()
@@ -322,6 +323,7 @@ PictureCommand::PictureCommand( double r, bool mh, bool mv, EImageScaling s, Ima
     oldsize.setHeight( it->rect().height() );
 
     m_item = it;
+    setText( name() + "\n" + name() );
 }
 
 void PictureCommand::setExpression( const QString & expr )
@@ -369,6 +371,7 @@ TextChangeCommand::TextChangeCommand( TextItem* it, QString t, QUndoCommand* par
     m_item = it;
     text = t;
     oldtext = m_item->text();
+    setText( name() + "\n" + name() );
 }
 
 void TextChangeCommand::redo()
@@ -388,6 +391,7 @@ TextRotationCommand::TextRotationCommand( double rot, TextItem* t, QUndoCommand*
 {
     rot1 = rot;
     rot2 = t->rotation();
+    setText( name() + "\n" + name() );
 }
 
 void TextRotationCommand::redo()
@@ -410,6 +414,7 @@ TextLineChangeCommand::TextLineChangeCommand( TextLineItem* it, QString t, int f
     m_font = font;
     m_mag_vert = magvert;
     m_mag_hor = maghor;
+    setText( name() + "\n" + name() );
 }
 
 void TextLineChangeCommand::redo()
@@ -435,6 +440,7 @@ BarcodeCommand::BarcodeCommand( BarcodeItem* bcode, Barkode* d, QUndoCommand* pa
     m_item = bcode;
     olddata = *bcode;
     data = d;
+    setText( name() + "\n" + name() );
 }
 
 void BarcodeCommand::redo()
@@ -563,6 +569,7 @@ BorderCommand::BorderCommand( bool border, const QPen & pen, DocumentItem* item,
     m_new_border = border;
     m_new_pen = pen;
     m_item = item;
+    setText( name() + "\n" + name() );
 }
 
 void BorderCommand::redo()
@@ -594,6 +601,7 @@ FillCommand::FillCommand( QColor c, RectItem* r, QUndoCommand* parent )
 {
     fill = c;
     m_item = r;
+    setText( name() + "\n" + name() );
 }
 
 void FillCommand::redo()
