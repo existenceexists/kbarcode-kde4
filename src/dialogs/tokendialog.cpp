@@ -181,10 +181,6 @@ void TokenDialog::setupStack2Page1()
     allList = new QTreeWidget;
     right_layout->addWidget(allList);
     allList->setHeaderLabels( QStringList() << i18n("Token") << i18n("Description") );
-    /*allList->setColumnWidthMode( 0, Q3ListView::Maximum );
-    allList->setColumnWidthMode( 1, Q3ListView::Maximum );*/// -!F: original, delete
-    allList->setColumnWidth( 0, 270 );
-    allList->setColumnWidth( 1, 350 );
     allList->setMinimumWidth( 600 );
     allList->setMinimumHeight( 200 );
     label->setBuddy( allList );
@@ -524,6 +520,8 @@ void TokenDialog::categoryChanged( QListWidgetItem* item )
 		allList->addTopLevelItem( new QTreeWidgetItem( allList, QStringList() << QString( "[%1]").arg( m_custom_tokens[i] ) << 
 						     i18n("Variable defined by the user for this label.") ) );
     }
+    allList->resizeColumnToContents( 0 );
+    allList->resizeColumnToContents( 1 );
 }
 
 void TokenDialog::itemChanged( QTreeWidgetItem* item )
