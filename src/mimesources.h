@@ -30,7 +30,7 @@ class DocumentItemDrag : public QMimeData {
     public:
         DocumentItemDrag();
         
-        static const char * mimeType();
+        static QString mimeType();
         
         void setDocumentItem( DocumentItemList* list );
 

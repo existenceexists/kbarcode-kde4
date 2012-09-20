@@ -85,7 +85,6 @@
 #include <kundostack.h>
 #include <kcombobox.h>
 #include <kfiledialog.h>
-#include <kiconloader.h>
 #include <kimageio.h>
 #include <klineedit.h>
 #include <klocale.h>

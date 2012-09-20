@@ -53,9 +53,9 @@ DocumentItemDrag::DocumentItemDrag()
 {
 }
 
-const char * DocumentItemDrag::mimeType()
+QString DocumentItemDrag::mimeType()
 {
-    return "application/x-kbarcode-document-item";
+    return QString( "application/x-kbarcode-document-item" );
 }
 
 void DocumentItemDrag::setDocumentItem( DocumentItemList* list )

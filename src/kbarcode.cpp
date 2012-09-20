@@ -42,6 +42,7 @@
 #include <kmenu.h>
 #include <kpushbutton.h>
 #include <kmessagebox.h>
+#include <kstandarddirs.h>
 
 KBarcode::KBarcode( QWidget *parent, Qt::WindowFlags f, Qt::WidgetAttribute waf)
     : MainWindow( parent, f )
@@ -59,7 +60,8 @@ KBarcode::KBarcode( QWidget *parent, Qt::WindowFlags f, Qt::WidgetAttribute waf)
     buttonData = new KPushButton( i18n("Edit SQL &Tables..."), w );
     buttonData->setEnabled( false );
     
-    buttonSingle->setIcon( KIcon( "view-barcode" ) );
+    //buttonSingle->setIcon( KIcon( "view-barcode" ) );
+    buttonSingle->setIcon( KIcon( KStandardDirs::locate( "appdata", "hi32-action-barcode.png" ) ) );
     buttonEditor->setIcon( KIcon( "document-edit" ) );
     buttonBatch->setIcon( KIcon( "document-print" ) );
 

@@ -10,6 +10,9 @@ install(FILES
     hi32-action-kbarcoderect.png 
     hi16-action-kbarcodeellipse.png 
     hi16-action-kbarcodegrid.png 
+    hi16-action-barcode.png 
+    hi22-action-barcode.png 
+    hi32-action-barcode.png 
     DESTINATION ${DATA_INSTALL_DIR}/${ProjectName})
 
 #message(STATUS "\${CMAKE_CURRENT_SOURCE_DIR} is: ${CMAKE_CURRENT_SOURCE_DIR}")
