@@ -477,7 +477,7 @@ void CSVImportDlg::accept()
             + i18np("%1 of %2 sql queries failed.", "%1 of %2 sql queries failed.", 
             queriesFailedNum, queriesFailedNum, queriesNum)
             + QString("\n")
-            + i18np("%1 of %2 sql was query executed successfully.", "%1 of %2 sql queries were executed successfully.", 
+            + i18np("%1 of %2 sql query was executed successfully.", "%1 of %2 sql queries were executed successfully.", 
             queriesNum - queriesFailedNum, queriesNum - queriesFailedNum, queriesNum) );
         KPageDialog::accept();// Destroy the csv import dialog.
     }

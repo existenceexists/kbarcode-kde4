@@ -293,7 +293,8 @@ bool SqlTables::newTables( const QString & username, const QString & password, c
                        "    PRIMARY KEY  (label_no)"
                        ");" );
 
-            KMessageBox::information( 0, i18n("Created tables in the database ")+database+i18n(" successfully!") );
+            //KMessageBox::information( 0, i18n("Created tables in the database %1 successfully!", database) );// this is correct, translate it
+            KMessageBox::information( 0, i18n("Created table ")+database+i18n(" successfully!") );
         }
         dbase.close();
     }// the end of the scope of QSqlDatabase dbase variable
@@ -321,7 +322,7 @@ void SqlTables::importLabelDef()
         f = config.readEntry( "defpath", KStandardDirs::locate( "appdata", "labeldefinitions.sql" ) );
     }
 
-    QString progressDialogText( i18n("Importing label definitions from the file ") + "<br>" + f + "<br>" + i18n(" into your database.") );
+    QString progressDialogText( i18n("Importing label definitions from the file <br>%1<br> into your database.", f ) );
     importData( f, database(), progressDialogText );
 
     Definition::updateProducer();
@@ -341,7 +342,8 @@ void SqlTables::importExampleData()
     QSqlQuery query3( QString::null, database() );
     exec( &query3, "DELETE FROM " TABLE_CUSTOMER_TEXT );
 
-    QString progressDialogText( i18n("Importing example data from the file ") + "<br>" + KStandardDirs::locate("appdata", "exampledata.sql") + "<br>" + i18n(" into your database.") );
+    QString progressDialogText( i18n("Importing example data from the file <br>%1<br> into your database.", 
+                                     KStandardDirs::locate("appdata", "exampledata.sql") ) );
     importData( KStandardDirs::locate("appdata", "exampledata.sql"), database(), progressDialogText );
 }
 
@@ -359,7 +361,7 @@ void SqlTables::importData( const QString & filename, QSqlDatabase dbase, const 
     }
 
     QFile data( filename);
-    QProgressDialog* dlg = new QProgressDialog( "<qt>" + progressDialogText + "<br><br>" + i18n("SQL import progress:") + "</qt>",  QString::null, 0, data.size());
+    QProgressDialog* dlg = new QProgressDialog( i18n( "<qt>%1<br><br>%2</qt>", progressDialogText, i18n("SQL import progress:") ),  QString::null, 0, data.size());
     dlg->setWindowModality( Qt::WindowModal );
 
     if( data.open( QIODevice::ReadOnly ) ) {
@@ -502,9 +504,9 @@ bool SqlTables::testSettings( const QString & username, const QString & password
             KMessageBox::information( 0, i18n("Connected successfully to your database") );
         } else {
             KMessageBox::error( 0, i18n("<qt>Connection failed:<br>")
-                + dbase.lastError().databaseText() + "<br>"
-                + i18n("So now we will try to connect to the default database:<br>") 
-                + drivers[driver]->initdb( database ) + "</qt>");
+                + dbase.lastError().databaseText()
+                + i18n("<br>So now we will try to connect to the default database:<br>%1</qt>", 
+                drivers[driver]->initdb( database ) ) );
         }
         dbase.close();
     }// the end of the scope of QSqlDatabase dbase variable
@@ -528,12 +530,12 @@ bool SqlTables::testSettings( const QString & username, const QString & password
         dbase.setHostName( hostname );
 
         if( !dbase.open() ) {
-            KMessageBox::error( 0, i18n("<qt>Connection failed to the default database:<br>") 
-                + dbase.lastError().databaseText() + "</qt>" );
+            KMessageBox::error( 0, i18n("<qt>Connection to the default database failed:<br>%1</qt>", 
+                dbase.lastError().databaseText() ) );
         } else {
             connectedSuccessfully = true;
-            KMessageBox::information( 0, i18n("<qt>Connected successfully to the default database:<br>")
-                + drivers[driver]->initdb( database ) + "</qt>");
+            KMessageBox::information( 0, i18n("<qt>Connected successfully to the default database:<br>%1</qt>",
+                drivers[driver]->initdb( database ) ) );
         }
         dbase.close();
     }// the end of the scope of QSqlDatabase dbase variable
