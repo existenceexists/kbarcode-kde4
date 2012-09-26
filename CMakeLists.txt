@@ -20,3 +20,4 @@ add_definitions (-DQT3_SUPPORT_WARNINGS)
 
 set(CMAKE_CXX_FLAGS "-g -Wall")
 add_subdirectory(src)
+add_subdirectory(po)
