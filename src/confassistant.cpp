@@ -45,16 +45,16 @@
 #include <kstandarddirs.h>
 
 const char* description = I18N_NOOP(
-        "KBarcode is a barcode and label printing application for KDE 3. It can "
-        "be used to print every thing from simple business cards up to complex "
-        "labels with several barcodes (e.g. article descriptions). KBarcode "
-        "comes with an easy to use WYSIWYG label designer, a setup assistant, "
-        "batch import of labels (directly from the delivery note), thousands "
-        "of predefined labels, database management tools and translations "
-        "in many languages. Even printing more than 10.000 labels in one go is "
-        "no problem for KBarcode. Additionally it is a simply xbarcode "
-        "replacement for the creation of barcodes. All major types of barcodes "
-        "like EAN, UPC, CODE39 and ISBN are supported." );
+        "KBarcode is a barcode and label printing application for KDE 3. It can be "
+        "used to print every thing from simple business cards up to complex labels "
+        "with several barcodes (e.g. article descriptions). KBarcode comes with an "
+        "easy to use WYSIWYG label designer, a setup assistant, batch import of "
+        "labels (directly from the delivery note), thousands of predefined labels, "
+        "database management tools and translations in many languages. Even printing "
+        "more than 10.000 labels in one go is no problem for KBarcode. Additionally "
+        "it is a simply xbarcode replacement for the creation of barcodes. All major "
+        "types of barcodes like EAN, UPC, CODE39 and ISBN are supported." );
+
 
 ConfAssistant::ConfAssistant( QWidget* parent, QString name, bool modal )
     : KAssistantDialog( parent )

@@ -148,9 +148,9 @@ TBarcodeDlg::TBarcodeDlg( QWidget *parent )
     layout->addWidget( checkAutoCorrect );
     layout->addLayout( hbox );
 
-    spinModule->setToolTip( "<qt>Change the module width used by TBarcode. Take a look into the "
+    spinModule->setToolTip( i18n( "<qt>Change the module width used by TBarcode. Take a look into the "
                                      "TBarcode documentation for details. Normally you do not want to change "
-                                     "this value.</qt>" );
+                                     "this value.</qt>" ) );
 
     setLayout( layout );
 }

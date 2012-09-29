@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?"
 "atid=463988&group_id=51628\n"
-"POT-Creation-Date: 2012-09-27 17:05+0200\n"
+"POT-Creation-Date: 2012-09-29 09:34+0200\n"
 "PO-Revision-Date: 2003-11-27 23:32+0100\n"
 "Last-Translator: Daniele Medri <madrid@linuxmeeting.net>\n"
 "Language-Team: italian <it@li.org>\n"
@@ -591,7 +591,6 @@ msgid "Changed visibility JavaScript"
 msgstr ""
 
 #: confassistant.cpp:48
-#, fuzzy
 msgid ""
 "KBarcode is a barcode and label printing application for KDE 3. It can be "
 "used to print every thing from simple business cards up to complex labels "
@@ -772,6 +771,16 @@ msgstr "Correzione &automatica"
 #: dialogs/barcodedialogs.cpp:136
 msgid "&Checksum calculation method:"
 msgstr "Metodo per il calcolo del &checksum:"
+
+#: dialogs/barcodedialogs.cpp:151
+msgid ""
+"<qt>Change the module width used by TBarcode. Take a look into the TBarcode "
+"documentation for details. Normally you do not want to change this value.</"
+"qt>"
+msgstr ""
+"<qt>Cambia il modulo utilizzato da tbarcode. Dai un'occhiata alla "
+"documentazione di tbarcode per dettagli. Normalmente non dovresti cambiare "
+"questo valore.</qt>"
 
 #: dialogs/barcodedialogs.cpp:172
 msgid "No Checksum"
@@ -2928,15 +2937,6 @@ msgstr ""
 #~ "_: EMAIL OF TRANSLATORS\n"
 #~ "Your emails"
 #~ msgstr "madrid@linuxmeeting.net"
-
-#~ msgid ""
-#~ "<qt>Change the module with used by tbarcode. Take a look into the "
-#~ "tbarcode documentation for details. Normaly you do not want to change "
-#~ "this value.</qt>"
-#~ msgstr ""
-#~ "<qt>Cambia il modulo utilizzato da tbarcode. Dai un'occhiata alla "
-#~ "documentazione di tbarcode per dettagli. Normalmente non dovresti "
-#~ "cambiare questo valore.</qt>"
 
 #~ msgid "Item Moved"
 #~ msgstr "Elemento mosso"

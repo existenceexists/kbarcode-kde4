@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kbarcode-1.7.0_nl\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?"
 "atid=463988&group_id=51628\n"
-"POT-Creation-Date: 2012-09-27 17:05+0200\n"
+"POT-Creation-Date: 2012-09-29 09:34+0200\n"
 "PO-Revision-Date: 2004-01-10 20:36+0000\n"
 "Last-Translator: Schoolmeesters <frank_schoolmeesters@yahoo.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -584,7 +584,6 @@ msgid "Changed visibility JavaScript"
 msgstr ""
 
 #: confassistant.cpp:48
-#, fuzzy
 msgid ""
 "KBarcode is a barcode and label printing application for KDE 3. It can be "
 "used to print every thing from simple business cards up to complex labels "
@@ -764,6 +763,15 @@ msgstr "&Autocorrectie"
 #: dialogs/barcodedialogs.cpp:136
 msgid "&Checksum calculation method:"
 msgstr "&Controlesom berekening methode:"
+
+#: dialogs/barcodedialogs.cpp:151
+msgid ""
+"<qt>Change the module width used by TBarcode. Take a look into the TBarcode "
+"documentation for details. Normally you do not want to change this value.</"
+"qt>"
+msgstr ""
+"<qt>De module gebruikt door tbarcode wijzigen. Lees de tbarcode documentatie "
+"voor meer informatie. Normaal wenst u deze waarde niet te wijzigen.</qt>"
 
 #: dialogs/barcodedialogs.cpp:172
 msgid "No Checksum"
@@ -2912,15 +2920,6 @@ msgstr ""
 #~ "_: EMAIL OF TRANSLATORS\n"
 #~ "Your emails"
 #~ msgstr "frank_schoolmeesters@yahoo.com"
-
-#~ msgid ""
-#~ "<qt>Change the module with used by tbarcode. Take a look into the "
-#~ "tbarcode documentation for details. Normaly you do not want to change "
-#~ "this value.</qt>"
-#~ msgstr ""
-#~ "<qt>De module gebruikt door tbarcode wijzigen. Lees de tbarcode "
-#~ "documentatie voor meer informatie. Normaal wenst u deze waarde niet te "
-#~ "wijzigen.</qt>"
 
 #, fuzzy
 #~ msgid "Code 11"

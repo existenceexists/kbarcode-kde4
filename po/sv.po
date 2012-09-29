@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: sv\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?"
 "atid=463988&group_id=51628\n"
-"POT-Creation-Date: 2012-09-27 17:05+0200\n"
+"POT-Creation-Date: 2012-09-29 09:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Anton Vaaranmaa <antonv@postikaista.net>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -592,7 +592,6 @@ msgid "Changed visibility JavaScript"
 msgstr ""
 
 #: confassistant.cpp:48
-#, fuzzy
 msgid ""
 "KBarcode is a barcode and label printing application for KDE 3. It can be "
 "used to print every thing from simple business cards up to complex labels "
@@ -778,6 +777,13 @@ msgstr "X-korrektion"
 
 #: dialogs/barcodedialogs.cpp:136
 msgid "&Checksum calculation method:"
+msgstr ""
+
+#: dialogs/barcodedialogs.cpp:151
+msgid ""
+"<qt>Change the module width used by TBarcode. Take a look into the TBarcode "
+"documentation for details. Normally you do not want to change this value.</"
+"qt>"
 msgstr ""
 
 #: dialogs/barcodedialogs.cpp:172
