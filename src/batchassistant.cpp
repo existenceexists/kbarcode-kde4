@@ -245,6 +245,8 @@ void BatchAssistant::setupPage5()
 		      "Serial start is a free form start value containing at least one "
 		      "number. This number is increased for every printed label on the "
 		      "print out.</qt>") );
+    label->setWordWrap( true );
+    label->setMaximumWidth( 700 );
     page5_layout->addWidget(label);
 
     QWidget* hbox = new QWidget;
