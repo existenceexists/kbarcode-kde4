@@ -61,7 +61,7 @@ KBarcode::KBarcode( QWidget *parent, Qt::WindowFlags f, Qt::WidgetAttribute waf)
     buttonData->setEnabled( false );
     
     //buttonSingle->setIcon( KIcon( "view-barcode" ) );
-    buttonSingle->setIcon( KIcon( KStandardDirs::locate( "appdata", "hi32-action-barcode.png" ) ) );
+    buttonSingle->setIcon( KIcon( "barcode" ) );
     buttonEditor->setIcon( KIcon( "document-edit" ) );
     buttonBatch->setIcon( KIcon( "document-print" ) );
 

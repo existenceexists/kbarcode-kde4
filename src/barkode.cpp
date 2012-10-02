@@ -26,8 +26,6 @@
 
 #ifdef _ENABLE_NATIVE_GNU_BARCODE
 #  include <barcode.h>
-//Added by qt3to4:
-#include <QList>
 #else
 #define BARCODE_DEFAULT_FLAGS 0x00000000
 
@@ -68,6 +66,9 @@ enum {
 #include <QPicture>
 #include <qpixmap.h>
 #include <qsize.h>
+#include <QDebug>
+//Added by qt3to4:
+#include <QList>
 
 #include <klocale.h>
 #include <kstandarddirs.h>
@@ -910,7 +911,7 @@ void Barkode::initValidators()
     if( QFile::exists( rules ) )
         path = rules;
     else
-        path =  KStandardDirs::locate( "data", "kbarcode/rules.xml" );
+        path =  KStandardDirs::locate( "appdata", "rules.xml" );
 
     QFile xml( path );
     QDomDocument doc;
@@ -922,7 +923,7 @@ void Barkode::initValidators()
 
     if( !xml.open( QIODevice::ReadOnly ) )
     {
-        qDebug( "Cannot read validation rules from %s\n", path.toLatin1().data() );
+        qDebug( "Cannot read validation rules from %s\n", qPrintable( path ) );
         return;
     }
 
@@ -939,6 +940,14 @@ void Barkode::initValidators()
             id.prepend( "ps_" );
             regular    = Barkode::validatorFromType( id );
             regularNot = Barkode::validatorNotFromType( id );
+            QString nullString1 = QString();
+            if( !regular ) {
+                regular = & nullString1;
+            }
+            QString nullString2 = QString();
+            if( !regularNot ) {
+                regularNot = & nullString2;
+            }
 
             QDomNode child = e.firstChild();
             while( !child.isNull() )

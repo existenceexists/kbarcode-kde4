@@ -532,21 +532,21 @@ void LabelEditor::setupActions()
     connect( textLineAct, SIGNAL(triggered(bool)), this, SLOT(insertTextLine()) );
     lineAct = new KAction( this );
     lineAct->setText( i18n("Insert &Line") );
-    lineAct->setIcon( KIcon( KStandardDirs::locate( "appdata", "hi16-action-kbarcodelinetool.png" ) ) );
+    lineAct->setIcon( KIcon( "kbarcodelinetool" ) );
     actionCollection()->addAction( "lineAct", lineAct );
     connect( lineAct, SIGNAL(triggered(bool)), this, SLOT(insertLine()) );
     rectAct = new KAction( this );
     rectAct->setText( i18n("Insert &Rectangle") );
-    rectAct->setIcon( KIcon( KStandardDirs::locate( "appdata", "hi32-action-kbarcoderect.png" ) ) );
+    rectAct->setIcon( KIcon( "kbarcoderect" ) );
     actionCollection()->addAction( "rectAct", rectAct );
     connect( rectAct, SIGNAL(triggered(bool)), this, SLOT(insertRect()) );
     circleAct = new KAction( this );
     circleAct->setText( i18n("Insert &Ellipse") );
-    circleAct->setIcon( KIcon( KStandardDirs::locate( "appdata", "hi16-action-kbarcodeellipse.png" ) ) );
+    circleAct->setIcon( KIcon( "kbarcodeellipse" ) );
     actionCollection()->addAction( "circleAct", circleAct );
     connect( circleAct, SIGNAL(triggered(bool)), this, SLOT(insertCircle()) );
     spellAct = KStandardAction::spelling( this, SLOT(spellCheck()), actionCollection() );
-    gridAct = new KToggleAction( KIcon( KStandardDirs::locate( "appdata", "hi16-action-kbarcodegrid.png" ) ), i18n("&Grid"), this );
+    gridAct = new KToggleAction( KIcon( "kbarcodegrid" ), i18n("&Grid"), this );
     actionCollection()->addAction( "gridAct", gridAct );
     connect( gridAct, SIGNAL(triggered(bool)), this, SLOT(toggleGrid()) );
     previewAct = new KAction( this );
@@ -569,7 +569,7 @@ void LabelEditor::setupActions()
     connect( singleBarcodeAct, SIGNAL(triggered(bool)), this, SLOT(startBarcodeGen()) );
     singleBarcodeAct->setEnabled( Barkode::haveBarcode() );
     
-    setupGUI( Default, KStandardDirs::locate( "appdata", QString("labeleditorui.rc") ) );
+    setupGUI( Default, "labeleditorui.rc" );
     
     createCustomHelpMenu();
 

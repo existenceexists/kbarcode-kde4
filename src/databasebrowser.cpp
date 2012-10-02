@@ -96,7 +96,7 @@ DatabaseBrowser::~DatabaseBrowser()
 
 void DatabaseBrowser::setupActions()
 {
-    KXmlGuiWindow::setupGUI( Default, KStandardDirs::locate( "appdata", QString("databasebrowserui.rc") ) );
+    KXmlGuiWindow::setupGUI( Default, "databasebrowserui.rc" );
     
     KMenu* editMenu = new KMenu( this );
     editMenu->setTitle( i18n("&Edit") );

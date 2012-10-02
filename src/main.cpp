@@ -26,6 +26,7 @@
 #include <QtDebug>
 #include <QImage>
 #include <QVariant>
+#include <QDir>
 
 #include "kbarcode.h"
 /*#include "labeleditor.h"
@@ -93,8 +94,8 @@ int main(int argc, char *argv[])
     aboutData.addCredit(ki18n("Brian Glass"), ki18n("Added EPCL barcode printer support"), "brian@glassbrian.com", "http://www.glassbrian.com" );
     aboutData.addCredit(ki18n("František (Fanda) Brožka"), ki18n("Ported Kbarcode from KDE3 to KDE4.") );
     
-    aboutData.setProgramIconName( KStandardDirs::locate("data", applicationFileName + QString( "/hi16-app-kbarcode.png" ) ) );
-    aboutData.setProgramLogo( QImage( KStandardDirs::locate("data", applicationFileName + QString( "/logo.png" ) ), "PNG" ) );
+    aboutData.setProgramIconName( "kbarcode" );
+    aboutData.setProgramLogo( QImage( KStandardDirs::locate("data", QDir( applicationFileName + QString( "/logo.png" ) ).path() ), "PNG" ) );
 
     KCmdLineArgs::init( argc, argv, &aboutData );
     

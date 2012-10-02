@@ -113,7 +113,7 @@ void PurePostscriptBarcode::init()
         if( QFile::exists( default_barcode ) )
             s_path = default_barcode;
         else
-            s_path = KStandardDirs::locate( "data", "kbarcode/barcode.ps" );
+            s_path = KStandardDirs::locate( "appdata", "barcode.ps" );
     }
 
     if( !QFile::exists( s_path ) )

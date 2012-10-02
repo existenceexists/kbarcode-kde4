@@ -110,7 +110,7 @@ void MainWindow::setupActions()
     importExampleAct->setEnabled( !connectAct->isEnabled() );
     
     // Let KDE4 create the main window.
-    setupGUI(Default, KStandardDirs::locate( "appdata", QString("mainwindowui.rc")));
+    setupGUI(Default, "mainwindowui.rc");
     
     createCustomHelpMenu();
 }
@@ -166,8 +166,7 @@ void MainWindow::createCustomHelpMenu()
     hlpMenu->insertSeparator(hlpMenu->actions()[1]);
     hlpMenu->insertAction(hlpMenu->actions()[0], barcodeHelpAct);
     hlpMenu->insertAction(hlpMenu->actions()[0], helpAct);
-    hlpMenu->actions()[12]->setIcon( KIcon ( KStandardDirs::locate(
-            "appdata", QString( "hi16-app-kbarcode.png" ) ) ) );
+    //hlpMenu->actions()[12]->setIcon( KIcon ( "kbarcode" ) );
     
     for( int i = 0; i < menuBarActionsList.size(); i++ ) {
         menuBar()->addAction( menuBarActionsList[i] );
