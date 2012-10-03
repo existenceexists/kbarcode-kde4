@@ -66,7 +66,6 @@ class TextLineEditor : public QWidget {
         bool eventFilter(QObject *obj, QEvent *ev);
         void saveSelection();
         
-        //int cursorPositionIndex;
         int selectionStartIndex;
         int selectionLength;
         

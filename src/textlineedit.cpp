@@ -36,7 +36,6 @@
 #include <qregexp.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <QDebug>
 #include <QEvent>
 
 TextLineEditor::TextLineEditor( TokenProvider* token, QWidget *parent )
@@ -55,7 +54,6 @@ TextLineEditor::TextLineEditor( TokenProvider* token, QWidget *parent )
     editor->installEventFilter( this );
     selectionStartIndex = -1;
     selectionLength = 0;
-    //cursorPositionIndex = 0;
 
     toolBar = new KToolBar( this );
     tool2Bar = new KToolBar( this );
@@ -248,6 +246,7 @@ int TextLineEditor::getHorMag()
     return mag_hor->value();
 }
 
+/* Based on http://qt-project.org/doc/qt-4.8/qobject.html#eventFilter */
 bool TextLineEditor::eventFilter( QObject *obj, QEvent *event )
 {
     if ( obj == editor ) {
@@ -263,7 +262,6 @@ bool TextLineEditor::eventFilter( QObject *obj, QEvent *event )
 
 void TextLineEditor::saveSelection()
 {
-    //cursorPositionIndex = editor->cursorPosition();
     if( editor->selectionStart() == -1 ) {// -1 means there is no selected text so save the position of the cursor
         selectionStartIndex = editor->cursorPosition();
     } else {
@@ -284,9 +282,6 @@ void TextLineEditor::copy()
     editor->setFocus();
     editor->setSelection( selectionStartIndex, selectionLength );
     editor->copy();
-    /*if( selectionStartIndex == cursorPositionIndex ) {
-        editor->setSelection( selectionStartIndex + selectionLength, - selectionLength );
-    }*/// Negative value of the selection's length does not solve cursor position issue.
 }
 
 void TextLineEditor::paste()
@@ -294,8 +289,5 @@ void TextLineEditor::paste()
     editor->setFocus();
     editor->setSelection( selectionStartIndex, selectionLength );
     editor->paste();
-    /*if( selectionStartIndex == cursorPositionIndex ) {
-        editor->setCursorPosition( cursorPositionIndex );
-    }*/// This is not desired, cursor should be always placed behind the inserted text.
 }
 #include "textlineedit.moc"
