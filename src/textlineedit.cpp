@@ -36,6 +36,8 @@
 #include <qregexp.h>
 #include <qlabel.h>
 #include <qlayout.h>
+#include <QDebug>
+#include <QEvent>
 
 TextLineEditor::TextLineEditor( TokenProvider* token, QWidget *parent )
     : QWidget( parent ), m_token( token )
@@ -50,7 +52,10 @@ TextLineEditor::TextLineEditor( TokenProvider* token, QWidget *parent )
     editor = new QLineEdit( this );
 #endif        
 
-    editor->setFocus();
+    editor->installEventFilter( this );
+    selectionStartIndex = -1;
+    selectionLength = 0;
+    //cursorPositionIndex = 0;
 
     toolBar = new KToolBar( this );
     tool2Bar = new KToolBar( this );
@@ -70,6 +75,7 @@ TextLineEditor::TextLineEditor( TokenProvider* token, QWidget *parent )
     
 
     
+    editor->setFocus();
     
 
 }
@@ -89,13 +95,13 @@ void TextLineEditor::setupActions()
     action_redo = KStandardAction::redo( editor, SLOT( redo() ), ac );
     action_redo->setEnabled( false );
 
-    action_cut = KStandardAction::cut( editor, SLOT( cut() ), ac );
+    action_cut = KStandardAction::cut( this, SLOT( cut() ), ac );
     /*action_cut->setEnabled( false );*/
 
-    action_copy = KStandardAction::copy( editor, SLOT( copy() ), ac );
+    action_copy = KStandardAction::copy( this, SLOT( copy() ), ac );
     /*action_copy->setEnabled( false );*/
 
-    action_paste = KStandardAction::paste( editor, SLOT( paste() ), ac );
+    action_paste = KStandardAction::paste( this, SLOT( paste() ), ac );
     
     connect( editor, SIGNAL( textChanged(const QString &) ), this, SLOT( updateActions(const QString &) ) );
 
@@ -240,5 +246,56 @@ void TextLineEditor::setHorMag( int index )
 int TextLineEditor::getHorMag()
 {    
     return mag_hor->value();
+}
+
+bool TextLineEditor::eventFilter( QObject *obj, QEvent *event )
+{
+    if ( obj == editor ) {
+        if ( event->type() == QEvent::FocusOut ) {
+            saveSelection();
+        }
+    } else {
+        // pass the event on to the parent class
+        return QWidget::eventFilter( obj, event );
+    }
+    return false;
+}
+
+void TextLineEditor::saveSelection()
+{
+    //cursorPositionIndex = editor->cursorPosition();
+    if( editor->selectionStart() == -1 ) {// -1 means there is no selected text so save the position of the cursor
+        selectionStartIndex = editor->cursorPosition();
+    } else {
+        selectionStartIndex = editor->selectionStart();
+    }
+    selectionLength = editor->selectedText().length();
+}
+
+void TextLineEditor::cut()
+{
+    editor->setFocus();
+    editor->setSelection( selectionStartIndex, selectionLength );
+    editor->cut();
+}
+
+void TextLineEditor::copy()
+{
+    editor->setFocus();
+    editor->setSelection( selectionStartIndex, selectionLength );
+    editor->copy();
+    /*if( selectionStartIndex == cursorPositionIndex ) {
+        editor->setSelection( selectionStartIndex + selectionLength, - selectionLength );
+    }*/// Negative value of the selection's length does not solve cursor position issue.
+}
+
+void TextLineEditor::paste()
+{
+    editor->setFocus();
+    editor->setSelection( selectionStartIndex, selectionLength );
+    editor->paste();
+    /*if( selectionStartIndex == cursorPositionIndex ) {
+        editor->setCursorPosition( cursorPositionIndex );
+    }*/// This is not desired, cursor should be always placed behind the inserted text.
 }
 #include "textlineedit.moc"

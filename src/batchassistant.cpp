@@ -246,7 +246,6 @@ void BatchAssistant::setupPage5()
 		      "number. This number is increased for every printed label on the "
 		      "print out.</qt>") );
     label->setWordWrap( true );
-    label->setMaximumWidth( 700 );
     page5_layout->addWidget(label);
 
     QWidget* hbox = new QWidget;

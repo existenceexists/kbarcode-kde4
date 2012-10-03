@@ -26,6 +26,8 @@ class KSpellConfig;
 class KComboBox;
 class TokenProvider;
 class KAction;
+class QEvent;
+class QObject;
 
 #if QT_VERSION >= 0x030100
     class KLineEdit;
@@ -56,8 +58,18 @@ class TextLineEditor : public QWidget {
            
         void insertNewField();
 	
+        void cut();
+        void copy();
+        void paste();
         
     protected:
+        bool eventFilter(QObject *obj, QEvent *ev);
+        void saveSelection();
+        
+        //int cursorPositionIndex;
+        int selectionStartIndex;
+        int selectionLength;
+        
         TokenProvider* m_token;
         KAction* action_undo;
         KAction* action_redo;
