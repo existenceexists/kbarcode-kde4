@@ -866,6 +866,7 @@ QString TokenProvider::jsParse( const QString & script )
     KJSResult comp = s_interpreter->evaluate( script );
     if ( comp.isException() )
     {
+        qDebug() << qPrintable( QString( "An error occured when evaluating a JavaScript in barcode value field." ) );
         ret = QString( "JavaScript ERROR: %1" ).arg( comp.errorMessage() );
         qDebug() << qPrintable( ret );
     }
@@ -886,9 +887,14 @@ bool TokenProvider::jsParseToBool( const QString & script )
 #ifdef USE_JAVASCRIPT
     // Maybe we need no Completion object for KJSEmbed
     KJSResult comp = s_interpreter->evaluate( script );
-    KJSObject val = comp.value();
-    if (!val.isUndefined() && !val.isNull())
+    if ( comp.isException() )
     {
+        qDebug() << qPrintable( QString( "An error occured when evaluating a JavaScript visibility script." ) );
+        qDebug() << qPrintable( QString( "JavaScript ERROR: %1" ).arg( comp.errorMessage() ) );
+    }
+    else
+    {
+        KJSObject val = comp.value();
         return val.toBoolean( s_interpreter->globalContext() );
     }
 #endif // USE_JAVASCRIPT
