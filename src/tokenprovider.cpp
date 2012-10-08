@@ -28,6 +28,7 @@
 #include <qsqlquery.h>
 #include <qregexp.h>
 #include <QList>
+#include <QDebug>
 #include <time.h>
 
 #include <klocale.h>
@@ -863,9 +864,14 @@ QString TokenProvider::jsParse( const QString & script )
 #else
     // Maybe we need no Completion object for KJSEmbed
     KJSResult comp = s_interpreter->evaluate( script );
-    KJSObject val = comp.value();
-    if (!val.isUndefined() && !val.isNull())
+    if ( comp.isException() )
     {
+        ret = QString( "JavaScript ERROR: %1" ).arg( comp.errorMessage() );
+        qDebug() << qPrintable( ret );
+    }
+    else
+    {
+        KJSObject val = comp.value();
         ret = val.toString( s_interpreter->globalContext() );
     }
 #endif
