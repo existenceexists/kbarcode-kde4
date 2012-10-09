@@ -29,6 +29,7 @@
 #include <QBrush>
 #include <QRectF>
 #include <QUndoCommand>
+#include <QDebug>
 
 // KDE includes
 #include <kruler.h>
@@ -151,8 +152,8 @@ void MyCanvasView::snapPoint(QPoint * point, TCanvasItem* item )
 
 void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
 {
-    rulerh->slotNewValue( e->x() );
-    rulerv->slotNewValue( e->y() );
+    rulerh->slotNewValue( e->x() + rulerh->offset() );// offset is negative so we must use plus
+    rulerv->slotNewValue( e->y() + rulerv->offset() );// offset is negative so we must use plus
     
     QPoint mappedEventPosition = mapToScene( e->pos() ).toPoint();
 
