@@ -334,7 +334,7 @@ void TokenProvider::init()
 }
 
 
-void TokenProvider::findBrackets( QString & text, QString (TokenProvider::*parserfunction)( const QString & ) )
+void TokenProvider::findBrackets( QString & text, QStringList & textList, QString (TokenProvider::*parserfunction)( const QString & ) )
 {
     /*
      * looks for a statement in brackets [ ]
@@ -363,7 +363,7 @@ void TokenProvider::findBrackets( QString & text, QString (TokenProvider::*parse
         token = text.mid( pos+1, (a-pos)-1 );
         
         // support [4-[length]]
-	findBrackets( token, parserfunction );
+	findBrackets( token, textList, parserfunction );
 
         token = unescapeText( token );
         token = escapeText( (*this.*parserfunction)( token ) );
@@ -371,6 +371,7 @@ void TokenProvider::findBrackets( QString & text, QString (TokenProvider::*parse
 	{
 	    text.remove( pos, (a-pos)+1 );
 	    text.insert( pos, token );
+            textList.append( token );
 	}
 	else
             // TODO: if we have a textfield with two variables:
@@ -383,13 +384,14 @@ void TokenProvider::findBrackets( QString & text, QString (TokenProvider::*parse
 	    return;
     }
     
-     findBrackets( text, parserfunction );
+     findBrackets( text, textList, parserfunction );
 }
 
 QString TokenProvider::parse( const QString & text )
 {
     QString t = QString( text );
-    findBrackets( t, &TokenProvider::process );
+    QStringList tl;
+    findBrackets( t, tl, &TokenProvider::process );
     return t;
 }
 
@@ -413,9 +415,13 @@ QStringList TokenProvider::listUserVars()
 	else if( item->rtti() == eRtti_TextLine )
 	    t = ((TextLineItem*)item)->text();
 
-	if( !t.isNull() )
-	    findBrackets( t, &TokenProvider::processUserVars );
-            lst.append( t );
+	if( !t.isNull() ) {
+            QStringList tList;
+	    findBrackets( t, tList, &TokenProvider::processUserVars );
+            if( !tList.isEmpty() ) {
+                lst.append( tList );
+            }
+        }
     }
 
     m_findUserVarsList = NULL;

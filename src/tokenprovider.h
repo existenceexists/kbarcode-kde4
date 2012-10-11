@@ -197,7 +197,7 @@ class TokenProvider {
 	  */
 	QString processUserVars( const QString & t );
 
-        void findBrackets( QString & text, QString (TokenProvider::*parserfunction)( const QString & ) );
+        void findBrackets( QString & text, QStringList & textList, QString (TokenProvider::*parserfunction)( const QString & ) );
 
         /**
           * run a SQL Query and return it result
