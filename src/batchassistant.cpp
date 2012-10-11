@@ -432,6 +432,10 @@ void BatchAssistant::setupStackPage1()
 	header->setText(3, i18n("Group") );
 	sqlList->setHeaderItem(header);
     sqlList->setAllColumnsShowFocus( true );
+    sqlList->resizeColumnToContents( 0 );
+    sqlList->resizeColumnToContents( 1 );
+    sqlList->resizeColumnToContents( 2 );
+    sqlList->resizeColumnToContents( 3 );
     stack1_layout->addWidget( sqlList );
     connect( sqlList, SIGNAL( itemDoubleClicked( QTreeWidgetItem *, int ) ),
              this, SLOT( changeItem( QTreeWidgetItem *, int ) ) );
@@ -943,6 +947,11 @@ bool BatchAssistant::addItem( const QString & article, const QString & group, in
     itemLabels << temp << QString( "%1" ).arg( count ) << article << group;
     QTreeWidgetItem* item = new QTreeWidgetItem( itemLabels );
     sqlList->addTopLevelItem( item );
+    
+    sqlList->resizeColumnToContents( 0 );
+    sqlList->resizeColumnToContents( 1 );
+    sqlList->resizeColumnToContents( 2 );
+    sqlList->resizeColumnToContents( 3 );
 
     addGroupCompletion( group );
     enableControls();
@@ -999,6 +1008,11 @@ void BatchAssistant::changeItem( QTreeWidgetItem* item, int column )
         item->setText( 3, aid.groupName() );
         addGroupCompletion( aid.groupName() );
 	enableControls();
+        
+        sqlList->resizeColumnToContents( 0 );
+        sqlList->resizeColumnToContents( 1 );
+        sqlList->resizeColumnToContents( 2 );
+        sqlList->resizeColumnToContents( 3 );
     }
 }
 
@@ -1065,6 +1079,11 @@ void BatchAssistant::addAllItems()
 	}
 
         enableControls();
+        
+        sqlList->resizeColumnToContents( 0 );
+        sqlList->resizeColumnToContents( 1 );
+        sqlList->resizeColumnToContents( 2 );
+        sqlList->resizeColumnToContents( 3 );
     }
 }
 
