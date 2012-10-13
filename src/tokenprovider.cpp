@@ -586,10 +586,13 @@ QString TokenProvider::process( const QString & t )
     if( t.startsWith( js ) )
 	ret = jsParse( t.right( t.length() - js.length() ) );
     
-    // everything starting with a $ is a user defined variable
+    // may be a user checked the radio button "Import variables and print" in the batch printing assistant
     if( !m_uservardata.isEmpty() ) 
     {
-	QString tok = t.right( t.length() - 1 );
+	QString tok = t;
+        if( t.startsWith( QString( TOK_VAR ) ) ) {// everything starting with a $ is a user defined variable
+            tok = t.right( t.length() - 1 );// strip $ from the beginning of the variable name
+        }
 	if( m_uservardata.contains( tok ) )
         {
 	    ret = m_uservardata[tok];
