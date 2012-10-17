@@ -43,6 +43,8 @@
 #include <QAbstractItemView>
 #include <QStringList>
 #include <QTableWidget>
+#include <QLabel>
+#include <QWidget>
 //Added by qt3to4:
 #include <QHBoxLayout>
 #include <QList>
@@ -76,6 +78,7 @@
 #include <KUrl>
 #include <kpagewidgetmodel.h>
 #include <KAction>
+#include <kdialog.h>
 
 #define PNG_FORMAT "PNG"
 
@@ -466,7 +469,11 @@ void BatchAssistant::setupStackPage2()
     group_layout->addWidget(radioImportManual);
     radioImportSql = new QRadioButton( i18n("Import variables from a &SQL table") );
     group_layout->addWidget(radioImportSql);
-    labelWarningSqlQuery = new QLabel( i18n("<qt>The query you enter can damage data in the database <br>so only SQL statements that don't modify the database <br>(i.e. SELECT statements) should be used.</qt>") );
+    labelWarningSqlQuery = new QLabel( 
+        i18n("<qt>The query you enter can damage data in the database " 
+        "so only SQL statements that don't modify the database " 
+        "(i.e. SELECT statements) should be used.</qt>") );
+    labelWarningSqlQuery->setWordWrap( true );
     group_layout->addWidget(labelWarningSqlQuery);
     labelSqlQuery = new QLabel( i18n("Please enter a sql &query:") );
     group_layout->addWidget(labelSqlQuery);
@@ -1269,10 +1276,52 @@ void BatchAssistant::contactSearchJobResult( KJob *job )
 
 bool BatchAssistant::fillVarTable()
 {
-    // Clear the table
-    m_varTable->clearContents();
-    m_varTable->setRowCount( 0 );
-
+    int resultTableDialog = KDialog::None;
+    if( m_varTable->rowCount() != 0 ) {
+        KDialog dialog( this );
+        dialog.setCaption( i18n( "What to do with already inserted data?" ) );
+        dialog.setButtons( KDialog::User1 | KDialog::User2 | KDialog::User3 );
+        dialog.setButtonText( KDialog::User1, i18n( "Append" ) );
+        dialog.setButtonText( KDialog::User2, i18n( "Replace" ) );
+        dialog.setButtonText( KDialog::User3, i18n( "Keep" ) );
+        dialog.setDefaultButton( KDialog::User3 );
+        dialog.setWindowModality( Qt::WindowModal );
+        QLabel label(
+            i18n( "<qt>There are already data in the table widget " 
+            "becouse you visited this page before. <br>" 
+            "<b>What do you want to do with the data?</b><br><br>"
+            "If you press \"Keep\" data in the table widget will not be deleted " 
+            "and not reloaded.<br><br>"
+            "If you press \"Replace\" data in the table widget will be deleted " 
+            "and if you checked the radio button \"Import variables from a SQL table\" " 
+            "or \"Import from a CSV file\" data will also be loaded from an SQL database " 
+            "or a CSV file.<br><br>"
+            "If you press \"Append\" data in the table widget will not be deleted " 
+            "and if you checked the radio button \"Import variables from a SQL table\" " 
+            "or \"Import from a CSV file\" other data will also be loaded from an SQL database " 
+            "or a CSV file and appended to the data already present in the table widget.<br><br>"
+            "If you don't know what to do press \"Keep\".</qt>" ),
+            & dialog );
+        label.setWordWrap( true );
+        dialog.setMainWidget( & label );
+        /*connect( & dialog, SIGNAL( buttonClicked( KDialog::ButtonCode ) ), & dialog, SLOT( done( int ) ) );*/// We can't do this becouse KDialog::ButtonCode argument is incompatible with int argument (although KDialog::ButtonCode is actually an int)
+        connect( & dialog, SIGNAL( buttonClicked( KDialog::ButtonCode ) ), this, SLOT( slotDataDialogButtonClicked( KDialog::ButtonCode ) ) );
+        connect( this, SIGNAL( signalDataDialogButtonClicked( int ) ), & dialog, SLOT( done( int ) ) );
+        resultTableDialog = dialog.exec();
+    }
+    
+    int initialRowCount = 0;
+    if( resultTableDialog == KDialog::User3 ) {// Keep
+        return true;
+    } else if( resultTableDialog == KDialog::User2 ) {// Replace
+        // Clear the table
+        m_varTable->clearContents();
+        m_varTable->setRowCount( 0 );
+        initialRowCount = 0;
+    } else if( resultTableDialog == KDialog::User1 ) {// Append
+        initialRowCount = m_varTable->rowCount();
+    }// If resultTableDialog is not one of the values then dialog was not displayed.
+    
     if( radioImportSql->isChecked() )
     {
         if( !SqlTables::getInstance()->database().isValid() )
@@ -1288,8 +1337,7 @@ bool BatchAssistant::fillVarTable()
 	    return false;
 	}
 
-	if( m_varTable->rowCount() != queryModel.rowCount() )
-	    m_varTable->setRowCount( queryModel.rowCount() );
+        m_varTable->setRowCount( queryModel.rowCount() + initialRowCount );
 
 	for( int y = 0; y < m_varTable->rowCount(); y++ )
 	{
@@ -1297,7 +1345,7 @@ bool BatchAssistant::fillVarTable()
                 QTableWidgetItem * item = new QTableWidgetItem();
                 if( item ) {
                     item->setText( queryModel.record( y ).value( m_varTable->horizontalHeaderItem( x )->text() ).toString() );
-                    m_varTable->setItem( y, x, item );
+                    m_varTable->setItem( y + initialRowCount, x, item );
                 }
             }
 	}
@@ -1309,7 +1357,7 @@ bool BatchAssistant::fillVarTable()
 
 	QStringList heading;
 	QStringList data;
-	int i = 0;
+	int i = initialRowCount;
 
         file.setCSVFile(true);
 	if( !file.isValid() )
@@ -1505,4 +1553,9 @@ void BatchAssistant::moveAddress( QTreeWidget* src, QTreeWidget* dst, bool bAll 
             item = src->topLevelItem( itemIndex );
         }
     }
+}
+
+void BatchAssistant::slotDataDialogButtonClicked( KDialog::ButtonCode i )
+{
+    emit signalDataDialogButtonClicked( int( i ) );
 }

@@ -149,6 +149,11 @@ class BatchAssistant : public KAssistantDialog {
         void back();
         
         void contactSearchJobResult( KJob *job );
+        
+        void slotDataDialogButtonClicked( KDialog::ButtonCode i );
+        
+    signals:
+        void signalDataDialogButtonClicked( int i );
 
     private:
         void moveAddress( QTreeWidget* src, QTreeWidget* dst, bool bAll = false );
