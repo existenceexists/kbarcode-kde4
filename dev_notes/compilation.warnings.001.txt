@@ -1,5 +1,0 @@
-Compilation Warnings - Kbarcode:
-
-- "operator== is incomplete" when compiling barkode.cpp .
-- Several warnings - unused variable.
-- Many warnings deprecated and others.

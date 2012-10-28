@@ -1,3 +1,0 @@
-Runtime Errors - Kbarcode: 
-
-- many errors when clicking on buttons in label editor
