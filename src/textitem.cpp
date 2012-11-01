@@ -60,10 +60,10 @@ void TextItem::draw(QPainter* painter)
     
     QPaintDevice* device = DocumentItem::paintDevice();
     
-    /*double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
-    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();*/
-    double scalex = 1.0;
-    double scaley = 1.0;// don't scale anything
+    double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
+    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();
+    /*double scalex = 1.0;
+    double scaley = 1.0;// don't scale anything*/
 
     QTextDocument srt;
     srt.setHtml( t );
@@ -75,10 +75,10 @@ void TextItem::draw(QPainter* painter)
     int height = (rect().height() < (int)((double)srt.height()*scaley) && autosize) ? srt.height() : rect().height();
     */
 
-    /*int width = (int)((double)rect().width() / scalex);
-    int height = (int)((double)rect().height() / scaley);*/
-    int width = (int)rect().width();
-    int height = (int)rect().height();
+    int width = (int)((double)rect().width() / scalex);
+    int height = (int)((double)rect().height() / scaley);
+    /*int width = (int)rect().width();
+    int height = (int)rect().height();*/
     
     painter->save();
 
@@ -140,10 +140,10 @@ void TextItem::drawPreview(QPainter* painter)
     
     QPaintDevice* device = DocumentItem::paintDevice();
     
-    /*double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
-    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();*/
-    double scalex = 1.0;
-    double scaley = 1.0;// don't scale anything
+    double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
+    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();
+    /*double scalex = 1.0;
+    double scaley = 1.0;// don't scale anything*/
 
     QTextDocument srt;
     srt.setHtml( t );
@@ -155,10 +155,10 @@ void TextItem::drawPreview(QPainter* painter)
     int height = (rect().height() < (int)((double)srt.height()*scaley) && autosize) ? srt.height() : rect().height();
     */
 
-    /*int width = (int)((double)rect().width() / scalex);
-    int height = (int)((double)rect().height() / scaley);*/
-    int width = rect().width();
-    int height = rect().height();
+    int width = (int)((double)rect().width() / scalex);
+    int height = (int)((double)rect().height() / scaley);
+    /*int width = rect().width();
+    int height = rect().height();*/
     
     painter->save();
 
