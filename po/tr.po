@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: yeni\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?"
 "atid=463988&group_id=51628\n"
-"POT-Creation-Date: 2012-09-29 09:34+0200\n"
+"POT-Creation-Date: 2012-11-01 09:33+0100\n"
 "PO-Revision-Date: 2006-03-21 17:33+0200\n"
 "Last-Translator: Furkan Duman <coderlord@gmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -82,95 +82,95 @@ msgstr ""
 msgid "An error occurred during saving the image"
 msgstr "Görüntü kaydedilirken bir hata meydana geldi"
 
-#: barkode.cpp:653
+#: barkode.cpp:654
 msgid " [GNU Barcode]"
 msgstr " [GNU Barkod]"
 
-#: barkode.cpp:656
+#: barkode.cpp:657
 msgid " [PDF 417]"
 msgstr " [PDF 417]"
 
-#: barkode.cpp:659
+#: barkode.cpp:660
 msgid " [TBarcode]"
 msgstr " [TBarcode]"
 
-#: barkode.cpp:662
+#: barkode.cpp:663
 msgid " [TBarcode2]"
 msgstr " [TBarcode2]"
 
-#: barkode.cpp:665
+#: barkode.cpp:666
 msgid " [Barcode Writer in Pure Postscript]"
 msgstr " [Pure Postscript içindeki Barkod Writer]"
 
-#: barkode.cpp:701
+#: barkode.cpp:702
 msgid "Raw code 128"
 msgstr "Ham code 128"
 
-#: barkode.cpp:702
+#: barkode.cpp:703
 msgid "Codabar"
 msgstr "Codabar"
 
-#: barkode.cpp:703
+#: barkode.cpp:704
 msgid "Codabar (no checksum)"
 msgstr "Codabar (kontrol toplamı yok)"
 
-#: barkode.cpp:704
+#: barkode.cpp:705
 msgid "Code 128 (a,b,c: autoselection)"
 msgstr "Code 128 (a,b,c: otomatik seçim)"
 
-#: barkode.cpp:705
+#: barkode.cpp:706
 msgid "Code 128B, full printable ascii"
 msgstr "Code 128B, tamamen yazılabilir ascii"
 
-#: barkode.cpp:706
+#: barkode.cpp:707
 msgid "Code 128C (compact form digits)"
 msgstr "Code 128C (ufak form basamakları)"
 
-#: barkode.cpp:707
+#: barkode.cpp:708
 msgid "Code 39 (no checksum)"
 msgstr "Code 39 (kontrol toplamı yok)"
 
-#: barkode.cpp:708
+#: barkode.cpp:709
 msgid "Code 39"
 msgstr "Code 39"
 
-#: barkode.cpp:709
+#: barkode.cpp:710
 msgid "Code 93"
 msgstr "Code 93"
 
-#: barkode.cpp:710
+#: barkode.cpp:711
 msgid "EAN (EAN 8 or EAN 13)"
 msgstr "EAN (EAN 8 veya EAN 13)"
 
-#: barkode.cpp:711
+#: barkode.cpp:712
 msgid "interleaved 2 of 5 (only digits, no checksum)"
 msgstr "interleaved 2 of 5 (sadece basamaklar, kontrol toplamı yok)"
 
-#: barkode.cpp:712
+#: barkode.cpp:713
 msgid "interleaved 2 of 5 (only digits)"
 msgstr "interleaved 2 of 5 (sadece basamaklar)"
 
-#: barkode.cpp:713
+#: barkode.cpp:714
 msgid "ISBN (still EAN13)"
 msgstr "ISBN (hala EAN13)"
 
-#: barkode.cpp:714
+#: barkode.cpp:715
 msgid "MSI"
 msgstr "MSI"
 
-#: barkode.cpp:715 dialogs/barcodedialogs.cpp:211
+#: barkode.cpp:716 dialogs/barcodedialogs.cpp:211
 msgid "Plessey"
 msgstr "Plessey"
 
-#: barkode.cpp:716
+#: barkode.cpp:717
 msgid "UPC (12-digit EAN; UPCA and UPCB)"
 msgstr "UPC (12-basamak EAN; UPCA ve UPCB)"
 
-#: barkode.cpp:721
+#: barkode.cpp:722
 msgid "pdf 417 2D Barcode"
 msgstr "pdf 417 2B Barkod"
 
-#: batchassistant.cpp:132
+#: batchassistant.cpp:135
 #, fuzzy
 msgid ""
 "<qt>This assistant will guide you through the process of printing many "
@@ -181,52 +181,52 @@ msgstr ""
 "gösterecektir.<br>İlk adım, yazdırmak istediğiniz KBarcode etiketini "
 "seçmektir.</qt>"
 
-#: batchassistant.cpp:141 batchassistant.cpp:328
+#: batchassistant.cpp:144 batchassistant.cpp:332
 #: dialogs/barcodeprinterdlg.cpp:48
 msgid "&Filename:"
 msgstr "&Dosya adı:"
 
-#: batchassistant.cpp:150
+#: batchassistant.cpp:153
 msgid "File Selection"
 msgstr "Dosya Seçimi"
 
-#: batchassistant.cpp:166
+#: batchassistant.cpp:169
 msgid "Print &labels without data"
 msgstr "Veri olmadan &etiket yazdır"
 
-#: batchassistant.cpp:168
+#: batchassistant.cpp:171
 msgid "Print &articles from KBarcodes SQL database"
 msgstr "KBarcode'un SQL veri tabanından maddeleri &yazdır"
 
-#: batchassistant.cpp:170
+#: batchassistant.cpp:173
 msgid "Import &variables and print"
 msgstr "&Değişkenleri içeri aktar ve yazdır"
 
-#: batchassistant.cpp:172
+#: batchassistant.cpp:175
 msgid "Print &contacts from your addressbook"
 msgstr "Adres defterinizdeki &kişileri yazdır"
 
-#: batchassistant.cpp:186
+#: batchassistant.cpp:189
 msgid "Data Source"
 msgstr "Veri Kaynağı"
 
-#: batchassistant.cpp:199
+#: batchassistant.cpp:202
 msgid "Print Data"
 msgstr "Veriyi Yazdır"
 
-#: batchassistant.cpp:214
+#: batchassistant.cpp:217
 msgid "Insert Row"
 msgstr "Satır Ekle"
 
-#: batchassistant.cpp:217
+#: batchassistant.cpp:220
 msgid "Delete Row"
 msgstr "Satır Sil"
 
-#: batchassistant.cpp:228
+#: batchassistant.cpp:231
 msgid "Import Variables"
 msgstr "Değişkenleri İçeri Aktar"
 
-#: batchassistant.cpp:242
+#: batchassistant.cpp:245
 #, fuzzy
 msgid ""
 "<qt>KBarcode has support for placing serial numbers on labels. If you did "
@@ -241,216 +241,248 @@ msgstr ""
 "başlangıç, en az bir numara içeren, baaşlangıç değerinin özgür bir şeklidir. "
 "Bu numara, çıktınızdaki her yazdırılan etikette arttırılacaktır.</qt>"
 
-#: batchassistant.cpp:255 dialogs/previewdialog.cpp:124
+#: batchassistant.cpp:259 dialogs/previewdialog.cpp:124
 msgid "Serial start:"
 msgstr "Ardışık başlangıç:"
 
-#: batchassistant.cpp:262 dialogs/previewdialog.cpp:126
+#: batchassistant.cpp:266 dialogs/previewdialog.cpp:126
 msgid "Serial increment:"
 msgstr "Ardışık artış:"
 
-#: batchassistant.cpp:268
+#: batchassistant.cpp:272
 msgid "Serial Number"
 msgstr "Ardışık Numara"
 
-#: batchassistant.cpp:283
+#: batchassistant.cpp:287
 msgid "&Print to a system printer or to a file"
 msgstr "Bir dosyaya veya sistem yazıcısına &yazdır"
 
-#: batchassistant.cpp:285
+#: batchassistant.cpp:289
 msgid "&Create images"
 msgstr "Görüntü &oluştur"
 
-#: batchassistant.cpp:292
+#: batchassistant.cpp:296
 msgid "Print to a special &barcode printer"
 msgstr "Özel &barkod yazıcısında yazdır"
 
-#: batchassistant.cpp:303
+#: batchassistant.cpp:307
 msgid "Output &Directory:"
 msgstr "İhraç &Dizini:"
 
-#: batchassistant.cpp:314
+#: batchassistant.cpp:318
 msgid "Output File &Format:"
 msgstr "İhraç Dosya &Biçimi:"
 
-#: batchassistant.cpp:331
+#: batchassistant.cpp:335
 msgid "Use &article number for filename"
 msgstr "Dosya adı için &madde numarası kullan"
 
-#: batchassistant.cpp:333
+#: batchassistant.cpp:337
 msgid "Use &barcode number for filename"
 msgstr "Dosya adı için &barkod numarası kullan"
 
-#: batchassistant.cpp:335
+#: batchassistant.cpp:339
 msgid "Use &custom filename:"
 msgstr "&Farklı dosya adı kullan:"
 
-#: batchassistant.cpp:347
+#: batchassistant.cpp:351
 msgid "&Keep window open after printing."
 msgstr ""
 
-#: batchassistant.cpp:367
+#: batchassistant.cpp:371
 msgid "Output Device"
 msgstr "Çıkış Aygıtı"
 
-#: batchassistant.cpp:384
+#: batchassistant.cpp:388
 msgid "Customer name and no.:"
 msgstr "Müşteri adı ve numarası:"
 
-#: batchassistant.cpp:396
+#: batchassistant.cpp:400
 msgid "&Add..."
 msgstr "&Ekle..."
 
-#: batchassistant.cpp:398
+#: batchassistant.cpp:402
 msgid "&Import..."
 msgstr "&İçe Aktar..."
 
-#: batchassistant.cpp:400
+#: batchassistant.cpp:404
 msgid "&Edit..."
 msgstr "&Düzenle..."
 
-#: batchassistant.cpp:402
+#: batchassistant.cpp:406
 #, fuzzy
 msgid "&Remove"
 msgstr "Hepsini &Kaldır"
 
-#: batchassistant.cpp:404
+#: batchassistant.cpp:408
 msgid "R&emove All"
 msgstr "Hepsini &Kaldır"
 
-#: batchassistant.cpp:409
+#: batchassistant.cpp:413
 msgid "Import from File ..."
 msgstr "Dosyadan içe Aktar ..."
 
-#: batchassistant.cpp:413
+#: batchassistant.cpp:417
 msgid "Import from Clipboard ..."
 msgstr "Panodan içe Aktar..."
 
-#: batchassistant.cpp:417
+#: batchassistant.cpp:421
 msgid "Import barcode_basic"
 msgstr "barcode_basic ithal et"
 
-#: batchassistant.cpp:428
+#: batchassistant.cpp:432
 msgid "Index"
 msgstr "Dizin"
 
-#: batchassistant.cpp:429
+#: batchassistant.cpp:433
 msgid "Number of Labels"
 msgstr "Etiket Sayısı"
 
-#: batchassistant.cpp:430 dialogs/configdialog.cpp:179
+#: batchassistant.cpp:434 dialogs/configdialog.cpp:179
 #: dialogs/configdialog.cpp:185 dialogs/configdialog.cpp:191
 msgid "Article Number"
 msgstr "Madde Numarası"
 
-#: batchassistant.cpp:431 dialogs/configdialog.cpp:180
+#: batchassistant.cpp:435 dialogs/configdialog.cpp:180
 #: dialogs/configdialog.cpp:186 dialogs/configdialog.cpp:192
 msgid "Group"
 msgstr "Grup"
 
-#: batchassistant.cpp:460
+#: batchassistant.cpp:468
 msgid "Enter &data manually"
 msgstr "&Veriyi elle gir"
 
-#: batchassistant.cpp:462
+#: batchassistant.cpp:470
 msgid "Import variables from a &SQL table"
 msgstr "Bir &SQL tablosundan değerleri içe aktar"
 
-#: batchassistant.cpp:464
+#: batchassistant.cpp:473
 msgid ""
-"<qt>The query you enter can damage data in the database <br>so only SQL "
-"statements that don't modify the database <br>(i.e. SELECT statements) "
-"should be used.</qt>"
+"<qt>The query you enter can damage data in the database so only SQL "
+"statements that don't modify the database (i.e. SELECT statements) should be "
+"used.</qt>"
 msgstr ""
 
-#: batchassistant.cpp:466
+#: batchassistant.cpp:478
 msgid "Please enter a sql &query:"
 msgstr "Lütfen bir sql &sorgusu girin:"
 
-#: batchassistant.cpp:472
+#: batchassistant.cpp:484
 msgid "Import from a &CSV file"
 msgstr "&CSV dosyasından içe aktar"
 
-#: batchassistant.cpp:474
+#: batchassistant.cpp:486
 msgid "Please select a csv &file:"
 msgstr "Lütfen bir CSV dosyası &seçin:"
 
-#: batchassistant.cpp:479
+#: batchassistant.cpp:491
 msgid "&Encoding:"
 msgstr "&Kodlama:"
 
-#: batchassistant.cpp:493
+#: batchassistant.cpp:505
 msgid "Available Variables:"
 msgstr "Mevcut Değişkenler:"
 
-#: batchassistant.cpp:516
+#: batchassistant.cpp:528
 msgid "&Number of labels to print:"
 msgstr "&Yazdırılacak etiket sayısı:"
 
-#: batchassistant.cpp:556
+#: batchassistant.cpp:568
 msgid "Add all contacts to the list of contacts which will be printed."
 msgstr "Kişiler listesine yazdırılacak olan bütün kişileri ekleyin."
 
-#: batchassistant.cpp:557
+#: batchassistant.cpp:569
 msgid "Add selected contacts to the list of contacts which will be printed."
 msgstr "Kişiler listesine, yazdırılacak olan seçilmiş kişileri ekleyin."
 
-#: batchassistant.cpp:558
+#: batchassistant.cpp:570
 msgid ""
 "Remove selected contacts from the list of contacts which will be printed."
 msgstr "Kişiler listesinden, yazdırılacak olan, seçilmiş kişileri kaldırın."
 
-#: batchassistant.cpp:559
+#: batchassistant.cpp:571
 msgid "Remove all contacts from the list of contacts which will be printed."
 msgstr "Kişiler listesinden, yazdırılacak olan bütün kişileri kaldırın."
 
-#: batchassistant.cpp:575
+#: batchassistant.cpp:587
 msgid "All Addresses"
 msgstr "Bütün Adresler"
 
-#: batchassistant.cpp:577
+#: batchassistant.cpp:589
 msgid "Selected Addresses"
 msgstr "Seçilmiş Adresler"
 
-#: batchassistant.cpp:582 batchassistant.cpp:596
+#: batchassistant.cpp:594 batchassistant.cpp:608
 msgid "Given Name"
 msgstr "Verilen İsim"
 
-#: batchassistant.cpp:583 batchassistant.cpp:597
+#: batchassistant.cpp:595 batchassistant.cpp:609
 msgid "Family Name"
 msgstr "Aile Adı"
 
-#: batchassistant.cpp:584 batchassistant.cpp:598
+#: batchassistant.cpp:596 batchassistant.cpp:610
 msgid "Email Address"
 msgstr "E-posta Adresi"
 
-#: batchassistant.cpp:743
+#: batchassistant.cpp:755
 #, fuzzy
 msgid "The label file %1 was not found"
 msgstr "%1 dosyası bulunamadı."
 
-#: batchassistant.cpp:934
+#: batchassistant.cpp:946
 msgid "Please enter a valid article ID"
 msgstr "Lütfen geçerli bir madde no'su girin"
 
-#: batchassistant.cpp:1104
+#: batchassistant.cpp:1131
 msgid "Separator is empty. Please set it to a value."
 msgstr "Ayıraç boş. Lütfen bir değer atayın."
 
-#: batchassistant.cpp:1173
+#: batchassistant.cpp:1200
 msgid "<qt>The following items can not be added:"
 msgstr "<qt>İzleyen öğeler eklenemedi:"
 
-#: batchassistant.cpp:1260
+#: batchassistant.cpp:1282
+#, fuzzy
+msgid "What to do with already inserted data?"
+msgstr "Ne eklemek istersiniz?"
+
+#: batchassistant.cpp:1284
+msgid "Append"
+msgstr ""
+
+#: batchassistant.cpp:1285
+msgid "Replace"
+msgstr ""
+
+#: batchassistant.cpp:1286
+msgid "Keep"
+msgstr ""
+
+#: batchassistant.cpp:1290
+msgid ""
+"<qt>There are already data in the table widget becouse you visited this page "
+"before. <br><b>What do you want to do with the data?</b><br><br>If you press "
+"\"Keep\" data in the table widget will not be deleted and not reloaded."
+"<br><br>If you press \"Replace\" data in the table widget will be deleted "
+"and if you checked the radio button \"Import variables from a SQL table\" or "
+"\"Import from a CSV file\" data will also be loaded from an SQL database or "
+"a CSV file.<br><br>If you press \"Append\" data in the table widget will not "
+"be deleted and if you checked the radio button \"Import variables from a SQL "
+"table\" or \"Import from a CSV file\" other data will also be loaded from an "
+"SQL database or a CSV file and appended to the data already present in the "
+"table widget.<br><br>If you don't know what to do press \"Keep\".</qt>"
+msgstr ""
+
+#: batchassistant.cpp:1329
 #, fuzzy
 msgid "<qt>Can't connect to a database.</qt>"
 msgstr "Veri tabanına bağlanılamıyor."
 
-#: batchassistant.cpp:1267
+#: batchassistant.cpp:1336
 msgid "<qt>Can't execute SQL query:<br>"
 msgstr "<qt>SQL sorgusu çalıştırılamadı:<br>"
 
-#: batchassistant.cpp:1297
+#: batchassistant.cpp:1365
 msgid "Can't open file: %1"
 msgstr "Dosya açılamadı: %1"
 
@@ -603,7 +635,7 @@ msgstr "Sistem kontrolü"
 msgid "&Use database with KBarcode"
 msgstr "KBarcode ile &veri tabanı kullan"
 
-#: confassistant.cpp:173 tokenprovider.cpp:207
+#: confassistant.cpp:173 tokenprovider.cpp:208
 msgid "Database"
 msgstr "Veri tabanı"
 
@@ -1369,7 +1401,7 @@ msgstr "Sağa &Hizala"
 msgid "&Justify"
 msgstr "&Yasla"
 
-#: dialogs/multilineeditdlg.cpp:176 labeleditor.cpp:524 textlineedit.cpp:103
+#: dialogs/multilineeditdlg.cpp:176 labeleditor.cpp:524 textlineedit.cpp:107
 msgid "Insert &Data Field"
 msgstr "&Veri Alanı Ekle"
 
@@ -1592,7 +1624,7 @@ msgstr "Tümü"
 msgid "Variable defined by the user for this label."
 msgstr "Bu etiket için, kullanıcı tarafından tanımlanan değişken."
 
-#: dialogs/tokendialog.cpp:518 tokenprovider.cpp:209
+#: dialogs/tokendialog.cpp:518 tokenprovider.cpp:210
 msgid "Custom Values"
 msgstr "Özel Değerler"
 
@@ -1812,174 +1844,174 @@ msgid ""
 "<qt>The document has been modified.<br><br>Do you want to save it ?</qt>"
 msgstr "<qt>Belge değiştirilmiş.<br><br>Kaydetmek istiyor musunuz?</qt>"
 
-#: main.cpp:64
+#: main.cpp:65
 #, fuzzy
 msgid "KBarcode"
 msgstr "Barkod"
 
-#: main.cpp:65
+#: main.cpp:66
 #, fuzzy
 msgid "KBarcode4 is a barcode and label printing application for KDE 4."
 msgstr "KBarcode, KDE 3 için bir barkod ve etiket yazdırma uygulamasıdır."
 
-#: main.cpp:66
+#: main.cpp:67
 msgid "(c) 2001-2008, Dominik Seichter"
 msgstr ""
 
-#: main.cpp:69
+#: main.cpp:70
 msgid "Dominik Seichter"
 msgstr ""
 
-#: main.cpp:69
+#: main.cpp:70
 msgid "Programmer"
 msgstr "Programlayan"
 
-#: main.cpp:70
+#: main.cpp:71
 msgid "Stefan \"Stonki\" Onken"
 msgstr ""
 
-#: main.cpp:71
+#: main.cpp:72
 msgid "Project Manager"
 msgstr "Proje Yöneticisi"
 
-#: main.cpp:73
+#: main.cpp:74
 msgid "Váradi Zsolt Gyula"
 msgstr ""
 
-#: main.cpp:73
+#: main.cpp:74
 #, fuzzy
 msgid "KBarcode4 Developer"
 msgstr "Barkod Üreteci"
 
-#: main.cpp:75
+#: main.cpp:76
 msgid "Alessandro Rubini"
 msgstr ""
 
-#: main.cpp:75
+#: main.cpp:76
 msgid "Wrote GNU Barcode on which kbarcode is based."
 msgstr "KBarcode'nin temeli olan GNU Barcode'yi yazdı."
 
-#: main.cpp:77
+#: main.cpp:78
 msgid "Terry Burton"
 msgstr ""
 
-#: main.cpp:77
+#: main.cpp:78
 msgid "Author of Barcode Writer in Pure Postscript"
 msgstr "Pure Postscript içindeki Barcode Writer'in yazarı"
 
-#: main.cpp:79
+#: main.cpp:80
 msgid "Daniele Medri"
 msgstr ""
 
-#: main.cpp:79
+#: main.cpp:80
 msgid "Italian translation"
 msgstr "İtalyanca çeviri"
 
-#: main.cpp:80
+#: main.cpp:81
 msgid "Anton Vaaranmaa"
 msgstr ""
 
-#: main.cpp:81
+#: main.cpp:82
 msgid "Finnish and Swedish translation, created the KBarcode icon"
 msgstr "Fince ve İsveççe çeviri, KBarcode simgesinin yaratıcısı"
 
-#: main.cpp:82
+#: main.cpp:83
 msgid "Miguel Revilla Rodr�uez"
 msgstr ""
 
-#: main.cpp:82
+#: main.cpp:83
 msgid "Spanish translation"
 msgstr "İspanyolca çeviri"
 
-#: main.cpp:83
+#: main.cpp:84
 msgid "Sandor Jager"
 msgstr ""
 
-#: main.cpp:83
+#: main.cpp:84
 msgid "Hungarian translation"
 msgstr "Macarca çeviri"
 
-#: main.cpp:84
+#: main.cpp:85
 msgid "Daniel Etzold"
 msgstr ""
 
-#: main.cpp:85
+#: main.cpp:86
 msgid "Tab icon code stolen from his excellent app qtella."
 msgstr "Sekme simgesi kodu, onun mükemmel uygulaması qtella'dan araklandı."
 
-#: main.cpp:86
+#: main.cpp:87
 msgid "Richard J. Moore"
 msgstr ""
 
-#: main.cpp:86
+#: main.cpp:87
 msgid "Wrote the RichText KPart"
 msgstr "RichText KPart'ı yazdı"
 
-#: main.cpp:87
+#: main.cpp:88
 msgid "Yann Bouan"
 msgstr ""
 
-#: main.cpp:87
+#: main.cpp:88
 msgid "French Translation"
 msgstr "Fransızca Çeviri"
 
-#: main.cpp:88
+#: main.cpp:89
 msgid "Erich Kitzmüller"
 msgstr ""
 
-#: main.cpp:88
+#: main.cpp:89
 msgid "Help with ZPL and IPL code"
 msgstr "ZPL ve IPL kodu yardımı"
 
-#: main.cpp:89
+#: main.cpp:90
 msgid "Dag Nygren"
 msgstr ""
 
-#: main.cpp:89
+#: main.cpp:90
 msgid "Wrote many patches to improve KBarcode"
 msgstr "KBarcode'yi geliştirmek için bir sürü yama yazdı"
 
-#: main.cpp:90
+#: main.cpp:91
 msgid "Frank Schoolmeesters"
 msgstr ""
 
-#: main.cpp:90
+#: main.cpp:91
 msgid "Made the Netherlands translation"
 msgstr "Hollandaca çeviriyi yaptı"
 
-#: main.cpp:91
+#: main.cpp:92
 msgid "John Volpe"
 msgstr ""
 
-#: main.cpp:91
+#: main.cpp:92
 msgid "Added lot's of useful data fields to kbarcode"
 msgstr "KBarcode'ye bir çok kullanışlı veri alanı ekledi"
 
-#: main.cpp:92
+#: main.cpp:93
 msgid "Nyssa s.r.l."
 msgstr ""
 
-#: main.cpp:92
+#: main.cpp:93
 msgid "Added TEC barcode printer support"
 msgstr "TEC barkod yazdırma desteği ekledi"
 
-#: main.cpp:93
+#: main.cpp:94
 msgid "Brian Glass"
 msgstr ""
 
-#: main.cpp:93
+#: main.cpp:94
 msgid "Added EPCL barcode printer support"
 msgstr "EPCL barkod yazdırma desteği ekledi"
 
-#: main.cpp:94
+#: main.cpp:95
 msgid "František (Fanda) Brožka"
 msgstr ""
 
-#: main.cpp:94
+#: main.cpp:95
 msgid "Ported Kbarcode from KDE3 to KDE4."
 msgstr ""
 
-#: main.cpp:103
+#: main.cpp:104
 msgid ""
 "Load the file in KBarcode (if --batch is specified, the file will be used in "
 "batchprinting mode)"
@@ -1987,7 +2019,7 @@ msgstr ""
 "Dosyayı KBarcode'a yükle (eğer --batch tanımlıysa, dosya, toplu yazdırma "
 "kipinde kullanılacaktır)"
 
-#: main.cpp:104
+#: main.cpp:105
 msgid ""
 "Print any loaded files immediately on the default printer or on the printer "
 "specified by the --printer commandline option and exit afterwards"
@@ -1995,39 +2027,39 @@ msgstr ""
 "Yüklenen herhangi bir dosyayı öntanımlı yazıcıda veya --printer komut satırı "
 "seçeneği ile belirtilen yazıcıda yazdır ve ardından çık"
 
-#: main.cpp:106
+#: main.cpp:107
 msgid "Printer/destination to print on"
 msgstr "Yazdırılan yazıcı/hedef"
 
-#: main.cpp:107
+#: main.cpp:108
 msgid "KBarcode Modes:"
 msgstr "KBarcode Kipleri:"
 
-#: main.cpp:108
+#: main.cpp:109
 msgid "Start KBarcode as xbarcode replacement"
 msgstr "KBarcode'u xbarcode yerine başlat"
 
-#: main.cpp:109
+#: main.cpp:110
 msgid "Open the label editor"
 msgstr "Etiket düzenleyiciyi aç"
 
-#: main.cpp:110
+#: main.cpp:111
 msgid "Start directly in batchprinting mode"
 msgstr "Doğrudan toplu yazdırma kipinde başla"
 
-#: main.cpp:111
+#: main.cpp:112
 msgid "Additional options for batchprinting (--batch):"
 msgstr "Toplu yazdırma için ek seçenekler (--batch):"
 
-#: main.cpp:112
+#: main.cpp:113
 msgid "Output format where mode is one of POSTSCRIPT|IMAGE|BARCODE"
 msgstr "Kip, POSTSCRİPT|RESIM|BARCODE dan birisi olduğunda çıktı biçimi"
 
-#: main.cpp:113
+#: main.cpp:114
 msgid "Set the serial number to be used"
 msgstr "Kullanılacak seri numarasını ayarlayın"
 
-#: main.cpp:114
+#: main.cpp:115
 msgid ""
 "Increase a previously specified serial number using this value for each "
 "printed label"
@@ -2035,15 +2067,15 @@ msgstr ""
 "Her basılan etiket için, bu değeri kullanarak, önceden belirlenen seri "
 "numarasını arttır"
 
-#: main.cpp:115
+#: main.cpp:116
 msgid "Print <value> labels without any data"
 msgstr "Hiç veri olmadan <value> etiketleri yazdır"
 
-#: main.cpp:116
+#: main.cpp:117
 msgid "Import variable data from a specified sql query"
 msgstr "Belirlenen bir sql sorgusundan veri değişkeni içe aktar"
 
-#: main.cpp:117
+#: main.cpp:118
 msgid "Import variable data from a specified csv file"
 msgstr "Belirlenen bir csv dosyasından veri değişkeni içe aktar"
 
@@ -2080,7 +2112,7 @@ msgstr "&Barkod Yardım..."
 msgid "&Donate..."
 msgstr "&Bağış..."
 
-#: mainwindow.cpp:239
+#: mainwindow.cpp:238
 #, fuzzy
 msgid ""
 "<qt>The KBarcode2 documentation is available as PDF for download on our "
@@ -2089,11 +2121,11 @@ msgstr ""
 "<qt>KBarcode belgesi, indirebilmeniz için PDF olarak web sayfamızda "
 "bulunmaktadır.<br><br>"
 
-#: mainwindow.cpp:241
+#: mainwindow.cpp:240
 msgid "Download Now"
 msgstr "Şimdi İndir"
 
-#: mainwindow.cpp:272
+#: mainwindow.cpp:271
 msgid ""
 "<qt>It is possible to support the further development of KBarcode through "
 "donations. PayPal will be used for processing the donation.<br><br>"
@@ -2102,25 +2134,25 @@ msgstr ""
 "destekleyebilmeniz mümkündür. Bağışlarınız için PayPal kullanılacaktır."
 "<br><br>"
 
-#: mainwindow.cpp:275
+#: mainwindow.cpp:274
 msgid "Donate Now"
 msgstr "Şimdi Bağış Yap"
 
-#: mainwindow.cpp:291
+#: mainwindow.cpp:290
 msgid "<p><h3>Barcode Support</h3></p>"
 msgstr "<p><h3>Barkod desteği</h3></p>"
 
-#: mainwindow.cpp:293 mainwindow.cpp:295 mainwindow.cpp:297 mainwindow.cpp:299
-#: mainwindow.cpp:301
+#: mainwindow.cpp:292 mainwindow.cpp:294 mainwindow.cpp:296 mainwindow.cpp:298
+#: mainwindow.cpp:300
 msgid "<b>No</b><br />"
 msgstr "<b>Yok</b><br />"
 
-#: mainwindow.cpp:293 mainwindow.cpp:295 mainwindow.cpp:297 mainwindow.cpp:299
-#: mainwindow.cpp:301
+#: mainwindow.cpp:292 mainwindow.cpp:294 mainwindow.cpp:296 mainwindow.cpp:298
+#: mainwindow.cpp:300
 msgid "<b>Found</b><br />"
 msgstr "<b>Bulundu</b><br />"
 
-#: mainwindow.cpp:304
+#: mainwindow.cpp:303
 msgid ""
 "<p>To get <b>barcode support</b> you have to either install <i>GNU Barcode</"
 "i>, <i>TBarcode</i> or <i>PDF417 Enc</i>.</p>"
@@ -2128,15 +2160,15 @@ msgstr ""
 "<p><b>barkode desteğinin</b> olması için <i>GNU Barcode</i>, <i>TBarcode</i> "
 "veya <i>PDF417 Enc</i> de kurmalısınız.</p>"
 
-#: mainwindow.cpp:306
+#: mainwindow.cpp:305
 msgid "<p><h3>Database Support</h3></p>"
 msgstr "<p><h3>Veri tabanı Desteği</h3></p>"
 
-#: mainwindow.cpp:314
+#: mainwindow.cpp:313
 msgid "<li>Driver found: "
 msgstr "<li>Sürücü bulundu: "
 
-#: mainwindow.cpp:319
+#: mainwindow.cpp:318
 msgid ""
 "<p><b>No database drivers found. SQL database support is disabled.</b></p>"
 msgstr ""
@@ -2159,11 +2191,11 @@ msgstr "Yapıştırılmış Nesne"
 msgid "Paste"
 msgstr ""
 
-#: mycanvasview.cpp:163
+#: mycanvasview.cpp:164
 msgid "Position: "
 msgstr "Konum: "
 
-#: mycanvasview.cpp:396
+#: mycanvasview.cpp:397
 #, fuzzy
 msgid "Delete"
 msgstr "Satır Sil"
@@ -2180,7 +2212,7 @@ msgstr "<h1>Yeni bir etiket oluştur</h1><br><br>"
 msgid "<h1>Change Label Size</h1><br><br>"
 msgstr "<h1>Etiket Boyutunu Değiştir</h1><br><br>"
 
-#: newlabel.cpp:65 tokenprovider.cpp:208
+#: newlabel.cpp:65 tokenprovider.cpp:209
 msgid "Label"
 msgstr "Etiket"
 
@@ -2563,239 +2595,239 @@ msgstr "Seçenekleri &Dene"
 msgid "<b>You have to test your database settings before you can procede.</b>"
 msgstr "<b>Kabul etmeden önce veri tabanı seçeneklerinizi denemelisiniz.</b>"
 
-#: textlineedit.cpp:153
+#: textlineedit.cpp:157
 msgid "&Mag. Vert.:"
 msgstr "&Mag. Düş.:"
 
-#: textlineedit.cpp:157
+#: textlineedit.cpp:161
 msgid "&Mag. Hor.:"
 msgstr "&Mag. Yat.:"
 
-#: tokenprovider.cpp:210
+#: tokenprovider.cpp:211
 msgid "Date & Time"
 msgstr "Tarih & Saat"
 
-#: tokenprovider.cpp:211
+#: tokenprovider.cpp:212
 msgid "Addressbook"
 msgstr "Adres defteri"
 
-#: tokenprovider.cpp:216
+#: tokenprovider.cpp:217
 msgid "Article description from barcode_basic"
 msgstr "barcode_basic'den madde açıklaması"
 
-#: tokenprovider.cpp:217
+#: tokenprovider.cpp:218
 msgid "Article number from barcode_basic"
 msgstr "barcode_basic'den madde numarası"
 
-#: tokenprovider.cpp:224
+#: tokenprovider.cpp:225
 msgid "customer number of the current customer"
 msgstr "şimdiki müşterinin, müşteri numarası"
 
-#: tokenprovider.cpp:225
+#: tokenprovider.cpp:226
 msgid "name of the current customer"
 msgstr "şimdiki müşterinin adı"
 
-#: tokenprovider.cpp:226
+#: tokenprovider.cpp:227
 msgid "Barcode number from barcode_basic"
 msgstr "barcode_basic'den barkod numarası"
 
-#: tokenprovider.cpp:228
+#: tokenprovider.cpp:229
 msgid "group of the current article"
 msgstr "şimdiki maddenin grubu"
 
-#: tokenprovider.cpp:229
+#: tokenprovider.cpp:230
 msgid "Barcode encoding type from barcode_basic"
 msgstr "barcode_basic'den barkod kodlama tipi"
 
-#: tokenprovider.cpp:230
+#: tokenprovider.cpp:231
 msgid "User readable barcode encoding type from barcode_basic"
 msgstr "barcode_basic'den kullanıcı tarafından okunabilen barkod kodlama tipi"
 
-#: tokenprovider.cpp:235
+#: tokenprovider.cpp:236
 msgid "Path and filename of this file"
 msgstr "Bu dosyanın yolu ve dosya adı"
 
-#: tokenprovider.cpp:236
+#: tokenprovider.cpp:237
 msgid "number of labels currently printed during this printout"
 msgstr "Bu çıktı boyunca basılmış olan etiket sayısı"
 
-#: tokenprovider.cpp:237
+#: tokenprovider.cpp:238
 msgid "current column on the page"
 msgstr "Sayfadaki şimdiki sütun"
 
-#: tokenprovider.cpp:238
+#: tokenprovider.cpp:239
 msgid "current row on the page"
 msgstr "Sayfadaki şimdiki satır"
 
-#: tokenprovider.cpp:239
+#: tokenprovider.cpp:240
 msgid "Current page"
 msgstr "Şimdiki sayfa"
 
-#: tokenprovider.cpp:240
+#: tokenprovider.cpp:241
 msgid "Current resolution"
 msgstr "Şimdiki çözünürlük"
 
-#: tokenprovider.cpp:241
+#: tokenprovider.cpp:242
 msgid "Include a serial number on your labels."
 msgstr "Etiketlerinize seri numarası ekleyin."
 
-#: tokenprovider.cpp:247
+#: tokenprovider.cpp:248
 msgid "Execute java script code"
 msgstr "Java betik kodu çalıştır"
 
-#: tokenprovider.cpp:248
+#: tokenprovider.cpp:249
 msgid "Insert the result of a custom sql query"
 msgstr "Özel sql sorgusunun sonucunu ekle"
 
-#: tokenprovider.cpp:249
+#: tokenprovider.cpp:250
 msgid "Insert a custom variable"
 msgstr "Özel değişken ekle"
 
-#: tokenprovider.cpp:254
+#: tokenprovider.cpp:255
 msgid "Date formated as configured in the preferences"
 msgstr "Tarih, seçeneklerde ayarlandığı gibi biçimlendirildi"
 
-#: tokenprovider.cpp:255
+#: tokenprovider.cpp:256
 msgid "Short Weekday Name"
 msgstr "Kısa Haftanın Günleri Adları"
 
-#: tokenprovider.cpp:256
+#: tokenprovider.cpp:257
 msgid "Full Weekday Name"
 msgstr "Uzun Haftanın Günleri Adları"
 
-#: tokenprovider.cpp:257
+#: tokenprovider.cpp:258
 msgid "Short Month Name"
 msgstr "Kısa Ay Adları"
 
-#: tokenprovider.cpp:258
+#: tokenprovider.cpp:259
 msgid "Full Month Name"
 msgstr "Uzun Ay Adları"
 
-#: tokenprovider.cpp:259
+#: tokenprovider.cpp:260
 msgid "Date-Time"
 msgstr "Tarih-Saat"
 
-#: tokenprovider.cpp:260
+#: tokenprovider.cpp:261
 msgid "Century"
 msgstr "Yüzyıl"
 
-#: tokenprovider.cpp:261
+#: tokenprovider.cpp:262
 msgid "Day Number (01-31)"
 msgstr "Gün (01-31)"
 
-#: tokenprovider.cpp:262
+#: tokenprovider.cpp:263
 msgid "Month-Day-year"
 msgstr "Ay-Gün-Yıl"
 
-#: tokenprovider.cpp:263
+#: tokenprovider.cpp:264
 msgid "Day Number ( 1-31)"
 msgstr "Gün (1-31)"
 
-#: tokenprovider.cpp:264
+#: tokenprovider.cpp:265
 msgid "Year-Month-day"
 msgstr "Yıl-Ay-Gün"
 
-#: tokenprovider.cpp:265
+#: tokenprovider.cpp:266
 msgid "Week Year (yy)"
 msgstr "Yıldaki Hafta (yy)"
 
-#: tokenprovider.cpp:266
+#: tokenprovider.cpp:267
 msgid "Week Year (yyyy)"
 msgstr "Yıldaki Hafta (yyyy)"
 
-#: tokenprovider.cpp:267
+#: tokenprovider.cpp:268
 msgid "Hour (01-24)"
 msgstr "Saat (01-24)"
 
-#: tokenprovider.cpp:268
+#: tokenprovider.cpp:269
 msgid "Hour (1-12)"
 msgstr "Saat (1-12)"
 
-#: tokenprovider.cpp:269
+#: tokenprovider.cpp:270
 msgid "Day of Year"
 msgstr "Yılın günü"
 
-#: tokenprovider.cpp:270
+#: tokenprovider.cpp:271
 msgid "Month Number (01-12)"
 msgstr "Ay (01-12)"
 
-#: tokenprovider.cpp:271
+#: tokenprovider.cpp:272
 msgid "Minute (00-59)"
 msgstr "Dakika (00-59)"
 
-#: tokenprovider.cpp:272
+#: tokenprovider.cpp:273
 msgid "a.m./p.m."
 msgstr "a.m./p.m."
 
-#: tokenprovider.cpp:273
+#: tokenprovider.cpp:274
 msgid "Time (h:m:s am/pm)"
 msgstr "Saat (s:d:s am/pm)"
 
-#: tokenprovider.cpp:274
+#: tokenprovider.cpp:275
 msgid "Time (HH:MM)"
 msgstr "Saat (SS:DD)"
 
-#: tokenprovider.cpp:275
+#: tokenprovider.cpp:276
 msgid "Seconds (00-59)"
 msgstr "Saniye (00-59)"
 
-#: tokenprovider.cpp:276
+#: tokenprovider.cpp:277
 msgid "Time (HH:MM:SS)"
 msgstr "Saat (SS:DD:SS)"
 
-#: tokenprovider.cpp:277
+#: tokenprovider.cpp:278
 msgid "Weekday (1=Monday...)"
 msgstr "Haftanın günü (1=Pazartesi...)"
 
-#: tokenprovider.cpp:278 tokenprovider.cpp:281
+#: tokenprovider.cpp:279 tokenprovider.cpp:282
 msgid "Week Number (00-53)"
 msgstr "Hafta (00-53)"
 
-#: tokenprovider.cpp:279
+#: tokenprovider.cpp:280
 msgid "Week Number (01-53)"
 msgstr "Hafta (01-53)"
 
-#: tokenprovider.cpp:280
+#: tokenprovider.cpp:281
 msgid "Weekday (0=Sunday...)"
 msgstr "Haftanın günü (0=Pazar...)"
 
-#: tokenprovider.cpp:282
+#: tokenprovider.cpp:283
 msgid "Local Date"
 msgstr "Yerel Tarih"
 
-#: tokenprovider.cpp:283
+#: tokenprovider.cpp:284
 msgid "Local Time"
 msgstr "Yerel Saat"
 
-#: tokenprovider.cpp:284
+#: tokenprovider.cpp:285
 msgid "Year (00-99)"
 msgstr "Yıl (00-99)"
 
-#: tokenprovider.cpp:285
+#: tokenprovider.cpp:286
 msgid "Year (YYYY)"
 msgstr "Yıl (YYYY)"
 
-#: tokenprovider.cpp:286
+#: tokenprovider.cpp:287
 msgid "Offset from UTC"
 msgstr "UTC Konumu"
 
-#: tokenprovider.cpp:287
+#: tokenprovider.cpp:288
 msgid "Timezone Name"
 msgstr "Zaman Alanı Adı"
 
-#: tokenprovider.cpp:292
+#: tokenprovider.cpp:293
 msgid "Name"
 msgstr "İsim"
 
-#: tokenprovider.cpp:296
+#: tokenprovider.cpp:297
 msgid "Full E-Mail"
 msgstr "Tam E-Posta"
 
-#: tokenprovider.cpp:319
+#: tokenprovider.cpp:320
 msgid "Formatted Address"
 msgstr "Biçimlendirilmiş Adres"
 
-#: tokenprovider.cpp:827
+#: tokenprovider.cpp:837
 msgid "ERROR: Empty SQL Query"
 msgstr "HATA: Boş SQL Sorgusu"
 
