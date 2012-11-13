@@ -1,4 +1,4 @@
-set(ProjectName kbarcode040)
+set(ProjectName kbarcode-kde4)
 
 project(${ProjectName})
 
