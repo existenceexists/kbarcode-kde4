@@ -770,7 +770,7 @@ void BatchAssistant::printNow( const QString & printer, bool bUserInteraction )
             PrinterSettings::getInstance()->getData()->border = pld.border();
         }
 	
-	prn = PrinterSettings::getInstance()->setupPrinter( m_url->url(), this, !printer.isEmpty(), printer );
+	prn = PrinterSettings::getInstance()->setupPrinter( KUrl(), this, !printer.isEmpty(), printer );
 	if( !prn ) 
 	    return;
 

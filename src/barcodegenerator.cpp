@@ -186,7 +186,8 @@ void BarcodeGenerator::print()
     if( d.isValid() )
         return;
 
-    QPrinter* printer = PrinterSettings::getInstance()->setupPrinter( KUrl("kfiledialog:///kbarcode"), this );
+    /*QPrinter* printer = PrinterSettings::getInstance()->setupPrinter( KUrl("kfiledialog:///kbarcode"), this );*/// "kfiledialog:///kbarcode" works with KFileDialog not with QPrinterDialog
+    QPrinter* printer = PrinterSettings::getInstance()->setupPrinter( KUrl(), this );
     if( !printer )
         return;
 

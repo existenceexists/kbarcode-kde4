@@ -751,7 +751,7 @@ void LabelEditor::print()
 
     PrinterSettings::getInstance()->getData()->border = pld.border();
 
-    QPrinter* printer = PrinterSettings::getInstance()->setupPrinter( KUrl( filename ), this );
+    QPrinter* printer = PrinterSettings::getInstance()->setupPrinter( KUrl(), this );
     if( !printer )
         return;
 
