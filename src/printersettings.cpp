@@ -173,15 +173,15 @@ QPrinter* PrinterSettings::setupPrinter( const KUrl & url, QWidget* parent, bool
 
     printer->setFullPage( true ); // don't use built-in margin system
 
+    if( url.isValid() )
+        printer->setOutputFileName( url.fileName() );
+
     QPrintDialog printDialog(printer, parent);
     if( !immediately && !printDialog.exec() )
         return 0;
 
     if( immediately && !prn.isEmpty() )
         printer->setPrinterName( prn );
-
-    if( !url.isValid() )
-        printer->setOutputFileName( url.fileName() );
         
     return printer;
 }
