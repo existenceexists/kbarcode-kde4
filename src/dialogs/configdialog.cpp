@@ -210,7 +210,7 @@ void ConfigDialog::setupTab4()
 {
     QWidget* page = new QWidget( this );
     KPageWidgetItem* item = addPage( page, i18n( "Label Editor" ) );
-    item->setIcon( KIcon( KStandardDirs::locate( "appdata", "hi32-app-kbarcode.png" ) ) );
+    item->setIcon( KIcon( "kbarcode" ) );
 
     QGridLayout* tabLayout = new QGridLayout( page );
 
