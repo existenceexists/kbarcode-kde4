@@ -1,3 +1,3 @@
 install( PROGRAMS 
-                kbarcode.desktop 
+                kbarcode-kde4.desktop 
         DESTINATION ${XDG_APPS_INSTALL_DIR} )
