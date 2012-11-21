@@ -194,12 +194,12 @@ void BarcodeGenerator::print()
     // unless we can center the barcode
     printer->setFullPage( false );
     
-    double scalex = (double)printer->logicalDpiX() / (double)QX11Info::appDpiX();
-    double scaley = (double)printer->logicalDpiY() / (double)QX11Info::appDpiY();
+    /*double scalex = (double)printer->logicalDpiX() / (double)QX11Info::appDpiX();
+    double scaley = (double)printer->logicalDpiY() / (double)QX11Info::appDpiY();*/
     
     QPicture picture;
     QPainter p( printer );
-    p.scale( scalex, scaley );
+    /*p.scale( scalex, scaley );*/// Don't scale anything
     // TODO: center barcode
 
     TokenProvider tp( printer );
