@@ -205,7 +205,8 @@ void BarcodeGenerator::print()
     TokenProvider tp( printer );
     
     d.setTokenProvider( &tp );
-    d.update( printer );
+    /*d.update( printer );*/// This causes the picture to be too large so use KApplication::desktop() instead
+    d.update( KApplication::desktop() );
 
     picture = d.picture();
     p.drawPicture( QPoint( 0, 0 ), picture );
