@@ -9,7 +9,7 @@ IF(NOT GETTEXT_MSGFMT_EXECUTABLE)
 ------")
 ELSE(NOT GETTEXT_MSGFMT_EXECUTABLE)
 
-        SET(catalogname kbarcode)
+        SET(catalogname ${ProjectName})
 
         ADD_CUSTOM_TARGET(translations ALL)
 
