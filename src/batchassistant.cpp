@@ -1269,7 +1269,16 @@ void BatchAssistant::contactSearchJobResult( KJob *job )
     KABC::Addressee::List::Iterator it;
     listAddress->setUpdatesEnabled( false );
     for ( it = contacts.begin(); it != contacts.end(); ++it ) {
-        new AddressListViewItem( listAddress, *it );
+        bool isAlreadyInListSelectedAddress = false;
+        for( int i = 0; i < listSelectedAddress->topLevelItemCount(); i++ ) {
+            if( (*it).uid() == ((AddressListViewItem*) listSelectedAddress->topLevelItem( i ))->address().uid() ) {
+                isAlreadyInListSelectedAddress = true;
+                break;
+            }
+        }
+        if( !isAlreadyInListSelectedAddress ) {
+            new AddressListViewItem( listAddress, *it );
+        }
     }
     listAddress->setUpdatesEnabled( true );
 }
