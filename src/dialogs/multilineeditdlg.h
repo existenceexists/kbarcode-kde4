@@ -59,6 +59,8 @@ class MultiLineEditor : public QWidget {
         void setFontSize( int size );
         
     protected:
+        void makeAllToolBarButtonsVisible();
+        
         TokenProvider* m_token;
 
 	DSTextEdit* editor;

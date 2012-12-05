@@ -39,7 +39,6 @@
 // Qt includes
 #include <qregexp.h>
 #include <QActionGroup>
-#include <QDebug>
 //Added by qt3to4:
 #include <QVBoxLayout>
 
@@ -71,21 +70,7 @@ MultiLineEditor::MultiLineEditor( TokenProvider* token, QWidget *parent )
     layout->addWidget( tool5Bar );
     layout->addWidget( editor );
     
-    // Make sure all the actions of the tool bars are visible:
-    //setMinimumWidth( 550 );
-    int maximumWidth = 0;
-    QList<KToolBar *> toolBars;
-    toolBars.append( toolBar );
-    toolBars.append( tool2Bar );
-    toolBars.append( tool3Bar );
-    toolBars.append( tool4Bar );
-    toolBars.append( tool5Bar );
-    for( int i = 0; i < toolBars.count(); i++ ) {
-        maximumWidth = qMax( maximumWidth, toolBars[i]->sizeHint().width() + toolBars[i]->width() );
-    }
-    if( maximumWidth > size().width() ) {
-        setMinimumWidth( maximumWidth );
-    }
+    makeAllToolBarButtonsVisible();
 
 }
 
@@ -228,6 +213,25 @@ void MultiLineEditor::setupActions()
     connect( editor, SIGNAL( currentFontChanged( const QFont & ) ), this, SLOT( updateFont() ) );
     connect( editor, SIGNAL( currentFontChanged( const QFont & ) ), this, SLOT( updateCharFmt() ) );
     connect( editor, SIGNAL( cursorPositionChanged() ), this, SLOT( updateAligment() ) );
+}
+
+void MultiLineEditor::makeAllToolBarButtonsVisible()
+{
+    // Make sure all the actions of the tool bars are visible:
+    //setMinimumWidth( 550 );
+    int maximumWidth = 0;
+    QList<KToolBar *> toolBars;
+    toolBars.append( toolBar );
+    toolBars.append( tool2Bar );
+    toolBars.append( tool3Bar );
+    toolBars.append( tool4Bar );
+    toolBars.append( tool5Bar );
+    for( int i = 0; i < toolBars.count(); i++ ) {
+        maximumWidth = qMax( maximumWidth, toolBars[i]->sizeHint().width() + toolBars[i]->width() );
+    }
+    if( maximumWidth > size().width() ) {
+        setMinimumWidth( maximumWidth );
+    }
 }
 
 QString MultiLineEditor::text()
