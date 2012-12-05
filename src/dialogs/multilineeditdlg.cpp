@@ -39,6 +39,7 @@
 // Qt includes
 #include <qregexp.h>
 #include <QActionGroup>
+#include <QDebug>
 //Added by qt3to4:
 #include <QVBoxLayout>
 
@@ -70,7 +71,21 @@ MultiLineEditor::MultiLineEditor( TokenProvider* token, QWidget *parent )
     layout->addWidget( tool5Bar );
     layout->addWidget( editor );
     
-    setMinimumWidth( 550 );
+    // Make sure all the actions of the tool bars are visible:
+    //setMinimumWidth( 550 );
+    int maximumWidth = 0;
+    QList<KToolBar *> toolBars;
+    toolBars.append( toolBar );
+    toolBars.append( tool2Bar );
+    toolBars.append( tool3Bar );
+    toolBars.append( tool4Bar );
+    toolBars.append( tool5Bar );
+    for( int i = 0; i < toolBars.count(); i++ ) {
+        maximumWidth = qMax( maximumWidth, toolBars[i]->sizeHint().width() + toolBars[i]->width() );
+    }
+    if( maximumWidth > size().width() ) {
+        setMinimumWidth( maximumWidth );
+    }
 
 }
 
