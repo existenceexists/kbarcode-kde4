@@ -1,12 +1,11 @@
 [Desktop Entry]
-Encoding=UTF-8
 Type=Application
 Exec=kbarcode --barcode
-Icon=kbarcode.png
+Icon=kbarcode
 DocPath=kbarcode/index.html
 Comment=Barcode generation tool
 Comment[de]=Barcode Erstellung
-Terminal=0
+Terminal=false
 Name=KBarcode Barcode Generator
 Name[de]=KBarcode Barcode Generator
 Categories=Qt;KDE;Office;

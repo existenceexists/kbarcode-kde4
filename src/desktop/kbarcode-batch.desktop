@@ -1,8 +1,7 @@
 [Desktop Entry]
-Encoding=UTF-8
 Type=Application
 Exec=kbarcode --batch
-Icon=kbarcode.png
+Icon=kbarcode
 DocPath=kbarcode/index.html
 Comment=Barcode and label printing tool (batch printing mode)
 Comment[de]=Werkzeug zum Barcode und Etiketten Druck (Stapelverarbeitung)
