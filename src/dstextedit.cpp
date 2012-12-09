@@ -25,7 +25,7 @@
 DSTextEdit::DSTextEdit( QWidget* parent )
     : TextEditBase( parent )
 {
-    connect( this, SIGNAL( textChanged() ), this, SLOT( fixParagraphs() ) );
+    /*connect( this, SIGNAL( textChanged() ), this, SLOT( fixParagraphs() ) );*/// If we call fixParagraphs() undo and redo don't work
 }
 
 /* fixParagraphs() removes all but the first occurence of the opening paragraph tag <p ...>

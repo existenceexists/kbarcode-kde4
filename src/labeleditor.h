@@ -193,6 +193,8 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
         bool queryClose();
         void setupSpellCheckedText( const TCanvasItem* item );
         QString findNextWord();
+        
+        void makeAllToolBarButtonsVisible();
 
         KUndoStack* history;
 

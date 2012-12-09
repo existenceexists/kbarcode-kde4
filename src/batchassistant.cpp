@@ -770,7 +770,7 @@ void BatchAssistant::printNow( const QString & printer, bool bUserInteraction )
             PrinterSettings::getInstance()->getData()->border = pld.border();
         }
 	
-	prn = PrinterSettings::getInstance()->setupPrinter( m_url->url(), this, !printer.isEmpty(), printer );
+	prn = PrinterSettings::getInstance()->setupPrinter( KUrl(), this, !printer.isEmpty(), printer );
 	if( !prn ) 
 	    return;
 
@@ -1269,7 +1269,16 @@ void BatchAssistant::contactSearchJobResult( KJob *job )
     KABC::Addressee::List::Iterator it;
     listAddress->setUpdatesEnabled( false );
     for ( it = contacts.begin(); it != contacts.end(); ++it ) {
-        new AddressListViewItem( listAddress, *it );
+        bool isAlreadyInListSelectedAddress = false;
+        for( int i = 0; i < listSelectedAddress->topLevelItemCount(); i++ ) {
+            if( (*it).uid() == ((AddressListViewItem*) listSelectedAddress->topLevelItem( i ))->address().uid() ) {
+                isAlreadyInListSelectedAddress = true;
+                break;
+            }
+        }
+        if( !isAlreadyInListSelectedAddress ) {
+            new AddressListViewItem( listAddress, *it );
+        }
     }
     listAddress->setUpdatesEnabled( true );
 }

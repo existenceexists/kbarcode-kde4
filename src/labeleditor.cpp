@@ -159,6 +159,8 @@ LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WindowFlags f,
     setupActions();
     setupContextMenu();
     setAutoSaveSettings( QString("Window") + QString(objectName()), true );
+    
+    makeAllToolBarButtonsVisible();
 
     clearLabel();
 
@@ -211,6 +213,14 @@ void LabelEditor::saveConfig()
     config.sync();
 
     MainWindow::saveConfig();
+}
+
+void LabelEditor::makeAllToolBarButtonsVisible()
+{
+    // Make sure all the actions of the main tool bar are visible:
+    if( ( toolBar( "mainToolBar" )->sizeHint().width() + toolBar( "mainToolBar" )->width() ) > size().width() ) {
+        resize( toolBar( "mainToolBar" )->sizeHint().width() + toolBar( "mainToolBar" )->width(), size().height() );
+    }
 }
 
 void LabelEditor::createCommandHistory()
@@ -751,7 +761,7 @@ void LabelEditor::print()
 
     PrinterSettings::getInstance()->getData()->border = pld.border();
 
-    QPrinter* printer = PrinterSettings::getInstance()->setupPrinter( KUrl( filename ), this );
+    QPrinter* printer = PrinterSettings::getInstance()->setupPrinter( KUrl(), this );
     if( !printer )
         return;
 

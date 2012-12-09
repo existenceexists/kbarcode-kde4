@@ -186,25 +186,27 @@ void BarcodeGenerator::print()
     if( d.isValid() )
         return;
 
-    QPrinter* printer = PrinterSettings::getInstance()->setupPrinter( KUrl("kfiledialog:///kbarcode"), this );
+    /*QPrinter* printer = PrinterSettings::getInstance()->setupPrinter( KUrl("kfiledialog:///kbarcode"), this );*/// "kfiledialog:///kbarcode" works with KFileDialog not with QPrinterDialog
+    QPrinter* printer = PrinterSettings::getInstance()->setupPrinter( KUrl(), this );
     if( !printer )
         return;
 
     // unless we can center the barcode
     printer->setFullPage( false );
     
-    double scalex = (double)printer->logicalDpiX() / (double)QX11Info::appDpiX();
-    double scaley = (double)printer->logicalDpiY() / (double)QX11Info::appDpiY();
+    /*double scalex = (double)printer->logicalDpiX() / (double)QX11Info::appDpiX();
+    double scaley = (double)printer->logicalDpiY() / (double)QX11Info::appDpiY();*/
     
     QPicture picture;
     QPainter p( printer );
-    p.scale( scalex, scaley );
+    /*p.scale( scalex, scaley );*/// Don't scale anything
     // TODO: center barcode
 
     TokenProvider tp( printer );
     
     d.setTokenProvider( &tp );
-    d.update( printer );
+    /*d.update( printer );*/// This causes the picture to be too large so use KApplication::desktop() instead
+    d.update( KApplication::desktop() );
 
     picture = d.picture();
     p.drawPicture( QPoint( 0, 0 ), picture );

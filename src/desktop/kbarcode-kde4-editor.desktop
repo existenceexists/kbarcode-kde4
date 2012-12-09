@@ -1,8 +1,7 @@
 [Desktop Entry]
-Encoding=UTF-8
 Type=Application
 Exec=kbarcode-kde4 --label
-Icon=kbarcode.png
+Icon=kbarcode
 DocPath=kbarcode-kde4/index.html
 Comment=Barcode and label printing tool (editor)
 Comment[de]=Werkzeug zum Barcode und Etiketten Druck (Editor)
