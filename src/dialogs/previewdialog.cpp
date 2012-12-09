@@ -35,6 +35,7 @@
 #include <QGridLayout>
 #include <QPixmap>
 #include <QSqlQuery>
+#include <QSqlRecord>
 #include <QVBoxLayout>
 
 // KDE includes

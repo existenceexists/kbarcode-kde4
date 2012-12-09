@@ -49,7 +49,7 @@
 #include <QHBoxLayout>
 #include <QList>
 #include <QSqlQuery>
-#include <QSqlQuery>
+#include <QSqlRecord>
 #include <QTreeWidgetItem>
 #include <QFrame>
 #include <QSqlError>
@@ -1340,7 +1340,7 @@ bool BatchAssistant::fillVarTable()
         }
 	QSqlQueryModel queryModel;
         queryModel.setQuery( importSqlQuery->text(), SqlTables::getInstance()->database() );
-	if( queryModel.lastError().type() != QSqlError::None )
+	if( queryModel.lastError().type() != QSqlError::NoError )
 	{
 	    KMessageBox::error( this, i18n("<qt>Can't execute SQL query:<br>") + queryModel.lastError().text() + "</qt>" );
 	    return false;
