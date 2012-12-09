@@ -1,6 +1,18 @@
 Changelog since Version 1.3.2:
 ==============================
 
+Version 3.0.0b2
+    Fixed printing in label editor.
+    Fixed printing in barcode generator.
+    Fixed displaying contacts in batch assistant's address list widgets.
+    Fixed names.
+
+Version 3.0.0b1
+    Ported KBarcode to KDE4.
+    Renamed KBarcode to KBarcode-kde4 so that a user can have the old KBarcode 
+        as well as the new KBarcode-kde4 on one system.
+    Also fixed some older bugs.
+
 Version 2.0.7
 
 Version 2.0.6

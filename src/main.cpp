@@ -33,7 +33,8 @@
 #include "barcodegenerator.h"
 */
 #ifndef VERSION
-    #define VERSION "Unknown Version"
+    //#define VERSION "Unknown Version"
+    #define VERSION "3.0.0b2"
 #endif
 
 void setupDirs()
