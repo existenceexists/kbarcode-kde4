@@ -1,4 +1,4 @@
-set(ProjectName kbarcode040)
+set(ProjectName kbarcode041)
 
 project(${ProjectName})
 
@@ -16,7 +16,7 @@ include (KDE4Defaults)
 include (MacroLibrary)
 
 #add_definitions (-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
-add_definitions (-DQT3_SUPPORT_WARNINGS)
+#add_definitions (-DQT3_SUPPORT_WARNINGS)
 
 set(CMAKE_CXX_FLAGS "-g -Wall")
 add_subdirectory(src)
