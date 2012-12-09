@@ -1,10 +1,10 @@
 [Desktop Entry]
 Encoding=UTF-8
 Type=Application
-Exec=kbarcode-kde4 -caption "%c" %i %m %f
+Exec=kbarcode-kde4 --caption "%c" %i %f
 Icon=kbarcode
 MimeType=application/kbarcode-label
-DocPath=kbarcode/index.html
+DocPath=kbarcode-kde4/index.html
 Comment=Barcode and label printing tool
 Comment[de]=Werkzeug zum Barcode und Etiketten Druck
 Terminal=0
