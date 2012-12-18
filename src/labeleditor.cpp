@@ -498,6 +498,7 @@ void LabelEditor::setupActions()
     connect( deleteAct, SIGNAL(triggered(bool)), cv, SLOT(deleteCurrent()) );
     editPropAct = new KAction( this );
     editPropAct->setText( i18n("&Properties...") );
+    editPropAct->setIcon( KIcon( "document-edit" ) );
     actionCollection()->addAction( "editPropAct", editPropAct );
     connect( editPropAct, SIGNAL(triggered(bool)), this, SLOT(doubleClickedCurrent()) );
     printAct = KStandardAction::print( this, SLOT( print() ), actionCollection() );

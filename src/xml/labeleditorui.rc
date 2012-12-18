@@ -57,6 +57,8 @@
     
     <ToolBar name="leftToolBar" position="left">
         <text>Left ToolBar</text>
+        <Action name="editPropAct" />
+        <Separator />
         <Action name="barcodeAct" />
         <Action name="pictureAct" />
         <Action name="textAct" />
