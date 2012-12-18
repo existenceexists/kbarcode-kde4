@@ -112,6 +112,9 @@ class TokenDialog : public KAssistantDialog {
 
     QStackedWidget* page2;
     QStackedWidget* page3;
+    
+    KPageWidgetItem * page2Item;
+    KPageWidgetItem * page3Item;
 
     QWidget* stackPage1;
     QWidget* stackPage2;

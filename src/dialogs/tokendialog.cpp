@@ -90,7 +90,7 @@ void TokenDialog::setupPage2()
 {
     page2 = new QStackedWidget( this );
 
-    KPageWidgetItem * page2Item = addPage( page2, i18n("Step 2 of 3") );
+    page2Item = addPage( page2, i18n("Step 2 of 3") );
     page2Item->setObjectName("page2");
 }
 
@@ -98,7 +98,7 @@ void TokenDialog::setupPage3()
 {
     page3 = new QStackedWidget( this );
 
-    KPageWidgetItem * page3Item = addPage( page3, i18n("Step 3 of 3") );
+    page3Item = addPage( page3, i18n("Step 3 of 3") );
     page3Item->setObjectName("page3");
 }
 
@@ -380,7 +380,7 @@ void TokenDialog::back()
 
 void TokenDialog::configureCurrentPage( KPageWidgetItem* w )
 {
-    if( w->objectName() == QString("page3") )
+    if( w->objectName() == page3Item->objectName() )
     {
         if( radioCustom->isChecked() ) 
         {
@@ -413,7 +413,7 @@ void TokenDialog::configureCurrentPage( KPageWidgetItem* w )
             }
         }
     }
-    else if( w->objectName() == QString("page2") )
+    else if( w->objectName() == page2Item->objectName() )
     {
         if( radioFixed->isChecked() ) {
             page2->setCurrentWidget( stackPage1 );
