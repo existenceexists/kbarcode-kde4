@@ -215,17 +215,12 @@ void TokenDialog::setupStack2Page2()
 {
     stack2Page2 = new QWidget;
     stack2Page2->setObjectName( "stack2Page2" );
-	QVBoxLayout* stack2Page2_layout = new QVBoxLayout;
-	stack2Page2->setLayout(stack2Page2_layout);
+    QVBoxLayout* stack2Page2_layout = new QVBoxLayout;
+    stack2Page2->setLayout(stack2Page2_layout);
 
     labelList = new QTreeWidget;
-	stack2Page2_layout->addWidget(labelList);
-    /*labelList->addColumn( i18n("Token"), 0 );
-    labelList->addColumn( i18n("Description"), 1 );
-    labelList->setColumnWidthMode( 0, Q3ListView::Maximum );
-    labelList->setColumnWidthMode( 1, Q3ListView::Maximum );*/// -!F: original, delete
+    stack2Page2_layout->addWidget(labelList);
     labelList->setHeaderLabels( QStringList() << i18n("Token") << i18n("Description") );
-    labelList->setColumnWidth( 0, 270 );
 
     connect( labelList, SIGNAL( itemSelectionChanged() ), this, SLOT( enableControls() ) );
     connect( labelList, SIGNAL( itemDoubleClicked( QTreeWidgetItem *, int ) ), this, SLOT( accept() ) );
@@ -342,7 +337,6 @@ void TokenDialog::accept()
     }
     else
     {
-        /*QTreeWidgetItem* item = ( radioAll->isChecked() ? allList->selectedItem() : labelList->selectedItem() );*/// -!F: original, delete
         QTreeWidgetItem* item = NULL;
         if( radioAll->isChecked() ) {
             if( !allList->selectedItems().isEmpty() ) {
@@ -485,6 +479,8 @@ void TokenDialog::initStackPage2()
             break;
         }
     }
+    labelList->resizeColumnToContents( 0 );
+    labelList->resizeColumnToContents( 1 );
 }
 
 void TokenDialog::categoryChanged( QListWidgetItem* item )
@@ -577,15 +573,15 @@ void TokenDialog::enableControls()
     }
     
     QString widgetName = page3->currentWidget()->objectName();
-    if( widgetName == QString( "stack2Page1" ) ) {
+    if( widgetName == stack2Page1->objectName() ) {
         enableButton( KDialog::User1, enableFinishButtonStack2Page1 );
-    } else if( widgetName == QString( "stack2Page2" ) ) {
+    } else if( widgetName == stack2Page2->objectName() ) {
         enableButton( KDialog::User1, enableFinishButtonStack2Page2 );
-    } else if( widgetName == QString( "stack2Page3" ) ) {
+    } else if( widgetName == stack2Page3->objectName() ) {
         enableButton( KDialog::User1, enableFinishButtonStack2Page3 );
-    } else if( widgetName == QString( "stack2Page4" ) ) {
+    } else if( widgetName == stack2Page4->objectName() ) {
         enableButton( KDialog::User1, enableFinishButtonStack2Page4 );
-    } else if( widgetName == QString( "stack2Page5" ) ) {
+    } else if( widgetName == stack2Page5->objectName() ) {
         enableButton( KDialog::User1, enableFinishButtonStack2Page5 );
     }
 }
