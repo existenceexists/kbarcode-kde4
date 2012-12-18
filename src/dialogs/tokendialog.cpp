@@ -47,6 +47,8 @@
 TokenDialog::TokenDialog(TokenProvider* token ,QWidget *parent)
     : KAssistantDialog( parent ), m_token( token )
 {
+    setupFinished = false;
+    
     m_custom_tokens = m_token->listUserVars();
 
     setupPage1();
@@ -62,11 +64,7 @@ TokenDialog::TokenDialog(TokenProvider* token ,QWidget *parent)
     setupStack2Page4();
     setupStack2Page5();
     
-    enableFinishButtonStack2Page1 = false;
-    enableFinishButtonStack2Page2 = false;
-    enableFinishButtonStack2Page3 = false;
-    enableFinishButtonStack2Page4 = false;
-    enableFinishButtonStack2Page5 = false;
+    setupFinished = true;
 
     enableControls();
 }
@@ -518,6 +516,8 @@ void TokenDialog::categoryChanged( QListWidgetItem* item )
     }
     allList->resizeColumnToContents( 0 );
     allList->resizeColumnToContents( 1 );
+    
+    enableControls();
 }
 
 void TokenDialog::itemChanged( QTreeWidgetItem* item )
@@ -538,6 +538,10 @@ void TokenDialog::itemChanged( QTreeWidgetItem* item )
 
 void TokenDialog::enableControls()
 {
+    if( !setupFinished ) {
+        return;// otherwise the application could crash
+    }
+    
     enableFinishButtonStack2Page1 = false;
     enableFinishButtonStack2Page2 = false;
     enableFinishButtonStack2Page3 = false;

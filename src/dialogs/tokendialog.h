@@ -136,6 +136,8 @@ class TokenDialog : public KAssistantDialog {
     KLineEdit* lineEdit;
 
     QTreeWidget* labelList;
+    
+    bool setupFinished;
 };
 
 #endif
