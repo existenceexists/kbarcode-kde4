@@ -180,6 +180,8 @@ void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
     if( moving && !moving->item()->locked() ) {
         QPoint p = matrix().inverted().map(mappedEventPosition);
         
+        QRect movingRectMM = moving->item()->rectMM();
+        
         if( !compressedCommandIsInProgress ) {
             compressedCommandIsInProgress = true;
         }
@@ -199,8 +201,8 @@ void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
 		pmm.setY( (int)l.pixelToMm( new_pt.y() - getTranslation().y(), this, LabelUtils::DpiY ) * 1000 );
 
                 // Move the item
-                MoveCommand* mv = new MoveCommand( pmm.x() - moving->item()->rectMM().x(),
-                                                   pmm.y() - moving->item()->rectMM().y(), 
+                MoveCommand* mv = new MoveCommand( pmm.x() - movingRectMM.x(),
+                                                   pmm.y() - movingRectMM.y(), 
                                                    movingItem, getCommandId() );
                 history->push( mv );
             }
