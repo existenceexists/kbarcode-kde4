@@ -187,10 +187,10 @@ void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
         if( m_mode == Barcode || m_mode == Inside ) {
             TCanvasItemList list = getSelected();
             for( int i = 0; i < list.count(); i++ ) {
-                TCanvasItem* moving = list[i];                    
+                TCanvasItem* movingItem = list[i];                    
                 QPoint new_pt = QPoint(p.x() - delta_pt.x(),p.y() - delta_pt.y());
                 if( canv->grid() ) {
-                    snapPoint(&new_pt, moving) ;
+                    snapPoint(&new_pt, movingItem) ;
                 }
 
 		LabelUtils l;
@@ -201,7 +201,7 @@ void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
                 // Move the item
                 MoveCommand* mv = new MoveCommand( pmm.x() - moving->item()->rectMM().x(),
                                                    pmm.y() - moving->item()->rectMM().y(), 
-                                                   moving, getCommandId() );
+                                                   movingItem, getCommandId() );
                 history->push( mv );
             }
         } else {
