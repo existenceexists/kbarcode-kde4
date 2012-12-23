@@ -30,6 +30,7 @@
 #include "barcodeitem.h"
 #include "tcanvasitem.h"
 #include "imageitem.h"
+#include "mycanvasview.h"
 
 struct barcodeData;
 class RectItem;
@@ -156,7 +157,7 @@ class ResizeCommand : public QUndoCommand, CommandUtils {
         int m_id;
 };
 
-/** Move a TCanvasItem on the canvas
+/** Move a TCanvasItem on the scene
  */
 class MoveCommand : public QUndoCommand, CommandUtils {
     public:
@@ -188,6 +189,36 @@ class MoveCommand : public QUndoCommand, CommandUtils {
         int x;
         int y;
         int m_id;
+};
+
+/** Move one or more TCanvasItem on the scene
+ */
+class MoveMultipleCommand : public QUndoCommand {
+    public:
+        /**
+         * @param cx move in x direction cx mm
+         * @param cy move in y direction cy mm
+         */
+        MoveMultipleCommand( int cx, int cy, TCanvasItemList list, int id = -1, QUndoCommand* parent = 0 );
+        ~MoveMultipleCommand();
+
+        void redo();
+        void undo();
+        QString name() const {
+            return i18n("Moved Item");
+        }
+        int id() const {
+            return m_id;
+        }
+        bool mergeWith( const QUndoCommand* other );
+        bool canvasHasItem( TCanvasItem* item );
+
+    protected:
+        int x;
+        int y;
+        int m_id;
+        TCanvasItemList* m_items_list;
+        QGraphicsScene* c;
 };
 
 class ChangeZCommand : public QUndoCommand, CommandUtils {

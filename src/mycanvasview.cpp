@@ -179,33 +179,30 @@ void MyCanvasView::mouseMoveEvent(QMouseEvent* e)
     TCanvasItem* moving = getActive();
     if( moving && !moving->item()->locked() ) {
         QPoint p = matrix().inverted().map(mappedEventPosition);
-        
-        QRect movingRectMM = moving->item()->rectMM();
-        
+            
         if( !compressedCommandIsInProgress ) {
             compressedCommandIsInProgress = true;
         }
-
+        
         if( m_mode == Barcode || m_mode == Inside ) {
-            TCanvasItemList list = getSelected();
-            for( int i = 0; i < list.count(); i++ ) {
-                TCanvasItem* movingItem = list[i];                    
-                QPoint new_pt = QPoint(p.x() - delta_pt.x(),p.y() - delta_pt.y());
-                if( canv->grid() ) {
-                    snapPoint(&new_pt, movingItem) ;
-                }
-
-		LabelUtils l;
-		QPoint pmm;
-		pmm.setX( (int)l.pixelToMm( new_pt.x() - getTranslation().x(), this, LabelUtils::DpiX ) * 1000 );
-		pmm.setY( (int)l.pixelToMm( new_pt.y() - getTranslation().y(), this, LabelUtils::DpiY ) * 1000 );
-
-                // Move the item
-                MoveCommand* mv = new MoveCommand( pmm.x() - movingRectMM.x(),
-                                                   pmm.y() - movingRectMM.y(), 
-                                                   movingItem, getCommandId() );
-                history->push( mv );
+            
+            QPoint new_pt = QPoint(p.x() - delta_pt.x(),p.y() - delta_pt.y());
+            if( canv->grid() ) {
+                snapPoint(&new_pt, moving);
             }
+            LabelUtils l;
+            QPoint pmm;
+            pmm.setX( (int)l.pixelToMm( new_pt.x() - getTranslation().x(), this, LabelUtils::DpiX ) * 1000 );
+            pmm.setY( (int)l.pixelToMm( new_pt.y() - getTranslation().y(), this, LabelUtils::DpiY ) * 1000 );
+            
+            // Move the item(s)
+            MoveMultipleCommand* mv = new MoveMultipleCommand( 
+                pmm.x() - moving->item()->rectMM().x(), 
+                pmm.y() - moving->item()->rectMM().y(), 
+                getSelected(), 
+                getCommandId() );
+            history->push( mv );
+            
         } else {
             
             if( canv->grid() ) {

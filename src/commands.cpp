@@ -258,6 +258,83 @@ bool MoveCommand::mergeWith( const QUndoCommand* other )
     return true;
 }
 
+MoveMultipleCommand::MoveMultipleCommand( int cx, int cy, TCanvasItemList list, int id, QUndoCommand* parent )
+    : QUndoCommand( parent )
+{
+    x = cx;
+    y = cy;
+    m_id = id;
+    setText( name() + "\n" + name() );
+    m_items_list = new TCanvasItemList;
+    for( int i = 0; i < list.count(); i++ ) {
+        m_items_list->append( list[i] );
+        list[i]->addRef();
+    }
+    c = m_items_list->last()->scene();
+}
+
+MoveMultipleCommand::~MoveMultipleCommand() 
+{
+    if( m_items_list ) {
+        if( !m_items_list->isEmpty() ) {
+            for( int i = 0; i < m_items_list->count(); i++ ) {
+                (*m_items_list)[i]->remRef();
+            }
+        }
+        delete m_items_list;
+        m_items_list = NULL;
+    }
+}
+
+bool MoveMultipleCommand::canvasHasItem( TCanvasItem* item )
+{
+    if( item && c )
+    {
+        QList<QGraphicsItem *> list = c->items();
+        for( int i=0;i<list.count();i++)
+            if( item == list[i] )
+                return true;
+    }
+    
+    return false;
+}
+
+void MoveMultipleCommand::redo()
+{
+    if( m_items_list && !m_items_list->isEmpty() ) {
+        for( int i = 0; i < m_items_list->count(); i++ ) {
+            if( canvasHasItem( (*m_items_list)[i] ) )
+            {
+                (*m_items_list)[i]->moveByMM( x, y );
+                (*m_items_list)[i]->update();
+            }
+        }
+    }
+}
+
+void MoveMultipleCommand::undo()
+{
+    if( m_items_list && !m_items_list->isEmpty() ) {
+        for( int i = 0; i < m_items_list->count(); i++ ) {
+            if( canvasHasItem( (*m_items_list)[i] ) )
+            {
+                (*m_items_list)[i]->moveByMM( -x, -y );
+                (*m_items_list)[i]->update();
+            }
+        }
+    }
+}
+
+bool MoveMultipleCommand::mergeWith( const QUndoCommand* other )
+{
+    if( other->id() != id() ) {
+        return false;
+    }
+    x += static_cast<const MoveMultipleCommand*>(other)->x;
+    y += static_cast<const MoveMultipleCommand*>(other)->y;
+    return true;
+}
+
 ChangeZCommand::ChangeZCommand( int z, TCanvasItem* it )
     : CommandUtils( it )
 {
