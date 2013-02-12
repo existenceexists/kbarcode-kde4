@@ -1,67 +1,67 @@
-# translation of de.po to
-# German Translation of KBarcode
-# Copyright (C) 2003, 2006, 2007 Free Software Foundation, Inc.
+# translation of uk.po to Ukrainian
+# This file is put in the public domain.
 #
-# DOMINIK SEICHTER <domseichter@web.de>, 2002,2003.
-# Dominik Seichter <domseichter@web.de>, 2003, 2006, 2007.
+# Serhij Dubyk <dubyk@library.lviv.ua>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: de\n"
+"Project-Id-Version: uk\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?"
 "atid=463988&group_id=51628\n"
 "POT-Creation-Date: 2013-02-10 10:35+0100\n"
-"PO-Revision-Date: 2007-10-13 15:30+0200\n"
-"Last-Translator: Dominik Seichter <domseichter@web.de>\n"
-"Language-Team:  <de@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2007-07-18 23:21+0300\n"
+"Last-Translator: Serhij Dubyk <dubyk@library.lviv.ua>\n"
+"Language-Team: Ukrainian <uk@li.org>\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: barcodecombo.cpp:122
 msgid "&Encoding Type:"
-msgstr "&Codierungs Art:"
+msgstr "&Варіант кодування:"
 
 #: barcodecombo.cpp:132
 msgid "&Value:"
-msgstr "&Wert:"
+msgstr "&Значення:"
 
 #: barcodecombo.cpp:160
 msgid "&Display text"
-msgstr "&Text anzeigen"
+msgstr "&Відображати текст"
 
 #: barcodecombo.cpp:165
 msgid "&Advanced..."
-msgstr "&Erweitert..."
+msgstr "&Додатково..."
 
 #: barcodecombo.cpp:169 propertywidget.cpp:482
 msgid "&Insert Data Field..."
-msgstr "&Daten Feld einfügen..."
+msgstr "&Вставити поле даних..."
 
 #: barcodecombo.cpp:175
 msgid "&Margin:"
-msgstr "&Rand:"
+msgstr "&Краї:"
 
 #: barcodecombo.cpp:184 propertywidget.cpp:140 propertywidget.cpp:458
 msgid "&Rotation:"
-msgstr "&Rotation:"
+msgstr "&Обертання: "
 
 #: barcodecombo.cpp:193
 msgid "&Scale (in permille):"
-msgstr "&Skalierung (in Promille):"
+msgstr "&Масштаб (у проміле):"
 
 #: barcodecombo.cpp:202
 msgid "&Crop:"
-msgstr "&Abschneiden:"
+msgstr "&Обрізка:"
 
 #: barcodegenerator.cpp:54
 msgid "Barcode Generator"
-msgstr "Barcode Generator"
+msgstr "Утворювач штрих-коду"
 
 #: barcodegenerator.cpp:74
 msgid "&Generate"
-msgstr "&Erstellen"
+msgstr "&Утворити"
 
 #: barcodegenerator.cpp:79
 msgid "&Save"
@@ -73,7 +73,7 @@ msgstr ""
 
 #: barcodegenerator.cpp:89
 msgid "&Print"
-msgstr "&Drucken"
+msgstr "&Друк"
 
 #: barcodegenerator.cpp:94 dialogs/previewdialog.cpp:113
 msgid "&Close"
@@ -81,79 +81,79 @@ msgstr ""
 
 #: barcodegenerator.cpp:176
 msgid "An error occurred during saving the image"
-msgstr "Fehler beim speichern des Bildes"
+msgstr "Трапилася помилка під час запису зображення"
 
 #: barkode.cpp:654
 msgid " [GNU Barcode]"
-msgstr " [GNU Barcode]"
+msgstr "   [GNU-штрих-кодер]"
 
 #: barkode.cpp:657
 msgid " [PDF 417]"
-msgstr " [PDF417]"
+msgstr "   [PDF 417]"
 
 #: barkode.cpp:660
 msgid " [TBarcode]"
-msgstr " [TBarcode]"
+msgstr "   [TBarcode]"
 
 #: barkode.cpp:663
 msgid " [TBarcode2]"
-msgstr " [TBarcode2]"
+msgstr "   [TBarcode2]"
 
 #: barkode.cpp:666
 msgid " [Barcode Writer in Pure Postscript]"
-msgstr " [Barcode Writer in Pure Postscript]"
+msgstr "   [Записувач штрих-коду у чистому PostScript-і]"
 
 #: barkode.cpp:702
 msgid "Raw code 128"
-msgstr "Raw Code 128"
+msgstr ""
 
 #: barkode.cpp:703
 msgid "Codabar"
-msgstr "Codabar"
+msgstr ""
 
 #: barkode.cpp:704
 msgid "Codabar (no checksum)"
-msgstr "Codabar (ohne Checksumme)"
+msgstr "Codabar (без контрольної суми)"
 
 #: barkode.cpp:705
 msgid "Code 128 (a,b,c: autoselection)"
-msgstr "Code 128 (a,b,c wird automatisch gewählt)"
+msgstr "Code 128 (a,b,c: автовибір)"
 
 #: barkode.cpp:706
 msgid "Code 128B, full printable ascii"
-msgstr "Code 128B, komplettes druckbares ASCII"
+msgstr ""
 
 #: barkode.cpp:707
 msgid "Code 128C (compact form digits)"
-msgstr "Code 128C (compact form digits)"
+msgstr ""
 
 #: barkode.cpp:708
 msgid "Code 39 (no checksum)"
-msgstr "Code 39 (ohne Checksumme)"
+msgstr "Code 39 (без контрольної суми)"
 
 #: barkode.cpp:709
 msgid "Code 39"
-msgstr "Code 39"
+msgstr ""
 
 #: barkode.cpp:710
 msgid "Code 93"
-msgstr "Code 93"
+msgstr ""
 
 #: barkode.cpp:711
 msgid "EAN (EAN 8 or EAN 13)"
-msgstr "EAN (EAN 8 oder EAN 13)"
+msgstr "EAN (EAN 8 або EAN 13)"
 
 #: barkode.cpp:712
 msgid "interleaved 2 of 5 (only digits, no checksum)"
-msgstr "interleaved 2 of 5 (nur Zahlen, keine Checksumme)"
+msgstr ""
 
 #: barkode.cpp:713
 msgid "interleaved 2 of 5 (only digits)"
-msgstr "interleaved 2 of 5 (nur Zahlen)"
+msgstr "interleaved 2 of 5 (лише цифри)"
 
 #: barkode.cpp:714
 msgid "ISBN (still EAN13)"
-msgstr "ISBN (EAN13)"
+msgstr "ISBN (однак EAN13)"
 
 #: barkode.cpp:715
 msgid "MSI"
@@ -161,15 +161,15 @@ msgstr "MSI"
 
 #: barkode.cpp:716 dialogs/barcodedialogs.cpp:211
 msgid "Plessey"
-msgstr "Plessey"
+msgstr ""
 
 #: barkode.cpp:717
 msgid "UPC (12-digit EAN; UPCA and UPCB)"
-msgstr "UPC (12-stelliges EAN; UPCA und UPCB)"
+msgstr "UPC (12-цифровий EAN; UPCA та UPCB)"
 
 #: barkode.cpp:722
 msgid "pdf 417 2D Barcode"
-msgstr "pdf 417 2D Barcode"
+msgstr "pdf 417 2D-штрих-код"
 
 #: batchassistant.cpp:135
 #, fuzzy
@@ -178,56 +178,57 @@ msgid ""
 "labels with KBarcode.<br>The first step is to select the KBarcode label file "
 "you want to print.</qt>"
 msgstr ""
-"<qt>Dieser Assistent wird Sie beim Drucken von mehreren Labels mit KBarcode "
-"begleiten und Ihnen helfen.<br>Der erste Schritt ist es die KBarcode Label "
-"Datei auszuwählen, die Sie drucken wollen.</qt> "
+"<qt>Цей чарівник скерує Вас у процесі видруку багатьох етикеток при допомозі "
+"KBarcode.<br>Першим кроком буде вибір для друку бажаного файлу з етикеткою "
+"KBarcode.</qt>"
 
 #: batchassistant.cpp:144 batchassistant.cpp:332
 #: dialogs/barcodeprinterdlg.cpp:48
 msgid "&Filename:"
-msgstr "&Dateiname:"
+msgstr "&Ім'я файлу:"
 
 #: batchassistant.cpp:153
 msgid "File Selection"
-msgstr "Datei Auswahl"
+msgstr "Вибір файлу"
 
 #: batchassistant.cpp:169
 msgid "Print &labels without data"
-msgstr "&Labels ohne Daten drucken"
+msgstr "Друк &етикеток без даних"
 
 #: batchassistant.cpp:171
 msgid "Print &articles from KBarcodes SQL database"
-msgstr "&Artikel aus KBarcodes SQL Datenbank drucken"
+msgstr "Друк &товарів з бази даних SQL від KBarcode"
 
 #: batchassistant.cpp:173
 msgid "Import &variables and print"
-msgstr "&Variablen importieren und dann drucken"
+msgstr "Імпорт &змінних та друк"
 
 #: batchassistant.cpp:175
 msgid "Print &contacts from your addressbook"
-msgstr "&Kontakte aus Ihrem Addressbuch drucken"
+msgstr "Друку &контактів з Вашої адресної книги"
 
 #: batchassistant.cpp:189
 msgid "Data Source"
-msgstr "Daten Quelle"
+msgstr "Джерело даних"
 
 #: batchassistant.cpp:202
 msgid "Print Data"
-msgstr "Daten drucken"
+msgstr "Друк даних"
 
 #: batchassistant.cpp:217
 msgid "Insert Row"
-msgstr "Reihe einfügen"
+msgstr "Вставити рядок"
 
 #: batchassistant.cpp:220
 msgid "Delete Row"
-msgstr "Reihe löschen"
+msgstr "Видалити рядок"
 
 #: batchassistant.cpp:231
 msgid "Import Variables"
-msgstr "Variablen importieren"
+msgstr "Імпорт змінних"
 
 #: batchassistant.cpp:245
+#, fuzzy
 msgid ""
 "<qt>KBarcode has support for placing serial numbers on labels. If you did "
 "not use the [serial] token on your label in a text field or a barcode, you "
@@ -235,126 +236,126 @@ msgid ""
 "least one number. This number is increased for every printed label on the "
 "print out.</qt>"
 msgstr ""
-"<qt>KBarcode kann fortlaufende Seriennummern auf die Label drucken. Wenn Sie "
-"das Kommando [seriel] nirgends auf Ihrem Label verwendet haben, können Sie "
-"diese Seite überspringen.<br>Start ist ein beliebiger Ausdruck der "
-"mindestens eine Zahl enthalten muss. Diese Zahl wird für jedes gedruckte "
-"Label auf dem Ausdruck erhöht.</qt> "
+"<qt>KBarcode дає можливість розміщувати серійні номери на етикетках. Якщо Ви "
+"не використовуєте ознаку серійного номера [serial] на Ваших етикетках у "
+"текстовому полі, то можете пропустити цю сторінку.<br>Серійний номер "
+"починається зі значення у вільній формі, що містить хоча б одне номер. Цей "
+"номер збільшується з кожним видруком етикетки.</qt"
 
 #: batchassistant.cpp:259 dialogs/previewdialog.cpp:125
 msgid "Serial start:"
-msgstr "Startwert:"
+msgstr "Серійний номер починається з: "
 
 #: batchassistant.cpp:266 dialogs/previewdialog.cpp:127
 msgid "Serial increment:"
-msgstr "Inkrementierung:"
+msgstr "Приріст для серійного номера: "
 
 #: batchassistant.cpp:272
 msgid "Serial Number"
-msgstr "Seriennummer"
+msgstr "Серійний номер"
 
 #: batchassistant.cpp:287
 msgid "&Print to a system printer or to a file"
-msgstr "Auf einen &Drucker oder in eine Datei drucken"
+msgstr "&Друк на системну друкарку або ж у файл"
 
 #: batchassistant.cpp:289
 msgid "&Create images"
-msgstr "&Bilder erstellen"
+msgstr "&Створити зображення"
 
 #: batchassistant.cpp:296
 msgid "Print to a special &barcode printer"
-msgstr "Auf einen speziellen &Barcode Drucker drucken"
+msgstr "Друк на спеціальну друкарку &штрих-кодів"
 
 #: batchassistant.cpp:307
 msgid "Output &Directory:"
-msgstr "Ausgabe &Verzeichnis:"
+msgstr "&Тека для виводу:"
 
 #: batchassistant.cpp:318
 msgid "Output File &Format:"
-msgstr "Ausgabe Datei &Format:"
+msgstr "&Формат файлу для виводу:"
 
 #: batchassistant.cpp:335
 msgid "Use &article number for filename"
-msgstr "&Artikel Nummer als Dateiname verwenden"
+msgstr "Використовувати номер &товару для імені файлу"
 
 #: batchassistant.cpp:337
 msgid "Use &barcode number for filename"
-msgstr "&Barcode Nummer als Dateiname verwenden"
+msgstr "Використовувати номер &штрих-коду для назви файлу"
 
 #: batchassistant.cpp:339
 msgid "Use &custom filename:"
-msgstr "&Benutzerspezifischen Dateinamen verwenden:"
+msgstr "Використати &особливе ім'я файлу:"
 
 #: batchassistant.cpp:351
 msgid "&Keep window open after printing."
-msgstr "&Fenster auch nach dem Drucken geöffnet lassen"
+msgstr ""
 
 #: batchassistant.cpp:371
 msgid "Output Device"
-msgstr "Ausgabe Gerät"
+msgstr "Вивідний пристрій"
 
 #: batchassistant.cpp:388
 msgid "Customer name and no.:"
-msgstr "Kunden Name und Nummer:"
+msgstr "Назва та номер замовника: "
 
 #: batchassistant.cpp:400
 msgid "&Add..."
-msgstr "&Hinzufügen..."
+msgstr "&Add..."
 
 #: batchassistant.cpp:402
 msgid "&Import..."
-msgstr "&Importieren..."
+msgstr "&Імпорт..."
 
 #: batchassistant.cpp:404
 msgid "&Edit..."
-msgstr "&Bearbeiten..."
+msgstr "&Редагувати..."
 
 #: batchassistant.cpp:406
 #, fuzzy
 msgid "&Remove"
-msgstr "Feld &entfernen"
+msgstr "&Видалити усе"
 
 #: batchassistant.cpp:408
 msgid "R&emove All"
-msgstr "All&e Entfernen"
+msgstr "&Видалити усе"
 
 #: batchassistant.cpp:413
 msgid "Import from File ..."
-msgstr "Aus Datei importieren..."
+msgstr "Імпорт з файлу ..."
 
 #: batchassistant.cpp:417
 msgid "Import from Clipboard ..."
-msgstr "Aus Zwischenablage importieren..."
+msgstr "Імпорт з буфера обміну..."
 
 #: batchassistant.cpp:421
 msgid "Import barcode_basic"
-msgstr "barcode_basic importieren"
+msgstr "Імпорт barcode_basic"
 
 #: batchassistant.cpp:432
 msgid "Index"
-msgstr "Index"
+msgstr ""
 
 #: batchassistant.cpp:433
 msgid "Number of Labels"
-msgstr "Anzahl der Labels"
+msgstr "Кількість етикеток"
 
 #: batchassistant.cpp:434 dialogs/configdialog.cpp:179
 #: dialogs/configdialog.cpp:185 dialogs/configdialog.cpp:191
 msgid "Article Number"
-msgstr "Artikel Nummer"
+msgstr "Номер товару"
 
 #: batchassistant.cpp:435 dialogs/configdialog.cpp:180
 #: dialogs/configdialog.cpp:186 dialogs/configdialog.cpp:192
 msgid "Group"
-msgstr "Gruppe"
+msgstr "Група"
 
 #: batchassistant.cpp:468
 msgid "Enter &data manually"
-msgstr "Daten per &Hand eingeben"
+msgstr "Ввести &дані вручну"
 
 #: batchassistant.cpp:470
 msgid "Import variables from a &SQL table"
-msgstr "Variablen aus einer &SQL Tabelle importieren"
+msgstr "Імпортувати змінні з &SQL-таблиці"
 
 #: batchassistant.cpp:473
 msgid ""
@@ -365,93 +366,86 @@ msgstr ""
 
 #: batchassistant.cpp:478
 msgid "Please enter a sql &query:"
-msgstr "Bitte geben Sie eine SQL &Abfrage ein:"
+msgstr "Будь-ласка, введіть sql-&запит:"
 
 #: batchassistant.cpp:484
 msgid "Import from a &CSV file"
-msgstr "Aus einer &CSV Datei importieren"
+msgstr "Імпортувати з &CSV-файлу"
 
 #: batchassistant.cpp:486
 msgid "Please select a csv &file:"
-msgstr "Bitte wählen Sie eine CSV &Datei:"
+msgstr "Будь-ласка, виберіть csv-&файл:"
 
 #: batchassistant.cpp:491
 msgid "&Encoding:"
-msgstr "&Codierungs Art:"
+msgstr "&Кодування:"
 
 #: batchassistant.cpp:505
 msgid "Available Variables:"
-msgstr "Verfügbare Variablen:"
+msgstr "Доступні змінні:"
 
 #: batchassistant.cpp:528
 msgid "&Number of labels to print:"
-msgstr "&Anzahl der Labels die gedruckt werden sollen:"
+msgstr "&Кількість етикеток до видруку: "
 
 #: batchassistant.cpp:568
 msgid "Add all contacts to the list of contacts which will be printed."
-msgstr ""
-"Fügt alle Kontakte in die Liste der Kontakte ein, die gedruckt werden sollen."
+msgstr "Додати усі контакти до списку контактів: що будуть видруковані."
 
 #: batchassistant.cpp:569
 msgid "Add selected contacts to the list of contacts which will be printed."
-msgstr ""
-"Fügt die markierten Kontakte in die Liste der Kontakte ein, die gedruckt "
-"werden sollen."
+msgstr "Додати вибрані контакти до списку контактів, що будуть видруковані."
 
 #: batchassistant.cpp:570
 msgid ""
 "Remove selected contacts from the list of contacts which will be printed."
-msgstr ""
-"Entfernt die markierten Kontakte aus der Liste der Kontakte, die gedruckt "
-"werden sollen."
+msgstr "Видалити вибрані контакти зі списку для друку."
 
 #: batchassistant.cpp:571
 msgid "Remove all contacts from the list of contacts which will be printed."
-msgstr ""
-"Entfernt alle Kontakte aus der Liste der Kontakte, die gedruckt werden "
-"sollen."
+msgstr "Видалити усі контакти зі списку для друку."
 
 #: batchassistant.cpp:587
 msgid "All Addresses"
-msgstr "All Addressen"
+msgstr "Усі адреси"
 
 #: batchassistant.cpp:589
 msgid "Selected Addresses"
-msgstr "Ausgewählte Addressen"
+msgstr "Вибрані адреси"
 
 #: batchassistant.cpp:594 batchassistant.cpp:608
 msgid "Given Name"
-msgstr "Vorname"
+msgstr "Ім'я"
 
 #: batchassistant.cpp:595 batchassistant.cpp:609
 msgid "Family Name"
-msgstr "Name"
+msgstr "Прізвище"
 
 #: batchassistant.cpp:596 batchassistant.cpp:610
 msgid "Email Address"
-msgstr "Email Addresse"
+msgstr "Електронна адреса"
 
 #: batchassistant.cpp:755
+#, fuzzy
 msgid "The label file %1 was not found"
-msgstr "Die Label Datei %1 konnte nicht gefunden werden."
+msgstr "Файл %1 не існує."
 
 #: batchassistant.cpp:946
 msgid "Please enter a valid article ID"
-msgstr "Bitte geben Sie ein zulässige Artikel Nummer an"
+msgstr "Будь-ласка, введіть правильний ідентифікатор товару"
 
 #: batchassistant.cpp:1131
 msgid "Separator is empty. Please set it to a value."
-msgstr ""
-"Das Trennzeichen ist nicht gesetzt. Bitte weisen Sie ihm einen Wert zu."
+msgstr "Роздільник не вказаний. Будь-ласка, вкажіть значення."
 
 #: batchassistant.cpp:1200
 msgid "<qt>The following items can not be added:"
-msgstr "<qt>Die folgenden Werte konnten nicht geladen werden:"
+msgstr ""
 
 #: batchassistant.cpp:1291
 #, fuzzy
 msgid "What to do with already inserted data?"
-msgstr "Was möchten Sie einfügen?"
+msgstr "Що Ви хочете вставити?"
 
 #: batchassistant.cpp:1293
 msgid "Append"
@@ -483,37 +477,37 @@ msgstr ""
 #: batchassistant.cpp:1338
 #, fuzzy
 msgid "<qt>Can't connect to a database.</qt>"
-msgstr "Kann keine Datenbank Verbindung aufbauen."
+msgstr "Не вдається приєднатися до бази даних."
 
 #: batchassistant.cpp:1345
 msgid "<qt>Can't execute SQL query:<br>"
-msgstr "<qt>Kann die SQL Anfrage nicht ausführen:<br>"
+msgstr "<qt>Не вдається виконати SQL-запит:<br>"
 
 #: batchassistant.cpp:1374
 msgid "Can't open file: %1"
-msgstr "Kann die Datei nicht öffnen: %1"
+msgstr "Не вдається відкрити файл: %1"
 
 #: batchprinter.cpp:113 batchprinter.cpp:343
 msgid "Printing..."
-msgstr "Drucke..."
+msgstr "Друкуємо..."
 
 #: batchprinter.cpp:158 batchprinter.cpp:159 batchprinter.cpp:160
 #: batchprinter.cpp:161
 msgid "Group : "
-msgstr "Gruppe : "
+msgstr "Група: "
 
 #: batchprinter.cpp:163 batchprinter.cpp:164 batchprinter.cpp:165
 #: batchprinter.cpp:166
 msgid "Article No. : "
-msgstr "Artikel Nummer : "
+msgstr "Номер товару: "
 
 #: batchprinter.cpp:275
 msgid "Creating Images..."
-msgstr "Bilder erstellen..."
+msgstr "Створення зображень..."
 
 #: batchprinter.cpp:339
 msgid "<qt>Can't open the file or device <b>%1</b></qt>."
-msgstr "<qt>Kann die Datei oder das Gerät <b>%1</b> nicht öffnen.</qt>"
+msgstr "<qt>Не вдається відкрити файл чи пристрій <b>%1</b></qt>."
 
 #: batchprinter.cpp:507 dialogs/definitiondialog.cpp:235 newlabel.cpp:137
 msgid "&Cancel"
@@ -521,33 +515,31 @@ msgstr ""
 
 #: commands.cpp:546
 msgid "New Rectangle"
-msgstr "Neues Rechteck"
+msgstr "Новий прямокутник"
 
 #: commands.cpp:560
 msgid "New Line"
-msgstr "Neu Linie"
+msgstr ""
 
 #: commands.cpp:570
 msgid "New Text"
-msgstr "Neuer Text"
+msgstr "Новий текст"
 
 #: commands.cpp:587
 msgid "New TextLine"
-msgstr "Neue Textzeile"
+msgstr ""
 
 #: commands.cpp:604
 msgid "New Barcode"
-msgstr "Neuer Barcode"
+msgstr "Новий штрих-код"
 
 #: commands.h:146
-#, fuzzy
 msgid "Resized Item"
-msgstr "Element geschützt"
+msgstr ""
 
 #: commands.h:181 commands.h:208
-#, fuzzy
 msgid "Moved Item"
-msgstr "Element geschützt"
+msgstr ""
 
 #: commands.h:231
 msgid "Raised or lowered an item"
@@ -555,37 +547,37 @@ msgstr ""
 
 #: commands.h:250 labeleditor.cpp:745
 msgid "Protected Item"
-msgstr "Element geschützt"
+msgstr ""
 
 #: commands.h:268
 #, fuzzy
 msgid "Changed Settings"
-msgstr "Barcode Einstellungen"
+msgstr "Налаштування штрих-коду"
 
 #: commands.h:291 commands.h:323
 #, fuzzy
 msgid "Changed Text"
-msgstr "Neuer Text"
+msgstr "Новий текст"
 
 #: commands.h:305
 #, fuzzy
 msgid "Rotated Text"
-msgstr "Neuer Text"
+msgstr "Новий текст"
 
 #: commands.h:344
 #, fuzzy
 msgid "Changed Barcode"
-msgstr "KBarcode Einrichtung..."
+msgstr "Налаштувати KBarcode"
 
 #: commands.h:355
 #, fuzzy
 msgid "New Picture"
-msgstr "&Bild Einfügen"
+msgstr "Вставити &зображення"
 
 #: commands.h:425
 #, fuzzy
 msgid "Delete Item"
-msgstr "Reihe löschen"
+msgstr "Видалити рядок"
 
 #: commands.h:436
 msgid "Modified Border"
@@ -600,6 +592,7 @@ msgid "Changed visibility JavaScript"
 msgstr ""
 
 #: confassistant.cpp:48
+#, fuzzy
 msgid ""
 "KBarcode is a barcode and label printing application for KDE 3. It can be "
 "used to print every thing from simple business cards up to complex labels "
@@ -611,39 +604,40 @@ msgid ""
 "it is a simply xbarcode replacement for the creation of barcodes. All major "
 "types of barcodes like EAN, UPC, CODE39 and ISBN are supported."
 msgstr ""
-"KBarcode ist eine Barcode und Label Anwendung für KDE 3. Es kann von simplen "
-"Visitenkarten bis zu komplexen Labels mit mehreren Barcodes (z.B. Artikel "
-"Beschreibungen) alles drucken. KBarcode hat einen einfach zu benutzenden "
-"WYSIWYG Label Designer, einen Einstellungs Assistenten, Batch Import von "
-"Labels (direkt vom Bestellungs Eingang), über 1000 Labeldefinitionen, "
-"Datenbank Werkzeuge und Übersetzungen in viele Sprachen. Nicht einmal das "
-"drucken von mehr als 10.000 Labels ist ein Problem für KBarcode. Außerdem "
-"ist es ein einfacher xbarcode Ersatz zum erstellen von Barcodes. Alle "
-"bekannten Barcode Formate wie EAN, UPC, CODE39 und ISBN werden unterstützt."
+"KBarcode - програма для видруку штрих-кодів та етикеток у KDE 3. Вона "
+"використовується для видруку будь-чого, починаючи від простої візитки до "
+"складних етикеток з декількома штрих-кодами (наприклад описи товару). "
+"KBarcode укомплектований легким для освоєння візуальним (WYSIWYG) дизайнером "
+"етикеток, чарівником налаштування, пакетним друком етикеток(прямо з "
+"накладної), тисячами готових етикеток, інструментами для взаємодії з базами "
+"даних та локалізацією на багатьох мовах. Навіть при друці більше 10 000 "
+"етикеток за один раз не є проблемою для KBarcode. Додатково є заміна "
+"простого xbarcode для створення штрих-кодів. Підтримуються усі основні типи "
+"штрих-кодів, такі як EAN, UPC, CODE39 та ISBN."
 
 #: confassistant.cpp:64 dialogs/configdialog.cpp:59
 msgid "Configure KBarcode"
-msgstr "KBarcode Einrichtung..."
+msgstr "Налаштувати KBarcode"
 
 #: confassistant.cpp:119
 msgid "<qt><h1>Welcome to KBarcode</h1><br><br>"
-msgstr "<qt><h1>Willkommen bei KBarcode</h1><br><br>"
+msgstr "<qt><h1>Вітання у KBarcode</h1><br><br>"
 
 #: confassistant.cpp:129
 msgid "Welcome"
-msgstr "Willkommen"
+msgstr "Гратуляції"
 
 #: confassistant.cpp:147
 msgid "System Check"
-msgstr "System Überprüfung"
+msgstr "Перевірка системи"
 
 #: confassistant.cpp:160
 msgid "&Use database with KBarcode"
-msgstr "&Datenbank mit KBarcode benutzen"
+msgstr "&Використовувати базу даних у KBarcode"
 
 #: confassistant.cpp:173 tokenprovider.cpp:208
 msgid "Database"
-msgstr "Datenbank"
+msgstr "База даних"
 
 #: confassistant.cpp:186
 msgid ""
@@ -651,44 +645,43 @@ msgid ""
 "also some Label Definitions to the tables.<br>After that you can fill the "
 "tables with some example data."
 msgstr ""
-"KBarcode kann die benötigten SQL Tabellen für Sie erstellen.<br>KBarcode "
-"wird auch die Label Definition in die Datenbank importieren.<br>Danach "
-"können Sie auch Beispiel Daten in die Datenbank importieren."
+"KBarcode може створити для Вас необхідні SQL-таблиці.<br>KBarcode також "
+"додасть певні означення етикеток у таблиці.<br>Після цього Ви зможете "
+"заповнити таблиці певними зразковими даними."
 
 #: confassistant.cpp:198 mainwindow.cpp:88
 msgid "&Create Tables"
-msgstr "&Tabellen erstellen"
+msgstr "&Створити таблиці"
 
 #: confassistant.cpp:203
 msgid "&Add Example Data"
-msgstr "&Beispiel Daten importieren"
+msgstr "&Додати зразкові дані"
 
 #: confassistant.cpp:208
 msgid "Create Tables"
-msgstr "Tabellen erstellen"
+msgstr "Створити таблиці"
 
 #: confassistant.cpp:238 confassistant.cpp:268 sqltables.cpp:506
 msgid "<qt>Connection failed:<br>"
-msgstr "<qt>Datenbank aufruf fehlgeschlagen:<br>"
+msgstr "<qt>З'єднання невдале:<br>"
 
 #: confassistant.cpp:243
 #, fuzzy
 msgid "Importing label definitions from the file "
-msgstr "&Label Definitionen Importieren"
+msgstr "&Імпортувати означення етикетки"
 
 #: confassistant.cpp:245 confassistant.cpp:274
 #, fuzzy
 msgid " into your database."
-msgstr "Kann keine Datenbank Verbindung aufbauen."
+msgstr "Не вдається приєднатися до бази даних."
 
 #: confassistant.cpp:272
-#, fuzzy
 msgid "Importing example data from the file "
-msgstr "Kann die Daten nicht aus der Datei laden:"
+msgstr ""
 
 #: confassistant.cpp:277
 msgid "Example data has been imported."
-msgstr "Beispiel Daten wurden importiert."
+msgstr "Зразкові дані імпортовано."
 
 #: confassistant.cpp:289
 msgid ""
@@ -697,23 +690,23 @@ msgid ""
 "distribution and should also be part of your distribution. Please install "
 "them first."
 msgstr ""
-"Es sind keine Qt SQL Treiber installiert. KBarcode braucht diese Treiber um "
-"die verschiedenen SQL Datenbanken anzusprechen. Diese Treiber sind Teil der "
-"Qt Quellcode Distribution und sollten auch in ihrer Distribution enthalten "
-"sein. Bitte installieren Sie zuerst die Treiber."
+"Не встновлені SQL-драйвери для Qt. KBarcode потребує ці драйвери щоб мати "
+"доступ до різних база даних SQL. Ці драйвери є частиною дистрибутиву "
+"джерельних кодів Qt і повинні бути у Вашому дистрибутиві. Будь-ласка, спершу "
+"інсталюйте їх."
 
 #: databasebrowser.cpp:61
 msgid "Current Table: <b>"
-msgstr "Aktuelle Tabelle: <b>"
+msgstr "Поточна таблиця: <b>"
 
 #: databasebrowser.cpp:102
 #, fuzzy
 msgid "&Edit"
-msgstr "&Bearbeiten..."
+msgstr "&Редагувати..."
 
 #: databasebrowser.cpp:119 kbarcode.cpp:105
 msgid "&Import CSV File..."
-msgstr "&CSV Datei importieren..."
+msgstr "&Імпорт CSV-файлу..."
 
 #: definition.cpp:574
 msgid ""
@@ -722,14 +715,14 @@ msgid ""
 "is part of the KBarcode distribution. You will be prompted now to select the "
 "file containing the labeldefinitions."
 msgstr ""
-"KBarcode kann die Label Definitionen nicht finden. Bitte stellen Sie sicher, "
-"dass die Datei $KDEDIR/share/apps/kbarcode/labeldefinitions.sql existiert. "
-"Diese Datei ist Teil der KBarcode Distribution. Sie werden jetzt nach einer "
-"Datei gefragt die die Label Definitionen enthält."
+"KBarcode не зміг знайти означення цієї етикетки. Будь-ласка, переконайтеся "
+"що файл $KDEDIR/share/apps/kbarcode/labeldefinitions.sql справді існує. Цей "
+"файл є частиною дистрибутиву KBarcode. У Вас буде зараз запитано вибрати "
+"файл що міститиме означення етикеток."
 
 #: dialogs/barcodedialogs.cpp:46
 msgid "Barcode Settings"
-msgstr "Barcode Einstellungen"
+msgstr "Налаштування штрих-коду"
 
 #: dialogs/barcodedialogs.cpp:53
 msgid "PDF417"
@@ -737,7 +730,7 @@ msgstr "PDF417"
 
 #: dialogs/barcodedialogs.cpp:60
 msgid "DataMatrix"
-msgstr "DataMatrix"
+msgstr ""
 
 #: dialogs/barcodedialogs.cpp:67
 msgid "TBarcode"
@@ -745,39 +738,39 @@ msgstr "TBarcode"
 
 #: dialogs/barcodedialogs.cpp:74
 msgid "Barcode Writer in Pure Postscript"
-msgstr "Barcode Writer in Pure Postscript"
+msgstr "Записувач штрих-коду у чистому PostScript-і"
 
 #: dialogs/barcodedialogs.cpp:81
 msgid "Colors"
-msgstr "Farben"
+msgstr "Кольори"
 
 #: dialogs/barcodedialogs.cpp:87
 msgid "Sequence"
-msgstr "Sequenz"
+msgstr "Послідовність"
 
 #: dialogs/barcodedialogs.cpp:122
 msgid "Module width (mm):"
-msgstr "Modul Breite (mm):"
+msgstr ""
 
 #: dialogs/barcodedialogs.cpp:126
 msgid "Barcode Height (mm):"
-msgstr "Barcode Höhe (in mm):"
+msgstr "Висота штрих-коду (мм):"
 
 #: dialogs/barcodedialogs.cpp:130
 msgid "&Translate escape sequences"
-msgstr "&Escape Sequenzen übersetzen"
+msgstr ""
 
 #: dialogs/barcodedialogs.cpp:131
 msgid "&Text above barcode"
-msgstr "&Text über dem Barcode"
+msgstr "&Текст поверха штрих-коду"
 
 #: dialogs/barcodedialogs.cpp:132
 msgid "&Auto correction"
-msgstr "&Auto Korrektur"
+msgstr "&Автоматичне виправлення"
 
 #: dialogs/barcodedialogs.cpp:136
 msgid "&Checksum calculation method:"
-msgstr "&Berechnungs Methode für Checksummen:"
+msgstr "&Метод обрахунку контрольної суми:"
 
 #: dialogs/barcodedialogs.cpp:151
 msgid ""
@@ -785,57 +778,54 @@ msgid ""
 "documentation for details. Normally you do not want to change this value.</"
 "qt>"
 msgstr ""
-"<qt>Verändert die Modulbreite von TBarcode. Bitte sehen Sie in die TBarcode "
-"Dokumentation für Details. Normalerweise müssen Sie diesen Wert nicht ändern."
-"</qt>"
 
 #: dialogs/barcodedialogs.cpp:172
 msgid "No Checksum"
-msgstr "Keine Checksumme"
+msgstr "Без контрольної суми"
 
 #: dialogs/barcodedialogs.cpp:173
 msgid "Default Checksum Method"
-msgstr "Standard Checksummen Methode"
+msgstr "Метод контрольної суми по умовчанню"
 
 #: dialogs/barcodedialogs.cpp:177
 msgid "Modulo 10 Checksum"
-msgstr "Modulo 10 Checksumme"
+msgstr "Контрольна сума за модулем 10"
 
 #: dialogs/barcodedialogs.cpp:184
 msgid "Module 43 (suggested for Code39 and Logmars, 1 digit)"
-msgstr "Module 43 (empfohlen für Code39 und Logmars, 1 Stelle)"
+msgstr "Модуль 43 (рекомендується для Code39 та Logmars, 1 цифра)"
 
 #: dialogs/barcodedialogs.cpp:187
 msgid "Modula 47 (2 digits)"
-msgstr "Module 47 (2 Stellen)"
+msgstr "Modula 47 (2 цифри)"
 
 #: dialogs/barcodedialogs.cpp:190
 msgid "Deutsche Post Leitcode"
-msgstr "Deutsche Post Leitcode"
+msgstr ""
 
 #: dialogs/barcodedialogs.cpp:193
 msgid "Deutsche Post Identcode"
-msgstr "Deutsche Post Identcode"
+msgstr ""
 
 #: dialogs/barcodedialogs.cpp:197
 msgid "Code 11 (1 digit)"
-msgstr "Code 11 (1 Stelle)"
+msgstr "Code 11 (1 цифра)"
 
 #: dialogs/barcodedialogs.cpp:198
 msgid "Code 11 (2 digits)"
-msgstr "Code 11 (2 Stellen)"
+msgstr "Code 11 (2 цифри)"
 
 #: dialogs/barcodedialogs.cpp:202
 msgid "USPS Postnet"
-msgstr "USPS Postnet"
+msgstr ""
 
 #: dialogs/barcodedialogs.cpp:206
 msgid "MSI (1 digit)"
-msgstr "MSI (1 Stelle)"
+msgstr "MSI (1 цифра)"
 
 #: dialogs/barcodedialogs.cpp:207
 msgid "MSI (2 digits)"
-msgstr "MSI (2 Stellen)"
+msgstr "MSI (2 цифри)"
 
 #: dialogs/barcodedialogs.cpp:214
 msgid "EAN 8"
@@ -851,7 +841,7 @@ msgstr "UPC A"
 
 #: dialogs/barcodedialogs.cpp:223
 msgid "UPC E"
-msgstr "UPC E"
+msgstr ""
 
 #: dialogs/barcodedialogs.cpp:226
 msgid "EAN 128"
@@ -859,400 +849,409 @@ msgstr "EAN 128"
 
 #: dialogs/barcodedialogs.cpp:229
 msgid "Code 128"
-msgstr "Code 128"
+msgstr ""
 
 #: dialogs/barcodedialogs.cpp:232
 msgid "Royal Mail 4 State"
-msgstr "Royal Mail 4 State"
+msgstr ""
 
 #: dialogs/barcodedialogs.cpp:268
 msgid "Rows:"
-msgstr "Reihen:"
+msgstr "Рядки:"
 
 #: dialogs/barcodedialogs.cpp:273
 msgid "Columns:"
-msgstr "Spalten:"
+msgstr "Стовпчики:"
 
 #: dialogs/barcodedialogs.cpp:278
 msgid "Error correction level:"
-msgstr "Fehler Korrektur:"
+msgstr "Рівень корекції помилки:"
 
 #: dialogs/barcodedialogs.cpp:320
 msgid "Data Matrix symbol sizes (rows x cols):"
-msgstr "DataMatrix Symbol Größen (Reihen x Spalten):"
+msgstr ""
 
 #: dialogs/barcodedialogs.cpp:324
 msgid "Automatic calculation"
-msgstr "Automatische Berechnung"
+msgstr "Автоматичний обрахунок"
 
 #: dialogs/barcodedialogs.cpp:374
 msgid "&Enable sequence"
-msgstr "&Sequenz einschalten"
+msgstr "&Задіяти послідовність"
 
 #: dialogs/barcodedialogs.cpp:376
 msgid "Iterate over numbers 0-9"
-msgstr "Zahlen 0-9"
+msgstr "Виконувати ітерації по числах 0-9"
 
 #: dialogs/barcodedialogs.cpp:377
 msgid "Iterate over characters A-Z"
-msgstr "Buchstaben A-Z"
+msgstr "Виконувати ітерації по символах A-Z"
 
 #: dialogs/barcodedialogs.cpp:378
 msgid "Iterate over A-Z, 0-9"
-msgstr "A-Z, 0-9"
+msgstr "Виконувати ітерації по A-Z, 0-9"
 
 #: dialogs/barcodedialogs.cpp:381
 msgid "Step:"
-msgstr "Schrittweite:"
+msgstr "Крок:"
 
 #: dialogs/barcodedialogs.cpp:386
 msgid "Start:"
-msgstr "Start:"
+msgstr "Початок:"
 
 #: dialogs/barcodedialogs.cpp:455
 msgid "Bar Color:"
-msgstr "Balken Farbe:"
+msgstr "Колір смужок:"
 
 #: dialogs/barcodedialogs.cpp:456
 msgid "Background Color:"
-msgstr "Hintergrund Farbe:"
+msgstr "Колір фону:"
 
 #: dialogs/barcodedialogs.cpp:457
 msgid "Text Color:"
-msgstr "Text Farbe:"
+msgstr "Колір тексту:"
 
 #: dialogs/barcodedialogs.cpp:485
 msgid "Enable &Checksum"
-msgstr "Prüfsumme &anschalten"
+msgstr "Задіяти &контрольну суму"
 
 #: dialogs/barcodeprinterdlg.cpp:33
 msgid "Barcode Printer"
-msgstr "Barcode Drucker"
+msgstr "Друкарка штрих-коду"
 
 #: dialogs/barcodeprinterdlg.cpp:42
 msgid "&Output Format:"
-msgstr "&Ausgabe Format:"
+msgstr "&Вихідний формат:"
 
 #: dialogs/barcodeprinterdlg.cpp:46
 msgid "&Print to File"
-msgstr "InDatei &drucken"
+msgstr "&Друкувати у файл"
 
 #: dialogs/barcodeprinterdlg.cpp:52
 msgid "&Device:"
-msgstr "&Gerät:"
+msgstr "&Пристрій:"
 
 #: dialogs/barcodeprinterdlg.cpp:65
 msgid "TEC Printer (TEC)"
-msgstr "TEC-Drucker (TEC)"
+msgstr "Друкарка TEC"
 
 #: dialogs/barcodeprinterdlg.cpp:66
 msgid "Zebra Printer (ZPL)"
-msgstr "Zebra Drucker (ZPL)"
+msgstr "Друкарка Zebra (ZPL)"
 
 #: dialogs/barcodeprinterdlg.cpp:67
 msgid "Intermec Printer (IPL)"
-msgstr "Intermec Drucker (IPL)"
+msgstr "Друкарка Intermec (IPL)"
 
 #: dialogs/barcodeprinterdlg.cpp:68
 msgid "EPCL Printer (EPCL)"
-msgstr "EPCL Drucker (EPCL)"
+msgstr "Друкарка EPCL (EPCL)"
 
 #: dialogs/configdialog.cpp:53
 msgid "There are currently %1 cached barcodes."
-msgstr "Es sind %1 Barcodes im Cache."
+msgstr "На зараз закешовано %1 штрих-кодів."
 
 #: dialogs/configdialog.cpp:78
 msgid "SQL Settings"
-msgstr "SQL Einstellungen"
+msgstr "Налаштування SQL"
 
 #: dialogs/configdialog.cpp:102
 msgid "Medium Resolution (300dpi)"
-msgstr "Mittlere Auflösung (300dpi)"
+msgstr "Посередня роздільна здатність (300dpi)"
 
 #: dialogs/configdialog.cpp:103
 msgid "High Resolution (600dpi)"
-msgstr "Hohe Auflösung (600dpi)"
+msgstr "Висока роздільна здатність (600dpi)"
 
 #: dialogs/configdialog.cpp:104
 msgid "Very High Resolution (1200dpi)"
-msgstr "Sehr Hohe Auflösung (1200dpi)"
+msgstr "Дуже висока роздільна здатність (1200dpi)"
 
 #: dialogs/configdialog.cpp:130
 msgid "Printer Resolution:"
-msgstr "Drucker Auflösung:"
+msgstr "Роздільна здатність друкарки:"
 
 #: dialogs/configdialog.cpp:132
 msgid "Preview Page Format:"
-msgstr "Vorschau Seiten Format:"
+msgstr "Формат попереднього перегляду сторінки:"
 
 #: dialogs/configdialog.cpp:136
 msgid "Print Settings"
-msgstr "Drucker Einstellungen"
+msgstr "Налаштування друку"
 
 #: dialogs/configdialog.cpp:149 dialogs/csvimportdlg.cpp:209
 msgid "Comment:"
-msgstr "Kommentar:"
+msgstr "Коментар:"
 
 #: dialogs/configdialog.cpp:156 dialogs/csvimportdlg.cpp:216
 msgid "Separator:"
-msgstr "Trennzeichen:"
+msgstr "Роздільник:"
 
 #: dialogs/configdialog.cpp:163 dialogs/csvimportdlg.cpp:223
 msgid "Quote Character:"
-msgstr "Quote Zeichen:"
+msgstr "Символ цитування:"
 
 #: dialogs/configdialog.cpp:169
 msgid "&Use customer article no. for import"
-msgstr "Artikel Nummer des Kunden beim Import &benutzen"
+msgstr "&Використовувати номер товару замовника для імпорту"
 
 #: dialogs/configdialog.cpp:175 dialogs/csvimportdlg.cpp:181
 msgid "File Format:"
-msgstr "Datei Format:"
+msgstr "Формат файлу: "
 
 #: dialogs/configdialog.cpp:178 dialogs/configdialog.cpp:184
 #: dialogs/configdialog.cpp:190
 msgid "Quantity"
-msgstr "Menge"
+msgstr "Кількість"
 
 #: dialogs/configdialog.cpp:205 dialogs/csvimportdlg.cpp:67
 #, fuzzy
 msgid "Import"
-msgstr "&Importieren"
+msgstr "&Імпорт"
 
 #: dialogs/configdialog.cpp:212
 msgid "Label Editor"
-msgstr "Label Editor"
+msgstr "Редактор етикеток"
 
 #: dialogs/configdialog.cpp:218
 msgid "&Create a new label on startup"
-msgstr "Bei Label Editor Start &nach neuen Label fragen"
+msgstr "&Утворити нову етикетку при запуску"
 
 #: dialogs/configdialog.cpp:226
 msgid "Grid:"
-msgstr "Gitter:"
+msgstr "Ґратка:"
 
 #: dialogs/configdialog.cpp:234
 msgid "Grid Color:"
-msgstr "Gitter Farbe:"
+msgstr "Колір ґратки:"
 
 #: dialogs/configdialog.cpp:236
 msgid "Date Format:"
-msgstr "Datums Format:"
+msgstr "Формат даних:"
 
 #: dialogs/configdialog.cpp:248
 msgid "On New"
-msgstr "Bei Neuem"
+msgstr "На нове"
 
 #: dialogs/configdialog.cpp:252 dialogs/configdialog.cpp:258
 msgid "No Line Break"
-msgstr "Keine neue Zeile"
+msgstr "Без розриву рядка"
 
 #: dialogs/configdialog.cpp:253 dialogs/configdialog.cpp:259
 msgid "Line Break"
-msgstr "Neue Zeile"
+msgstr "Розрив рядка"
 
 #: dialogs/configdialog.cpp:254 dialogs/configdialog.cpp:260
 msgid "Insert Label X"
-msgstr "X Label einfügen"
+msgstr ""
 
 #: dialogs/configdialog.cpp:255 dialogs/configdialog.cpp:261
 msgid "New Page"
-msgstr "Neue Seite"
+msgstr "Нова сторінка"
 
 #: dialogs/configdialog.cpp:256
 msgid "Article No."
-msgstr "Artikel Nummer"
+msgstr "Номер товару: "
 
 #: dialogs/configdialog.cpp:262
 msgid "Group Name"
-msgstr "Gruppe"
+msgstr "Назва групи"
 
 #: dialogs/configdialog.cpp:264
 msgid "On New Article"
-msgstr "Bei Neuem Artikel"
+msgstr "На новий товар"
 
 #: dialogs/configdialog.cpp:291
 msgid "On New Group"
-msgstr "Bei Neuer Gruppe"
+msgstr "На нову групу"
 
 #: dialogs/configdialog.cpp:380
 msgid "Preview: "
-msgstr "Vorschau: "
+msgstr "Попередній перегляд: "
 
 #: dialogs/csvimportdlg.cpp:72
 msgid "&Import"
-msgstr "&Importieren"
+msgstr "&Імпорт"
 
 #: dialogs/csvimportdlg.cpp:73
 msgid "Import the selected file into your tables."
-msgstr "Importiere die ausgewählte Datei in die SQL Tabelle."
+msgstr "Імпорт вибраного файлу у Ваші таблиці."
 
 #: dialogs/csvimportdlg.cpp:121
 msgid "Other table..."
-msgstr "Andere Tabelle..."
+msgstr ""
 
 #: dialogs/csvimportdlg.cpp:124
 msgid "&Load complete file into preview"
-msgstr "Gesamte Datei in die Vorschau &laden"
+msgstr ""
 
 #: dialogs/csvimportdlg.cpp:127
 msgid "Load only a number of datasets:"
-msgstr "Nur eine bestimmte Anzahl an Datensätzen laden:"
+msgstr ""
 
 #: dialogs/csvimportdlg.cpp:141
 msgid "Column:"
-msgstr "Spalte:"
+msgstr "Стовпчик:"
 
 #: dialogs/csvimportdlg.cpp:146
 msgid "Set"
-msgstr "Setzen"
+msgstr ""
 
 #: dialogs/csvimportdlg.cpp:149
 msgid "Database field to use for this column:"
-msgstr "Datenbankfeld, dass für diese Spalte benutzt werden soll:"
+msgstr "Поле база даних, відповідне цьому стовпцю:"
 
 #: dialogs/csvimportdlg.cpp:153
 msgid "File to import:"
-msgstr "Datei zum importieren:"
+msgstr "Файл для імпорту:"
 
 #: dialogs/csvimportdlg.cpp:155
 msgid "Encoding:"
-msgstr "Codierungs Art:"
+msgstr "Кодування:"
 
 #: dialogs/csvimportdlg.cpp:157
 msgid "Import into table:"
-msgstr "In Tabelle importieren:"
+msgstr "Імпортувати у таблицю:"
 
 #: dialogs/csvimportdlg.cpp:159
+#, fuzzy
 msgid "Table Name:"
-msgstr "Tabellen Name:"
+msgstr "Прізвище"
 
 #: dialogs/csvimportdlg.cpp:168
+#, fuzzy
 msgid "&Import Data"
-msgstr "Daten &importieren"
+msgstr "&Імпортувати зразкові дані"
 
 #: dialogs/csvimportdlg.cpp:183
+#, fuzzy
 msgid "&CSV File"
-msgstr "&CSV Datei"
+msgstr "&Імпорт CSV-файлу..."
 
 #: dialogs/csvimportdlg.cpp:185
 msgid "File with &fixed field width"
-msgstr "Datei mit fester Feld-Breite"
+msgstr ""
 
 #: dialogs/csvimportdlg.cpp:192
 msgid "CSV File"
-msgstr "CSV Datei"
+msgstr ""
 
 #: dialogs/csvimportdlg.cpp:194
 msgid "Fixed Field Width File"
-msgstr "Datei mit fester Feld-Breite"
+msgstr ""
 
 #: dialogs/csvimportdlg.cpp:243
 msgid "&Add Field"
-msgstr "Feld &hinzufügen"
+msgstr ""
 
 #: dialogs/csvimportdlg.cpp:246
+#, fuzzy
 msgid "&Remove Field"
-msgstr "Feld &entfernen"
+msgstr "&Видалити усе"
 
 #: dialogs/csvimportdlg.cpp:269
+#, fuzzy
 msgid "&Import Settings"
-msgstr "Einstellungen &importiere "
+msgstr "Налаштування друку"
 
 #: dialogs/csvimportdlg.cpp:429
 msgid "Cannot load data from the file:"
-msgstr "Kann die Daten nicht aus der Datei laden:"
+msgstr ""
 
 #: dialogs/csvimportdlg.cpp:452
 msgid "Could not import the following line:"
-msgstr "Konnte diese Zeile nicht importieren:"
+msgstr "Не вдається імпортувати наступний рядок:"
 
 #: dialogs/csvimportdlg.cpp:464
 msgid "Data was imported successfully."
-msgstr "Daten wurden erfolgreich importiert."
+msgstr "Дані успішно імпортовані."
 
 #: dialogs/csvimportdlg.cpp:465
 msgid "%1 of %1 sql query was executed successfully."
 msgid_plural "All %1 of %1 sql queries were executed successfully."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: dialogs/csvimportdlg.cpp:469
 #, fuzzy
 msgid "No data was imported successfully."
-msgstr "Daten wurden erfolgreich importiert."
+msgstr "Дані успішно імпортовані."
 
 #: dialogs/csvimportdlg.cpp:470
 msgid "%1 of %2 sql query failed."
 msgid_plural "All %1 of %2 sql queries failed."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: dialogs/csvimportdlg.cpp:473
 #, fuzzy
 msgid "No sql query was executed successfully."
-msgstr "Daten wurden erfolgreich importiert."
+msgstr "Дані успішно імпортовані."
 
 #: dialogs/csvimportdlg.cpp:476
 #, fuzzy
 msgid "Only a part of data was imported successfully."
-msgstr "Daten wurden erfolgreich importiert."
+msgstr "Дані успішно імпортовані."
 
 #: dialogs/csvimportdlg.cpp:477
 msgid "%1 of %2 sql queries failed."
 msgid_plural "%1 of %2 sql queries failed."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: dialogs/csvimportdlg.cpp:480
 msgid "%1 of %2 sql query was executed successfully."
 msgid_plural "%1 of %2 sql queries were executed successfully."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: dialogs/definitiondialog.cpp:88
 msgid "Add Label Definition"
-msgstr "Label Definition hinzufügen"
+msgstr "Додати означення етикетки"
 
 #: dialogs/definitiondialog.cpp:109 newlabel.cpp:76
 msgid "Producer:"
-msgstr "Hersteller:"
+msgstr "Генератор:"
 
 #: dialogs/definitiondialog.cpp:114 newlabel.cpp:80
 msgid "Type:"
-msgstr "Typ:"
+msgstr "Тип: "
 
 #: dialogs/definitiondialog.cpp:119
 msgid "Width (in %1):"
-msgstr "Breite (in %1):"
+msgstr "Ширина (у %1):"
 
 #: dialogs/definitiondialog.cpp:124
 msgid "Height (in %1):"
-msgstr "Höhe (in %1):"
+msgstr "Висота (у %1):"
 
 #: dialogs/definitiondialog.cpp:129
 msgid "Horizontal Gap:"
-msgstr "Horizontaler Abstand:"
+msgstr "Проміжок по горизонталі:"
 
 #: dialogs/definitiondialog.cpp:134
 msgid "Vertical Gap:"
-msgstr "Vertikaler Abstand:"
+msgstr "Проміжок по вертикалі:"
 
 #: dialogs/definitiondialog.cpp:139
 msgid "Top Gap:"
-msgstr "Abstand nach Oben:"
+msgstr "Проміжок зверху:"
 
 #: dialogs/definitiondialog.cpp:144
 msgid "Left Gap:"
-msgstr "Abstand nach Links:"
+msgstr "Проміжок зліва:"
 
 #: dialogs/definitiondialog.cpp:149
 msgid "Number Horizontal:"
-msgstr "Horizontaler Anzahl:"
+msgstr "Кількість по горизонталі:"
 
 #: dialogs/definitiondialog.cpp:154
 msgid "Number Vertical:"
-msgstr "Vertikale Anzahl:"
+msgstr "Кількість по вертикалі:"
 
 #: dialogs/definitiondialog.cpp:174 dialogs/definitiondialog.cpp:179
 #: dialogs/definitiondialog.cpp:184 dialogs/definitiondialog.cpp:189
@@ -1270,145 +1269,145 @@ msgstr "0123456789."
 
 #: dialogs/definitiondialog.cpp:224
 msgid "More &Information"
-msgstr "Mehr &Informationen"
+msgstr "Ще &інформації"
 
 #: dialogs/definitiondialog.cpp:231 dialogs/smalldialogs.cpp:117
 msgid "&Add"
-msgstr "&Hinzufügen"
+msgstr ""
 
 #: dialogs/definitiondialog.cpp:299 printersettings.cpp:49
 msgid "Custom"
-msgstr "Benutzerdefiniert"
+msgstr ""
 
 #: dialogs/definitiondialog.cpp:471
 #, fuzzy
 msgid "Width"
-msgstr "&Breite:"
+msgstr "&Ширина:"
 
 #: dialogs/definitiondialog.cpp:472
 #, fuzzy
 msgid "Height"
-msgstr "&Höhe:"
+msgstr "&Висота:"
 
 #: dialogs/definitiondialog.cpp:473
 msgid "Number of horizontal Labels"
-msgstr "Horizontale Label"
+msgstr "Кількість етикеток по горизонталі"
 
 #: dialogs/definitiondialog.cpp:475
 msgid "Number of vertical Labels"
-msgstr "Vertikale Label"
+msgstr "Кількість етикеток по вертикалі"
 
 #: dialogs/definitiondialog.cpp:479
 msgid "Gap Top"
-msgstr "Abstand Oben"
+msgstr "Верхній проміжок"
 
 #: dialogs/definitiondialog.cpp:481
 msgid "Gap Left"
-msgstr "Abstand Links"
+msgstr "Лівий проміжок"
 
 #: dialogs/definitiondialog.cpp:486
 msgid "Vertical Gap"
-msgstr "Vertikaler Abstand"
+msgstr "Вертикальний проміжок"
 
 #: dialogs/definitiondialog.cpp:487
 msgid "Horizontal Gap"
-msgstr "Horizontaler Abstand"
+msgstr "Горизонтальний проміжок"
 
 #: dialogs/documentitemdlg.cpp:36
 #, fuzzy
 msgid "Properties"
-msgstr "&Eigenschaften"
+msgstr "&Властивості"
 
 #: dialogs/documentitemdlg.cpp:45
 msgid "&Position && Size"
-msgstr "&Position && Größe"
+msgstr "&Позиція && розмір"
 
 #: dialogs/documentitemdlg.cpp:49
 msgid "&Border"
-msgstr "&Rand"
+msgstr "&Кайма"
 
 #: dialogs/documentitemdlg.cpp:55
 msgid "&Fill Color"
-msgstr "&Füll Farbe:"
+msgstr "Колір &заповнення"
 
 #. i18n: file: xml/labeleditorui.rc:49
 #. i18n: ectx: Menu (barcode)
 #: dialogs/documentitemdlg.cpp:61 rc.cpp:12
 msgid "&Barcode"
-msgstr "&Barcode"
+msgstr "Штрих-код"
 
 #: dialogs/documentitemdlg.cpp:67
 msgid "&Rotation"
-msgstr "&Rotation"
+msgstr "&Обертання"
 
 #: dialogs/documentitemdlg.cpp:71 dialogs/documentitemdlg.cpp:84
 msgid "&Text"
-msgstr "&Text"
+msgstr "&Текст"
 
 #: dialogs/documentitemdlg.cpp:77 propertywidget.cpp:462
 msgid "&Image"
-msgstr "&Bild"
+msgstr "&Зображення"
 
 #: dialogs/documentitemdlg.cpp:97
 msgid "&Visibility"
-msgstr "&Sichtbarkeit"
+msgstr "&Видимість"
 
 #: dialogs/documentitemdlg.cpp:129
 msgid "Property changed"
-msgstr "Eigenschaft geändert"
+msgstr "Властивості змінено"
 
 #: dialogs/multilineeditdlg.cpp:87
 #, fuzzy
 msgid "Export"
-msgstr "&Importieren"
+msgstr "&Імпорт"
 
 #: dialogs/multilineeditdlg.cpp:116
 msgid "&Bold"
-msgstr "&Fett"
+msgstr "&Жирний"
 
 #: dialogs/multilineeditdlg.cpp:121
 msgid "&Italic"
-msgstr "&Kursiv"
+msgstr "&Курсивний"
 
 #: dialogs/multilineeditdlg.cpp:126
 msgid "&Underline"
-msgstr "&Unterstrichen"
+msgstr "&Підреслення"
 
 #: dialogs/multilineeditdlg.cpp:132
 msgid "Text &Color..."
-msgstr "Text &Farbe"
+msgstr "&Колір тексту..."
 
 #: dialogs/multilineeditdlg.cpp:140
 msgid "&Font"
-msgstr "&Schrift"
+msgstr "&Шрифт"
 
 #: dialogs/multilineeditdlg.cpp:144
 msgid "Font &Size"
-msgstr "Schrift &Größe"
+msgstr "&Розмір шрифту"
 
 #: dialogs/multilineeditdlg.cpp:151
 msgid "Align &Left"
-msgstr "&Links Bündig"
+msgstr "Вирівнювання &зліва"
 
 #: dialogs/multilineeditdlg.cpp:155
 msgid "Align &Center"
-msgstr "&Zentrieren"
+msgstr "Вирівнювання по &центру"
 
 #: dialogs/multilineeditdlg.cpp:159
 msgid "Align &Right"
-msgstr "&Rechts Bündig"
+msgstr "Вирівнювання &справа"
 
 #: dialogs/multilineeditdlg.cpp:163
 msgid "&Justify"
-msgstr "&Blocksatz"
+msgstr "Вирівнювання по &краям"
 
 #: dialogs/multilineeditdlg.cpp:176 labeleditor.cpp:535 textlineedit.cpp:107
 msgid "Insert &Data Field"
-msgstr "&Daten Feld einfügen"
+msgstr "Вставити &поле даних"
 
 #: dialogs/previewdialog.cpp:110
 msgid "Select &Address"
-msgstr "&Adresse auswählen"
+msgstr "Вибрати &адресу"
 
 #: dialogs/previewdialog.cpp:112
 msgid "&Update"
@@ -1416,167 +1415,164 @@ msgstr ""
 
 #: dialogs/previewdialog.cpp:116
 msgid "Customer Name and No.:"
-msgstr "Kunden Name und Nummer:"
+msgstr "Назва та номер замовника: "
 
 #: dialogs/previewdialog.cpp:119
 msgid "Article Number:"
-msgstr "Artikel Nummer:"
+msgstr "Номер товару: "
 
 #: dialogs/previewdialog.cpp:121 dialogs/smalldialogs.cpp:56
 #: dialogs/smalldialogs.cpp:114
 msgid "Group:"
-msgstr "Gruppe:"
+msgstr "Група: "
 
 #: dialogs/previewdialog.cpp:123
 msgid "Index:"
-msgstr "Index:"
+msgstr ""
 
 #: dialogs/previewdialog.cpp:129
 msgid "Addressbook entry:"
-msgstr "Adreß&buch Eintrag:"
+msgstr ""
 
 #: dialogs/printlabeldlg.cpp:41 dialogs/smalldialogs.cpp:52
 #: dialogs/smalldialogs.cpp:107
 msgid "Number of labels:"
-msgstr "Anzahl der Labels:"
+msgstr "Кількість етикеток:"
 
 #: dialogs/printlabeldlg.cpp:46
 msgid "Start at label position:"
-msgstr "Ab Label Position drucken:"
+msgstr ""
 
 #: dialogs/printlabeldlg.cpp:50
 msgid "&Print crop marks (borders)"
-msgstr "&Schnittgrenzen drucken (Rand)"
+msgstr ""
 
 #: dialogs/rectsettingsdlg.cpp:61 dialogs/rectsettingsdlg.cpp:155
 msgid "Settings"
-msgstr "Einstellungen"
+msgstr "Налаштування"
 
 #: dialogs/rectsettingsdlg.cpp:79
 msgid "&Enable Border"
-msgstr "&Rand sichtbar"
+msgstr ""
 
 #: dialogs/rectsettingsdlg.cpp:81
 msgid "Fill Color:"
-msgstr "Füll Farbe:"
+msgstr ""
 
 #: dialogs/rectsettingsdlg.cpp:85
 msgid "Border Color:"
-msgstr "Rand Farbe:"
+msgstr ""
 
 #: dialogs/rectsettingsdlg.cpp:87
 msgid "Border Width:"
-msgstr "Rand:"
+msgstr ""
 
 #: dialogs/rectsettingsdlg.cpp:89 dialogs/rectsettingsdlg.cpp:174
 #: propertywidget.cpp:107
 msgid "Line Style:"
-msgstr "Linien Stil:"
+msgstr "Стиль лінії:"
 
 #: dialogs/rectsettingsdlg.cpp:170 propertywidget.cpp:103
 #: propertywidget.cpp:188
 msgid "Color:"
-msgstr "Farbe:"
+msgstr "Колір:"
 
 #: dialogs/rectsettingsdlg.cpp:172 propertywidget.cpp:105
 msgid "Line Width:"
-msgstr "Linien Breite:"
+msgstr "Ширина лінії:"
 
 #: dialogs/smalldialogs.cpp:41
 msgid "Add Barcode_basic"
-msgstr "barcode_basic hinzufügen"
+msgstr "Додати Barcode_basic"
 
 #: dialogs/smalldialogs.cpp:74
 msgid "Add Items"
-msgstr "Einträge hinzufügen"
+msgstr ""
 
 #: dialogs/smalldialogs.cpp:83
 msgid "Edit Item"
-msgstr "Eintrag bearbeiten"
+msgstr ""
 
 #: dialogs/smalldialogs.cpp:112
 msgid "Article:"
-msgstr "Artikel:"
+msgstr "Товар: "
 
 #: dialogs/tokendialog.cpp:74 dialogs/tokendialog.cpp:111
 #: dialogs/tokendialog.cpp:136
 msgid "What do you want to insert?"
-msgstr "Was möchten Sie einfügen?"
+msgstr "Що Ви хочете вставити?"
 
 #: dialogs/tokendialog.cpp:77
 msgid "Insert a &fixed data field"
-msgstr "Ein Datenfeld einfügen"
+msgstr "Вставити &стале поле даних"
 
 #: dialogs/tokendialog.cpp:79
 msgid "Insert a &custom SQL query, variable or JavaScript function"
-msgstr ""
-"Eine &benutzerspezifische SQL Abfrage, Variable oder JavaScript Funktion "
-"einfügen"
+msgstr "Вставити &особливий SQL-запит, змінну, чи функцію JavaScript"
 
 #: dialogs/tokendialog.cpp:85
 msgid "Step 1 of 3"
-msgstr "Schritt 1 von 3"
+msgstr "Крок 1 з 3"
 
 #: dialogs/tokendialog.cpp:93
 msgid "Step 2 of 3"
-msgstr "Schritt 2 von 3"
+msgstr "Крок 2 з 3"
 
 #: dialogs/tokendialog.cpp:101
 msgid "Step 3 of 3"
-msgstr "Schritt 3 von 3"
+msgstr "Крок 3 з 3"
 
 #: dialogs/tokendialog.cpp:114
 msgid "&Select from a list of all tokens"
-msgstr "Aus einer Liste von Kommandos &auswählen"
+msgstr "&Вибрати зі списку усіх ознак"
 
 #: dialogs/tokendialog.cpp:116
 msgid "Insert printing &informations"
-msgstr "Druck &Informationen einfügen"
+msgstr "Вставити дані &друкування"
 
 #: dialogs/tokendialog.cpp:118
 msgid "&Insert a database field"
-msgstr "&Datenbank Feld einfügen"
+msgstr "&Вставити поле бази даних"
 
 #: dialogs/tokendialog.cpp:120
 msgid "Insert a &date/time function"
-msgstr "Eine &Datums/Zeit Funktion einfügen"
+msgstr "Вставити функцію &дати/часу"
 
 #: dialogs/tokendialog.cpp:122
 msgid "Insert an &addressbook field"
-msgstr "Ein &Addressbuchfeld einfügen"
+msgstr "Вставити поле з &адресної книги"
 
 #: dialogs/tokendialog.cpp:139
 msgid "Insert a custom &variable"
-msgstr "Eine benutzerspezifische &Variable einfügen"
+msgstr "Вставити особливу &змінну"
 
 #: dialogs/tokendialog.cpp:141
 msgid "Insert a &SQL query"
-msgstr "Eine &SQL Abfrage einfügen"
+msgstr "Вставити &SQL-запит"
 
 #: dialogs/tokendialog.cpp:143
 msgid "Insert a &JavaScript function"
-msgstr "Eine &JavaScript Funktion einfügen"
+msgstr "Вставити функцію &JavaScript"
 
 #: dialogs/tokendialog.cpp:170
 msgid "&Category:"
-msgstr "&Kategorie:"
+msgstr "&Категорія:"
 
 #: dialogs/tokendialog.cpp:177
 msgid "&Token:"
-msgstr "&Kommando:"
+msgstr "&Ознака:"
 
 #: dialogs/tokendialog.cpp:181 dialogs/tokendialog.cpp:221
 msgid "Token"
-msgstr "Kommando"
+msgstr "Ознака"
 
 #: dialogs/tokendialog.cpp:181 dialogs/tokendialog.cpp:221
 msgid "Description"
-msgstr "Beschreibung"
+msgstr "Опис"
 
 #: dialogs/tokendialog.cpp:185
 msgid "&Custom Expression to be inserted in the token."
-msgstr ""
-"&Benutzerspezifischer Ausdruck der in das Kommando eingefügt werden soll"
+msgstr "&Особливе значення буде вставлено у ознаку."
 
 #: dialogs/tokendialog.cpp:192
 msgid ""
@@ -1584,278 +1580,274 @@ msgid ""
 "the case of the sqlquery token, the sure has to enter a sql query in this "
 "text field.</qt>"
 msgstr ""
-"<qt>Bestimmte Kommandos, wie zum Beispiel das sqlquery Kommando, benötigen "
-"zusätzliche Argumente. Im Falle des des sqlquery Kommandos muss hier "
-"natürlich eine SQL Abfrage eingegeben werden.</qt>"
+"<qt>Деякі ознаки, наприклад ознака sqlquery, потребують аргументів. У "
+"випадку ознаки sqlquery, переконайтеся що ввели sql-запит у цьому текстовому "
+"полі.</qt>"
 
 #: dialogs/tokendialog.cpp:235
 msgid "&Create a new custom variable"
-msgstr "Eine neue benutzerspezifische Variable &erstellen"
+msgstr "&Створити нову особливу змінну"
 
 #: dialogs/tokendialog.cpp:240
 msgid "&Insert an existing custom variable"
-msgstr "Eine existierende benutzerspezifische &Variable einfügen"
+msgstr "&Вставити існуючу особливу змінну"
 
 #: dialogs/tokendialog.cpp:269
 msgid ""
 "<qt><b>No SQL connection found!</b><br>You can build a query, but you will "
 "not be able to execute or test it right now.<br></qt>"
 msgstr ""
-"<qt><b>Keine SQL Verbindung gefunden!</b><br>Sie können Ihre SQL Abfrage "
-"jetzt erstellen, können Sie aber weder testen noch ausführen.</br></qt>"
+"<qt><b>Немає SQL-з'єднання!</b><br>Ви можете побудувати запит, але Ви не "
+"зможете виконати чи протестувати його саме зараз.<br></qt>"
 
 #: dialogs/tokendialog.cpp:277
 msgid "&SQL Query:"
-msgstr "&SQL Abfrage:"
+msgstr "&SQL-запит:"
 
 #: dialogs/tokendialog.cpp:281
 msgid "&Test"
-msgstr "&Test"
+msgstr ""
 
 #: dialogs/tokendialog.cpp:287
 msgid "Query test results:"
-msgstr "Ergebnis der Abfrage:"
+msgstr ""
 
 #: dialogs/tokendialog.cpp:307
 msgid "/* Place your JavaScript code into this text field. */\n"
-msgstr "/* Fügen Sie Ihr JavaScript Programm in dieses Textfeld ein. */\n"
+msgstr "/* Помістіть Ваш JavaScript-код у це текстове поле. */\n"
 
 #: dialogs/tokendialog.cpp:432
 msgid "All"
-msgstr "Alle"
+msgstr ""
 
 #: dialogs/tokendialog.cpp:445 dialogs/tokendialog.cpp:515
 msgid "Variable defined by the user for this label."
-msgstr "Variablen die von Benutzer für dieses Label definiert wurden."
+msgstr ""
 
 #: dialogs/tokendialog.cpp:512 tokenprovider.cpp:210
 msgid "Custom Values"
-msgstr "Benutzerspezifische Werte"
+msgstr "Особливі значення"
 
 #: imageitem.cpp:288
 msgid "Expression: "
-msgstr "Ausdruck: "
+msgstr "Вираз: "
 
 #: kbarcode.cpp:56
 msgid "Barcode &Generator..."
-msgstr "Barcode &Generator..."
+msgstr "&Утворювач штрих-коду..."
 
 #: kbarcode.cpp:58
 msgid "&Label Editor..."
-msgstr "&Label Editor..."
+msgstr "&Редактор етикетки..."
 
 #: kbarcode.cpp:59
 msgid "&Batch Printing..."
-msgstr "&Massen Druck..."
+msgstr "&Пакетний друк..."
 
 #: kbarcode.cpp:60
 msgid "Edit SQL &Tables..."
-msgstr "SQL &Tabellen Bearbeiten..."
+msgstr "Редагувати SQL-&таблиці..."
 
 #: kbarcode.cpp:85
 msgid "&Edit Label Definitions"
-msgstr "&Label Definitionen Bearbeiten"
+msgstr "&Редагувати означення етикетки"
 
 #: kbarcode.cpp:90
 msgid "&Edit Articles"
-msgstr "&Artikel Bearbeiten"
+msgstr "&Редагувати товари"
 
 #: kbarcode.cpp:95
 msgid "&Edit Customers"
-msgstr "&Kunden Bearbeiten"
+msgstr "&Редагувати замовників"
 
 #: kbarcode.cpp:100
 msgid "&Edit Customer Text"
-msgstr "&Customer Text Bearbeiten"
+msgstr "&Редагувати текст замовника"
 
 #: kbarcode.cpp:198
 msgid ""
 "%1 is no valid output format for --output. Valid values are POSTSCRIPT, "
 "IMAGE and BARCODE."
 msgstr ""
-"%1 ist kein gültiges Ausgabe Format für --output. Gültige Werte sind "
-"POSTSCRIPT, IMAGE und BARCODE. "
 
 #: label.cpp:217
 msgid "Static"
-msgstr "Fest"
+msgstr "Статичне"
 
 #: labeleditor.cpp:372
 msgid "Select Label"
-msgstr "Label Auswahl"
+msgstr "Вибрати етикетку"
 
 #: labeleditor.cpp:409
 msgid ""
 "<qt>The file <b>%1</b> cannot be loaded as the label definition is missing.</"
 "qt>"
 msgstr ""
-"<qt>Die Datei <b>%1</b> kann nicht geladen werden, da die dafür benötigten "
-"Label Definitionen fehlen.</qt>"
 
 #: labeleditor.cpp:472
 msgid "Close &Label"
-msgstr "Label Schl&ießen"
+msgstr "Закрити &етикетку"
 
 #: labeleditor.cpp:477
 msgid "&Recent Files"
-msgstr "&Zuletzt geöffnete Dateien"
+msgstr "&Останні файли"
 
 #: labeleditor.cpp:482
 msgid "&Import and Print Batch File..."
-msgstr "&Batch Datei importieren und drucken..."
+msgstr "&Імпортувати та друкувати пакетний файл..."
 
 #: labeleditor.cpp:490
 msgid "&Change description..."
-msgstr "&Beschreibung ändern..."
+msgstr "&Змінити опис..."
 
 #: labeleditor.cpp:494
 msgid "&Delete Object"
-msgstr "&Objekt Löschen"
+msgstr "&Видалити об'єкт"
 
 #: labeleditor.cpp:500
 #, fuzzy
 msgid "&Properties..."
-msgstr "&Eigenschaften"
+msgstr "&Властивості"
 
 #: labeleditor.cpp:506
 msgid "Print to &Barcode Printer..."
-msgstr "Auf &Barcode Drucker drucken..."
+msgstr "Друк на друкарку &штрих-кодів..."
 
 #: labeleditor.cpp:510
 msgid "Print to &Image..."
-msgstr "Bilder &erstellen..."
+msgstr "Друк у &зображення..."
 
 #: labeleditor.cpp:514
 msgid "&Change Label..."
-msgstr "Label &Ändern..."
+msgstr "&Змінити етикетку..."
 
 #: labeleditor.cpp:518
 msgid "Insert &Barcode"
-msgstr "&Barcode Einfügen"
+msgstr "Вставити &штрих-код"
 
 #: labeleditor.cpp:525
 msgid "Insert &Picture"
-msgstr "&Bild Einfügen"
+msgstr "Вставити &зображення"
 
 #: labeleditor.cpp:530
 msgid "Insert &Text"
-msgstr "&Text Einfügen"
+msgstr "Вставити &текст"
 
 #: labeleditor.cpp:540
 msgid "Insert &Text Line"
-msgstr "&Textzeile Einfügen"
+msgstr "Вставити &рядок тексту"
 
 #: labeleditor.cpp:545
 msgid "Insert &Line"
-msgstr "&Linie Einfügen"
+msgstr "Вставити &лінію"
 
 #: labeleditor.cpp:550
 msgid "Insert &Rectangle"
-msgstr "&Rechteck Einfügen"
+msgstr "Вставити &прямокутник"
 
 #: labeleditor.cpp:555
 msgid "Insert &Ellipse"
-msgstr "&Ellipse Einfügen"
+msgstr "Вставити &еліпс"
 
 #: labeleditor.cpp:560
 msgid "&Grid"
-msgstr "&Gitter"
+msgstr "&Ґратка"
 
 #: labeleditor.cpp:564
 msgid "&Preview..."
-msgstr "&Vorschau..."
+msgstr "&Попередній перегляд..."
 
 #: labeleditor.cpp:573
 msgid "Address&book"
-msgstr "Adreß&buch"
+msgstr "Адресна &книга"
 
 #: labeleditor.cpp:578
 msgid "&Create Single Barcode..."
-msgstr "&Einzelnen Barcode Erstellen..."
+msgstr "&Створити поодинокий штрих-код..."
 
 #: labeleditor.cpp:594
 msgid "&Order"
-msgstr "&Reihenfolge"
+msgstr "&Порядок"
 
 #: labeleditor.cpp:595
 msgid "&On Top"
-msgstr "&Nach Ganz Oben"
+msgstr "&Зверху"
 
 #: labeleditor.cpp:596
 msgid "&Raise"
-msgstr "&Aufwärts"
+msgstr "&Підняти"
 
 #: labeleditor.cpp:597
 msgid "&Lower"
-msgstr "&Abwärts"
+msgstr "&Нижче"
 
 #: labeleditor.cpp:598
 msgid "&To Background"
-msgstr "&In den Hintergrund"
+msgstr "&У фон"
 
 #: labeleditor.cpp:600
 msgid "&Center"
-msgstr "&Zentrieren"
+msgstr "&Центрування"
 
 #: labeleditor.cpp:601
 msgid "Center &Horizontally"
-msgstr "&Horizontaler Zentrieren"
+msgstr "Центрувати по &горизонталі"
 
 #: labeleditor.cpp:602
 msgid "Center &Vertically"
-msgstr "&Vertikale Zentrieren"
+msgstr "Центрувати по &вертикалі"
 
 #: labeleditor.cpp:605
 #, fuzzy
 msgid "&Delete"
-msgstr "Reihe löschen"
+msgstr "Видалити рядок"
 
 #: labeleditor.cpp:606
 msgid "&Protect Position and Size"
-msgstr "&Position und Größe schützen"
+msgstr "&Захистити позицію та розмір"
 
 #: labeleditor.cpp:609
 msgid "&Properties"
-msgstr "&Eigenschaften"
+msgstr "&Властивості"
 
 #: labeleditor.cpp:681
 msgid "Label Description"
-msgstr "Label Beschreibung"
+msgstr "Опис етикетки"
 
 #: labeleditor.cpp:682
 msgid "Please enter a description:"
-msgstr "Bitte geben Sie eine Beschreibung ein:"
+msgstr "Будь-ласка, введіть опис:"
 
 #: labeleditor.cpp:711
 msgid "Size: "
-msgstr "Größe: "
+msgstr "Розмір: "
 
 #: labeleditor.cpp:714
 msgid "Label Template: "
-msgstr "Label Vorlage: "
+msgstr "Шаблон етикетки: "
 
 #: labeleditor.cpp:963
 msgid "Spellchecking"
-msgstr "Rechtschreibprüfung"
+msgstr "Перевірка правопису"
 
 #: labeleditor.cpp:1160
 msgid "The file %1 does not exist."
-msgstr "Die Datei %1 existiert nicht."
+msgstr "Файл %1 не існує."
 
 #: labeleditor.cpp:1196
 msgid ""
 "<qt>The document has been modified.<br><br>Do you want to save it ?</qt>"
-msgstr ""
-"<qt>Das Dokument wurde verändert.<br><br>Wollen Sie es speichern ?</qt>"
+msgstr "<qt>Документ було змінено.<br><br>Чи бажаєте зберегти його?</qt>"
 
 #: main.cpp:65
+#, fuzzy
 msgid "KBarcode"
-msgstr "KBarcode"
+msgstr "Штрих-код"
 
 #: main.cpp:66
 #, fuzzy
 msgid "KBarcode4 is a barcode and label printing application for KDE 4."
-msgstr "KBarcode ist eine Barcode und Label Anwendung für KDE 3."
+msgstr "KBarcode - програма під KDE 3 для видруку штрих-кодів та етикеток."
 
 #: main.cpp:67
 msgid "(c) 2001-2008, Dominik Seichter"
@@ -1867,7 +1859,7 @@ msgstr ""
 
 #: main.cpp:70
 msgid "Programmer"
-msgstr "Programmierer"
+msgstr "Програміст"
 
 #: main.cpp:71
 msgid "Stefan \"Stonki\" Onken"
@@ -1875,7 +1867,7 @@ msgstr ""
 
 #: main.cpp:72
 msgid "Project Manager"
-msgstr "Projekt Manager"
+msgstr "Керівник проекту"
 
 #: main.cpp:74
 msgid "Váradi Zsolt Gyula"
@@ -1884,7 +1876,7 @@ msgstr ""
 #: main.cpp:74
 #, fuzzy
 msgid "KBarcode4 Developer"
-msgstr "Barcode Generator"
+msgstr "Утворювач штрих-коду"
 
 #: main.cpp:76
 msgid "Alessandro Rubini"
@@ -1892,7 +1884,8 @@ msgstr ""
 
 #: main.cpp:76
 msgid "Wrote GNU Barcode on which kbarcode is based."
-msgstr "Hat GNU Barcode geschrieben, auf welchem KBarcode basiert."
+msgstr ""
+"Написав GNU-штрих-кодер (GNU Barcode), на якому і побудований kBarcode."
 
 #: main.cpp:78
 msgid "Terry Burton"
@@ -1900,7 +1893,7 @@ msgstr ""
 
 #: main.cpp:78
 msgid "Author of Barcode Writer in Pure Postscript"
-msgstr "Author von Barcode Writer in Pure Postscript"
+msgstr "Автор записувача штрих-коду у чистому PostScript-і"
 
 #: main.cpp:80
 msgid "Daniele Medri"
@@ -1908,7 +1901,7 @@ msgstr ""
 
 #: main.cpp:80
 msgid "Italian translation"
-msgstr "Italienische Übersetzung"
+msgstr "Переклад італійською"
 
 #: main.cpp:81
 msgid "Anton Vaaranmaa"
@@ -1916,7 +1909,7 @@ msgstr ""
 
 #: main.cpp:82
 msgid "Finnish and Swedish translation, created the KBarcode icon"
-msgstr "Finnische und Schwedische Übersetzung, sowie das KBarcode Symbol"
+msgstr "Фінський та шведський переклади, створив іконку для KBarcode"
 
 #: main.cpp:83
 msgid "Miguel Revilla Rodr�uez"
@@ -1924,7 +1917,7 @@ msgstr ""
 
 #: main.cpp:83
 msgid "Spanish translation"
-msgstr "Spanische Übersetzung"
+msgstr "Переклад іспанською"
 
 #: main.cpp:84
 msgid "Sandor Jager"
@@ -1932,7 +1925,7 @@ msgstr ""
 
 #: main.cpp:84
 msgid "Hungarian translation"
-msgstr "Ungarische Übersetzung"
+msgstr "Переклад угорською"
 
 #: main.cpp:85
 msgid "Daniel Etzold"
@@ -1940,7 +1933,7 @@ msgstr ""
 
 #: main.cpp:86
 msgid "Tab icon code stolen from his excellent app qtella."
-msgstr "Tab Icon Code aus qtella."
+msgstr "Іконки викрадені з його чудової програми qtella."
 
 #: main.cpp:87
 msgid "Richard J. Moore"
@@ -1948,7 +1941,7 @@ msgstr ""
 
 #: main.cpp:87
 msgid "Wrote the RichText KPart"
-msgstr "Hat das RichText KPart geschrieben."
+msgstr "Написав RichText KPart"
 
 #: main.cpp:88
 msgid "Yann Bouan"
@@ -1956,7 +1949,7 @@ msgstr ""
 
 #: main.cpp:88
 msgid "French Translation"
-msgstr "Französische Übersetzung"
+msgstr "Переклад французькою"
 
 #: main.cpp:89
 msgid "Erich Kitzmüller"
@@ -1964,7 +1957,7 @@ msgstr ""
 
 #: main.cpp:89
 msgid "Help with ZPL and IPL code"
-msgstr "Hat mir mit ZPL und IPL geholfen."
+msgstr "Допомога з кодом для ZPL та IPL"
 
 #: main.cpp:90
 msgid "Dag Nygren"
@@ -1972,7 +1965,7 @@ msgstr ""
 
 #: main.cpp:90
 msgid "Wrote many patches to improve KBarcode"
-msgstr "Hat viele Patches geschrieben um KBarcode zu verbessern"
+msgstr "Написав багато латок для покращення KBarcode"
 
 #: main.cpp:91
 msgid "Frank Schoolmeesters"
@@ -1980,7 +1973,7 @@ msgstr ""
 
 #: main.cpp:91
 msgid "Made the Netherlands translation"
-msgstr "Niederländische Übersetzung"
+msgstr "Створив голландський переклад"
 
 #: main.cpp:92
 msgid "John Volpe"
@@ -1988,7 +1981,7 @@ msgstr ""
 
 #: main.cpp:92
 msgid "Added lot's of useful data fields to kbarcode"
-msgstr "Hat viele nützliche Datenfelder zu KBarcode hinzugefügt"
+msgstr "Додав цілу купу корисних полів даних для KBarcode"
 
 #: main.cpp:93
 msgid "Nyssa s.r.l."
@@ -1996,7 +1989,7 @@ msgstr ""
 
 #: main.cpp:93
 msgid "Added TEC barcode printer support"
-msgstr "Hat die TEC Barcode Drucker Unterstüzung beigesteuert"
+msgstr "Додав підтримку штрих-кодової друкарки TEC"
 
 #: main.cpp:94
 msgid "Brian Glass"
@@ -2004,7 +1997,7 @@ msgstr ""
 
 #: main.cpp:94
 msgid "Added EPCL barcode printer support"
-msgstr "Hat EPCL Barcode Drucker Unterstüzung hinzugefügt"
+msgstr "Додав підтримку штрих-кодової друкарки EPCL"
 
 #: main.cpp:95
 msgid "František (Fanda) Brožka"
@@ -2019,86 +2012,82 @@ msgid ""
 "Load the file in KBarcode (if --batch is specified, the file will be used in "
 "batchprinting mode)"
 msgstr ""
-"Die Datei in KBarcode laden (wenn die --batch Option benutzt wird, wird die "
-"Datei ins Batchdruck Modul geladen)"
+"Завантажити файл у KBarcode (якщо зазначено --batch, то файл "
+"використовуватиметься у режимі пакетного видруку)"
 
 #: main.cpp:105
 msgid ""
 "Print any loaded files immediately on the default printer or on the printer "
 "specified by the --printer commandline option and exit afterwards"
 msgstr ""
-"Drucke alle geladenen Dateien sofort auf dem Standard Drucker oder auf dem "
-"Drucker der mit der --printer Option angegeben wurde und beende KBarcode "
-"danach"
 
 #: main.cpp:107
 msgid "Printer/destination to print on"
-msgstr "Drucker/Ziel auf dem gedruckt werden soll"
+msgstr ""
 
 #: main.cpp:108
 msgid "KBarcode Modes:"
-msgstr "KBarcode Modi:"
+msgstr "Режими KBarcode:"
 
 #: main.cpp:109
 msgid "Start KBarcode as xbarcode replacement"
-msgstr "KBarcode als xbarcode Ersatz starten"
+msgstr "Запускати KBarcode як заміна xbarcode"
 
 #: main.cpp:110
 msgid "Open the label editor"
-msgstr "Den Label Editor starten"
+msgstr "Відкрити редактор етикетки"
 
 #: main.cpp:111
 msgid "Start directly in batchprinting mode"
-msgstr "direkt in den Batch Druck Modus starten"
+msgstr "Запускатися зразу у режимі пакетного видруку"
 
 #: main.cpp:112
 msgid "Additional options for batchprinting (--batch):"
-msgstr "Zusätzliche optionen für den Batch Druck (--batch)"
+msgstr "Додаткові параметри для пакетного видруку (--batch):"
 
 #: main.cpp:113
 msgid "Output format where mode is one of POSTSCRIPT|IMAGE|BARCODE"
 msgstr ""
-"Ausgabe Format, wobei mode einer der Werte POSTSCRIPT|IMAGE|BARCODE ist"
 
 #: main.cpp:114
 msgid "Set the serial number to be used"
-msgstr "Die Seriennummer setzten"
+msgstr "Встановіть бажаний серійний номер"
 
 #: main.cpp:115
 msgid ""
 "Increase a previously specified serial number using this value for each "
 "printed label"
 msgstr ""
-"Eine vorher angegebene Seriennummer um diesen Wert für jedes Label erhöhen"
+"Збільшує попередній серійний номер на це значення при друці кожної етикетки"
 
 #: main.cpp:116
 msgid "Print <value> labels without any data"
-msgstr "Print <value> labels ohne Daten"
+msgstr ""
 
 #: main.cpp:117
 msgid "Import variable data from a specified sql query"
-msgstr "Daten aus einer SQL Abfrage importieren"
+msgstr ""
 
 #: main.cpp:118
 msgid "Import variable data from a specified csv file"
-msgstr "Daten aus einer CSV Datei importieren"
+msgstr ""
 
 #: mainwindow.cpp:76
 #, fuzzy
 msgid "&Start Configuration Assistant..."
-msgstr "Einrichtungs Assistent &Starten..."
+msgstr "&Запустити чарівник налаштування..."
 
 #: mainwindow.cpp:82
 msgid "&Connect to Database"
-msgstr "&Datenbank Verbindung"
+msgstr "&З'єднатися з базою даних"
 
 #: mainwindow.cpp:93
 msgid "&Import Label Definitions"
-msgstr "&Label Definitionen Importieren"
+msgstr "&Імпортувати означення етикетки"
 
 #: mainwindow.cpp:98
 msgid "&Import Example Data"
-msgstr "&Beispiel Daten Importieren"
+msgstr "&Імпортувати зразкові дані"
 
 #: mainwindow.cpp:123
 msgid "&Help"
@@ -2106,15 +2095,15 @@ msgstr ""
 
 #: mainwindow.cpp:130
 msgid "&System Check..."
-msgstr "&System Überprüfung..."
+msgstr "&Перевірити систему..."
 
 #: mainwindow.cpp:136
 msgid "&Barcode Help..."
-msgstr "&Barcode Hilfe..."
+msgstr "&Довідка по штрих-кодеру..."
 
 #: mainwindow.cpp:142
 msgid "&Donate..."
-msgstr "&Spenden..."
+msgstr "&Дарувати.."
 
 #: mainwindow.cpp:238
 #, fuzzy
@@ -2122,73 +2111,72 @@ msgid ""
 "<qt>The KBarcode2 documentation is available as PDF for download on our "
 "webpage.<br><br>"
 msgstr ""
-"<qt>Die KBarcode Dokumentation kann als PDF Datei von der KBarcode Webseite "
-"heruntergeladen werden.<br><br>"
+"<qt>Документація по KBarcode доступна у PDF-форматі з нашого веб-сайту."
+"<br><br>"
 
 #: mainwindow.cpp:240
 msgid "Download Now"
-msgstr "Jetzt Herunterladen"
+msgstr "Завантажити зараз"
 
 #: mainwindow.cpp:271
 msgid ""
 "<qt>It is possible to support the further development of KBarcode through "
 "donations. PayPal will be used for processing the donation.<br><br>"
 msgstr ""
-"<qt>Sie können die weitere Entwicklung von KBarcode durch Spenden fördern. "
-"PayPal wird zur Abwicklung der Spenden verwendet.<br><br>"
+"<qt>Є можливість підтримати подальшу розробку KBarcode роблячи "
+"пожертвування. Для передачі пожертв можна використати PayPal.<br><br>"
 
 #: mainwindow.cpp:274
 msgid "Donate Now"
-msgstr "Jetzt spenden"
+msgstr "Зробити дарунок зараз"
 
 #: mainwindow.cpp:290
 msgid "<p><h3>Barcode Support</h3></p>"
-msgstr "<p><h3>Barcode Unterstützung</h3></p>"
+msgstr "<p><h3>Підтримка штрих-кодування</h3></p>"
 
 #: mainwindow.cpp:292 mainwindow.cpp:294 mainwindow.cpp:296 mainwindow.cpp:298
 #: mainwindow.cpp:300
 msgid "<b>No</b><br />"
-msgstr "<b>Nein</b><br />"
+msgstr "<b>ні</b><br />"
 
 #: mainwindow.cpp:292 mainwindow.cpp:294 mainwindow.cpp:296 mainwindow.cpp:298
 #: mainwindow.cpp:300
 msgid "<b>Found</b><br />"
-msgstr "<b>Gefunden</b><br />"
+msgstr "<b>знайдено</b><br />"
 
 #: mainwindow.cpp:303
 msgid ""
 "<p>To get <b>barcode support</b> you have to either install <i>GNU Barcode</"
 "i>, <i>TBarcode</i> or <i>PDF417 Enc</i>.</p>"
 msgstr ""
-"<p>Um <b>Barcode Unterstützung</b> zu erhalten müssen Sie entweder <i>GNU "
-"Barcode</i>, <i>TBarcode</i> oder <i>PDF417 Enc</i> installieren.</p>"
+"<p>Щоб мати <b>підтримку штрих-кодів</b>, Ви поивинні хоча б встановити "
+"<i>GNU-штрих-кодер (barcode)</i>, <i>TBarcode</i> або ж <i>кодувальник "
+"PDF417</i>.</p>"
 
 #: mainwindow.cpp:305
 msgid "<p><h3>Database Support</h3></p>"
-msgstr "<p><h3>Datenbank Unterstützung</h3></p>"
+msgstr "<p><h3>Підтримка баз даних</h3></p>"
 
 #: mainwindow.cpp:313
 msgid "<li>Driver found: "
-msgstr "<li>Treiber gefunden: "
+msgstr "<li>Знайдено драйвер: "
 
 #: mainwindow.cpp:318
 msgid ""
 "<p><b>No database drivers found. SQL database support is disabled.</b></p>"
 msgstr ""
-"<p><b>Keine Datenbank Treiber gefunden. SQL Unterstützung wurde abgeschalten."
-"</b></p>"
 
 #: measurements.cpp:51
 msgid "mm"
-msgstr "mm"
+msgstr "мм"
 
 #: measurements.cpp:52
 msgid "in"
-msgstr "in"
+msgstr "у"
 
 #: mimesources.cpp:35
 msgid "Pasted Object"
-msgstr "Eingefügtes Objekt"
+msgstr ""
 
 #: mimesources.cpp:100
 msgid "Paste"
@@ -2196,36 +2184,36 @@ msgstr ""
 
 #: mycanvasview.cpp:164
 msgid "Position: "
-msgstr "Position: "
+msgstr "Позиція: "
 
 #: mycanvasview.cpp:396
 #, fuzzy
 msgid "Delete"
-msgstr "Reihe löschen"
+msgstr "Видалити рядок"
 
 #: newlabel.cpp:46
 msgid "New Label"
-msgstr "Neues Label"
+msgstr "Нова етикетка"
 
 #: newlabel.cpp:58
 msgid "<h1>Create a new Label</h1><br><br>"
-msgstr "<h1>Ein neues Label erstellen</h1><br><br>"
+msgstr "<h1>Створити нову етикетку</h1><br><br>"
 
 #: newlabel.cpp:60
 msgid "<h1>Change Label Size</h1><br><br>"
-msgstr "<h1>Label Größe ändern</h1><br><br>"
+msgstr "<h1>Змінити розмір етикетки</h1><br><br>"
 
 #: newlabel.cpp:65 tokenprovider.cpp:209
 msgid "Label"
-msgstr "Label"
+msgstr "Етикетка"
 
 #: newlabel.cpp:87
 msgid "&Start with an empty label"
-msgstr "&Mit einem leeren Label starten"
+msgstr "&Починати з пустої етикетки"
 
 #: newlabel.cpp:125
 msgid "&Add own Label Definition"
-msgstr "&Eigene Label Definition hinzufügen"
+msgstr "&Додати власне означення етикетки"
 
 #: newlabel.cpp:132
 msgid "&OK"
@@ -2236,152 +2224,152 @@ msgid ""
 "<b>Format:</b><br>\n"
 "Width: "
 msgstr ""
-"<b>Format:</b><br>\n"
-"Breite: "
+"<b>Формат:</b><br>\n"
+"Ширина: "
 
 #: newlabel.cpp:192
 msgid "%1<br>Height: "
-msgstr "%1<br>Höhe: "
+msgstr "%1<br>Висота: "
 
 #: newlabel.cpp:193
 msgid "%2<br>Horizontal Gap: "
-msgstr "%2<br>Horizontaler Abstand: "
+msgstr "%2<br>Проміжок по горизонталі: "
 
 #: newlabel.cpp:194
 msgid "%3<br>Vertical Gap: "
-msgstr "%3<br>Vertikaler Abstand: "
+msgstr "%3<br>Проміжок по вертикалі: "
 
 #: newlabel.cpp:195
 msgid "%4<br>Top Gap: "
-msgstr "%4<br>Abstand nach Oben: "
+msgstr "%4<br>Проміжок зверху: "
 
 #: newlabel.cpp:196
 msgid "%5<br>Left Gap: "
-msgstr "%5<br>Abstand nach Links: "
+msgstr "%5<br>Проміжок зверху: "
 
 #: newlabel.cpp:215
 msgid "No label selected."
-msgstr "Kein Label ausgewählt."
+msgstr "Не вибрано жодної етикетки."
 
 #: printersettings.cpp:43
 msgid "ISO A3"
-msgstr "ISO-A3"
+msgstr "ISO A3"
 
 #: printersettings.cpp:44
 msgid "ISO A4"
-msgstr "ISO-A4"
+msgstr "ISO A4"
 
 #: printersettings.cpp:45
 msgid "ISO A5"
-msgstr "ISO-A5"
+msgstr "ISO A5"
 
 #: printersettings.cpp:46
 msgid "US Letter"
-msgstr "US-Letter"
+msgstr ""
 
 #: printersettings.cpp:47
 msgid "US Legal"
-msgstr "US-Legal"
+msgstr ""
 
 #: printersettings.cpp:48
 msgid "Screen"
-msgstr "Bildschirm"
+msgstr "Екран"
 
 #: printersettings.cpp:50
 msgid "ISO B5"
-msgstr "ISO-B5"
+msgstr "ISO B5"
 
 #: printersettings.cpp:51
 msgid "US Executive"
-msgstr "US-Executive"
+msgstr ""
 
 #: printersettings.cpp:52
 msgid "ISO A0"
-msgstr "ISO-A0"
+msgstr "ISO A0"
 
 #: printersettings.cpp:53
 msgid "ISO A1"
-msgstr "ISO-A1"
+msgstr "ISO A1"
 
 #: printersettings.cpp:54
 msgid "ISO A2"
-msgstr "ISO-A2"
+msgstr "ISO A2"
 
 #: printersettings.cpp:55
 msgid "ISO A6"
-msgstr "ISO-A6"
+msgstr "ISO A6"
 
 #: printersettings.cpp:56
 msgid "ISO A7"
-msgstr "ISO-A7"
+msgstr "ISO A7"
 
 #: printersettings.cpp:57
 msgid "ISO A8"
-msgstr "ISO-A8"
+msgstr "ISO A8"
 
 #: printersettings.cpp:58
 msgid "ISO A9"
-msgstr "ISO-A9"
+msgstr "ISO A9"
 
 #: printersettings.cpp:59
 msgid "ISO B0"
-msgstr "ISO-B0"
+msgstr "ISO B0"
 
 #: printersettings.cpp:60
 msgid "ISO B1"
-msgstr "ISO-B1"
+msgstr "ISO B1"
 
 #: printersettings.cpp:61
 msgid "ISO B10"
-msgstr "ISO-B10"
+msgstr "ISO B10"
 
 #: printersettings.cpp:62
 msgid "ISO B2"
-msgstr "ISO-B2"
+msgstr "ISO B2"
 
 #: printersettings.cpp:63
 msgid "ISO B3"
-msgstr "ISO-B3"
+msgstr "ISO B3"
 
 #: printersettings.cpp:64
 msgid "ISO B4"
-msgstr "ISO-B4"
+msgstr "ISO B4"
 
 #: printersettings.cpp:65
 msgid "ISO B6"
-msgstr "ISO-B6"
+msgstr "ISO B6"
 
 #: printersettings.cpp:66
 msgid "ISO C5"
-msgstr "ISO-C5"
+msgstr "ISO C5"
 
 #: printersettings.cpp:67
 msgid "US Common 10"
-msgstr "US Common 10"
+msgstr ""
 
 #: printersettings.cpp:68
 msgid "ISO DL"
-msgstr "ISO-DL"
+msgstr "ISO DL"
 
 #: printersettings.cpp:69
 msgid "US Folio"
-msgstr "US-Folio"
+msgstr ""
 
 #: printersettings.cpp:70
 msgid "US Ledger"
-msgstr "US-Ledger"
+msgstr ""
 
 #: printersettings.cpp:71
 msgid "US Tabloid"
-msgstr "US-Tabloid"
+msgstr ""
 
 #: propertywidget.cpp:57
 msgid "Image Saved in KBarcode"
-msgstr "Bild in KBarcode gespeichert"
+msgstr ""
 
 #: propertywidget.cpp:91
 msgid "&Border Visible"
-msgstr "&Rand sichtbar"
+msgstr "&Кайма видима"
 
 #: propertywidget.cpp:145 propertywidget.cpp:487
 msgid "90"
@@ -2397,43 +2385,43 @@ msgstr "270"
 
 #: propertywidget.cpp:209
 msgid "Barcode Settings:"
-msgstr "Barcode Einstellungen:"
+msgstr "Налаштування штрих-коду:"
 
 #: propertywidget.cpp:339
 msgid "&Protect item from being moved or resized"
-msgstr "Element vorm verschieben und Größen Änderungen &schützen."
+msgstr "&Захистити елемент від переміщення та зміни розміру"
 
 #: propertywidget.cpp:355
 msgid "&Top:"
-msgstr "&Oben:"
+msgstr "&Зверху:"
 
 #: propertywidget.cpp:356
 msgid "&Left:"
-msgstr "&Links:"
+msgstr "&Зліва:"
 
 #: propertywidget.cpp:357
 msgid "&Height:"
-msgstr "&Höhe:"
+msgstr "&Висота:"
 
 #: propertywidget.cpp:358
 msgid "&Width:"
-msgstr "&Breite:"
+msgstr "&Ширина:"
 
 #: propertywidget.cpp:464
 msgid "&Load image from path"
-msgstr "Bild von Pfad &laden"
+msgstr "&Завантажити зображення зі шляху"
 
 #: propertywidget.cpp:470
 msgid "&Read image path from expression"
-msgstr "Bildpfad aus einem Ausdruck erstellen"
+msgstr "&Прочитати шлях зображення з виразу"
 
 #: propertywidget.cpp:491
 msgid "&Size"
-msgstr "&Größe"
+msgstr "&Розмір"
 
 #: propertywidget.cpp:494
 msgid "&None"
-msgstr "&Nichts"
+msgstr ""
 
 #: propertywidget.cpp:496
 msgid "&Zoom"
@@ -2441,70 +2429,66 @@ msgstr ""
 
 #: propertywidget.cpp:498
 msgid "S&cale"
-msgstr "S&kalierung"
+msgstr ""
 
 #: propertywidget.cpp:501
 msgid "Mirror &Horizontaly"
-msgstr "&Horizontaler spiegeln"
+msgstr "Віддзеркалити по &горизонталі"
 
 #: propertywidget.cpp:502
 msgid "Mirror &Vertically"
-msgstr "&Vertikal spiegeln"
+msgstr "Віддзеркалити по &вертикалі"
 
 #: propertywidget.cpp:528
 msgid "Image format not supported for file: %1"
-msgstr "Bildformat nicht unterstützt für die Datei: %1"
+msgstr "Формат зображення не підтримується для файлу: %1"
 
 #: propertywidget.cpp:615
 msgid "Evaluate JavsScript code to define the visibility of this item:"
-msgstr ""
-"JavaScript Programm ausführen um die sichtbarkeit dieses Elements zu "
-"bestimmen:"
+msgstr "Виконати код JavaScript щоб визначити видимість цього елемента:"
 
 #: sqltables.cpp:126
 msgid "<qt>Unable to open database: "
-msgstr "<qt>Kann die Datenbank nicht öffnen: "
+msgstr "<qt>Не вдається відкрити базу даних: "
 
 #: sqltables.cpp:159
 msgid "We are going to re-create the tables '"
-msgstr "Die folgenden Tabellen werden neu erstellt '"
+msgstr "Ми будемо перестворювати таблиці '"
 
 #: sqltables.cpp:161
 msgid "' and '"
-msgstr "' und '"
+msgstr "' та '"
 
 #: sqltables.cpp:188
 msgid "<qt>Can't create database "
-msgstr "<qt>Kann die Datenbank nicht erstellen "
+msgstr "<qt>Не вдається створити базу даних"
 
 #: sqltables.cpp:188
 msgid "<br>You can continue if the database exists already.</qt>"
 msgstr ""
-"<br>Sie können das Erstellen fortsetzen wenn die Datenbank bereits existiert."
-"</qt>"
 
 #: sqltables.cpp:196
 msgid "Can't connect to database."
-msgstr "Kann keine Datenbank Verbindung aufbauen."
+msgstr "Не вдається приєднатися до бази даних."
 
 #: sqltables.cpp:219
 msgid ""
 "KBarcode could not create the required database. Please create it manually."
 msgstr ""
-"KBarcode konnte die benötigte Datenbank nicht erstellen. Bitte erstellen Sie "
-"sie manuell."
+"KBarcode не вдалося створити запитувану базу даних. Будь-ласка, створіть її "
+"вручну."
 
 #: sqltables.cpp:297
 msgid "Created table "
-msgstr "Tabelle erstellt "
+msgstr "Створена таблиця "
 
 #: sqltables.cpp:297
 msgid " successfully!"
-msgstr " erfolgreich!"
+msgstr " успішно!"
 
 #: sqltables.cpp:312
 msgid "We are going to delete the complete table: "
-msgstr "Die komplette Tabelle wird gelöscht: "
+msgstr "Знищуватимемо усю таблицю: "
 
 #: sqltables.cpp:325
 msgid ""
@@ -2513,24 +2497,22 @@ msgstr ""
 
 #: sqltables.cpp:334
 msgid "We are going to delete the complete tables: "
-msgstr "Die folgenden Tabellen werden gelöscht: "
+msgstr "Знищуватимемо повністю таблиці: "
 
 #: sqltables.cpp:345
 #, fuzzy
 msgid "Importing example data from the file <br>%1<br> into your database."
-msgstr "Importiere die ausgewählte Datei in die SQL Tabelle."
+msgstr "Імпорт вибраного файлу у Ваші таблиці."
 
 #: sqltables.cpp:359
 msgid ""
 "Data file for import not found. Continuing without importing data. Please "
 "check your KBarcode installation."
 msgstr ""
-"Die Datei für den Import konnte nicht gefunden werden. Der Daten-Import wird "
-"übersprungen. Bitte prüfen Sie Ihre KBarcode installation."
 
 #: sqltables.cpp:364
 msgid "SQL import progress:"
-msgstr "SQL Import Fortschritt:"
+msgstr "Поступ SQL-імпорту:"
 
 #: sqltables.cpp:364
 msgid "<qt>%1<br><br>%2</qt>"
@@ -2538,23 +2520,23 @@ msgstr ""
 
 #: sqltables.cpp:383
 msgid "Can't open the data file containing the label definitions."
-msgstr "Kann die Datei mit den Label Definitionen nicht öffnen."
+msgstr "Не вдається відкрити файл з даними щодо означення етикетки."
 
 #: sqltables.cpp:393
 msgid "<qt>Can't execute command:<br><b>"
-msgstr "<qt>Kann den Befehl nicht ausführen:<br><b>"
+msgstr ""
 
 #: sqltables.cpp:483
 msgid ""
 "The SQL tables of KBarcode have changed since the last version. KBarcode "
 "updated them without any loss of data."
 msgstr ""
-"Die SQL Tabellen von KBarcode wurden seit der letzten Version geändert. "
-"KBarcode hat sie ohne Datenverlust aktualisiert."
+"SQL-таблиці від KBarcode змінені відносно останньої версії. KBarcode оновив "
+"їх без будь яких втрат даних."
 
 #: sqltables.cpp:504
 msgid "Connected successfully to your database"
-msgstr "Datenbank Verbindung erfolgreich aufgebaut"
+msgstr "Вдале під'єднання до Вашої бази даних"
 
 #: sqltables.cpp:508
 msgid "<br>So now we will try to connect to the default database:<br>%1</qt>"
@@ -2563,50 +2545,50 @@ msgstr ""
 #: sqltables.cpp:533
 #, fuzzy
 msgid "<qt>Connection to the default database failed:<br>%1</qt>"
-msgstr "<qt>Datenbank aufruf fehlgeschlagen:<br>"
+msgstr "<qt>З'єднання невдале:<br>"
 
 #: sqltables.cpp:537
 #, fuzzy
 msgid "<qt>Connected successfully to the default database:<br>%1</qt>"
-msgstr "Datenbank Verbindung erfolgreich aufgebaut"
+msgstr "Вдале під'єднання до Вашої бази даних"
 
 #: sqltables.cpp:589
 msgid "Database Settings"
-msgstr "Datenbank Einstellungen"
+msgstr "Налаштування бази даних"
 
 #: sqltables.cpp:598
 msgid "Username :"
-msgstr "Benutzername :"
+msgstr "Ім'я користувача: "
 
 #: sqltables.cpp:605
 msgid "Password :"
-msgstr "Passwort :"
+msgstr "Пароль: "
 
 #: sqltables.cpp:613
 msgid "Database :"
-msgstr "Datenbank :"
+msgstr "База даних: "
 
 #: sqltables.cpp:620
 msgid "Host :"
-msgstr "Host :"
+msgstr "Вузол: "
 
 #: sqltables.cpp:627
 msgid "Driver :"
-msgstr "Treiber :"
+msgstr "Драйвер: "
 
 #: sqltables.cpp:640
 msgid "&Autoconnect on program start"
-msgstr "&Automatisch nach dem Start mit Datenbank verbinden"
+msgstr "&Автопід'єднання при запуску програми"
 
 #: sqltables.cpp:644
 msgid "&Test Settings"
-msgstr "&Einstellungen überprüfen"
+msgstr "&Протестувати налаштування"
 
 #: sqltables.cpp:648
 msgid "<b>You have to test your database settings before you can procede.</b>"
 msgstr ""
-"<b>Sie müssen die Datenbank Einstellungen testen, bevor Sie fortfahren "
-"können.</b>"
+"<b>Ви можете протестувати налаштування Вашої бази даних перед тим як "
+"продовжувати.</b>"
 
 #: textlineedit.cpp:157
 msgid "&Mag. Vert.:"
@@ -2618,246 +2600,246 @@ msgstr ""
 
 #: tokenprovider.cpp:211
 msgid "Date & Time"
-msgstr "Datum & Zeit"
+msgstr "Дата та час"
 
 #: tokenprovider.cpp:212
 msgid "Addressbook"
-msgstr "Adressbuch"
+msgstr "Адресна книга"
 
 #: tokenprovider.cpp:217
 msgid "Article description from barcode_basic"
-msgstr "Artikel Beschreibung aus barcode_basic"
+msgstr "Опис товару зі barcode_basic"
 
 #: tokenprovider.cpp:218
 msgid "Article number from barcode_basic"
-msgstr "Artikel Nummer aus barcode_basic"
+msgstr "Номер товару зі barcode_basic"
 
 #: tokenprovider.cpp:225
 msgid "customer number of the current customer"
-msgstr "Kunden Nummer des aktuellen Kunden"
+msgstr "номер поточного замовника"
 
 #: tokenprovider.cpp:226
 msgid "name of the current customer"
-msgstr "Name des aktuellen Kunden"
+msgstr "назва поточного замовника"
 
 #: tokenprovider.cpp:227
 msgid "Barcode number from barcode_basic"
-msgstr "Barcode Nummer aus barcode_basic"
+msgstr "Номер штрих-коду зі barcode_basic"
 
 #: tokenprovider.cpp:229
 msgid "group of the current article"
-msgstr "Gruppe des aktuellen Artikels"
+msgstr "група поточного товару"
 
 #: tokenprovider.cpp:230
 msgid "Barcode encoding type from barcode_basic"
-msgstr "Barcode Codierungs Art aus barcode_basic"
+msgstr ""
 
 #: tokenprovider.cpp:231
 msgid "User readable barcode encoding type from barcode_basic"
-msgstr "Lesbare Barcode Codierungs Art aus barcode_basic"
+msgstr ""
 
 #: tokenprovider.cpp:236
 msgid "Path and filename of this file"
-msgstr "Pfad und Dateiname dieser Datei"
+msgstr "Шлях та назва цього файлу"
 
 #: tokenprovider.cpp:237
 msgid "number of labels currently printed during this printout"
-msgstr "Anzahl der Labels die bisher gedruckt wurden"
+msgstr "кількість видрукованих етикеток протягом поточного друку"
 
 #: tokenprovider.cpp:238
 msgid "current column on the page"
-msgstr "Spalte auf der Seite"
+msgstr "поточний стовпчик на сторінці"
 
 #: tokenprovider.cpp:239
 msgid "current row on the page"
-msgstr "Reihe auf der Seite"
+msgstr "поточний рядок на сторінці"
 
 #: tokenprovider.cpp:240
 msgid "Current page"
-msgstr "Aktuelle Seite"
+msgstr "Поточна сторінка"
 
 #: tokenprovider.cpp:241
 msgid "Current resolution"
-msgstr "Auflösung"
+msgstr "Поточна роздільна здатність"
 
 #: tokenprovider.cpp:242
 msgid "Include a serial number on your labels."
-msgstr "Eine Seriennummer in Ihre Label einfügen"
+msgstr ""
 
 #: tokenprovider.cpp:248
 msgid "Execute java script code"
-msgstr "JavaScript Programme ausführen"
+msgstr "Виконати код java script"
 
 #: tokenprovider.cpp:249
 msgid "Insert the result of a custom sql query"
-msgstr "Das Ergebnis einer benutzerspezifischen SQL Abfrage einfügen"
+msgstr "Вставити результат виконання особливого sql-запиту"
 
 #: tokenprovider.cpp:250
 msgid "Insert a custom variable"
-msgstr "Eine benutzerspezifische Variable einfügen"
+msgstr "Вставити особливу змінну"
 
 #: tokenprovider.cpp:255
 msgid "Date formated as configured in the preferences"
-msgstr "Datum so formatiert wie in den Einstellungne angegeben"
+msgstr "Дата формується згідно налаштувань"
 
 #: tokenprovider.cpp:256
 msgid "Short Weekday Name"
-msgstr "Kurzer Name des Wochentags"
+msgstr "Коротка назва дня тижня"
 
 #: tokenprovider.cpp:257
 msgid "Full Weekday Name"
-msgstr "Name des Wochentags"
+msgstr "Повна назва дня тижня"
 
 #: tokenprovider.cpp:258
 msgid "Short Month Name"
-msgstr "Kurzer Name des Monats"
+msgstr "Повна назва місяця"
 
 #: tokenprovider.cpp:259
 msgid "Full Month Name"
-msgstr "Name des Monats"
+msgstr "Повна назва місяця"
 
 #: tokenprovider.cpp:260
 msgid "Date-Time"
-msgstr "Datum-Zeit"
+msgstr "Дата-час"
 
 #: tokenprovider.cpp:261
 msgid "Century"
-msgstr "Jahrhundert"
+msgstr "Століття"
 
 #: tokenprovider.cpp:262
 msgid "Day Number (01-31)"
-msgstr "Tag im Monat (01-31)"
+msgstr "Номер дня (01-31)"
 
 #: tokenprovider.cpp:263
 msgid "Month-Day-year"
-msgstr "Monat-Tag-Jahr"
+msgstr "Місяць-день-рік"
 
 #: tokenprovider.cpp:264
 msgid "Day Number ( 1-31)"
-msgstr "Tag im Monat (1-31)"
+msgstr "Номер дня ( 1-31)"
 
 #: tokenprovider.cpp:265
 msgid "Year-Month-day"
-msgstr "Jahr-Monat-tag"
+msgstr "Рік-місяць-день"
 
 #: tokenprovider.cpp:266
 msgid "Week Year (yy)"
-msgstr "Woche im Jahr (yy)"
+msgstr ""
 
 #: tokenprovider.cpp:267
 msgid "Week Year (yyyy)"
-msgstr "Woche im Jahr (yyyy)"
+msgstr ""
 
 #: tokenprovider.cpp:268
 msgid "Hour (01-24)"
-msgstr "Stunde (01-24)"
+msgstr "Година (01-24)"
 
 #: tokenprovider.cpp:269
 msgid "Hour (1-12)"
-msgstr "Stunde (1-12)"
+msgstr "Година (1-12)"
 
 #: tokenprovider.cpp:270
 msgid "Day of Year"
-msgstr "Tag im Jahr"
+msgstr "День року"
 
 #: tokenprovider.cpp:271
 msgid "Month Number (01-12)"
-msgstr "Monat (01-12)"
+msgstr "Номер місяця (01-12)"
 
 #: tokenprovider.cpp:272
 msgid "Minute (00-59)"
-msgstr "Minute (00-59)"
+msgstr "Хвилини (00-59)"
 
 #: tokenprovider.cpp:273
 msgid "a.m./p.m."
-msgstr "a.m/p.m."
+msgstr "до полудня/після полудня"
 
 #: tokenprovider.cpp:274
 msgid "Time (h:m:s am/pm)"
-msgstr "Zeit (h:m:s am/pm)"
+msgstr "Час (год:хв:сек до полудня/після полудня)"
 
 #: tokenprovider.cpp:275
 msgid "Time (HH:MM)"
-msgstr "Zeit (HH:MM)"
+msgstr "Час (ГГ:ХХ)"
 
 #: tokenprovider.cpp:276
 msgid "Seconds (00-59)"
-msgstr "Sekunden (00-59)"
+msgstr "Секунди (00-59)"
 
 #: tokenprovider.cpp:277
 msgid "Time (HH:MM:SS)"
-msgstr "Zeit (HH::MM:SS)"
+msgstr "Час (ГГ:ХХ:СС)"
 
 #: tokenprovider.cpp:278
 msgid "Weekday (1=Monday...)"
-msgstr "Wochentag (Montag=1)"
+msgstr "День тижня (1=понеділок...)"
 
 #: tokenprovider.cpp:279 tokenprovider.cpp:282
 msgid "Week Number (00-53)"
-msgstr "Nummer der Woche (00-53)"
+msgstr "Номер тижня (00-53)"
 
 #: tokenprovider.cpp:280
 msgid "Week Number (01-53)"
-msgstr "Nummer der Woche (01-53)"
+msgstr "Номер тижня (01-53)"
 
 #: tokenprovider.cpp:281
 msgid "Weekday (0=Sunday...)"
-msgstr "Wochentag (Sonntag=0)"
+msgstr "День тижня (0=неділя...)"
 
 #: tokenprovider.cpp:283
 msgid "Local Date"
-msgstr "Lokales Datumsformat"
+msgstr "Місцева дата"
 
 #: tokenprovider.cpp:284
 msgid "Local Time"
-msgstr "Lokales Zeitformat"
+msgstr "Місцевий час"
 
 #: tokenprovider.cpp:285
 msgid "Year (00-99)"
-msgstr "Jahr (00-99)"
+msgstr "Рік (00-99)"
 
 #: tokenprovider.cpp:286
 msgid "Year (YYYY)"
-msgstr "Jahr (YYYY)"
+msgstr "Рік (РРРР)"
 
 #: tokenprovider.cpp:287
 msgid "Offset from UTC"
-msgstr "Abstand zu UTC"
+msgstr "Зсув від Грінвіча"
 
 #: tokenprovider.cpp:288
 msgid "Timezone Name"
-msgstr "Name der Zeitzone"
+msgstr "Назва часового поясу"
 
 #: tokenprovider.cpp:293
 msgid "Name"
-msgstr "Name"
+msgstr ""
 
 #: tokenprovider.cpp:297
 msgid "Full E-Mail"
-msgstr "Komplette E-Mail Addresse"
+msgstr "Повна електронна адреса"
 
 #: tokenprovider.cpp:320
 msgid "Formatted Address"
-msgstr "Formattierte Addresse"
+msgstr ""
 
 #: tokenprovider.cpp:837
 msgid "ERROR: Empty SQL Query"
-msgstr "Fehler: Lehre SQL Abfrage"
+msgstr "ПОМИЛКА: Порожній SQL-запит"
 
 #: xmlutils.cpp:349
 msgid ""
 "<qt>This appears file appears to be created by an older version of KBarcode."
 "<br>Please check if the used label definition is correct:<br><b>"
 msgstr ""
-"<qt>Diese scheint von einer älteren KBarcode Version erstellt worden zu sein."
-"<br> Bitte prüfen Sie ob die Label Definition noch richtig ist:<br><b>"
+"<qt>Виглядає так, що файл створено у старішій версії KBarcode.<br>Будь-"
+"ласка, перевірте чи правильне означення етикетки:<br><b>"
 
 #. i18n: file: xml/labeleditorui.rc:28
 #. i18n: ectx: Menu (my-insert)
 #: rc.cpp:3
 #, fuzzy
 msgid "&Insert"
-msgstr "Reihe einfügen"
+msgstr "Вставити рядок"
 
 #. i18n: file: xml/labeleditorui.rc:39
 #. i18n: ectx: Menu (my-view)
@@ -2869,7 +2851,7 @@ msgstr ""
 #. i18n: ectx: Menu (tools)
 #: rc.cpp:9
 msgid "T&ools"
-msgstr "E&xtras"
+msgstr "Інструменти"
 
 #. i18n: file: xml/labeleditorui.rc:59
 #. i18n: ectx: ToolBar (leftToolBar)
@@ -2890,27 +2872,59 @@ msgstr ""
 #~ msgid ""
 #~ "_: NAME OF TRANSLATORS\n"
 #~ "Your names"
-#~ msgstr "Dominik Seichter"
+#~ msgstr "Сергій Дубик"
 
 #~ msgid ""
 #~ "_: EMAIL OF TRANSLATORS\n"
 #~ "Your emails"
-#~ msgstr "domseichter@web.de"
+#~ msgstr "dubyk@library.lviv.ua"
 
-#~ msgid "&Action Map..."
-#~ msgstr "&Aktions-Verzeichnis..."
+#~ msgid "Australian Post"
+#~ msgstr "Австралійська пошта"
 
-#~ msgid "Action Map"
-#~ msgstr "Aktions-Verzeichnis"
+#~ msgid "EAN 2"
+#~ msgstr "EAN 2"
 
-#~ msgid "Find and execute actions."
-#~ msgstr "Aktionen finden und ausführen."
+#~ msgid "EAN 5"
+#~ msgstr "EAN 5"
 
-#~ msgid "Action"
-#~ msgstr "Aktion"
+#~ msgid "ISBN"
+#~ msgstr "ISBN"
 
-#~ msgid "Shortcut"
-#~ msgstr "Kürzel"
+#~ msgid "Rationalized Codabar"
+#~ msgstr "Раціоналізований Codabar"
+
+#~ msgid "Royal Mail"
+#~ msgstr "Королівська пошта"
+
+#~ msgid "UPCA"
+#~ msgstr "UPCA"
+
+#~ msgid "UPCE"
+#~ msgstr "UPCE"
+
+#~ msgid "Barcode Cache"
+#~ msgstr "Кеш для штрих-кодів"
+
+#~ msgid "Barcode Cache Size:"
+#~ msgstr "Розмір кешу для штрих-кодів:"
+
+#~ msgid ""
+#~ "<qt>Specifies how many barcodes should be cached on the harddisk.If you "
+#~ "print lot's of articles, you should set this to be the same as the number "
+#~ "of articles in your database to get best speed results.One cached barcode "
+#~ "requires about 20kb of diskspace.</qt>"
+#~ msgstr ""
+#~ "<qt>Конретизує, скільки штрихкодів кешувати на жорсткому диску. Якщо Ви "
+#~ "продруковуєте велику кількість товарів, Ви повинні встановити це рівним "
+#~ "кількості товарів у Вашій базі даних і матимете кращі результати по "
+#~ "швидкодії. Один закешований штрих-код потребує біля 20кб на диску.</qt>"
+
+#~ msgid "Kbarcode"
+#~ msgstr "Kbarcode"
+
+#~ msgid "Barcode not valid!"
+#~ msgstr "Штрих-код неправильний!"
 
 #~ msgid "Item Moved"
-#~ msgstr "Element verschoben"
+#~ msgstr "Елемент переміщено"

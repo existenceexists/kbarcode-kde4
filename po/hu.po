@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?"
 "atid=463988&group_id=51628\n"
-"POT-Creation-Date: 2012-11-01 09:33+0100\n"
+"POT-Creation-Date: 2013-02-10 10:35+0100\n"
 "PO-Revision-Date: 2003-12-02 22:09+0100\n"
 "Last-Translator: Sandor Jager <jager@puskas.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -84,7 +84,7 @@ msgstr ""
 msgid "&Print"
 msgstr "&Nyomtatás"
 
-#: barcodegenerator.cpp:94 dialogs/previewdialog.cpp:112
+#: barcodegenerator.cpp:94 dialogs/previewdialog.cpp:113
 msgid "&Close"
 msgstr ""
 
@@ -256,12 +256,12 @@ msgid ""
 "print out.</qt>"
 msgstr ""
 
-#: batchassistant.cpp:259 dialogs/previewdialog.cpp:124
+#: batchassistant.cpp:259 dialogs/previewdialog.cpp:125
 #, fuzzy
 msgid "Serial start:"
 msgstr "Kezdet:"
 
-#: batchassistant.cpp:266 dialogs/previewdialog.cpp:126
+#: batchassistant.cpp:266 dialogs/previewdialog.cpp:127
 msgid "Serial increment:"
 msgstr ""
 
@@ -471,24 +471,24 @@ msgstr "Üres szeparátor! Kérlek adj meg egy értéket!"
 msgid "<qt>The following items can not be added:"
 msgstr "<qt>A következő elemeket nem lehet hozzáadni:"
 
-#: batchassistant.cpp:1282
+#: batchassistant.cpp:1291
 #, fuzzy
 msgid "What to do with already inserted data?"
 msgstr "Hány címkét szeretne kinyomtatni?"
 
-#: batchassistant.cpp:1284
+#: batchassistant.cpp:1293
 msgid "Append"
 msgstr ""
 
-#: batchassistant.cpp:1285
+#: batchassistant.cpp:1294
 msgid "Replace"
 msgstr ""
 
-#: batchassistant.cpp:1286
+#: batchassistant.cpp:1295
 msgid "Keep"
 msgstr ""
 
-#: batchassistant.cpp:1290
+#: batchassistant.cpp:1299
 msgid ""
 "<qt>There are already data in the table widget becouse you visited this page "
 "before. <br><b>What do you want to do with the data?</b><br><br>If you press "
@@ -503,17 +503,17 @@ msgid ""
 "table widget.<br><br>If you don't know what to do press \"Keep\".</qt>"
 msgstr ""
 
-#: batchassistant.cpp:1329
+#: batchassistant.cpp:1338
 #, fuzzy
 msgid "<qt>Can't connect to a database.</qt>"
 msgstr "Nem lehet csatlakozni az adatbázishoz."
 
-#: batchassistant.cpp:1336
+#: batchassistant.cpp:1345
 #, fuzzy
 msgid "<qt>Can't execute SQL query:<br>"
 msgstr "<qt>Nem hajtható végre a parancs:<br><b>"
 
-#: batchassistant.cpp:1365
+#: batchassistant.cpp:1374
 msgid "Can't open file: %1"
 msgstr ""
 
@@ -543,82 +543,82 @@ msgstr ""
 msgid "&Cancel"
 msgstr ""
 
-#: commands.cpp:469
+#: commands.cpp:546
 msgid "New Rectangle"
 msgstr "Új négyszög"
 
-#: commands.cpp:483
+#: commands.cpp:560
 msgid "New Line"
 msgstr "Új vonal"
 
-#: commands.cpp:493
+#: commands.cpp:570
 msgid "New Text"
 msgstr "Új szöveg beszúrása"
 
-#: commands.cpp:510
+#: commands.cpp:587
 #, fuzzy
 msgid "New TextLine"
 msgstr "Új vonal"
 
-#: commands.cpp:527
+#: commands.cpp:604
 msgid "New Barcode"
 msgstr "Új vonalkód beszúrása"
 
-#: commands.h:145
+#: commands.h:146
 msgid "Resized Item"
 msgstr "Objektum átméretezve"
 
-#: commands.h:180
+#: commands.h:181 commands.h:208
 #, fuzzy
 msgid "Moved Item"
 msgstr "Vonal áthelyezve"
 
-#: commands.h:200
+#: commands.h:231
 msgid "Raised or lowered an item"
 msgstr ""
 
-#: commands.h:219 labeleditor.cpp:734
+#: commands.h:250 labeleditor.cpp:745
 #, fuzzy
 msgid "Protected Item"
 msgstr "Objektum áthelyezve"
 
-#: commands.h:237
+#: commands.h:268
 msgid "Changed Settings"
 msgstr "Beállítások megváltoztatva"
 
-#: commands.h:260 commands.h:292
+#: commands.h:291 commands.h:323
 msgid "Changed Text"
 msgstr "Szöveg megváltoztatva"
 
-#: commands.h:274
+#: commands.h:305
 #, fuzzy
 msgid "Rotated Text"
 msgstr "Szöveg megváltoztatva"
 
-#: commands.h:313
+#: commands.h:344
 #, fuzzy
 msgid "Changed Barcode"
 msgstr "KBarcode beállításai"
 
-#: commands.h:324
+#: commands.h:355
 msgid "New Picture"
 msgstr "Új kép beszúrása"
 
-#: commands.h:394
+#: commands.h:425
 #, fuzzy
 msgid "Delete Item"
 msgstr "Objetum törlése"
 
-#: commands.h:405
+#: commands.h:436
 #, fuzzy
 msgid "Modified Border"
 msgstr "Vonal módosítva"
 
-#: commands.h:424
+#: commands.h:455
 msgid "Modified Rectangle or Ellipse"
 msgstr "Négyszög vagy ellipszis módosítva"
 
-#: commands.h:445
+#: commands.h:476
 msgid "Changed visibility JavaScript"
 msgstr ""
 
@@ -1446,38 +1446,38 @@ msgstr "&Jobbra rendezés"
 msgid "&Justify"
 msgstr "&Sorkizárás"
 
-#: dialogs/multilineeditdlg.cpp:176 labeleditor.cpp:524 textlineedit.cpp:107
+#: dialogs/multilineeditdlg.cpp:176 labeleditor.cpp:535 textlineedit.cpp:107
 #, fuzzy
 msgid "Insert &Data Field"
 msgstr "&Adatbázismező beszúrása"
 
-#: dialogs/previewdialog.cpp:109
+#: dialogs/previewdialog.cpp:110
 #, fuzzy
 msgid "Select &Address"
 msgstr "&Cím beszúrása..."
 
-#: dialogs/previewdialog.cpp:111
+#: dialogs/previewdialog.cpp:112
 msgid "&Update"
 msgstr ""
 
-#: dialogs/previewdialog.cpp:115
+#: dialogs/previewdialog.cpp:116
 msgid "Customer Name and No.:"
 msgstr "Ügyfél neve és száma:"
 
-#: dialogs/previewdialog.cpp:118
+#: dialogs/previewdialog.cpp:119
 msgid "Article Number:"
 msgstr "Cikkszám:"
 
-#: dialogs/previewdialog.cpp:120 dialogs/smalldialogs.cpp:56
+#: dialogs/previewdialog.cpp:121 dialogs/smalldialogs.cpp:56
 #: dialogs/smalldialogs.cpp:114
 msgid "Group:"
 msgstr "Csoport:"
 
-#: dialogs/previewdialog.cpp:122
+#: dialogs/previewdialog.cpp:123
 msgid "Index:"
 msgstr "Index:"
 
-#: dialogs/previewdialog.cpp:128
+#: dialogs/previewdialog.cpp:129
 #, fuzzy
 msgid "Addressbook entry:"
 msgstr "&Címjegyzék"
@@ -1548,137 +1548,137 @@ msgstr "Elem hozzáadása"
 msgid "Article:"
 msgstr "Cikkszám"
 
-#: dialogs/tokendialog.cpp:76 dialogs/tokendialog.cpp:113
-#: dialogs/tokendialog.cpp:138
+#: dialogs/tokendialog.cpp:74 dialogs/tokendialog.cpp:111
+#: dialogs/tokendialog.cpp:136
 #, fuzzy
 msgid "What do you want to insert?"
 msgstr "Hány címkét szeretne kinyomtatni?"
 
-#: dialogs/tokendialog.cpp:79
+#: dialogs/tokendialog.cpp:77
 #, fuzzy
 msgid "Insert a &fixed data field"
 msgstr "&Adatbázismező beszúrása"
 
-#: dialogs/tokendialog.cpp:81
+#: dialogs/tokendialog.cpp:79
 msgid "Insert a &custom SQL query, variable or JavaScript function"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:87
+#: dialogs/tokendialog.cpp:85
 msgid "Step 1 of 3"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:95
+#: dialogs/tokendialog.cpp:93
 msgid "Step 2 of 3"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:103
+#: dialogs/tokendialog.cpp:101
 msgid "Step 3 of 3"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:116
+#: dialogs/tokendialog.cpp:114
 msgid "&Select from a list of all tokens"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:118
+#: dialogs/tokendialog.cpp:116
 msgid "Insert printing &informations"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:120
+#: dialogs/tokendialog.cpp:118
 #, fuzzy
 msgid "&Insert a database field"
 msgstr "&Adatbázismező beszúrása"
 
-#: dialogs/tokendialog.cpp:122
+#: dialogs/tokendialog.cpp:120
 msgid "Insert a &date/time function"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:124
+#: dialogs/tokendialog.cpp:122
 #, fuzzy
 msgid "Insert an &addressbook field"
 msgstr "&Cím beszúrása..."
 
-#: dialogs/tokendialog.cpp:141
+#: dialogs/tokendialog.cpp:139
 msgid "Insert a custom &variable"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:143
+#: dialogs/tokendialog.cpp:141
 #, fuzzy
 msgid "Insert a &SQL query"
 msgstr "V&onal beszúrása"
 
-#: dialogs/tokendialog.cpp:145
+#: dialogs/tokendialog.cpp:143
 msgid "Insert a &JavaScript function"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:172
+#: dialogs/tokendialog.cpp:170
 msgid "&Category:"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:179
+#: dialogs/tokendialog.cpp:177
 msgid "&Token:"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:183 dialogs/tokendialog.cpp:227
+#: dialogs/tokendialog.cpp:181 dialogs/tokendialog.cpp:221
 msgid "Token"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:183 dialogs/tokendialog.cpp:227
+#: dialogs/tokendialog.cpp:181 dialogs/tokendialog.cpp:221
 #, fuzzy
 msgid "Description"
 msgstr "Címke leírása"
 
-#: dialogs/tokendialog.cpp:187
+#: dialogs/tokendialog.cpp:185
 msgid "&Custom Expression to be inserted in the token."
 msgstr ""
 
-#: dialogs/tokendialog.cpp:194
+#: dialogs/tokendialog.cpp:192
 msgid ""
 "<qt>Certain tokens, like for exaple the sqlquery token need arguments. In "
 "the case of the sqlquery token, the sure has to enter a sql query in this "
 "text field.</qt>"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:242
+#: dialogs/tokendialog.cpp:235
 #, fuzzy
 msgid "&Create a new custom variable"
 msgstr "Új címke készítésének &felajánlása induláskor"
 
-#: dialogs/tokendialog.cpp:247
+#: dialogs/tokendialog.cpp:240
 msgid "&Insert an existing custom variable"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:276
+#: dialogs/tokendialog.cpp:269
 msgid ""
 "<qt><b>No SQL connection found!</b><br>You can build a query, but you will "
 "not be able to execute or test it right now.<br></qt>"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:284
+#: dialogs/tokendialog.cpp:277
 msgid "&SQL Query:"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:288
+#: dialogs/tokendialog.cpp:281
 msgid "&Test"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:294
+#: dialogs/tokendialog.cpp:287
 msgid "Query test results:"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:314
+#: dialogs/tokendialog.cpp:307
 msgid "/* Place your JavaScript code into this text field. */\n"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:440
+#: dialogs/tokendialog.cpp:432
 msgid "All"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:453 dialogs/tokendialog.cpp:521
+#: dialogs/tokendialog.cpp:445 dialogs/tokendialog.cpp:515
 #, fuzzy
 msgid "Variable defined by the user for this label."
 msgstr "Ehhez az oszlophoz használt adatbázismező:"
 
-#: dialogs/tokendialog.cpp:518 tokenprovider.cpp:210
+#: dialogs/tokendialog.cpp:512 tokenprovider.cpp:210
 #, fuzzy
 msgid "Custom Values"
 msgstr "Ügyfél neve"
@@ -1729,169 +1729,169 @@ msgstr ""
 msgid "Static"
 msgstr "Állandó"
 
-#: labeleditor.cpp:362
+#: labeleditor.cpp:372
 msgid "Select Label"
 msgstr "Címke kiválasztása"
 
-#: labeleditor.cpp:399
+#: labeleditor.cpp:409
 msgid ""
 "<qt>The file <b>%1</b> cannot be loaded as the label definition is missing.</"
 "qt>"
 msgstr ""
 
-#: labeleditor.cpp:462
+#: labeleditor.cpp:472
 msgid "Close &Label"
 msgstr "&Címke bezárása"
 
-#: labeleditor.cpp:467
+#: labeleditor.cpp:477
 msgid "&Recent Files"
 msgstr "Elő&zőleg megnyitott"
 
-#: labeleditor.cpp:472
+#: labeleditor.cpp:482
 msgid "&Import and Print Batch File..."
 msgstr "&Importálás és nyomtatás nagy tételben..."
 
-#: labeleditor.cpp:480
+#: labeleditor.cpp:490
 msgid "&Change description..."
 msgstr "&Leírás megváltoztatása..."
 
-#: labeleditor.cpp:484
+#: labeleditor.cpp:494
 msgid "&Delete Object"
 msgstr "Objetum &törlése"
 
-#: labeleditor.cpp:490
+#: labeleditor.cpp:500
 #, fuzzy
 msgid "&Properties..."
 msgstr "&Tulajdonságok"
 
-#: labeleditor.cpp:495
+#: labeleditor.cpp:506
 msgid "Print to &Barcode Printer..."
 msgstr ""
 
-#: labeleditor.cpp:499
+#: labeleditor.cpp:510
 #, fuzzy
 msgid "Print to &Image..."
 msgstr "Képek készítése..."
 
-#: labeleditor.cpp:503
+#: labeleditor.cpp:514
 msgid "&Change Label..."
 msgstr "&Címke méretének megváltoztatása..."
 
-#: labeleditor.cpp:507
+#: labeleditor.cpp:518
 msgid "Insert &Barcode"
 msgstr "&Vonalkód beszúrása"
 
-#: labeleditor.cpp:514
+#: labeleditor.cpp:525
 msgid "Insert &Picture"
 msgstr "&Kép beszúrása"
 
-#: labeleditor.cpp:519
+#: labeleditor.cpp:530
 msgid "Insert &Text"
 msgstr "&Szöveg beszúrása"
 
-#: labeleditor.cpp:529
+#: labeleditor.cpp:540
 #, fuzzy
 msgid "Insert &Text Line"
 msgstr "&Szöveg beszúrása"
 
-#: labeleditor.cpp:534
+#: labeleditor.cpp:545
 msgid "Insert &Line"
 msgstr "V&onal beszúrása"
 
-#: labeleditor.cpp:539
+#: labeleditor.cpp:550
 msgid "Insert &Rectangle"
 msgstr "&Négyszög beszúrása"
 
-#: labeleditor.cpp:544
+#: labeleditor.cpp:555
 msgid "Insert &Ellipse"
 msgstr "&Ellipszis beszúrása"
 
-#: labeleditor.cpp:549
+#: labeleditor.cpp:560
 msgid "&Grid"
 msgstr "&Rajzrács"
 
-#: labeleditor.cpp:553
+#: labeleditor.cpp:564
 msgid "&Preview..."
 msgstr "&Előnézet..."
 
-#: labeleditor.cpp:562
+#: labeleditor.cpp:573
 msgid "Address&book"
 msgstr "&Címjegyzék"
 
-#: labeleditor.cpp:567
+#: labeleditor.cpp:578
 msgid "&Create Single Barcode..."
 msgstr "Önálló vonalkód &készítése..."
 
-#: labeleditor.cpp:583
+#: labeleditor.cpp:594
 msgid "&Order"
 msgstr "&Sorrend"
 
-#: labeleditor.cpp:584
+#: labeleditor.cpp:595
 msgid "&On Top"
 msgstr "&Legfelül"
 
-#: labeleditor.cpp:585
+#: labeleditor.cpp:596
 msgid "&Raise"
 msgstr "&Megemelés"
 
-#: labeleditor.cpp:586
+#: labeleditor.cpp:597
 msgid "&Lower"
 msgstr "&Süllyesztés"
 
-#: labeleditor.cpp:587
+#: labeleditor.cpp:598
 msgid "&To Background"
 msgstr "&Háttérbe"
 
-#: labeleditor.cpp:589
+#: labeleditor.cpp:600
 msgid "&Center"
 msgstr "&Középre"
 
-#: labeleditor.cpp:590
+#: labeleditor.cpp:601
 msgid "Center &Horizontally"
 msgstr "&Vízszintesen középre"
 
-#: labeleditor.cpp:591
+#: labeleditor.cpp:602
 msgid "Center &Vertically"
 msgstr "&Függőlegesen középre"
 
-#: labeleditor.cpp:594
+#: labeleditor.cpp:605
 #, fuzzy
 msgid "&Delete"
 msgstr "Objetum törlése"
 
-#: labeleditor.cpp:595
+#: labeleditor.cpp:606
 msgid "&Protect Position and Size"
 msgstr ""
 
-#: labeleditor.cpp:598
+#: labeleditor.cpp:609
 msgid "&Properties"
 msgstr "&Tulajdonságok"
 
-#: labeleditor.cpp:670
+#: labeleditor.cpp:681
 msgid "Label Description"
 msgstr "Címke leírása"
 
-#: labeleditor.cpp:671
+#: labeleditor.cpp:682
 msgid "Please enter a description:"
 msgstr "Kérlek adj meg leírást:"
 
-#: labeleditor.cpp:700
+#: labeleditor.cpp:711
 msgid "Size: "
 msgstr "Méret: "
 
-#: labeleditor.cpp:703
+#: labeleditor.cpp:714
 msgid "Label Template: "
 msgstr "Címke sablon: "
 
-#: labeleditor.cpp:952
+#: labeleditor.cpp:963
 msgid "Spellchecking"
 msgstr "Helyesírásellenőrzés"
 
-#: labeleditor.cpp:1149
+#: labeleditor.cpp:1160
 msgid "The file %1 does not exist."
 msgstr "A %1 fájl nem létezik."
 
-#: labeleditor.cpp:1185
+#: labeleditor.cpp:1196
 msgid ""
 "<qt>The document has been modified.<br><br>Do you want to save it ?</qt>"
 msgstr "<qt>A dokumentum megváltozott.<br><br>Kívánod elmenteni ?</qt>"
@@ -2247,7 +2247,7 @@ msgstr ""
 msgid "Position: "
 msgstr "Pozíció: "
 
-#: mycanvasview.cpp:397
+#: mycanvasview.cpp:396
 #, fuzzy
 msgid "Delete"
 msgstr "Objetum törlése"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: yeni\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?"
 "atid=463988&group_id=51628\n"
-"POT-Creation-Date: 2012-11-01 09:33+0100\n"
+"POT-Creation-Date: 2013-02-10 10:35+0100\n"
 "PO-Revision-Date: 2006-03-21 17:33+0200\n"
 "Last-Translator: Furkan Duman <coderlord@gmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -74,7 +74,7 @@ msgstr ""
 msgid "&Print"
 msgstr "&Yazdır"
 
-#: barcodegenerator.cpp:94 dialogs/previewdialog.cpp:112
+#: barcodegenerator.cpp:94 dialogs/previewdialog.cpp:113
 msgid "&Close"
 msgstr ""
 
@@ -241,11 +241,11 @@ msgstr ""
 "başlangıç, en az bir numara içeren, baaşlangıç değerinin özgür bir şeklidir. "
 "Bu numara, çıktınızdaki her yazdırılan etikette arttırılacaktır.</qt>"
 
-#: batchassistant.cpp:259 dialogs/previewdialog.cpp:124
+#: batchassistant.cpp:259 dialogs/previewdialog.cpp:125
 msgid "Serial start:"
 msgstr "Ardışık başlangıç:"
 
-#: batchassistant.cpp:266 dialogs/previewdialog.cpp:126
+#: batchassistant.cpp:266 dialogs/previewdialog.cpp:127
 msgid "Serial increment:"
 msgstr "Ardışık artış:"
 
@@ -441,24 +441,24 @@ msgstr "Ayıraç boş. Lütfen bir değer atayın."
 msgid "<qt>The following items can not be added:"
 msgstr "<qt>İzleyen öğeler eklenemedi:"
 
-#: batchassistant.cpp:1282
+#: batchassistant.cpp:1291
 #, fuzzy
 msgid "What to do with already inserted data?"
 msgstr "Ne eklemek istersiniz?"
 
-#: batchassistant.cpp:1284
+#: batchassistant.cpp:1293
 msgid "Append"
 msgstr ""
 
-#: batchassistant.cpp:1285
+#: batchassistant.cpp:1294
 msgid "Replace"
 msgstr ""
 
-#: batchassistant.cpp:1286
+#: batchassistant.cpp:1295
 msgid "Keep"
 msgstr ""
 
-#: batchassistant.cpp:1290
+#: batchassistant.cpp:1299
 msgid ""
 "<qt>There are already data in the table widget becouse you visited this page "
 "before. <br><b>What do you want to do with the data?</b><br><br>If you press "
@@ -473,16 +473,16 @@ msgid ""
 "table widget.<br><br>If you don't know what to do press \"Keep\".</qt>"
 msgstr ""
 
-#: batchassistant.cpp:1329
+#: batchassistant.cpp:1338
 #, fuzzy
 msgid "<qt>Can't connect to a database.</qt>"
 msgstr "Veri tabanına bağlanılamıyor."
 
-#: batchassistant.cpp:1336
+#: batchassistant.cpp:1345
 msgid "<qt>Can't execute SQL query:<br>"
 msgstr "<qt>SQL sorgusu çalıştırılamadı:<br>"
 
-#: batchassistant.cpp:1365
+#: batchassistant.cpp:1374
 msgid "Can't open file: %1"
 msgstr "Dosya açılamadı: %1"
 
@@ -512,83 +512,83 @@ msgstr "<qt>Aygıt veya dosya açılamadı <b>%1</b></qt>."
 msgid "&Cancel"
 msgstr ""
 
-#: commands.cpp:469
+#: commands.cpp:546
 msgid "New Rectangle"
 msgstr "Yeni Dörtgen"
 
-#: commands.cpp:483
+#: commands.cpp:560
 msgid "New Line"
 msgstr "Yeni Çizgi"
 
-#: commands.cpp:493
+#: commands.cpp:570
 msgid "New Text"
 msgstr "Yeni Metin"
 
-#: commands.cpp:510
+#: commands.cpp:587
 msgid "New TextLine"
 msgstr "Yeni metin çizgisi"
 
-#: commands.cpp:527
+#: commands.cpp:604
 msgid "New Barcode"
 msgstr "Yeni Barkod"
 
-#: commands.h:145
+#: commands.h:146
 #, fuzzy
 msgid "Resized Item"
 msgstr "Korunmuş Öğe"
 
-#: commands.h:180
+#: commands.h:181 commands.h:208
 #, fuzzy
 msgid "Moved Item"
 msgstr "Korunmuş Öğe"
 
-#: commands.h:200
+#: commands.h:231
 msgid "Raised or lowered an item"
 msgstr ""
 
-#: commands.h:219 labeleditor.cpp:734
+#: commands.h:250 labeleditor.cpp:745
 msgid "Protected Item"
 msgstr "Korunmuş Öğe"
 
-#: commands.h:237
+#: commands.h:268
 #, fuzzy
 msgid "Changed Settings"
 msgstr "Barkod Seçenekleri"
 
-#: commands.h:260 commands.h:292
+#: commands.h:291 commands.h:323
 #, fuzzy
 msgid "Changed Text"
 msgstr "Yeni Metin"
 
-#: commands.h:274
+#: commands.h:305
 #, fuzzy
 msgid "Rotated Text"
 msgstr "Yeni Metin"
 
-#: commands.h:313
+#: commands.h:344
 #, fuzzy
 msgid "Changed Barcode"
 msgstr "KBarcode'yi Ayarla"
 
-#: commands.h:324
+#: commands.h:355
 #, fuzzy
 msgid "New Picture"
 msgstr "&Resim Ekle"
 
-#: commands.h:394
+#: commands.h:425
 #, fuzzy
 msgid "Delete Item"
 msgstr "Satır Sil"
 
-#: commands.h:405
+#: commands.h:436
 msgid "Modified Border"
 msgstr ""
 
-#: commands.h:424
+#: commands.h:455
 msgid "Modified Rectangle or Ellipse"
 msgstr ""
 
-#: commands.h:445
+#: commands.h:476
 msgid "Changed visibility JavaScript"
 msgstr ""
 
@@ -1401,36 +1401,36 @@ msgstr "Sağa &Hizala"
 msgid "&Justify"
 msgstr "&Yasla"
 
-#: dialogs/multilineeditdlg.cpp:176 labeleditor.cpp:524 textlineedit.cpp:107
+#: dialogs/multilineeditdlg.cpp:176 labeleditor.cpp:535 textlineedit.cpp:107
 msgid "Insert &Data Field"
 msgstr "&Veri Alanı Ekle"
 
-#: dialogs/previewdialog.cpp:109
+#: dialogs/previewdialog.cpp:110
 msgid "Select &Address"
 msgstr "&Adres Seç"
 
-#: dialogs/previewdialog.cpp:111
+#: dialogs/previewdialog.cpp:112
 msgid "&Update"
 msgstr ""
 
-#: dialogs/previewdialog.cpp:115
+#: dialogs/previewdialog.cpp:116
 msgid "Customer Name and No.:"
 msgstr "Müşteri Adı ve No.:"
 
-#: dialogs/previewdialog.cpp:118
+#: dialogs/previewdialog.cpp:119
 msgid "Article Number:"
 msgstr "Madde Numarası:"
 
-#: dialogs/previewdialog.cpp:120 dialogs/smalldialogs.cpp:56
+#: dialogs/previewdialog.cpp:121 dialogs/smalldialogs.cpp:56
 #: dialogs/smalldialogs.cpp:114
 msgid "Group:"
 msgstr "Grup:"
 
-#: dialogs/previewdialog.cpp:122
+#: dialogs/previewdialog.cpp:123
 msgid "Index:"
 msgstr "Dizin:"
 
-#: dialogs/previewdialog.cpp:128
+#: dialogs/previewdialog.cpp:129
 msgid "Addressbook entry:"
 msgstr "Adres defteri girdisi:"
 
@@ -1497,84 +1497,84 @@ msgstr "Öğe Düzenle"
 msgid "Article:"
 msgstr "Madde:"
 
-#: dialogs/tokendialog.cpp:76 dialogs/tokendialog.cpp:113
-#: dialogs/tokendialog.cpp:138
+#: dialogs/tokendialog.cpp:74 dialogs/tokendialog.cpp:111
+#: dialogs/tokendialog.cpp:136
 msgid "What do you want to insert?"
 msgstr "Ne eklemek istersiniz?"
 
-#: dialogs/tokendialog.cpp:79
+#: dialogs/tokendialog.cpp:77
 msgid "Insert a &fixed data field"
 msgstr "&Sabit bir veri tabanı alanı ekle"
 
-#: dialogs/tokendialog.cpp:81
+#: dialogs/tokendialog.cpp:79
 msgid "Insert a &custom SQL query, variable or JavaScript function"
 msgstr "Öz&el bir SQL sorgusu, değer veya JavaScript fonksiyonu ekle"
 
-#: dialogs/tokendialog.cpp:87
+#: dialogs/tokendialog.cpp:85
 msgid "Step 1 of 3"
 msgstr "Adım 1-3"
 
-#: dialogs/tokendialog.cpp:95
+#: dialogs/tokendialog.cpp:93
 msgid "Step 2 of 3"
 msgstr "Adım 2-3"
 
-#: dialogs/tokendialog.cpp:103
+#: dialogs/tokendialog.cpp:101
 msgid "Step 3 of 3"
 msgstr "Adım 3-3"
 
-#: dialogs/tokendialog.cpp:116
+#: dialogs/tokendialog.cpp:114
 msgid "&Select from a list of all tokens"
 msgstr "Simge listesinden &seç"
 
-#: dialogs/tokendialog.cpp:118
+#: dialogs/tokendialog.cpp:116
 msgid "Insert printing &informations"
 msgstr "Yazdırma b&ilgisi ekle"
 
-#: dialogs/tokendialog.cpp:120
+#: dialogs/tokendialog.cpp:118
 msgid "&Insert a database field"
 msgstr "&Veri tabanı alanı ekle"
 
-#: dialogs/tokendialog.cpp:122
+#: dialogs/tokendialog.cpp:120
 msgid "Insert a &date/time function"
 msgstr "&Tarih/saat fonksiyonu ekle"
 
-#: dialogs/tokendialog.cpp:124
+#: dialogs/tokendialog.cpp:122
 msgid "Insert an &addressbook field"
 msgstr "&Adres defteri alanı ekle"
 
-#: dialogs/tokendialog.cpp:141
+#: dialogs/tokendialog.cpp:139
 msgid "Insert a custom &variable"
 msgstr "Özel &değişken ekle"
 
-#: dialogs/tokendialog.cpp:143
+#: dialogs/tokendialog.cpp:141
 msgid "Insert a &SQL query"
 msgstr "&SQL sorgusu ekle"
 
-#: dialogs/tokendialog.cpp:145
+#: dialogs/tokendialog.cpp:143
 msgid "Insert a &JavaScript function"
 msgstr "&JavaScript fonksiyonu ekle"
 
-#: dialogs/tokendialog.cpp:172
+#: dialogs/tokendialog.cpp:170
 msgid "&Category:"
 msgstr "&Kategori:"
 
-#: dialogs/tokendialog.cpp:179
+#: dialogs/tokendialog.cpp:177
 msgid "&Token:"
 msgstr "&Simge:"
 
-#: dialogs/tokendialog.cpp:183 dialogs/tokendialog.cpp:227
+#: dialogs/tokendialog.cpp:181 dialogs/tokendialog.cpp:221
 msgid "Token"
 msgstr "Simge"
 
-#: dialogs/tokendialog.cpp:183 dialogs/tokendialog.cpp:227
+#: dialogs/tokendialog.cpp:181 dialogs/tokendialog.cpp:221
 msgid "Description"
 msgstr "Açıklama"
 
-#: dialogs/tokendialog.cpp:187
+#: dialogs/tokendialog.cpp:185
 msgid "&Custom Expression to be inserted in the token."
 msgstr "Simgeye eklenecek olan öz&el ifade."
 
-#: dialogs/tokendialog.cpp:194
+#: dialogs/tokendialog.cpp:192
 msgid ""
 "<qt>Certain tokens, like for exaple the sqlquery token need arguments. In "
 "the case of the sqlquery token, the sure has to enter a sql query in this "
@@ -1584,15 +1584,15 @@ msgstr ""
 "simgesinin için, bu metin alanına bir sql sorgusu girildiğinden emin "
 "olunmalıdır.</qt>"
 
-#: dialogs/tokendialog.cpp:242
+#: dialogs/tokendialog.cpp:235
 msgid "&Create a new custom variable"
 msgstr "&Yeni bir özel değişken oluştur"
 
-#: dialogs/tokendialog.cpp:247
+#: dialogs/tokendialog.cpp:240
 msgid "&Insert an existing custom variable"
 msgstr "Varolan bir özel değişken &ekle"
 
-#: dialogs/tokendialog.cpp:276
+#: dialogs/tokendialog.cpp:269
 msgid ""
 "<qt><b>No SQL connection found!</b><br>You can build a query, but you will "
 "not be able to execute or test it right now.<br></qt>"
@@ -1600,31 +1600,31 @@ msgstr ""
 "<qt><b>SQL bağlantısı bulunamadı!</b><br>Sorguyu inşa edebilirsiniz, fakat "
 "şu anda çalıştıramayacak veya deneyemeyeceksiniz.<br></qt>"
 
-#: dialogs/tokendialog.cpp:284
+#: dialogs/tokendialog.cpp:277
 msgid "&SQL Query:"
 msgstr "&SQL Sorgusu:"
 
-#: dialogs/tokendialog.cpp:288
+#: dialogs/tokendialog.cpp:281
 msgid "&Test"
 msgstr "&Dene"
 
-#: dialogs/tokendialog.cpp:294
+#: dialogs/tokendialog.cpp:287
 msgid "Query test results:"
 msgstr "Sorgu deneme sonuçları:"
 
-#: dialogs/tokendialog.cpp:314
+#: dialogs/tokendialog.cpp:307
 msgid "/* Place your JavaScript code into this text field. */\n"
 msgstr "/* Bu metin alanına JavaScript kodunuzu yerleştirin. */\n"
 
-#: dialogs/tokendialog.cpp:440
+#: dialogs/tokendialog.cpp:432
 msgid "All"
 msgstr "Tümü"
 
-#: dialogs/tokendialog.cpp:453 dialogs/tokendialog.cpp:521
+#: dialogs/tokendialog.cpp:445 dialogs/tokendialog.cpp:515
 msgid "Variable defined by the user for this label."
 msgstr "Bu etiket için, kullanıcı tarafından tanımlanan değişken."
 
-#: dialogs/tokendialog.cpp:518 tokenprovider.cpp:210
+#: dialogs/tokendialog.cpp:512 tokenprovider.cpp:210
 msgid "Custom Values"
 msgstr "Özel Değerler"
 
@@ -1677,11 +1677,11 @@ msgstr ""
 msgid "Static"
 msgstr "Sabit"
 
-#: labeleditor.cpp:362
+#: labeleditor.cpp:372
 msgid "Select Label"
 msgstr "Etiket Seçin"
 
-#: labeleditor.cpp:399
+#: labeleditor.cpp:409
 msgid ""
 "<qt>The file <b>%1</b> cannot be loaded as the label definition is missing.</"
 "qt>"
@@ -1689,157 +1689,157 @@ msgstr ""
 "<qt><b>%1</b> dosyası kayıp olduğu için etiket tanım dosyası olarak "
 "yüklenemedi.</qt>"
 
-#: labeleditor.cpp:462
+#: labeleditor.cpp:472
 msgid "Close &Label"
 msgstr "Etiketi &Kapat"
 
-#: labeleditor.cpp:467
+#: labeleditor.cpp:477
 msgid "&Recent Files"
 msgstr "&Sık Kullanılan Dosyalar"
 
-#: labeleditor.cpp:472
+#: labeleditor.cpp:482
 msgid "&Import and Print Batch File..."
 msgstr "İçe &Aktar ve Toplu İşlem Dosyasını Yazdır..."
 
-#: labeleditor.cpp:480
+#: labeleditor.cpp:490
 msgid "&Change description..."
 msgstr "Açıklamayı &değiştir..."
 
-#: labeleditor.cpp:484
+#: labeleditor.cpp:494
 msgid "&Delete Object"
 msgstr "Nesneyi &Sil"
 
-#: labeleditor.cpp:490
+#: labeleditor.cpp:500
 #, fuzzy
 msgid "&Properties..."
 msgstr "&Seçenekler"
 
-#: labeleditor.cpp:495
+#: labeleditor.cpp:506
 msgid "Print to &Barcode Printer..."
 msgstr "&Barkod Yazıcıda Yazdır..."
 
-#: labeleditor.cpp:499
+#: labeleditor.cpp:510
 msgid "Print to &Image..."
 msgstr "&Resim olarak Yazdır..."
 
-#: labeleditor.cpp:503
+#: labeleditor.cpp:514
 msgid "&Change Label..."
 msgstr "Etiketi &Değiştir..."
 
-#: labeleditor.cpp:507
+#: labeleditor.cpp:518
 msgid "Insert &Barcode"
 msgstr "&Barkod Ekle"
 
-#: labeleditor.cpp:514
+#: labeleditor.cpp:525
 msgid "Insert &Picture"
 msgstr "&Resim Ekle"
 
-#: labeleditor.cpp:519
+#: labeleditor.cpp:530
 msgid "Insert &Text"
 msgstr "&Metin Ekle"
 
-#: labeleditor.cpp:529
+#: labeleditor.cpp:540
 msgid "Insert &Text Line"
 msgstr "&Metin Satırı Ekle"
 
-#: labeleditor.cpp:534
+#: labeleditor.cpp:545
 msgid "Insert &Line"
 msgstr "&Çizgi Ekle"
 
-#: labeleditor.cpp:539
+#: labeleditor.cpp:550
 msgid "Insert &Rectangle"
 msgstr "&Dörtgen Ekle"
 
-#: labeleditor.cpp:544
+#: labeleditor.cpp:555
 msgid "Insert &Ellipse"
 msgstr "&Elips Ekle"
 
-#: labeleditor.cpp:549
+#: labeleditor.cpp:560
 msgid "&Grid"
 msgstr "&Izgara"
 
-#: labeleditor.cpp:553
+#: labeleditor.cpp:564
 msgid "&Preview..."
 msgstr "Ö&ngörünüm..."
 
-#: labeleditor.cpp:562
+#: labeleditor.cpp:573
 msgid "Address&book"
 msgstr "Adres &defteri"
 
-#: labeleditor.cpp:567
+#: labeleditor.cpp:578
 msgid "&Create Single Barcode..."
 msgstr "Tek Barkod &Oluştur..."
 
-#: labeleditor.cpp:583
+#: labeleditor.cpp:594
 msgid "&Order"
 msgstr "&Sıra"
 
-#: labeleditor.cpp:584
+#: labeleditor.cpp:595
 msgid "&On Top"
 msgstr "Ü&stte"
 
-#: labeleditor.cpp:585
+#: labeleditor.cpp:596
 msgid "&Raise"
 msgstr "Çı&kık"
 
-#: labeleditor.cpp:586
+#: labeleditor.cpp:597
 msgid "&Lower"
 msgstr "&Gömülü"
 
-#: labeleditor.cpp:587
+#: labeleditor.cpp:598
 msgid "&To Background"
 msgstr "&Arka fonda"
 
-#: labeleditor.cpp:589
+#: labeleditor.cpp:600
 msgid "&Center"
 msgstr "&Ortala"
 
-#: labeleditor.cpp:590
+#: labeleditor.cpp:601
 msgid "Center &Horizontally"
 msgstr "&Yatay Ortala"
 
-#: labeleditor.cpp:591
+#: labeleditor.cpp:602
 msgid "Center &Vertically"
 msgstr "&Düşey Ortala"
 
-#: labeleditor.cpp:594
+#: labeleditor.cpp:605
 #, fuzzy
 msgid "&Delete"
 msgstr "Satır Sil"
 
-#: labeleditor.cpp:595
+#: labeleditor.cpp:606
 msgid "&Protect Position and Size"
 msgstr "Konum ve Boyutu &Koru"
 
-#: labeleditor.cpp:598
+#: labeleditor.cpp:609
 msgid "&Properties"
 msgstr "&Seçenekler"
 
-#: labeleditor.cpp:670
+#: labeleditor.cpp:681
 msgid "Label Description"
 msgstr "Etiket Açıklaması"
 
-#: labeleditor.cpp:671
+#: labeleditor.cpp:682
 msgid "Please enter a description:"
 msgstr "Lütfen bir açıklama girin:"
 
-#: labeleditor.cpp:700
+#: labeleditor.cpp:711
 msgid "Size: "
 msgstr "Boyut: "
 
-#: labeleditor.cpp:703
+#: labeleditor.cpp:714
 msgid "Label Template: "
 msgstr "Etiket Şablonu: "
 
-#: labeleditor.cpp:952
+#: labeleditor.cpp:963
 msgid "Spellchecking"
 msgstr "Yazım denetimi"
 
-#: labeleditor.cpp:1149
+#: labeleditor.cpp:1160
 msgid "The file %1 does not exist."
 msgstr "%1 dosyası bulunamadı."
 
-#: labeleditor.cpp:1185
+#: labeleditor.cpp:1196
 msgid ""
 "<qt>The document has been modified.<br><br>Do you want to save it ?</qt>"
 msgstr "<qt>Belge değiştirilmiş.<br><br>Kaydetmek istiyor musunuz?</qt>"
@@ -2195,7 +2195,7 @@ msgstr ""
 msgid "Position: "
 msgstr "Konum: "
 
-#: mycanvasview.cpp:397
+#: mycanvasview.cpp:396
 #, fuzzy
 msgid "Delete"
 msgstr "Satır Sil"

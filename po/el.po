@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?"
 "atid=463988&group_id=51628\n"
-"POT-Creation-Date: 2012-11-01 09:33+0100\n"
+"POT-Creation-Date: 2013-02-10 10:35+0100\n"
 "PO-Revision-Date: 2004-02-02 19:33+0200\n"
 "Last-Translator: Theodore Karkoulis <bilbo@debian.gr>\n"
 "Language-Team: Greek <el@li.org>\n"
@@ -81,7 +81,7 @@ msgstr ""
 msgid "&Print"
 msgstr "&Εκτύπωση"
 
-#: barcodegenerator.cpp:94 dialogs/previewdialog.cpp:112
+#: barcodegenerator.cpp:94 dialogs/previewdialog.cpp:113
 msgid "&Close"
 msgstr ""
 
@@ -246,12 +246,12 @@ msgid ""
 "print out.</qt>"
 msgstr ""
 
-#: batchassistant.cpp:259 dialogs/previewdialog.cpp:124
+#: batchassistant.cpp:259 dialogs/previewdialog.cpp:125
 #, fuzzy
 msgid "Serial start:"
 msgstr "Αρχή:"
 
-#: batchassistant.cpp:266 dialogs/previewdialog.cpp:126
+#: batchassistant.cpp:266 dialogs/previewdialog.cpp:127
 msgid "Serial increment:"
 msgstr ""
 
@@ -461,23 +461,23 @@ msgstr "Ο διαχωριστής είναι άδειος. Παρακαλώ δώ
 msgid "<qt>The following items can not be added:"
 msgstr "<qt>Τα παρακάτω αντικείμενα δεν μπορούν να προστεθούν:"
 
-#: batchassistant.cpp:1282
+#: batchassistant.cpp:1291
 msgid "What to do with already inserted data?"
 msgstr ""
 
-#: batchassistant.cpp:1284
+#: batchassistant.cpp:1293
 msgid "Append"
 msgstr ""
 
-#: batchassistant.cpp:1285
+#: batchassistant.cpp:1294
 msgid "Replace"
 msgstr ""
 
-#: batchassistant.cpp:1286
+#: batchassistant.cpp:1295
 msgid "Keep"
 msgstr ""
 
-#: batchassistant.cpp:1290
+#: batchassistant.cpp:1299
 msgid ""
 "<qt>There are already data in the table widget becouse you visited this page "
 "before. <br><b>What do you want to do with the data?</b><br><br>If you press "
@@ -492,17 +492,17 @@ msgid ""
 "table widget.<br><br>If you don't know what to do press \"Keep\".</qt>"
 msgstr ""
 
-#: batchassistant.cpp:1329
+#: batchassistant.cpp:1338
 #, fuzzy
 msgid "<qt>Can't connect to a database.</qt>"
 msgstr "Αδυναμία σύνδεσης με τη βάση δεδομένων."
 
-#: batchassistant.cpp:1336
+#: batchassistant.cpp:1345
 #, fuzzy
 msgid "<qt>Can't execute SQL query:<br>"
 msgstr "<qt>Αδυναμία εκτέλεσης εντολής:<br><b>"
 
-#: batchassistant.cpp:1365
+#: batchassistant.cpp:1374
 msgid "Can't open file: %1"
 msgstr ""
 
@@ -532,82 +532,82 @@ msgstr ""
 msgid "&Cancel"
 msgstr ""
 
-#: commands.cpp:469
+#: commands.cpp:546
 msgid "New Rectangle"
 msgstr "Νεό Παραλληλόγραμο"
 
-#: commands.cpp:483
+#: commands.cpp:560
 msgid "New Line"
 msgstr "Νέα γραμμή"
 
-#: commands.cpp:493
+#: commands.cpp:570
 msgid "New Text"
 msgstr "Νέο Κείμενο"
 
-#: commands.cpp:510
+#: commands.cpp:587
 #, fuzzy
 msgid "New TextLine"
 msgstr "Νέα γραμμή"
 
-#: commands.cpp:527
+#: commands.cpp:604
 msgid "New Barcode"
 msgstr "Νέο Barcode"
 
-#: commands.h:145
+#: commands.h:146
 msgid "Resized Item"
 msgstr ""
 
-#: commands.h:180
+#: commands.h:181 commands.h:208
 #, fuzzy
 msgid "Moved Item"
 msgstr "Προσθήκη Αντικειμένου"
 
-#: commands.h:200
+#: commands.h:231
 msgid "Raised or lowered an item"
 msgstr ""
 
-#: commands.h:219 labeleditor.cpp:734
+#: commands.h:250 labeleditor.cpp:745
 msgid "Protected Item"
 msgstr ""
 
-#: commands.h:237
+#: commands.h:268
 #, fuzzy
 msgid "Changed Settings"
 msgstr "Ρυθμίσεις Barcode"
 
-#: commands.h:260 commands.h:292
+#: commands.h:291 commands.h:323
 #, fuzzy
 msgid "Changed Text"
 msgstr "Νέο Κείμενο"
 
-#: commands.h:274
+#: commands.h:305
 #, fuzzy
 msgid "Rotated Text"
 msgstr "Νέο Κείμενο"
 
-#: commands.h:313
+#: commands.h:344
 #, fuzzy
 msgid "Changed Barcode"
 msgstr "Ρύθμιση KBarcode"
 
-#: commands.h:324
+#: commands.h:355
 msgid "New Picture"
 msgstr "Νέα Εικόνα"
 
-#: commands.h:394
+#: commands.h:425
 #, fuzzy
 msgid "Delete Item"
 msgstr "&Διαγραφή Αντικειμένου"
 
-#: commands.h:405
+#: commands.h:436
 msgid "Modified Border"
 msgstr ""
 
-#: commands.h:424
+#: commands.h:455
 msgid "Modified Rectangle or Ellipse"
 msgstr ""
 
-#: commands.h:445
+#: commands.h:476
 msgid "Changed visibility JavaScript"
 msgstr ""
 
@@ -1436,38 +1436,38 @@ msgstr "Στοίχιση &Δεξια"
 msgid "&Justify"
 msgstr "&Πλήρης Στοίχιση"
 
-#: dialogs/multilineeditdlg.cpp:176 labeleditor.cpp:524 textlineedit.cpp:107
+#: dialogs/multilineeditdlg.cpp:176 labeleditor.cpp:535 textlineedit.cpp:107
 #, fuzzy
 msgid "Insert &Data Field"
 msgstr "Εισαγωγή &Πεδίου βάσης δεδομένων"
 
-#: dialogs/previewdialog.cpp:109
+#: dialogs/previewdialog.cpp:110
 #, fuzzy
 msgid "Select &Address"
 msgstr "Εισαγωγή &Διεύθυνσης..."
 
-#: dialogs/previewdialog.cpp:111
+#: dialogs/previewdialog.cpp:112
 msgid "&Update"
 msgstr ""
 
-#: dialogs/previewdialog.cpp:115
+#: dialogs/previewdialog.cpp:116
 msgid "Customer Name and No.:"
 msgstr "Όνομα και Αρ. Πελάτη:"
 
-#: dialogs/previewdialog.cpp:118
+#: dialogs/previewdialog.cpp:119
 msgid "Article Number:"
 msgstr "Αριθμός Άρθρου:"
 
-#: dialogs/previewdialog.cpp:120 dialogs/smalldialogs.cpp:56
+#: dialogs/previewdialog.cpp:121 dialogs/smalldialogs.cpp:56
 #: dialogs/smalldialogs.cpp:114
 msgid "Group:"
 msgstr "Γκρούπ:"
 
-#: dialogs/previewdialog.cpp:122
+#: dialogs/previewdialog.cpp:123
 msgid "Index:"
 msgstr "Ευρετήριο:"
 
-#: dialogs/previewdialog.cpp:128
+#: dialogs/previewdialog.cpp:129
 #, fuzzy
 msgid "Addressbook entry:"
 msgstr "Βιβλίο &Διευθύνσεων"
@@ -1538,136 +1538,136 @@ msgstr "Προσθήκη Αντικειμένου"
 msgid "Article:"
 msgstr "Αρ. Άρθρου"
 
-#: dialogs/tokendialog.cpp:76 dialogs/tokendialog.cpp:113
-#: dialogs/tokendialog.cpp:138
+#: dialogs/tokendialog.cpp:74 dialogs/tokendialog.cpp:111
+#: dialogs/tokendialog.cpp:136
 msgid "What do you want to insert?"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:79
+#: dialogs/tokendialog.cpp:77
 #, fuzzy
 msgid "Insert a &fixed data field"
 msgstr "Εισαγωγή &Πεδίου βάσης δεδομένων"
 
-#: dialogs/tokendialog.cpp:81
+#: dialogs/tokendialog.cpp:79
 msgid "Insert a &custom SQL query, variable or JavaScript function"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:87
+#: dialogs/tokendialog.cpp:85
 msgid "Step 1 of 3"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:95
+#: dialogs/tokendialog.cpp:93
 msgid "Step 2 of 3"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:103
+#: dialogs/tokendialog.cpp:101
 msgid "Step 3 of 3"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:116
+#: dialogs/tokendialog.cpp:114
 msgid "&Select from a list of all tokens"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:118
+#: dialogs/tokendialog.cpp:116
 msgid "Insert printing &informations"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:120
+#: dialogs/tokendialog.cpp:118
 #, fuzzy
 msgid "&Insert a database field"
 msgstr "Εισαγωγή &Πεδίου βάσης δεδομένων"
 
-#: dialogs/tokendialog.cpp:122
+#: dialogs/tokendialog.cpp:120
 msgid "Insert a &date/time function"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:124
+#: dialogs/tokendialog.cpp:122
 #, fuzzy
 msgid "Insert an &addressbook field"
 msgstr "Εισαγωγή &Διεύθυνσης..."
 
-#: dialogs/tokendialog.cpp:141
+#: dialogs/tokendialog.cpp:139
 msgid "Insert a custom &variable"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:143
+#: dialogs/tokendialog.cpp:141
 #, fuzzy
 msgid "Insert a &SQL query"
 msgstr "Εισαγωγή &Γραμμής"
 
-#: dialogs/tokendialog.cpp:145
+#: dialogs/tokendialog.cpp:143
 msgid "Insert a &JavaScript function"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:172
+#: dialogs/tokendialog.cpp:170
 msgid "&Category:"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:179
+#: dialogs/tokendialog.cpp:177
 msgid "&Token:"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:183 dialogs/tokendialog.cpp:227
+#: dialogs/tokendialog.cpp:181 dialogs/tokendialog.cpp:221
 msgid "Token"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:183 dialogs/tokendialog.cpp:227
+#: dialogs/tokendialog.cpp:181 dialogs/tokendialog.cpp:221
 #, fuzzy
 msgid "Description"
 msgstr "Περιγραφή Ταμπέλας"
 
-#: dialogs/tokendialog.cpp:187
+#: dialogs/tokendialog.cpp:185
 msgid "&Custom Expression to be inserted in the token."
 msgstr ""
 
-#: dialogs/tokendialog.cpp:194
+#: dialogs/tokendialog.cpp:192
 msgid ""
 "<qt>Certain tokens, like for exaple the sqlquery token need arguments. In "
 "the case of the sqlquery token, the sure has to enter a sql query in this "
 "text field.</qt>"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:242
+#: dialogs/tokendialog.cpp:235
 #, fuzzy
 msgid "&Create a new custom variable"
 msgstr "&Δημιουργία νέας ταμπέλας κατά την εκκίνηση"
 
-#: dialogs/tokendialog.cpp:247
+#: dialogs/tokendialog.cpp:240
 msgid "&Insert an existing custom variable"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:276
+#: dialogs/tokendialog.cpp:269
 msgid ""
 "<qt><b>No SQL connection found!</b><br>You can build a query, but you will "
 "not be able to execute or test it right now.<br></qt>"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:284
+#: dialogs/tokendialog.cpp:277
 msgid "&SQL Query:"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:288
+#: dialogs/tokendialog.cpp:281
 msgid "&Test"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:294
+#: dialogs/tokendialog.cpp:287
 msgid "Query test results:"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:314
+#: dialogs/tokendialog.cpp:307
 msgid "/* Place your JavaScript code into this text field. */\n"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:440
+#: dialogs/tokendialog.cpp:432
 msgid "All"
 msgstr ""
 
-#: dialogs/tokendialog.cpp:453 dialogs/tokendialog.cpp:521
+#: dialogs/tokendialog.cpp:445 dialogs/tokendialog.cpp:515
 #, fuzzy
 msgid "Variable defined by the user for this label."
 msgstr "Πεδίο βάσης δεδομένων για χρησιμοποίηση με αυτή τη στήλη:"
 
-#: dialogs/tokendialog.cpp:518 tokenprovider.cpp:210
+#: dialogs/tokendialog.cpp:512 tokenprovider.cpp:210
 #, fuzzy
 msgid "Custom Values"
 msgstr "Όνομα Πελάτη"
@@ -1718,169 +1718,169 @@ msgstr ""
 msgid "Static"
 msgstr "Στατικό"
 
-#: labeleditor.cpp:362
+#: labeleditor.cpp:372
 msgid "Select Label"
 msgstr "Επιλογή Ταμπέλας"
 
-#: labeleditor.cpp:399
+#: labeleditor.cpp:409
 msgid ""
 "<qt>The file <b>%1</b> cannot be loaded as the label definition is missing.</"
 "qt>"
 msgstr ""
 
-#: labeleditor.cpp:462
+#: labeleditor.cpp:472
 msgid "Close &Label"
 msgstr "Κλείσιμο &Ταμπέλας"
 
-#: labeleditor.cpp:467
+#: labeleditor.cpp:477
 msgid "&Recent Files"
 msgstr "&Πρόσφατα Αρχεία"
 
-#: labeleditor.cpp:472
+#: labeleditor.cpp:482
 msgid "&Import and Print Batch File..."
 msgstr "&Εισαγωγή και Εκτύπωση Ομαδικού Αρχείου..."
 
-#: labeleditor.cpp:480
+#: labeleditor.cpp:490
 msgid "&Change description..."
 msgstr "&Αλλαγή περιγραφής..."
 
-#: labeleditor.cpp:484
+#: labeleditor.cpp:494
 msgid "&Delete Object"
 msgstr "&Διαγραφή Αντικειμένου"
 
-#: labeleditor.cpp:490
+#: labeleditor.cpp:500
 #, fuzzy
 msgid "&Properties..."
 msgstr "&Ιδιότητες"
 
-#: labeleditor.cpp:495
+#: labeleditor.cpp:506
 msgid "Print to &Barcode Printer..."
 msgstr ""
 
-#: labeleditor.cpp:499
+#: labeleditor.cpp:510
 #, fuzzy
 msgid "Print to &Image..."
 msgstr "Δημιουργία εικόνων..."
 
-#: labeleditor.cpp:503
+#: labeleditor.cpp:514
 msgid "&Change Label..."
 msgstr "&Αλλαγή Ταμπέλας..."
 
-#: labeleditor.cpp:507
+#: labeleditor.cpp:518
 msgid "Insert &Barcode"
 msgstr "Εισαγωγή &Barcode"
 
-#: labeleditor.cpp:514
+#: labeleditor.cpp:525
 msgid "Insert &Picture"
 msgstr "Εισαγωγή &Εικόνας"
 
-#: labeleditor.cpp:519
+#: labeleditor.cpp:530
 msgid "Insert &Text"
 msgstr "Εισαγωγή &Κειμένου"
 
-#: labeleditor.cpp:529
+#: labeleditor.cpp:540
 #, fuzzy
 msgid "Insert &Text Line"
 msgstr "Εισαγωγή &Κειμένου"
 
-#: labeleditor.cpp:534
+#: labeleditor.cpp:545
 msgid "Insert &Line"
 msgstr "Εισαγωγή &Γραμμής"
 
-#: labeleditor.cpp:539
+#: labeleditor.cpp:550
 msgid "Insert &Rectangle"
 msgstr "Εισαγωγή &Παραλληλόγραμου"
 
-#: labeleditor.cpp:544
+#: labeleditor.cpp:555
 msgid "Insert &Ellipse"
 msgstr "Εισαγωγή &Έλλειψης"
 
-#: labeleditor.cpp:549
+#: labeleditor.cpp:560
 msgid "&Grid"
 msgstr "&Πλέγμα"
 
-#: labeleditor.cpp:553
+#: labeleditor.cpp:564
 msgid "&Preview..."
 msgstr "&Προεπισκόπηση..."
 
-#: labeleditor.cpp:562
+#: labeleditor.cpp:573
 msgid "Address&book"
 msgstr "Βιβλίο &Διευθύνσεων"
 
-#: labeleditor.cpp:567
+#: labeleditor.cpp:578
 msgid "&Create Single Barcode..."
 msgstr "&Δημιουργία Απλού Barcode..."
 
-#: labeleditor.cpp:583
+#: labeleditor.cpp:594
 msgid "&Order"
 msgstr "&Σειρά"
 
-#: labeleditor.cpp:584
+#: labeleditor.cpp:595
 msgid "&On Top"
 msgstr "Στην &Κορυφή"
 
-#: labeleditor.cpp:585
+#: labeleditor.cpp:596
 msgid "&Raise"
 msgstr "&Ανύψωση"
 
-#: labeleditor.cpp:586
+#: labeleditor.cpp:597
 msgid "&Lower"
 msgstr "&Κατέβασμα"
 
-#: labeleditor.cpp:587
+#: labeleditor.cpp:598
 msgid "&To Background"
 msgstr "&Στο Φόντο"
 
-#: labeleditor.cpp:589
+#: labeleditor.cpp:600
 msgid "&Center"
 msgstr "&Κέντρο"
 
-#: labeleditor.cpp:590
+#: labeleditor.cpp:601
 msgid "Center &Horizontally"
 msgstr "Κεντράρισμα &Οριζόντια"
 
-#: labeleditor.cpp:591
+#: labeleditor.cpp:602
 msgid "Center &Vertically"
 msgstr "Κεντράρισμα &Κάθετα"
 
-#: labeleditor.cpp:594
+#: labeleditor.cpp:605
 #, fuzzy
 msgid "&Delete"
 msgstr "&Διαγραφή Αντικειμένου"
 
-#: labeleditor.cpp:595
+#: labeleditor.cpp:606
 msgid "&Protect Position and Size"
 msgstr ""
 
-#: labeleditor.cpp:598
+#: labeleditor.cpp:609
 msgid "&Properties"
 msgstr "&Ιδιότητες"
 
-#: labeleditor.cpp:670
+#: labeleditor.cpp:681
 msgid "Label Description"
 msgstr "Περιγραφή Ταμπέλας"
 
-#: labeleditor.cpp:671
+#: labeleditor.cpp:682
 msgid "Please enter a description:"
 msgstr "Παρακαλώ εισάγετε μια περιγραφή:"
 
-#: labeleditor.cpp:700
+#: labeleditor.cpp:711
 msgid "Size: "
 msgstr "Μέγεθος: "
 
-#: labeleditor.cpp:703
+#: labeleditor.cpp:714
 msgid "Label Template: "
 msgstr "Προσχέδιο Ταμπέλας: "
 
-#: labeleditor.cpp:952
+#: labeleditor.cpp:963
 msgid "Spellchecking"
 msgstr "Ορθογραφικός Έλεγχος"
 
-#: labeleditor.cpp:1149
+#: labeleditor.cpp:1160
 msgid "The file %1 does not exist."
 msgstr "Το αρχείο %1 δεν υπάρχει."
 
-#: labeleditor.cpp:1185
+#: labeleditor.cpp:1196
 msgid ""
 "<qt>The document has been modified.<br><br>Do you want to save it ?</qt>"
 msgstr "<qt>Το έγγραφο έχει αλλάξει.<br><br>Θέλετε να το αποθηκεύσετε?</qt>"
@@ -2236,7 +2236,7 @@ msgstr ""
 msgid "Position: "
 msgstr "Θέση: "
 
-#: mycanvasview.cpp:397
+#: mycanvasview.cpp:396
 #, fuzzy
 msgid "Delete"
 msgstr "&Διαγραφή Αντικειμένου"
