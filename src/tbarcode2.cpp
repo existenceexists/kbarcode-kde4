@@ -145,10 +145,15 @@ QRect TBarcode2::bbox( const char* postscript, long postscript_size )
 
     KTemporaryFile * psfile = new KTemporaryFile();
     psfile->setSuffix(".ps");
+    psfile->open();
     psfile->write( postscript, postscript_size );
-    psfile->close();
+    psfile->flush();
+    
+    QString gs_bbox_string = QString( gs_bbox ).arg( psfile->fileName() );
+    QByteArray ba = gs_bbox_string.toLatin1();
+    const char* gs_bbox_cmd = ba.constData();
 
-    if( !readFromPipe( QString( gs_bbox ).arg( psfile->fileName() ).toLatin1(), &buffer, &len ) || !len )
+    if( !readFromPipe( gs_bbox_cmd, &buffer, &len ) || !len )
     {
 	psfile->close();
         return QRect( 0, 0, 0, 0 );
