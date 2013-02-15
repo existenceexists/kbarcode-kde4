@@ -480,8 +480,6 @@ QPixmap PixmapBarcode::cut( QPixmap* pic, double cut)
 
 QPixmap PixmapBarcode::addMargin( QPixmap* pic )
 {
-    QPixmap p( pixmapBarcodeWidth, pixmapBarcodeHeight );
-
     /* We have to handle UPC special because of the checksum character
      * which is printed on the right margin.
      * The samve goes for ISBN codes.
@@ -499,15 +497,19 @@ QPixmap PixmapBarcode::addMargin( QPixmap* pic )
     double sh = pic->height() - (barm * 2);
     int margin = (int)(barkode->quietZone()*2 - barm*2);
 
+    int w, h = 0;
     if( gnubarcode && (barkode->type() == "upc" || barkode->type() == "isbn") ) 
     {
         sw = pic->width() - barm;
 
-	p = p.copy(0, 0, pic->width() + int(barkode->quietZone()*2 - barm), pic->height() + margin);
+        w = pic->width() + int(barkode->quietZone()*2 - barm);
+        h = pic->height() + margin;
     } 
     else {
-	p = p.copy( 0, 0, pic->width() + margin, pic->height() + margin);
+        w = pic->width() + margin;
+        h = pic->height() + margin;
     }
+    QPixmap p(w, h);
 
     p.fill( barkode->background() );
     QPainter painter( &p );
