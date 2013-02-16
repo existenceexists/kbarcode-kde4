@@ -369,7 +369,8 @@ bool PixmapBarcode::createPdf417( KTemporaryFile* output )
         return false;
     }
 
-    KTemporaryFile * text = new KTemporaryFile();
+    KTemporaryFile textFile;
+    KTemporaryFile * text = & textFile;
     text->setSuffix(".txt");
     QTextStream t( text );
     t << barkode->parsedValue();

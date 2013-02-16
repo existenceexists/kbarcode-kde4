@@ -143,7 +143,8 @@ QRect TBarcode2::bbox( const char* postscript, long postscript_size )
     long    len    = 0;
     QRect   size;
 
-    KTemporaryFile * psfile = new KTemporaryFile();
+    KTemporaryFile psfileF;
+    KTemporaryFile * psfile = & psfileF;
     psfile->setSuffix(".ps");
     psfile->open();
     psfile->write( postscript, postscript_size );
