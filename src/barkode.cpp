@@ -507,7 +507,7 @@ void Barkode::setBarHeight( unsigned int h )
 
 void Barkode::setType( const QString & type )
 {
-    m_type = type.toLower();
+    m_type = type;
     updateEngine();
 }
 
