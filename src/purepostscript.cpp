@@ -23,6 +23,7 @@
 #include <qdom.h>
 #include <qfile.h>
 #include <QTextStream>
+#include <QDebug>
 
 #include <kstandarddirs.h>
 #include <ktemporaryfile.h>
@@ -87,7 +88,7 @@ PurePostscriptBarcode::PurePostscriptBarcode()
                 if( line.contains( END_TEMPLATE ) )
                     break;
                     
-                m_program.append( line );
+                m_program.append( line + QString("\n") );
             }
 
             if( !append && line.contains( BEGIN_TEMPLATE ) )
@@ -216,10 +217,15 @@ QRect PurePostscriptBarcode::bbox( const char* postscript, long postscript_size 
     KTemporaryFile psfileF;
     KTemporaryFile * psfile = & psfileF;
     psfile->setSuffix(".ps");
+    psfile->open();
     psfile->write( postscript, postscript_size );
-    psfile->close();
+    psfile->flush();
+    
+    QString gs_bbox_string = QString( gs_bbox ).arg( psfile->fileName() );
+    QByteArray gs_bbox_ba = gs_bbox_string.toLatin1();
+    const char* gs_bbox_cmd = gs_bbox_ba.constData();
 
-    if( !readFromPipe( QString( gs_bbox ).arg( psfile->fileName() ).toLatin1(), &buffer, &len ) || !len )
+    if( !readFromPipe( gs_bbox_cmd, &buffer, &len ) || !len )
     {
 	psfile->close();
         return QRect( 0, 0, 0, 0 );
@@ -247,7 +253,9 @@ bool PurePostscriptBarcode::createPostscript( char** postscript, long* postscrip
     if( !*postscript ) 
         return false;
 
-    memcpy( *postscript, cmd.toLatin1(), *postscript_size );
+    QByteArray cmd_ba = cmd.toLatin1();
+    const char* cmd_char = cmd_ba.constData();
+    memcpy( *postscript, cmd_char, *postscript_size );
 
     return true;
 }
