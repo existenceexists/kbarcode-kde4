@@ -201,7 +201,7 @@ void PurePostscriptBarcode::createProgram( QString & prg )
 
     prg = "%!PS-Adobe-2.0 EPSF-2.0\n%%EndComments\n%%EndProlog\n";
     prg += m_program;
-    prg += QString("20 20 moveto\n(%1) (%2) %3 barcode\n")
+    prg += QString("20 20 moveto\n(%1) (%2) /%3 /uk.co.terryburton.bwipp findresource exec\n")
         .arg( barkode->parsedValue() )
         .arg( opt ).arg( type );
 }
