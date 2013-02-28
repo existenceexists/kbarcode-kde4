@@ -33,6 +33,7 @@
 #define END_TEMPLATE "--END TEMPLATE--"
 
 QString PurePostscriptBarcode::s_path = QString::null;
+bool PurePostscriptBarcode::s_oldBWIPP = false;
 
 PurePostscriptOptions::PurePostscriptOptions()
     : BarkodeEngineOptions()
@@ -125,6 +126,7 @@ void PurePostscriptBarcode::init()
 #define BEGIN_ENCODER "BEGIN ENCODER "
 #define DESCRIPTION "DESC: "
 #define EXAMPLE "EXAM: "
+#define BWIPP_VERSION_START "% Barcode Writer in Pure PostScript - Version "
 
 void PurePostscriptBarcode::initInfo( TBarcodeInfoList* info )
 {
@@ -136,6 +138,7 @@ void PurePostscriptBarcode::initInfo( TBarcodeInfoList* info )
         QString encoder;
         QString description;
         QString example;
+        QString version(BWIPP_VERSION_START);
         QTextStream s( & pureFile );
 	QString line = s.readLine(MAX_LINE_LENGTH);
         
@@ -146,6 +149,16 @@ void PurePostscriptBarcode::initInfo( TBarcodeInfoList* info )
               % --DESC: EAN-13
               % --EXAM: 977147396801
             */
+            if( line.startsWith( version ) ) 
+            {
+                bool ok;
+                int year = line.mid(version.length(), 4).toInt(&ok);
+                if( ok && year < 2010 && year > 1990 ) {
+                    s_oldBWIPP = true;
+                } else {
+                    s_oldBWIPP = false;
+                }
+            }
             
             if( line.startsWith( START_TOKEN ) ) 
             {
@@ -201,9 +214,15 @@ void PurePostscriptBarcode::createProgram( QString & prg )
 
     prg = "%!PS-Adobe-2.0 EPSF-2.0\n%%EndComments\n%%EndProlog\n";
     prg += m_program;
-    prg += QString("20 20 moveto\n(%1) (%2) /%3 /uk.co.terryburton.bwipp findresource exec\n")
-        .arg( barkode->parsedValue() )
-        .arg( opt ).arg( type );
+    if( s_oldBWIPP ) {
+        prg += QString("20 20 moveto\n(%1) (%2) %3 barcode\n")
+            .arg( barkode->parsedValue() )
+            .arg( opt ).arg( type );
+    } else {
+        prg += QString("20 20 moveto\n(%1) (%2) /%3 /uk.co.terryburton.bwipp findresource exec\n")
+            .arg( barkode->parsedValue() )
+            .arg( opt ).arg( type );
+    }
 }
 
 QRect PurePostscriptBarcode::bbox( const char* postscript, long postscript_size ) 

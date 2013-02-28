@@ -73,6 +73,8 @@ class PurePostscriptBarcode : public PixmapBarcode {
     QString m_program;
 
     static QString s_path;
+    
+    static bool s_oldBWIPP;
 };
 
 EEngine PurePostscriptBarcode::engine() const
