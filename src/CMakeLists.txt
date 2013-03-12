@@ -86,7 +86,7 @@ if(ProjectName)
   
   target_link_libraries(${ProjectName} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS}
   			       ${KDE4_KIO_LIBS} ${KDE4_KMETADATA}
-  			       ${KDE4_KJS_LIBS} 
+  			       ${KDE4_KJS_LIBS} -lpcre
                                 #${QT_QT3SUPPORT_LIBRARY} ${KDE4_KDE3SUPPORT_LIBS}
 ${KDE4_KJSAPI_LIBS} #${KDE4_KABC_LIBS}
 #${KDE4_PIM_LIBS}
