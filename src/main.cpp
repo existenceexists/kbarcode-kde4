@@ -34,7 +34,7 @@
 */
 #ifndef VERSION
     //#define VERSION "Unknown Version"
-    #define VERSION "3.0.0b2"
+    #define VERSION "3.0.0b3"
 #endif
 
 void setupDirs()
