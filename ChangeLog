@@ -1,6 +1,12 @@
 Changelog since Version 1.3.2:
 ==============================
 
+Version 3.0.0b3
+    Fixed and upgraded implementation of Barcode Writer In Pure Postscript.
+    Fixed TBarcode support.
+    Fixed moving multiple items.
+    Added Ukrainian localization.
+
 Version 3.0.0b2
     Fixed printing in label editor.
     Fixed printing in barcode generator.
