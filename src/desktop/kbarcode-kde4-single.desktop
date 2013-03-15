@@ -1,11 +1,11 @@
 [Desktop Entry]
 Type=Application
-Exec=kbarcode --barcode
+Exec=kbarcode-kde4 --barcode
 Icon=kbarcode
-DocPath=kbarcode/index.html
+DocPath=kbarcode-kde4/index.html
 Comment=Barcode generation tool
 Comment[de]=Barcode Erstellung
 Terminal=false
-Name=KBarcode Barcode Generator
-Name[de]=KBarcode Barcode Generator
+Name=KBarcode-kde4 Barcode Generator
+Name[de]=KBarcode-kde4 Barcode Generator
 Categories=Qt;KDE;Office;

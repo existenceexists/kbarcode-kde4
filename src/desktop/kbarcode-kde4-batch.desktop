@@ -1,11 +1,11 @@
 [Desktop Entry]
 Type=Application
-Exec=kbarcode --batch
+Exec=kbarcode-kde4 --batch
 Icon=kbarcode
-DocPath=kbarcode/index.html
+DocPath=kbarcode-kde4/index.html
 Comment=Barcode and label printing tool (batch printing mode)
 Comment[de]=Werkzeug zum Barcode und Etiketten Druck (Stapelverarbeitung)
 Terminal=false
-Name=KBarcode Batch Printing
-Name[de]=KBarcode Batch Druck
+Name=KBarcode-kde4 Batch Printing
+Name[de]=KBarcode-kde4 Batch Druck
 Categories=Qt;KDE;Office;

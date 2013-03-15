@@ -1,13 +1,13 @@
 [Desktop Entry]
 Type=Application
-Exec=kbarcode --caption "%c" %i %f
+Exec=kbarcode-kde4 --caption "%c" %i %f
 Icon=kbarcode
 MimeType=application/kbarcode-label
-DocPath=kbarcode/index.html
+DocPath=kbarcode-kde4/index.html
 Comment=Barcode and label printing tool
 Comment[de]=Werkzeug zum Barcode und Etiketten Druck
 Terminal=false
-Name=KBarcode
-Name[de]=KBarcode
+Name=KBarcode-kde4
+Name[de]=KBarcode-kde4
 GenericName=Barcode And Label Editor
 Categories=Qt;KDE;Office;

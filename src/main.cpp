@@ -33,7 +33,8 @@
 #include "barcodegenerator.h"
 */
 #ifndef VERSION
-    #define VERSION "Unknown Version"
+    //#define VERSION "Unknown Version"
+    #define VERSION "3.0.0b2"
 #endif
 
 void setupDirs()
@@ -59,11 +60,11 @@ void setupDirs()
 
 int main(int argc, char *argv[])
 {
-    char charApplicationFileName[] = "kbarcode041";// The name of the final executable file.
+    char charApplicationFileName[] = "kbarcode-kde4";// The name of the final executable file.
     QString applicationFileName( charApplicationFileName );
     
-    KAboutData aboutData( charApplicationFileName, "kbarcode", ki18n("KBarcode"), VERSION,
-            ki18n("KBarcode4 is a barcode and label printing application for KDE 4."),
+    KAboutData aboutData( charApplicationFileName, charApplicationFileName, ki18n("KBarcode-kde4"), VERSION,
+            ki18n("KBarcode-kde4 is a barcode and label printing application for KDE 4."),
             KAboutData::License_GPL, ki18n("(c) 2001-2008, Dominik Seichter"), KLocalizedString(),
         "http://www.kbarcode.net", "kbarcode-users@lists.sourceforge.net" );
 
