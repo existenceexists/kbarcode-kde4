@@ -18,6 +18,7 @@
 #include "mycanvasview.h"
 #include "commands.h"
 #include "definition.h"
+#include "labeleditor.h"
 #include "measurements.h"
 #include "kbarcodesettings.h"
 
@@ -581,6 +582,8 @@ void MyCanvasView::setSelected( QGraphicsItem* item, bool control )
 
     if( item )
         item->setSelected( true );
+    
+    ((LabelEditor*)parent())->enablePropertiesAndDelete();
 }
 
 int MyCanvasView::updateCursor( QPoint pos, bool pressed )

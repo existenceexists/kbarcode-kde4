@@ -107,6 +107,7 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
         void print();
         void printBCP();
         void printImage();
+        void enablePropertiesAndDelete();
         
     private:
 

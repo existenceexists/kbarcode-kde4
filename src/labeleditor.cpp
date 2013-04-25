@@ -274,6 +274,7 @@ void LabelEditor::clearLabel()
     createCommandHistoryActions();
 
     connect( history, SIGNAL( indexChanged( int ) ), cv, SLOT( updateGUI() ) );
+    connect( history, SIGNAL( indexChanged( int ) ), this, SLOT( enablePropertiesAndDelete() ) );
 
     m_edited = false;
 
@@ -1270,8 +1271,7 @@ void LabelEditor::setEdited( bool isInCleanState )
 
 void LabelEditor::enableActions()
 {
-    editPropAct->setEnabled( cv->getActive() );
-    deleteAct->setEnabled( cv->getActive() );
+    enablePropertiesAndDelete();
 
     if( d->getId() == -1 ){
         // label closed
@@ -1304,7 +1304,7 @@ void LabelEditor::enableActions()
         selectAllAct->setEnabled( false );
         deSelectAllAct->setEnabled( false );
     } else {
-        deleteAct->setEnabled( true );
+        //deleteAct->setEnabled( true );
         barcodeAct->setEnabled( Barkode::haveBarcode() );
         pictureAct->setEnabled( true );
         textAct->setEnabled( true );
@@ -1333,6 +1333,12 @@ void LabelEditor::enableActions()
         selectAllAct->setEnabled( true );
         deSelectAllAct->setEnabled( true );
     }
+}
+
+void LabelEditor::enablePropertiesAndDelete()
+{
+    editPropAct->setEnabled( cv->getActive() );
+    deleteAct->setEnabled( cv->getActive() );
 }
 
 void LabelEditor::launchAddressBook()
