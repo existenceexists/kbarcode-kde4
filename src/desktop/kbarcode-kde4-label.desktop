@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=MimeType
-Comment=KBarcode-kde4 Label
-Icon=kbarcode
-MimeType=application/kbarcode-label
-Name[de]=kbarcode-kde4-label.desktop
-Patterns=*.kbarcode;*.KBARCODE;
-
