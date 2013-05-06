@@ -907,11 +907,13 @@ void Barkode::initInfo()
 void Barkode::initValidators()
 {
     QString path;
-    const char* rules = "/usr/share/libpostscriptbarcode/rules.xml";
+    /*const char* rules = "/usr/share/libpostscriptbarcode/rules.xml";
     if( QFile::exists( rules ) )
         path = rules;
     else
         path =  KStandardDirs::locate( "appdata", "rules.xml" );
+    */
+    path =  KStandardDirs::locate( "appdata", "rules.xml" );
 
     QFile xml( path );
     QDomDocument doc;
