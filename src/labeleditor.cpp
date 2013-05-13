@@ -446,12 +446,15 @@ bool LabelEditor::newLabel()
 
     closeLabel();
 
-    if( !nl->empty() )
+    /*if( !nl->empty() )
     {
         d->setId( nl->labelId() );
         clearLabel();
         cv->setDefinition( d );
-    }
+    }*/
+    d->setId( nl->labelId() );
+    clearLabel();
+    cv->setDefinition( d );
 
     delete nl;
 

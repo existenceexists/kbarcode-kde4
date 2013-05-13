@@ -84,10 +84,10 @@ NewLabel::NewLabel( QWidget* parent, bool change, Qt::WFlags fl )
     comboType = new KComboBox( FALSE, group1 );
     comboType->setObjectName( "comboType" );
 
-    checkEmpty = new QCheckBox( i18n("&Start with an empty label"), group1 );
-    checkEmpty->setEnabled( !change );
+    /*checkEmpty = new QCheckBox( i18n("&Start with an empty label"), group1 );
+    checkEmpty->setEnabled( !change );*/
     
-    group1Layout->addWidget( checkEmpty, 0, 0, 1, 2 );
+    /*group1Layout->addWidget( checkEmpty, 0, 0, 1, 2 );*/
     group1Layout->addWidget( TextLabel2, 1, 0 );
     group1Layout->addWidget( TextLabel3, 2, 0 );
     group1Layout->addWidget( comboProducer, 1, 1 );
@@ -141,7 +141,7 @@ NewLabel::NewLabel( QWidget* parent, bool change, Qt::WFlags fl )
     connect( comboProducer, SIGNAL( activated(int) ), this, SLOT( updateType() ) );
     connect( comboProducer, SIGNAL( activated(int) ), this, SLOT( updateText() ) );
     connect( comboType, SIGNAL( activated(int) ), this, SLOT( updateText() ) );
-    connect( checkEmpty, SIGNAL( clicked() ), this, SLOT( updateText() ) );
+    /*connect( checkEmpty, SIGNAL( clicked() ), this, SLOT( updateText() ) );*/
     
     connect( buttonOk, SIGNAL( clicked() ), this, SLOT(accept() ) );
     connect( buttonCancel, SIGNAL( clicked() ), this, SLOT(reject() ) );
@@ -177,7 +177,7 @@ void NewLabel::updateType()
         comboType->addItems( types[ comboProducer->currentIndex() ] );
 }
 
-void NewLabel::updateText()
+/*void NewLabel::updateText()
 {
     comboProducer->setEnabled( !checkEmpty->isChecked() );
     comboType->setEnabled( !checkEmpty->isChecked() );
@@ -216,6 +216,33 @@ void NewLabel::updateText()
         preview->setPrvEnabled( false );
         preview->repaint();
     }
+}*/
+
+void NewLabel::updateText()
+{
+    Definition d( comboProducer->currentText(), comboType->currentText() );
+    TextLabel4->setText( QString(i18n(
+        "<b>Format:</b><br>\nWidth: ") + I2S(d.getMeasurements().width()) +
+        i18n("%1<br>Height: ") + I2S(d.getMeasurements().height()) +
+        i18n("%2<br>Horizontal Gap: ") + I2S(d.getMeasurements().gapH()) +
+        i18n("%3<br>Vertical Gap: ") + I2S(d.getMeasurements().gapV()) +
+        i18n("%4<br>Top Gap: ") + I2S(d.getMeasurements().gapTop()) +
+        i18n("%5<br>Left Gap: ") + I2S(d.getMeasurements().gapLeft()) + "%6<br>"
+        ).arg( Measurements::system() )
+        .arg( Measurements::system() )
+        .arg( Measurements::system() )
+        .arg( Measurements::system() )
+        .arg( Measurements::system() )
+        .arg( Measurements::system() ) );
+    
+    preview->setRect( QRect( (int)d.getMeasurements().gapLeftMM(), 
+                             (int)d.getMeasurements().gapTopMM(), 
+                             (int)d.getMeasurements().widthMM(), 
+                             (int)d.getMeasurements().heightMM() ) );
+    preview->setMeasurements( d.getMeasurements() );
+    preview->setPrvEnabled( true );        
+    preview->repaint();
+    curid = d.getId();
 }
 
 bool NewLabel::isInCombo( QComboBox* combo, QString text )
@@ -264,10 +291,10 @@ void NewLabel::add()
     delete d;
 }
 
-bool NewLabel::empty() const
+/*bool NewLabel::empty() const
 {
     return checkEmpty->isChecked();
-}
+}*/
 
 
 #include "newlabel.moc"

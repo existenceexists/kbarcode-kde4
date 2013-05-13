@@ -46,7 +46,7 @@ class NewLabel : public QDialog
         ~NewLabel();
 
         int labelId() const { return curid; }
-        bool empty() const;
+        /*bool empty() const;*/
 
         void setLabelId( int id );
 
