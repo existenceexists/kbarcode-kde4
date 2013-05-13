@@ -188,6 +188,10 @@ class Barkode {
     /** Convert the uservisible encoding type @p name
       * to the internal identifier
       */
+    static const QStringList* reloadEncodingTypes();
+    /** Convert the uservisible encoding type @p name
+      * to the internal identifier
+      */
     static const QString typeFromName( const QString & name );
     /** Convert the internal identifier @p type 
       * to the user visible encoding name

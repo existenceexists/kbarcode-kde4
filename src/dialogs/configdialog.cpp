@@ -16,7 +16,9 @@
  ***************************************************************************/
 
 #include "configdialog.h"
+#include "kbarcodesettings.h"
 #include "printersettings.h"
+#include "purepostscript.h"
 #include "sqltables.h"
 
 // Qt includes
@@ -24,6 +26,7 @@
 #include <QLabel>
 #include <QLayout>
 #include <QRadioButton>
+#include <QButtonGroup>
 #include <QGroupBox>
 #include <qsqldatabase.h>
 #include <QToolTip>
@@ -49,6 +52,7 @@
 #include <kvbox.h>
 #include <kpagewidgetmodel.h>
 #include <kstandarddirs.h>
+#include <kurlrequester.h>
 
 const QString cached = I18N_NOOP( "There are currently %1 cached barcodes." );
 
@@ -66,6 +70,7 @@ ConfigDialog::ConfigDialog( QWidget* parent )
     setupTab4(); // label editor
     setupTab3(); // import
     setupTab5(); // on new
+    setupTab6(); // backends
 }
 
 ConfigDialog::~ConfigDialog()
@@ -326,6 +331,88 @@ void ConfigDialog::setupTab5()
     onNewGroup4->setCurrentIndex( lb->groupEvent4 );
 }
 
+void ConfigDialog::setupTab6()
+{
+    QWidget* page = new QWidget( this );
+    KPageWidgetItem* item = addPage( page, i18n( "Barcode Writer In Pure Postscript" ) );
+    item->setIcon( KIcon( "barcode" ) );
+    QGridLayout* tabLayout = new QGridLayout( page );
+    groupPostscript = new QButtonGroup( page );
+    int method = KBarcodeSettings::getInstance()->getPurePostscriptMethod();
+
+    QLabel* description = new QLabel( i18n( "<qt><b>Choose which version of Barcode Writer In Pure Postscript <br>will be used by KBarcode-kde4:</b></qt>" ), page );
+    radioAutomatic = new QRadioButton( page );
+    radioAutomatic->setText( i18n( "Automatic - Let KBarcode-kde4 choose the newest version \nof Barcode Writer In Pure Postscript automatically. \nEither the version installed with the package libpostscriptbarcode \nor the one shipped with KBarcode-kde4 is used, depending on \nwhich one is the most up-to-date." ) );
+    groupPostscript->addButton( radioAutomatic );
+    groupPostscript->setId( radioAutomatic, KBarcodeSettings::Automatic );
+    if( method == KBarcodeSettings::Automatic ) {
+        radioAutomatic->setChecked( true );
+    }
+    radioLib = new QRadioButton( page );
+    radioLib->setText( i18n( "Use the version installed with the package libpostscriptbarcode \ninto /usr/share/libpostscriptbarcode/barcode.ps .\nThis option is disabled if the file is not found." ) );
+    radioLib->setEnabled( QFile::exists( KBarcodeSettings::getInstance()->getLibpostscriptbarcodeFilePath() ) );
+    groupPostscript->addButton( radioLib );
+    groupPostscript->setId( radioLib, KBarcodeSettings::Libpostscriptbarcode );
+    if( method == KBarcodeSettings::Libpostscriptbarcode ) {
+        radioLib->setChecked( true );
+    }
+    radioKBarcodes = new QRadioButton( page );
+    radioKBarcodes->setText( i18n( "Use the version shipped with KBarcode-kde4. \nThe library is in the file barcode.ps which is installed \ninto KBarcode-kde4's data directory." ) );
+    groupPostscript->addButton( radioKBarcodes );
+    groupPostscript->setId( radioKBarcodes, KBarcodeSettings::KBarcodes );
+    if( method == KBarcodeSettings::KBarcodes ) {
+        radioKBarcodes->setChecked( true );
+    }
+    radioCustom = new QRadioButton( page );
+    radioCustom->setText( i18n( "Set another version located \nin a file on the local system:" ) );
+    groupPostscript->addButton( radioCustom );
+    groupPostscript->setId( radioCustom, KBarcodeSettings::Custom );
+    m_url = new KUrlRequester( page );
+    //m_url->setMode( KFile::File | KFile::ExistingOnly | KFile::LocalOnly );
+    //m_url->setFilter( "*.ps" );
+    m_url->setText( KBarcodeSettings::getInstance()->getCustomPurePostscriptFilePath() );
+    m_url->setEnabled( false );
+    if( method == KBarcodeSettings::Custom ) {
+        radioCustom->setChecked( true );
+        m_url->setEnabled( true );
+    }
+    QLabel* descriptionFileLabel = new QLabel( i18n( "The following file will be used as the backend Barcode Writer In Pure Postscript:" ), page );
+    purePostscriptFileLabel = new QLabel( KBarcodeSettings::getInstance()->determinePurePostscriptFilePath( method, m_url->text() ), page );
+    QPalette palette = QPalette();
+    palette.setColor( QPalette::WindowText, Qt::red );
+    purePostscriptFileLabel->setPalette( palette );
+    
+    connect( groupPostscript, SIGNAL(buttonClicked(int)), this, SLOT(updatePurePostscriptFileLabel(int)) );
+    connect( m_url, SIGNAL(textChanged(const QString &)), this, SLOT(updateCustomFileLabel(const QString &)) );
+    
+    tabLayout->addWidget( description, 0, 0, 1, -1 );
+    tabLayout->addWidget( radioAutomatic, 1, 0, 1, -1 );
+    tabLayout->addWidget( radioLib, 2, 0, 1, -1 );
+    tabLayout->addWidget( radioKBarcodes, 3, 0, 1, -1 );
+    tabLayout->addWidget( radioCustom, 4, 0, 1, 1 );
+    tabLayout->addWidget( m_url, 4, 1, 1, 1 );
+    tabLayout->addWidget( descriptionFileLabel, 5, 0, 1, -1 );
+    tabLayout->addWidget( purePostscriptFileLabel, 6, 0, 1, -1 );
+
+    page->setLayout( tabLayout );
+}
+
+void ConfigDialog::updatePurePostscriptFileLabel( int buttonId )
+{
+    purePostscriptFileLabel->setText( KBarcodeSettings::getInstance()->determinePurePostscriptFilePath( buttonId, m_url->text() ) );
+    m_url->setEnabled( buttonId == KBarcodeSettings::Custom );
+}
+
+void ConfigDialog::updateCustomFileLabel( const QString & url )
+{
+    purePostscriptFileLabel->setText( KBarcodeSettings::getInstance()->determinePurePostscriptFilePath( KBarcodeSettings::Custom, url ) );
+}
+
+int ConfigDialog::getPurePostscriptMethod()
+{
+    return groupPostscript->checkedId();
+}
+
 void ConfigDialog::accept()
 {
     KConfigGroup config = KGlobal::config()->group( "FileFormat" );
@@ -370,6 +457,31 @@ void ConfigDialog::accept()
 
         default:
             break;
+    }
+    
+    KConfigGroup backends = KGlobal::config()->group( "Backends" );
+    KBarcodeSettings* settings = KBarcodeSettings::getInstance();
+    QString oldPath = backends.readEntry("purePostscriptFilePath", QString());
+    QString path = settings->determinePurePostscriptFilePath( groupPostscript->checkedId(), m_url->text() );
+    int oldMethod = settings->getPurePostscriptMethod();
+    int method = getPurePostscriptMethod();
+    bool doEmit = false;
+    if( oldMethod != method ) {
+        doEmit = true;
+        settings->setPurePostscriptMethod(method);
+        settings->setPurePostscriptFilePath(path);
+        backends.writeEntry("purePostscriptMethod", method);
+    }
+    if( ( method == KBarcodeSettings::Custom ) && ( oldPath != path ) ) {
+        doEmit = true;
+        settings->setPurePostscriptFilePath(path);
+        settings->setCustomPurePostscriptFilePath(path);
+        backends.writeEntry("purePostscriptFilePath", path);
+    }
+    if( doEmit ) {
+        PurePostscriptBarcode::init();
+        Barkode::reloadEncodingTypes();
+        settings->emitPurePostscriptFileChanged();
     }
 
     QDialog::accept();

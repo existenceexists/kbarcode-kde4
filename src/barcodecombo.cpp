@@ -18,6 +18,7 @@
 #include "barcodecombo.h"
 #include "dialogs/barcodedialogs.h"
 #include "barkode.h"
+#include "kbarcodesettings.h"
 #include "tokendialog.h"
 
 #include <pcre.h>
@@ -112,6 +113,12 @@ void BarcodeCombo::setEncodingType( const QString & type )
     setCurrentItem( name, false );
 }
 
+void BarcodeCombo::reloadEncodingTypes()
+{
+    this->clear();
+    this->addItems( *Barkode::reloadEncodingTypes() );
+}
+
 BarcodeWidget::BarcodeWidget(QWidget *parent)
     : QWidget( parent ), m_validator( this )
 {
@@ -125,6 +132,7 @@ BarcodeWidget::BarcodeWidget(QWidget *parent)
     comboStandard = new BarcodeCombo( this );
     connect( comboStandard, SIGNAL( activated(int) ), this, SLOT( encodingChanged() ) );
     connect( comboStandard, SIGNAL( activated(int) ), this, SLOT( changed() ) );
+    connect( KBarcodeSettings::getInstance(), SIGNAL( purePostscriptFileChanged() ), comboStandard, SLOT( reloadEncodingTypes() ) );
     /*grid->addMultiCellWidget( comboStandard, 1, 1, 1, 3 );*/// -!F: original, del
     grid->addWidget( comboStandard, 1, 1, 1, 3 );
     labelStandard->setBuddy( comboStandard );

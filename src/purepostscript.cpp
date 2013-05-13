@@ -17,6 +17,7 @@
 
 #include "purepostscript.h"
 #include "barkode.h"
+#include "kbarcodesettings.h"
 
 #include <stdlib.h>
 
@@ -121,22 +122,27 @@ PurePostscriptBarcode::~PurePostscriptBarcode()
     if( !QFile::exists( s_path ) )
         s_path = QString::null;
 }*/
+/*void PurePostscriptBarcode::init()
+{
+    if( s_path.isEmpty() )
+    {
+        s_path = KBarcodeSettings::getInstance()->getPurePostscriptFilePath();
+        if( s_path.isEmpty() || !QFile::exists( s_path ) ) {
+            s_path = KStandardDirs::locate( "appdata", "barcode.ps" );
+        }
+    }
+
+    if( s_path.isEmpty() || !QFile::exists( s_path ) )
+        s_path = QString::null;
+}*/
 void PurePostscriptBarcode::init()
 {
-    if( s_path.isNull() )
-    {
-        // Don't use /usr/share/libpostscriptbarcode/barcode.ps as it is obsolete in Ubuntu 13.04
-        /*// first look at the default location
-        const char* default_barcode = "/usr/share/libpostscriptbarcode/barcode.ps";
-        if( QFile::exists( default_barcode ) )
-            s_path = default_barcode;
-        else
-            s_path = KStandardDirs::locate( "appdata", "barcode.ps" );
-        */
+    s_path = KBarcodeSettings::getInstance()->getPurePostscriptFilePath();
+    if( s_path.isEmpty() || !QFile::exists( s_path ) ) {
         s_path = KStandardDirs::locate( "appdata", "barcode.ps" );
     }
 
-    if( !QFile::exists( s_path ) )
+    if( s_path.isEmpty() || !QFile::exists( s_path ) )
         s_path = QString::null;
 }
 

@@ -63,6 +63,9 @@ class BarcodeCombo : public KComboBox  {
 
         const QString getEncodingType();
         void setEncodingType( const QString & type );
+        
+    public slots:
+        void reloadEncodingTypes();
 };
 
 class KIntNumInput;

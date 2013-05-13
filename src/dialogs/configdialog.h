@@ -28,6 +28,8 @@ class KIntNumInput;
 class KDoubleNumInput;
 class KLineEdit;
 class KPushButton;
+class KUrlRequester;
+class QButtonGroup;
 class QRadioButton;
 class QCheckBox;
 class QLabel;
@@ -73,6 +75,16 @@ class ConfigDialog : public KPageDialog  {
         KComboBox* onNewGroup4;
 
         KColorButton* colorGrid;
+        
+        QButtonGroup* groupPostscript;
+        QRadioButton* radioAutomatic;
+        QRadioButton* radioLib;
+        QRadioButton* radioKBarcodes;
+        QRadioButton* radioCustom;
+        KUrlRequester* m_url;
+        QLabel* purePostscriptFileLabel;
+        
+        int getPurePostscriptMethod();
 
     private:
         void accept();
@@ -82,9 +94,12 @@ class ConfigDialog : public KPageDialog  {
         void setupTab3();
         void setupTab4();
         void setupTab5();
+        void setupTab6();
 
     private slots:
         void updateDatePreview();
+        void updatePurePostscriptFileLabel(int);
+        void updateCustomFileLabel( const QString & );
 
     protected:
         KComboBox* comboDataMatrix;

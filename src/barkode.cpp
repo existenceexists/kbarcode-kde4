@@ -606,6 +606,26 @@ const QStringList* Barkode::encodingTypes()
     return s_encoding;
 }
 
+const QStringList* Barkode::reloadEncodingTypes()
+{
+    if( s_encoding )
+    {
+        delete s_encoding;
+        s_encoding = NULL;
+    }
+    s_encoding = new QStringList;
+    if( s_info.count() )
+    {
+        s_info.clear();
+    }
+    Barkode::initInfo();
+    for( int i = 0; i < s_info.count(); i++ )
+        s_encoding->append( s_info[i].name );
+    //s_encoding->sort();
+    
+    return s_encoding;
+}
+
 const QString Barkode::typeFromName( const QString & name )
 {
     for( int i = 0; i < s_info.count(); i++ )

@@ -31,6 +31,7 @@ class KBarcodeSettings : public QObject
 {
     Q_OBJECT
     public:
+        enum PurePostscriptMethod { Automatic = 0, Libpostscriptbarcode, KBarcodes, Custom };
         static KBarcodeSettings* getInstance();
 
         static const QString getDateFormat() {
@@ -40,15 +41,38 @@ class KBarcodeSettings : public QObject
         int gridSize() const { return gridsize; }
         const QColor & gridColor() const { return gridcolor; }
         bool newDialog() const { return newdlg; }
+        
+        /* The following functions are assosiated with 
+         * setting path to the Barcode Writer In Pure Postscript library used by KBarcode-kde4.*/
+        QString getPurePostscriptFilePath() const { return purePostscriptFilePath; }
+        void setPurePostscriptFilePath( QString path ) { purePostscriptFilePath = path; }
+        QString getCustomPurePostscriptFilePath() const { return customPurePostscriptFilePath; }
+        void setCustomPurePostscriptFilePath( QString path ) { customPurePostscriptFilePath = path; }
+        int getPurePostscriptMethod() const { return purePostscriptMethod; }
+        void setPurePostscriptMethod( int method ) { purePostscriptMethod = method; }
+        QString getLibpostscriptbarcodeFilePath() const { return libpostscriptbarcodeFilePath; }
+        /* determinePurePostscriptFilePath() determines the path 
+         * to the library Barcode Writer In Pure Postscript 
+         * depending on the method KBarcode-kde4 is configured to use. 
+         * It tries to return path to a default existing file, 
+         * if a file assosiated with a given method is not found. */
+        QString determinePurePostscriptFilePath( int purePostscriptMethod, QString customPath );
+        int getPurePostscriptVersion(QString filename);
+        void emitPurePostscriptFileChanged();
+        
     public slots:
         void loadConfig();
         void saveConfig();
         void configure();
 
     signals:
-        /** Emitted when the user changes the grid size
+        /** Emitted when the user changes the grid size.
           */
         void updateGrid( int );
+        /** Emitted when the user using configuration dialog changes the path 
+         * to the file that is used as Barcode Writer In Pure Postscript library.
+          */
+        void purePostscriptFileChanged();
 
     private:
         KBarcodeSettings();
@@ -61,6 +85,11 @@ class KBarcodeSettings : public QObject
         static bool newdlg;
         static QColor gridcolor;
         static QString dateFormat;
+        
+        static QString purePostscriptFilePath;
+        static QString customPurePostscriptFilePath;
+        static int purePostscriptMethod;
+        static QString libpostscriptbarcodeFilePath;
 };
 
 #endif
