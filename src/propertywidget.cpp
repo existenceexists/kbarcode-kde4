@@ -66,12 +66,16 @@ void FillLineCombo( KComboBox* box )
     // TODO: Use the enum for Qt line styles here!
 
     QPainter p;
+    int w = 150;
+    int h = 40;
+    int o = 5;
+    box->setIconSize(QSize( w, h ));
     for( int i = 1; i < 6; i++ ) {
-        QPixmap pixmap( 60, 20 );
+        QPixmap pixmap( w, h );
         pixmap.fill( Qt::white );
         p.begin( &pixmap );
         p.setPen( QPen( Qt::black, 3, (Qt::PenStyle)i ) );
-        p.drawLine( 5, 10, 55, 10 );
+        p.drawLine( o, h / 2, w - o, h / 2 );
         p.end();
 
         box->addItem( QIcon( pixmap ), QString() );
