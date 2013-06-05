@@ -2,6 +2,7 @@ Changelog since Version 1.3.2:
 ==============================
 
 Version 3.0.0b3
+    Renamed KBarcode-kde4 back to KBarcode.
     Fixed and upgraded implementation of Barcode Writer In Pure Postscript.
     Fixed TBarcode support.
     Fixed moving multiple items.

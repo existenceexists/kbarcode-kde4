@@ -1,4 +1,4 @@
-Name:          kbarcode-kde4
+Name:          kbarcode
 Version:       3.0.0b2
 Summary:       A barcode and label printing application for KDE
 Release:       1%{?dist}
@@ -14,7 +14,7 @@ BuildRequires: kdepimlibs-devel
 BuildRequires: pcre-devel
 
 %description
-KBarcode-kde4 is a barcode and label printing application for Linux and KDE 4.
+KBarcode is a barcode and label printing application for Linux and KDE 4.
 It can be used to print every thing from simple business cards up to complex
 labels with several barcodes (e.g. article descriptions). KBarcode comes with
 an easy to use WYSIWYG label designer, a setup wizard, batch import of labels
