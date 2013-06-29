@@ -45,6 +45,7 @@
 #include <QTableWidget>
 #include <QLabel>
 #include <QWidget>
+#include <QButtonGroup>
 //Added by qt3to4:
 #include <QHBoxLayout>
 #include <QList>
@@ -282,11 +283,14 @@ void BatchAssistant::setupPage10()
     pageLayout->setObjectName( "page10Layout" );
 
     QGroupBox* group = new QGroupBox( page10 );
+    QButtonGroup* buttonGroup = new QButtonGroup( page10 );
     QVBoxLayout* button_layout = new QVBoxLayout;
     
     radioPrinter = new QRadioButton( i18n("&Print to a system printer or to a file"));
+    buttonGroup->addButton(radioPrinter);
     button_layout->addWidget(radioPrinter);
     radioImage = new QRadioButton( i18n("&Create images"));
+    buttonGroup->addButton(radioImage);
 
     imageBox = new QWidget;
 	QVBoxLayout* imageBox_layout = new QVBoxLayout;
@@ -294,9 +298,10 @@ void BatchAssistant::setupPage10()
 	imageBox->setLayout(imageBox_layout);
 	
     radioBarcode = new QRadioButton( i18n("Print to a special &barcode printer"));
-    button_layout->addWidget(radioBarcode);
+    buttonGroup->addButton(radioBarcode);
     button_layout->addWidget(radioImage);
-    /*button_layout->addWidget(imageBox);*/// if imageBox is put into QGroupBox group, radio buttons don't behave as desired
+    button_layout->addWidget(imageBox);
+    button_layout->addWidget(radioBarcode);
     group->setLayout(button_layout);
 
     QWidget* directoryBox = new QWidget;
@@ -332,11 +337,15 @@ void BatchAssistant::setupPage10()
     QGroupBox* imageNameGroup = new QGroupBox( i18n("&Filename:") );
 	imageBox_layout->addWidget(imageNameGroup);
     QVBoxLayout* image_button_layout = new QVBoxLayout;
+    QButtonGroup* buttonGroup2 = new QButtonGroup( page10 );
     radioImageFilenameArticle = new QRadioButton( i18n("Use &article number for filename"));
+    buttonGroup2->addButton(radioImageFilenameArticle);
     image_button_layout->addWidget(radioImageFilenameArticle);
     radioImageFilenameBarcode = new QRadioButton( i18n("Use &barcode number for filename"));
+    buttonGroup2->addButton(radioImageFilenameBarcode);
     image_button_layout->addWidget(radioImageFilenameBarcode);
     radioImageFilenameCustom  = new QRadioButton( i18n("Use &custom filename:"));
+    buttonGroup2->addButton(radioImageFilenameCustom);
     image_button_layout->addWidget(radioImageFilenameCustom);
     editImageFilename = new KLineEdit( imageNameGroup );
     radioImageFilenameBarcode->setChecked( true );
@@ -353,7 +362,6 @@ void BatchAssistant::setupPage10()
 
     QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Expanding );
     pageLayout->addWidget( group );
-    pageLayout->addWidget(imageBox);
     pageLayout->addItem( spacer );
     pageLayout->addWidget( labelInfo );
     pageLayout->addWidget( checkKeepOpen );
