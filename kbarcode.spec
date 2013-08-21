@@ -1,12 +1,11 @@
 Name:          kbarcode
-Version:       3.0.0b2
+Version:       3.0.0b3
 Summary:       A barcode and label printing application for KDE
 Release:       1%{?dist}
 # Only the barcode_ps file is MIT licensed
 License:       GPLv2+ and MIT
 URL:           http://www.kbarcode.net
-Source0:       http://downloads.sourceforge.net/kbarcode/Development/%{name}_%{version}.tar.gz
-Patch0:        %{name}.desktop.patch
+Source0:       http://downloads.sourceforge.net/%{name}/Development/%{name}_%{version}.tar.gz
 
 BuildRequires: desktop-file-utils
 BuildRequires: gettext
@@ -26,11 +25,9 @@ like EAN, UPC, CODE39 and ISBN are supported.
 
 %prep
 %setup -q -n %{name}
-%patch0 -p0
 
 
 %build
-export LDFLAGS=-lpcre
 mkdir -p %{_target_platform}
 pushd %{_target_platform}
 %{cmake_kde4} ../
@@ -62,6 +59,10 @@ update-mime-database %{_datadir}/mime &> /dev/null || :
 %{_kde4_appsdir}/%{name}/
 
 %changelog
+* Sun Aug 18 2013 Mario Blättermann <mariobl@fedoraproject.org> - 3.0.0b3-1
+- New upstream version
+- Removed obsolete patch
+
 * Sun Apr 28 2013 Mario Blättermann <mariobl@fedoraproject.org> 3.0.0b2-1
 - Initial package
 
